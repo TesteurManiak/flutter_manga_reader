@@ -6,4 +6,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get library_title => 'Bibliothèque';
+
+  @override
+  String get settings_title => 'Paramètres';
 }

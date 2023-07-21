@@ -6,4 +6,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get library_title => 'Library';
+
+  @override
+  String get settings_title => 'Settings';
 }

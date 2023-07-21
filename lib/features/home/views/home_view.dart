@@ -57,6 +57,8 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.strings;
+
     return ValueListenableBuilder(
       valueListenable: controller,
       builder: (context, currentIndex, _) {
@@ -66,7 +68,7 @@ class _BottomBar extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.book),
-              label: 'Library'.hardcoded,
+              label: strings.library_title,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.search),
@@ -74,7 +76,7 @@ class _BottomBar extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings),
-              label: 'Settings'.hardcoded,
+              label: strings.settings_title,
             ),
           ],
         );

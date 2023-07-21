@@ -98,6 +98,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Bibliothèque'**
   String get library_title;
+
+  /// No description provided for @settings_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paramètres'**
+  String get settings_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

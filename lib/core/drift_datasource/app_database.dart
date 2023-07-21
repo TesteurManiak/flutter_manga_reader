@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:flutter_manga_reader/core/models/manga.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
@@ -9,13 +10,28 @@ part 'app_database.g.dart';
 
 // This will generate a table called "mangas" for us.
 // The rows of that table will be represented by a class called "Mangas".
-// TODO: Other Columns should be added here. See the drift documentation for more info. You can also add new Tables to the same database. https://drift.simonbinder.eu/docs/getting-started/
 class Mangas extends Table {
   IntColumn get id => integer().autoIncrement()();
+  TextColumn get url => text()();
+  TextColumn get title => text()();
+  TextColumn get artist => text().nullable()();
+  TextColumn get description => text().nullable()();
+  TextColumn get genre => text().nullable()();
+  IntColumn get status => integer().withDefault(const Constant(0))();
+  IntColumn get updateStrategy => intEnum<UpdateStrategy>()();
+  BoolColumn get initialized => boolean().withDefault(const Constant(false))();
+}
+
+class Chapters extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get mangaId => integer().nullable()();
+  TextColumn get url => text()();
+  TextColumn get name => text()();
+  TextColumn get scanlator => text().nullable()();
 }
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
-@DriftDatabase(tables: [Mangas])
+@DriftDatabase(tables: [Mangas, Chapters])
 class AppDatabase extends _$AppDatabase {
   // We tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());
