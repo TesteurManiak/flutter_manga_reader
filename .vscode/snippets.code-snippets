@@ -1,0 +1,41 @@
+{
+    "Generate part directive": {
+        "prefix": "part",
+        "body": [
+            "part '${TM_FILENAME_BASE}.g.dart';",
+        ]
+    },
+    "Generate freezed part directive": {
+        "prefix": "fpart",
+        "body": [
+            "part '${TM_FILENAME_BASE}.freezed.dart';",
+        ]
+    },
+    "Generate tailor part directive": {
+        "prefix": "tpart",
+        "body": [
+            "part '${TM_FILENAME_BASE}.tailor.dart';",
+        ]
+    },
+    "Get semanticColorTheme": {
+        "prefix": "colorTheme",
+        "description": "Retrieve color theme from context in a variable",
+        "body": [
+            "final colorTheme = context.appColors;",
+        ],
+    },
+    "Get semanticTextTheme": {
+        "prefix": "textTheme",
+        "description": "Retrieve text theme from context in a variable",
+        "body": [
+            "final textTheme = context.appTypography;",
+        ],
+    },
+    "Get Strings": {
+        "prefix": "strings",
+        "description": "Retrieve localization from context in a variable",
+        "body": [
+            "final strings = context.strings;",
+        ],
+    }
+}

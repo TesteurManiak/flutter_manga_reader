@@ -1,0 +1,78 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch development",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--target",
+                "lib/main_dev.dart",
+                "--dart-define",
+                "DEV_MODE_ENABLED=true"
+            ]
+        },
+        {
+            "name": "Launch staging",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging",
+                "--target",
+                "lib/main_staging.dart"
+            ]
+        },
+        {
+            "name": "Launch production",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--flavor",
+                "prod",
+                "--target",
+                "lib/main_prod.dart"
+            ]
+        },
+        {
+            "name": "Launch development (no flavor)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--target",
+                "lib/main_dev.dart",
+                "--dart-define",
+                "DEV_MODE_ENABLED=true"
+            ]
+        },
+        {
+            "name": "Launch staging (no flavor)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_staging.dart",
+            "args": [
+                "--target",
+                "lib/main_staging.dart"
+            ]
+        },
+        {
+            "name": "Launch production (no flavor)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_prod.dart",
+            "args": [
+                "--target",
+                "lib/main_prod.dart"
+            ]
+        }
+    ]
+}
