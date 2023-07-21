@@ -3,11 +3,11 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
+class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $MangasTable(this.attachedDatabase, [this._alias]);
+  $DbMangasTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -57,7 +57,8 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
       updateStrategy = GeneratedColumn<int>(
               'update_strategy', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: true)
-          .withConverter<UpdateStrategy>($MangasTable.$converterupdateStrategy);
+          .withConverter<UpdateStrategy>(
+              $DbMangasTable.$converterupdateStrategy);
   static const VerificationMeta _initializedMeta =
       const VerificationMeta('initialized');
   @override
@@ -84,11 +85,11 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
         initialized
       ];
   @override
-  String get aliasedName => _alias ?? 'mangas';
+  String get aliasedName => _alias ?? 'db_mangas';
   @override
-  String get actualTableName => 'mangas';
+  String get actualTableName => 'db_mangas';
   @override
-  VerificationContext validateIntegrity(Insertable<Manga> instance,
+  VerificationContext validateIntegrity(Insertable<DbManga> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -138,9 +139,9 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Manga map(Map<String, dynamic> data, {String? tablePrefix}) {
+  DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Manga(
+    return DbManga(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       url: attachedDatabase.typeMapping
@@ -155,7 +156,7 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
           .read(DriftSqlType.string, data['${effectivePrefix}genre']),
       status: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}status'])!,
-      updateStrategy: $MangasTable.$converterupdateStrategy.fromSql(
+      updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
           attachedDatabase.typeMapping.read(
               DriftSqlType.int, data['${effectivePrefix}update_strategy'])!),
       initialized: attachedDatabase.typeMapping
@@ -164,15 +165,15 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
   }
 
   @override
-  $MangasTable createAlias(String alias) {
-    return $MangasTable(attachedDatabase, alias);
+  $DbMangasTable createAlias(String alias) {
+    return $DbMangasTable(attachedDatabase, alias);
   }
 
   static JsonTypeConverter2<UpdateStrategy, int, int> $converterupdateStrategy =
       const EnumIndexConverter<UpdateStrategy>(UpdateStrategy.values);
 }
 
-class Manga extends DataClass implements Insertable<Manga> {
+class DbManga extends DataClass implements Insertable<DbManga> {
   final int id;
   final String url;
   final String title;
@@ -182,7 +183,7 @@ class Manga extends DataClass implements Insertable<Manga> {
   final int status;
   final UpdateStrategy updateStrategy;
   final bool initialized;
-  const Manga(
+  const DbManga(
       {required this.id,
       required this.url,
       required this.title,
@@ -209,15 +210,15 @@ class Manga extends DataClass implements Insertable<Manga> {
     }
     map['status'] = Variable<int>(status);
     {
-      final converter = $MangasTable.$converterupdateStrategy;
+      final converter = $DbMangasTable.$converterupdateStrategy;
       map['update_strategy'] = Variable<int>(converter.toSql(updateStrategy));
     }
     map['initialized'] = Variable<bool>(initialized);
     return map;
   }
 
-  MangasCompanion toCompanion(bool nullToAbsent) {
-    return MangasCompanion(
+  DbMangasCompanion toCompanion(bool nullToAbsent) {
+    return DbMangasCompanion(
       id: Value(id),
       url: Value(url),
       title: Value(title),
@@ -234,10 +235,10 @@ class Manga extends DataClass implements Insertable<Manga> {
     );
   }
 
-  factory Manga.fromJson(Map<String, dynamic> json,
+  factory DbManga.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Manga(
+    return DbManga(
       id: serializer.fromJson<int>(json['id']),
       url: serializer.fromJson<String>(json['url']),
       title: serializer.fromJson<String>(json['title']),
@@ -245,7 +246,7 @@ class Manga extends DataClass implements Insertable<Manga> {
       description: serializer.fromJson<String?>(json['description']),
       genre: serializer.fromJson<String?>(json['genre']),
       status: serializer.fromJson<int>(json['status']),
-      updateStrategy: $MangasTable.$converterupdateStrategy
+      updateStrategy: $DbMangasTable.$converterupdateStrategy
           .fromJson(serializer.fromJson<int>(json['updateStrategy'])),
       initialized: serializer.fromJson<bool>(json['initialized']),
     );
@@ -262,12 +263,12 @@ class Manga extends DataClass implements Insertable<Manga> {
       'genre': serializer.toJson<String?>(genre),
       'status': serializer.toJson<int>(status),
       'updateStrategy': serializer.toJson<int>(
-          $MangasTable.$converterupdateStrategy.toJson(updateStrategy)),
+          $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy)),
       'initialized': serializer.toJson<bool>(initialized),
     };
   }
 
-  Manga copyWith(
+  DbManga copyWith(
           {int? id,
           String? url,
           String? title,
@@ -277,7 +278,7 @@ class Manga extends DataClass implements Insertable<Manga> {
           int? status,
           UpdateStrategy? updateStrategy,
           bool? initialized}) =>
-      Manga(
+      DbManga(
         id: id ?? this.id,
         url: url ?? this.url,
         title: title ?? this.title,
@@ -290,7 +291,7 @@ class Manga extends DataClass implements Insertable<Manga> {
       );
   @override
   String toString() {
-    return (StringBuffer('Manga(')
+    return (StringBuffer('DbManga(')
           ..write('id: $id, ')
           ..write('url: $url, ')
           ..write('title: $title, ')
@@ -310,7 +311,7 @@ class Manga extends DataClass implements Insertable<Manga> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Manga &&
+      (other is DbManga &&
           other.id == this.id &&
           other.url == this.url &&
           other.title == this.title &&
@@ -322,7 +323,7 @@ class Manga extends DataClass implements Insertable<Manga> {
           other.initialized == this.initialized);
 }
 
-class MangasCompanion extends UpdateCompanion<Manga> {
+class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<int> id;
   final Value<String> url;
   final Value<String> title;
@@ -332,7 +333,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
   final Value<int> status;
   final Value<UpdateStrategy> updateStrategy;
   final Value<bool> initialized;
-  const MangasCompanion({
+  const DbMangasCompanion({
     this.id = const Value.absent(),
     this.url = const Value.absent(),
     this.title = const Value.absent(),
@@ -343,7 +344,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
     this.updateStrategy = const Value.absent(),
     this.initialized = const Value.absent(),
   });
-  MangasCompanion.insert({
+  DbMangasCompanion.insert({
     this.id = const Value.absent(),
     required String url,
     required String title,
@@ -356,7 +357,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
   })  : url = Value(url),
         title = Value(title),
         updateStrategy = Value(updateStrategy);
-  static Insertable<Manga> custom({
+  static Insertable<DbManga> custom({
     Expression<int>? id,
     Expression<String>? url,
     Expression<String>? title,
@@ -380,7 +381,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
     });
   }
 
-  MangasCompanion copyWith(
+  DbMangasCompanion copyWith(
       {Value<int>? id,
       Value<String>? url,
       Value<String>? title,
@@ -390,7 +391,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
       Value<int>? status,
       Value<UpdateStrategy>? updateStrategy,
       Value<bool>? initialized}) {
-    return MangasCompanion(
+    return DbMangasCompanion(
       id: id ?? this.id,
       url: url ?? this.url,
       title: title ?? this.title,
@@ -428,7 +429,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
       map['status'] = Variable<int>(status.value);
     }
     if (updateStrategy.present) {
-      final converter = $MangasTable.$converterupdateStrategy;
+      final converter = $DbMangasTable.$converterupdateStrategy;
       map['update_strategy'] =
           Variable<int>(converter.toSql(updateStrategy.value));
     }
@@ -440,7 +441,7 @@ class MangasCompanion extends UpdateCompanion<Manga> {
 
   @override
   String toString() {
-    return (StringBuffer('MangasCompanion(')
+    return (StringBuffer('DbMangasCompanion(')
           ..write('id: $id, ')
           ..write('url: $url, ')
           ..write('title: $title, ')
@@ -455,11 +456,12 @@ class MangasCompanion extends UpdateCompanion<Manga> {
   }
 }
 
-class $ChaptersTable extends Chapters with TableInfo<$ChaptersTable, Chapter> {
+class $DbChaptersTable extends DbChapters
+    with TableInfo<$DbChaptersTable, DbChapter> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $ChaptersTable(this.attachedDatabase, [this._alias]);
+  $DbChaptersTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -491,14 +493,101 @@ class $ChaptersTable extends Chapters with TableInfo<$ChaptersTable, Chapter> {
   late final GeneratedColumn<String> scanlator = GeneratedColumn<String>(
       'scanlator', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _readMeta = const VerificationMeta('read');
   @override
-  List<GeneratedColumn> get $columns => [id, mangaId, url, name, scanlator];
+  late final GeneratedColumn<bool> read =
+      GeneratedColumn<bool>('read', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("read" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }),
+          defaultValue: const Constant(false));
+  static const VerificationMeta _bookmarkMeta =
+      const VerificationMeta('bookmark');
   @override
-  String get aliasedName => _alias ?? 'chapters';
+  late final GeneratedColumn<bool> bookmark =
+      GeneratedColumn<bool>('bookmark', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("bookmark" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }),
+          defaultValue: const Constant(false));
+  static const VerificationMeta _lastPageReadMeta =
+      const VerificationMeta('lastPageRead');
   @override
-  String get actualTableName => 'chapters';
+  late final GeneratedColumn<int> lastPageRead = GeneratedColumn<int>(
+      'last_page_read', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _dateFetchMeta =
+      const VerificationMeta('dateFetch');
   @override
-  VerificationContext validateIntegrity(Insertable<Chapter> instance,
+  late final GeneratedColumn<int> dateFetch = GeneratedColumn<int>(
+      'date_fetch', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _dateUploadMeta =
+      const VerificationMeta('dateUpload');
+  @override
+  late final GeneratedColumn<int> dateUpload = GeneratedColumn<int>(
+      'date_upload', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _chapterNumberMeta =
+      const VerificationMeta('chapterNumber');
+  @override
+  late final GeneratedColumn<double> chapterNumber = GeneratedColumn<double>(
+      'chapter_number', aliasedName, false,
+      type: DriftSqlType.double,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _sourceOrderMeta =
+      const VerificationMeta('sourceOrder');
+  @override
+  late final GeneratedColumn<int> sourceOrder = GeneratedColumn<int>(
+      'source_order', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _lastModifierMeta =
+      const VerificationMeta('lastModifier');
+  @override
+  late final GeneratedColumn<int> lastModifier = GeneratedColumn<int>(
+      'last_modifier', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        mangaId,
+        url,
+        name,
+        scanlator,
+        read,
+        bookmark,
+        lastPageRead,
+        dateFetch,
+        dateUpload,
+        chapterNumber,
+        sourceOrder,
+        lastModifier
+      ];
+  @override
+  String get aliasedName => _alias ?? 'db_chapters';
+  @override
+  String get actualTableName => 'db_chapters';
+  @override
+  VerificationContext validateIntegrity(Insertable<DbChapter> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -525,15 +614,57 @@ class $ChaptersTable extends Chapters with TableInfo<$ChaptersTable, Chapter> {
       context.handle(_scanlatorMeta,
           scanlator.isAcceptableOrUnknown(data['scanlator']!, _scanlatorMeta));
     }
+    if (data.containsKey('read')) {
+      context.handle(
+          _readMeta, read.isAcceptableOrUnknown(data['read']!, _readMeta));
+    }
+    if (data.containsKey('bookmark')) {
+      context.handle(_bookmarkMeta,
+          bookmark.isAcceptableOrUnknown(data['bookmark']!, _bookmarkMeta));
+    }
+    if (data.containsKey('last_page_read')) {
+      context.handle(
+          _lastPageReadMeta,
+          lastPageRead.isAcceptableOrUnknown(
+              data['last_page_read']!, _lastPageReadMeta));
+    }
+    if (data.containsKey('date_fetch')) {
+      context.handle(_dateFetchMeta,
+          dateFetch.isAcceptableOrUnknown(data['date_fetch']!, _dateFetchMeta));
+    }
+    if (data.containsKey('date_upload')) {
+      context.handle(
+          _dateUploadMeta,
+          dateUpload.isAcceptableOrUnknown(
+              data['date_upload']!, _dateUploadMeta));
+    }
+    if (data.containsKey('chapter_number')) {
+      context.handle(
+          _chapterNumberMeta,
+          chapterNumber.isAcceptableOrUnknown(
+              data['chapter_number']!, _chapterNumberMeta));
+    }
+    if (data.containsKey('source_order')) {
+      context.handle(
+          _sourceOrderMeta,
+          sourceOrder.isAcceptableOrUnknown(
+              data['source_order']!, _sourceOrderMeta));
+    }
+    if (data.containsKey('last_modifier')) {
+      context.handle(
+          _lastModifierMeta,
+          lastModifier.isAcceptableOrUnknown(
+              data['last_modifier']!, _lastModifierMeta));
+    }
     return context;
   }
 
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Chapter map(Map<String, dynamic> data, {String? tablePrefix}) {
+  DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Chapter(
+    return DbChapter(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       mangaId: attachedDatabase.typeMapping
@@ -544,27 +675,59 @@ class $ChaptersTable extends Chapters with TableInfo<$ChaptersTable, Chapter> {
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       scanlator: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}scanlator']),
+      read: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}read'])!,
+      bookmark: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}bookmark'])!,
+      lastPageRead: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}last_page_read'])!,
+      dateFetch: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}date_fetch'])!,
+      dateUpload: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}date_upload'])!,
+      chapterNumber: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}chapter_number'])!,
+      sourceOrder: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}source_order'])!,
+      lastModifier: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}last_modifier'])!,
     );
   }
 
   @override
-  $ChaptersTable createAlias(String alias) {
-    return $ChaptersTable(attachedDatabase, alias);
+  $DbChaptersTable createAlias(String alias) {
+    return $DbChaptersTable(attachedDatabase, alias);
   }
 }
 
-class Chapter extends DataClass implements Insertable<Chapter> {
+class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int id;
   final int? mangaId;
   final String url;
   final String name;
   final String? scanlator;
-  const Chapter(
+  final bool read;
+  final bool bookmark;
+  final int lastPageRead;
+  final int dateFetch;
+  final int dateUpload;
+  final double chapterNumber;
+  final int sourceOrder;
+  final int lastModifier;
+  const DbChapter(
       {required this.id,
       this.mangaId,
       required this.url,
       required this.name,
-      this.scanlator});
+      this.scanlator,
+      required this.read,
+      required this.bookmark,
+      required this.lastPageRead,
+      required this.dateFetch,
+      required this.dateUpload,
+      required this.chapterNumber,
+      required this.sourceOrder,
+      required this.lastModifier});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -577,11 +740,19 @@ class Chapter extends DataClass implements Insertable<Chapter> {
     if (!nullToAbsent || scanlator != null) {
       map['scanlator'] = Variable<String>(scanlator);
     }
+    map['read'] = Variable<bool>(read);
+    map['bookmark'] = Variable<bool>(bookmark);
+    map['last_page_read'] = Variable<int>(lastPageRead);
+    map['date_fetch'] = Variable<int>(dateFetch);
+    map['date_upload'] = Variable<int>(dateUpload);
+    map['chapter_number'] = Variable<double>(chapterNumber);
+    map['source_order'] = Variable<int>(sourceOrder);
+    map['last_modifier'] = Variable<int>(lastModifier);
     return map;
   }
 
-  ChaptersCompanion toCompanion(bool nullToAbsent) {
-    return ChaptersCompanion(
+  DbChaptersCompanion toCompanion(bool nullToAbsent) {
+    return DbChaptersCompanion(
       id: Value(id),
       mangaId: mangaId == null && nullToAbsent
           ? const Value.absent()
@@ -591,18 +762,34 @@ class Chapter extends DataClass implements Insertable<Chapter> {
       scanlator: scanlator == null && nullToAbsent
           ? const Value.absent()
           : Value(scanlator),
+      read: Value(read),
+      bookmark: Value(bookmark),
+      lastPageRead: Value(lastPageRead),
+      dateFetch: Value(dateFetch),
+      dateUpload: Value(dateUpload),
+      chapterNumber: Value(chapterNumber),
+      sourceOrder: Value(sourceOrder),
+      lastModifier: Value(lastModifier),
     );
   }
 
-  factory Chapter.fromJson(Map<String, dynamic> json,
+  factory DbChapter.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return Chapter(
+    return DbChapter(
       id: serializer.fromJson<int>(json['id']),
       mangaId: serializer.fromJson<int?>(json['mangaId']),
       url: serializer.fromJson<String>(json['url']),
       name: serializer.fromJson<String>(json['name']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
+      read: serializer.fromJson<bool>(json['read']),
+      bookmark: serializer.fromJson<bool>(json['bookmark']),
+      lastPageRead: serializer.fromJson<int>(json['lastPageRead']),
+      dateFetch: serializer.fromJson<int>(json['dateFetch']),
+      dateUpload: serializer.fromJson<int>(json['dateUpload']),
+      chapterNumber: serializer.fromJson<double>(json['chapterNumber']),
+      sourceOrder: serializer.fromJson<int>(json['sourceOrder']),
+      lastModifier: serializer.fromJson<int>(json['lastModifier']),
     );
   }
   @override
@@ -614,74 +801,159 @@ class Chapter extends DataClass implements Insertable<Chapter> {
       'url': serializer.toJson<String>(url),
       'name': serializer.toJson<String>(name),
       'scanlator': serializer.toJson<String?>(scanlator),
+      'read': serializer.toJson<bool>(read),
+      'bookmark': serializer.toJson<bool>(bookmark),
+      'lastPageRead': serializer.toJson<int>(lastPageRead),
+      'dateFetch': serializer.toJson<int>(dateFetch),
+      'dateUpload': serializer.toJson<int>(dateUpload),
+      'chapterNumber': serializer.toJson<double>(chapterNumber),
+      'sourceOrder': serializer.toJson<int>(sourceOrder),
+      'lastModifier': serializer.toJson<int>(lastModifier),
     };
   }
 
-  Chapter copyWith(
+  DbChapter copyWith(
           {int? id,
           Value<int?> mangaId = const Value.absent(),
           String? url,
           String? name,
-          Value<String?> scanlator = const Value.absent()}) =>
-      Chapter(
+          Value<String?> scanlator = const Value.absent(),
+          bool? read,
+          bool? bookmark,
+          int? lastPageRead,
+          int? dateFetch,
+          int? dateUpload,
+          double? chapterNumber,
+          int? sourceOrder,
+          int? lastModifier}) =>
+      DbChapter(
         id: id ?? this.id,
         mangaId: mangaId.present ? mangaId.value : this.mangaId,
         url: url ?? this.url,
         name: name ?? this.name,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
+        read: read ?? this.read,
+        bookmark: bookmark ?? this.bookmark,
+        lastPageRead: lastPageRead ?? this.lastPageRead,
+        dateFetch: dateFetch ?? this.dateFetch,
+        dateUpload: dateUpload ?? this.dateUpload,
+        chapterNumber: chapterNumber ?? this.chapterNumber,
+        sourceOrder: sourceOrder ?? this.sourceOrder,
+        lastModifier: lastModifier ?? this.lastModifier,
       );
   @override
   String toString() {
-    return (StringBuffer('Chapter(')
+    return (StringBuffer('DbChapter(')
           ..write('id: $id, ')
           ..write('mangaId: $mangaId, ')
           ..write('url: $url, ')
           ..write('name: $name, ')
-          ..write('scanlator: $scanlator')
+          ..write('scanlator: $scanlator, ')
+          ..write('read: $read, ')
+          ..write('bookmark: $bookmark, ')
+          ..write('lastPageRead: $lastPageRead, ')
+          ..write('dateFetch: $dateFetch, ')
+          ..write('dateUpload: $dateUpload, ')
+          ..write('chapterNumber: $chapterNumber, ')
+          ..write('sourceOrder: $sourceOrder, ')
+          ..write('lastModifier: $lastModifier')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, mangaId, url, name, scanlator);
+  int get hashCode => Object.hash(
+      id,
+      mangaId,
+      url,
+      name,
+      scanlator,
+      read,
+      bookmark,
+      lastPageRead,
+      dateFetch,
+      dateUpload,
+      chapterNumber,
+      sourceOrder,
+      lastModifier);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Chapter &&
+      (other is DbChapter &&
           other.id == this.id &&
           other.mangaId == this.mangaId &&
           other.url == this.url &&
           other.name == this.name &&
-          other.scanlator == this.scanlator);
+          other.scanlator == this.scanlator &&
+          other.read == this.read &&
+          other.bookmark == this.bookmark &&
+          other.lastPageRead == this.lastPageRead &&
+          other.dateFetch == this.dateFetch &&
+          other.dateUpload == this.dateUpload &&
+          other.chapterNumber == this.chapterNumber &&
+          other.sourceOrder == this.sourceOrder &&
+          other.lastModifier == this.lastModifier);
 }
 
-class ChaptersCompanion extends UpdateCompanion<Chapter> {
+class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<int> id;
   final Value<int?> mangaId;
   final Value<String> url;
   final Value<String> name;
   final Value<String?> scanlator;
-  const ChaptersCompanion({
+  final Value<bool> read;
+  final Value<bool> bookmark;
+  final Value<int> lastPageRead;
+  final Value<int> dateFetch;
+  final Value<int> dateUpload;
+  final Value<double> chapterNumber;
+  final Value<int> sourceOrder;
+  final Value<int> lastModifier;
+  const DbChaptersCompanion({
     this.id = const Value.absent(),
     this.mangaId = const Value.absent(),
     this.url = const Value.absent(),
     this.name = const Value.absent(),
     this.scanlator = const Value.absent(),
+    this.read = const Value.absent(),
+    this.bookmark = const Value.absent(),
+    this.lastPageRead = const Value.absent(),
+    this.dateFetch = const Value.absent(),
+    this.dateUpload = const Value.absent(),
+    this.chapterNumber = const Value.absent(),
+    this.sourceOrder = const Value.absent(),
+    this.lastModifier = const Value.absent(),
   });
-  ChaptersCompanion.insert({
+  DbChaptersCompanion.insert({
     this.id = const Value.absent(),
     this.mangaId = const Value.absent(),
     required String url,
     required String name,
     this.scanlator = const Value.absent(),
+    this.read = const Value.absent(),
+    this.bookmark = const Value.absent(),
+    this.lastPageRead = const Value.absent(),
+    this.dateFetch = const Value.absent(),
+    this.dateUpload = const Value.absent(),
+    this.chapterNumber = const Value.absent(),
+    this.sourceOrder = const Value.absent(),
+    this.lastModifier = const Value.absent(),
   })  : url = Value(url),
         name = Value(name);
-  static Insertable<Chapter> custom({
+  static Insertable<DbChapter> custom({
     Expression<int>? id,
     Expression<int>? mangaId,
     Expression<String>? url,
     Expression<String>? name,
     Expression<String>? scanlator,
+    Expression<bool>? read,
+    Expression<bool>? bookmark,
+    Expression<int>? lastPageRead,
+    Expression<int>? dateFetch,
+    Expression<int>? dateUpload,
+    Expression<double>? chapterNumber,
+    Expression<int>? sourceOrder,
+    Expression<int>? lastModifier,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -689,21 +961,45 @@ class ChaptersCompanion extends UpdateCompanion<Chapter> {
       if (url != null) 'url': url,
       if (name != null) 'name': name,
       if (scanlator != null) 'scanlator': scanlator,
+      if (read != null) 'read': read,
+      if (bookmark != null) 'bookmark': bookmark,
+      if (lastPageRead != null) 'last_page_read': lastPageRead,
+      if (dateFetch != null) 'date_fetch': dateFetch,
+      if (dateUpload != null) 'date_upload': dateUpload,
+      if (chapterNumber != null) 'chapter_number': chapterNumber,
+      if (sourceOrder != null) 'source_order': sourceOrder,
+      if (lastModifier != null) 'last_modifier': lastModifier,
     });
   }
 
-  ChaptersCompanion copyWith(
+  DbChaptersCompanion copyWith(
       {Value<int>? id,
       Value<int?>? mangaId,
       Value<String>? url,
       Value<String>? name,
-      Value<String?>? scanlator}) {
-    return ChaptersCompanion(
+      Value<String?>? scanlator,
+      Value<bool>? read,
+      Value<bool>? bookmark,
+      Value<int>? lastPageRead,
+      Value<int>? dateFetch,
+      Value<int>? dateUpload,
+      Value<double>? chapterNumber,
+      Value<int>? sourceOrder,
+      Value<int>? lastModifier}) {
+    return DbChaptersCompanion(
       id: id ?? this.id,
       mangaId: mangaId ?? this.mangaId,
       url: url ?? this.url,
       name: name ?? this.name,
       scanlator: scanlator ?? this.scanlator,
+      read: read ?? this.read,
+      bookmark: bookmark ?? this.bookmark,
+      lastPageRead: lastPageRead ?? this.lastPageRead,
+      dateFetch: dateFetch ?? this.dateFetch,
+      dateUpload: dateUpload ?? this.dateUpload,
+      chapterNumber: chapterNumber ?? this.chapterNumber,
+      sourceOrder: sourceOrder ?? this.sourceOrder,
+      lastModifier: lastModifier ?? this.lastModifier,
     );
   }
 
@@ -725,17 +1021,49 @@ class ChaptersCompanion extends UpdateCompanion<Chapter> {
     if (scanlator.present) {
       map['scanlator'] = Variable<String>(scanlator.value);
     }
+    if (read.present) {
+      map['read'] = Variable<bool>(read.value);
+    }
+    if (bookmark.present) {
+      map['bookmark'] = Variable<bool>(bookmark.value);
+    }
+    if (lastPageRead.present) {
+      map['last_page_read'] = Variable<int>(lastPageRead.value);
+    }
+    if (dateFetch.present) {
+      map['date_fetch'] = Variable<int>(dateFetch.value);
+    }
+    if (dateUpload.present) {
+      map['date_upload'] = Variable<int>(dateUpload.value);
+    }
+    if (chapterNumber.present) {
+      map['chapter_number'] = Variable<double>(chapterNumber.value);
+    }
+    if (sourceOrder.present) {
+      map['source_order'] = Variable<int>(sourceOrder.value);
+    }
+    if (lastModifier.present) {
+      map['last_modifier'] = Variable<int>(lastModifier.value);
+    }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('ChaptersCompanion(')
+    return (StringBuffer('DbChaptersCompanion(')
           ..write('id: $id, ')
           ..write('mangaId: $mangaId, ')
           ..write('url: $url, ')
           ..write('name: $name, ')
-          ..write('scanlator: $scanlator')
+          ..write('scanlator: $scanlator, ')
+          ..write('read: $read, ')
+          ..write('bookmark: $bookmark, ')
+          ..write('lastPageRead: $lastPageRead, ')
+          ..write('dateFetch: $dateFetch, ')
+          ..write('dateUpload: $dateUpload, ')
+          ..write('chapterNumber: $chapterNumber, ')
+          ..write('sourceOrder: $sourceOrder, ')
+          ..write('lastModifier: $lastModifier')
           ..write(')'))
         .toString();
   }
@@ -743,11 +1071,11 @@ class ChaptersCompanion extends UpdateCompanion<Chapter> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  late final $MangasTable mangas = $MangasTable(this);
-  late final $ChaptersTable chapters = $ChaptersTable(this);
+  late final $DbMangasTable dbMangas = $DbMangasTable(this);
+  late final $DbChaptersTable dbChapters = $DbChaptersTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [mangas, chapters];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [dbMangas, dbChapters];
 }

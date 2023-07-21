@@ -1,3 +1,4 @@
+import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'manga.freezed.dart';
@@ -15,6 +16,19 @@ class Manga with _$Manga {
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,
   }) = _Manga;
+
+  factory Manga.fromDb(DbManga dbManga) {
+    return Manga(
+      url: dbManga.url,
+      title: dbManga.title,
+      artist: dbManga.artist,
+      description: dbManga.description,
+      genre: dbManga.genre,
+      status: dbManga.status,
+      updateStrategy: dbManga.updateStrategy,
+      initialized: dbManga.initialized,
+    );
+  }
 }
 
 /// Define the update strategy for a manga.

@@ -8,9 +8,7 @@ import 'package:path_provider/path_provider.dart';
 
 part 'app_database.g.dart';
 
-// This will generate a table called "mangas" for us.
-// The rows of that table will be represented by a class called "Mangas".
-class Mangas extends Table {
+class DbMangas extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get url => text()();
   TextColumn get title => text()();
@@ -22,16 +20,24 @@ class Mangas extends Table {
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
 }
 
-class Chapters extends Table {
+class DbChapters extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get mangaId => integer().nullable()();
   TextColumn get url => text()();
   TextColumn get name => text()();
   TextColumn get scanlator => text().nullable()();
+  BoolColumn get read => boolean().withDefault(const Constant(false))();
+  BoolColumn get bookmark => boolean().withDefault(const Constant(false))();
+  IntColumn get lastPageRead => integer().withDefault(const Constant(0))();
+  IntColumn get dateFetch => integer().withDefault(const Constant(0))();
+  IntColumn get dateUpload => integer().withDefault(const Constant(0))();
+  RealColumn get chapterNumber => real().withDefault(const Constant(0))();
+  IntColumn get sourceOrder => integer().withDefault(const Constant(0))();
+  IntColumn get lastModifier => integer().withDefault(const Constant(0))();
 }
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
-@DriftDatabase(tables: [Mangas, Chapters])
+@DriftDatabase(tables: [DbMangas, DbChapters])
 class AppDatabase extends _$AppDatabase {
   // We tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());
