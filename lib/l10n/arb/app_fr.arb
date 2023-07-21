@@ -1,0 +1,16 @@
+{
+    "@@locale": "fr",
+    "decrement_title": "Décrémenter",
+    "decrement_tooltip": "Décrémenter",
+    "home_counter": "Vous avez cliqué sur le bouton {count} fois.",
+    "home_go_to_increment": "Aller à la page d'incrémentation",
+    "home_go_to_decrement": "Aller à la page de décrémentation",
+    "increment_title": "Incrémenter",
+    "increment_tooltip": "Incrémenter",
+    "settings_language_select": "Langue",
+    "settings_theme_select": "Thème",
+    "settings_title": "Paramètres",
+    "theme_mode_system": "Système",
+    "theme_mode_light": "Clair",
+    "theme_mode_dark": "Sombre"
+}
