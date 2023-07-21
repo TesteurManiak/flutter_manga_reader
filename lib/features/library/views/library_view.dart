@@ -7,9 +7,19 @@ class LibraryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Library'.hardcoded),
-      ),
+      appBar: _AppBar(),
+      body: const CustomScrollView(),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget with AppBarSizeMixin {
+  @override
+  Widget build(BuildContext context) {
+    final strings = context.strings;
+
+    return AppBar(
+      title: Text(strings.library_title),
     );
   }
 }

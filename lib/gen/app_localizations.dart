@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_en.dart';
 import 'app_localizations_fr.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
@@ -88,86 +89,15 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
     Locale('fr')
   ];
 
-  /// No description provided for @decrement_title.
+  /// No description provided for @library_title.
   ///
   /// In fr, this message translates to:
-  /// **'Décrémenter'**
-  String get decrement_title;
-
-  /// No description provided for @decrement_tooltip.
-  ///
-  /// In fr, this message translates to:
-  /// **'Décrémenter'**
-  String get decrement_tooltip;
-
-  /// No description provided for @home_counter.
-  ///
-  /// In fr, this message translates to:
-  /// **'Vous avez cliqué sur le bouton {count} fois.'**
-  String home_counter(Object count);
-
-  /// No description provided for @home_go_to_increment.
-  ///
-  /// In fr, this message translates to:
-  /// **'Aller à la page d\'incrémentation'**
-  String get home_go_to_increment;
-
-  /// No description provided for @home_go_to_decrement.
-  ///
-  /// In fr, this message translates to:
-  /// **'Aller à la page de décrémentation'**
-  String get home_go_to_decrement;
-
-  /// No description provided for @increment_title.
-  ///
-  /// In fr, this message translates to:
-  /// **'Incrémenter'**
-  String get increment_title;
-
-  /// No description provided for @increment_tooltip.
-  ///
-  /// In fr, this message translates to:
-  /// **'Incrémenter'**
-  String get increment_tooltip;
-
-  /// No description provided for @settings_language_select.
-  ///
-  /// In fr, this message translates to:
-  /// **'Langue'**
-  String get settings_language_select;
-
-  /// No description provided for @settings_theme_select.
-  ///
-  /// In fr, this message translates to:
-  /// **'Thème'**
-  String get settings_theme_select;
-
-  /// No description provided for @settings_title.
-  ///
-  /// In fr, this message translates to:
-  /// **'Paramètres'**
-  String get settings_title;
-
-  /// No description provided for @theme_mode_system.
-  ///
-  /// In fr, this message translates to:
-  /// **'Système'**
-  String get theme_mode_system;
-
-  /// No description provided for @theme_mode_light.
-  ///
-  /// In fr, this message translates to:
-  /// **'Clair'**
-  String get theme_mode_light;
-
-  /// No description provided for @theme_mode_dark.
-  ///
-  /// In fr, this message translates to:
-  /// **'Sombre'**
-  String get theme_mode_dark;
+  /// **'Bibliothèque'**
+  String get library_title;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -179,7 +109,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -190,6 +120,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'en': return AppLocalizationsEn();
     case 'fr': return AppLocalizationsFr();
   }
 
