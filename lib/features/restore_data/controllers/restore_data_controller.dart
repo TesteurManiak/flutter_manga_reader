@@ -18,7 +18,7 @@ class RestoreDataController extends _$RestoreDataController {
     final result = await ref.read(pickBackupFileProvider.future);
 
     state = result.when(
-      success: (file) => const RestoreDataState.loaded(),
+      success: (bytes) => const RestoreDataState.loaded(),
       failure: (error) => RestoreDataState.error(message: error.toString()),
     );
   }

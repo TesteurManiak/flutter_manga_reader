@@ -26,7 +26,6 @@ dependencies:
   logging: ^1.2.0
   path: ^1.8.3
   path_provider: ^2.0.15
-  protobuf: ^3.0.0
   riverpod_annotation: ^2.1.1
   shared_preferences: ^2.2.0
   sliver_tools: ^0.2.12

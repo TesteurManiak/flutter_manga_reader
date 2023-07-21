@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,11 +20,14 @@ class _FilePickerImpl implements AppFilePicker {
 
   @override
   Future<String?> pickFile({List<String>? allowedExtensions}) async {
-    final result = await _filePicker.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: allowedExtensions,
-    );
-    return result?.files.singleOrNull?.path;
+    final result = await _filePicker.pickFiles();
+    final file = result?.files.singleOrNull?.path;
+
+    if (file != null && allowedExtensions != null) {
+      if (allowedExtensions.none(file.endsWith)) return null;
+    }
+
+    return file;
   }
 }
 

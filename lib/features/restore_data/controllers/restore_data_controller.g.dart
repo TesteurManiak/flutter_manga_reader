@@ -7,7 +7,7 @@ part of 'restore_data_controller.dart';
 // **************************************************************************
 
 String _$restoreDataControllerHash() =>
-    r'3b06afec9bd6a6a2b31dc1416a58716330b49d64';
+    r'cec3058b64b7b74269197477dc26e21f2d7bdccc';
 
 /// See also [RestoreDataController].
 @ProviderFor(RestoreDataController)
