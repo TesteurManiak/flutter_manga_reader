@@ -10,10 +10,21 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final pageController = PageController();
   final selectedIndexNotifier = ValueNotifier<int>(0);
 
   @override
+  void initState() {
+    super.initState();
+
+    selectedIndexNotifier.addListener(() {
+      pageController.jumpToPage(selectedIndexNotifier.value);
+    });
+  }
+
+  @override
   void dispose() {
+    pageController.dispose();
     selectedIndexNotifier.dispose();
     super.dispose();
   }
@@ -22,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           LibraryView(),
@@ -50,6 +62,7 @@ class _BottomBar extends StatelessWidget {
       builder: (context, currentIndex, _) {
         return BottomNavigationBar(
           currentIndex: currentIndex,
+          onTap: (index) => controller.value = index,
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.book),
