@@ -6,7 +6,7 @@ part of 'feature_flag_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$hasFeatureFlagHash() => r'd064c4db211f8ec93d5b5e8c929d74ffd4862ee8';
+String _$hasFeatureFlagHash() => r'e94ddb01f6864999199be1dadad3feb344e1b5a5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -111,7 +111,7 @@ class HasFeatureFlagProvider extends AutoDisposeProvider<bool> {
 }
 
 String _$featureFlagControllerHash() =>
-    r'cce85494becb8a8a1a98a86b9f61df2deaf7f9da';
+    r'9e8cc789cffb2c59c9493cfd3ea8b9af4f9461b2';
 
 /// See also [FeatureFlagController].
 @ProviderFor(FeatureFlagController)

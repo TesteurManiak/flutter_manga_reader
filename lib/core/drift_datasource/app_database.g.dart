@@ -3,7 +3,7 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $MangasTable extends Mangas with TableInfo<$MangasTable, MangasData> {
+class $MangasTable extends Mangas with TableInfo<$MangasTable, Manga> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -24,7 +24,7 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, MangasData> {
   @override
   String get actualTableName => 'mangas';
   @override
-  VerificationContext validateIntegrity(Insertable<MangasData> instance,
+  VerificationContext validateIntegrity(Insertable<Manga> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -37,9 +37,9 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, MangasData> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  MangasData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  Manga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return MangasData(
+    return Manga(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
     );
@@ -51,9 +51,9 @@ class $MangasTable extends Mangas with TableInfo<$MangasTable, MangasData> {
   }
 }
 
-class MangasData extends DataClass implements Insertable<MangasData> {
+class Manga extends DataClass implements Insertable<Manga> {
   final int id;
-  const MangasData({required this.id});
+  const Manga({required this.id});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -67,10 +67,10 @@ class MangasData extends DataClass implements Insertable<MangasData> {
     );
   }
 
-  factory MangasData.fromJson(Map<String, dynamic> json,
+  factory Manga.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return MangasData(
+    return Manga(
       id: serializer.fromJson<int>(json['id']),
     );
   }
@@ -82,12 +82,12 @@ class MangasData extends DataClass implements Insertable<MangasData> {
     };
   }
 
-  MangasData copyWith({int? id}) => MangasData(
+  Manga copyWith({int? id}) => Manga(
         id: id ?? this.id,
       );
   @override
   String toString() {
-    return (StringBuffer('MangasData(')
+    return (StringBuffer('Manga(')
           ..write('id: $id')
           ..write(')'))
         .toString();
@@ -97,10 +97,10 @@ class MangasData extends DataClass implements Insertable<MangasData> {
   int get hashCode => id.hashCode;
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is MangasData && other.id == this.id);
+      identical(this, other) || (other is Manga && other.id == this.id);
 }
 
-class MangasCompanion extends UpdateCompanion<MangasData> {
+class MangasCompanion extends UpdateCompanion<Manga> {
   final Value<int> id;
   const MangasCompanion({
     this.id = const Value.absent(),
@@ -108,7 +108,7 @@ class MangasCompanion extends UpdateCompanion<MangasData> {
   MangasCompanion.insert({
     this.id = const Value.absent(),
   });
-  static Insertable<MangasData> custom({
+  static Insertable<Manga> custom({
     Expression<int>? id,
   }) {
     return RawValuesInsertable({
