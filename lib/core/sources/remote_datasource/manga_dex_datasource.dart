@@ -14,8 +14,10 @@ class MangaDexDatasource implements MangaDatasource {
 
   @override
   Future<List<Manga>> fetchMangas() async {
-    // TODO: implement fetchMangas
-    throw UnimplementedError();
+    await _restClient.send(
+      method: HttpMethod.get,
+      pathSegments: ['manga'],
+    );
   }
 }
 
