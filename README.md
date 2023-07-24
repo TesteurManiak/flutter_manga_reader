@@ -145,6 +145,10 @@ This project uses [flutter_native_splash][flutter_native_splash_link] to generat
 
 _Section coming soon_
 
+## Credits
+
+* [MangaDex][manga_dex]: For providing the API used in this project
+
 [mei_link]: https://github.com/MeixDev
 [guillaume_link]: https://github.com/TesteurManiak
 [floating_dartists_link]: https://github.com/Floating-Dartists
@@ -158,3 +162,4 @@ _Section coming soon_
 [theme_tailor_link]: https://pub.dev/packages/theme_tailor
 [flutter_launcher_icons_link]: https://pub.dev/packages/flutter_launcher_icons
 [flutter_native_splash_link]: https://pub.dev/packages/flutter_native_splash
+[manga_dex]: https://api.mangadex.org
