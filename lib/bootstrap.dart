@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
@@ -8,6 +9,9 @@ import 'package:go_router/go_router.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  HttpOverrides.global = MyHttpOverrides();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
   // Add cross-flavor configuration here
   setupLogging();
@@ -39,4 +43,12 @@ Future<void> _initializeLocale(ProviderContainer container) {
 
 Future<void> _initializeFeatureFlags(ProviderContainer container) {
   return container.read(featureFlagControllerProvider.notifier).init();
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (_, __, ___) => true;
+  }
 }

@@ -8,6 +8,7 @@ class AppTheme {
   /// The light theme for this app.
   static ThemeData light() {
     return ThemeData.light().copyWith(
+      useMaterial3: true,
       extensions: [
         const AppColors.light(),
         const AppShadows.light(),
@@ -20,6 +21,7 @@ class AppTheme {
   /// The dark theme for this app.
   static ThemeData dark() {
     return ThemeData.dark().copyWith(
+      useMaterial3: true,
       extensions: [
         const AppColors.dark(),
         const AppShadows.dark(),

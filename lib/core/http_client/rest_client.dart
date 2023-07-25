@@ -21,7 +21,7 @@ class RestClient {
   final Uri baseUri;
   final Client httpClient;
 
-  Future<HttpResult<Object, HttpError>> send({
+  Future<Result<Object, HttpError>> send({
     required HttpMethod method,
     required List<String> pathSegments,
     Map<String, Object?>? queryParameters,
@@ -91,17 +91,17 @@ class RestClient {
     return request;
   }
 
-  Future<HttpResult<Object, HttpError>> _sendRequest(
+  Future<Result<Object, HttpError>> _sendRequest(
     BaseRequest request,
   ) async {
     try {
       final response = await httpClient.send(request);
       if (!response.isSuccessful) {
-        return HttpResult.failure(HttpError(message: response.toString()));
+        return Result.failure(HttpError(message: response.toString()));
       }
 
       final body = await response.stream.bytesToString();
-      if (body == '') return const HttpResult.success('');
+      if (body == '') return const Result.success('');
 
       final contentTypeHeader = response.headers[HttpHeaders.contentTypeHeader];
       if (contentTypeHeader != null) {
@@ -109,22 +109,22 @@ class RestClient {
         if (mimeType == ContentType.json.mimeType) {
           final json = jsonDecode(body);
           if (json is! Object) {
-            return HttpResult.failure(
+            return Result.failure(
               HttpError(message: 'Invalid JSON: $json'),
             );
           }
 
-          return HttpResult.success(json);
+          return Result.success(json);
         }
       }
-      return HttpResult.success(body);
+      return Result.success(body);
     } on TimeoutException {
-      return const HttpResult.failure(HttpError(message: 'Timeout'));
+      return const Result.failure(HttpError(message: 'Timeout'));
     } on SocketException catch (e) {
       if (e.message.contains('timed out')) {
-        return const HttpResult.failure(HttpError(message: 'Timeout'));
+        return const Result.failure(HttpError(message: 'Timeout'));
       }
-      return HttpResult.failure(HttpError(message: e.message));
+      return Result.failure(HttpError(message: e.message));
     }
   }
 }
