@@ -81,16 +81,19 @@ enum MangaDexStatus {
 typedef LocalizedString = Map<String, String>;
 
 class MangaDexToMangaConverter
-    extends JsonConverter<List<Manga>, List<MangaDexManga>> {
+    extends JsonConverter<List<Manga>, List<dynamic>> {
   const MangaDexToMangaConverter();
 
   @override
-  List<Manga> fromJson(List<MangaDexManga> json) {
-    return json.map((e) => e.toManga()).toList();
+  List<Manga> fromJson(List<dynamic> json) {
+    return json
+        .cast<Map<String, dynamic>>()
+        .map((e) => MangaDexManga.fromJson(e).toManga())
+        .toList();
   }
 
   @override
-  List<MangaDexManga> toJson(List<Manga> object) {
+  List<dynamic> toJson(List<Manga> object) {
     throw UnimplementedError();
   }
 }

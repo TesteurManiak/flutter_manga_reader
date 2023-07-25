@@ -12,8 +12,7 @@ _$_MangaDexResponse _$$_MangaDexResponseFromJson(Map<String, dynamic> json) =>
       response: json['response'] as String,
       mangas: json['data'] == null
           ? const <Manga>[]
-          : const MangaDexToMangaConverter()
-              .fromJson(json['data'] as List<MangaDexManga>),
+          : const MangaDexToMangaConverter().fromJson(json['data'] as List),
       limit: json['limit'] as int? ?? 0,
       offset: json['offset'] as int? ?? 0,
       total: json['total'] as int? ?? 0,
