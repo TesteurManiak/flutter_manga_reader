@@ -3,6 +3,8 @@ import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
+import 'package:flutter_manga_reader/core/widgets/manga_tile.dart';
+import 'package:flutter_manga_reader/core/widgets/paginated_grid_view.dart';
 import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -57,37 +59,25 @@ class _AppBar extends StatelessWidget with AppBarSizeMixin {
   }
 }
 
-class _Loaded extends StatelessWidget {
+class _Loaded extends ConsumerWidget {
   const _Loaded(this.mangas);
 
   final List<Manga> mangas;
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return PaginatedGridView(
       padding: const EdgeInsets.all(16),
+      fetchMore: () {
+        return ref.read(searchControllerProvider.notifier).searchForMangas();
+      },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
-      itemBuilder: (context, index) {
-        final manga = mangas[index];
-
-        return Container(
-          padding: const EdgeInsets.all(8),
-          alignment: Alignment.bottomLeft,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            manga.title,
-            textAlign: TextAlign.start,
-          ),
-        );
-      },
       itemCount: mangas.length,
+      itemBuilder: (_, index) => MangaTile(mangas[index]),
     );
   }
 }
