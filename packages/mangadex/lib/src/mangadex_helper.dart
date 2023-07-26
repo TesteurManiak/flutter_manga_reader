@@ -1,4 +1,7 @@
+import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
+import 'package:mangadex/src/extensions/string_extensions.dart';
+import 'package:mangadex/src/models/manga.dart';
 
 class MangadexHelper {
   const MangadexHelper();
@@ -41,5 +44,30 @@ class MangadexHelper {
   /// Get the latest chapter offset pages are 1 based, so subtract 1.
   String getLatestChapterOffset(int page) {
     return (MDConstants.latestChapterLimit * (page - 1)).toString();
+  }
+
+  Manga createBasicManga({
+    required MangaData mangaData,
+    String? coverFileName,
+    String? coverSuffix,
+    required String lang,
+  }) {
+    final titleMap = mangaData.attributes.title;
+    final dirtyTitle = titleMap.values.firstOrNull ??
+        mangaData.attributes.altTitles
+            .firstWhere((e) => e[lang] != null || e['en'] != null)
+            .values
+            .singleOrNull;
+    final title = (dirtyTitle?.trim() ?? '').removeHtmlTags().removeMarkdown();
+
+    return Manga(
+      url: '/manga/${mangaData.id}',
+      title: title,
+      thumbnailUrl: switch (coverSuffix.isNullOrEmpty) {
+        true =>
+          '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName$coverSuffix',
+        _ => '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
+      },
+    );
   }
 }

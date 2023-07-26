@@ -20,7 +20,9 @@ MangaData _$MangaDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MangaData {
+  String get id => throw _privateConstructorUsedError;
   MangaAttributes get attributes => throw _privateConstructorUsedError;
+  List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +35,10 @@ abstract class $MangaDataCopyWith<$Res> {
   factory $MangaDataCopyWith(MangaData value, $Res Function(MangaData) then) =
       _$MangaDataCopyWithImpl<$Res, MangaData>;
   @useResult
-  $Res call({MangaAttributes attributes});
+  $Res call(
+      {String id,
+      MangaAttributes attributes,
+      List<Relationship> relationships});
 
   $MangaAttributesCopyWith<$Res> get attributes;
 }
@@ -51,13 +56,23 @@ class _$MangaDataCopyWithImpl<$Res, $Val extends MangaData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? attributes = null,
+    Object? relationships = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       attributes: null == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as MangaAttributes,
+      relationships: null == relationships
+          ? _value.relationships
+          : relationships // ignore: cast_nullable_to_non_nullable
+              as List<Relationship>,
     ) as $Val);
   }
 
@@ -77,7 +92,10 @@ abstract class _$$_MangaDataCopyWith<$Res> implements $MangaDataCopyWith<$Res> {
       __$$_MangaDataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({MangaAttributes attributes});
+  $Res call(
+      {String id,
+      MangaAttributes attributes,
+      List<Relationship> relationships});
 
   @override
   $MangaAttributesCopyWith<$Res> get attributes;
@@ -94,13 +112,23 @@ class __$$_MangaDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? attributes = null,
+    Object? relationships = null,
   }) {
     return _then(_$_MangaData(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       attributes: null == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
               as MangaAttributes,
+      relationships: null == relationships
+          ? _value._relationships
+          : relationships // ignore: cast_nullable_to_non_nullable
+              as List<Relationship>,
     ));
   }
 }
@@ -108,17 +136,30 @@ class __$$_MangaDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_MangaData implements _MangaData {
-  const _$_MangaData({required this.attributes});
+  const _$_MangaData(
+      {required this.id,
+      required this.attributes,
+      required final List<Relationship> relationships})
+      : _relationships = relationships;
 
   factory _$_MangaData.fromJson(Map<String, dynamic> json) =>
       _$$_MangaDataFromJson(json);
 
   @override
+  final String id;
+  @override
   final MangaAttributes attributes;
+  final List<Relationship> _relationships;
+  @override
+  List<Relationship> get relationships {
+    if (_relationships is EqualUnmodifiableListView) return _relationships;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_relationships);
+  }
 
   @override
   String toString() {
-    return 'MangaData(attributes: $attributes)';
+    return 'MangaData(id: $id, attributes: $attributes, relationships: $relationships)';
   }
 
   @override
@@ -126,13 +167,17 @@ class _$_MangaData implements _MangaData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MangaData &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.attributes, attributes) ||
-                other.attributes == attributes));
+                other.attributes == attributes) &&
+            const DeepCollectionEquality()
+                .equals(other._relationships, _relationships));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, attributes);
+  int get hashCode => Object.hash(runtimeType, id, attributes,
+      const DeepCollectionEquality().hash(_relationships));
 
   @JsonKey(ignore: true)
   @override
@@ -149,14 +194,20 @@ class _$_MangaData implements _MangaData {
 }
 
 abstract class _MangaData implements MangaData {
-  const factory _MangaData({required final MangaAttributes attributes}) =
-      _$_MangaData;
+  const factory _MangaData(
+      {required final String id,
+      required final MangaAttributes attributes,
+      required final List<Relationship> relationships}) = _$_MangaData;
 
   factory _MangaData.fromJson(Map<String, dynamic> json) =
       _$_MangaData.fromJson;
 
   @override
+  String get id;
+  @override
   MangaAttributes get attributes;
+  @override
+  List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)
   _$$_MangaDataCopyWith<_$_MangaData> get copyWith =>

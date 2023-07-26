@@ -7,13 +7,19 @@ part of 'manga.dart';
 // **************************************************************************
 
 _$_MangaData _$$_MangaDataFromJson(Map<String, dynamic> json) => _$_MangaData(
+      id: json['id'] as String,
       attributes:
           MangaAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
+      relationships: (json['relationships'] as List<dynamic>)
+          .map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_MangaDataToJson(_$_MangaData instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'attributes': instance.attributes,
+      'relationships': instance.relationships,
     };
 
 _$_MangaAttributes _$$_MangaAttributesFromJson(Map<String, dynamic> json) =>

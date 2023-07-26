@@ -1,14 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:mangadex/src/models/relationship.dart';
 
 part 'manga.freezed.dart';
 part 'manga.g.dart';
 
-typedef MangaList = PaginatedResponse<MangaData>;
-
 @freezed
 class MangaData with _$MangaData {
-  const factory MangaData({required MangaAttributes attributes}) = _MangaData;
+  const factory MangaData({
+    required String id,
+    required MangaAttributes attributes,
+    required List<Relationship> relationships,
+  }) = _MangaData;
 
   factory MangaData.fromJson(Map<String, dynamic> json) =>
       _$MangaDataFromJson(json);
@@ -83,13 +85,4 @@ class TagAttributes with _$TagAttributes {
 
   factory TagAttributes.fromJson(Map<String, dynamic> json) =>
       _$TagAttributesFromJson(json);
-}
-
-extension MangaDataExtensions on MangaData {
-  Manga toModel() {
-    return Manga(
-      url: '',
-      title: attributes.title.values.first,
-    );
-  }
 }

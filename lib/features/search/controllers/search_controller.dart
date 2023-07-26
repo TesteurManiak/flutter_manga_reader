@@ -14,8 +14,6 @@ class SearchController extends _$SearchController {
   }
 
   Future<void> searchForMangas() async {
-    state = const SearchState.loading();
-
     final currentPage = state.maybeMap(
       loaded: (state) => state.page,
       orElse: () => 0,
@@ -28,10 +26,14 @@ class SearchController extends _$SearchController {
 
     state = result.when(
       success: (page) {
-        if (page.data.isEmpty) return const SearchState.empty();
+        final currentMangas = state.mangasOrNull ?? <Manga>[];
+        final mangas = currentMangas + page.mangaList;
+
+        if (mangas.isEmpty) return const SearchState.empty();
+
         return SearchState.loaded(
           page: nextPage,
-          mangas: page.mangaList,
+          mangas: mangas,
         );
       },
       failure: (error) => SearchState.error(message: error.message),
@@ -50,4 +52,8 @@ class SearchState with _$SearchState {
   const factory SearchState.error({String? message}) = _Error;
 
   const SearchState._();
+
+  List<Manga>? get mangasOrNull {
+    return mapOrNull(loaded: (state) => state.mangas);
+  }
 }

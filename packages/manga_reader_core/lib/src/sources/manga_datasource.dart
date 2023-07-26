@@ -11,6 +11,5 @@ abstract class MangaDatasource {
   final String lang;
   final RestClient restClient;
 
-  Future<Result<MangasPage, HttpError>> fetchMangas();
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);
 }

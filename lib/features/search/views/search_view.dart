@@ -5,6 +5,7 @@ import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
 
 class SearchView extends ConsumerStatefulWidget {
   const SearchView({super.key});
@@ -34,7 +35,7 @@ class _SearchViewState extends ConsumerState<SearchView>
       appBar: const _AppBar(),
       body: state.when(
         loading: LoadingContent.new,
-        loaded: (page, mangas) => Center(child: Text('Page: $page')),
+        loaded: (_, mangas) => _Loaded(mangas),
         empty: () => const _Empty(),
         error: (_) => const ErrorContent(),
       ),
@@ -52,6 +53,41 @@ class _AppBar extends StatelessWidget with AppBarSizeMixin {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text('MangaDex'.hardcoded),
+    );
+  }
+}
+
+class _Loaded extends StatelessWidget {
+  const _Loaded(this.mangas);
+
+  final List<Manga> mangas;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.all(16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
+      ),
+      itemBuilder: (context, index) {
+        final manga = mangas[index];
+
+        return Container(
+          padding: const EdgeInsets.all(8),
+          alignment: Alignment.bottomLeft,
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            manga.title,
+            textAlign: TextAlign.start,
+          ),
+        );
+      },
+      itemCount: mangas.length,
     );
   }
 }
