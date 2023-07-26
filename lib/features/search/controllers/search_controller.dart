@@ -20,9 +20,9 @@ class SearchController extends _$SearchController {
     final result = await ref.read(mangaDexDatasourceProvider).fetchMangas();
 
     state = result.when(
-      success: (mangas) {
-        if (mangas.isEmpty) return const SearchState.empty();
-        return SearchState.loaded(mangas: mangas);
+      success: (page) {
+        if (page.data.isEmpty) return const SearchState.empty();
+        return SearchState.loaded(mangas: page.data);
       },
       failure: (error) => SearchState.error(message: error.message),
     );
