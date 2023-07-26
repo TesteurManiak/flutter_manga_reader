@@ -20,6 +20,7 @@ class AsciiEmojiWidget extends StatelessWidget {
       emoji.ascii,
       style: TextStyle(fontSize: localSize),
       maxLines: 1,
+      textAlign: TextAlign.center,
     );
   }
 }

@@ -12,9 +12,9 @@ abstract class PaginatedResponse<T> {
 
 class MangasPage extends PaginatedResponse<Manga> {
   const MangasPage({
-    required super.data,
+    required this.mangaList,
     required super.hasMore,
-  });
+  }) : super(data: mangaList);
 
-  List<Manga> get mangas => data;
+  final List<Manga> mangaList;
 }

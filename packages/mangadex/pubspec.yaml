@@ -1,5 +1,5 @@
 name: mangadex
-description: A new Flutter package project.
+description: Wrapper for MangaDex API.
 version: 0.0.1
 homepage: https://github.com/TesteurManiak/flutter_manga_reader
 publish_to: none

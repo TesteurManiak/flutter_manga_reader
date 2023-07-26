@@ -1,0 +1,20 @@
+{
+    "Generate part directive": {
+        "prefix": "part",
+        "body": [
+            "part '${TM_FILENAME_BASE}.g.dart';",
+        ]
+    },
+    "Generate freezed part directive": {
+        "prefix": "fpart",
+        "body": [
+            "part '${TM_FILENAME_BASE}.freezed.dart';",
+        ]
+    },
+    "Generate tailor part directive": {
+        "prefix": "tpart",
+        "body": [
+            "part '${TM_FILENAME_BASE}.tailor.dart';",
+        ]
+    }
+}
