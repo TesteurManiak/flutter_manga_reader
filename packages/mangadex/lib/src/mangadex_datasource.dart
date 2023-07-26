@@ -35,7 +35,7 @@ class MangadexDatasource extends MangaDatasource {
       queryParameters: {
         'order[followedCount]': 'desc',
         'availableTranslatedLanguage[]': _dexLang,
-        'limit': MDConstants.mangaLimit.toString(),
+        'limit': MDConstants.mangaLimit,
         'offset': _helper.getMangaListOffset(page),
         'includes[]': MDConstants.coverArt,
         // 'contentRating[]': preferences.contentRating,
@@ -90,9 +90,9 @@ class MangadexDatasource extends MangaDatasource {
       pathSegments: ['cover'],
       queryParameters: {
         'order[volume]': 'asc',
-        'manga[]': mangaMap.keys.join(','),
-        'locales[]': locales.join(','),
-        'limit': limit.toString(),
+        'manga[]': mangaMap.keys,
+        'locales[]': locales,
+        'limit': limit,
         'offset': '0',
       },
     ).decode(CoverListResponse.fromJson);

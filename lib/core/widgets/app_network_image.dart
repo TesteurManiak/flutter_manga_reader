@@ -5,14 +5,17 @@ class AppNetworkImage extends StatelessWidget {
   const AppNetworkImage({
     super.key,
     required this.url,
+    this.fit,
   });
 
   final String url;
+  final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url,
+      fit: fit,
       progressIndicatorBuilder: (context, url, progress) {
         return Center(
           child: CircularProgressIndicator(value: progress.progress),

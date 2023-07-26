@@ -63,11 +63,14 @@ class MangadexHelper {
     return Manga(
       url: '/manga/${mangaData.id}',
       title: title,
-      thumbnailUrl: switch (coverSuffix.isNullOrEmpty) {
-        true =>
-          '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName$coverSuffix',
-        _ => '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
-      },
+      thumbnailUrl: coverFileName != null
+          ? switch (coverSuffix.isNullOrEmpty) {
+              false =>
+                '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName$coverSuffix',
+              _ =>
+                '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
+            }
+          : null,
     );
   }
 }

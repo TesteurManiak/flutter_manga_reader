@@ -75,6 +75,7 @@ class _Loaded extends ConsumerWidget {
         crossAxisCount: 3,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
+        childAspectRatio: 0.72,
       ),
       itemCount: mangas.length,
       itemBuilder: (_, index) => MangaTile(mangas[index]),
