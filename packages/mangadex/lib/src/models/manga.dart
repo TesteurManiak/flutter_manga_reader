@@ -12,14 +12,6 @@ class MangaData with _$MangaData {
 
   factory MangaData.fromJson(Map<String, dynamic> json) =>
       _$MangaDataFromJson(json);
-
-  Manga toModel() {
-    // TODO(Guillaume): implement toModel
-    return Manga(
-      url: '',
-      title: attributes.title.values.first,
-    );
-  }
 }
 
 @freezed
@@ -91,4 +83,13 @@ class TagAttributes with _$TagAttributes {
 
   factory TagAttributes.fromJson(Map<String, dynamic> json) =>
       _$TagAttributesFromJson(json);
+}
+
+extension MangaDataExtensions on MangaData {
+  Manga toModel() {
+    return Manga(
+      url: '',
+      title: attributes.title.values.first,
+    );
+  }
 }

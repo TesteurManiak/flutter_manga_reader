@@ -629,6 +629,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  manga_reader_core:
+    dependency: "direct main"
+    description:
+      path: "packages/manga_reader_core"
+      relative: true
+    source: path
+    version: "0.0.1"
+  mangadex:
+    dependency: "direct main"
+    description:
+      path: "packages/mangadex"
+      relative: true
+    source: path
+    version: "0.0.1"
   matcher:
     dependency: transitive
     description:

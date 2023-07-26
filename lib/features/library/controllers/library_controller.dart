@@ -1,6 +1,6 @@
-import 'package:flutter_manga_reader/core/models/manga.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'library_controller.freezed.dart';

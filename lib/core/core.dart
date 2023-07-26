@@ -5,7 +5,6 @@ export 'extensions/string_extensions.dart';
 export 'extensions/theme_mode_extensions.dart';
 export 'mixins/app_bar_size.dart';
 export 'mixins/showable.dart';
-export 'models/result.dart';
 export 'providers/locale_controller.dart';
 export 'providers/theme_controller.dart';
 export 'utils/logger.dart';

@@ -7,8 +7,12 @@ class AppTheme {
 
   /// The light theme for this app.
   static ThemeData light() {
-    return ThemeData.light().copyWith(
+    final baseTheme = ThemeData.light();
+    return baseTheme.copyWith(
       useMaterial3: true,
+      appBarTheme: baseTheme.appBarTheme.copyWith(
+        centerTitle: false,
+      ),
       extensions: [
         const AppColors.light(),
         const AppShadows.light(),
@@ -20,8 +24,13 @@ class AppTheme {
 
   /// The dark theme for this app.
   static ThemeData dark() {
-    return ThemeData.dark().copyWith(
+    final baseTheme = ThemeData.dark();
+
+    return baseTheme.copyWith(
       useMaterial3: true,
+      appBarTheme: baseTheme.appBarTheme.copyWith(
+        centerTitle: false,
+      ),
       extensions: [
         const AppColors.dark(),
         const AppShadows.dark(),

@@ -1,6 +1,6 @@
-import 'package:flutter_manga_reader/core/models/manga.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_dex_datasource/manga_dex_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_controller.freezed.dart';
@@ -16,13 +16,23 @@ class SearchController extends _$SearchController {
   Future<void> searchForMangas() async {
     state = const SearchState.loading();
 
+    final currentPage = state.maybeMap(
+      loaded: (state) => state.page,
+      orElse: () => 0,
+    );
+    final nextPage = currentPage + 1;
+
     // TODO(Guillaume): use dynamic sources
-    final result = await ref.read(mangaDexDatasourceProvider).fetchMangas();
+    final result =
+        await ref.read(mangadexDatasourceProvider).fetchPopularMangas(nextPage);
 
     state = result.when(
       success: (page) {
         if (page.data.isEmpty) return const SearchState.empty();
-        return SearchState.loaded(mangas: page.data);
+        return SearchState.loaded(
+          page: nextPage,
+          mangas: page.mangaList,
+        );
       },
       failure: (error) => SearchState.error(message: error.message),
     );
@@ -33,6 +43,7 @@ class SearchController extends _$SearchController {
 class SearchState with _$SearchState {
   const factory SearchState.loading() = _Loading;
   const factory SearchState.loaded({
+    @Default(0) int page,
     required List<Manga> mangas,
   }) = _Loaded;
   const factory SearchState.empty() = _Empty;

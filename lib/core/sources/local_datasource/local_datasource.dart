@@ -1,5 +1,5 @@
-import 'package:flutter_manga_reader/core/models/manga.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'local_datasource.g.dart';
@@ -17,10 +17,22 @@ class _DriftImpl implements LocalDatasource {
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
-    return _database
-        .select(_database.dbMangas)
-        .watch()
-        .map((dbMangas) => dbMangas.map(Manga.fromDb).toList());
+    return _database.select(_database.dbMangas).watch().map(
+      (dbMangas) {
+        return dbMangas.map((e) {
+          return Manga(
+            url: e.url,
+            title: e.title,
+            artist: e.artist,
+            description: e.description,
+            genre: e.genre,
+            status: e.status,
+            updateStrategy: e.updateStrategy,
+            initialized: e.initialized,
+          );
+        }).toList();
+      },
+    );
   }
 }
 

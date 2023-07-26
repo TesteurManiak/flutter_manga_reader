@@ -19,7 +19,7 @@ mixin _$SearchState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
+    required TResult Function(int page, List<Manga> mangas) loaded,
     required TResult Function() empty,
     required TResult Function(String? message) error,
   }) =>
@@ -27,7 +27,7 @@ mixin _$SearchState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
+    TResult? Function(int page, List<Manga> mangas)? loaded,
     TResult? Function()? empty,
     TResult? Function(String? message)? error,
   }) =>
@@ -35,7 +35,7 @@ mixin _$SearchState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
+    TResult Function(int page, List<Manga> mangas)? loaded,
     TResult Function()? empty,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -124,7 +124,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
+    required TResult Function(int page, List<Manga> mangas) loaded,
     required TResult Function() empty,
     required TResult Function(String? message) error,
   }) {
@@ -135,7 +135,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
+    TResult? Function(int page, List<Manga> mangas)? loaded,
     TResult? Function()? empty,
     TResult? Function(String? message)? error,
   }) {
@@ -146,7 +146,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
+    TResult Function(int page, List<Manga> mangas)? loaded,
     TResult Function()? empty,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -205,7 +205,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Manga> mangas});
+  $Res call({int page, List<Manga> mangas});
 }
 
 /// @nodoc
@@ -218,9 +218,14 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? page = null,
     Object? mangas = null,
   }) {
     return _then(_$_Loaded(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
       mangas: null == mangas
           ? _value._mangas
           : mangas // ignore: cast_nullable_to_non_nullable
@@ -232,10 +237,13 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
-  const _$_Loaded({required final List<Manga> mangas})
+  const _$_Loaded({this.page = 0, required final List<Manga> mangas})
       : _mangas = mangas,
         super._();
 
+  @override
+  @JsonKey()
+  final int page;
   final List<Manga> _mangas;
   @override
   List<Manga> get mangas {
@@ -246,7 +254,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   String toString() {
-    return 'SearchState.loaded(mangas: $mangas)';
+    return 'SearchState.loaded(page: $page, mangas: $mangas)';
   }
 
   @override
@@ -254,12 +262,13 @@ class _$_Loaded extends _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
+            (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._mangas, _mangas));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_mangas));
+  int get hashCode => Object.hash(
+      runtimeType, page, const DeepCollectionEquality().hash(_mangas));
 
   @JsonKey(ignore: true)
   @override
@@ -271,35 +280,35 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
+    required TResult Function(int page, List<Manga> mangas) loaded,
     required TResult Function() empty,
     required TResult Function(String? message) error,
   }) {
-    return loaded(mangas);
+    return loaded(page, mangas);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
+    TResult? Function(int page, List<Manga> mangas)? loaded,
     TResult? Function()? empty,
     TResult? Function(String? message)? error,
   }) {
-    return loaded?.call(mangas);
+    return loaded?.call(page, mangas);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
+    TResult Function(int page, List<Manga> mangas)? loaded,
     TResult Function()? empty,
     TResult Function(String? message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(mangas);
+      return loaded(page, mangas);
     }
     return orElse();
   }
@@ -343,9 +352,11 @@ class _$_Loaded extends _Loaded {
 }
 
 abstract class _Loaded extends SearchState {
-  const factory _Loaded({required final List<Manga> mangas}) = _$_Loaded;
+  const factory _Loaded({final int page, required final List<Manga> mangas}) =
+      _$_Loaded;
   const _Loaded._() : super._();
 
+  int get page;
   List<Manga> get mangas;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
@@ -389,7 +400,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
+    required TResult Function(int page, List<Manga> mangas) loaded,
     required TResult Function() empty,
     required TResult Function(String? message) error,
   }) {
@@ -400,7 +411,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
+    TResult? Function(int page, List<Manga> mangas)? loaded,
     TResult? Function()? empty,
     TResult? Function(String? message)? error,
   }) {
@@ -411,7 +422,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
+    TResult Function(int page, List<Manga> mangas)? loaded,
     TResult Function()? empty,
     TResult Function(String? message)? error,
     required TResult orElse(),
@@ -528,7 +539,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
+    required TResult Function(int page, List<Manga> mangas) loaded,
     required TResult Function() empty,
     required TResult Function(String? message) error,
   }) {
@@ -539,7 +550,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
+    TResult? Function(int page, List<Manga> mangas)? loaded,
     TResult? Function()? empty,
     TResult? Function(String? message)? error,
   }) {
@@ -550,7 +561,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
+    TResult Function(int page, List<Manga> mangas)? loaded,
     TResult Function()? empty,
     TResult Function(String? message)? error,
     required TResult orElse(),

@@ -24,6 +24,10 @@ dependencies:
   intl: ^0.18.0
   json_annotation: ^4.8.1
   logging: ^1.2.0
+  mangadex:
+    path: packages/mangadex
+  manga_reader_core:
+    path: packages/manga_reader_core
   path: ^1.8.3
   path_provider: ^2.0.15
   riverpod_annotation: ^2.1.1

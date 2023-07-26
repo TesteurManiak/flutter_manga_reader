@@ -34,12 +34,12 @@ class MangadexHelper {
   bool isUuid(String text) => MDConstants.uuidRegex.hasMatch(text);
 
   /// Get the manga offset pages are 1 based, so subtract 1.
-  int getMangaListOffset(int page) {
-    return MDConstants.latestChapterLimit * (page - 1);
+  String getMangaListOffset(int page) {
+    return (MDConstants.latestChapterLimit * (page - 1)).toString();
   }
 
   /// Get the latest chapter offset pages are 1 based, so subtract 1.
-  int getLatestChapterOffset(int page) {
-    return MDConstants.latestChapterLimit * (page - 1);
+  String getLatestChapterOffset(int page) {
+    return (MDConstants.latestChapterLimit * (page - 1)).toString();
   }
 }

@@ -34,7 +34,7 @@ class _SearchViewState extends ConsumerState<SearchView>
       appBar: const _AppBar(),
       body: state.when(
         loading: LoadingContent.new,
-        loaded: (mangas) => const SizedBox.shrink(),
+        loaded: (page, mangas) => Center(child: Text('Page: $page')),
         empty: () => const _Empty(),
         error: (_) => const ErrorContent(),
       ),

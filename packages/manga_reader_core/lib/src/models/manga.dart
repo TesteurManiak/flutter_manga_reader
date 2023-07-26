@@ -15,20 +15,6 @@ class Manga with _$Manga {
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,
   }) = _Manga;
-
-  // TODO(Guillaume): move this outside of core
-  // factory Manga.fromDb(DbManga dbManga) {
-  //   return Manga(
-  //     url: dbManga.url,
-  //     title: dbManga.title,
-  //     artist: dbManga.artist,
-  //     description: dbManga.description,
-  //     genre: dbManga.genre,
-  //     status: dbManga.status,
-  //     updateStrategy: dbManga.updateStrategy,
-  //     initialized: dbManga.initialized,
-  //   );
-  // }
 }
 
 /// Define the update strategy for a manga.

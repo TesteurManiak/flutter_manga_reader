@@ -1,6 +1,7 @@
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/mangadex_helper.dart';
+import 'package:mangadex/src/models/manga.dart';
 import 'package:mangadex/src/models/manga_response.dart';
 
 class MangadexDatasource extends MangaDatasource {
@@ -36,7 +37,7 @@ class MangadexDatasource extends MangaDatasource {
       queryParameters: {
         'order[followedCount]': 'desc',
         'availableTranslatedLanguage[]': _dexLang,
-        'limit': MDConstants.mangaLimit,
+        'limit': MDConstants.mangaLimit.toString(),
         'offset': _helper.getMangaListOffset(page),
         'includes[]': MDConstants.coverArt,
         // 'contentRating[]': preferences.contentRating,
