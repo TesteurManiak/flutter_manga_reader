@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
+import 'package:flutter_manga_reader/core/widgets/infinite_scroller.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/manga_tile.dart';
-import 'package:flutter_manga_reader/core/widgets/paginated_grid_view.dart';
 import 'package:flutter_manga_reader/core/widgets/source_app_bar.dart';
 import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,26 +49,37 @@ class _SearchViewState extends ConsumerState<SearchView>
   bool get wantKeepAlive => true;
 }
 
-class _Loaded extends ConsumerWidget {
+class _Loaded extends ConsumerStatefulWidget {
   const _Loaded(this.mangas);
 
   final List<Manga> mangas;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return PaginatedGridView(
-      padding: const EdgeInsets.all(16),
+  ConsumerState<_Loaded> createState() => _LoadedState();
+}
+
+class _LoadedState extends ConsumerState<_Loaded> {
+  final scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
+    return InfiniteScroller(
+      scrollController: scrollController,
       fetchMore: () {
         return ref.read(searchControllerProvider.notifier).searchForMangas();
       },
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-        childAspectRatio: 0.72,
+      child: GridView.builder(
+        controller: scrollController,
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+          childAspectRatio: 0.72,
+        ),
+        itemCount: widget.mangas.length,
+        itemBuilder: (_, index) => MangaTile(widget.mangas[index]),
       ),
-      itemCount: mangas.length,
-      itemBuilder: (_, index) => MangaTile(mangas[index]),
     );
   }
 }
