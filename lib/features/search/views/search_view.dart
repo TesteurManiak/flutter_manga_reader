@@ -5,6 +5,7 @@ import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/manga_tile.dart';
 import 'package:flutter_manga_reader/core/widgets/paginated_grid_view.dart';
+import 'package:flutter_manga_reader/core/widgets/source_app_bar.dart';
 import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -34,7 +35,7 @@ class _SearchViewState extends ConsumerState<SearchView>
     final state = ref.watch(searchControllerProvider);
 
     return Scaffold(
-      appBar: const _AppBar(),
+      appBar: SourceAppBar(title: 'MangaDex'.hardcoded),
       body: state.when(
         loading: LoadingContent.new,
         loaded: (_, mangas) => _Loaded(mangas),
@@ -46,17 +47,6 @@ class _SearchViewState extends ConsumerState<SearchView>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class _AppBar extends StatelessWidget with AppBarSizeMixin {
-  const _AppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: Text('MangaDex'.hardcoded),
-    );
-  }
 }
 
 class _Loaded extends ConsumerWidget {
