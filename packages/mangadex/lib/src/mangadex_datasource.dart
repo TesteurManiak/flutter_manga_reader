@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/map_extensions.dart';
-import 'package:mangadex/src/extensions/string_extensions.dart';
 import 'package:mangadex/src/mangadex_helper.dart';
 import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/chapter.dart';
@@ -86,7 +85,7 @@ class MangadexDatasource extends MangaDatasource {
     final mangaMap = Map<String, MangaAttributes>.fromEntries(
       mangaList.map((e) => MapEntry(e.id, e.attributes)).where((e) {
         final originalLanguage = e.value.originalLanguage;
-        return !originalLanguage.isNullOrEmpty;
+        return originalLanguage != null && originalLanguage.isNotEmpty;
       }),
     );
     final locales = mangaList

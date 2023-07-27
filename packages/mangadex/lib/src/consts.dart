@@ -18,4 +18,18 @@ class MDConstants {
 
   static const cdnUrl = 'https://uploads.mangadex.org';
   static const apiUrl = 'https://api.mangadex.org';
+
+  static const _tagGroupContent = 'content';
+  static const _tagGroupFormat = 'format';
+  static const _tagGroupGenre = 'genre';
+  static const _tagGroupTheme = 'theme';
+  static const tagGroupsOrder = [
+    _tagGroupContent,
+    _tagGroupFormat,
+    _tagGroupGenre,
+    _tagGroupTheme
+  ];
+
+  static const tagAnthologyUuid = '51d83883-4103-437c-b4b1-731cb73d786c';
+  static const tagOneShotUuid = '0234a31e-a729-4e28-9d6a-3f87c4966b9e';
 }

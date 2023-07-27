@@ -11,7 +11,7 @@ class Manga with _$Manga {
     String? author,
     String? description,
     String? genre,
-    @Default(0) int status,
+    @Default(MangaStatus.unknown) MangaStatus status,
     String? thumbnailUrl,
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,
@@ -57,4 +57,14 @@ enum UpdateStrategy {
   /// library updates. Useful for cases where the series is previously known to
   /// be finished and have only a single chapter, for example.
   onlyFetchOnce,
+}
+
+enum MangaStatus {
+  unknown,
+  ongoing,
+  completed,
+  licensed,
+  publishingFinished,
+  cancelled,
+  onHiatus,
 }

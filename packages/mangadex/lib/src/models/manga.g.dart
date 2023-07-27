@@ -84,11 +84,13 @@ const _$StatusEnumMap = {
 };
 
 _$_Tag _$$_TagFromJson(Map<String, dynamic> json) => _$_Tag(
+      id: json['id'] as String? ?? '',
       attributes:
           TagAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_TagToJson(_$_Tag instance) => <String, dynamic>{
+      'id': instance.id,
       'attributes': instance.attributes,
     };
 

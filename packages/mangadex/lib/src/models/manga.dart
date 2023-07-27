@@ -76,7 +76,10 @@ enum Status {
 
 @freezed
 class Tag with _$Tag {
-  const factory Tag({required TagAttributes attributes}) = _Tag;
+  const factory Tag({
+    @Default('') String id,
+    required TagAttributes attributes,
+  }) = _Tag;
 
   factory Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(json);
 }

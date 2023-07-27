@@ -22,4 +22,23 @@ extension MapExtensions<K, V> on Map<K, V> {
 
     return newMap;
   }
+
+  Map<K, V> sort(int Function(MapEntry<K, V> a, MapEntry<K, V> b) compare) {
+    final sortedEntries = entries.toList()..sort(compare);
+    return Map.fromEntries(sortedEntries);
+  }
+}
+
+extension GroupedMapExtensions<K, V> on Map<K, List<V>> {
+  /// Sorts the values of the map using the provided [compare] function.
+  Map<K, List<V>> groupSort([int Function(V a, V b)? compare]) {
+    final newMap = <K, List<V>>{};
+
+    for (final entry in entries) {
+      final key = entry.key;
+      final value = entry.value;
+      newMap[key] = value..sort(compare);
+    }
+    return newMap;
+  }
 }

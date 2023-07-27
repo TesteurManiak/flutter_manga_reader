@@ -1,5 +1,7 @@
+import 'package:collection/collection.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
+import 'package:mangadex/src/extensions/map_extensions.dart';
 import 'package:mangadex/src/extensions/string_extensions.dart';
 import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/manga.dart';
@@ -60,14 +62,14 @@ class MangadexHelper {
             .firstWhere((e) => e[lang] != null || e['en'] != null)
             .values
             .singleOrNull;
-    final title = (dirtyTitle?.trim() ?? '').removeHtmlTags().removeMarkdown();
+    final title = (dirtyTitle?.trim() ?? '').removeEntitiesAndMarkdown();
 
     return Manga(
       url: '/manga/${mangaData.id}',
       title: title,
       thumbnailUrl: coverFileName != null
-          ? switch (coverSuffix.isNullOrEmpty) {
-              false =>
+          ? switch (coverSuffix != null && coverSuffix.isNotEmpty) {
+              true =>
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName$coverSuffix',
               _ =>
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
@@ -115,9 +117,80 @@ class MangadexHelper {
             ?.attributes
             ?.fileName;
 
-    return createBasicManga(mangaData: mangaData, lang: lang).copyWith(
+    final genresMap = groupBy(attr.tags, (tag) => tag.attributes.group)
+        .groupSort((a, b) => a.attributes.group.compareTo(b.attributes.group));
+    final genreList = [
+      for (final group in MDConstants.tagGroupsOrder)
+        ...genresMap[group]?.map((e) => e.attributes.group) ?? [],
+      ...nonGenres,
+    ];
+
+    final desc = (attr.description[lang] ?? attr.description['en'])
+        ?.removeEntitiesAndMarkdown();
+
+    return createBasicManga(
+      mangaData: mangaData,
+      coverFileName: coverFileName,
+      coverSuffix: coverSuffix,
+      lang: lang,
+    ).copyWith(
       author: authors.join(', '),
       artist: artists.join(', '),
+      genre: genreList.where((e) => e.isNotEmpty).join(', '),
+      description: desc,
+      status: getPublicationStatus(attr, chapters),
     );
+  }
+
+  MangaStatus getPublicationStatus(
+    MangaAttributes attr,
+    Map<String, AggregateVolume> volumes,
+  ) {
+    final chapterList = volumes.values
+        .expand((e) => e.chapters.values)
+        .map((e) => e.chapter)
+        .toList();
+
+    final tmpStatus = switch (attr.status) {
+      Status.ongoing => MangaStatus.ongoing,
+      Status.cancelled => MangaStatus.cancelled,
+      Status.completed => MangaStatus.publishingFinished,
+      Status.hiatus => MangaStatus.onHiatus,
+      _ => MangaStatus.unknown,
+    };
+
+    final publishedOrCancelled = tmpStatus.publishedOrCancelled;
+    final isOneShot = attr.isOneShot;
+
+    return switch (chapterList) {
+      _ when chapterList.contains(attr.lastChapter) && publishedOrCancelled =>
+        MangaStatus.publishingFinished,
+      _ when isOneShot && volumes['none']?.chapters['none'] != null =>
+        MangaStatus.completed,
+      _ => tmpStatus,
+    };
+  }
+}
+
+extension on MangaStatus {
+  bool get publishedOrCancelled {
+    return this == MangaStatus.publishingFinished ||
+        this == MangaStatus.cancelled;
+  }
+}
+
+extension on MangaAttributes {
+  /// Should return true if one of the tag's id is [MDConstants.tagOneShotUuid]
+  /// but only if no tag [MDConstants.tagAnthologyUuid] is found.
+  bool get isOneShot {
+    bool oneShot = false;
+    for (final tag in tags) {
+      if (tag.id == MDConstants.tagOneShotUuid) {
+        oneShot = true;
+      } else if (tag.id == MDConstants.tagAnthologyUuid) {
+        return false;
+      }
+    }
+    return oneShot;
   }
 }

@@ -22,7 +22,7 @@ mixin _$Manga {
   String? get author => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
-  int get status => throw _privateConstructorUsedError;
+  MangaStatus get status => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   UpdateStrategy get updateStrategy => throw _privateConstructorUsedError;
   bool get initialized => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $MangaCopyWith<$Res> {
       String? author,
       String? description,
       String? genre,
-      int status,
+      MangaStatus status,
       String? thumbnailUrl,
       UpdateStrategy updateStrategy,
       bool initialized});
@@ -101,7 +101,7 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as MangaStatus,
       thumbnailUrl: freezed == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
@@ -131,7 +131,7 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
       String? author,
       String? description,
       String? genre,
-      int status,
+      MangaStatus status,
       String? thumbnailUrl,
       UpdateStrategy updateStrategy,
       bool initialized});
@@ -185,7 +185,7 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as int,
+              as MangaStatus,
       thumbnailUrl: freezed == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
@@ -212,7 +212,7 @@ class _$_Manga extends _Manga {
       this.author,
       this.description,
       this.genre,
-      this.status = 0,
+      this.status = MangaStatus.unknown,
       this.thumbnailUrl,
       this.updateStrategy = UpdateStrategy.alwaysUpdate,
       this.initialized = false})
@@ -232,7 +232,7 @@ class _$_Manga extends _Manga {
   final String? genre;
   @override
   @JsonKey()
-  final int status;
+  final MangaStatus status;
   @override
   final String? thumbnailUrl;
   @override
@@ -287,7 +287,7 @@ abstract class _Manga extends Manga {
       final String? author,
       final String? description,
       final String? genre,
-      final int status,
+      final MangaStatus status,
       final String? thumbnailUrl,
       final UpdateStrategy updateStrategy,
       final bool initialized}) = _$_Manga;
@@ -306,7 +306,7 @@ abstract class _Manga extends Manga {
   @override
   String? get genre;
   @override
-  int get status;
+  MangaStatus get status;
   @override
   String? get thumbnailUrl;
   @override

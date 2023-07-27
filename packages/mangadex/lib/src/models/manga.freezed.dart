@@ -592,6 +592,7 @@ Tag _$TagFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Tag {
+  String get id => throw _privateConstructorUsedError;
   TagAttributes get attributes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -604,7 +605,7 @@ abstract class $TagCopyWith<$Res> {
   factory $TagCopyWith(Tag value, $Res Function(Tag) then) =
       _$TagCopyWithImpl<$Res, Tag>;
   @useResult
-  $Res call({TagAttributes attributes});
+  $Res call({String id, TagAttributes attributes});
 
   $TagAttributesCopyWith<$Res> get attributes;
 }
@@ -621,9 +622,14 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? attributes = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       attributes: null == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
@@ -646,7 +652,7 @@ abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
       __$$_TagCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TagAttributes attributes});
+  $Res call({String id, TagAttributes attributes});
 
   @override
   $TagAttributesCopyWith<$Res> get attributes;
@@ -661,9 +667,14 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? attributes = null,
   }) {
     return _then(_$_Tag(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       attributes: null == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
@@ -675,16 +686,19 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
 /// @nodoc
 @JsonSerializable()
 class _$_Tag implements _Tag {
-  const _$_Tag({required this.attributes});
+  const _$_Tag({this.id = '', required this.attributes});
 
   factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
 
+  @override
+  @JsonKey()
+  final String id;
   @override
   final TagAttributes attributes;
 
   @override
   String toString() {
-    return 'Tag(attributes: $attributes)';
+    return 'Tag(id: $id, attributes: $attributes)';
   }
 
   @override
@@ -692,13 +706,14 @@ class _$_Tag implements _Tag {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Tag &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.attributes, attributes) ||
                 other.attributes == attributes));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, attributes);
+  int get hashCode => Object.hash(runtimeType, id, attributes);
 
   @JsonKey(ignore: true)
   @override
@@ -715,10 +730,13 @@ class _$_Tag implements _Tag {
 }
 
 abstract class _Tag implements Tag {
-  const factory _Tag({required final TagAttributes attributes}) = _$_Tag;
+  const factory _Tag(
+      {final String id, required final TagAttributes attributes}) = _$_Tag;
 
   factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
 
+  @override
+  String get id;
   @override
   TagAttributes get attributes;
   @override
