@@ -10,13 +10,9 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   $DbMangasTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
   @override
   late final GeneratedColumn<String> url = GeneratedColumn<String>(
@@ -107,6 +103,8 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
     }
     if (data.containsKey('url')) {
       context.handle(
@@ -156,13 +154,13 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => const {};
   @override
   DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbManga(
       id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       url: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
       title: attachedDatabase.typeMapping
@@ -200,7 +198,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
 }
 
 class DbManga extends DataClass implements Insertable<DbManga> {
-  final int id;
+  final String id;
   final String url;
   final String title;
   final String? artist;
@@ -226,7 +224,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
+    map['id'] = Variable<String>(id);
     map['url'] = Variable<String>(url);
     map['title'] = Variable<String>(title);
     if (!nullToAbsent || artist != null) {
@@ -283,7 +281,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbManga(
-      id: serializer.fromJson<int>(json['id']),
+      id: serializer.fromJson<String>(json['id']),
       url: serializer.fromJson<String>(json['url']),
       title: serializer.fromJson<String>(json['title']),
       artist: serializer.fromJson<String?>(json['artist']),
@@ -302,7 +300,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   Map<String, dynamic> toJson({ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
+      'id': serializer.toJson<String>(id),
       'url': serializer.toJson<String>(url),
       'title': serializer.toJson<String>(title),
       'artist': serializer.toJson<String?>(artist),
@@ -319,7 +317,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   }
 
   DbManga copyWith(
-          {int? id,
+          {String? id,
           String? url,
           String? title,
           Value<String?> artist = const Value.absent(),
@@ -383,7 +381,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
 }
 
 class DbMangasCompanion extends UpdateCompanion<DbManga> {
-  final Value<int> id;
+  final Value<String> id;
   final Value<String> url;
   final Value<String> title;
   final Value<String?> artist;
@@ -394,6 +392,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<String?> thumbnailUrl;
   final Value<UpdateStrategy> updateStrategy;
   final Value<bool> initialized;
+  final Value<int> rowid;
   const DbMangasCompanion({
     this.id = const Value.absent(),
     this.url = const Value.absent(),
@@ -406,9 +405,10 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.thumbnailUrl = const Value.absent(),
     this.updateStrategy = const Value.absent(),
     this.initialized = const Value.absent(),
+    this.rowid = const Value.absent(),
   });
   DbMangasCompanion.insert({
-    this.id = const Value.absent(),
+    required String id,
     required String url,
     required String title,
     this.artist = const Value.absent(),
@@ -419,12 +419,14 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.thumbnailUrl = const Value.absent(),
     required UpdateStrategy updateStrategy,
     this.initialized = const Value.absent(),
-  })  : url = Value(url),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        url = Value(url),
         title = Value(title),
         status = Value(status),
         updateStrategy = Value(updateStrategy);
   static Insertable<DbManga> custom({
-    Expression<int>? id,
+    Expression<String>? id,
     Expression<String>? url,
     Expression<String>? title,
     Expression<String>? artist,
@@ -435,6 +437,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     Expression<String>? thumbnailUrl,
     Expression<int>? updateStrategy,
     Expression<bool>? initialized,
+    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -448,11 +451,12 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       if (thumbnailUrl != null) 'thumbnail_url': thumbnailUrl,
       if (updateStrategy != null) 'update_strategy': updateStrategy,
       if (initialized != null) 'initialized': initialized,
+      if (rowid != null) 'rowid': rowid,
     });
   }
 
   DbMangasCompanion copyWith(
-      {Value<int>? id,
+      {Value<String>? id,
       Value<String>? url,
       Value<String>? title,
       Value<String?>? artist,
@@ -462,7 +466,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       Value<MangaStatus>? status,
       Value<String?>? thumbnailUrl,
       Value<UpdateStrategy>? updateStrategy,
-      Value<bool>? initialized}) {
+      Value<bool>? initialized,
+      Value<int>? rowid}) {
     return DbMangasCompanion(
       id: id ?? this.id,
       url: url ?? this.url,
@@ -475,6 +480,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       updateStrategy: updateStrategy ?? this.updateStrategy,
       initialized: initialized ?? this.initialized,
+      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -482,7 +488,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<String>(id.value);
     }
     if (url.present) {
       map['url'] = Variable<String>(url.value);
@@ -517,6 +523,9 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     if (initialized.present) {
       map['initialized'] = Variable<bool>(initialized.value);
     }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
     return map;
   }
 
@@ -533,7 +542,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
           ..write('status: $status, ')
           ..write('thumbnailUrl: $thumbnailUrl, ')
           ..write('updateStrategy: $updateStrategy, ')
-          ..write('initialized: $initialized')
+          ..write('initialized: $initialized, ')
+          ..write('rowid: $rowid')
           ..write(')'))
         .toString();
   }
@@ -557,9 +567,9 @@ class $DbChaptersTable extends DbChapters
   static const VerificationMeta _mangaIdMeta =
       const VerificationMeta('mangaId');
   @override
-  late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
-      'manga_id', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+  late final GeneratedColumn<String> mangaId = GeneratedColumn<String>(
+      'manga_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
   @override
   late final GeneratedColumn<String> url = GeneratedColumn<String>(
@@ -680,6 +690,8 @@ class $DbChaptersTable extends DbChapters
     if (data.containsKey('manga_id')) {
       context.handle(_mangaIdMeta,
           mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+    } else if (isInserting) {
+      context.missing(_mangaIdMeta);
     }
     if (data.containsKey('url')) {
       context.handle(
@@ -751,7 +763,7 @@ class $DbChaptersTable extends DbChapters
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       mangaId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}manga_id']),
+          .read(DriftSqlType.string, data['${effectivePrefix}manga_id'])!,
       url: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
       name: attachedDatabase.typeMapping
@@ -785,7 +797,7 @@ class $DbChaptersTable extends DbChapters
 
 class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int id;
-  final int? mangaId;
+  final String mangaId;
   final String url;
   final String name;
   final String? scanlator;
@@ -799,7 +811,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int lastModifier;
   const DbChapter(
       {required this.id,
-      this.mangaId,
+      required this.mangaId,
       required this.url,
       required this.name,
       this.scanlator,
@@ -815,9 +827,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    if (!nullToAbsent || mangaId != null) {
-      map['manga_id'] = Variable<int>(mangaId);
-    }
+    map['manga_id'] = Variable<String>(mangaId);
     map['url'] = Variable<String>(url);
     map['name'] = Variable<String>(name);
     if (!nullToAbsent || scanlator != null) {
@@ -837,9 +847,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   DbChaptersCompanion toCompanion(bool nullToAbsent) {
     return DbChaptersCompanion(
       id: Value(id),
-      mangaId: mangaId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(mangaId),
+      mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
       scanlator: scanlator == null && nullToAbsent
@@ -861,7 +869,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbChapter(
       id: serializer.fromJson<int>(json['id']),
-      mangaId: serializer.fromJson<int?>(json['mangaId']),
+      mangaId: serializer.fromJson<String>(json['mangaId']),
       url: serializer.fromJson<String>(json['url']),
       name: serializer.fromJson<String>(json['name']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
@@ -880,7 +888,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'mangaId': serializer.toJson<int?>(mangaId),
+      'mangaId': serializer.toJson<String>(mangaId),
       'url': serializer.toJson<String>(url),
       'name': serializer.toJson<String>(name),
       'scanlator': serializer.toJson<String?>(scanlator),
@@ -897,7 +905,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
 
   DbChapter copyWith(
           {int? id,
-          Value<int?> mangaId = const Value.absent(),
+          String? mangaId,
           String? url,
           String? name,
           Value<String?> scanlator = const Value.absent(),
@@ -911,7 +919,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           int? lastModifier}) =>
       DbChapter(
         id: id ?? this.id,
-        mangaId: mangaId.present ? mangaId.value : this.mangaId,
+        mangaId: mangaId ?? this.mangaId,
         url: url ?? this.url,
         name: name ?? this.name,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
@@ -980,7 +988,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
 
 class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<int> id;
-  final Value<int?> mangaId;
+  final Value<String> mangaId;
   final Value<String> url;
   final Value<String> name;
   final Value<String?> scanlator;
@@ -1009,7 +1017,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   });
   DbChaptersCompanion.insert({
     this.id = const Value.absent(),
-    this.mangaId = const Value.absent(),
+    required String mangaId,
     required String url,
     required String name,
     this.scanlator = const Value.absent(),
@@ -1021,11 +1029,12 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.chapterNumber = const Value.absent(),
     this.sourceOrder = const Value.absent(),
     this.lastModifier = const Value.absent(),
-  })  : url = Value(url),
+  })  : mangaId = Value(mangaId),
+        url = Value(url),
         name = Value(name);
   static Insertable<DbChapter> custom({
     Expression<int>? id,
-    Expression<int>? mangaId,
+    Expression<String>? mangaId,
     Expression<String>? url,
     Expression<String>? name,
     Expression<String>? scanlator,
@@ -1057,7 +1066,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
 
   DbChaptersCompanion copyWith(
       {Value<int>? id,
-      Value<int?>? mangaId,
+      Value<String>? mangaId,
       Value<String>? url,
       Value<String>? name,
       Value<String?>? scanlator,
@@ -1093,7 +1102,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       map['id'] = Variable<int>(id.value);
     }
     if (mangaId.present) {
-      map['manga_id'] = Variable<int>(mangaId.value);
+      map['manga_id'] = Variable<String>(mangaId.value);
     }
     if (url.present) {
       map['url'] = Variable<String>(url.value);

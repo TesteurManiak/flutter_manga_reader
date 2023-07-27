@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 part 'app_database.g.dart';
 
 class DbMangas extends Table {
-  IntColumn get id => integer().autoIncrement()();
+  TextColumn get id => text()();
   TextColumn get url => text()();
   TextColumn get title => text()();
   TextColumn get artist => text().nullable()();
@@ -24,7 +24,7 @@ class DbMangas extends Table {
 
 class DbChapters extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get mangaId => integer().nullable()();
+  TextColumn get mangaId => text()();
   TextColumn get url => text()();
   TextColumn get name => text()();
   TextColumn get scanlator => text().nullable()();

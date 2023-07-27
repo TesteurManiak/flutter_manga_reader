@@ -21,6 +21,7 @@ class _DriftImpl implements LocalDatasource {
       (dbMangas) {
         return dbMangas.map((e) {
           return Manga(
+            id: e.id,
             url: e.url,
             title: e.title,
             artist: e.artist,
