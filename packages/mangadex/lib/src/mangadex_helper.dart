@@ -119,11 +119,15 @@ class MangadexHelper {
 
     final genresMap = groupBy(attr.tags, (tag) => tag.attributes.group)
         .groupSort((a, b) => a.attributes.group.compareTo(b.attributes.group));
-    final genreList = [
-      for (final group in MDConstants.tagGroupsOrder)
-        ...genresMap[group]?.map((e) => e.attributes.group) ?? [],
-      ...nonGenres,
-    ];
+
+    final genreList = <String>[];
+    for (final group in MDConstants.tagGroupsOrder) {
+      final genres = genresMap[group]?.map((e) => e.attributes.group);
+      if (genres != null && genres.isNotEmpty) {
+        genreList.addAll(genres);
+      }
+    }
+    genreList.addAll(nonGenres);
 
     final desc = (attr.description[lang] ?? attr.description['en'])
         ?.removeEntitiesAndMarkdown();
