@@ -22,6 +22,7 @@ MangaData _$MangaDataFromJson(Map<String, dynamic> json) {
 mixin _$MangaData {
   String get id => throw _privateConstructorUsedError;
   MangaAttributes get attributes => throw _privateConstructorUsedError;
+  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +39,7 @@ abstract class $MangaDataCopyWith<$Res> {
   $Res call(
       {String id,
       MangaAttributes attributes,
-      List<Relationship> relationships});
+      @RelationshipConverter() List<Relationship> relationships});
 
   $MangaAttributesCopyWith<$Res> get attributes;
 }
@@ -95,7 +96,7 @@ abstract class _$$_MangaDataCopyWith<$Res> implements $MangaDataCopyWith<$Res> {
   $Res call(
       {String id,
       MangaAttributes attributes,
-      List<Relationship> relationships});
+      @RelationshipConverter() List<Relationship> relationships});
 
   @override
   $MangaAttributesCopyWith<$Res> get attributes;
@@ -139,6 +140,7 @@ class _$_MangaData implements _MangaData {
   const _$_MangaData(
       {required this.id,
       required this.attributes,
+      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
@@ -152,6 +154,7 @@ class _$_MangaData implements _MangaData {
   final List<Relationship> _relationships;
   @override
   @JsonKey()
+  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -196,9 +199,10 @@ class _$_MangaData implements _MangaData {
 
 abstract class _MangaData implements MangaData {
   const factory _MangaData(
-      {required final String id,
-      required final MangaAttributes attributes,
-      final List<Relationship> relationships}) = _$_MangaData;
+          {required final String id,
+          required final MangaAttributes attributes,
+          @RelationshipConverter() final List<Relationship> relationships}) =
+      _$_MangaData;
 
   factory _MangaData.fromJson(Map<String, dynamic> json) =
       _$_MangaData.fromJson;
@@ -208,6 +212,7 @@ abstract class _MangaData implements MangaData {
   @override
   MangaAttributes get attributes;
   @override
+  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)

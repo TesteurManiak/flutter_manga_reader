@@ -21,6 +21,7 @@ CoverArt _$CoverArtFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CoverArt {
   CoverArtAttributes? get attributes => throw _privateConstructorUsedError;
+  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +35,9 @@ abstract class $CoverArtCopyWith<$Res> {
   factory $CoverArtCopyWith(CoverArt value, $Res Function(CoverArt) then) =
       _$CoverArtCopyWithImpl<$Res, CoverArt>;
   @useResult
-  $Res call({CoverArtAttributes? attributes, List<Relationship> relationships});
+  $Res call(
+      {CoverArtAttributes? attributes,
+      @RelationshipConverter() List<Relationship> relationships});
 
   $CoverArtAttributesCopyWith<$Res>? get attributes;
 }
@@ -87,7 +90,9 @@ abstract class _$$_CoverArtCopyWith<$Res> implements $CoverArtCopyWith<$Res> {
       __$$_CoverArtCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({CoverArtAttributes? attributes, List<Relationship> relationships});
+  $Res call(
+      {CoverArtAttributes? attributes,
+      @RelationshipConverter() List<Relationship> relationships});
 
   @override
   $CoverArtAttributesCopyWith<$Res>? get attributes;
@@ -125,6 +130,7 @@ class __$$_CoverArtCopyWithImpl<$Res>
 class _$_CoverArt implements _CoverArt {
   const _$_CoverArt(
       {this.attributes,
+      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
@@ -136,6 +142,7 @@ class _$_CoverArt implements _CoverArt {
   final List<Relationship> _relationships;
   @override
   @JsonKey()
+  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -179,14 +186,16 @@ class _$_CoverArt implements _CoverArt {
 
 abstract class _CoverArt implements CoverArt {
   const factory _CoverArt(
-      {final CoverArtAttributes? attributes,
-      final List<Relationship> relationships}) = _$_CoverArt;
+          {final CoverArtAttributes? attributes,
+          @RelationshipConverter() final List<Relationship> relationships}) =
+      _$_CoverArt;
 
   factory _CoverArt.fromJson(Map<String, dynamic> json) = _$_CoverArt.fromJson;
 
   @override
   CoverArtAttributes? get attributes;
   @override
+  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)

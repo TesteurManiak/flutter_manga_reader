@@ -9,7 +9,9 @@ class MangaData with _$MangaData {
   const factory MangaData({
     required String id,
     required MangaAttributes attributes,
-    @Default(<Relationship>[]) List<Relationship> relationships,
+    @Default(<Relationship>[])
+    @RelationshipConverter()
+    List<Relationship> relationships,
   }) = _MangaData;
 
   factory MangaData.fromJson(Map<String, dynamic> json) =>

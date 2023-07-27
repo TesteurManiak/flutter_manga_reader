@@ -22,6 +22,7 @@ ChapterData _$ChapterDataFromJson(Map<String, dynamic> json) {
 mixin _$ChapterData {
   String get id => throw _privateConstructorUsedError;
   ChapterAttributes get attributes => throw _privateConstructorUsedError;
+  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +40,7 @@ abstract class $ChapterDataCopyWith<$Res> {
   $Res call(
       {String id,
       ChapterAttributes attributes,
-      List<Relationship> relationships});
+      @RelationshipConverter() List<Relationship> relationships});
 
   $ChapterAttributesCopyWith<$Res> get attributes;
 }
@@ -97,7 +98,7 @@ abstract class _$$_ChapterDataCopyWith<$Res>
   $Res call(
       {String id,
       ChapterAttributes attributes,
-      List<Relationship> relationships});
+      @RelationshipConverter() List<Relationship> relationships});
 
   @override
   $ChapterAttributesCopyWith<$Res> get attributes;
@@ -141,6 +142,7 @@ class _$_ChapterData implements _ChapterData {
   const _$_ChapterData(
       {required this.id,
       required this.attributes,
+      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
@@ -154,6 +156,7 @@ class _$_ChapterData implements _ChapterData {
   final List<Relationship> _relationships;
   @override
   @JsonKey()
+  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -198,9 +201,10 @@ class _$_ChapterData implements _ChapterData {
 
 abstract class _ChapterData implements ChapterData {
   const factory _ChapterData(
-      {required final String id,
-      required final ChapterAttributes attributes,
-      final List<Relationship> relationships}) = _$_ChapterData;
+          {required final String id,
+          required final ChapterAttributes attributes,
+          @RelationshipConverter() final List<Relationship> relationships}) =
+      _$_ChapterData;
 
   factory _ChapterData.fromJson(Map<String, dynamic> json) =
       _$_ChapterData.fromJson;
@@ -210,6 +214,7 @@ abstract class _ChapterData implements ChapterData {
   @override
   ChapterAttributes get attributes;
   @override
+  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)

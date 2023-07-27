@@ -12,7 +12,8 @@ _$_CoverArt _$$_CoverArtFromJson(Map<String, dynamic> json) => _$_CoverArt(
           : CoverArtAttributes.fromJson(
               json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => const RelationshipConverter()
+                  .fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
@@ -20,7 +21,9 @@ _$_CoverArt _$$_CoverArtFromJson(Map<String, dynamic> json) => _$_CoverArt(
 Map<String, dynamic> _$$_CoverArtToJson(_$_CoverArt instance) =>
     <String, dynamic>{
       'attributes': instance.attributes,
-      'relationships': instance.relationships,
+      'relationships': instance.relationships
+          .map(const RelationshipConverter().toJson)
+          .toList(),
     };
 
 _$_CoverArtAttributes _$$_CoverArtAttributesFromJson(

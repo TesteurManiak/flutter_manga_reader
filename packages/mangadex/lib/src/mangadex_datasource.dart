@@ -11,6 +11,7 @@ import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/cover_list_response.dart';
 import 'package:mangadex/src/models/manga.dart';
 import 'package:mangadex/src/models/manga_response.dart';
+import 'package:mangadex/src/models/relationship.dart';
 
 /// {@template mangadex_datasource}
 /// Mangadex datasource.
@@ -115,7 +116,7 @@ class MangadexDatasource extends MangaDatasource {
           covers,
           (cover) {
             return cover.relationships
-                .where((rel) => rel.isManga)
+                .whereType<MangaRelationship>()
                 .firstOrNull
                 ?.id;
           },
@@ -127,7 +128,7 @@ class MangadexDatasource extends MangaDatasource {
               k,
               v.firstWhereOrNull((cover) {
                 final id = v.first.relationships
-                    .where((rel) => rel.isManga)
+                    .whereType<MangaRelationship>()
                     .firstOrNull
                     ?.id;
 
@@ -191,7 +192,7 @@ class MangadexDatasource extends MangaDatasource {
     final mangaIds = data
         .map((chapter) {
           return chapter.relationships
-              .where((rel) => rel.isManga)
+              .whereType<MangaRelationship>()
               .firstOrNull
               ?.id;
         })

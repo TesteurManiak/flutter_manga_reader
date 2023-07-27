@@ -11,7 +11,8 @@ _$_MangaData _$$_MangaDataFromJson(Map<String, dynamic> json) => _$_MangaData(
       attributes:
           MangaAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => const RelationshipConverter()
+                  .fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
@@ -20,7 +21,9 @@ Map<String, dynamic> _$$_MangaDataToJson(_$_MangaData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
-      'relationships': instance.relationships,
+      'relationships': instance.relationships
+          .map(const RelationshipConverter().toJson)
+          .toList(),
     };
 
 _$_MangaAttributes _$$_MangaAttributesFromJson(Map<String, dynamic> json) =>

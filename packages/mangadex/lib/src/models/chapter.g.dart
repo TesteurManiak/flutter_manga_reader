@@ -12,7 +12,8 @@ _$_ChapterData _$$_ChapterDataFromJson(Map<String, dynamic> json) =>
       attributes: ChapterAttributes.fromJson(
           json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => const RelationshipConverter()
+                  .fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
@@ -21,7 +22,9 @@ Map<String, dynamic> _$$_ChapterDataToJson(_$_ChapterData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
-      'relationships': instance.relationships,
+      'relationships': instance.relationships
+          .map(const RelationshipConverter().toJson)
+          .toList(),
     };
 
 _$_ChapterAttributes _$$_ChapterAttributesFromJson(Map<String, dynamic> json) =>

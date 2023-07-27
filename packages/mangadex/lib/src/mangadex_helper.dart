@@ -3,6 +3,7 @@ import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/string_extensions.dart';
 import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/manga.dart';
+import 'package:mangadex/src/models/relationship.dart';
 
 class MangadexHelper {
   const MangadexHelper();
@@ -83,6 +84,20 @@ class MangadexHelper {
     String? coverSuffix,
     bool altTitlesInDesc = false,
   }) {
-    final attributes = mangaData.attributes;
+    final attr = mangaData.attributes;
+    final publicationDemographic = attr.publicationDemographic;
+    final contentRating = attr.contentRating;
+    final originalLanguage = attr.originalLanguage;
+    final nonGenres = [
+      if (publicationDemographic != null) publicationDemographic.name,
+      if (contentRating != null && contentRating != ContentRating.safe)
+        contentRating.name,
+      if (originalLanguage != null) originalLanguage,
+    ];
+    final authors = mangaData.relationships
+        .whereType<AuthorRelationship>()
+        .map((author) => author.attributes?.name)
+        .whereType<String>()
+        .toSet();
   }
 }

@@ -9,7 +9,9 @@ class ChapterData with _$ChapterData {
   const factory ChapterData({
     required String id,
     required ChapterAttributes attributes,
-    @Default(<Relationship>[]) List<Relationship> relationships,
+    @Default(<Relationship>[])
+    @RelationshipConverter()
+    List<Relationship> relationships,
   }) = _ChapterData;
 
   factory ChapterData.fromJson(Map<String, dynamic> json) =>
