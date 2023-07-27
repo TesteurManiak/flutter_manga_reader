@@ -4,6 +4,7 @@ import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/map_extensions.dart';
 import 'package:mangadex/src/extensions/string_extensions.dart';
 import 'package:mangadex/src/mangadex_helper.dart';
+import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/chapter.dart';
 import 'package:mangadex/src/models/chapter_response.dart';
 import 'package:mangadex/src/models/cover.dart';
@@ -46,7 +47,7 @@ class MangadexDatasource extends MangaDatasource {
         'offset': _helper.getMangaListOffset(page),
         'includes[]': MDConstants.coverArt,
       },
-    ).decode(MangaResponse.fromJson);
+    ).decode(MangaListResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -207,7 +208,7 @@ class MangadexDatasource extends MangaDatasource {
         'limit': mangaIds.length,
         'ids[]': mangaIds,
       },
-    ).decode(MangaResponse.fromJson);
+    ).decode(MangaListResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -244,5 +245,79 @@ class MangadexDatasource extends MangaDatasource {
   ) {
     // TODO: implement fetchSearchManga
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
+    if (!_helper.containsUuid(manga.url.trim())) {
+      return const Result.failure(HttpError(message: 'Invalid manga format'));
+    }
+
+    final result = await _client.send(
+      method: HttpMethod.get,
+      pathSegments: manga.pathSegments,
+      queryParameters: {
+        'includes[]': [
+          MDConstants.coverArt,
+          MDConstants.author,
+          MDConstants.artist,
+        ],
+      },
+    ).decode(MangaResponse.fromJson);
+
+    return result.when(
+      success: (response) async {
+        final mangaData = response.data;
+        final chapters = await _fetchSimpleChapterList(mangaData, _dexLang);
+        final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
+
+        return Result.success(
+          _helper.createManga(
+            mangaData: response.data,
+            chapters: chapters,
+            firstVolumeCover: firstVolumeCover,
+            lang: _dexLang,
+          ),
+        );
+      },
+      failure: Result.failure,
+    );
+  }
+
+  /// Get a quick-n-dirty list of the chapters to be used in determining the
+  /// manga status.
+  ///
+  /// Uses the 'aggregate' endpoint.
+  Future<Map<String, AggregateVolume>> _fetchSimpleChapterList(
+    MangaData mangaData,
+    String langCode,
+  ) async {
+    final result = await _client.send(
+      method: HttpMethod.get,
+      pathSegments: [
+        mangaData.id,
+        'aggregate',
+      ],
+      queryParameters: {'translatedLanguage[]': langCode},
+    ).decode(AggregateResponse.fromJson);
+
+    return result.when(
+      success: (response) => response.volumes ?? {},
+      failure: (_) => {},
+    );
+  }
+
+  /// Attempt to get the first volume cover if the setting is enabled.
+  ///
+  /// Uses the 'covers' endpoint.
+  Future<String?> _fetchFirstVolumeCover(MangaData mangaData) async {
+    return _fetchFirstVolumeCovers([mangaData])
+        .then((value) => value?[mangaData.id]);
+  }
+}
+
+extension on Manga {
+  List<String> get pathSegments {
+    return url.split('/').where((e) => e.trim().isNotEmpty).toList();
   }
 }

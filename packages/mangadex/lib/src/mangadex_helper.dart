@@ -1,6 +1,7 @@
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/string_extensions.dart';
+import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/manga.dart';
 
 class MangadexHelper {
@@ -72,5 +73,16 @@ class MangadexHelper {
             }
           : null,
     );
+  }
+
+  Manga createManga({
+    required MangaData mangaData,
+    required Map<String, AggregateVolume> chapters,
+    String? firstVolumeCover,
+    required String lang,
+    String? coverSuffix,
+    bool altTitlesInDesc = false,
+  }) {
+    final attributes = mangaData.attributes;
   }
 }

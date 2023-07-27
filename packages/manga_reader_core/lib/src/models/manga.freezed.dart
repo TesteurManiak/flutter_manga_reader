@@ -19,6 +19,7 @@ mixin _$Manga {
   String get url => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
+  String? get author => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
   int get status => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $MangaCopyWith<$Res> {
       {String url,
       String title,
       String? artist,
+      String? author,
       String? description,
       String? genre,
       int status,
@@ -63,6 +65,7 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
+    Object? author = freezed,
     Object? description = freezed,
     Object? genre = freezed,
     Object? status = null,
@@ -82,6 +85,10 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
@@ -121,6 +128,7 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
       {String url,
       String title,
       String? artist,
+      String? author,
       String? description,
       String? genre,
       int status,
@@ -141,6 +149,7 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
+    Object? author = freezed,
     Object? description = freezed,
     Object? genre = freezed,
     Object? status = null,
@@ -160,6 +169,10 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
+              as String?,
+      author: freezed == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String?,
       description: freezed == description
           ? _value.description
@@ -191,17 +204,19 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
 
 /// @nodoc
 
-class _$_Manga implements _Manga {
+class _$_Manga extends _Manga {
   const _$_Manga(
       {required this.url,
       required this.title,
       this.artist,
+      this.author,
       this.description,
       this.genre,
       this.status = 0,
       this.thumbnailUrl,
       this.updateStrategy = UpdateStrategy.alwaysUpdate,
-      this.initialized = false});
+      this.initialized = false})
+      : super._();
 
   @override
   final String url;
@@ -209,6 +224,8 @@ class _$_Manga implements _Manga {
   final String title;
   @override
   final String? artist;
+  @override
+  final String? author;
   @override
   final String? description;
   @override
@@ -227,7 +244,7 @@ class _$_Manga implements _Manga {
 
   @override
   String toString() {
-    return 'Manga(url: $url, title: $title, artist: $artist, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
+    return 'Manga(url: $url, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
   }
 
   @override
@@ -238,6 +255,7 @@ class _$_Manga implements _Manga {
             (identical(other.url, url) || other.url == url) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.artist, artist) || other.artist == artist) &&
+            (identical(other.author, author) || other.author == author) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.genre, genre) || other.genre == genre) &&
@@ -251,8 +269,8 @@ class _$_Manga implements _Manga {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url, title, artist, description,
-      genre, status, thumbnailUrl, updateStrategy, initialized);
+  int get hashCode => Object.hash(runtimeType, url, title, artist, author,
+      description, genre, status, thumbnailUrl, updateStrategy, initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -261,17 +279,19 @@ class _$_Manga implements _Manga {
       __$$_MangaCopyWithImpl<_$_Manga>(this, _$identity);
 }
 
-abstract class _Manga implements Manga {
+abstract class _Manga extends Manga {
   const factory _Manga(
       {required final String url,
       required final String title,
       final String? artist,
+      final String? author,
       final String? description,
       final String? genre,
       final int status,
       final String? thumbnailUrl,
       final UpdateStrategy updateStrategy,
       final bool initialized}) = _$_Manga;
+  const _Manga._() : super._();
 
   @override
   String get url;
@@ -279,6 +299,8 @@ abstract class _Manga implements Manga {
   String get title;
   @override
   String? get artist;
+  @override
+  String? get author;
   @override
   String? get description;
   @override

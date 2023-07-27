@@ -13,6 +13,8 @@ class MDConstants {
   static const coverArt = 'cover_art';
   static const scanlationGroup = 'scanlation_group';
   static const user = 'user';
+  static const author = 'author';
+  static const artist = 'artist';
 
   static const cdnUrl = 'https://uploads.mangadex.org';
   static const apiUrl = 'https://api.mangadex.org';

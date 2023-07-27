@@ -1,4 +1,5 @@
 import 'package:manga_reader_core/src/http_client/http_client.dart';
+import 'package:manga_reader_core/src/models/manga.dart';
 import 'package:manga_reader_core/src/models/paginated_data.dart';
 import 'package:manga_reader_core/src/models/result.dart';
 
@@ -23,4 +24,7 @@ abstract class MangaDatasource {
     String query,
     // FilterList filterList,
   );
+
+  /// Fetch the details of a manga.
+  Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga);
 }

@@ -8,6 +8,7 @@ class Manga with _$Manga {
     required String url,
     required String title,
     String? artist,
+    String? author,
     String? description,
     String? genre,
     @Default(0) int status,
@@ -15,6 +16,34 @@ class Manga with _$Manga {
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,
   }) = _Manga;
+
+  const Manga._();
+
+  List<String>? getGenres() {
+    final localGenre = genre;
+    if (localGenre == null || localGenre.isEmpty) return null;
+
+    return localGenre
+        .split(', ')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
+  }
+
+  Manga copyFrom(Manga other) {
+    return Manga(
+      url: url,
+      title: title,
+      author: author ?? other.author,
+      artist: artist ?? other.artist,
+      description: description ?? other.description,
+      genre: genre ?? other.genre,
+      status: other.status,
+      thumbnailUrl: thumbnailUrl ?? other.thumbnailUrl,
+      updateStrategy: other.updateStrategy,
+      initialized: !initialized ? other.initialized : initialized,
+    );
+  }
 }
 
 /// Define the update strategy for a manga.
