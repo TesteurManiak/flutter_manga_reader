@@ -1,7 +1,7 @@
 import 'package:manga_reader_core/src/models/manga.dart';
 
-abstract class PaginatedResponse<T> {
-  const PaginatedResponse({
+abstract class PageData<T> {
+  const PageData({
     required this.data,
     required this.hasMore,
   });
@@ -10,7 +10,7 @@ abstract class PaginatedResponse<T> {
   final bool hasMore;
 }
 
-class MangasPage extends PaginatedResponse<Manga> {
+class MangasPage extends PageData<Manga> {
   const MangasPage({
     required this.mangaList,
     required super.hasMore,

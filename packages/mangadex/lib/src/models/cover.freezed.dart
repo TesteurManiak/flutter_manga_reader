@@ -124,7 +124,8 @@ class __$$_CoverArtCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CoverArt implements _CoverArt {
   const _$_CoverArt(
-      {this.attributes, required final List<Relationship> relationships})
+      {this.attributes,
+      final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
   factory _$_CoverArt.fromJson(Map<String, dynamic> json) =>
@@ -134,6 +135,7 @@ class _$_CoverArt implements _CoverArt {
   final CoverArtAttributes? attributes;
   final List<Relationship> _relationships;
   @override
+  @JsonKey()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -178,7 +180,7 @@ class _$_CoverArt implements _CoverArt {
 abstract class _CoverArt implements CoverArt {
   const factory _CoverArt(
       {final CoverArtAttributes? attributes,
-      required final List<Relationship> relationships}) = _$_CoverArt;
+      final List<Relationship> relationships}) = _$_CoverArt;
 
   factory _CoverArt.fromJson(Map<String, dynamic> json) = _$_CoverArt.fromJson;
 

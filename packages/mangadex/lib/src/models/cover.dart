@@ -8,7 +8,7 @@ part 'cover.g.dart';
 class CoverArt with _$CoverArt {
   const factory CoverArt({
     CoverArtAttributes? attributes,
-    required List<Relationship> relationships,
+    @Default(<Relationship>[]) List<Relationship> relationships,
   }) = _CoverArt;
 
   factory CoverArt.fromJson(Map<String, dynamic> json) =>

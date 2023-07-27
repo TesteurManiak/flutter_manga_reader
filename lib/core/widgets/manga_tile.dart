@@ -18,47 +18,52 @@ class _MangaTileState extends State<MangaTile>
     super.build(context);
     final thumbnailUrl = widget.manga.thumbnailUrl;
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(6),
-      child: Stack(
-        children: [
-          // TODO(Guillaume): use a placeholder
-          if (thumbnailUrl != null)
-            AppNetworkImage(
-              url: thumbnailUrl,
-              fit: BoxFit.fill,
-            ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: 8,
-                right: 8,
-                bottom: 8,
-                top: 16,
+    return GestureDetector(
+      onTap: () {
+        // TODO(Guillaume): go to details
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: Stack(
+          children: [
+            // TODO(Guillaume): use a placeholder
+            if (thumbnailUrl != null)
+              AppNetworkImage(
+                url: thumbnailUrl,
+                fit: BoxFit.fill,
               ),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black],
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  left: 8,
+                  right: 8,
+                  bottom: 8,
+                  top: 16,
+                ),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Colors.transparent, Colors.black],
+                  ),
+                ),
+                child: Text(
+                  widget.manga.title,
+                  textAlign: TextAlign.start,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              child: Text(
-                widget.manga.title,
-                textAlign: TextAlign.start,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

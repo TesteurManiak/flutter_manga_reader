@@ -15,29 +15,32 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SearchState {
+mixin _$PaginatedMangaState {
+  int get page => throw _privateConstructorUsedError;
+  bool get hasMore => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(int page, List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String? message) error,
+    required TResult Function(int page, bool hasMore) loading,
+    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+        loaded,
+    required TResult Function(int page, bool hasMore) empty,
+    required TResult Function(int page, bool hasMore, String? message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(int page, List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String? message)? error,
+    TResult? Function(int page, bool hasMore)? loading,
+    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore)? empty,
+    TResult? Function(int page, bool hasMore, String? message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(int page, List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String? message)? error,
+    TResult Function(int page, bool hasMore)? loading,
+    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore)? empty,
+    TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -66,93 +69,155 @@ mixin _$SearchState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PaginatedMangaStateCopyWith<PaginatedMangaState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SearchStateCopyWith<$Res> {
-  factory $SearchStateCopyWith(
-          SearchState value, $Res Function(SearchState) then) =
-      _$SearchStateCopyWithImpl<$Res, SearchState>;
+abstract class $PaginatedMangaStateCopyWith<$Res> {
+  factory $PaginatedMangaStateCopyWith(
+          PaginatedMangaState value, $Res Function(PaginatedMangaState) then) =
+      _$PaginatedMangaStateCopyWithImpl<$Res, PaginatedMangaState>;
+  @useResult
+  $Res call({int page, bool hasMore});
 }
 
 /// @nodoc
-class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
-    implements $SearchStateCopyWith<$Res> {
-  _$SearchStateCopyWithImpl(this._value, this._then);
+class _$PaginatedMangaStateCopyWithImpl<$Res, $Val extends PaginatedMangaState>
+    implements $PaginatedMangaStateCopyWith<$Res> {
+  _$PaginatedMangaStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? hasMore = null,
+  }) {
+    return _then(_value.copyWith(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
+abstract class _$$_LoadingCopyWith<$Res>
+    implements $PaginatedMangaStateCopyWith<$Res> {
   factory _$$_LoadingCopyWith(
           _$_Loading value, $Res Function(_$_Loading) then) =
       __$$_LoadingCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int page, bool hasMore});
 }
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$_Loading>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? hasMore = null,
+  }) {
+    return _then(_$_Loading(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Loading extends _Loading {
-  const _$_Loading() : super._();
+  const _$_Loading({required this.page, this.hasMore = true}) : super._();
+
+  @override
+  final int page;
+  @override
+  @JsonKey()
+  final bool hasMore;
 
   @override
   String toString() {
-    return 'SearchState.loading()';
+    return 'PaginatedMangaState.loading(page: $page, hasMore: $hasMore)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$_Loading &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, page, hasMore);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(int page, List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String? message) error,
+    required TResult Function(int page, bool hasMore) loading,
+    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+        loaded,
+    required TResult Function(int page, bool hasMore) empty,
+    required TResult Function(int page, bool hasMore, String? message) error,
   }) {
-    return loading();
+    return loading(page, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(int page, List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String? message)? error,
+    TResult? Function(int page, bool hasMore)? loading,
+    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore)? empty,
+    TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
-    return loading?.call();
+    return loading?.call(page, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(int page, List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String? message)? error,
+    TResult Function(int page, bool hasMore)? loading,
+    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore)? empty,
+    TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(page, hasMore);
     }
     return orElse();
   }
@@ -195,22 +260,34 @@ class _$_Loading extends _Loading {
   }
 }
 
-abstract class _Loading extends SearchState {
-  const factory _Loading() = _$_Loading;
+abstract class _Loading extends PaginatedMangaState {
+  const factory _Loading({required final int page, final bool hasMore}) =
+      _$_Loading;
   const _Loading._() : super._();
+
+  @override
+  int get page;
+  @override
+  bool get hasMore;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
+abstract class _$$_LoadedCopyWith<$Res>
+    implements $PaginatedMangaStateCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({int page, List<Manga> mangas});
+  $Res call({int page, bool hasMore, List<Manga> mangas});
 }
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -219,6 +296,7 @@ class __$$_LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? page = null,
+    Object? hasMore = null,
     Object? mangas = null,
   }) {
     return _then(_$_Loaded(
@@ -226,6 +304,10 @@ class __$$_LoadedCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       mangas: null == mangas
           ? _value._mangas
           : mangas // ignore: cast_nullable_to_non_nullable
@@ -237,13 +319,17 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
-  const _$_Loaded({this.page = 0, required final List<Manga> mangas})
+  const _$_Loaded(
+      {required this.page,
+      required this.hasMore,
+      required final List<Manga> mangas})
       : _mangas = mangas,
         super._();
 
   @override
-  @JsonKey()
   final int page;
+  @override
+  final bool hasMore;
   final List<Manga> _mangas;
   @override
   List<Manga> get mangas {
@@ -254,7 +340,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   String toString() {
-    return 'SearchState.loaded(page: $page, mangas: $mangas)';
+    return 'PaginatedMangaState.loaded(page: $page, hasMore: $hasMore, mangas: $mangas)';
   }
 
   @override
@@ -263,12 +349,13 @@ class _$_Loaded extends _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
             (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             const DeepCollectionEquality().equals(other._mangas, _mangas));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, page, const DeepCollectionEquality().hash(_mangas));
+      runtimeType, page, hasMore, const DeepCollectionEquality().hash(_mangas));
 
   @JsonKey(ignore: true)
   @override
@@ -279,36 +366,37 @@ class _$_Loaded extends _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(int page, List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String? message) error,
+    required TResult Function(int page, bool hasMore) loading,
+    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+        loaded,
+    required TResult Function(int page, bool hasMore) empty,
+    required TResult Function(int page, bool hasMore, String? message) error,
   }) {
-    return loaded(page, mangas);
+    return loaded(page, hasMore, mangas);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(int page, List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String? message)? error,
+    TResult? Function(int page, bool hasMore)? loading,
+    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore)? empty,
+    TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
-    return loaded?.call(page, mangas);
+    return loaded?.call(page, hasMore, mangas);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(int page, List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String? message)? error,
+    TResult Function(int page, bool hasMore)? loading,
+    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore)? empty,
+    TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(page, mangas);
+      return loaded(page, hasMore, mangas);
     }
     return orElse();
   }
@@ -351,84 +439,128 @@ class _$_Loaded extends _Loaded {
   }
 }
 
-abstract class _Loaded extends SearchState {
-  const factory _Loaded({final int page, required final List<Manga> mangas}) =
-      _$_Loaded;
+abstract class _Loaded extends PaginatedMangaState {
+  const factory _Loaded(
+      {required final int page,
+      required final bool hasMore,
+      required final List<Manga> mangas}) = _$_Loaded;
   const _Loaded._() : super._();
 
+  @override
   int get page;
+  @override
+  bool get hasMore;
   List<Manga> get mangas;
+  @override
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_EmptyCopyWith<$Res> {
+abstract class _$$_EmptyCopyWith<$Res>
+    implements $PaginatedMangaStateCopyWith<$Res> {
   factory _$$_EmptyCopyWith(_$_Empty value, $Res Function(_$_Empty) then) =
       __$$_EmptyCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int page, bool hasMore});
 }
 
 /// @nodoc
 class __$$_EmptyCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$_Empty>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Empty>
     implements _$$_EmptyCopyWith<$Res> {
   __$$_EmptyCopyWithImpl(_$_Empty _value, $Res Function(_$_Empty) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? page = null,
+    Object? hasMore = null,
+  }) {
+    return _then(_$_Empty(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Empty extends _Empty {
-  const _$_Empty() : super._();
+  const _$_Empty({required this.page, this.hasMore = false}) : super._();
+
+  @override
+  final int page;
+  @override
+  @JsonKey()
+  final bool hasMore;
 
   @override
   String toString() {
-    return 'SearchState.empty()';
+    return 'PaginatedMangaState.empty(page: $page, hasMore: $hasMore)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Empty);
+        (other.runtimeType == runtimeType &&
+            other is _$_Empty &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, page, hasMore);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
+      __$$_EmptyCopyWithImpl<_$_Empty>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(int page, List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String? message) error,
+    required TResult Function(int page, bool hasMore) loading,
+    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+        loaded,
+    required TResult Function(int page, bool hasMore) empty,
+    required TResult Function(int page, bool hasMore, String? message) error,
   }) {
-    return empty();
+    return empty(page, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(int page, List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String? message)? error,
+    TResult? Function(int page, bool hasMore)? loading,
+    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore)? empty,
+    TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
-    return empty?.call();
+    return empty?.call(page, hasMore);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(int page, List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String? message)? error,
+    TResult Function(int page, bool hasMore)? loading,
+    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore)? empty,
+    TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
   }) {
     if (empty != null) {
-      return empty();
+      return empty(page, hasMore);
     }
     return orElse();
   }
@@ -471,22 +603,34 @@ class _$_Empty extends _Empty {
   }
 }
 
-abstract class _Empty extends SearchState {
-  const factory _Empty() = _$_Empty;
+abstract class _Empty extends PaginatedMangaState {
+  const factory _Empty({required final int page, final bool hasMore}) =
+      _$_Empty;
   const _Empty._() : super._();
+
+  @override
+  int get page;
+  @override
+  bool get hasMore;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
+abstract class _$$_ErrorCopyWith<$Res>
+    implements $PaginatedMangaStateCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String? message});
+  $Res call({int page, bool hasMore, String? message});
 }
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$SearchStateCopyWithImpl<$Res, _$_Error>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -494,9 +638,19 @@ class __$$_ErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? page = null,
+    Object? hasMore = null,
     Object? message = freezed,
   }) {
     return _then(_$_Error(
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasMore: null == hasMore
+          ? _value.hasMore
+          : hasMore // ignore: cast_nullable_to_non_nullable
+              as bool,
       message: freezed == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -508,14 +662,19 @@ class __$$_ErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error extends _Error {
-  const _$_Error({this.message}) : super._();
+  const _$_Error({required this.page, required this.hasMore, this.message})
+      : super._();
 
+  @override
+  final int page;
+  @override
+  final bool hasMore;
   @override
   final String? message;
 
   @override
   String toString() {
-    return 'SearchState.error(message: $message)';
+    return 'PaginatedMangaState.error(page: $page, hasMore: $hasMore, message: $message)';
   }
 
   @override
@@ -523,11 +682,13 @@ class _$_Error extends _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, page, hasMore, message);
 
   @JsonKey(ignore: true)
   @override
@@ -538,36 +699,37 @@ class _$_Error extends _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(int page, List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String? message) error,
+    required TResult Function(int page, bool hasMore) loading,
+    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+        loaded,
+    required TResult Function(int page, bool hasMore) empty,
+    required TResult Function(int page, bool hasMore, String? message) error,
   }) {
-    return error(message);
+    return error(page, hasMore, message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(int page, List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String? message)? error,
+    TResult? Function(int page, bool hasMore)? loading,
+    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore)? empty,
+    TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
-    return error?.call(message);
+    return error?.call(page, hasMore, message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(int page, List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String? message)? error,
+    TResult Function(int page, bool hasMore)? loading,
+    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore)? empty,
+    TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(page, hasMore, message);
     }
     return orElse();
   }
@@ -610,11 +772,19 @@ class _$_Error extends _Error {
   }
 }
 
-abstract class _Error extends SearchState {
-  const factory _Error({final String? message}) = _$_Error;
+abstract class _Error extends PaginatedMangaState {
+  const factory _Error(
+      {required final int page,
+      required final bool hasMore,
+      final String? message}) = _$_Error;
   const _Error._() : super._();
 
+  @override
+  int get page;
+  @override
+  bool get hasMore;
   String? get message;
+  @override
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;

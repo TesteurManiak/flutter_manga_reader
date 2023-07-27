@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/infinite_scroller.dart';
@@ -19,12 +20,16 @@ class SearchView extends ConsumerStatefulWidget {
 
 class _SearchViewState extends ConsumerState<SearchView>
     with AutomaticKeepAliveClientMixin {
+  late final MangaDatasource datasource;
+
   @override
   void initState() {
     super.initState();
 
+    datasource = ref.read(mangaDatasourceProvider);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(searchControllerProvider.notifier).searchForMangas();
+      ref.read(searchControllerProvider(datasource).notifier).fetchNextMangas();
     });
   }
 
@@ -32,14 +37,19 @@ class _SearchViewState extends ConsumerState<SearchView>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final state = ref.watch(searchControllerProvider);
+    final state = ref.watch(searchControllerProvider(datasource));
 
     return Scaffold(
-      appBar: SourceAppBar(title: 'MangaDex'.hardcoded),
-      body: state.when(
-        loading: LoadingContent.new,
-        loaded: (_, mangas) => _Loaded(mangas),
-        empty: () => const _Empty(),
+      appBar: SourceAppBar(title: datasource.name),
+      body: state.map(
+        loading: (_) => const LoadingContent(),
+        loaded: (loaded) {
+          return _Loaded(
+            datasource: datasource,
+            mangas: loaded.mangas,
+          );
+        },
+        empty: (_) => const _Empty(),
         error: (_) => const ErrorContent(),
       ),
     );
@@ -50,8 +60,12 @@ class _SearchViewState extends ConsumerState<SearchView>
 }
 
 class _Loaded extends ConsumerStatefulWidget {
-  const _Loaded(this.mangas);
+  const _Loaded({
+    required this.datasource,
+    required this.mangas,
+  });
 
+  final MangaDatasource datasource;
   final List<Manga> mangas;
 
   @override
@@ -66,7 +80,9 @@ class _LoadedState extends ConsumerState<_Loaded> {
     return InfiniteScroller(
       scrollController: scrollController,
       fetchMore: () {
-        return ref.read(searchControllerProvider.notifier).searchForMangas();
+        return ref
+            .read(searchControllerProvider(widget.datasource).notifier)
+            .fetchNextMangas();
       },
       child: GridView.builder(
         controller: scrollController,

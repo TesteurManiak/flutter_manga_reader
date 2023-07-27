@@ -11,9 +11,10 @@ _$_CoverArt _$$_CoverArtFromJson(Map<String, dynamic> json) => _$_CoverArt(
           ? null
           : CoverArtAttributes.fromJson(
               json['attributes'] as Map<String, dynamic>),
-      relationships: (json['relationships'] as List<dynamic>)
-          .map((e) => Relationship.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      relationships: (json['relationships'] as List<dynamic>?)
+              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Relationship>[],
     );
 
 Map<String, dynamic> _$$_CoverArtToJson(_$_CoverArt instance) =>

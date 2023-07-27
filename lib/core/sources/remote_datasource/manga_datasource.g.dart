@@ -1,27 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'manga_dex_datasource.dart';
+part of 'manga_datasource.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mangadexDatasourceHash() =>
-    r'e59d90a29a7381309803e54a54cf5127cc83fc82';
+String _$mangaDatasourceHash() => r'b4a5922883382e2dfcbe612ead89077d239dc169';
 
-/// See also [mangadexDatasource].
-@ProviderFor(mangadexDatasource)
-final mangadexDatasourceProvider =
-    AutoDisposeProvider<MangadexDatasource>.internal(
-  mangadexDatasource,
-  name: r'mangadexDatasourceProvider',
+/// See also [mangaDatasource].
+@ProviderFor(mangaDatasource)
+final mangaDatasourceProvider = AutoDisposeProvider<MangaDatasource>.internal(
+  mangaDatasource,
+  name: r'mangaDatasourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$mangadexDatasourceHash,
+      : _$mangaDatasourceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef MangadexDatasourceRef = AutoDisposeProviderRef<MangadexDatasource>;
+typedef MangaDatasourceRef = AutoDisposeProviderRef<MangaDatasource>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

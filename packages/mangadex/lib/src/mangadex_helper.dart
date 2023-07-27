@@ -38,7 +38,7 @@ class MangadexHelper {
 
   /// Get the manga offset pages are 1 based, so subtract 1.
   String getMangaListOffset(int page) {
-    return (MDConstants.latestChapterLimit * (page - 1)).toString();
+    return (MDConstants.mangaLimit * (page - 1)).toString();
   }
 
   /// Get the latest chapter offset pages are 1 based, so subtract 1.

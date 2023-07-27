@@ -10,9 +10,10 @@ _$_MangaData _$$_MangaDataFromJson(Map<String, dynamic> json) => _$_MangaData(
       id: json['id'] as String,
       attributes:
           MangaAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
-      relationships: (json['relationships'] as List<dynamic>)
-          .map((e) => Relationship.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      relationships: (json['relationships'] as List<dynamic>?)
+              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Relationship>[],
     );
 
 Map<String, dynamic> _$$_MangaDataToJson(_$_MangaData instance) =>

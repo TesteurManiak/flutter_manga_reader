@@ -139,7 +139,7 @@ class _$_MangaData implements _MangaData {
   const _$_MangaData(
       {required this.id,
       required this.attributes,
-      required final List<Relationship> relationships})
+      final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
   factory _$_MangaData.fromJson(Map<String, dynamic> json) =>
@@ -151,6 +151,7 @@ class _$_MangaData implements _MangaData {
   final MangaAttributes attributes;
   final List<Relationship> _relationships;
   @override
+  @JsonKey()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -197,7 +198,7 @@ abstract class _MangaData implements MangaData {
   const factory _MangaData(
       {required final String id,
       required final MangaAttributes attributes,
-      required final List<Relationship> relationships}) = _$_MangaData;
+      final List<Relationship> relationships}) = _$_MangaData;
 
   factory _MangaData.fromJson(Map<String, dynamic> json) =
       _$_MangaData.fromJson;

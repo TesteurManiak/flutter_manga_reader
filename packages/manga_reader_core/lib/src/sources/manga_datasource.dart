@@ -1,15 +1,26 @@
 import 'package:manga_reader_core/src/http_client/http_client.dart';
-import 'package:manga_reader_core/src/models/paginated_response.dart';
+import 'package:manga_reader_core/src/models/paginated_data.dart';
 import 'package:manga_reader_core/src/models/result.dart';
 
 abstract class MangaDatasource {
   const MangaDatasource({
     required this.lang,
-    required this.restClient,
+    required this.name,
   });
 
   final String lang;
-  final RestClient restClient;
+  final String name;
 
+  /// Fetch the most popular mangas from the source.
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);
+
+  /// Fetch the latest mangas from the source.
+  Future<Result<MangasPage, HttpError>> latestUpdatesRequest(int page);
+
+  /// Query the source for a manga.
+  Future<Result<MangasPage, HttpError>> fetchSearchManga(
+    int page,
+    String query,
+    // FilterList filterList,
+  );
 }
