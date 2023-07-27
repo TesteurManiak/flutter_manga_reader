@@ -32,6 +32,11 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   late final GeneratedColumn<String> artist = GeneratedColumn<String>(
       'artist', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _authorMeta = const VerificationMeta('author');
+  @override
+  late final GeneratedColumn<String> author = GeneratedColumn<String>(
+      'author', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _descriptionMeta =
       const VerificationMeta('description');
   @override
@@ -45,11 +50,10 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _statusMeta = const VerificationMeta('status');
   @override
-  late final GeneratedColumn<int> status = GeneratedColumn<int>(
-      'status', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+  late final GeneratedColumnWithTypeConverter<MangaStatus, int> status =
+      GeneratedColumn<int>('status', aliasedName, false,
+              type: DriftSqlType.int, requiredDuringInsert: true)
+          .withConverter<MangaStatus>($DbMangasTable.$converterstatus);
   static const VerificationMeta _updateStrategyMeta =
       const VerificationMeta('updateStrategy');
   @override
@@ -78,6 +82,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
         url,
         title,
         artist,
+        author,
         description,
         genre,
         status,
@@ -112,6 +117,10 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       context.handle(_artistMeta,
           artist.isAcceptableOrUnknown(data['artist']!, _artistMeta));
     }
+    if (data.containsKey('author')) {
+      context.handle(_authorMeta,
+          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
+    }
     if (data.containsKey('description')) {
       context.handle(
           _descriptionMeta,
@@ -122,10 +131,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       context.handle(
           _genreMeta, genre.isAcceptableOrUnknown(data['genre']!, _genreMeta));
     }
-    if (data.containsKey('status')) {
-      context.handle(_statusMeta,
-          status.isAcceptableOrUnknown(data['status']!, _statusMeta));
-    }
+    context.handle(_statusMeta, const VerificationResult.success());
     context.handle(_updateStrategyMeta, const VerificationResult.success());
     if (data.containsKey('initialized')) {
       context.handle(
@@ -150,12 +156,15 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       artist: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}artist']),
+      author: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}author']),
       description: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}description']),
       genre: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}genre']),
-      status: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}status'])!,
+      status: $DbMangasTable.$converterstatus.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}status'])!),
       updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
           attachedDatabase.typeMapping.read(
               DriftSqlType.int, data['${effectivePrefix}update_strategy'])!),
@@ -169,6 +178,8 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     return $DbMangasTable(attachedDatabase, alias);
   }
 
+  static JsonTypeConverter2<MangaStatus, int, int> $converterstatus =
+      const EnumIndexConverter<MangaStatus>(MangaStatus.values);
   static JsonTypeConverter2<UpdateStrategy, int, int> $converterupdateStrategy =
       const EnumIndexConverter<UpdateStrategy>(UpdateStrategy.values);
 }
@@ -178,9 +189,10 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final String url;
   final String title;
   final String? artist;
+  final String? author;
   final String? description;
   final String? genre;
-  final int status;
+  final MangaStatus status;
   final UpdateStrategy updateStrategy;
   final bool initialized;
   const DbManga(
@@ -188,6 +200,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       required this.url,
       required this.title,
       this.artist,
+      this.author,
       this.description,
       this.genre,
       required this.status,
@@ -202,13 +215,19 @@ class DbManga extends DataClass implements Insertable<DbManga> {
     if (!nullToAbsent || artist != null) {
       map['artist'] = Variable<String>(artist);
     }
+    if (!nullToAbsent || author != null) {
+      map['author'] = Variable<String>(author);
+    }
     if (!nullToAbsent || description != null) {
       map['description'] = Variable<String>(description);
     }
     if (!nullToAbsent || genre != null) {
       map['genre'] = Variable<String>(genre);
     }
-    map['status'] = Variable<int>(status);
+    {
+      final converter = $DbMangasTable.$converterstatus;
+      map['status'] = Variable<int>(converter.toSql(status));
+    }
     {
       final converter = $DbMangasTable.$converterupdateStrategy;
       map['update_strategy'] = Variable<int>(converter.toSql(updateStrategy));
@@ -224,6 +243,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       title: Value(title),
       artist:
           artist == null && nullToAbsent ? const Value.absent() : Value(artist),
+      author:
+          author == null && nullToAbsent ? const Value.absent() : Value(author),
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
@@ -243,9 +264,11 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       url: serializer.fromJson<String>(json['url']),
       title: serializer.fromJson<String>(json['title']),
       artist: serializer.fromJson<String?>(json['artist']),
+      author: serializer.fromJson<String?>(json['author']),
       description: serializer.fromJson<String?>(json['description']),
       genre: serializer.fromJson<String?>(json['genre']),
-      status: serializer.fromJson<int>(json['status']),
+      status: $DbMangasTable.$converterstatus
+          .fromJson(serializer.fromJson<int>(json['status'])),
       updateStrategy: $DbMangasTable.$converterupdateStrategy
           .fromJson(serializer.fromJson<int>(json['updateStrategy'])),
       initialized: serializer.fromJson<bool>(json['initialized']),
@@ -259,9 +282,11 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       'url': serializer.toJson<String>(url),
       'title': serializer.toJson<String>(title),
       'artist': serializer.toJson<String?>(artist),
+      'author': serializer.toJson<String?>(author),
       'description': serializer.toJson<String?>(description),
       'genre': serializer.toJson<String?>(genre),
-      'status': serializer.toJson<int>(status),
+      'status': serializer
+          .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
       'updateStrategy': serializer.toJson<int>(
           $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy)),
       'initialized': serializer.toJson<bool>(initialized),
@@ -273,9 +298,10 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           String? url,
           String? title,
           Value<String?> artist = const Value.absent(),
+          Value<String?> author = const Value.absent(),
           Value<String?> description = const Value.absent(),
           Value<String?> genre = const Value.absent(),
-          int? status,
+          MangaStatus? status,
           UpdateStrategy? updateStrategy,
           bool? initialized}) =>
       DbManga(
@@ -283,6 +309,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         url: url ?? this.url,
         title: title ?? this.title,
         artist: artist.present ? artist.value : this.artist,
+        author: author.present ? author.value : this.author,
         description: description.present ? description.value : this.description,
         genre: genre.present ? genre.value : this.genre,
         status: status ?? this.status,
@@ -296,6 +323,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           ..write('url: $url, ')
           ..write('title: $title, ')
           ..write('artist: $artist, ')
+          ..write('author: $author, ')
           ..write('description: $description, ')
           ..write('genre: $genre, ')
           ..write('status: $status, ')
@@ -306,8 +334,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   }
 
   @override
-  int get hashCode => Object.hash(id, url, title, artist, description, genre,
-      status, updateStrategy, initialized);
+  int get hashCode => Object.hash(id, url, title, artist, author, description,
+      genre, status, updateStrategy, initialized);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -316,6 +344,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           other.url == this.url &&
           other.title == this.title &&
           other.artist == this.artist &&
+          other.author == this.author &&
           other.description == this.description &&
           other.genre == this.genre &&
           other.status == this.status &&
@@ -328,9 +357,10 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<String> url;
   final Value<String> title;
   final Value<String?> artist;
+  final Value<String?> author;
   final Value<String?> description;
   final Value<String?> genre;
-  final Value<int> status;
+  final Value<MangaStatus> status;
   final Value<UpdateStrategy> updateStrategy;
   final Value<bool> initialized;
   const DbMangasCompanion({
@@ -338,6 +368,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.url = const Value.absent(),
     this.title = const Value.absent(),
     this.artist = const Value.absent(),
+    this.author = const Value.absent(),
     this.description = const Value.absent(),
     this.genre = const Value.absent(),
     this.status = const Value.absent(),
@@ -349,19 +380,22 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     required String url,
     required String title,
     this.artist = const Value.absent(),
+    this.author = const Value.absent(),
     this.description = const Value.absent(),
     this.genre = const Value.absent(),
-    this.status = const Value.absent(),
+    required MangaStatus status,
     required UpdateStrategy updateStrategy,
     this.initialized = const Value.absent(),
   })  : url = Value(url),
         title = Value(title),
+        status = Value(status),
         updateStrategy = Value(updateStrategy);
   static Insertable<DbManga> custom({
     Expression<int>? id,
     Expression<String>? url,
     Expression<String>? title,
     Expression<String>? artist,
+    Expression<String>? author,
     Expression<String>? description,
     Expression<String>? genre,
     Expression<int>? status,
@@ -373,6 +407,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       if (url != null) 'url': url,
       if (title != null) 'title': title,
       if (artist != null) 'artist': artist,
+      if (author != null) 'author': author,
       if (description != null) 'description': description,
       if (genre != null) 'genre': genre,
       if (status != null) 'status': status,
@@ -386,9 +421,10 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       Value<String>? url,
       Value<String>? title,
       Value<String?>? artist,
+      Value<String?>? author,
       Value<String?>? description,
       Value<String?>? genre,
-      Value<int>? status,
+      Value<MangaStatus>? status,
       Value<UpdateStrategy>? updateStrategy,
       Value<bool>? initialized}) {
     return DbMangasCompanion(
@@ -396,6 +432,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       url: url ?? this.url,
       title: title ?? this.title,
       artist: artist ?? this.artist,
+      author: author ?? this.author,
       description: description ?? this.description,
       genre: genre ?? this.genre,
       status: status ?? this.status,
@@ -419,6 +456,9 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     if (artist.present) {
       map['artist'] = Variable<String>(artist.value);
     }
+    if (author.present) {
+      map['author'] = Variable<String>(author.value);
+    }
     if (description.present) {
       map['description'] = Variable<String>(description.value);
     }
@@ -426,7 +466,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       map['genre'] = Variable<String>(genre.value);
     }
     if (status.present) {
-      map['status'] = Variable<int>(status.value);
+      final converter = $DbMangasTable.$converterstatus;
+      map['status'] = Variable<int>(converter.toSql(status.value));
     }
     if (updateStrategy.present) {
       final converter = $DbMangasTable.$converterupdateStrategy;
@@ -446,6 +487,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
           ..write('url: $url, ')
           ..write('title: $title, ')
           ..write('artist: $artist, ')
+          ..write('author: $author, ')
           ..write('description: $description, ')
           ..write('genre: $genre, ')
           ..write('status: $status, ')

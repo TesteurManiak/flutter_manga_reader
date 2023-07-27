@@ -13,9 +13,11 @@ class DbMangas extends Table {
   TextColumn get url => text()();
   TextColumn get title => text()();
   TextColumn get artist => text().nullable()();
+  TextColumn get author => text().nullable()();
   TextColumn get description => text().nullable()();
   TextColumn get genre => text().nullable()();
-  IntColumn get status => integer().withDefault(const Constant(0))();
+  IntColumn get status => intEnum<MangaStatus>()();
+  TextColumn get thumbnailUrl => text().nullable()();
   IntColumn get updateStrategy => intEnum<UpdateStrategy>()();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
 }
