@@ -25,6 +25,8 @@ abstract class MangaDatasource {
     // FilterList filterList,
   );
 
+  Future<Result<Manga, HttpError>> fetchMangaInfo(String mangaId);
+
   /// Fetch the details of a manga.
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga);
 }

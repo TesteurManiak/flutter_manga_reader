@@ -6,7 +6,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'search_controller.freezed.dart';
 part 'search_controller.g.dart';
 
-// TODO(Guillaume): refacto into a PopularMangasController
 @riverpod
 class SearchController extends _$SearchController with Loadable {
   @override

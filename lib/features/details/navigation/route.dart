@@ -11,6 +11,6 @@ class DetailsRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const DetailsView();
+    return DetailsView(mangaId: mangaId);
   }
 }

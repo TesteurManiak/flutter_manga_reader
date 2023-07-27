@@ -246,6 +246,7 @@ class MangadexDatasource extends MangaDatasource {
     throw UnimplementedError();
   }
 
+  /// Fetch the chapters for a manga.
   @override
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
     if (!_helper.containsUuid(manga.url.trim())) {
@@ -312,6 +313,33 @@ class MangadexDatasource extends MangaDatasource {
   Future<String?> _fetchFirstVolumeCover(MangaData mangaData) async {
     return _fetchFirstVolumeCovers([mangaData])
         .then((value) => value?[mangaData.id]);
+  }
+
+  @override
+  Future<Result<Manga, HttpError>> fetchMangaInfo(String mangaId) async {
+    final result = await _client.send(
+      method: HttpMethod.get,
+      pathSegments: [
+        MDConstants.manga,
+        mangaId,
+      ],
+    ).decode(MangaResponse.fromJson);
+
+    return result.when(
+      success: (response) async {
+        final mangaData = response.data;
+        final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
+
+        return Result.success(
+          _helper.createBasicManga(
+            mangaData: response.data,
+            coverFileName: firstVolumeCover,
+            lang: _dexLang,
+          ),
+        );
+      },
+      failure: Result.failure,
+    );
   }
 }
 

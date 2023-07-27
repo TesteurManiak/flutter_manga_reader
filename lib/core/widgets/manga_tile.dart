@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
+import 'package:flutter_manga_reader/features/details/navigation/route.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class MangaTile extends StatefulWidget {
@@ -20,7 +22,7 @@ class _MangaTileState extends State<MangaTile>
 
     return GestureDetector(
       onTap: () {
-        // TODO(Guillaume): go to details
+        DetailsRoute(mangaId: widget.manga.id).push<void>(context);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
