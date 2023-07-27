@@ -65,6 +65,7 @@ class MangadexHelper {
     final title = (dirtyTitle?.trim() ?? '').removeEntitiesAndMarkdown();
 
     return Manga(
+      id: mangaData.id,
       url: '/manga/${mangaData.id}',
       title: title,
       thumbnailUrl: coverFileName != null

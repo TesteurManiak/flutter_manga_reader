@@ -5,6 +5,8 @@ part 'manga.freezed.dart';
 @freezed
 class Manga with _$Manga {
   const factory Manga({
+    required String id,
+    @Default(false) bool favorite,
     required String url,
     required String title,
     String? artist,
@@ -32,6 +34,7 @@ class Manga with _$Manga {
 
   Manga copyFrom(Manga other) {
     return Manga(
+      id: id,
       url: url,
       title: title,
       author: author ?? other.author,

@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Manga {
+  String get id => throw _privateConstructorUsedError;
+  bool get favorite => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
@@ -37,7 +39,9 @@ abstract class $MangaCopyWith<$Res> {
       _$MangaCopyWithImpl<$Res, Manga>;
   @useResult
   $Res call(
-      {String url,
+      {String id,
+      bool favorite,
+      String url,
       String title,
       String? artist,
       String? author,
@@ -62,6 +66,8 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? favorite = null,
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
@@ -74,6 +80,14 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? initialized = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -125,7 +139,9 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String url,
+      {String id,
+      bool favorite,
+      String url,
       String title,
       String? artist,
       String? author,
@@ -146,6 +162,8 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
+    Object? favorite = null,
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
@@ -158,6 +176,14 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     Object? initialized = null,
   }) {
     return _then(_$_Manga(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -206,7 +232,9 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
 
 class _$_Manga extends _Manga {
   const _$_Manga(
-      {required this.url,
+      {required this.id,
+      this.favorite = false,
+      required this.url,
       required this.title,
       this.artist,
       this.author,
@@ -218,6 +246,11 @@ class _$_Manga extends _Manga {
       this.initialized = false})
       : super._();
 
+  @override
+  final String id;
+  @override
+  @JsonKey()
+  final bool favorite;
   @override
   final String url;
   @override
@@ -244,7 +277,7 @@ class _$_Manga extends _Manga {
 
   @override
   String toString() {
-    return 'Manga(url: $url, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
+    return 'Manga(id: $id, favorite: $favorite, url: $url, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
   }
 
   @override
@@ -252,6 +285,9 @@ class _$_Manga extends _Manga {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Manga &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.favorite, favorite) ||
+                other.favorite == favorite) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.artist, artist) || other.artist == artist) &&
@@ -269,8 +305,20 @@ class _$_Manga extends _Manga {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url, title, artist, author,
-      description, genre, status, thumbnailUrl, updateStrategy, initialized);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      favorite,
+      url,
+      title,
+      artist,
+      author,
+      description,
+      genre,
+      status,
+      thumbnailUrl,
+      updateStrategy,
+      initialized);
 
   @JsonKey(ignore: true)
   @override
@@ -281,7 +329,9 @@ class _$_Manga extends _Manga {
 
 abstract class _Manga extends Manga {
   const factory _Manga(
-      {required final String url,
+      {required final String id,
+      final bool favorite,
+      required final String url,
       required final String title,
       final String? artist,
       final String? author,
@@ -293,6 +343,10 @@ abstract class _Manga extends Manga {
       final bool initialized}) = _$_Manga;
   const _Manga._() : super._();
 
+  @override
+  String get id;
+  @override
+  bool get favorite;
   @override
   String get url;
   @override
