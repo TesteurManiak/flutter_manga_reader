@@ -25,8 +25,14 @@ mixin _$Relationship {
             String id, String type, MangaAttributes? attributes)
         manga,
     required TResult Function(
-            String id, String type, AuthorAttributes? attributes)
+            String id, String type, AuthorArtistAttributes? attributes)
         author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
     required TResult Function(
             String id, String type, Map<String, dynamic>? attributes)
         other,
@@ -36,8 +42,14 @@ mixin _$Relationship {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult? Function(String id, String type, AuthorAttributes? attributes)?
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
   }) =>
@@ -46,8 +58,14 @@ mixin _$Relationship {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult Function(String id, String type, AuthorAttributes? attributes)?
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
     required TResult orElse(),
@@ -57,6 +75,8 @@ mixin _$Relationship {
   TResult map<TResult extends Object?>({
     required TResult Function(MangaRelationship value) manga,
     required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
     required TResult Function(OtherRelationship value) other,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +84,8 @@ mixin _$Relationship {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MangaRelationship value)? manga,
     TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
     TResult? Function(OtherRelationship value)? other,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +93,8 @@ mixin _$Relationship {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MangaRelationship value)? manga,
     TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
     TResult Function(OtherRelationship value)? other,
     required TResult orElse(),
   }) =>
@@ -221,8 +245,14 @@ class _$MangaRelationship implements MangaRelationship {
             String id, String type, MangaAttributes? attributes)
         manga,
     required TResult Function(
-            String id, String type, AuthorAttributes? attributes)
+            String id, String type, AuthorArtistAttributes? attributes)
         author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
     required TResult Function(
             String id, String type, Map<String, dynamic>? attributes)
         other,
@@ -235,8 +265,14 @@ class _$MangaRelationship implements MangaRelationship {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult? Function(String id, String type, AuthorAttributes? attributes)?
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
   }) {
@@ -248,8 +284,14 @@ class _$MangaRelationship implements MangaRelationship {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult Function(String id, String type, AuthorAttributes? attributes)?
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
     required TResult orElse(),
@@ -265,6 +307,8 @@ class _$MangaRelationship implements MangaRelationship {
   TResult map<TResult extends Object?>({
     required TResult Function(MangaRelationship value) manga,
     required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
     required TResult Function(OtherRelationship value) other,
   }) {
     return manga(this);
@@ -275,6 +319,8 @@ class _$MangaRelationship implements MangaRelationship {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MangaRelationship value)? manga,
     TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
     TResult? Function(OtherRelationship value)? other,
   }) {
     return manga?.call(this);
@@ -285,6 +331,8 @@ class _$MangaRelationship implements MangaRelationship {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MangaRelationship value)? manga,
     TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
     TResult Function(OtherRelationship value)? other,
     required TResult orElse(),
   }) {
@@ -321,9 +369,9 @@ abstract class _$$AuthorRelationshipCopyWith<$Res>
       __$$AuthorRelationshipCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String type, AuthorAttributes? attributes});
+  $Res call({String id, String type, AuthorArtistAttributes? attributes});
 
-  $AuthorAttributesCopyWith<$Res>? get attributes;
+  $AuthorArtistAttributesCopyWith<$Res>? get attributes;
 }
 
 /// @nodoc
@@ -353,18 +401,18 @@ class __$$AuthorRelationshipCopyWithImpl<$Res>
       attributes: freezed == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
-              as AuthorAttributes?,
+              as AuthorArtistAttributes?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AuthorAttributesCopyWith<$Res>? get attributes {
+  $AuthorArtistAttributesCopyWith<$Res>? get attributes {
     if (_value.attributes == null) {
       return null;
     }
 
-    return $AuthorAttributesCopyWith<$Res>(_value.attributes!, (value) {
+    return $AuthorArtistAttributesCopyWith<$Res>(_value.attributes!, (value) {
       return _then(_value.copyWith(attributes: value));
     });
   }
@@ -381,7 +429,7 @@ class _$AuthorRelationship implements AuthorRelationship {
   @override
   final String type;
   @override
-  final AuthorAttributes? attributes;
+  final AuthorArtistAttributes? attributes;
 
   @override
   String toString() {
@@ -416,8 +464,14 @@ class _$AuthorRelationship implements AuthorRelationship {
             String id, String type, MangaAttributes? attributes)
         manga,
     required TResult Function(
-            String id, String type, AuthorAttributes? attributes)
+            String id, String type, AuthorArtistAttributes? attributes)
         author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
     required TResult Function(
             String id, String type, Map<String, dynamic>? attributes)
         other,
@@ -430,8 +484,14 @@ class _$AuthorRelationship implements AuthorRelationship {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult? Function(String id, String type, AuthorAttributes? attributes)?
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
   }) {
@@ -443,8 +503,14 @@ class _$AuthorRelationship implements AuthorRelationship {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult Function(String id, String type, AuthorAttributes? attributes)?
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
     required TResult orElse(),
@@ -460,6 +526,8 @@ class _$AuthorRelationship implements AuthorRelationship {
   TResult map<TResult extends Object?>({
     required TResult Function(MangaRelationship value) manga,
     required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
     required TResult Function(OtherRelationship value) other,
   }) {
     return author(this);
@@ -470,6 +538,8 @@ class _$AuthorRelationship implements AuthorRelationship {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MangaRelationship value)? manga,
     TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
     TResult? Function(OtherRelationship value)? other,
   }) {
     return author?.call(this);
@@ -480,6 +550,8 @@ class _$AuthorRelationship implements AuthorRelationship {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MangaRelationship value)? manga,
     TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
     TResult Function(OtherRelationship value)? other,
     required TResult orElse(),
   }) {
@@ -494,17 +566,455 @@ abstract class AuthorRelationship implements Relationship {
   const factory AuthorRelationship(
       {required final String id,
       required final String type,
-      final AuthorAttributes? attributes}) = _$AuthorRelationship;
+      final AuthorArtistAttributes? attributes}) = _$AuthorRelationship;
 
   @override
   String get id;
   @override
   String get type;
   @override
-  AuthorAttributes? get attributes;
+  AuthorArtistAttributes? get attributes;
   @override
   @JsonKey(ignore: true)
   _$$AuthorRelationshipCopyWith<_$AuthorRelationship> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ArtistRelationshipCopyWith<$Res>
+    implements $RelationshipCopyWith<$Res> {
+  factory _$$ArtistRelationshipCopyWith(_$ArtistRelationship value,
+          $Res Function(_$ArtistRelationship) then) =
+      __$$ArtistRelationshipCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String type, AuthorArtistAttributes? attributes});
+
+  $AuthorArtistAttributesCopyWith<$Res>? get attributes;
+}
+
+/// @nodoc
+class __$$ArtistRelationshipCopyWithImpl<$Res>
+    extends _$RelationshipCopyWithImpl<$Res, _$ArtistRelationship>
+    implements _$$ArtistRelationshipCopyWith<$Res> {
+  __$$ArtistRelationshipCopyWithImpl(
+      _$ArtistRelationship _value, $Res Function(_$ArtistRelationship) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+    Object? attributes = freezed,
+  }) {
+    return _then(_$ArtistRelationship(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as AuthorArtistAttributes?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthorArtistAttributesCopyWith<$Res>? get attributes {
+    if (_value.attributes == null) {
+      return null;
+    }
+
+    return $AuthorArtistAttributesCopyWith<$Res>(_value.attributes!, (value) {
+      return _then(_value.copyWith(attributes: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ArtistRelationship implements ArtistRelationship {
+  const _$ArtistRelationship(
+      {required this.id, required this.type, this.attributes});
+
+  @override
+  final String id;
+  @override
+  final String type;
+  @override
+  final AuthorArtistAttributes? attributes;
+
+  @override
+  String toString() {
+    return 'Relationship.artist(id: $id, type: $type, attributes: $attributes)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ArtistRelationship &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.attributes, attributes) ||
+                other.attributes == attributes));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, type, attributes);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ArtistRelationshipCopyWith<_$ArtistRelationship> get copyWith =>
+      __$$ArtistRelationshipCopyWithImpl<_$ArtistRelationship>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id, String type, MangaAttributes? attributes)
+        manga,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
+    required TResult Function(
+            String id, String type, Map<String, dynamic>? attributes)
+        other,
+  }) {
+    return artist(id, type, attributes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, String type, MangaAttributes? attributes)?
+        manga,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
+    TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
+        other,
+  }) {
+    return artist?.call(id, type, attributes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, String type, MangaAttributes? attributes)?
+        manga,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
+    TResult Function(String id, String type, Map<String, dynamic>? attributes)?
+        other,
+    required TResult orElse(),
+  }) {
+    if (artist != null) {
+      return artist(id, type, attributes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MangaRelationship value) manga,
+    required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
+    required TResult Function(OtherRelationship value) other,
+  }) {
+    return artist(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MangaRelationship value)? manga,
+    TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
+    TResult? Function(OtherRelationship value)? other,
+  }) {
+    return artist?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MangaRelationship value)? manga,
+    TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
+    TResult Function(OtherRelationship value)? other,
+    required TResult orElse(),
+  }) {
+    if (artist != null) {
+      return artist(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ArtistRelationship implements Relationship {
+  const factory ArtistRelationship(
+      {required final String id,
+      required final String type,
+      final AuthorArtistAttributes? attributes}) = _$ArtistRelationship;
+
+  @override
+  String get id;
+  @override
+  String get type;
+  @override
+  AuthorArtistAttributes? get attributes;
+  @override
+  @JsonKey(ignore: true)
+  _$$ArtistRelationshipCopyWith<_$ArtistRelationship> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CoverArtRelationshipCopyWith<$Res>
+    implements $RelationshipCopyWith<$Res> {
+  factory _$$CoverArtRelationshipCopyWith(_$CoverArtRelationship value,
+          $Res Function(_$CoverArtRelationship) then) =
+      __$$CoverArtRelationshipCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String type, CoverArtAttributes? attributes});
+
+  $CoverArtAttributesCopyWith<$Res>? get attributes;
+}
+
+/// @nodoc
+class __$$CoverArtRelationshipCopyWithImpl<$Res>
+    extends _$RelationshipCopyWithImpl<$Res, _$CoverArtRelationship>
+    implements _$$CoverArtRelationshipCopyWith<$Res> {
+  __$$CoverArtRelationshipCopyWithImpl(_$CoverArtRelationship _value,
+      $Res Function(_$CoverArtRelationship) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+    Object? attributes = freezed,
+  }) {
+    return _then(_$CoverArtRelationship(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+      attributes: freezed == attributes
+          ? _value.attributes
+          : attributes // ignore: cast_nullable_to_non_nullable
+              as CoverArtAttributes?,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CoverArtAttributesCopyWith<$Res>? get attributes {
+    if (_value.attributes == null) {
+      return null;
+    }
+
+    return $CoverArtAttributesCopyWith<$Res>(_value.attributes!, (value) {
+      return _then(_value.copyWith(attributes: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$CoverArtRelationship implements CoverArtRelationship {
+  const _$CoverArtRelationship(
+      {required this.id, required this.type, this.attributes});
+
+  @override
+  final String id;
+  @override
+  final String type;
+  @override
+  final CoverArtAttributes? attributes;
+
+  @override
+  String toString() {
+    return 'Relationship.coverArt(id: $id, type: $type, attributes: $attributes)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CoverArtRelationship &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.attributes, attributes) ||
+                other.attributes == attributes));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, type, attributes);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CoverArtRelationshipCopyWith<_$CoverArtRelationship> get copyWith =>
+      __$$CoverArtRelationshipCopyWithImpl<_$CoverArtRelationship>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String id, String type, MangaAttributes? attributes)
+        manga,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
+    required TResult Function(
+            String id, String type, Map<String, dynamic>? attributes)
+        other,
+  }) {
+    return coverArt(id, type, attributes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String id, String type, MangaAttributes? attributes)?
+        manga,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
+    TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
+        other,
+  }) {
+    return coverArt?.call(id, type, attributes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, String type, MangaAttributes? attributes)?
+        manga,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
+    TResult Function(String id, String type, Map<String, dynamic>? attributes)?
+        other,
+    required TResult orElse(),
+  }) {
+    if (coverArt != null) {
+      return coverArt(id, type, attributes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MangaRelationship value) manga,
+    required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
+    required TResult Function(OtherRelationship value) other,
+  }) {
+    return coverArt(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MangaRelationship value)? manga,
+    TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
+    TResult? Function(OtherRelationship value)? other,
+  }) {
+    return coverArt?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MangaRelationship value)? manga,
+    TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
+    TResult Function(OtherRelationship value)? other,
+    required TResult orElse(),
+  }) {
+    if (coverArt != null) {
+      return coverArt(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CoverArtRelationship implements Relationship {
+  const factory CoverArtRelationship(
+      {required final String id,
+      required final String type,
+      final CoverArtAttributes? attributes}) = _$CoverArtRelationship;
+
+  @override
+  String get id;
+  @override
+  String get type;
+  @override
+  CoverArtAttributes? get attributes;
+  @override
+  @JsonKey(ignore: true)
+  _$$CoverArtRelationshipCopyWith<_$CoverArtRelationship> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -607,8 +1117,14 @@ class _$OtherRelationship implements OtherRelationship {
             String id, String type, MangaAttributes? attributes)
         manga,
     required TResult Function(
-            String id, String type, AuthorAttributes? attributes)
+            String id, String type, AuthorArtistAttributes? attributes)
         author,
+    required TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)
+        artist,
+    required TResult Function(
+            String id, String type, CoverArtAttributes? attributes)
+        coverArt,
     required TResult Function(
             String id, String type, Map<String, dynamic>? attributes)
         other,
@@ -621,8 +1137,14 @@ class _$OtherRelationship implements OtherRelationship {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult? Function(String id, String type, AuthorAttributes? attributes)?
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult? Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult? Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult? Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
   }) {
@@ -634,8 +1156,14 @@ class _$OtherRelationship implements OtherRelationship {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String type, MangaAttributes? attributes)?
         manga,
-    TResult Function(String id, String type, AuthorAttributes? attributes)?
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
         author,
+    TResult Function(
+            String id, String type, AuthorArtistAttributes? attributes)?
+        artist,
+    TResult Function(String id, String type, CoverArtAttributes? attributes)?
+        coverArt,
     TResult Function(String id, String type, Map<String, dynamic>? attributes)?
         other,
     required TResult orElse(),
@@ -651,6 +1179,8 @@ class _$OtherRelationship implements OtherRelationship {
   TResult map<TResult extends Object?>({
     required TResult Function(MangaRelationship value) manga,
     required TResult Function(AuthorRelationship value) author,
+    required TResult Function(ArtistRelationship value) artist,
+    required TResult Function(CoverArtRelationship value) coverArt,
     required TResult Function(OtherRelationship value) other,
   }) {
     return other(this);
@@ -661,6 +1191,8 @@ class _$OtherRelationship implements OtherRelationship {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(MangaRelationship value)? manga,
     TResult? Function(AuthorRelationship value)? author,
+    TResult? Function(ArtistRelationship value)? artist,
+    TResult? Function(CoverArtRelationship value)? coverArt,
     TResult? Function(OtherRelationship value)? other,
   }) {
     return other?.call(this);
@@ -671,6 +1203,8 @@ class _$OtherRelationship implements OtherRelationship {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(MangaRelationship value)? manga,
     TResult Function(AuthorRelationship value)? author,
+    TResult Function(ArtistRelationship value)? artist,
+    TResult Function(CoverArtRelationship value)? coverArt,
     TResult Function(OtherRelationship value)? other,
     required TResult orElse(),
   }) {

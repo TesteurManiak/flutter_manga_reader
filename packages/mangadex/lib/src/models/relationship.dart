@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mangadex/src/models/author.dart';
+import 'package:mangadex/src/models/author_artist.dart';
+import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/manga.dart';
 
 part 'relationship.freezed.dart';
@@ -15,8 +16,18 @@ class Relationship with _$Relationship {
   const factory Relationship.author({
     required String id,
     required String type,
-    AuthorAttributes? attributes,
+    AuthorArtistAttributes? attributes,
   }) = AuthorRelationship;
+  const factory Relationship.artist({
+    required String id,
+    required String type,
+    AuthorArtistAttributes? attributes,
+  }) = ArtistRelationship;
+  const factory Relationship.coverArt({
+    required String id,
+    required String type,
+    CoverArtAttributes? attributes,
+  }) = CoverArtRelationship;
   const factory Relationship.other({
     required String id,
     required String type,
@@ -40,16 +51,26 @@ class RelationshipConverter
           attributes:
               attributes != null ? MangaAttributes.fromJson(attributes) : null,
         ),
-      'cover_art' => Relationship.other(
+      'cover_art' => Relationship.coverArt(
           id: rawRelationship.id,
           type: rawRelationship.type,
-          attributes: rawRelationship.attributes,
+          attributes: attributes != null
+              ? CoverArtAttributes.fromJson(attributes)
+              : null,
         ),
       'author' => Relationship.author(
           id: rawRelationship.id,
           type: rawRelationship.type,
-          attributes:
-              attributes != null ? AuthorAttributes.fromJson(attributes) : null,
+          attributes: attributes != null
+              ? AuthorArtistAttributes.fromJson(attributes)
+              : null,
+        ),
+      'artist' => Relationship.artist(
+          id: rawRelationship.id,
+          type: rawRelationship.type,
+          attributes: attributes != null
+              ? AuthorArtistAttributes.fromJson(attributes)
+              : null,
         ),
       _ => Relationship.other(
           id: rawRelationship.id,
@@ -67,6 +88,8 @@ class RelationshipConverter
       attributes: object.map(
         manga: (rel) => rel.attributes?.toJson(),
         author: (rel) => rel.attributes?.toJson(),
+        artist: (rel) => rel.attributes?.toJson(),
+        coverArt: (rel) => rel.attributes?.toJson(),
         other: (rel) => rel.attributes,
       ),
     ).toJson();

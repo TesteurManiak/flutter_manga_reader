@@ -88,16 +88,36 @@ class MangadexHelper {
     final publicationDemographic = attr.publicationDemographic;
     final contentRating = attr.contentRating;
     final originalLanguage = attr.originalLanguage;
+
     final nonGenres = [
       if (publicationDemographic != null) publicationDemographic.name,
       if (contentRating != null && contentRating != ContentRating.safe)
         contentRating.name,
       if (originalLanguage != null) originalLanguage,
     ];
+
     final authors = mangaData.relationships
         .whereType<AuthorRelationship>()
         .map((author) => author.attributes?.name)
         .whereType<String>()
         .toSet();
+
+    final artists = mangaData.relationships
+        .whereType<ArtistRelationship>()
+        .map((artist) => artist.attributes?.name)
+        .whereType<String>()
+        .toSet();
+
+    final coverFileName = firstVolumeCover ??
+        mangaData.relationships
+            .whereType<CoverArtRelationship>()
+            .firstOrNull
+            ?.attributes
+            ?.fileName;
+
+    return createBasicManga(mangaData: mangaData, lang: lang).copyWith(
+      author: authors.join(', '),
+      artist: artists.join(', '),
+    );
   }
 }

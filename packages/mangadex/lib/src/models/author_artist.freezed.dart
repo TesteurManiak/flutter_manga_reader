@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'author.dart';
+part of 'author_artist.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,33 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AuthorAttributes _$AuthorAttributesFromJson(Map<String, dynamic> json) {
-  return _AuthorAttributes.fromJson(json);
+AuthorArtistAttributes _$AuthorArtistAttributesFromJson(
+    Map<String, dynamic> json) {
+  return _AuthorArtistAttributes.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AuthorAttributes {
+mixin _$AuthorArtistAttributes {
   String get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AuthorAttributesCopyWith<AuthorAttributes> get copyWith =>
+  $AuthorArtistAttributesCopyWith<AuthorArtistAttributes> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthorAttributesCopyWith<$Res> {
-  factory $AuthorAttributesCopyWith(
-          AuthorAttributes value, $Res Function(AuthorAttributes) then) =
-      _$AuthorAttributesCopyWithImpl<$Res, AuthorAttributes>;
+abstract class $AuthorArtistAttributesCopyWith<$Res> {
+  factory $AuthorArtistAttributesCopyWith(AuthorArtistAttributes value,
+          $Res Function(AuthorArtistAttributes) then) =
+      _$AuthorArtistAttributesCopyWithImpl<$Res, AuthorArtistAttributes>;
   @useResult
   $Res call({String name});
 }
 
 /// @nodoc
-class _$AuthorAttributesCopyWithImpl<$Res, $Val extends AuthorAttributes>
-    implements $AuthorAttributesCopyWith<$Res> {
-  _$AuthorAttributesCopyWithImpl(this._value, this._then);
+class _$AuthorArtistAttributesCopyWithImpl<$Res,
+        $Val extends AuthorArtistAttributes>
+    implements $AuthorArtistAttributesCopyWith<$Res> {
+  _$AuthorArtistAttributesCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -62,22 +64,23 @@ class _$AuthorAttributesCopyWithImpl<$Res, $Val extends AuthorAttributes>
 }
 
 /// @nodoc
-abstract class _$$_AuthorAttributesCopyWith<$Res>
-    implements $AuthorAttributesCopyWith<$Res> {
-  factory _$$_AuthorAttributesCopyWith(
-          _$_AuthorAttributes value, $Res Function(_$_AuthorAttributes) then) =
-      __$$_AuthorAttributesCopyWithImpl<$Res>;
+abstract class _$$_AuthorArtistAttributesCopyWith<$Res>
+    implements $AuthorArtistAttributesCopyWith<$Res> {
+  factory _$$_AuthorArtistAttributesCopyWith(_$_AuthorArtistAttributes value,
+          $Res Function(_$_AuthorArtistAttributes) then) =
+      __$$_AuthorArtistAttributesCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name});
 }
 
 /// @nodoc
-class __$$_AuthorAttributesCopyWithImpl<$Res>
-    extends _$AuthorAttributesCopyWithImpl<$Res, _$_AuthorAttributes>
-    implements _$$_AuthorAttributesCopyWith<$Res> {
-  __$$_AuthorAttributesCopyWithImpl(
-      _$_AuthorAttributes _value, $Res Function(_$_AuthorAttributes) _then)
+class __$$_AuthorArtistAttributesCopyWithImpl<$Res>
+    extends _$AuthorArtistAttributesCopyWithImpl<$Res,
+        _$_AuthorArtistAttributes>
+    implements _$$_AuthorArtistAttributesCopyWith<$Res> {
+  __$$_AuthorArtistAttributesCopyWithImpl(_$_AuthorArtistAttributes _value,
+      $Res Function(_$_AuthorArtistAttributes) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +88,7 @@ class __$$_AuthorAttributesCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
   }) {
-    return _then(_$_AuthorAttributes(
+    return _then(_$_AuthorArtistAttributes(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -96,25 +99,25 @@ class __$$_AuthorAttributesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AuthorAttributes implements _AuthorAttributes {
-  const _$_AuthorAttributes({required this.name});
+class _$_AuthorArtistAttributes implements _AuthorArtistAttributes {
+  const _$_AuthorArtistAttributes({required this.name});
 
-  factory _$_AuthorAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_AuthorAttributesFromJson(json);
+  factory _$_AuthorArtistAttributes.fromJson(Map<String, dynamic> json) =>
+      _$$_AuthorArtistAttributesFromJson(json);
 
   @override
   final String name;
 
   @override
   String toString() {
-    return 'AuthorAttributes(name: $name)';
+    return 'AuthorArtistAttributes(name: $name)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthorAttributes &&
+            other is _$_AuthorArtistAttributes &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -125,28 +128,29 @@ class _$_AuthorAttributes implements _AuthorAttributes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthorAttributesCopyWith<_$_AuthorAttributes> get copyWith =>
-      __$$_AuthorAttributesCopyWithImpl<_$_AuthorAttributes>(this, _$identity);
+  _$$_AuthorArtistAttributesCopyWith<_$_AuthorArtistAttributes> get copyWith =>
+      __$$_AuthorArtistAttributesCopyWithImpl<_$_AuthorArtistAttributes>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AuthorAttributesToJson(
+    return _$$_AuthorArtistAttributesToJson(
       this,
     );
   }
 }
 
-abstract class _AuthorAttributes implements AuthorAttributes {
-  const factory _AuthorAttributes({required final String name}) =
-      _$_AuthorAttributes;
+abstract class _AuthorArtistAttributes implements AuthorArtistAttributes {
+  const factory _AuthorArtistAttributes({required final String name}) =
+      _$_AuthorArtistAttributes;
 
-  factory _AuthorAttributes.fromJson(Map<String, dynamic> json) =
-      _$_AuthorAttributes.fromJson;
+  factory _AuthorArtistAttributes.fromJson(Map<String, dynamic> json) =
+      _$_AuthorArtistAttributes.fromJson;
 
   @override
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_AuthorAttributesCopyWith<_$_AuthorAttributes> get copyWith =>
+  _$$_AuthorArtistAttributesCopyWith<_$_AuthorArtistAttributes> get copyWith =>
       throw _privateConstructorUsedError;
 }
