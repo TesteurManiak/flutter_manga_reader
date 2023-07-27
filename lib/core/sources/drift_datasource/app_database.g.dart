@@ -54,6 +54,12 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       GeneratedColumn<int>('status', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: true)
           .withConverter<MangaStatus>($DbMangasTable.$converterstatus);
+  static const VerificationMeta _thumbnailUrlMeta =
+      const VerificationMeta('thumbnailUrl');
+  @override
+  late final GeneratedColumn<String> thumbnailUrl = GeneratedColumn<String>(
+      'thumbnail_url', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _updateStrategyMeta =
       const VerificationMeta('updateStrategy');
   @override
@@ -86,6 +92,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
         description,
         genre,
         status,
+        thumbnailUrl,
         updateStrategy,
         initialized
       ];
@@ -132,6 +139,12 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           _genreMeta, genre.isAcceptableOrUnknown(data['genre']!, _genreMeta));
     }
     context.handle(_statusMeta, const VerificationResult.success());
+    if (data.containsKey('thumbnail_url')) {
+      context.handle(
+          _thumbnailUrlMeta,
+          thumbnailUrl.isAcceptableOrUnknown(
+              data['thumbnail_url']!, _thumbnailUrlMeta));
+    }
     context.handle(_updateStrategyMeta, const VerificationResult.success());
     if (data.containsKey('initialized')) {
       context.handle(
@@ -165,6 +178,8 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       status: $DbMangasTable.$converterstatus.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}status'])!),
+      thumbnailUrl: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}thumbnail_url']),
       updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
           attachedDatabase.typeMapping.read(
               DriftSqlType.int, data['${effectivePrefix}update_strategy'])!),
@@ -193,6 +208,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final String? description;
   final String? genre;
   final MangaStatus status;
+  final String? thumbnailUrl;
   final UpdateStrategy updateStrategy;
   final bool initialized;
   const DbManga(
@@ -204,6 +220,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       this.description,
       this.genre,
       required this.status,
+      this.thumbnailUrl,
       required this.updateStrategy,
       required this.initialized});
   @override
@@ -228,6 +245,9 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       final converter = $DbMangasTable.$converterstatus;
       map['status'] = Variable<int>(converter.toSql(status));
     }
+    if (!nullToAbsent || thumbnailUrl != null) {
+      map['thumbnail_url'] = Variable<String>(thumbnailUrl);
+    }
     {
       final converter = $DbMangasTable.$converterupdateStrategy;
       map['update_strategy'] = Variable<int>(converter.toSql(updateStrategy));
@@ -251,6 +271,9 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       genre:
           genre == null && nullToAbsent ? const Value.absent() : Value(genre),
       status: Value(status),
+      thumbnailUrl: thumbnailUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(thumbnailUrl),
       updateStrategy: Value(updateStrategy),
       initialized: Value(initialized),
     );
@@ -269,6 +292,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       genre: serializer.fromJson<String?>(json['genre']),
       status: $DbMangasTable.$converterstatus
           .fromJson(serializer.fromJson<int>(json['status'])),
+      thumbnailUrl: serializer.fromJson<String?>(json['thumbnailUrl']),
       updateStrategy: $DbMangasTable.$converterupdateStrategy
           .fromJson(serializer.fromJson<int>(json['updateStrategy'])),
       initialized: serializer.fromJson<bool>(json['initialized']),
@@ -287,6 +311,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       'genre': serializer.toJson<String?>(genre),
       'status': serializer
           .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
+      'thumbnailUrl': serializer.toJson<String?>(thumbnailUrl),
       'updateStrategy': serializer.toJson<int>(
           $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy)),
       'initialized': serializer.toJson<bool>(initialized),
@@ -302,6 +327,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           Value<String?> description = const Value.absent(),
           Value<String?> genre = const Value.absent(),
           MangaStatus? status,
+          Value<String?> thumbnailUrl = const Value.absent(),
           UpdateStrategy? updateStrategy,
           bool? initialized}) =>
       DbManga(
@@ -313,6 +339,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         description: description.present ? description.value : this.description,
         genre: genre.present ? genre.value : this.genre,
         status: status ?? this.status,
+        thumbnailUrl:
+            thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
         updateStrategy: updateStrategy ?? this.updateStrategy,
         initialized: initialized ?? this.initialized,
       );
@@ -327,6 +355,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           ..write('description: $description, ')
           ..write('genre: $genre, ')
           ..write('status: $status, ')
+          ..write('thumbnailUrl: $thumbnailUrl, ')
           ..write('updateStrategy: $updateStrategy, ')
           ..write('initialized: $initialized')
           ..write(')'))
@@ -335,7 +364,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
 
   @override
   int get hashCode => Object.hash(id, url, title, artist, author, description,
-      genre, status, updateStrategy, initialized);
+      genre, status, thumbnailUrl, updateStrategy, initialized);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -348,6 +377,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           other.description == this.description &&
           other.genre == this.genre &&
           other.status == this.status &&
+          other.thumbnailUrl == this.thumbnailUrl &&
           other.updateStrategy == this.updateStrategy &&
           other.initialized == this.initialized);
 }
@@ -361,6 +391,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<String?> description;
   final Value<String?> genre;
   final Value<MangaStatus> status;
+  final Value<String?> thumbnailUrl;
   final Value<UpdateStrategy> updateStrategy;
   final Value<bool> initialized;
   const DbMangasCompanion({
@@ -372,6 +403,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.description = const Value.absent(),
     this.genre = const Value.absent(),
     this.status = const Value.absent(),
+    this.thumbnailUrl = const Value.absent(),
     this.updateStrategy = const Value.absent(),
     this.initialized = const Value.absent(),
   });
@@ -384,6 +416,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.description = const Value.absent(),
     this.genre = const Value.absent(),
     required MangaStatus status,
+    this.thumbnailUrl = const Value.absent(),
     required UpdateStrategy updateStrategy,
     this.initialized = const Value.absent(),
   })  : url = Value(url),
@@ -399,6 +432,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     Expression<String>? description,
     Expression<String>? genre,
     Expression<int>? status,
+    Expression<String>? thumbnailUrl,
     Expression<int>? updateStrategy,
     Expression<bool>? initialized,
   }) {
@@ -411,6 +445,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       if (description != null) 'description': description,
       if (genre != null) 'genre': genre,
       if (status != null) 'status': status,
+      if (thumbnailUrl != null) 'thumbnail_url': thumbnailUrl,
       if (updateStrategy != null) 'update_strategy': updateStrategy,
       if (initialized != null) 'initialized': initialized,
     });
@@ -425,6 +460,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       Value<String?>? description,
       Value<String?>? genre,
       Value<MangaStatus>? status,
+      Value<String?>? thumbnailUrl,
       Value<UpdateStrategy>? updateStrategy,
       Value<bool>? initialized}) {
     return DbMangasCompanion(
@@ -436,6 +472,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       description: description ?? this.description,
       genre: genre ?? this.genre,
       status: status ?? this.status,
+      thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
       updateStrategy: updateStrategy ?? this.updateStrategy,
       initialized: initialized ?? this.initialized,
     );
@@ -469,6 +506,9 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       final converter = $DbMangasTable.$converterstatus;
       map['status'] = Variable<int>(converter.toSql(status.value));
     }
+    if (thumbnailUrl.present) {
+      map['thumbnail_url'] = Variable<String>(thumbnailUrl.value);
+    }
     if (updateStrategy.present) {
       final converter = $DbMangasTable.$converterupdateStrategy;
       map['update_strategy'] =
@@ -491,6 +531,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
           ..write('description: $description, ')
           ..write('genre: $genre, ')
           ..write('status: $status, ')
+          ..write('thumbnailUrl: $thumbnailUrl, ')
           ..write('updateStrategy: $updateStrategy, ')
           ..write('initialized: $initialized')
           ..write(')'))
