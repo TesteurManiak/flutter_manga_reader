@@ -1,6 +1,4 @@
-<p align="center">
-    <img src="assets/launcher_icons/icon.png" alt="Flutter Manga Reader icon" height="150">
-</p>
+# <img src="assets/splash/splash.png" alt="Flutter Manga Reader icon" height="28"> Flutter Manga Reader
 
 A cross-platform manga reader built with Flutter.
 
@@ -139,6 +137,18 @@ This project uses [flutter_launcher_icons][flutter_launcher_icons_link] to gener
 
 ```sh
 $ dart run flutter_launcher_icons
+```
+
+## Generating Splash Screens
+
+This project uses [flutter_native_splash][flutter_native_splash_link] to generate the splash screens. To modify the splash screens follow these steps:
+
+1. Replace the `splash.png` file at `assets/splash/splash.png` with your own splash screen. And edit the options in `pubspec.yaml` how you see fit.
+
+2. Run the following command:
+
+```sh
+$ dart run flutter_native_splash:create
 ```
 
 ## Credits
