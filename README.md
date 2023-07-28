@@ -1,6 +1,10 @@
-# Flutter Manga Reader
-
-A cross-platform manga reader.
+<p align="center">
+    <img src="assets/launcher_icons/icon.png" alt="Flutter Manga Reader icon" height="100">
+    <header>
+        <h2>Flutter Manga Reader</h2>
+        <p>A cross-platform manga reader</p>
+    </header>
+</p>
 
 ## Getting Started
 
