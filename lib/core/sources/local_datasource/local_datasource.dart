@@ -18,10 +18,8 @@ class _DriftImpl implements LocalDatasource {
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
-    return _database
-        .select(_database.dbMangas)
-        // ..where((tbl) => tbl.favorite.equals(true))
-
+    return (_database.select(_database.dbMangas)
+          ..where((tbl) => tbl.favorite.equals(true)))
         .watch()
         .map((mangas) => mangas.map((e) => e.toModel()).toList());
   }
