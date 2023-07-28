@@ -23,25 +23,7 @@ class _DriftImpl implements LocalDatasource {
         // ..where((tbl) => tbl.favorite.equals(true))
 
         .watch()
-        .map(
-      (dbMangas) {
-        return dbMangas.map((e) {
-          return Manga(
-            id: e.id,
-            favorite: e.favorite,
-            url: e.url,
-            source: e.source,
-            title: e.title,
-            artist: e.artist,
-            description: e.description,
-            genre: e.genre,
-            status: e.status,
-            updateStrategy: e.updateStrategy,
-            initialized: e.initialized,
-          );
-        }).toList();
-      },
-    );
+        .map((mangas) => mangas.map((e) => e.toModel()).toList());
   }
 
   @override
@@ -49,21 +31,7 @@ class _DriftImpl implements LocalDatasource {
     return _database.batch((batch) {
       batch.insertAllOnConflictUpdate(
         _database.dbMangas,
-        mangas.map((e) {
-          return DbManga(
-            id: e.id,
-            favorite: e.favorite,
-            url: e.url,
-            source: e.source,
-            title: e.title,
-            artist: e.artist,
-            description: e.description,
-            genre: e.genre,
-            status: e.status,
-            updateStrategy: e.updateStrategy,
-            initialized: e.initialized,
-          );
-        }),
+        mangas.map((e) => e.toDbModel()),
       );
     });
   }
@@ -77,4 +45,42 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 @riverpod
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
+}
+
+extension on DbManga {
+  Manga toModel() {
+    return Manga(
+      id: id,
+      favorite: favorite,
+      url: url,
+      source: source,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genre: genre,
+      status: status,
+      thumbnailUrl: thumbnailUrl,
+      updateStrategy: updateStrategy,
+      initialized: initialized,
+    );
+  }
+}
+
+extension on Manga {
+  DbManga toDbModel() {
+    return DbManga(
+      id: id,
+      favorite: favorite,
+      url: url,
+      source: source,
+      title: title,
+      artist: artist,
+      description: description,
+      genre: genre,
+      status: status,
+      updateStrategy: updateStrategy,
+      initialized: initialized,
+    );
+  }
 }
