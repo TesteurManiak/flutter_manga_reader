@@ -9,4 +9,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settings_title => 'Settings';
+
+  @override
+  String get manga_status_unknown => 'Unknown';
+
+  @override
+  String get manga_status_ongoing => 'Ongoing';
+
+  @override
+  String get manga_status_completed => 'Completed';
+
+  @override
+  String get manga_status_licensed => 'Licensed';
+
+  @override
+  String get manga_status_publishing_finished => 'Completed';
+
+  @override
+  String get manga_status_canceled => 'Canceled';
+
+  @override
+  String get manga_status_on_hiatus => 'Hiatus';
 }

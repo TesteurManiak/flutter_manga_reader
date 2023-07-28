@@ -104,6 +104,48 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Paramètres'**
   String get settings_title;
+
+  /// No description provided for @manga_status_unknown.
+  ///
+  /// In fr, this message translates to:
+  /// **'Inconnu'**
+  String get manga_status_unknown;
+
+  /// No description provided for @manga_status_ongoing.
+  ///
+  /// In fr, this message translates to:
+  /// **'En cours'**
+  String get manga_status_ongoing;
+
+  /// No description provided for @manga_status_completed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminé'**
+  String get manga_status_completed;
+
+  /// No description provided for @manga_status_licensed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Licencié'**
+  String get manga_status_licensed;
+
+  /// No description provided for @manga_status_publishing_finished.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminé'**
+  String get manga_status_publishing_finished;
+
+  /// No description provided for @manga_status_canceled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annulé'**
+  String get manga_status_canceled;
+
+  /// No description provided for @manga_status_on_hiatus.
+  ///
+  /// In fr, this message translates to:
+  /// **'En pause'**
+  String get manga_status_on_hiatus;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,5 +1,12 @@
 {
     "@@locale": "fr",
     "library_title": "Bibliothèque",
-    "settings_title": "Paramètres"
+    "settings_title": "Paramètres",
+    "manga_status_unknown": "Inconnu",
+    "manga_status_ongoing": "En cours",
+    "manga_status_completed": "Terminé",
+    "manga_status_licensed": "Licencié",
+    "manga_status_publishing_finished": "Terminé",
+    "manga_status_canceled": "Annulé",
+    "manga_status_on_hiatus": "En pause"
 }

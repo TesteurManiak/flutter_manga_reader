@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,13 +52,19 @@ class _MangaContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final manga =
-        ref.watch(detailsControllerProvider(initialManga.id)).maybeWhen(
-              orElse: () => initialManga,
-              loaded: (manga) => manga,
-            );
+    final manga = ref.watch(
+      detailsControllerProvider(initialManga.id).select(
+        (value) {
+          return value.maybeWhen(
+            loaded: (manga) => manga,
+            orElse: () => initialManga,
+          );
+        },
+      ),
+    );
 
     return CustomScrollView(
+      physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         _SliverHeader(manga),
       ],
@@ -73,7 +80,6 @@ class _SliverHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final thumbnailUrl = manga.thumbnailUrl;
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -81,20 +87,22 @@ class _SliverHeader extends StatelessWidget {
         child: SeparatedRow(
           separator: const SizedBox(width: 8),
           children: [
-            if (thumbnailUrl != null)
-              Flexible(
-                child: AppNetworkImage(
-                  url: thumbnailUrl,
-                  width: size.width / 4,
-                ),
+            Flexible(
+              child: AppNetworkImage(
+                url: manga.thumbnailUrl,
+                width: size.width / 4,
               ),
+            ),
             Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(manga.title),
-                ],
+              child: Text.rich(
+                TextSpan(
+                  text: '${manga.title}\n',
+                  children: [
+                    TextSpan(text: manga.author),
+                    TextSpan(text: manga.status.toLocalizedString(context)),
+                  ].separatedWith(const TextSpan(text: '\n')).toList(),
+                ),
+                textAlign: TextAlign.start,
               ),
             ),
           ],

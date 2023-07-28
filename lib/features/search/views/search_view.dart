@@ -94,6 +94,7 @@ class _LoadedState extends ConsumerState<_Loaded> {
           childAspectRatio: 0.72,
         ),
         itemCount: widget.mangas.length,
+        // Why are items reloading ???
         itemBuilder: (_, index) => MangaTile(widget.mangas[index]),
       ),
     );

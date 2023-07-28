@@ -5,18 +5,28 @@ class AppNetworkImage extends StatelessWidget {
   const AppNetworkImage({
     super.key,
     required this.url,
+    this.height,
     this.width,
     this.fit,
   });
 
-  final String url;
+  final String? url;
+  final double? height;
   final double? width;
   final BoxFit? fit;
 
   @override
   Widget build(BuildContext context) {
+    final localUrl = url;
+
+    if (localUrl == null ||
+        localUrl.isEmpty ||
+        Uri.tryParse(localUrl) == null) {
+      return _ErrorWidget(height: height, width: width);
+    }
+
     return CachedNetworkImage(
-      imageUrl: url,
+      imageUrl: localUrl,
       width: width,
       fit: fit,
       progressIndicatorBuilder: (context, url, progress) {
@@ -24,11 +34,30 @@ class AppNetworkImage extends StatelessWidget {
           child: CircularProgressIndicator(value: progress.progress),
         );
       },
-      errorWidget: (_, __, ___) {
-        return const Center(
-          child: Icon(Icons.image_not_supported),
-        );
-      },
+      errorWidget: (_, __, ___) => _ErrorWidget(height: height, width: width),
+    );
+  }
+}
+
+class _ErrorWidget extends StatelessWidget {
+  const _ErrorWidget({
+    required this.height,
+    required this.width,
+  });
+
+  final double? height;
+  final double? width;
+
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints.tightFor(
+        height: height,
+        width: width,
+      ),
+      child: const Center(
+        child: Icon(Icons.image_not_supported),
+      ),
     );
   }
 }

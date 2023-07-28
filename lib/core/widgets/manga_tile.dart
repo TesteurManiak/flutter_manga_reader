@@ -17,7 +17,6 @@ class _MangaTileState extends State<MangaTile>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final thumbnailUrl = widget.manga.thumbnailUrl;
 
     return GestureDetector(
       onTap: () {
@@ -28,12 +27,10 @@ class _MangaTileState extends State<MangaTile>
         borderRadius: BorderRadius.circular(6),
         child: Stack(
           children: [
-            // TODO(Guillaume): use a placeholder
-            if (thumbnailUrl != null)
-              AppNetworkImage(
-                url: thumbnailUrl,
-                fit: BoxFit.fill,
-              ),
+            AppNetworkImage(
+              url: widget.manga.thumbnailUrl,
+              fit: BoxFit.fill,
+            ),
             Positioned(
               bottom: 0,
               left: 0,
