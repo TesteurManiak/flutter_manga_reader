@@ -18,7 +18,7 @@ class DetailsController extends _$DetailsController {
     final currentManga = state.manga;
     if (currentManga != null && currentManga.initialized) return;
 
-    state = DetailsState.loading(manga: state.manga);
+    state = DetailsState.loading(manga: currentManga);
 
     final localManga = await ref.read(getMangaProvider(mangaId).future);
     if (localManga == null) {
@@ -34,7 +34,7 @@ class DetailsController extends _$DetailsController {
 
     state = await result.when(
       success: (manga) async {
-        await ref.read(localDatasourceProvider).saveManga(manga);
+        await ref.read(localDatasourceProvider).updateManga(manga);
         return DetailsState.loaded(manga: manga);
       },
       failure: (error) {

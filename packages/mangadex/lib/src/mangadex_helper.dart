@@ -140,6 +140,7 @@ class MangadexHelper {
       coverSuffix: coverSuffix,
       lang: lang,
     ).copyWith(
+      initialized: true,
       author: authors.join(', '),
       artist: artists.join(', '),
       genre: genreList.where((e) => e.isNotEmpty).join(', '),

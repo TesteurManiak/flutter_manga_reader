@@ -15,6 +15,8 @@ abstract class LocalDatasource {
 
   /// Get a manga from the database.
   Future<Manga?> getManga(String mangaId);
+
+  Future<void> updateManga(Manga manga);
 }
 
 class _DriftImpl implements LocalDatasource {
@@ -56,6 +58,11 @@ class _DriftImpl implements LocalDatasource {
         .getSingleOrNull();
 
     return manga?.toModel();
+  }
+
+  @override
+  Future<void> updateManga(Manga manga) {
+    return _database.update(_database.dbMangas).replace(manga.toDbModel());
   }
 }
 
