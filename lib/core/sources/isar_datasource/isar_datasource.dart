@@ -4,31 +4,31 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 class IsarDatasource implements LocalDatasource {
   @override
   Future<Manga?> getManga(String mangaId) {
-    // TODO: implement getManga
+    // TODO(Guillaume): implement getManga
     throw UnimplementedError();
   }
 
   @override
   Future<void> saveManga(Manga manga) {
-    // TODO: implement saveManga
+    // TODO(Guillaume): implement saveManga
     throw UnimplementedError();
   }
 
   @override
   Future<void> saveMangas(List<Manga> mangas) {
-    // TODO: implement saveMangas
+    // TODO(Guillaume): implement saveMangas
     throw UnimplementedError();
   }
 
   @override
   Future<void> updateManga(Manga manga) {
-    // TODO: implement updateManga
+    // TODO(Guillaume): implement updateManga
     throw UnimplementedError();
   }
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
-    // TODO: implement watchMangasInLibrary
+    // TODO(Guillaume): implement watchMangasInLibrary
     throw UnimplementedError();
   }
 }

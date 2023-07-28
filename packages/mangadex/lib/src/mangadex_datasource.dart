@@ -242,7 +242,7 @@ class MangadexDatasource extends MangaDatasource {
     int page,
     String query,
   ) {
-    // TODO: implement fetchSearchManga
+    // TODO(Guillaume): implement fetchSearchManga
     throw UnimplementedError();
   }
 
