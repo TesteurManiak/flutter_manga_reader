@@ -83,6 +83,7 @@ class _SliverHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final textTheme = Theme.of(context).textTheme;
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -100,9 +101,14 @@ class _SliverHeader extends StatelessWidget {
               child: Text.rich(
                 TextSpan(
                   text: '${manga.title}\n',
+                  style: textTheme.titleMedium,
                   children: [
-                    TextSpan(text: manga.author),
-                    TextSpan(text: manga.status.toLocalizedString(context)),
+                    TextSpan(text: manga.author, style: textTheme.bodyMedium),
+                    TextSpan(
+                      text:
+                          '${manga.status.toLocalizedString(context)} - ${manga.source}',
+                      style: textTheme.bodyMedium,
+                    ),
                   ].separatedWith(const TextSpan(text: '\n')).toList(),
                 ),
                 textAlign: TextAlign.start,
