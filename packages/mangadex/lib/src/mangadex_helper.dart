@@ -67,6 +67,7 @@ class MangadexHelper {
     return Manga(
       id: mangaData.id,
       url: '/manga/${mangaData.id}',
+      source: MDConstants.sourceName,
       title: title,
       thumbnailUrl: coverFileName != null
           ? switch (coverSuffix != null && coverSuffix.isNotEmpty) {

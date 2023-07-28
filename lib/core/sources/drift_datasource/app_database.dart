@@ -10,7 +10,9 @@ part 'app_database.g.dart';
 
 class DbMangas extends Table {
   TextColumn get id => text()();
+  BoolColumn get favorite => boolean().withDefault(const Constant(false))();
   TextColumn get url => text()();
+  TextColumn get source => text()();
   TextColumn get title => text()();
   TextColumn get artist => text().nullable()();
   TextColumn get author => text().nullable()();

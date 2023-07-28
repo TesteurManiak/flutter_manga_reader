@@ -8,6 +8,7 @@ class Manga with _$Manga {
     required String id,
     @Default(false) bool favorite,
     required String url,
+    required String source,
     required String title,
     String? artist,
     String? author,
@@ -36,6 +37,7 @@ class Manga with _$Manga {
     return Manga(
       id: id,
       url: url,
+      source: source,
       title: title,
       author: author ?? other.author,
       artist: artist ?? other.artist,

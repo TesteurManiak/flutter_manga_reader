@@ -28,7 +28,7 @@ class MangadexDatasource extends MangaDatasource {
   })  : _dexLang = dexLang,
         _helper = const MangadexHelper(),
         _client = client ?? RestClient(baseUri: Uri.parse(MDConstants.apiUrl)),
-        super(name: 'MangaDex');
+        super(name: MDConstants.sourceName);
 
   final String _dexLang;
   final MangadexHelper _helper;

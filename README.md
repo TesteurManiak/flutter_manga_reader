@@ -2,8 +2,6 @@
 
 A cross-platform manga reader.
 
-Made by [Michel "Meï" Mancier][mei_link] and [Guillaume Roux][guillaume_link] with inspiration from the [Floating Dartists][floating_dartists_link] organization maintained by both of them and [Pierre Monier][pierre_link].
-
 ## Getting Started
 
 This project contains 3 flavors:
@@ -139,24 +137,10 @@ This project uses [flutter_launcher_icons][flutter_launcher_icons_link] to gener
 $ dart run flutter_launcher_icons
 ```
 
-## Generating Splash Screens
-
-This project uses [flutter_native_splash][flutter_native_splash_link] to generate the splash screens. To modify the splash screens follow these steps:
-
-_Section coming soon_
-
-```sh
-$ dart run flutter_native_splash:create
-```
-
 ## Credits
 
 * [MangaDex][manga_dex]: For providing the API used in this project
 
-[mei_link]: https://github.com/MeixDev
-[guillaume_link]: https://github.com/TesteurManiak
-[floating_dartists_link]: https://github.com/Floating-Dartists
-[pierre_link]: https://github.com/Pierre-Monier
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_guide_link]: https://docs.flutter.dev/accessibility-and-localization/internationalization
 [flutter_gen_runner_link]: https://pub.dev/packages/flutter_gen_runner

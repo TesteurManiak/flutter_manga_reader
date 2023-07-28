@@ -19,6 +19,7 @@ mixin _$Manga {
   String get id => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
+  String get source => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $MangaCopyWith<$Res> {
       {String id,
       bool favorite,
       String url,
+      String source,
       String title,
       String? artist,
       String? author,
@@ -69,6 +71,7 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? id = null,
     Object? favorite = null,
     Object? url = null,
+    Object? source = null,
     Object? title = null,
     Object? artist = freezed,
     Object? author = freezed,
@@ -91,6 +94,10 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -142,6 +149,7 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
       {String id,
       bool favorite,
       String url,
+      String source,
       String title,
       String? artist,
       String? author,
@@ -165,6 +173,7 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     Object? id = null,
     Object? favorite = null,
     Object? url = null,
+    Object? source = null,
     Object? title = null,
     Object? artist = freezed,
     Object? author = freezed,
@@ -187,6 +196,10 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
+              as String,
+      source: null == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
               as String,
       title: null == title
           ? _value.title
@@ -235,6 +248,7 @@ class _$_Manga extends _Manga {
       {required this.id,
       this.favorite = false,
       required this.url,
+      required this.source,
       required this.title,
       this.artist,
       this.author,
@@ -253,6 +267,8 @@ class _$_Manga extends _Manga {
   final bool favorite;
   @override
   final String url;
+  @override
+  final String source;
   @override
   final String title;
   @override
@@ -277,7 +293,7 @@ class _$_Manga extends _Manga {
 
   @override
   String toString() {
-    return 'Manga(id: $id, favorite: $favorite, url: $url, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
+    return 'Manga(id: $id, favorite: $favorite, url: $url, source: $source, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized)';
   }
 
   @override
@@ -289,6 +305,7 @@ class _$_Manga extends _Manga {
             (identical(other.favorite, favorite) ||
                 other.favorite == favorite) &&
             (identical(other.url, url) || other.url == url) &&
+            (identical(other.source, source) || other.source == source) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.author, author) || other.author == author) &&
@@ -310,6 +327,7 @@ class _$_Manga extends _Manga {
       id,
       favorite,
       url,
+      source,
       title,
       artist,
       author,
@@ -332,6 +350,7 @@ abstract class _Manga extends Manga {
       {required final String id,
       final bool favorite,
       required final String url,
+      required final String source,
       required final String title,
       final String? artist,
       final String? author,
@@ -349,6 +368,8 @@ abstract class _Manga extends Manga {
   bool get favorite;
   @override
   String get url;
+  @override
+  String get source;
   @override
   String get title;
   @override
