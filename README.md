@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="assets/launcher_icons/icon.png" alt="Flutter Manga Reader icon" height="100">
+    <img src="assets/launcher_icons/icon.png" alt="Flutter Manga Reader icon" height="150">
 </p>
 
 A cross-platform manga reader built with Flutter.
