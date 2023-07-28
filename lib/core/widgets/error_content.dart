@@ -18,7 +18,7 @@ class ErrorContent extends StatelessWidget {
         children: [
           const AsciiEmojiWidget(AsciiEmoji.raiseShoulders),
           Text(
-            'Something went wrong'.hardcoded,
+            context.strings.generic_error,
             textAlign: TextAlign.center,
           ),
         ],

@@ -11,6 +11,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_title => 'Paramètres';
 
   @override
+  String get searching_title => 'Recherche';
+
+  @override
   String get manga_status_unknown => 'Inconnu';
 
   @override
@@ -30,4 +33,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get manga_status_on_hiatus => 'En pause';
+
+  @override
+  String get generic_error => 'Une erreur est survenue';
 }

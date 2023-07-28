@@ -105,6 +105,12 @@ abstract class AppLocalizations {
   /// **'Paramètres'**
   String get settings_title;
 
+  /// No description provided for @searching_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Recherche'**
+  String get searching_title;
+
   /// No description provided for @manga_status_unknown.
   ///
   /// In fr, this message translates to:
@@ -146,6 +152,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'En pause'**
   String get manga_status_on_hiatus;
+
+  /// No description provided for @generic_error.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue'**
+  String get generic_error;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

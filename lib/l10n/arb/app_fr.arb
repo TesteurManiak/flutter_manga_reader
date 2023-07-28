@@ -2,11 +2,13 @@
     "@@locale": "fr",
     "library_title": "Bibliothèque",
     "settings_title": "Paramètres",
+    "searching_title": "Recherche",
     "manga_status_unknown": "Inconnu",
     "manga_status_ongoing": "En cours",
     "manga_status_completed": "Terminé",
     "manga_status_licensed": "Licencié",
     "manga_status_publishing_finished": "Terminé",
     "manga_status_canceled": "Annulé",
-    "manga_status_on_hiatus": "En pause"
+    "manga_status_on_hiatus": "En pause",
+    "generic_error": "Une erreur est survenue"
 }

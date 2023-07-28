@@ -54,6 +54,4 @@ class DetailsState with _$DetailsState {
     Manga? manga,
     String? error,
   }) = _Error;
-
-  const DetailsState._();
 }

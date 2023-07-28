@@ -151,8 +151,8 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading extends _Loading {
-  const _$_Loading({this.manga}) : super._();
+class _$_Loading implements _Loading {
+  const _$_Loading({this.manga});
 
   @override
   final Manga? manga;
@@ -248,9 +248,8 @@ class _$_Loading extends _Loading {
   }
 }
 
-abstract class _Loading extends DetailsState {
+abstract class _Loading implements DetailsState {
   const factory _Loading({final Manga? manga}) = _$_Loading;
-  const _Loading._() : super._();
 
   @override
   Manga? get manga;
@@ -303,8 +302,8 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded extends _Loaded {
-  const _$_Loaded({required this.manga}) : super._();
+class _$_Loaded implements _Loaded {
+  const _$_Loaded({required this.manga});
 
   @override
   final Manga manga;
@@ -400,9 +399,8 @@ class _$_Loaded extends _Loaded {
   }
 }
 
-abstract class _Loaded extends DetailsState {
+abstract class _Loaded implements DetailsState {
   const factory _Loaded({required final Manga manga}) = _$_Loaded;
-  const _Loaded._() : super._();
 
   @override
   Manga get manga;
@@ -452,8 +450,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error extends _Error {
-  const _$_Error({this.manga, this.error}) : super._();
+class _$_Error implements _Error {
+  const _$_Error({this.manga, this.error});
 
   @override
   final Manga? manga;
@@ -552,9 +550,8 @@ class _$_Error extends _Error {
   }
 }
 
-abstract class _Error extends DetailsState {
+abstract class _Error implements DetailsState {
   const factory _Error({final Manga? manga, final String? error}) = _$_Error;
-  const _Error._() : super._();
 
   @override
   Manga? get manga;

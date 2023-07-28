@@ -11,6 +11,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_title => 'Settings';
 
   @override
+  String get searching_title => 'Search';
+
+  @override
   String get manga_status_unknown => 'Unknown';
 
   @override
@@ -30,4 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get manga_status_on_hiatus => 'Hiatus';
+
+  @override
+  String get generic_error => 'Something went wrong';
 }

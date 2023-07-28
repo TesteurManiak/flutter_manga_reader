@@ -2,11 +2,13 @@
     "@@locale": "en",
     "library_title": "Library",
     "settings_title": "Settings",
+    "searching_title": "Search",
     "manga_status_unknown": "Unknown",
     "manga_status_ongoing": "Ongoing",
     "manga_status_completed": "Completed",
     "manga_status_licensed": "Licensed",
     "manga_status_publishing_finished": "Completed",
     "manga_status_canceled": "Canceled",
-    "manga_status_on_hiatus": "Hiatus"
+    "manga_status_on_hiatus": "Hiatus",
+    "generic_error": "Something went wrong"
 }
