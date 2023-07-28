@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_manga_reader/core/models/isar_chapter.dart';
+import 'package:flutter_manga_reader/core/models/isar_manga.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:isar/isar.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -11,16 +13,17 @@ class IsarDatasource implements LocalDatasource {
   Future<Isar> getInstance() async {
     return Isar.getInstance(_instanceName) ??
         await Isar.open(
-          [],
+          [IsarMangaSchema, IsarChapterSchema],
           directory: (await getApplicationDocumentsDirectory()).path,
           name: _instanceName,
         );
   }
 
   @override
-  Future<Manga?> getManga(String mangaId) {
-    // TODO(Guillaume): implement getManga
-    throw UnimplementedError();
+  Future<Manga?> getManga(String mangaId) async {
+    final isar = await getInstance();
+    final manga = await isar.isarMangas.getByMangaId(mangaId);
+    return manga?.toModel();
   }
 
   @override

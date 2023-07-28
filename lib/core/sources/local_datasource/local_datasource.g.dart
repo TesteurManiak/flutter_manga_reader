@@ -6,7 +6,7 @@ part of 'local_datasource.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localDatasourceHash() => r'aecd9499c988a22f76ffb7649c3d58c275fcb91e';
+String _$localDatasourceHash() => r'3fc9a93f9e3999c336e790f8338a6f15134f4003';
 
 /// See also [localDatasource].
 @ProviderFor(localDatasource)
