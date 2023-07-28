@@ -6,7 +6,7 @@ part of 'manga_datasource.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mangaDatasourceHash() => r'191dc3d98de45e0538a1c46cdec1701b84c57b7d';
+String _$mangaDatasourceHash() => r'a0e922fc6ffcb0fac71fbfa6c8ca3707dd8e35fd';
 
 /// See also [mangaDatasource].
 @ProviderFor(mangaDatasource)

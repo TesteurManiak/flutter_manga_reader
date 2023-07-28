@@ -25,4 +25,7 @@ abstract class NetworkQueryCacheService {
 
   /// Deletes the cached response for the given [key].
   Future<void> delete(String key);
+
+  /// Clears the cache.
+  Future<void> clear();
 }

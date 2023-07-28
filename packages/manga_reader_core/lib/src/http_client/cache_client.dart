@@ -2,11 +2,11 @@ part of 'http_client.dart';
 
 class CacheClient extends BaseClient {
   CacheClient({
-    required this.httpClient,
+    Client? httpClient,
     required this.cacheService,
-  });
+  }) : _httpClient = httpClient ?? Client();
 
-  final Client httpClient;
+  final Client _httpClient;
   final NetworkQueryCacheService cacheService;
 
   @override
@@ -15,7 +15,7 @@ class CacheClient extends BaseClient {
     final cachedResponse = await _getResponseFromCache(cacheKey, request);
     if (cachedResponse != null) return cachedResponse;
 
-    final response = await httpClient.send(request);
+    final response = await _httpClient.send(request);
     if (response.statusCode == HttpStatus.ok) {
       return _cacheResponse(cacheKey, response);
     }
@@ -58,6 +58,14 @@ class CacheClient extends BaseClient {
       persistentConnection: response.persistentConnection,
       reasonPhrase: response.reasonPhrase,
     );
+  }
+
+  /// Removes all cached responses.
+  Future<void> invalidateCache() => cacheService.clear();
+
+  /// Removes a cached response stored with the given [cacheKey].
+  Future<void> invalidateCacheForKey(String cacheKey) {
+    return cacheService.delete(cacheKey);
   }
 }
 

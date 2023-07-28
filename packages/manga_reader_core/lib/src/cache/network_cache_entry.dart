@@ -1,25 +1,19 @@
 import 'package:clock/clock.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'network_cache_entry.freezed.dart';
-part 'network_cache_entry.g.dart';
+class NetworkCacheEntry {
+  NetworkCacheEntry({
+    required this.key,
+    required this.value,
+    required this.expiry,
+  });
 
-@Freezed(toJson: true)
-class NetworkCacheEntry with _$NetworkCacheEntry {
-  const factory NetworkCacheEntry({
-    required String key,
+  final String key;
 
-    /// Encoded JSON string of the response.
-    required String value,
+  /// Encoded JSON string of the response.
+  final String value;
 
-    /// Expiry date of the cache entry.
-    required DateTime expiry,
-  }) = _NetworkCacheEntry;
-
-  factory NetworkCacheEntry.fromJson(Map<String, dynamic> json) =>
-      _$NetworkCacheEntryFromJson(json);
-
-  const NetworkCacheEntry._();
+  /// Expiry date of the cache entry.
+  final DateTime expiry;
 
   bool get isValid => expiry.isAfter(clock.now());
 }

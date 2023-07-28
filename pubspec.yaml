@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   cached_network_image: ^3.2.3
+  clock: ^1.1.1
   collection: ^1.17.1
   drift: ^2.10.0
   flutter:
@@ -21,6 +22,8 @@ dependencies:
   go_router: ^10.0.0
   http: ^1.1.0
   intl: ^0.18.0
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
   json_annotation: ^4.8.1
   logging: ^1.2.0
   manga_reader_core:
@@ -50,6 +53,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.1
   go_router_builder: ^2.2.3
+  isar_generator: ^3.1.0+1
   json_serializable: ^6.7.1
   mocktail: ^0.3.0
   riverpod_generator: ^2.2.4
