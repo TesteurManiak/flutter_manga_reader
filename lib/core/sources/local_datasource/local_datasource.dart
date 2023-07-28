@@ -6,6 +6,7 @@ part 'local_datasource.g.dart';
 
 abstract class LocalDatasource {
   Stream<List<Manga>> watchMangasInLibrary();
+  Future<void> saveMangas(List<Manga> mangas);
 }
 
 class _DriftImpl implements LocalDatasource {
@@ -17,7 +18,12 @@ class _DriftImpl implements LocalDatasource {
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
-    return _database.select(_database.dbMangas).watch().map(
+    return _database
+        .select(_database.dbMangas)
+        // ..where((tbl) => tbl.favorite.equals(true))
+
+        .watch()
+        .map(
       (dbMangas) {
         return dbMangas.map((e) {
           return Manga(
@@ -36,6 +42,30 @@ class _DriftImpl implements LocalDatasource {
         }).toList();
       },
     );
+  }
+
+  @override
+  Future<void> saveMangas(List<Manga> mangas) {
+    return _database.batch((batch) {
+      batch.insertAllOnConflictUpdate(
+        _database.dbMangas,
+        mangas.map((e) {
+          return DbManga(
+            id: e.id,
+            favorite: e.favorite,
+            url: e.url,
+            source: e.source,
+            title: e.title,
+            artist: e.artist,
+            description: e.description,
+            genre: e.genre,
+            status: e.status,
+            updateStrategy: e.updateStrategy,
+            initialized: e.initialized,
+          );
+        }),
+      );
+    });
   }
 }
 

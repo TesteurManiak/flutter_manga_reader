@@ -22,6 +22,9 @@ class DbMangas extends Table {
   TextColumn get thumbnailUrl => text().nullable()();
   IntColumn get updateStrategy => intEnum<UpdateStrategy>()();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {id};
 }
 
 class DbChapters extends Table {

@@ -1,4 +1,5 @@
 import 'package:flutter_manga_reader/core/mixins/loadable.dart';
+import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -25,6 +26,8 @@ class SearchController extends _$SearchController with Loadable {
         final mangas = currentMangas + page.mangaList;
 
         if (mangas.isEmpty) return PaginatedMangaState.empty(page: nextPage);
+
+        ref.read(localDatasourceProvider).saveMangas(mangas);
 
         return PaginatedMangaState.loaded(
           page: nextPage,

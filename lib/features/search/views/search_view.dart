@@ -5,7 +5,7 @@ import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/infinite_scroller.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
-import 'package:flutter_manga_reader/core/widgets/manga_tile.dart';
+import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
 import 'package:flutter_manga_reader/core/widgets/source_app_bar.dart';
 import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -84,18 +84,9 @@ class _LoadedState extends ConsumerState<_Loaded> {
             .read(searchControllerProvider(widget.datasource).notifier)
             .fetchNextMangas();
       },
-      child: GridView.builder(
+      child: MangaGridView(
         controller: scrollController,
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 0.72,
-        ),
-        itemCount: widget.mangas.length,
-        // Why are items reloading ???
-        itemBuilder: (_, index) => MangaTile(widget.mangas[index]),
+        mangas: widget.mangas,
       ),
     );
   }

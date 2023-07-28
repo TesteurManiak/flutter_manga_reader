@@ -3,6 +3,7 @@ import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
+import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
 import 'package:flutter_manga_reader/features/library/controllers/library_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,7 +26,7 @@ class _LibraryViewState extends ConsumerState<LibraryView>
       appBar: _AppBar(),
       body: state.when(
         loading: LoadingContent.new,
-        loaded: (_) => Container(),
+        loaded: (mangas) => MangaGridView(mangas: mangas),
         empty: () => const _Empty(),
         error: (_) => const ErrorContent(),
       ),
