@@ -70,6 +70,7 @@ class _MangaContent extends ConsumerWidget {
       slivers: [
         _SliverHeader(manga),
         if (desc != null) _SliverDescription(desc),
+        _SliverButtons(manga.id),
       ],
     );
   }
@@ -132,6 +133,29 @@ class _SliverDescription extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Text(desc),
+      ),
+    );
+  }
+}
+
+class _SliverButtons extends ConsumerWidget {
+  const _SliverButtons(this.id);
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(
+      detailsControllerProvider(id).select((v) => v.manga?.favorite ?? false),
+    );
+
+    return SliverToBoxAdapter(
+      child: TextButton.icon(
+        onPressed: () {
+          ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
+        },
+        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+        label: const Text('Add to library'),
       ),
     );
   }

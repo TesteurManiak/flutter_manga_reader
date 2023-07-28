@@ -42,6 +42,15 @@ class DetailsController extends _$DetailsController {
       },
     );
   }
+
+  Future<void> toggleFavorite() async {
+    final currentManga = state.manga;
+    if (currentManga == null) return;
+
+    final newManga = currentManga.copyWith(favorite: !currentManga.favorite);
+    await ref.read(localDatasourceProvider).updateManga(newManga);
+    state = DetailsState.loaded(manga: newManga);
+  }
 }
 
 @freezed
