@@ -21,7 +21,10 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
   @override
   Future<void> delete(String key) async {
     final isar = await getInstance();
-    await isar.isarCacheEntrys.deleteByIsarKey(key);
+
+    return isar.writeTxn(() {
+      return isar.isarCacheEntrys.deleteByIsarKey(key);
+    });
   }
 
   @protected
@@ -52,11 +55,19 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
     final entry = IsarCacheEntry(
       isarKey: key,
       value: networkResponseJson,
-      expiry: clock.now(),
+      expiry: clock.now().add(cacheDuration),
     );
 
     final isar = await getInstance();
-    await isar.isarCacheEntrys.put(entry);
+    await isar.writeTxn(() async {
+      // cleanup old cache entries
+      await isar.isarCacheEntrys
+          .filter()
+          .expiryLessThan(clock.now())
+          .deleteAll();
+
+      await isar.isarCacheEntrys.put(entry);
+    });
   }
 
   @override
