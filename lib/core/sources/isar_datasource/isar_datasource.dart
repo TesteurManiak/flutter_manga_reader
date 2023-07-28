@@ -27,15 +27,19 @@ class IsarDatasource implements LocalDatasource {
   }
 
   @override
-  Future<void> saveManga(Manga manga) {
-    // TODO(Guillaume): implement saveManga
-    throw UnimplementedError();
+  Future<void> saveManga(Manga manga) async {
+    final isar = await getInstance();
+    return isar.writeTxn(() {
+      return isar.isarMangas.put(IsarManga.fromModel(manga));
+    });
   }
 
   @override
-  Future<void> saveMangas(List<Manga> mangas) {
-    // TODO(Guillaume): implement saveMangas
-    throw UnimplementedError();
+  Future<void> saveMangas(List<Manga> mangas) async {
+    final isar = await getInstance();
+    return isar.writeTxn(() {
+      return isar.isarMangas.putAll(mangas.map(IsarManga.fromModel).toList());
+    });
   }
 
   @override
