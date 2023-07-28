@@ -184,7 +184,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => {id, source};
   @override
   DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';

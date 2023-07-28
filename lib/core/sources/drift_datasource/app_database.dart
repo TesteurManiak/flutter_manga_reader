@@ -24,7 +24,7 @@ class DbMangas extends Table {
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
 
   @override
-  Set<Column<Object>>? get primaryKey => {id};
+  Set<Column<Object>>? get primaryKey => {id, source};
 }
 
 class DbChapters extends Table {
