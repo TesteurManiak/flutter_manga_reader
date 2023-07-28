@@ -4,7 +4,7 @@ A cross-platform manga reader built with Flutter.
 
 This app is a Flutter clone of [Tachiyomi][tachiyomi] mainly to provide an iOS version of the app.
 
-## Getting Started
+## Run the app
 
 This project contains 3 flavors:
 
@@ -150,6 +150,10 @@ This project uses [flutter_native_splash][flutter_native_splash_link] to generat
 ```sh
 $ dart run flutter_native_splash:create
 ```
+
+## License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ## Credits
 
