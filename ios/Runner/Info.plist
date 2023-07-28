@@ -53,5 +53,7 @@
 	<array>
 		<string>fr</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<false/>
 </dict>
 </plist>

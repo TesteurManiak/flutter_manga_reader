@@ -76,7 +76,8 @@ flutter_launcher_icons:
   macos:
     generate: true
     image_path: "assets/launcher_icons/icon.png"
+
 # Check the package's documentation to setup the splash screen
 # https://pub.dev/packages/flutter_native_splash#1-setting-the-splash-screen
-# flutter_native_splash:
-#   color: "#ffffff"
+flutter_native_splash:
+  color: "#0075ff"

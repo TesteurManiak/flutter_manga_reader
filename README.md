@@ -145,6 +145,10 @@ This project uses [flutter_native_splash][flutter_native_splash_link] to generat
 
 _Section coming soon_
 
+```sh
+$ dart run flutter_native_splash:create
+```
+
 ## Credits
 
 * [MangaDex][manga_dex]: For providing the API used in this project
