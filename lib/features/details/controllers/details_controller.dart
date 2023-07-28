@@ -1,3 +1,4 @@
+import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -14,25 +15,30 @@ class DetailsController extends _$DetailsController {
   }
 
   Future<void> fetchDetails() async {
-    final datasource = ref.read(mangaDatasourceProvider);
-    if (!state.isLoaded) {
-      final result = await datasource.fetchMangaInfo(mangaId);
+    final currentManga = state.manga;
+    if (currentManga != null && currentManga.initialized) return;
 
-      state = result.maybeWhen(
-        success: (manga) => DetailsState.loaded(manga: manga),
-        orElse: () => state,
-      );
+    state = DetailsState.loading(manga: state.manga);
+
+    final localManga = await ref.read(getMangaProvider(mangaId).future);
+    if (localManga == null) {
+      state = DetailsState.error(error: 'Manga not found', manga: currentManga);
+      return;
+    } else if (localManga.initialized) {
+      state = DetailsState.loaded(manga: localManga);
+      return;
     }
 
-    await state.whenOrNull(
-      loaded: (manga) async {
-        if (manga.initialized) return;
+    final datasource = ref.read(mangaDatasourceProvider);
+    final result = await datasource.fetchMangaDetails(localManga);
 
-        final result = await datasource.fetchMangaDetails(manga);
-        state = result.when(
-          success: (manga) => DetailsState.loaded(manga: manga),
-          failure: (error) => DetailsState.error(error: error.message),
-        );
+    state = await result.when(
+      success: (manga) async {
+        await ref.read(localDatasourceProvider).saveManga(manga);
+        return DetailsState.loaded(manga: manga);
+      },
+      failure: (error) {
+        return DetailsState.error(error: error.message, manga: currentManga);
       },
     );
   }
@@ -40,18 +46,14 @@ class DetailsController extends _$DetailsController {
 
 @freezed
 class DetailsState with _$DetailsState {
-  const factory DetailsState.loading() = _Loading;
+  const factory DetailsState.loading({Manga? manga}) = _Loading;
   const factory DetailsState.loaded({
     required Manga manga,
   }) = _Loaded;
-  const factory DetailsState.error({String? error}) = _Error;
+  const factory DetailsState.error({
+    Manga? manga,
+    String? error,
+  }) = _Error;
 
   const DetailsState._();
-
-  bool get isLoaded {
-    return maybeWhen(
-      orElse: () => false,
-      loaded: (_) => true,
-    );
-  }
 }

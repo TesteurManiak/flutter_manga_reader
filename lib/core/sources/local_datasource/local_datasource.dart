@@ -6,7 +6,15 @@ part 'local_datasource.g.dart';
 
 abstract class LocalDatasource {
   Stream<List<Manga>> watchMangasInLibrary();
+
+  /// Insert a manga into the database.
+  Future<void> saveManga(Manga manga);
+
+  /// Insert a list of mangas into the database.
   Future<void> saveMangas(List<Manga> mangas);
+
+  /// Get a manga from the database.
+  Future<Manga?> getManga(String mangaId);
 }
 
 class _DriftImpl implements LocalDatasource {
@@ -25,6 +33,13 @@ class _DriftImpl implements LocalDatasource {
   }
 
   @override
+  Future<void> saveManga(Manga manga) {
+    return _database
+        .into(_database.dbMangas)
+        .insertOnConflictUpdate(manga.toDbModel());
+  }
+
+  @override
   Future<void> saveMangas(List<Manga> mangas) {
     return _database.batch((batch) {
       batch.insertAllOnConflictUpdate(
@@ -32,6 +47,15 @@ class _DriftImpl implements LocalDatasource {
         mangas.map((e) => e.toDbModel()),
       );
     });
+  }
+
+  @override
+  Future<Manga?> getManga(String mangaId) async {
+    final manga = await (_database.select(_database.dbMangas)
+          ..where((tbl) => tbl.id.equals(mangaId)))
+        .getSingleOrNull();
+
+    return manga?.toModel();
   }
 }
 
@@ -43,6 +67,11 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 @riverpod
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
+}
+
+@riverpod
+Future<Manga?> getManga(GetMangaRef ref, String mangaId) {
+  return ref.watch(localDatasourceProvider).getManga(mangaId);
 }
 
 extension on DbManga {

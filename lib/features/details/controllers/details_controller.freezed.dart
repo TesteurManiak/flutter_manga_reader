@@ -16,25 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DetailsState {
+  Manga? get manga => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(Manga? manga) loading,
     required TResult Function(Manga manga) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(Manga? manga, String? error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(Manga? manga)? loading,
     TResult? Function(Manga manga)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(Manga? manga, String? error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(Manga? manga)? loading,
     TResult Function(Manga manga)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(Manga? manga, String? error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +61,10 @@ mixin _$DetailsState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $DetailsStateCopyWith<DetailsState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -67,6 +72,10 @@ abstract class $DetailsStateCopyWith<$Res> {
   factory $DetailsStateCopyWith(
           DetailsState value, $Res Function(DetailsState) then) =
       _$DetailsStateCopyWithImpl<$Res, DetailsState>;
+  @useResult
+  $Res call({Manga manga});
+
+  $MangaCopyWith<$Res>? get manga;
 }
 
 /// @nodoc
@@ -78,13 +87,45 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? manga = null,
+  }) {
+    return _then(_value.copyWith(
+      manga: null == manga
+          ? _value.manga!
+          : manga // ignore: cast_nullable_to_non_nullable
+              as Manga,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MangaCopyWith<$Res>? get manga {
+    if (_value.manga == null) {
+      return null;
+    }
+
+    return $MangaCopyWith<$Res>(_value.manga!, (value) {
+      return _then(_value.copyWith(manga: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
+abstract class _$$_LoadingCopyWith<$Res>
+    implements $DetailsStateCopyWith<$Res> {
   factory _$$_LoadingCopyWith(
           _$_Loading value, $Res Function(_$_Loading) then) =
       __$$_LoadingCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Manga? manga});
+
+  @override
+  $MangaCopyWith<$Res>? get manga;
 }
 
 /// @nodoc
@@ -93,57 +134,81 @@ class __$$_LoadingCopyWithImpl<$Res>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? manga = freezed,
+  }) {
+    return _then(_$_Loading(
+      manga: freezed == manga
+          ? _value.manga
+          : manga // ignore: cast_nullable_to_non_nullable
+              as Manga?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Loading extends _Loading {
-  const _$_Loading() : super._();
+  const _$_Loading({this.manga}) : super._();
+
+  @override
+  final Manga? manga;
 
   @override
   String toString() {
-    return 'DetailsState.loading()';
+    return 'DetailsState.loading(manga: $manga)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$_Loading &&
+            (identical(other.manga, manga) || other.manga == manga));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, manga);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(Manga? manga) loading,
     required TResult Function(Manga manga) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(Manga? manga, String? error) error,
   }) {
-    return loading();
+    return loading(manga);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(Manga? manga)? loading,
     TResult? Function(Manga manga)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(Manga? manga, String? error)? error,
   }) {
-    return loading?.call();
+    return loading?.call(manga);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(Manga? manga)? loading,
     TResult Function(Manga manga)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(Manga? manga, String? error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(manga);
     }
     return orElse();
   }
@@ -184,17 +249,26 @@ class _$_Loading extends _Loading {
 }
 
 abstract class _Loading extends DetailsState {
-  const factory _Loading() = _$_Loading;
+  const factory _Loading({final Manga? manga}) = _$_Loading;
   const _Loading._() : super._();
+
+  @override
+  Manga? get manga;
+  @override
+  @JsonKey(ignore: true)
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> {
+abstract class _$$_LoadedCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({Manga manga});
 
+  @override
   $MangaCopyWith<$Res> get manga;
 }
 
@@ -260,9 +334,9 @@ class _$_Loaded extends _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(Manga? manga) loading,
     required TResult Function(Manga manga) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(Manga? manga, String? error) error,
   }) {
     return loaded(manga);
   }
@@ -270,9 +344,9 @@ class _$_Loaded extends _Loaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(Manga? manga)? loading,
     TResult? Function(Manga manga)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(Manga? manga, String? error)? error,
   }) {
     return loaded?.call(manga);
   }
@@ -280,9 +354,9 @@ class _$_Loaded extends _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(Manga? manga)? loading,
     TResult Function(Manga manga)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(Manga? manga, String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -330,18 +404,24 @@ abstract class _Loaded extends DetailsState {
   const factory _Loaded({required final Manga manga}) = _$_Loaded;
   const _Loaded._() : super._();
 
+  @override
   Manga get manga;
+  @override
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
+abstract class _$$_ErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String? error});
+  $Res call({Manga? manga, String? error});
+
+  @override
+  $MangaCopyWith<$Res>? get manga;
 }
 
 /// @nodoc
@@ -354,9 +434,14 @@ class __$$_ErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? manga = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_Error(
+      manga: freezed == manga
+          ? _value.manga
+          : manga // ignore: cast_nullable_to_non_nullable
+              as Manga?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -368,14 +453,16 @@ class __$$_ErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error extends _Error {
-  const _$_Error({this.error}) : super._();
+  const _$_Error({this.manga, this.error}) : super._();
 
+  @override
+  final Manga? manga;
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'DetailsState.error(error: $error)';
+    return 'DetailsState.error(manga: $manga, error: $error)';
   }
 
   @override
@@ -383,11 +470,12 @@ class _$_Error extends _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
+            (identical(other.manga, manga) || other.manga == manga) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, manga, error);
 
   @JsonKey(ignore: true)
   @override
@@ -398,33 +486,33 @@ class _$_Error extends _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
+    required TResult Function(Manga? manga) loading,
     required TResult Function(Manga manga) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(Manga? manga, String? error) error,
   }) {
-    return error(this.error);
+    return error(manga, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
+    TResult? Function(Manga? manga)? loading,
     TResult? Function(Manga manga)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(Manga? manga, String? error)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(manga, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
+    TResult Function(Manga? manga)? loading,
     TResult Function(Manga manga)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(Manga? manga, String? error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(manga, this.error);
     }
     return orElse();
   }
@@ -465,10 +553,13 @@ class _$_Error extends _Error {
 }
 
 abstract class _Error extends DetailsState {
-  const factory _Error({final String? error}) = _$_Error;
+  const factory _Error({final Manga? manga, final String? error}) = _$_Error;
   const _Error._() : super._();
 
+  @override
+  Manga? get manga;
   String? get error;
+  @override
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;
