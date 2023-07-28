@@ -76,9 +76,11 @@ extension on Manga {
       source: source,
       title: title,
       artist: artist,
+      author: author,
       description: description,
       genre: genre,
       status: status,
+      thumbnailUrl: thumbnailUrl,
       updateStrategy: updateStrategy,
       initialized: initialized,
     );
