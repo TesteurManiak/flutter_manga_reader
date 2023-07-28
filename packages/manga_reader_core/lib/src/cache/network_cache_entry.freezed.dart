@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+NetworkCacheEntry _$NetworkCacheEntryFromJson(Map<String, dynamic> json) {
+  return _NetworkCacheEntry.fromJson(json);
+}
+
 /// @nodoc
 mixin _$NetworkCacheEntry {
   String get key => throw _privateConstructorUsedError;
@@ -24,6 +28,7 @@ mixin _$NetworkCacheEntry {
   /// Expiry date of the cache entry.
   DateTime get expiry => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NetworkCacheEntryCopyWith<NetworkCacheEntry> get copyWith =>
       throw _privateConstructorUsedError;
@@ -116,11 +121,14 @@ class __$$_NetworkCacheEntryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_NetworkCacheEntry extends _NetworkCacheEntry {
   const _$_NetworkCacheEntry(
       {required this.key, required this.value, required this.expiry})
       : super._();
+
+  factory _$_NetworkCacheEntry.fromJson(Map<String, dynamic> json) =>
+      _$$_NetworkCacheEntryFromJson(json);
 
   @override
   final String key;
@@ -148,6 +156,7 @@ class _$_NetworkCacheEntry extends _NetworkCacheEntry {
             (identical(other.expiry, expiry) || other.expiry == expiry));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, key, value, expiry);
 
@@ -157,6 +166,13 @@ class _$_NetworkCacheEntry extends _NetworkCacheEntry {
   _$$_NetworkCacheEntryCopyWith<_$_NetworkCacheEntry> get copyWith =>
       __$$_NetworkCacheEntryCopyWithImpl<_$_NetworkCacheEntry>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_NetworkCacheEntryToJson(
+      this,
+    );
+  }
 }
 
 abstract class _NetworkCacheEntry extends NetworkCacheEntry {
@@ -165,6 +181,9 @@ abstract class _NetworkCacheEntry extends NetworkCacheEntry {
       required final String value,
       required final DateTime expiry}) = _$_NetworkCacheEntry;
   const _NetworkCacheEntry._() : super._();
+
+  factory _NetworkCacheEntry.fromJson(Map<String, dynamic> json) =
+      _$_NetworkCacheEntry.fromJson;
 
   @override
   String get key;
