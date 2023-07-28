@@ -63,10 +63,13 @@ class _MangaContent extends ConsumerWidget {
       ),
     );
 
+    final desc = manga.description;
+
     return CustomScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         _SliverHeader(manga),
+        if (desc != null) _SliverDescription(desc),
       ],
     );
   }
@@ -107,6 +110,22 @@ class _SliverHeader extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _SliverDescription extends StatelessWidget {
+  const _SliverDescription(this.desc);
+
+  final String desc;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Text(desc),
       ),
     );
   }

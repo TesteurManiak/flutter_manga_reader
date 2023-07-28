@@ -11,10 +11,10 @@ extension StringExtensions on String {
     );
   }
 
-  /// Remove all bold and italic markdown tags from a string.
+  /// Remove all bold, italic and link markdown tags from a string.
   String removeMarkdown() {
     return replaceAllMapped(
-      RegExp(r'(\*|_){1,2}'),
+      RegExp(r'\*\*|__|\*|_|`|\[.*\]\(.*\)|\n'),
       (match) => '',
     );
   }
