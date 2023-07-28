@@ -218,7 +218,7 @@ packages:
     source: hosted
     version: "0.4.0"
   clock:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: clock
       sha256: cb6d7f03e1de671e34607e909a7213e31d7752be4fb66a86d29fe1eb14bfb5cf
@@ -377,14 +377,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
-  file_picker:
-    dependency: "direct main"
-    description:
-      name: file_picker
-      sha256: "21145c9c268d54b1f771d8380c195d2d6f655e0567dc1ca2f9c134c02c819e0a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.3"
   fixnum:
     dependency: transitive
     description:
@@ -451,14 +443,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      sha256: "950e77c2bbe1692bc0874fc7fb491b96a4dc340457f4ea1641443d0a6c1ea360"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.15"
   flutter_riverpod:
     dependency: "direct main"
     description:
