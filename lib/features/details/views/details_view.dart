@@ -150,12 +150,14 @@ class _SliverButtons extends ConsumerWidget {
     );
 
     return SliverToBoxAdapter(
-      child: TextButton.icon(
-        onPressed: () {
-          ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
-        },
-        icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-        label: const Text('Add to library'),
+      child: UnconstrainedBox(
+        child: TextButton.icon(
+          onPressed: () {
+            ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
+          },
+          icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+          label: const Text('Add to library'),
+        ),
       ),
     );
   }

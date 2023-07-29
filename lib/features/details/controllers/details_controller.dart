@@ -20,26 +20,32 @@ class DetailsController extends _$DetailsController {
 
     state = DetailsState.loading(manga: currentManga);
 
-    final localManga = await ref.read(getMangaProvider(mangaId).future);
-    if (localManga == null) {
-      state = DetailsState.error(error: 'Manga not found', manga: currentManga);
-      return;
-    } else if (localManga.initialized) {
+    final localManga =
+        await ref.read(localDatasourceProvider).getManga(mangaId);
+    if (localManga != null && localManga.initialized) {
       state = DetailsState.loaded(manga: localManga);
       return;
     }
 
     final datasource = ref.read(mangaDatasourceProvider);
-    final result = await datasource.fetchMangaDetails(localManga);
+
+    final infoResult = (await datasource.fetchMangaInfo(mangaId)).successOrNull;
+    if (infoResult == null) {
+      state = DetailsState.error(
+        error: 'Manga not found',
+        manga: currentManga,
+      );
+      return;
+    }
+
+    final result = await datasource.fetchMangaDetails(infoResult);
 
     state = await result.when(
       success: (manga) async {
-        await ref.read(localDatasourceProvider).updateManga(manga);
+        await ref.read(localDatasourceProvider).saveManga(manga);
         return DetailsState.loaded(manga: manga);
       },
-      failure: (error) {
-        return DetailsState.error(error: error.message, manga: currentManga);
-      },
+      failure: (e) => DetailsState.error(error: e.message, manga: infoResult),
     );
   }
 

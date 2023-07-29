@@ -29,8 +29,3 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
 }
-
-@riverpod
-Future<Manga?> getManga(GetMangaRef ref, String mangaId) {
-  return ref.watch(localDatasourceProvider).getManga(mangaId);
-}
