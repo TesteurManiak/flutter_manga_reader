@@ -25,15 +25,13 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
   void initState() {
     super.initState();
 
-    if (!widget.initialManga.initialized) {
-      final detailsController = ref.read(
-        detailsControllerProvider(widget.mangaId).notifier,
-      );
+    final detailsController = ref.read(
+      detailsControllerProvider(widget.mangaId).notifier,
+    );
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        detailsController.fetchDetails();
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      detailsController.fetchDetails();
+    });
   }
 
   @override
