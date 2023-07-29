@@ -4,6 +4,7 @@ import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dar
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
+import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -76,7 +77,6 @@ class _SliverHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
-    final textTheme = Theme.of(context).textTheme;
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -88,28 +88,65 @@ class _SliverHeader extends StatelessWidget {
               child: AppNetworkImage(
                 url: manga?.thumbnailUrl,
                 width: size.width / 4,
+                fit: BoxFit.cover,
               ),
             ),
             Expanded(
-              child: Text.rich(
-                TextSpan(
-                  text: '${manga?.title}\n',
-                  style: textTheme.titleMedium,
-                  children: [
-                    TextSpan(text: manga?.author, style: textTheme.bodyMedium),
-                    TextSpan(
-                      text:
-                          '${manga?.status.toLocalizedString(context)} - ${manga?.source}',
-                      style: textTheme.bodyMedium,
-                    ),
-                  ].separatedWith(const TextSpan(text: '\n')).toList(),
-                ),
-                textAlign: TextAlign.start,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    manga?.title ?? '',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    manga?.author ?? '',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  _StatusAndSource(
+                    status: manga?.status,
+                    source: manga?.source,
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _StatusAndSource extends StatelessWidget {
+  const _StatusAndSource({
+    required this.status,
+    required this.source,
+  });
+
+  final MangaStatus? status;
+  final String? source;
+
+  @override
+  Widget build(BuildContext context) {
+    final localStatus = status;
+    final localSource = source;
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (localStatus != null) ...[
+          Icon(localStatus.icon, size: 14),
+          const SizedBox(width: 4),
+          Text(
+            localStatus.toLocalizedString(context),
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
+          const Text(' • '),
+        ],
+        if (localSource != null) Text(localSource),
+      ],
     );
   }
 }
@@ -122,10 +159,7 @@ class _SliverDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Text(desc),
-      ),
+      child: MangaDescription(description: desc),
     );
   }
 }
@@ -147,7 +181,7 @@ class _SliverButtons extends ConsumerWidget {
         children: [
           _AddToLibraryButton(id: id, isLoaded: isLoaded),
           DetailsButton(
-            icon: Icons.web,
+            icon: Icons.public,
             label: 'WebView'.hardcoded,
             onPressed: null,
           ),
