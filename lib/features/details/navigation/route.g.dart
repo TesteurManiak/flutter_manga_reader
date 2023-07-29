@@ -18,21 +18,18 @@ RouteBase get $detailsRoute => GoRouteData.$route(
 extension $DetailsRouteExtension on DetailsRoute {
   static DetailsRoute _fromState(GoRouterState state) => DetailsRoute(
         mangaId: state.pathParameters['mangaId']!,
-        $extra: state.extra as Manga,
       );
 
   String get location => GoRouteData.$location(
         '/details/${Uri.encodeComponent(mangaId)}',
       );
 
-  void go(BuildContext context) => context.go(location, extra: $extra);
+  void go(BuildContext context) => context.go(location);
 
-  Future<T?> push<T>(BuildContext context) =>
-      context.push<T>(location, extra: $extra);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location, extra: $extra);
+      context.pushReplacement(location);
 
-  void replace(BuildContext context) =>
-      context.replace(location, extra: $extra);
+  void replace(BuildContext context) => context.replace(location);
 }

@@ -44,7 +44,6 @@ dev_dependencies:
   alchemist: ^0.6.1
   build_runner: ^2.4.6
   build_verify: ^3.1.0
-  build_version: ^2.1.1
   custom_lint: ^0.4.0
   drift_dev: ^2.10.0
   fd_lints: ^2.0.1

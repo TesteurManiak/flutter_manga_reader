@@ -11,11 +11,9 @@ class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
     super.key,
     required this.mangaId,
-    required this.initialManga,
   });
 
   final String mangaId;
-  final Manga initialManga;
 
   @override
   ConsumerState<DetailsView> createState() => _DetailsViewState();
@@ -39,36 +37,31 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: _MangaContent(widget.initialManga),
+      body: _MangaContent(widget.mangaId),
     );
   }
 }
 
 class _MangaContent extends ConsumerWidget {
-  const _MangaContent(this.initialManga);
+  const _MangaContent(this.mangaId);
 
-  final Manga initialManga;
+  final String mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final manga = ref.watch(
-      detailsControllerProvider(initialManga.id).select(
-        (value) {
-          return value.maybeWhen(
-            loaded: (manga) => manga,
-            orElse: () => initialManga,
-          );
-        },
+      detailsControllerProvider(mangaId).select(
+        (v) => v.whenOrNull(loaded: (manga) => manga),
       ),
     );
 
-    final desc = manga.description;
+    final desc = manga?.description;
 
     return CustomScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         _SliverHeader(manga),
-        _SliverButtons(manga.id),
+        _SliverButtons(mangaId),
         if (desc != null) _SliverDescription(desc),
       ],
     );
@@ -78,7 +71,7 @@ class _MangaContent extends ConsumerWidget {
 class _SliverHeader extends StatelessWidget {
   const _SliverHeader(this.manga);
 
-  final Manga manga;
+  final Manga? manga;
 
   @override
   Widget build(BuildContext context) {
@@ -93,20 +86,20 @@ class _SliverHeader extends StatelessWidget {
           children: [
             Flexible(
               child: AppNetworkImage(
-                url: manga.thumbnailUrl,
+                url: manga?.thumbnailUrl,
                 width: size.width / 4,
               ),
             ),
             Expanded(
               child: Text.rich(
                 TextSpan(
-                  text: '${manga.title}\n',
+                  text: '${manga?.title}\n',
                   style: textTheme.titleMedium,
                   children: [
-                    TextSpan(text: manga.author, style: textTheme.bodyMedium),
+                    TextSpan(text: manga?.author, style: textTheme.bodyMedium),
                     TextSpan(
                       text:
-                          '${manga.status.toLocalizedString(context)} - ${manga.source}',
+                          '${manga?.status.toLocalizedString(context)} - ${manga?.source}',
                       style: textTheme.bodyMedium,
                     ),
                   ].separatedWith(const TextSpan(text: '\n')).toList(),
@@ -150,12 +143,13 @@ class _SliverButtons extends ConsumerWidget {
 
     return SliverToBoxAdapter(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _AddToLibraryButton(id: id, isLoaded: isLoaded),
           DetailsButton(
             icon: Icons.web,
             label: 'WebView'.hardcoded,
-            onPressed: isLoaded ? () {} : null,
+            onPressed: null,
           ),
         ],
       ),

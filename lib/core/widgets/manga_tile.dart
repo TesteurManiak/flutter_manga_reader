@@ -19,10 +19,7 @@ class _MangaTileState extends State<MangaTile>
     super.build(context);
 
     return GestureDetector(
-      onTap: () {
-        DetailsRoute(mangaId: widget.manga.id, $extra: widget.manga)
-            .push<void>(context);
-      },
+      onTap: () => DetailsRoute(mangaId: widget.manga.id).push<void>(context),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
         child: Stack(
