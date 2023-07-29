@@ -3,6 +3,7 @@ import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -67,8 +68,8 @@ class _MangaContent extends ConsumerWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         _SliverHeader(manga),
-        if (desc != null) _SliverDescription(desc),
         _SliverButtons(manga.id),
+        if (desc != null) _SliverDescription(desc),
       ],
     );
   }
@@ -143,27 +144,50 @@ class _SliverButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorite = ref.watch(
-      detailsControllerProvider(id).select((v) => v.manga?.favorite ?? false),
-    );
     final isLoaded = ref.watch(
       detailsControllerProvider(id).select((v) => v.isLoaded),
     );
 
     return SliverToBoxAdapter(
-      child: UnconstrainedBox(
-        child: TextButton.icon(
-          onPressed: isLoaded
-              ? () {
-                  ref
-                      .read(detailsControllerProvider(id).notifier)
-                      .toggleFavorite();
-                }
-              : null,
-          icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-          label: Text(context.strings.details_add_to_library),
-        ),
+      child: Row(
+        children: [
+          _AddToLibraryButton(id: id, isLoaded: isLoaded),
+          DetailsButton(
+            icon: Icons.web,
+            label: 'WebView'.hardcoded,
+            onPressed: isLoaded ? () {} : null,
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _AddToLibraryButton extends ConsumerWidget {
+  const _AddToLibraryButton({
+    required this.id,
+    required this.isLoaded,
+  });
+
+  final String id;
+  final bool isLoaded;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(
+      detailsControllerProvider(id).select((v) => v.manga?.favorite ?? false),
+    );
+
+    return DetailsButton(
+      onPressed: isLoaded
+          ? () {
+              ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
+            }
+          : null,
+      icon: isFavorite ? Icons.favorite : Icons.favorite_border,
+      label: isFavorite
+          ? 'In library'.hardcoded
+          : context.strings.details_add_to_library,
     );
   }
 }
