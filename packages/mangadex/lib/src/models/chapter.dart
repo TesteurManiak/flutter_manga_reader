@@ -5,6 +5,19 @@ part 'chapter.freezed.dart';
 part 'chapter.g.dart';
 
 @freezed
+class ChapterResponse with _$ChapterResponse {
+  const factory ChapterResponse({
+    @Default(<ChapterData>[]) List<ChapterData> data,
+    @Default(0) int limit,
+    @Default(0) int offset,
+    @Default(0) int total,
+  }) = _ChapterResponse;
+
+  factory ChapterResponse.fromJson(Map<String, dynamic> json) =>
+      _$ChapterResponseFromJson(json);
+}
+
+@freezed
 class ChapterData with _$ChapterData {
   const factory ChapterData({
     required String id,

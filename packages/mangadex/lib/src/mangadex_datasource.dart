@@ -5,7 +5,6 @@ import 'package:mangadex/src/extensions/map_extensions.dart';
 import 'package:mangadex/src/mangadex_helper.dart';
 import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/chapter.dart';
-import 'package:mangadex/src/models/chapter_response.dart';
 import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/manga.dart';
 import 'package:mangadex/src/models/manga_response.dart';
