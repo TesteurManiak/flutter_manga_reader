@@ -29,7 +29,9 @@ class _MangaTileState extends State<MangaTile>
           children: [
             AppNetworkImage(
               url: widget.manga.thumbnailUrl,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
             ),
             Positioned(
               bottom: 0,
