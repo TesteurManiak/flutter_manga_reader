@@ -17,11 +17,11 @@ class MangaGridView extends StatelessWidget {
     return GridView.builder(
       controller: controller,
       padding: const EdgeInsets.all(16),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
         childAspectRatio: 0.69,
+        maxCrossAxisExtent: 160,
       ),
       itemCount: mangas.length,
       itemBuilder: (_, index) => MangaTile(mangas[index]),
