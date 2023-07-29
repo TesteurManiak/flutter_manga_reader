@@ -12,5 +12,4 @@ export 'utils/sliver_separated_child_builder_delegate.dart';
 export 'widgets/locales_dropdown.dart';
 export 'widgets/separated_column.dart';
 export 'widgets/separated_row.dart';
-export 'widgets/spacing.dart';
 export 'widgets/theme_mode_dropdown.dart';

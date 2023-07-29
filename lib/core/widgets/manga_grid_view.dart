@@ -21,7 +21,7 @@ class MangaGridView extends StatelessWidget {
         crossAxisCount: 3,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
-        childAspectRatio: 0.72,
+        childAspectRatio: 0.69, // or 0.642
       ),
       itemCount: mangas.length,
       itemBuilder: (_, index) => MangaTile(mangas[index]),

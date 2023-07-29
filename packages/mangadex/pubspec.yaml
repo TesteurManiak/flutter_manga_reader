@@ -10,6 +10,7 @@ environment:
 dependencies:
   collection: ^1.17.1
   freezed_annotation: ^2.4.1
+  intl: ^0.18.0
   json_annotation: ^4.8.1
   manga_reader_core:
     path: ../manga_reader_core
