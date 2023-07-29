@@ -1,12 +1,16 @@
 extension MapExtensions<K, V> on Map<K, V> {
+  /// Creates a new [Map] with all [MapEntry] that have key of type [K2] and
+  /// value of type [V2].
   Map<K2, V2> whereType<K2 extends K, V2 extends V>() {
     return Map.fromEntries(entries.whereKeyValueType());
   }
 
+  /// Creates a new [Map] with all [MapEntry] that have key of type [K2].
   Map<K2, V> whereKeyType<K2 extends K>() {
     return Map.fromEntries(entries.whereKeyValueType());
   }
 
+  /// Creates a new [Map] with all [MapEntry] that have value of type [V2].
   Map<K, V2> whereValueType<V2 extends V>() {
     return Map.fromEntries(entries.whereKeyValueType());
   }
@@ -18,6 +22,8 @@ extension MapExtensions<K, V> on Map<K, V> {
 }
 
 extension MapEntriesExtensions<K, V> on Iterable<MapEntry<K, V>> {
+  /// Creates a new lazy [Iterable] with all [MapEntry] that have key of type
+  /// [K2] and value of type [V2].
   Iterable<MapEntry<K2, V2>>
       whereKeyValueType<K2 extends K, V2 extends V>() sync* {
     for (final e in this) {
