@@ -5,6 +5,29 @@ part 'manga.freezed.dart';
 part 'manga.g.dart';
 
 @freezed
+class MangaListResponse with _$MangaListResponse {
+  const factory MangaListResponse({
+    @Default(<MangaData>[]) List<MangaData> data,
+    @Default(0) int limit,
+    @Default(0) int offset,
+    @Default(0) int total,
+  }) = _MangaListResponse;
+
+  factory MangaListResponse.fromJson(Map<String, dynamic> json) =>
+      _$MangaListResponseFromJson(json);
+}
+
+@freezed
+class MangaResponse with _$MangaResponse {
+  const factory MangaResponse({
+    required MangaData data,
+  }) = _MangaResponse;
+
+  factory MangaResponse.fromJson(Map<String, dynamic> json) =>
+      _$MangaResponseFromJson(json);
+}
+
+@freezed
 class MangaData with _$MangaData {
   const factory MangaData({
     required String id,

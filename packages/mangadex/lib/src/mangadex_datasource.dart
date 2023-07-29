@@ -7,7 +7,6 @@ import 'package:mangadex/src/models/aggregate.dart';
 import 'package:mangadex/src/models/chapter.dart';
 import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/manga.dart';
-import 'package:mangadex/src/models/manga_response.dart';
 import 'package:mangadex/src/models/relationship.dart';
 
 /// {@template mangadex_datasource}
