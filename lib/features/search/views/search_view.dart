@@ -104,7 +104,7 @@ class _Empty extends StatelessWidget {
         children: [
           const AsciiEmojiWidget(AsciiEmoji.confused),
           Text(
-            'No manga found'.hardcoded,
+            context.strings.search_empty,
             textAlign: TextAlign.center,
           ),
         ],

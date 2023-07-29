@@ -99,17 +99,29 @@ abstract class AppLocalizations {
   /// **'Bibliothèque'**
   String get library_title;
 
+  /// No description provided for @library_empty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre bibliothèque est vide'**
+  String get library_empty;
+
   /// No description provided for @settings_title.
   ///
   /// In fr, this message translates to:
   /// **'Paramètres'**
   String get settings_title;
 
-  /// No description provided for @searching_title.
+  /// No description provided for @search_title.
   ///
   /// In fr, this message translates to:
   /// **'Recherche'**
-  String get searching_title;
+  String get search_title;
+
+  /// No description provided for @search_empty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun manga trouvé'**
+  String get search_empty;
 
   /// No description provided for @manga_status_unknown.
   ///
@@ -158,6 +170,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Une erreur est survenue'**
   String get generic_error;
+
+  /// No description provided for @details_add_to_library.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter à la bibliothèque'**
+  String get details_add_to_library;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

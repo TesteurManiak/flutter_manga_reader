@@ -1,8 +1,10 @@
 {
     "@@locale": "fr",
     "library_title": "Bibliothèque",
+    "library_empty": "Votre bibliothèque est vide",
     "settings_title": "Paramètres",
-    "searching_title": "Recherche",
+    "search_title": "Recherche",
+    "search_empty": "Aucun manga trouvé",
     "manga_status_unknown": "Inconnu",
     "manga_status_ongoing": "En cours",
     "manga_status_completed": "Terminé",
@@ -10,5 +12,6 @@
     "manga_status_publishing_finished": "Terminé",
     "manga_status_canceled": "Annulé",
     "manga_status_on_hiatus": "En pause",
-    "generic_error": "Une erreur est survenue"
+    "generic_error": "Une erreur est survenue",
+    "details_add_to_library": "Ajouter à la bibliothèque"
 }

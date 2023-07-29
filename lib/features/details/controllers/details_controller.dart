@@ -69,4 +69,13 @@ class DetailsState with _$DetailsState {
     Manga? manga,
     String? error,
   }) = _Error;
+
+  const DetailsState._();
+
+  bool get isLoaded {
+    return maybeWhen(
+      loaded: (_) => true,
+      orElse: () => false,
+    );
+  }
 }

@@ -60,7 +60,7 @@ class _Empty extends StatelessWidget {
         children: [
           const AsciiEmojiWidget(AsciiEmoji.confused),
           Text(
-            'Your library is empty'.hardcoded,
+            context.strings.library_empty,
             textAlign: TextAlign.center,
           ),
         ],

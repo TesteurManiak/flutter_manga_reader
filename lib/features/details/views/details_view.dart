@@ -146,15 +146,22 @@ class _SliverButtons extends ConsumerWidget {
     final isFavorite = ref.watch(
       detailsControllerProvider(id).select((v) => v.manga?.favorite ?? false),
     );
+    final isLoaded = ref.watch(
+      detailsControllerProvider(id).select((v) => v.isLoaded),
+    );
 
     return SliverToBoxAdapter(
       child: UnconstrainedBox(
         child: TextButton.icon(
-          onPressed: () {
-            ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
-          },
+          onPressed: isLoaded
+              ? () {
+                  ref
+                      .read(detailsControllerProvider(id).notifier)
+                      .toggleFavorite();
+                }
+              : null,
           icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
-          label: const Text('Add to library'),
+          label: Text(context.strings.details_add_to_library),
         ),
       ),
     );
