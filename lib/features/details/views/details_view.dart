@@ -10,6 +10,7 @@ import 'package:flutter_manga_reader/features/details/controllers/details_contro
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
+import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -66,10 +67,13 @@ class _MangaContent extends ConsumerStatefulWidget {
 }
 
 class _MangaContentState extends ConsumerState<_MangaContent> {
+  final scrollController = ScrollController();
+
   late final compactNotifier = ValueNotifier<bool>(!widget.openedFromSource);
 
   @override
   void dispose() {
+    scrollController.dispose();
     compactNotifier.dispose();
 
     super.dispose();
@@ -105,9 +109,10 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
             ),
           ),
         CustomScrollView(
+          controller: scrollController,
           physics: const PullToRefreshScrollPhysics(),
           slivers: [
-            const _SliverAppBar(),
+            SliverDetailsAppBar(scrollController: scrollController),
             SliverPullToRefresh(
               onRefresh: () async {
                 // TODO(Guillaume): force refresh manga details
@@ -132,32 +137,6 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                 },
               ),
           ],
-        ),
-      ],
-    );
-  }
-}
-
-class _SliverAppBar extends StatelessWidget {
-  const _SliverAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return const SliverAppBar(
-      backgroundColor: Colors.transparent,
-      pinned: true,
-      actions: [
-        IconButton(
-          onPressed: null,
-          icon: Icon(Icons.download_outlined),
-        ),
-        IconButton(
-          onPressed: null,
-          icon: Icon(Icons.filter_list),
-        ),
-        IconButton(
-          onPressed: null,
-          icon: Icon(Icons.more_vert),
         ),
       ],
     );
