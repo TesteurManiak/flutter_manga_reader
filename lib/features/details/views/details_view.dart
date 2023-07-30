@@ -107,10 +107,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
         CustomScrollView(
           physics: const PullToRefreshScrollPhysics(),
           slivers: [
-            const SliverAppBar(
-              backgroundColor: Colors.transparent,
-              pinned: true,
-            ),
+            const _SliverAppBar(),
             SliverPullToRefresh(
               onRefresh: () async {
                 // TODO(Guillaume): force refresh manga details
@@ -135,6 +132,32 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                 },
               ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SliverAppBar extends StatelessWidget {
+  const _SliverAppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverAppBar(
+      backgroundColor: Colors.transparent,
+      pinned: true,
+      actions: [
+        IconButton(
+          onPressed: null,
+          icon: Icon(Icons.download_outlined),
+        ),
+        IconButton(
+          onPressed: null,
+          icon: Icon(Icons.filter_list),
+        ),
+        IconButton(
+          onPressed: null,
+          icon: Icon(Icons.more_vert),
         ),
       ],
     );
