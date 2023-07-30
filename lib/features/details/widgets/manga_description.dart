@@ -13,7 +13,7 @@ class MangaDescription extends StatefulWidget {
 }
 
 class _MangaDescriptionState extends State<MangaDescription> {
-  final animationDuration = const Duration(milliseconds: 500);
+  final animationDuration = const Duration(milliseconds: 300);
 
   bool isExpanded = false;
 

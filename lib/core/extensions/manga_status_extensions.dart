@@ -21,7 +21,7 @@ extension MangaStatusExtensions on MangaStatus {
   IconData get icon {
     return switch (this) {
       MangaStatus.unknown => Icons.help_outline,
-      MangaStatus.ongoing => Icons.play_arrow,
+      MangaStatus.ongoing => Icons.schedule,
       MangaStatus.completed => Icons.check,
       MangaStatus.licensed => Icons.lock,
       MangaStatus.publishingFinished => Icons.check,
