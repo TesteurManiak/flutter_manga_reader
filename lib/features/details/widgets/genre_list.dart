@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/core.dart';
+
+class GenreList extends StatelessWidget {
+  const GenreList({
+    super.key,
+    required this.compact,
+    required this.genres,
+  });
+
+  final bool compact;
+  final List<String> genres;
+
+  @override
+  Widget build(BuildContext context) {
+    const spacing = 4.0;
+    const padding = EdgeInsets.symmetric(horizontal: 12);
+
+    if (compact) {
+      return SingleChildScrollView(
+        padding: padding,
+        scrollDirection: Axis.horizontal,
+        child: SeparatedRow(
+          separator: const SizedBox(width: spacing),
+          children: [
+            for (final genre in genres) _GenreChip(genre),
+          ],
+        ),
+      );
+    }
+
+    return Padding(
+      padding: padding,
+      child: Wrap(
+        spacing: spacing,
+        children: [
+          for (final genre in genres) _GenreChip(genre),
+        ],
+      ),
+    );
+  }
+}
+
+class _GenreChip extends StatelessWidget {
+  const _GenreChip(this.genre);
+
+  final String genre;
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      backgroundColor: Colors.grey.withOpacity(0.2),
+      label: Text(
+        genre,
+        style: const TextStyle(fontSize: 11),
+      ),
+    );
+  }
+}

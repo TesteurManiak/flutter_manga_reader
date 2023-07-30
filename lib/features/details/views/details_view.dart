@@ -4,6 +4,7 @@ import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dar
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
+import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -48,7 +49,7 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
   }
 }
 
-class _MangaContent extends ConsumerWidget {
+class _MangaContent extends ConsumerStatefulWidget {
   const _MangaContent({
     required this.mangaId,
     required this.openedFromSource,
@@ -58,9 +59,23 @@ class _MangaContent extends ConsumerWidget {
   final bool openedFromSource;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_MangaContent> createState() => _MangaContentState();
+}
+
+class _MangaContentState extends ConsumerState<_MangaContent> {
+  late final compactNotifier = ValueNotifier<bool>(!widget.openedFromSource);
+
+  @override
+  void dispose() {
+    compactNotifier.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final manga = ref.watch(
-      detailsControllerProvider(mangaId).select(
+      detailsControllerProvider(widget.mangaId).select(
         (v) => v.whenOrNull(loaded: (manga) => manga),
       ),
     );
@@ -72,13 +87,23 @@ class _MangaContent extends ConsumerWidget {
       physics: const AlwaysScrollableScrollPhysics(),
       slivers: [
         _SliverHeader(manga),
-        _SliverButtons(mangaId),
+        _SliverButtons(widget.mangaId),
         if (desc != null)
           _SliverDescription(
             desc: desc,
-            initiallyExpanded: openedFromSource,
+            initiallyExpanded: widget.openedFromSource,
+            onExpansionChanged: (v) => compactNotifier.value = !v,
           ),
-        if (genres != null) _SliverGenreList(genres: genres, compact: false),
+        if (genres != null)
+          ValueListenableBuilder(
+            valueListenable: compactNotifier,
+            builder: (context, isCompact, _) {
+              return _SliverGenreList(
+                genres: genres,
+                compact: isCompact,
+              );
+            },
+          ),
       ],
     );
   }
@@ -170,10 +195,12 @@ class _SliverDescription extends StatelessWidget {
   const _SliverDescription({
     required this.desc,
     required this.initiallyExpanded,
+    required this.onExpansionChanged,
   });
 
   final String desc;
   final bool initiallyExpanded;
+  final ValueChanged<bool> onExpansionChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +208,7 @@ class _SliverDescription extends StatelessWidget {
       child: MangaDescription(
         description: desc,
         initiallyExpanded: initiallyExpanded,
+        onExpansionChanged: onExpansionChanged,
       ),
     );
   }
@@ -254,32 +282,9 @@ class _SliverGenreList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        scrollDirection: Axis.horizontal,
-        child: SeparatedRow(
-          separator: const SizedBox(width: 4),
-          children: [
-            for (final genre in genres) _GenreChip(genre),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _GenreChip extends StatelessWidget {
-  const _GenreChip(this.genre);
-
-  final String genre;
-
-  @override
-  Widget build(BuildContext context) {
-    return Chip(
-      backgroundColor: Colors.grey.withOpacity(0.2),
-      label: Text(
-        genre,
-        style: const TextStyle(fontSize: 11),
+      child: GenreList(
+        compact: compact,
+        genres: genres,
       ),
     );
   }

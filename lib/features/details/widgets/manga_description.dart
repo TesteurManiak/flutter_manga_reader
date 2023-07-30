@@ -5,10 +5,12 @@ class MangaDescription extends StatefulWidget {
     super.key,
     required this.description,
     required this.initiallyExpanded,
+    this.onExpansionChanged,
   });
 
   final String description;
   final bool initiallyExpanded;
+  final ValueChanged<bool>? onExpansionChanged;
 
   @override
   State<MangaDescription> createState() => _MangaDescriptionState();
@@ -24,7 +26,10 @@ class _MangaDescriptionState extends State<MangaDescription> {
     final theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: () => setState(() => isExpanded = !isExpanded),
+      onTap: () {
+        setState(() => isExpanded = !isExpanded);
+        widget.onExpansionChanged?.call(isExpanded);
+      },
       behavior: HitTestBehavior.opaque,
       child: Padding(
         padding: const EdgeInsets.all(8),
