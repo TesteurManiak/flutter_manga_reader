@@ -72,7 +72,7 @@ class _BottomBar extends StatelessWidget {
               label: strings.library_title,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.search),
+              icon: const Icon(Icons.explore_outlined),
               label: strings.search_title,
             ),
             BottomNavigationBarItem(

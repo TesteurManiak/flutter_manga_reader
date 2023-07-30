@@ -14,7 +14,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_title => 'Settings';
 
   @override
-  String get search_title => 'Search';
+  String get search_title => 'Explore';
 
   @override
   String get search_empty => 'No manga found';

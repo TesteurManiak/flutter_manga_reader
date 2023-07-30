@@ -114,7 +114,7 @@ abstract class AppLocalizations {
   /// No description provided for @search_title.
   ///
   /// In fr, this message translates to:
-  /// **'Recherche'**
+  /// **'Explorer'**
   String get search_title;
 
   /// No description provided for @search_empty.
