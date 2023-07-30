@@ -83,28 +83,33 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
     final desc = manga?.description;
     final genres = manga?.getGenres();
 
-    return CustomScrollView(
-      physics: const AlwaysScrollableScrollPhysics(),
-      slivers: [
-        _SliverHeader(manga),
-        _SliverButtons(widget.mangaId),
-        if (desc != null)
-          _SliverDescription(
-            desc: desc,
-            initiallyExpanded: widget.openedFromSource,
-            onExpansionChanged: (v) => compactNotifier.value = !v,
-          ),
-        if (genres != null)
-          ValueListenableBuilder(
-            valueListenable: compactNotifier,
-            builder: (context, isCompact, _) {
-              return _SliverGenreList(
-                genres: genres,
-                compact: isCompact,
-              );
-            },
-          ),
-      ],
+    return RefreshIndicator(
+      onRefresh: () async {
+        // TODO(Guillaume): force refresh manga details
+      },
+      child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          _SliverHeader(manga),
+          _SliverButtons(widget.mangaId),
+          if (desc != null)
+            _SliverDescription(
+              desc: desc,
+              initiallyExpanded: widget.openedFromSource,
+              onExpansionChanged: (v) => compactNotifier.value = !v,
+            ),
+          if (genres != null)
+            ValueListenableBuilder(
+              valueListenable: compactNotifier,
+              builder: (context, isCompact, _) {
+                return _SliverGenreList(
+                  genres: genres,
+                  compact: isCompact,
+                );
+              },
+            ),
+        ],
+      ),
     );
   }
 }
