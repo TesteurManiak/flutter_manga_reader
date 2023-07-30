@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dart';
+import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
+import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
@@ -101,34 +103,37 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
               stops: const [0, .3],
             ),
           ),
-        RefreshIndicator(
-          onRefresh: () async {
-            // TODO(Guillaume): force refresh manga details
-          },
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: [
-              const SliverAppBar(backgroundColor: Colors.transparent),
-              _SliverHeader(manga),
-              _SliverButtons(widget.mangaId),
-              if (desc != null)
-                _SliverDescription(
-                  desc: desc,
-                  initiallyExpanded: widget.openedFromSource,
-                  onExpansionChanged: (v) => compactNotifier.value = !v,
-                ),
-              if (genres != null)
-                ValueListenableBuilder(
-                  valueListenable: compactNotifier,
-                  builder: (context, isCompact, _) {
-                    return _SliverGenreList(
-                      genres: genres,
-                      compact: isCompact,
-                    );
-                  },
-                ),
-            ],
-          ),
+        CustomScrollView(
+          physics: const PullToRefreshScrollPhysics(),
+          slivers: [
+            const SliverAppBar(
+              backgroundColor: Colors.transparent,
+              pinned: true,
+            ),
+            SliverPullToRefresh(
+              onRefresh: () async {
+                // TODO(Guillaume): force refresh manga details
+              },
+            ),
+            _SliverHeader(manga),
+            _SliverButtons(widget.mangaId),
+            if (desc != null)
+              _SliverDescription(
+                desc: desc,
+                initiallyExpanded: widget.openedFromSource,
+                onExpansionChanged: (v) => compactNotifier.value = !v,
+              ),
+            if (genres != null)
+              ValueListenableBuilder(
+                valueListenable: compactNotifier,
+                builder: (context, isCompact, _) {
+                  return _SliverGenreList(
+                    genres: genres,
+                    compact: isCompact,
+                  );
+                },
+              ),
+          ],
         ),
       ],
     );
