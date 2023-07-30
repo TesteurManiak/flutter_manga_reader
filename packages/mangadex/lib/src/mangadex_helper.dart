@@ -94,10 +94,13 @@ class MangadexHelper {
     final originalLanguage = attr.originalLanguage;
 
     final nonGenres = [
-      if (publicationDemographic != null) publicationDemographic.name,
+      if (publicationDemographic != null &&
+          publicationDemographic != PublicationDemographic.none)
+        publicationDemographic.name.capitalizeFirst(),
       if (contentRating != null && contentRating != ContentRating.safe)
-        contentRating.name,
-      if (originalLanguage != null) originalLanguage,
+        contentRating.name.capitalizeFirst(), // TODO(Guillaume): translate
+      if (originalLanguage != null)
+        originalLanguage.toUpperCase(), // TODO(Guillaume): translate
     ];
 
     final authors = mangaData.relationships
@@ -119,20 +122,36 @@ class MangadexHelper {
             ?.attributes
             ?.fileName;
 
-    final genresMap = groupBy(attr.tags, (tag) => tag.attributes.group)
-        .groupSort((a, b) => a.attributes.group.compareTo(b.attributes.group));
+    final genresMap =
+        groupBy(attr.tags, (tag) => tag.attributes.group).groupSort(
+      (a, b) {
+        final nameA = a.attributes.name.getDisplayName(lang);
+        final nameB = b.attributes.name.getDisplayName(lang);
+
+        if (nameA == null && nameB == null) {
+          return 0;
+        } else if (nameA == null) {
+          return 1;
+        } else if (nameB == null) {
+          return -1;
+        }
+
+        return nameA.compareTo(nameB);
+      },
+    );
 
     final genreList = <String>[];
     for (final group in MDConstants.tagGroupsOrder) {
-      final genres = genresMap[group]?.map((e) => e.attributes.group);
-      if (genres != null && genres.isNotEmpty) {
-        genreList.addAll(genres);
-      }
+      final genres = genresMap[group]
+          ?.map((e) => e.attributes.name.getDisplayName(lang))
+          .whereType<String>();
+
+      if (genres != null && genres.isNotEmpty) genreList.addAll(genres);
     }
     genreList.addAll(nonGenres);
 
-    final desc = (attr.description[lang] ?? attr.description['en'])
-        ?.removeEntitiesAndMarkdown();
+    final desc =
+        attr.description.getDisplayName(lang)?.removeEntitiesAndMarkdown();
 
     return createBasicManga(
       mangaData: mangaData,
@@ -199,5 +218,18 @@ extension on MangaAttributes {
       }
     }
     return oneShot;
+  }
+}
+
+extension on LocalizedString {
+  String? getDisplayName(String lang) {
+    return this[lang] ?? this['en'] ?? values.firstOrNull;
+  }
+}
+
+extension on String {
+  String capitalizeFirst() {
+    if (length <= 1) return toUpperCase();
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 }

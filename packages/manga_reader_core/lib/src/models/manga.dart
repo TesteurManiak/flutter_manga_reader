@@ -32,23 +32,6 @@ class Manga with _$Manga {
         .where((e) => e.isNotEmpty)
         .toList();
   }
-
-  Manga copyFrom(Manga other) {
-    return Manga(
-      id: id,
-      url: url,
-      source: source,
-      title: title,
-      author: author ?? other.author,
-      artist: artist ?? other.artist,
-      description: description ?? other.description,
-      genre: genre ?? other.genre,
-      status: other.status,
-      thumbnailUrl: thumbnailUrl ?? other.thumbnailUrl,
-      updateStrategy: other.updateStrategy,
-      initialized: !initialized ? other.initialized : initialized,
-    );
-  }
 }
 
 /// Define the update strategy for a manga.

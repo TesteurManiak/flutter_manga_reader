@@ -57,6 +57,7 @@ class _MangaContent extends ConsumerWidget {
     );
 
     final desc = manga?.description;
+    final genres = manga?.getGenres();
 
     return CustomScrollView(
       physics: const AlwaysScrollableScrollPhysics(),
@@ -64,6 +65,7 @@ class _MangaContent extends ConsumerWidget {
         _SliverHeader(manga),
         _SliverButtons(mangaId),
         if (desc != null) _SliverDescription(desc),
+        if (genres != null) _SliverGenreList(genres: genres, compact: false),
       ],
     );
   }
@@ -216,6 +218,49 @@ class _AddToLibraryButton extends ConsumerWidget {
       label: isFavorite
           ? 'In library'.hardcoded
           : context.strings.details_add_to_library,
+    );
+  }
+}
+
+class _SliverGenreList extends StatelessWidget {
+  const _SliverGenreList({
+    required this.genres,
+    required this.compact,
+  });
+
+  final bool compact;
+  final List<String> genres;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        scrollDirection: Axis.horizontal,
+        child: SeparatedRow(
+          separator: const SizedBox(width: 4),
+          children: [
+            for (final genre in genres) _GenreChip(genre),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GenreChip extends StatelessWidget {
+  const _GenreChip(this.genre);
+
+  final String genre;
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      backgroundColor: Colors.grey.withOpacity(0.2),
+      label: Text(
+        genre,
+        style: const TextStyle(fontSize: 11),
+      ),
     );
   }
 }

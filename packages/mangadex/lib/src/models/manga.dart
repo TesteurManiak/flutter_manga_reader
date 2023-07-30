@@ -34,7 +34,7 @@ class MangaData with _$MangaData {
     required MangaAttributes attributes,
     @Default(<Relationship>[])
     @RelationshipConverter()
-    List<Relationship> relationships,
+        List<Relationship> relationships,
   }) = _MangaData;
 
   factory MangaData.fromJson(Map<String, dynamic> json) =>
@@ -109,7 +109,10 @@ class Tag with _$Tag {
 
 @freezed
 class TagAttributes with _$TagAttributes {
-  const factory TagAttributes({required String group}) = _TagAttributes;
+  const factory TagAttributes({
+    required LocalizedString name,
+    required String group,
+  }) = _TagAttributes;
 
   factory TagAttributes.fromJson(Map<String, dynamic> json) =>
       _$TagAttributesFromJson(json);

@@ -1105,6 +1105,7 @@ TagAttributes _$TagAttributesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TagAttributes {
+  Map<String, String> get name => throw _privateConstructorUsedError;
   String get group => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1119,7 +1120,7 @@ abstract class $TagAttributesCopyWith<$Res> {
           TagAttributes value, $Res Function(TagAttributes) then) =
       _$TagAttributesCopyWithImpl<$Res, TagAttributes>;
   @useResult
-  $Res call({String group});
+  $Res call({Map<String, String> name, String group});
 }
 
 /// @nodoc
@@ -1135,9 +1136,14 @@ class _$TagAttributesCopyWithImpl<$Res, $Val extends TagAttributes>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? group = null,
   }) {
     return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       group: null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
@@ -1154,7 +1160,7 @@ abstract class _$$_TagAttributesCopyWith<$Res>
       __$$_TagAttributesCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String group});
+  $Res call({Map<String, String> name, String group});
 }
 
 /// @nodoc
@@ -1168,9 +1174,14 @@ class __$$_TagAttributesCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? group = null,
   }) {
     return _then(_$_TagAttributes(
+      name: null == name
+          ? _value._name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
       group: null == group
           ? _value.group
           : group // ignore: cast_nullable_to_non_nullable
@@ -1182,17 +1193,27 @@ class __$$_TagAttributesCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_TagAttributes implements _TagAttributes {
-  const _$_TagAttributes({required this.group});
+  const _$_TagAttributes(
+      {required final Map<String, String> name, required this.group})
+      : _name = name;
 
   factory _$_TagAttributes.fromJson(Map<String, dynamic> json) =>
       _$$_TagAttributesFromJson(json);
+
+  final Map<String, String> _name;
+  @override
+  Map<String, String> get name {
+    if (_name is EqualUnmodifiableMapView) return _name;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_name);
+  }
 
   @override
   final String group;
 
   @override
   String toString() {
-    return 'TagAttributes(group: $group)';
+    return 'TagAttributes(name: $name, group: $group)';
   }
 
   @override
@@ -1200,12 +1221,14 @@ class _$_TagAttributes implements _TagAttributes {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TagAttributes &&
+            const DeepCollectionEquality().equals(other._name, _name) &&
             (identical(other.group, group) || other.group == group));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, group);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_name), group);
 
   @JsonKey(ignore: true)
   @override
@@ -1222,12 +1245,15 @@ class _$_TagAttributes implements _TagAttributes {
 }
 
 abstract class _TagAttributes implements TagAttributes {
-  const factory _TagAttributes({required final String group}) =
-      _$_TagAttributes;
+  const factory _TagAttributes(
+      {required final Map<String, String> name,
+      required final String group}) = _$_TagAttributes;
 
   factory _TagAttributes.fromJson(Map<String, dynamic> json) =
       _$_TagAttributes.fromJson;
 
+  @override
+  Map<String, String> get name;
   @override
   String get group;
   @override

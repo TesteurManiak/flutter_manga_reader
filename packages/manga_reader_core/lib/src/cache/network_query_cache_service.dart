@@ -28,4 +28,7 @@ abstract class NetworkQueryCacheService {
 
   /// Clears the cache.
   Future<void> clear();
+
+  /// Clears all expired entries from the cache.
+  Future<void> clearExpiredEntries();
 }

@@ -126,10 +126,12 @@ Map<String, dynamic> _$$_TagToJson(_$_Tag instance) => <String, dynamic>{
 
 _$_TagAttributes _$$_TagAttributesFromJson(Map<String, dynamic> json) =>
     _$_TagAttributes(
+      name: Map<String, String>.from(json['name'] as Map),
       group: json['group'] as String,
     );
 
 Map<String, dynamic> _$$_TagAttributesToJson(_$_TagAttributes instance) =>
     <String, dynamic>{
+      'name': instance.name,
       'group': instance.group,
     };

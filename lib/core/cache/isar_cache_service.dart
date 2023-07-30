@@ -32,7 +32,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
     NetworkCacheEntry? cacheEntry,
   ) async {
     if (cacheEntry != null && !cacheEntry.isValid) {
-      await delete(cacheEntry.key);
+      await clearExpiredEntries();
       return null;
     }
 
@@ -74,5 +74,16 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
   Future<void> clear() async {
     final isar = await getInstance();
     return isar.isarCacheEntrys.clear();
+  }
+
+  @override
+  Future<void> clearExpiredEntries() async {
+    final isar = await getInstance();
+    return isar.writeTxn(() {
+      return isar.isarCacheEntrys
+          .filter()
+          .expiryLessThan(clock.now())
+          .deleteAll();
+    });
   }
 }

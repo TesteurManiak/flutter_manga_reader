@@ -20,12 +20,12 @@ extension MangaStatusExtensions on MangaStatus {
 
   IconData get icon {
     return switch (this) {
-      MangaStatus.unknown => Icons.help_outline,
+      MangaStatus.unknown => Icons.block,
       MangaStatus.ongoing => Icons.schedule,
-      MangaStatus.completed => Icons.check,
+      MangaStatus.completed => Icons.done_all,
       MangaStatus.licensed => Icons.lock,
-      MangaStatus.publishingFinished => Icons.check,
-      MangaStatus.cancelled => Icons.cancel_outlined,
+      MangaStatus.publishingFinished => Icons.done_all,
+      MangaStatus.cancelled => Icons.close,
       MangaStatus.onHiatus => Icons.pause,
     };
   }
