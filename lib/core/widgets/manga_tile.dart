@@ -4,9 +4,14 @@ import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class MangaTile extends StatefulWidget {
-  const MangaTile(this.manga, {super.key});
+  const MangaTile({
+    super.key,
+    required this.manga,
+    required this.displayedFromSource,
+  });
 
   final Manga manga;
+  final bool displayedFromSource;
 
   @override
   State<MangaTile> createState() => _MangaTileState();
@@ -19,7 +24,12 @@ class _MangaTileState extends State<MangaTile>
     super.build(context);
 
     return GestureDetector(
-      onTap: () => DetailsRoute(mangaId: widget.manga.id).push<void>(context),
+      onTap: () {
+        DetailsRoute(
+          mangaId: widget.manga.id,
+          openedFromSource: widget.displayedFromSource,
+        ).push<void>(context);
+      },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
         child: Stack(

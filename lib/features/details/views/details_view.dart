@@ -12,9 +12,11 @@ class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
     super.key,
     required this.mangaId,
+    required this.openedFromSource,
   });
 
   final String mangaId;
+  final bool openedFromSource;
 
   @override
   ConsumerState<DetailsView> createState() => _DetailsViewState();
@@ -38,15 +40,22 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: _MangaContent(widget.mangaId),
+      body: _MangaContent(
+        mangaId: widget.mangaId,
+        openedFromSource: widget.openedFromSource,
+      ),
     );
   }
 }
 
 class _MangaContent extends ConsumerWidget {
-  const _MangaContent(this.mangaId);
+  const _MangaContent({
+    required this.mangaId,
+    required this.openedFromSource,
+  });
 
   final String mangaId;
+  final bool openedFromSource;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,7 +73,11 @@ class _MangaContent extends ConsumerWidget {
       slivers: [
         _SliverHeader(manga),
         _SliverButtons(mangaId),
-        if (desc != null) _SliverDescription(desc),
+        if (desc != null)
+          _SliverDescription(
+            desc: desc,
+            initiallyExpanded: openedFromSource,
+          ),
         if (genres != null) _SliverGenreList(genres: genres, compact: false),
       ],
     );
@@ -154,14 +167,21 @@ class _StatusAndSource extends StatelessWidget {
 }
 
 class _SliverDescription extends StatelessWidget {
-  const _SliverDescription(this.desc);
+  const _SliverDescription({
+    required this.desc,
+    required this.initiallyExpanded,
+  });
 
   final String desc;
+  final bool initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: MangaDescription(description: desc),
+      child: MangaDescription(
+        description: desc,
+        initiallyExpanded: initiallyExpanded,
+      ),
     );
   }
 }

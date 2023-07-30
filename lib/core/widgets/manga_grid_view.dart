@@ -6,11 +6,13 @@ class MangaGridView extends StatelessWidget {
   const MangaGridView({
     super.key,
     required this.mangas,
+    required this.displayedFromSource,
     this.controller,
   });
 
   final List<Manga> mangas;
   final ScrollController? controller;
+  final bool displayedFromSource;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,12 @@ class MangaGridView extends StatelessWidget {
         maxCrossAxisExtent: 160,
       ),
       itemCount: mangas.length,
-      itemBuilder: (_, index) => MangaTile(mangas[index]),
+      itemBuilder: (_, index) {
+        return MangaTile(
+          manga: mangas[index],
+          displayedFromSource: displayedFromSource,
+        );
+      },
     );
   }
 }

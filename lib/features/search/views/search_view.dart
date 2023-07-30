@@ -87,6 +87,7 @@ class _LoadedState extends ConsumerState<_Loaded> {
       child: MangaGridView(
         controller: scrollController,
         mangas: widget.mangas,
+        displayedFromSource: true,
       ),
     );
   }

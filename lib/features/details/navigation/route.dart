@@ -8,14 +8,19 @@ part 'route.g.dart';
 class DetailsRoute extends GoRouteData {
   const DetailsRoute({
     required this.mangaId,
+    this.openedFromSource,
   });
 
   static const path = '/details/:mangaId';
 
   final String mangaId;
+  final bool? openedFromSource;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return DetailsView(mangaId: mangaId);
+    return DetailsView(
+      mangaId: mangaId,
+      openedFromSource: openedFromSource ?? false,
+    );
   }
 }

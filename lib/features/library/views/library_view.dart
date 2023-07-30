@@ -26,7 +26,12 @@ class _LibraryViewState extends ConsumerState<LibraryView>
       appBar: _AppBar(),
       body: state.when(
         loading: LoadingContent.new,
-        loaded: (mangas) => MangaGridView(mangas: mangas),
+        loaded: (mangas) {
+          return MangaGridView(
+            mangas: mangas,
+            displayedFromSource: false,
+          );
+        },
         empty: () => const _Empty(),
         error: (_) => const ErrorContent(),
       ),

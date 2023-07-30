@@ -4,9 +4,11 @@ class MangaDescription extends StatefulWidget {
   const MangaDescription({
     super.key,
     required this.description,
+    required this.initiallyExpanded,
   });
 
   final String description;
+  final bool initiallyExpanded;
 
   @override
   State<MangaDescription> createState() => _MangaDescriptionState();
@@ -15,7 +17,7 @@ class MangaDescription extends StatefulWidget {
 class _MangaDescriptionState extends State<MangaDescription> {
   final animationDuration = const Duration(milliseconds: 300);
 
-  bool isExpanded = false;
+  late bool isExpanded = widget.initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
