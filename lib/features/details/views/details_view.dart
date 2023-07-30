@@ -5,6 +5,7 @@ import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dar
 import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
+import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
@@ -81,6 +82,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(
+      detailsControllerProvider(widget.mangaId).select((v) => v.isLoading),
+    );
     final manga = ref.watch(
       detailsControllerProvider(widget.mangaId).select(
         (v) => v.whenOrNull(loaded: (manga) => manga),
@@ -91,6 +95,8 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
     final desc = manga?.description;
     final genres = manga?.getGenres();
     final thumbnailUrl = manga?.thumbnailUrl;
+
+    if (manga == null && isLoading) return const LoadingContent();
 
     return Stack(
       children: [

@@ -78,4 +78,11 @@ class DetailsState with _$DetailsState {
       orElse: () => false,
     );
   }
+
+  bool get isLoading {
+    return maybeWhen(
+      loading: (_) => true,
+      orElse: () => false,
+    );
+  }
 }
