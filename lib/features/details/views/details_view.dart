@@ -92,6 +92,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
       children: [
         if (thumbnailUrl != null)
           GradientImage(
+            height: 480,
             image: CachedNetworkImageProvider(thumbnailUrl),
             gradient: LinearGradient(
               begin: Alignment.topCenter,

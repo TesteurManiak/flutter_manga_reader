@@ -5,20 +5,35 @@ class GradientImage extends StatelessWidget {
     super.key,
     required this.image,
     required this.gradient,
+    this.height,
   });
 
   final ImageProvider image;
   final Gradient gradient;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: gradient.createShader,
-      blendMode: BlendMode.srcATop,
-      child: Image(
-        image: image,
-        fit: BoxFit.cover,
-      ),
+    return Stack(
+      children: [
+        Container(
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              image: image,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          height: height,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            gradient: gradient,
+          ),
+        ),
+      ],
     );
   }
 }
