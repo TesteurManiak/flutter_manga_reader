@@ -1,6 +1,5 @@
 export 'extensions/build_context_extensions.dart';
 export 'extensions/iterable_extensions.dart';
-export 'extensions/locale_extensions.dart';
 export 'extensions/string_extensions.dart';
 export 'extensions/theme_mode_extensions.dart';
 export 'mixins/app_bar_size.dart';
@@ -9,7 +8,6 @@ export 'providers/locale_controller.dart';
 export 'providers/theme_controller.dart';
 export 'utils/logger.dart';
 export 'utils/sliver_separated_child_builder_delegate.dart';
-export 'widgets/locales_dropdown.dart';
 export 'widgets/separated_column.dart';
 export 'widgets/separated_row.dart';
 export 'widgets/theme_mode_dropdown.dart';

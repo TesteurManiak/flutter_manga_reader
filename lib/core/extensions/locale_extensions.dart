@@ -1,10 +1,8 @@
-import 'dart:ui';
-
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter/widgets.dart';
 
 extension LocaleExtensions on Locale {
   /// Returns the locale name in its corresponding language.
-  String translatedLocaleName() {
+  String get translatedLocaleName {
     switch (toLanguageTag()) {
       case 'de':
       case 'de-DE':
@@ -39,7 +37,7 @@ extension LocaleExtensions on Locale {
       case 'zh-TW':
         return '繁體中文';
       default:
-        log.severe('Locale $this not found for translatedLocaleName().');
+        debugPrint('Locale $this not found.');
         return 'N/A';
     }
   }

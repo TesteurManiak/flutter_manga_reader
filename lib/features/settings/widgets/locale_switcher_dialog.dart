@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -43,7 +44,7 @@ class _LocaleTile extends ConsumerWidget {
     final currentLocale = ref.watch(localeControllerProvider);
 
     return RadioListTile<Locale>(
-      title: Text(locale.languageCode),
+      title: Text(locale.translatedLocaleName),
       value: locale,
       groupValue: currentLocale,
       onChanged: (_) => Navigator.pop(context, locale),
