@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -42,6 +43,8 @@ class _LocaleObserver extends WidgetsBindingObserver {
 
 @riverpod
 class LocaleController extends _$LocaleController {
+  static const _localeKey = 'locale';
+
   @override
   Locale build() {
     final system = ref.read(systemLocaleProvider);
@@ -54,17 +57,20 @@ class LocaleController extends _$LocaleController {
   ///
   /// Used to load something if the locale is not set by the device settings
   /// (e.g: from the local storage).
-  Future<void> init() {
-    // Replace this with your own logic.
-    return Future.value();
+  Future<void> init() async {
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    final locale = prefs.getString(_localeKey);
+
+    if (locale != null) await setLocale(Locale(locale));
   }
 
   /// Used to set the locale if it is supported.
-  Future<void> setLocale(Locale locale) {
+  Future<void> setLocale(Locale locale) async {
     final newLocale = _resolveLocale(locale);
-    if (newLocale == state) return Future.value();
+    if (newLocale == state) return;
 
-    // You can save the new locale to the local storage here.
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    await prefs.setString(_localeKey, newLocale.languageCode);
 
     state = newLocale;
     return Future.value();
