@@ -6,6 +6,7 @@
     "settings_general": "General",
     "settings_general_subtitle": "App language, notifications",
     "settings_general_language": "App language",
+    "settings_general_language_default": "Default",
     "settings_appearance": "Appearance",
     "settings_appearance_subtitle": "Theme, date & time format",
     "settings_library": "Library",

@@ -18,10 +18,12 @@ class LocaleSwitcherDialog extends StatelessWidget
       title: Text(strings.settings_general_language),
       content: SizedBox(
         width: size.width * 0.8,
-        child: ListView.builder(
+        child: ListView(
           shrinkWrap: true,
-          itemCount: locales.length,
-          itemBuilder: (_, index) => _LocaleTile(locales[index]),
+          children: [
+            const _DefaultTile(),
+            ...locales.map(_LocaleTile.new),
+          ],
         ),
       ),
       actions: [
@@ -30,6 +32,22 @@ class LocaleSwitcherDialog extends StatelessWidget
           child: Text(strings.generic_cancel),
         ),
       ],
+    );
+  }
+}
+
+class _DefaultTile extends ConsumerWidget {
+  const _DefaultTile();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final systemLocale = ref.watch(systemLocaleProvider);
+
+    return RadioListTile<Locale>(
+      title: Text(context.strings.settings_general_language_default),
+      value: systemLocale,
+      groupValue: null,
+      onChanged: (_) => Navigator.pop(context, systemLocale),
     );
   }
 }

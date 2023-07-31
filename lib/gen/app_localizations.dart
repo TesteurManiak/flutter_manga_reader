@@ -129,6 +129,12 @@ abstract class AppLocalizations {
   /// **'Langue de l\'application'**
   String get settings_general_language;
 
+  /// No description provided for @settings_general_language_default.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par défaut'**
+  String get settings_general_language_default;
+
   /// No description provided for @settings_appearance.
   ///
   /// In fr, this message translates to:

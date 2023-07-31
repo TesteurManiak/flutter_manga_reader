@@ -23,6 +23,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_general_language => 'Langue de l\'application';
 
   @override
+  String get settings_general_language_default => 'Par défaut';
+
+  @override
   String get settings_appearance => 'Apparence';
 
   @override
