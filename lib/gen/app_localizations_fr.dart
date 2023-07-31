@@ -62,5 +62,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get generic_error => 'Une erreur est survenue';
 
   @override
+  String get generic_cancel => 'Annuler';
+
+  @override
   String get details_add_to_library => 'Ajouter à la bibliothèque';
 }

@@ -207,6 +207,12 @@ abstract class AppLocalizations {
   /// **'Une erreur est survenue'**
   String get generic_error;
 
+  /// No description provided for @generic_cancel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get generic_cancel;
+
   /// No description provided for @details_add_to_library.
   ///
   /// In fr, this message translates to:

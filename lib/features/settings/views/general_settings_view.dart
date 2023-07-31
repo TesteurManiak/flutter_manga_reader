@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
+import 'package:flutter_manga_reader/features/settings/widgets/locale_switcher_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GeneralSettingsView extends StatelessWidget {
@@ -30,7 +31,11 @@ class _LocaleSwitcher extends ConsumerWidget {
       title: Text("Langue de l'application".hardcoded),
       subtitle: Text("Par défaut".hardcoded),
       onTap: () {
-        // TODO(Guillaume): open a dialog to select the language
+        const LocaleSwitcherDialog().show(context).then((value) {
+          if (value == null) return;
+
+          ref.read(localeControllerProvider.notifier).setLocale(value);
+        });
       },
     );
   }

@@ -19,5 +19,6 @@
     "manga_status_canceled": "Annulé",
     "manga_status_on_hiatus": "En pause",
     "generic_error": "Une erreur est survenue",
+    "generic_cancel": "Annuler",
     "details_add_to_library": "Ajouter à la bibliothèque"
 }
