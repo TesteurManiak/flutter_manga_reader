@@ -20,6 +20,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_general_subtitle => 'Langue de l\'application, notifications';
 
   @override
+  String get settings_general_language => 'Langue de l\'application';
+
+  @override
   String get settings_appearance => 'Apparence';
 
   @override
@@ -66,4 +69,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get details_add_to_library => 'Ajouter à la bibliothèque';
+
+  @override
+  String get details_in_library => 'Dans la bibliothèque';
+
+  @override
+  String get details_webview => 'WebView';
 }

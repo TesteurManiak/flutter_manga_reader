@@ -15,7 +15,7 @@ class LocaleSwitcherDialog extends StatelessWidget
     const locales = AppLocalizations.supportedLocales;
 
     return AlertDialog(
-      title: Text("Langue de l'application".hardcoded),
+      title: Text(strings.settings_general_language),
       content: SizedBox(
         width: size.width * 0.8,
         child: ListView.builder(

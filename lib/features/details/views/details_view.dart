@@ -272,7 +272,7 @@ class _SliverButtons extends ConsumerWidget {
           _AddToLibraryButton(id: id, isLoaded: isLoaded),
           DetailsButton(
             icon: Icons.public,
-            label: 'WebView'.hardcoded,
+            label: context.strings.details_webview,
             onPressed: null,
           ),
         ],
@@ -296,6 +296,8 @@ class _AddToLibraryButton extends ConsumerWidget {
       detailsControllerProvider(id).select((v) => v.manga?.favorite ?? false),
     );
 
+    final strings = context.strings;
+
     return DetailsButton(
       onPressed: isLoaded
           ? () {
@@ -304,8 +306,8 @@ class _AddToLibraryButton extends ConsumerWidget {
           : null,
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
       label: isFavorite
-          ? 'In library'.hardcoded
-          : context.strings.details_add_to_library,
+          ? strings.details_in_library
+          : strings.details_add_to_library,
     );
   }
 }

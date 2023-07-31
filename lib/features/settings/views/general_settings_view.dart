@@ -30,7 +30,7 @@ class _LocaleSwitcher extends ConsumerWidget {
     final currentLocale = ref.watch(localeControllerProvider);
 
     return ListTile(
-      title: Text("Langue de l'application".hardcoded),
+      title: Text(strings.settings_general_language),
       subtitle: Text(currentLocale.translatedLocaleName),
       onTap: () {
         const LocaleSwitcherDialog().show(context).then((value) {

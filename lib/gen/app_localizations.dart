@@ -123,6 +123,12 @@ abstract class AppLocalizations {
   /// **'Langue de l\'application, notifications'**
   String get settings_general_subtitle;
 
+  /// No description provided for @settings_general_language.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue de l\'application'**
+  String get settings_general_language;
+
   /// No description provided for @settings_appearance.
   ///
   /// In fr, this message translates to:
@@ -218,6 +224,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Ajouter à la bibliothèque'**
   String get details_add_to_library;
+
+  /// No description provided for @details_in_library.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dans la bibliothèque'**
+  String get details_in_library;
+
+  /// No description provided for @details_webview.
+  ///
+  /// In fr, this message translates to:
+  /// **'WebView'**
+  String get details_webview;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
