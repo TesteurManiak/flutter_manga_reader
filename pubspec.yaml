@@ -47,6 +47,7 @@ dev_dependencies:
   custom_lint: ^0.4.0
   drift_dev: ^2.10.0
   fd_lints: ^2.0.1
+  flutter_gen: ^5.3.1
   flutter_gen_runner: ^5.3.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.1
@@ -64,6 +65,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
 # Check the package's documentation to setup the launcher icons
 # https://pub.dev/packages/flutter_native_splash#1-setting-the-splash-screen

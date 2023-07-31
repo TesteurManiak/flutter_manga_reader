@@ -14,6 +14,24 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_title => 'Paramètres';
 
   @override
+  String get settings_general => 'Général';
+
+  @override
+  String get settings_general_subtitle => 'Langue de l\'application, notifications';
+
+  @override
+  String get settings_appearance => 'Apparence';
+
+  @override
+  String get settings_appearance_subtitle => 'Thème, format de la date et de l\'heure';
+
+  @override
+  String get settings_library => 'Bibliothèque';
+
+  @override
+  String get settings_library_subtitle => 'Catégories, mise à jour globale';
+
+  @override
   String get search_title => 'Explorer';
 
   @override

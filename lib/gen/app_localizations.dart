@@ -111,6 +111,42 @@ abstract class AppLocalizations {
   /// **'Paramètres'**
   String get settings_title;
 
+  /// No description provided for @settings_general.
+  ///
+  /// In fr, this message translates to:
+  /// **'Général'**
+  String get settings_general;
+
+  /// No description provided for @settings_general_subtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue de l\'application, notifications'**
+  String get settings_general_subtitle;
+
+  /// No description provided for @settings_appearance.
+  ///
+  /// In fr, this message translates to:
+  /// **'Apparence'**
+  String get settings_appearance;
+
+  /// No description provided for @settings_appearance_subtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Thème, format de la date et de l\'heure'**
+  String get settings_appearance_subtitle;
+
+  /// No description provided for @settings_library.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bibliothèque'**
+  String get settings_library;
+
+  /// No description provided for @settings_library_subtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Catégories, mise à jour globale'**
+  String get settings_library_subtitle;
+
   /// No description provided for @search_title.
   ///
   /// In fr, this message translates to:

@@ -1,8 +1,20 @@
-# <img src="assets/splash/splash.png" alt="Flutter Manga Reader icon" height="28"> Flutter Manga Reader
+<p align="center">
+    <img src="assets/splash/splash.png" alt="Flutter Manga Reader icon" height="200">
+</p>
+
+<h1 align="center">Flutter Manga Reader</h1>
 
 A cross-platform manga reader built with Flutter.
 
 This app is a Flutter clone of [Tachiyomi][tachiyomi] mainly to provide an iOS version of the app.
+
+## Features
+
+_WIP_
+
+## Screenshots
+
+_WIP_
 
 ## Run the app
 
