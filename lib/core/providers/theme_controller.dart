@@ -20,7 +20,7 @@ Brightness platformBrightness(PlatformBrightnessRef ref) {
   return PlatformDispatcher.instance.platformBrightness;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ThemeController extends _$ThemeController {
   @override
   ThemeMode build() {

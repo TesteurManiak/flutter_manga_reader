@@ -35,12 +35,12 @@ final systemLocaleProvider = AutoDisposeProvider<Locale>.internal(
 );
 
 typedef SystemLocaleRef = AutoDisposeProviderRef<Locale>;
-String _$localeControllerHash() => r'4d53ed3aa606819fc3429aa09818ac665f8b7ac6';
+String _$localeControllerHash() => r'2d145d260acf5f2192c96c7d96ce143e8e83a22f';
 
 /// See also [LocaleController].
 @ProviderFor(LocaleController)
 final localeControllerProvider =
-    AutoDisposeNotifierProvider<LocaleController, Locale>.internal(
+    NotifierProvider<LocaleController, Locale>.internal(
   LocaleController.new,
   name: r'localeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -50,6 +50,6 @@ final localeControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$LocaleController = AutoDisposeNotifier<Locale>;
+typedef _$LocaleController = Notifier<Locale>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

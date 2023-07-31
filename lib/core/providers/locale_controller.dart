@@ -41,7 +41,7 @@ class _LocaleObserver extends WidgetsBindingObserver {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class LocaleController extends _$LocaleController {
   static const _localeKey = 'locale';
 
@@ -73,7 +73,6 @@ class LocaleController extends _$LocaleController {
     await prefs.setString(_localeKey, newLocale.languageCode);
 
     state = newLocale;
-    return Future.value();
   }
 
   /// Used to reset the locale to the system locale.

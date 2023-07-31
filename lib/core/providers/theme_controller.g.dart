@@ -65,12 +65,12 @@ final platformBrightnessProvider = AutoDisposeProvider<Brightness>.internal(
 );
 
 typedef PlatformBrightnessRef = AutoDisposeProviderRef<Brightness>;
-String _$themeControllerHash() => r'5e83eea36e5b60017bbdbd6490a1f7c04bb2d7bb';
+String _$themeControllerHash() => r'688984f74b213aeba8be1d45f4ada6a587ef39ef';
 
 /// See also [ThemeController].
 @ProviderFor(ThemeController)
 final themeControllerProvider =
-    AutoDisposeNotifierProvider<ThemeController, ThemeMode>.internal(
+    NotifierProvider<ThemeController, ThemeMode>.internal(
   ThemeController.new,
   name: r'themeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -80,6 +80,6 @@ final themeControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$ThemeController = AutoDisposeNotifier<ThemeMode>;
+typedef _$ThemeController = Notifier<ThemeMode>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
