@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_manga_reader/features/settings/navigation/route.dart';
-import 'package:flutter_manga_reader/gen/app_localizations.dart';
-
-typedef LocalizedStringFetcher = String Function(AppLocalizations strings);
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});

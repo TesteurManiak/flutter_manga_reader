@@ -78,4 +78,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get details_webview => 'WebView';
+
+  @override
+  String get filter_popular => 'Populaire';
+
+  @override
+  String get filter_latest => 'Récents';
+
+  @override
+  String get filter_other => 'Filtre';
 }

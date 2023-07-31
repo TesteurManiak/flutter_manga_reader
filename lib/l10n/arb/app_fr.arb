@@ -24,5 +24,8 @@
     "generic_cancel": "Annuler",
     "details_add_to_library": "Ajouter à la bibliothèque",
     "details_in_library": "Dans la bibliothèque",
-    "details_webview": "WebView"
+    "details_webview": "WebView",
+    "filter_popular": "Populaire",
+    "filter_latest": "Récents",
+    "filter_other": "Filtre"
 }

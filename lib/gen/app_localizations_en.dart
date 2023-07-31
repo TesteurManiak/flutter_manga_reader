@@ -78,4 +78,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get details_webview => 'WebView';
+
+  @override
+  String get filter_popular => 'Popular';
+
+  @override
+  String get filter_latest => 'Recent';
+
+  @override
+  String get filter_other => 'Filter';
 }

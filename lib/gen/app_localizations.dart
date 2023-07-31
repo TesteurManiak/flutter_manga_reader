@@ -242,6 +242,24 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'WebView'**
   String get details_webview;
+
+  /// No description provided for @filter_popular.
+  ///
+  /// In fr, this message translates to:
+  /// **'Populaire'**
+  String get filter_popular;
+
+  /// No description provided for @filter_latest.
+  ///
+  /// In fr, this message translates to:
+  /// **'Récents'**
+  String get filter_latest;
+
+  /// No description provided for @filter_other.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtre'**
+  String get filter_other;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
