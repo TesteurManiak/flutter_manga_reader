@@ -98,12 +98,10 @@ class _FilterChip extends StatelessWidget {
       onPressed: onTap,
       selected: selected,
       isEnabled: type.enabled,
-      // onSelected: (_) => onTap(),
+      showCheckmark: false,
     );
   }
 }
-
-class _FilterChipTheme extends ChipThemeData {}
 
 enum _FilterType {
   popular(Icons.favorite, _popular),
