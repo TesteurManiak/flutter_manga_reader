@@ -70,7 +70,7 @@ class _FilterChipListState extends State<_FilterChipList> {
             onTap: () => setState(() => _selectedFilter = filterType),
           );
         },
-        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        separatorBuilder: (_, __) => const SizedBox(width: 6),
         itemCount: _FilterType.values.length,
       ),
     );
@@ -91,6 +91,7 @@ class _FilterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strings = context.strings;
+    final theme = Theme.of(context);
 
     return RawChip(
       avatar: Icon(type.icon),
@@ -98,6 +99,7 @@ class _FilterChip extends StatelessWidget {
       onPressed: onTap,
       selected: selected,
       isEnabled: type.enabled,
+      selectedColor: theme.colorScheme.primary.withOpacity(.2),
       showCheckmark: false,
     );
   }
