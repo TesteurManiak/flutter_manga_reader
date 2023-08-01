@@ -1,0 +1,40 @@
+{
+  "name": "MangaReader",
+  "css_prefix_text": "",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "cb1b238b03c21450ef717fe3d8534d68",
+      "css": "twitter",
+      "code": 61593,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "1c84e3e6e855070297da0371c1e87ff1",
+      "css": "github",
+      "code": 61595,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "fc343b9dcaf2558974e6f1abe009bc33",
+      "css": "reddit",
+      "code": 61857,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "c8a620baa7b8ea0db70149cb5da9b6ae",
+      "css": "facebook",
+      "code": 61594,
+      "src": "fontawesome5"
+    },
+    {
+      "uid": "990fedfbfce973e093d7885b3f771d21",
+      "css": "discord",
+      "code": 62354,
+      "src": "fontawesome5"
+    }
+  ]
+}

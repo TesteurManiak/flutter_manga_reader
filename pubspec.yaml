@@ -41,6 +41,7 @@ dependencies:
   sliver_tools: ^0.2.12
   sqlite3_flutter_libs: ^0.5.15
   theme_tailor_annotation: ^2.0.0
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   alchemist: ^0.6.1
@@ -69,6 +70,10 @@ flutter:
   generate: true
   assets:
     - assets/svgs/
+  fonts:
+    - family: MangaReader
+      fonts:
+        - asset: assets/icons/MangaReader.ttf
 
 # Check the package's documentation to setup the launcher icons
 # https://pub.dev/packages/flutter_native_splash#1-setting-the-splash-screen

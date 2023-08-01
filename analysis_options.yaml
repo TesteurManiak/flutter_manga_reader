@@ -6,3 +6,4 @@ analyzer:
   exclude:
     - "**/*.tailor.dart"
     - lib/gen/**.dart
+    - lib/design_system/icons/manga_reader_icons.dart
