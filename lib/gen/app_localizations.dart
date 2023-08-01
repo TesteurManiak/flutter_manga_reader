@@ -147,6 +147,30 @@ abstract class AppLocalizations {
   /// **'Thème, format de la date et de l\'heure'**
   String get settings_appearance_subtitle;
 
+  /// No description provided for @settings_appearance_dark_mode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode sombre'**
+  String get settings_appearance_dark_mode;
+
+  /// No description provided for @settings_appearance_system_default.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par défaut du système'**
+  String get settings_appearance_system_default;
+
+  /// No description provided for @settings_appearance_disabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Désactivé'**
+  String get settings_appearance_disabled;
+
+  /// No description provided for @settings_appearance_enabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activé'**
+  String get settings_appearance_enabled;
+
   /// No description provided for @settings_library.
   ///
   /// In fr, this message translates to:

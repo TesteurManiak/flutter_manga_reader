@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/features/settings/extensions/theme_mode_extensions.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/theme_switcher_dialog.dart';
-import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppearanceSettingsView extends StatelessWidget {
@@ -11,7 +11,7 @@ class AppearanceSettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GenericSettingsView(
-      title: 'Appearance'.hardcoded,
+      title: context.strings.settings_appearance,
       children: const [
         _ThemeModeSwitcher(),
       ],
@@ -28,7 +28,7 @@ class _ThemeModeSwitcher extends ConsumerWidget {
     final strings = context.strings;
 
     return ListTile(
-      title: Text('Dark mode'.hardcoded),
+      title: Text(strings.settings_appearance_dark_mode),
       subtitle: Text(currentThemeMode.localized(strings)),
       onTap: () {
         const ThemeSwitcherDialog().show(context).then((value) {
@@ -38,18 +38,5 @@ class _ThemeModeSwitcher extends ConsumerWidget {
         });
       },
     );
-  }
-}
-
-extension on ThemeMode {
-  String localized(AppLocalizations strings) {
-    switch (this) {
-      case ThemeMode.system:
-        return 'System default'.hardcoded;
-      case ThemeMode.light:
-        return 'Light'.hardcoded;
-      case ThemeMode.dark:
-        return 'Dark'.hardcoded;
-    }
   }
 }

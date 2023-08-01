@@ -32,6 +32,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_appearance_subtitle => 'Thème, format de la date et de l\'heure';
 
   @override
+  String get settings_appearance_dark_mode => 'Mode sombre';
+
+  @override
+  String get settings_appearance_system_default => 'Par défaut du système';
+
+  @override
+  String get settings_appearance_disabled => 'Désactivé';
+
+  @override
+  String get settings_appearance_enabled => 'Activé';
+
+  @override
   String get settings_library => 'Bibliothèque';
 
   @override

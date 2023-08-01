@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
-import 'package:flutter_manga_reader/gen/app_localizations.dart';
+import 'package:flutter_manga_reader/features/settings/extensions/theme_mode_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ThemeSwitcherDialog extends StatelessWidget
@@ -44,18 +44,5 @@ class _ThemeRadioTile extends ConsumerWidget {
       groupValue: groupValue,
       onChanged: (_) => Navigator.pop(context, mode),
     );
-  }
-}
-
-extension on ThemeMode {
-  String localized(AppLocalizations strings) {
-    switch (this) {
-      case ThemeMode.system:
-        return 'System default'.hardcoded;
-      case ThemeMode.light:
-        return 'Disabled'.hardcoded;
-      case ThemeMode.dark:
-        return 'Enabled'.hardcoded;
-    }
   }
 }

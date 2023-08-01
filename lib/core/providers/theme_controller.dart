@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/theme_mode_extensions.dart';
+import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
 import 'package:flutter_manga_reader/design_system/theme_data/theme.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,6 +23,8 @@ Brightness platformBrightness(PlatformBrightnessRef ref) {
 
 @Riverpod(keepAlive: true)
 class ThemeController extends _$ThemeController {
+  static const themeKey = 'theme_mode';
+
   @override
   ThemeMode build() {
     return ref.read(defaultThemeModeProvider);
@@ -31,9 +34,11 @@ class ThemeController extends _$ThemeController {
   ///
   /// Used to load something if the theme mode is not set by the device settings
   /// (e.g: from the local storage).
-  Future<void> init() {
-    // Replace this with your own logic.
-    return Future.value();
+  Future<void> init() async {
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    final themeModeIndex = prefs.getInt(themeKey) ?? ThemeMode.system.index;
+
+    return setThemeMode(ThemeMode.values[themeModeIndex]);
   }
 
   /// Used to toggle between light and dark theme modes.
@@ -45,13 +50,13 @@ class ThemeController extends _$ThemeController {
     return setThemeMode(newMode);
   }
 
-  Future<void> setThemeMode(ThemeMode mode) {
-    if (mode == state) return Future.value();
+  Future<void> setThemeMode(ThemeMode mode) async {
+    if (mode == state) return;
 
-    // You can save the new mode to the local storage here.
+    final prefs = await ref.read(sharedPreferencesProvider.future);
+    await prefs.setInt(themeKey, mode.index);
 
     state = mode;
-    return Future.value();
   }
 
   /// Used to reset the theme mode to the default theme mode.
