@@ -53,6 +53,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_about => 'À propos';
 
   @override
+  String get settings_about_version => 'Version';
+
+  @override
+  String get settings_about_open_source_licenses => 'Licences à code source ouvert';
+
+  @override
   String get search_title => 'Explorer';
 
   @override

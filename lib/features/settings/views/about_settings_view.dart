@@ -50,7 +50,7 @@ class _VersionTile extends ConsumerWidget {
     );
 
     return ListTile(
-      title: Text('Version'.hardcoded),
+      title: Text(context.strings.settings_about_version),
       subtitle: Text(appVersion),
     );
   }
@@ -62,7 +62,7 @@ class _OpenSourceLicenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text('Open source licenses'.hardcoded),
+      title: Text(context.strings.settings_about_open_source_licenses),
       onTap: () {
         showLicensePage(
           context: context,

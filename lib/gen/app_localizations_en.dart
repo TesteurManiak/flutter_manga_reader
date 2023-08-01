@@ -53,6 +53,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_about => 'About';
 
   @override
+  String get settings_about_version => 'Version';
+
+  @override
+  String get settings_about_open_source_licenses => 'Open source licenses';
+
+  @override
   String get search_title => 'Explore';
 
   @override

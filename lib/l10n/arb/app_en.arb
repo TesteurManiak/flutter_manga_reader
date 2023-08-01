@@ -16,6 +16,8 @@
     "settings_library": "Library",
     "settings_library_subtitle": "Categories, global update",
     "settings_about": "About",
+    "settings_about_version": "Version",
+    "settings_about_open_source_licenses": "Open source licenses",
     "search_title": "Explore",
     "search_empty": "No manga found",
     "manga_status_unknown": "Unknown",

@@ -16,6 +16,8 @@
     "settings_library": "Bibliothèque",
     "settings_library_subtitle": "Catégories, mise à jour globale",
     "settings_about": "À propos",
+    "settings_about_version": "Version",
+    "settings_about_open_source_licenses": "Licences à code source ouvert",
     "search_title": "Explorer",
     "search_empty": "Aucun manga trouvé",
     "manga_status_unknown": "Inconnu",

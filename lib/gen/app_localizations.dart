@@ -189,6 +189,18 @@ abstract class AppLocalizations {
   /// **'À propos'**
   String get settings_about;
 
+  /// No description provided for @settings_about_version.
+  ///
+  /// In fr, this message translates to:
+  /// **'Version'**
+  String get settings_about_version;
+
+  /// No description provided for @settings_about_open_source_licenses.
+  ///
+  /// In fr, this message translates to:
+  /// **'Licences à code source ouvert'**
+  String get settings_about_open_source_licenses;
+
   /// No description provided for @search_title.
   ///
   /// In fr, this message translates to:
