@@ -43,7 +43,7 @@ class _LocaleObserver extends WidgetsBindingObserver {
 
 @Riverpod(keepAlive: true)
 class LocaleController extends _$LocaleController {
-  static const _localeKey = 'locale';
+  static const localeKey = 'locale';
 
   @override
   Locale build() {
@@ -59,7 +59,7 @@ class LocaleController extends _$LocaleController {
   /// (e.g: from the local storage).
   Future<void> init() async {
     final prefs = await ref.read(sharedPreferencesProvider.future);
-    final locale = prefs.getString(_localeKey);
+    final locale = prefs.getString(localeKey);
 
     if (locale != null) await setLocale(Locale(locale));
   }
@@ -70,7 +70,7 @@ class LocaleController extends _$LocaleController {
     if (newLocale == state) return;
 
     final prefs = await ref.read(sharedPreferencesProvider.future);
-    await prefs.setString(_localeKey, newLocale.languageCode);
+    await prefs.setString(localeKey, newLocale.languageCode);
 
     state = newLocale;
   }
