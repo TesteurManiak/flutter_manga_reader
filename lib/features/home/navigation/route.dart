@@ -10,6 +10,7 @@ part 'route.g.dart';
   routes: <TypedGoRoute>[
     TypedGoRoute<GeneralSettingsRoute>(path: GeneralSettingsRoute.path),
     TypedGoRoute<AppearanceSettingsRoute>(path: AppearanceSettingsRoute.path),
+    TypedGoRoute<AboutSettingsRoute>(path: AboutSettingsRoute.path),
   ],
 )
 class HomeRoute extends GoRouteData {

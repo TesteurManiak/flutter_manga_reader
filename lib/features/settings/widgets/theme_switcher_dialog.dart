@@ -12,7 +12,7 @@ class ThemeSwitcherDialog extends StatelessWidget
     final strings = context.strings;
 
     return AlertDialog(
-      title: Text('Dark mode'.hardcoded),
+      title: Text(strings.settings_appearance_dark_mode),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

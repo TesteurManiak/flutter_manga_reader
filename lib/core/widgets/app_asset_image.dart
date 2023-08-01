@@ -7,11 +7,13 @@ class AppAssetImage extends StatelessWidget {
     super.key,
     this.width,
     this.height,
+    this.color,
   });
 
   final String asset;
   final double? width;
   final double? height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class AppAssetImage extends StatelessWidget {
         asset,
         height: height,
         width: width,
+        colorFilter: color?.toColorFilter(),
       );
     }
 
@@ -27,6 +30,13 @@ class AppAssetImage extends StatelessWidget {
       asset,
       height: height,
       width: width,
+      color: color,
     );
+  }
+}
+
+extension on Color {
+  ColorFilter toColorFilter() {
+    return ColorFilter.mode(this, BlendMode.srcIn);
   }
 }

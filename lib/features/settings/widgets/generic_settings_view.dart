@@ -5,18 +5,28 @@ class GenericSettingsView extends StatelessWidget {
   const GenericSettingsView({
     super.key,
     required this.title,
-    required this.children,
+    this.header,
+    this.children = const [],
   });
 
   final String title;
+  final Widget? header;
   final List<Widget> children;
 
   @override
   Widget build(BuildContext context) {
+    final header = this.header;
+
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: ListView(
-        children: children,
+        children: [
+          if (header != null) ...[
+            header,
+            const Divider(),
+          ],
+          ...children,
+        ],
       ),
     );
   }

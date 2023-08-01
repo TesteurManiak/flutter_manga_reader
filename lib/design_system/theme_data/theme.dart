@@ -12,6 +12,7 @@ class AppTheme {
       useMaterial3: true,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
+        surfaceTintColor: Colors.transparent,
       ),
       extensions: [
         const AppColors.light(),
@@ -30,6 +31,7 @@ class AppTheme {
       useMaterial3: true,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
+        surfaceTintColor: Colors.transparent,
       ),
       extensions: [
         const AppColors.dark(),

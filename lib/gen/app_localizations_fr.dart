@@ -50,6 +50,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_library_subtitle => 'Catégories, mise à jour globale';
 
   @override
+  String get settings_about => 'À propos';
+
+  @override
   String get search_title => 'Explorer';
 
   @override

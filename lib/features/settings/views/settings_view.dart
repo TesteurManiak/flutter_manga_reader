@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/platform/app_info.dart';
+import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_manga_reader/features/settings/navigation/route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends ConsumerWidget {
   const SettingsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appVersion = ref.watch(
+      getAppVersionProvider.select(
+        (v) {
+          return v.maybeWhen(
+            data: (version) => version,
+            orElse: () => '?',
+          );
+        },
+      ),
+    );
+
     final settings = <_SettingData>[
       _SettingData(
         titleFetcher: (strings) => strings.settings_general,
@@ -22,10 +36,10 @@ class SettingsView extends StatelessWidget {
         onTap: () => const AppearanceSettingsRoute().push<void>(context),
       ),
       _SettingData(
-        titleFetcher: (strings) => strings.settings_library,
-        subtitleFetcher: (strings) => strings.settings_library_subtitle,
-        icon: Icons.collections_bookmark_outlined,
-        onTap: null,
+        titleFetcher: (strings) => strings.settings_about,
+        subtitleFetcher: (_) => '${Consts.appName} $appVersion',
+        icon: Icons.info_outline,
+        onTap: () => const AboutSettingsRoute().push<void>(context),
       ),
     ];
 

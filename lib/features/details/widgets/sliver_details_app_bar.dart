@@ -24,7 +24,6 @@ class SliverDetailsAppBar extends StatelessWidget {
 
         return SliverAppBar(
           backgroundColor: appBarColor.withOpacity(opacity),
-          surfaceTintColor: Colors.transparent,
           pinned: true,
           actions: const [
             IconButton(

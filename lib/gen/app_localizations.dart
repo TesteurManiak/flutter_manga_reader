@@ -183,6 +183,12 @@ abstract class AppLocalizations {
   /// **'Catégories, mise à jour globale'**
   String get settings_library_subtitle;
 
+  /// No description provided for @settings_about.
+  ///
+  /// In fr, this message translates to:
+  /// **'À propos'**
+  String get settings_about;
+
   /// No description provided for @search_title.
   ///
   /// In fr, this message translates to:

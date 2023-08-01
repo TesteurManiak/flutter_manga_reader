@@ -16,7 +16,6 @@ class SourceAppBar extends StatelessWidget with AppBarSizeMixin {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      surfaceTintColor: Colors.transparent,
       actions: const [
         IconButton(
           icon: Icon(Icons.search),

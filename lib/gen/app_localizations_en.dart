@@ -50,6 +50,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_library_subtitle => 'Categories, global update';
 
   @override
+  String get settings_about => 'About';
+
+  @override
   String get search_title => 'Explore';
 
   @override
