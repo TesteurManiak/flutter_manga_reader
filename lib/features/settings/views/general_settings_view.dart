@@ -10,10 +10,8 @@ class GeneralSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final strings = context.strings;
-
     return GenericSettingsView(
-      title: strings.settings_general,
+      title: context.strings.settings_general,
       children: const [
         _LocaleSwitcher(),
       ],

@@ -100,6 +100,7 @@ class _FilterChip extends StatelessWidget {
       selected: selected,
       isEnabled: type.enabled,
       selectedColor: theme.colorScheme.primary.withOpacity(.2),
+      side: selected ? const BorderSide(style: BorderStyle.none) : null,
       showCheckmark: false,
     );
   }

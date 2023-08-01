@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/features/settings/views/appearance_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/general_settings_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,5 +11,16 @@ class GeneralSettingsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const GeneralSettingsView();
+  }
+}
+
+class AppearanceSettingsRoute extends GoRouteData {
+  const AppearanceSettingsRoute();
+
+  static const path = 'settings/appearance';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AppearanceSettingsView();
   }
 }

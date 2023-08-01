@@ -33,7 +33,7 @@ class GenreList extends StatelessWidget {
       padding: padding,
       child: Wrap(
         spacing: spacing,
-        runSpacing: spacing,
+        runSpacing: spacing + 2,
         children: [
           for (final genre in genres) _GenreChip(genre),
         ],
@@ -52,6 +52,7 @@ class _GenreChip extends StatelessWidget {
     return Chip(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       backgroundColor: Colors.grey.withOpacity(0.2),
+      side: const BorderSide(style: BorderStyle.none),
       label: Text(
         genre,
         style: const TextStyle(fontSize: 11),

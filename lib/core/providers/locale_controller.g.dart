@@ -35,7 +35,7 @@ final systemLocaleProvider = AutoDisposeProvider<Locale>.internal(
 );
 
 typedef SystemLocaleRef = AutoDisposeProviderRef<Locale>;
-String _$localeControllerHash() => r'2d145d260acf5f2192c96c7d96ce143e8e83a22f';
+String _$localeControllerHash() => r'2bc5e4ce5eaa682a0ee1984852e128fc934582ac';
 
 /// See also [LocaleController].
 @ProviderFor(LocaleController)

@@ -19,7 +19,7 @@ class SettingsView extends StatelessWidget {
         titleFetcher: (strings) => strings.settings_appearance,
         subtitleFetcher: (strings) => strings.settings_appearance_subtitle,
         icon: Icons.palette_outlined,
-        onTap: null,
+        onTap: () => const AppearanceSettingsRoute().push<void>(context),
       ),
       _SettingData(
         titleFetcher: (strings) => strings.settings_library,

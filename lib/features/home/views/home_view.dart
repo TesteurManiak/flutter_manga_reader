@@ -77,7 +77,7 @@ class _BottomBar extends StatelessWidget {
               label: strings.search_title,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.settings_outlined),
               label: strings.settings_title,
             ),
           ],

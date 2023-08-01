@@ -8,7 +8,8 @@ part 'route.g.dart';
 @TypedGoRoute<HomeRoute>(
   path: HomeRoute.path,
   routes: <TypedGoRoute>[
-    TypedGoRoute<GeneralSettingsRoute>(path: GeneralSettingsRoute.path)
+    TypedGoRoute<GeneralSettingsRoute>(path: GeneralSettingsRoute.path),
+    TypedGoRoute<AppearanceSettingsRoute>(path: AppearanceSettingsRoute.path),
   ],
 )
 class HomeRoute extends GoRouteData {

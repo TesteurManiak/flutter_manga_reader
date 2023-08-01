@@ -18,6 +18,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           path: 'settings/general',
           factory: $GeneralSettingsRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'settings/appearance',
+          factory: $AppearanceSettingsRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -44,6 +48,24 @@ extension $GeneralSettingsRouteExtension on GeneralSettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings/general',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AppearanceSettingsRouteExtension on AppearanceSettingsRoute {
+  static AppearanceSettingsRoute _fromState(GoRouterState state) =>
+      const AppearanceSettingsRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings/appearance',
       );
 
   void go(BuildContext context) => context.go(location);
