@@ -165,10 +165,13 @@ class _SliverHeader extends StatelessWidget {
           separator: const SizedBox(width: 8),
           children: [
             Flexible(
-              child: AppNetworkImage(
-                url: manga?.thumbnailUrl,
-                width: size.width / 4,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: AppNetworkImage(
+                  url: manga?.thumbnailUrl,
+                  width: size.width / 4,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(
