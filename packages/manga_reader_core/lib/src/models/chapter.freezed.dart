@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Chapter _$ChapterFromJson(Map<String, dynamic> json) {
+  return _Chapter.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Chapter {
   int get id => throw _privateConstructorUsedError;
@@ -29,6 +33,7 @@ mixin _$Chapter {
   int get dateFetch => throw _privateConstructorUsedError;
   int get lastModified => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ChapterCopyWith<Chapter> get copyWith => throw _privateConstructorUsedError;
 }
@@ -231,8 +236,8 @@ class __$$_ChapterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$_Chapter implements _Chapter {
+@JsonSerializable()
+class _$_Chapter extends _Chapter {
   const _$_Chapter(
       {required this.id,
       required this.mangaId,
@@ -245,7 +250,11 @@ class _$_Chapter implements _Chapter {
       this.bookmark = false,
       this.lastPageRead = 0,
       this.dateFetch = 0,
-      this.lastModified = 0});
+      this.lastModified = 0})
+      : super._();
+
+  factory _$_Chapter.fromJson(Map<String, dynamic> json) =>
+      _$$_ChapterFromJson(json);
 
   @override
   final int id;
@@ -312,6 +321,7 @@ class _$_Chapter implements _Chapter {
                 other.lastModified == lastModified));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -333,9 +343,16 @@ class _$_Chapter implements _Chapter {
   @pragma('vm:prefer-inline')
   _$$_ChapterCopyWith<_$_Chapter> get copyWith =>
       __$$_ChapterCopyWithImpl<_$_Chapter>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ChapterToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Chapter implements Chapter {
+abstract class _Chapter extends Chapter {
   const factory _Chapter(
       {required final int id,
       required final int mangaId,
@@ -349,6 +366,9 @@ abstract class _Chapter implements Chapter {
       final int lastPageRead,
       final int dateFetch,
       final int lastModified}) = _$_Chapter;
+  const _Chapter._() : super._();
+
+  factory _Chapter.fromJson(Map<String, dynamic> json) = _$_Chapter.fromJson;
 
   @override
   int get id;

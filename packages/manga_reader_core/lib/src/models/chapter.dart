@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:manga_reader_core/src/models/source_chapter.dart';
 
 part 'chapter.freezed.dart';
+part 'chapter.g.dart';
 
 @freezed
 class Chapter with _$Chapter {
@@ -20,4 +22,12 @@ class Chapter with _$Chapter {
     @Default(0) int dateFetch,
     @Default(0) int lastModified,
   }) = _Chapter;
+
+  /// Used to create model from the database entity.
+  factory Chapter.fromJson(Map<String, dynamic> json) =>
+      _$ChapterFromJson(json);
+
+  const Chapter._();
+
+  SourceChapter toSourceModel() => SourceChapter.fromJson(toJson());
 }

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:manga_reader_core/src/models/chapter.dart';
 
 part 'source_chapter.freezed.dart';
 part 'source_chapter.g.dart';
@@ -18,4 +19,8 @@ class SourceChapter with _$SourceChapter {
 
   factory SourceChapter.fromJson(Map<String, dynamic> json) =>
       _$SourceChapterFromJson(json);
+
+  factory SourceChapter.fromModel(Chapter chapter) {
+    return SourceChapter.fromJson(chapter.toJson());
+  }
 }
