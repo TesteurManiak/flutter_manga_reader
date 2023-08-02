@@ -21,7 +21,7 @@ final _getPackageInfoProvider = AutoDisposeFutureProvider<PackageInfo>.internal(
 );
 
 typedef _GetPackageInfoRef = AutoDisposeFutureProviderRef<PackageInfo>;
-String _$getAppVersionHash() => r'dcba1ed97a1241bd960f5a7c4295cedc5c3bd801';
+String _$getAppVersionHash() => r'c0c0f4d6735a2d00b596f505ee122f598fa6084e';
 
 /// See also [getAppVersion].
 @ProviderFor(getAppVersion)

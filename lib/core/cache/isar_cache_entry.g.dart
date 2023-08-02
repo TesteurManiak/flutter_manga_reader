@@ -37,8 +37,13 @@ const IsarCacheEntrySchema = CollectionSchema(
       name: r'key',
       type: IsarType.string,
     ),
-    r'value': PropertySchema(
+    r'response': PropertySchema(
       id: 4,
+      name: r'response',
+      type: IsarType.string,
+    ),
+    r'value': PropertySchema(
+      id: 5,
       name: r'value',
       type: IsarType.string,
     )
@@ -79,6 +84,7 @@ int _isarCacheEntryEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.isarKey.length * 3;
   bytesCount += 3 + object.key.length * 3;
+  bytesCount += 3 + object.response.length * 3;
   bytesCount += 3 + object.value.length * 3;
   return bytesCount;
 }
@@ -93,7 +99,8 @@ void _isarCacheEntrySerialize(
   writer.writeBool(offsets[1], object.isValid);
   writer.writeString(offsets[2], object.isarKey);
   writer.writeString(offsets[3], object.key);
-  writer.writeString(offsets[4], object.value);
+  writer.writeString(offsets[4], object.response);
+  writer.writeString(offsets[5], object.value);
 }
 
 IsarCacheEntry _isarCacheEntryDeserialize(
@@ -105,7 +112,7 @@ IsarCacheEntry _isarCacheEntryDeserialize(
   final object = IsarCacheEntry(
     expiry: reader.readDateTime(offsets[0]),
     isarKey: reader.readString(offsets[2]),
-    value: reader.readString(offsets[4]),
+    response: reader.readString(offsets[4]),
   );
   object.id = id;
   return object;
@@ -127,6 +134,8 @@ P _isarCacheEntryDeserializeProp<P>(
     case 3:
       return (reader.readString(offset)) as P;
     case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -741,6 +750,142 @@ extension IsarCacheEntryQueryFilter
   }
 
   QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'response',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'response',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'response',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'response',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
+      responseIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'response',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterFilterCondition>
       valueEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -936,6 +1081,19 @@ extension IsarCacheEntryQuerySortBy
     });
   }
 
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy> sortByResponse() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'response', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy>
+      sortByResponseDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'response', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy> sortByValue() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'value', Sort.asc);
@@ -1014,6 +1172,19 @@ extension IsarCacheEntryQuerySortThenBy
     });
   }
 
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy> thenByResponse() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'response', Sort.asc);
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy>
+      thenByResponseDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'response', Sort.desc);
+    });
+  }
+
   QueryBuilder<IsarCacheEntry, IsarCacheEntry, QAfterSortBy> thenByValue() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'value', Sort.asc);
@@ -1055,6 +1226,13 @@ extension IsarCacheEntryQueryWhereDistinct
     });
   }
 
+  QueryBuilder<IsarCacheEntry, IsarCacheEntry, QDistinct> distinctByResponse(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'response', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<IsarCacheEntry, IsarCacheEntry, QDistinct> distinctByValue(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1092,6 +1270,12 @@ extension IsarCacheEntryQueryProperty
   QueryBuilder<IsarCacheEntry, String, QQueryOperations> keyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'key');
+    });
+  }
+
+  QueryBuilder<IsarCacheEntry, String, QQueryOperations> responseProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'response');
     });
   }
 
