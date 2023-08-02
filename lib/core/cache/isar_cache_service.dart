@@ -54,7 +54,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
   }) async {
     final entry = IsarCacheEntry(
       isarKey: key,
-      value: networkResponseJson,
+      response: networkResponseJson,
       expiry: clock.now().add(cacheDuration),
     );
 

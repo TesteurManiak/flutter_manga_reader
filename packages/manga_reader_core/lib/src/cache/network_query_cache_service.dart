@@ -1,4 +1,4 @@
-import 'package:manga_reader_core/src/cache/network_cache_entry.dart';
+import 'package:manga_reader_core/src/cache/cache_entry.dart';
 
 const kCacheDefaultDuration = Duration(minutes: 10);
 

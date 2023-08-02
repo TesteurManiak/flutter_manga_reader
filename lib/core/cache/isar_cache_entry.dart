@@ -7,7 +7,7 @@ part 'isar_cache_entry.g.dart';
 class IsarCacheEntry extends NetworkCacheEntry {
   IsarCacheEntry({
     required this.isarKey,
-    required super.value,
+    required super.response,
     required super.expiry,
   }) : super(key: isarKey);
 
