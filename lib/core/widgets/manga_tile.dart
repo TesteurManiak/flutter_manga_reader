@@ -1,34 +1,53 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/navigation/route.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class MangaTile extends StatefulWidget {
+class MangaTile extends ConsumerStatefulWidget {
   const MangaTile({
     super.key,
     required this.manga,
     required this.displayedFromSource,
   });
 
-  final Manga manga;
+  final SourceManga manga;
   final bool displayedFromSource;
 
   @override
-  State<MangaTile> createState() => _MangaTileState();
+  ConsumerState<MangaTile> createState() => _MangaTileState();
 }
 
-class _MangaTileState extends State<MangaTile>
+class _MangaTileState extends ConsumerState<MangaTile>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
     return GestureDetector(
-      onTap: () {
-        DetailsRoute(
-          mangaId: widget.manga.id,
-          openedFromSource: widget.displayedFromSource,
-        ).push<void>(context);
+      onTap: () async {
+        late final int mangaId;
+        final localId = await ref.read(
+          getMangaIdFromSourceProvider(widget.manga).future,
+        );
+        if (localId == null) {
+          mangaId = await ref
+              .read(localDatasourceProvider)
+              .saveSourceManga(widget.manga);
+        } else {
+          mangaId = localId;
+        }
+
+        if (!mounted) return;
+        unawaited(
+          DetailsRoute(
+            mangaId: mangaId,
+            openedFromSource: widget.displayedFromSource,
+          ).push<void>(context),
+        );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),

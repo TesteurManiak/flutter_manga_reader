@@ -59,7 +59,7 @@ class MangadexDatasource extends MangaDatasource {
     );
   }
 
-  Future<List<Manga>> _parsePopularMangas(List<MangaData> data) async {
+  Future<List<SourceManga>> _parsePopularMangas(List<MangaData> data) async {
     final firstVolumeCovers = await _fetchFirstVolumeCovers(data);
 
     return data.map((manga) {
@@ -184,7 +184,7 @@ class MangadexDatasource extends MangaDatasource {
     );
   }
 
-  Future<List<Manga>> _parseLatestUpdate(List<ChapterData> data) async {
+  Future<List<SourceManga>> _parseLatestUpdate(List<ChapterData> data) async {
     final mangaIds = data
         .map((chapter) {
           return chapter.relationships
@@ -214,7 +214,7 @@ class MangadexDatasource extends MangaDatasource {
           response.data.map((manga) => MapEntry(manga.id, manga)),
         );
 
-        final mangaList = <Manga>[];
+        final mangaList = <SourceManga>[];
         for (final id in mangaIds) {
           final manga = mangaMap[id];
           if (manga == null) continue;
@@ -270,12 +270,14 @@ class MangadexDatasource extends MangaDatasource {
         final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
 
         return Result.success(
-          _helper.createManga(
-            mangaData: response.data,
-            chapters: chapters,
-            firstVolumeCover: firstVolumeCover,
-            lang: _dexLang,
-          ),
+          _helper
+              .createManga(
+                mangaData: response.data,
+                chapters: chapters,
+                firstVolumeCover: firstVolumeCover,
+                lang: _dexLang,
+              )
+              .toModel(manga),
         );
       },
       failure: Result.failure,
@@ -312,37 +314,27 @@ class MangadexDatasource extends MangaDatasource {
     return _fetchFirstVolumeCovers([mangaData])
         .then((value) => value?[mangaData.id]);
   }
-
-  @override
-  Future<Result<Manga, HttpError>> fetchMangaInfo(String mangaId) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [
-        MDConstants.manga,
-        mangaId,
-      ],
-    ).decode(MangaResponse.fromJson);
-
-    return result.when(
-      success: (response) async {
-        final mangaData = response.data;
-        final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
-
-        return Result.success(
-          _helper.createBasicManga(
-            mangaData: response.data,
-            coverFileName: firstVolumeCover,
-            lang: _dexLang,
-          ),
-        );
-      },
-      failure: Result.failure,
-    );
-  }
 }
 
 extension on Manga {
   List<String> get pathSegments {
     return url.split('/').where((e) => e.trim().isNotEmpty).toList();
+  }
+}
+
+extension on SourceManga {
+  Manga toModel(Manga base) {
+    return base.copyWith(
+      title: title,
+      url: url,
+      description: description,
+      author: author,
+      status: status,
+      genre: genre,
+      source: source,
+      lang: lang,
+      artist: artist,
+      thumbnailUrl: thumbnailUrl,
+    );
   }
 }

@@ -19,8 +19,8 @@ class SliverDetailsAppBar extends StatelessWidget {
     return ListenableBuilder(
       listenable: scrollController,
       builder: (context, _) {
-        final scrollOffset = scrollController.offset;
-        final opacity = (scrollOffset / 350).clamp(0, 1).toDouble();
+        final offset = scrollController.offset;
+        final opacity = (offset / 350).clamp(0, 1).toDouble();
 
         return SliverAppBar(
           backgroundColor: appBarColor.withOpacity(opacity),

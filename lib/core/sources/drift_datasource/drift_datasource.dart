@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -35,7 +36,7 @@ class DriftDatasource implements LocalDatasource {
   }
 
   @override
-  Future<Manga?> getManga(String mangaId) async {
+  Future<Manga?> getManga(int mangaId) async {
     final manga = await (_database.select(_database.dbMangas)
           ..where((tbl) => tbl.id.equals(mangaId)))
         .getSingleOrNull();
@@ -47,44 +48,63 @@ class DriftDatasource implements LocalDatasource {
   Future<void> updateManga(Manga manga) {
     return _database.update(_database.dbMangas).replace(manga.toDbModel());
   }
-}
 
-extension on DbManga {
-  Manga toModel() {
-    return Manga(
-      id: id,
-      favorite: favorite,
-      url: url,
-      source: source,
-      title: title,
-      artist: artist,
-      author: author,
-      description: description,
-      genre: genre,
-      status: status,
-      thumbnailUrl: thumbnailUrl,
-      updateStrategy: updateStrategy,
-      initialized: initialized,
-    );
+  @override
+  Future<int?> getMangaId({
+    required String title,
+    required String url,
+    required String? lang,
+    required String? source,
+  }) {
+    return (_database.select(_database.dbMangas)
+          ..where((t) => t.title.equals(title))
+          ..where((t) => t.lang.equalsNullable(lang))
+          ..where((t) => t.source.equalsNullable(source))
+          ..where((t) => t.url.equals(url)))
+        .getSingleOrNull()
+        .then((manga) => manga?.id);
+  }
+
+  @override
+  Future<int> saveSourceManga(SourceManga sourceManga) async {
+    final query = (_database.delete(_database.dbMangas)
+      ..where((t) => t.title.equals(sourceManga.title))
+      ..where((t) => t.lang.equalsNullable(sourceManga.lang))
+      ..where((t) => t.source.equalsNullable(sourceManga.source))
+      ..where((t) => t.url.equals(sourceManga.url)));
+
+    // Delete any existing source with the same title, lang, source and url
+    await query.go();
+
+    return _database.into(_database.dbMangas).insert(sourceManga.toDbModel());
   }
 }
 
+extension on DbManga {
+  Manga toModel() => Manga.fromJson(toJson());
+}
+
 extension on Manga {
-  DbManga toDbModel() {
-    return DbManga(
-      id: id,
-      favorite: favorite,
-      url: url,
-      source: source,
+  DbManga toDbModel() => DbManga.fromJson(toJson());
+}
+
+extension on SourceManga {
+  DbMangasCompanion toDbModel() {
+    return DbMangasCompanion.insert(
       title: title,
-      artist: artist,
-      author: author,
-      description: description,
-      genre: genre,
+      url: url,
+      description: description != null
+          ? Value.ofNullable(description)
+          : const Value.absent(),
+      author: author != null ? Value.ofNullable(author) : const Value.absent(),
       status: status,
-      thumbnailUrl: thumbnailUrl,
-      updateStrategy: updateStrategy,
-      initialized: initialized,
+      genre: genre != null ? Value.ofNullable(genre) : const Value.absent(),
+      source: source != null ? Value.ofNullable(source) : const Value.absent(),
+      lang: lang != null ? Value.ofNullable(lang) : const Value.absent(),
+      artist: artist != null ? Value.ofNullable(artist) : const Value.absent(),
+      thumbnailUrl: thumbnailUrl != null
+          ? Value.ofNullable(thumbnailUrl)
+          : const Value.absent(),
     );
   }
 }

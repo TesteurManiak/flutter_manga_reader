@@ -17,13 +17,13 @@ RouteBase get $detailsRoute => GoRouteData.$route(
 
 extension $DetailsRouteExtension on DetailsRoute {
   static DetailsRoute _fromState(GoRouterState state) => DetailsRoute(
-        mangaId: state.pathParameters['mangaId']!,
+        mangaId: int.parse(state.pathParameters['mangaId']!),
         openedFromSource: _$convertMapValue(
             'opened-from-source', state.uri.queryParameters, _$boolConverter),
       );
 
   String get location => GoRouteData.$location(
-        '/details/${Uri.encodeComponent(mangaId)}',
+        '/details/${Uri.encodeComponent(mangaId.toString())}',
         queryParams: {
           if (openedFromSource != null)
             'opened-from-source': openedFromSource!.toString(),

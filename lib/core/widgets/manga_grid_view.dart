@@ -10,7 +10,7 @@ class MangaGridView extends StatelessWidget {
     this.controller,
   });
 
-  final List<Manga> mangas;
+  final List<SourceManga> mangas;
   final ScrollController? controller;
   final bool displayedFromSource;
 

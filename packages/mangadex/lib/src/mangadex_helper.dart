@@ -50,7 +50,7 @@ class MangadexHelper {
     return (MDConstants.latestChapterLimit * (page - 1)).toString();
   }
 
-  Manga createBasicManga({
+  SourceManga createBasicManga({
     required MangaData mangaData,
     String? coverFileName,
     String? coverSuffix,
@@ -64,8 +64,7 @@ class MangadexHelper {
             .singleOrNull;
     final title = (dirtyTitle?.trim() ?? '').removeEntitiesAndMarkdown();
 
-    return Manga(
-      id: mangaData.id,
+    return SourceManga(
       url: '/manga/${mangaData.id}',
       source: MDConstants.sourceName,
       title: title,
@@ -77,10 +76,11 @@ class MangadexHelper {
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
             }
           : null,
+      lang: lang,
     );
   }
 
-  Manga createManga({
+  SourceManga createManga({
     required MangaData mangaData,
     required Map<String, AggregateVolume> chapters,
     String? firstVolumeCover,
@@ -159,7 +159,6 @@ class MangadexHelper {
       coverSuffix: coverSuffix,
       lang: lang,
     ).copyWith(
-      initialized: true,
       author: authors.join(', '),
       artist: artists.join(', '),
       genre: genreList.where((e) => e.isNotEmpty).join(', '),

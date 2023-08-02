@@ -66,7 +66,7 @@ class _Loaded extends ConsumerStatefulWidget {
   });
 
   final MangaDatasource datasource;
-  final List<Manga> mangas;
+  final List<SourceManga> mangas;
 
   @override
   ConsumerState<_Loaded> createState() => _LoadedState();

@@ -10,42 +10,39 @@ part 'details_controller.g.dart';
 @riverpod
 class DetailsController extends _$DetailsController {
   @override
-  DetailsState build(String mangaId) {
+  DetailsState build(int mangaId) {
     return const DetailsState.loading();
   }
 
-  Future<void> fetchDetails() async {
-    final currentManga = state.manga;
-    if (currentManga != null && currentManga.initialized) return;
-
-    state = DetailsState.loading(manga: currentManga);
+  Future<void> fetchDetails({bool forceRefresh = false}) async {
+    state = DetailsState.loading(manga: state.manga);
 
     final localManga =
         await ref.read(localDatasourceProvider).getManga(mangaId);
-    if (localManga != null && localManga.initialized) {
+
+    if (localManga == null) {
+      state = DetailsState.error(error: 'Manga not found', manga: state.manga);
+      return;
+    } else if (!forceRefresh && localManga.initialized) {
       state = DetailsState.loaded(manga: localManga);
       return;
     }
 
-    final datasource = ref.read(mangaDatasourceProvider);
+    state = DetailsState.loading(manga: localManga);
 
-    final infoResult = (await datasource.fetchMangaInfo(mangaId)).successOrNull;
-    if (infoResult == null) {
-      state = DetailsState.error(
-        error: 'Manga not found',
-        manga: currentManga,
-      );
-      return;
-    }
+    final remoteDatasource = ref.read(mangaDatasourceProvider);
+    final result = await remoteDatasource.fetchMangaDetails(localManga);
 
-    final result = await datasource.fetchMangaDetails(infoResult);
+    // TODO(Guillaume): Fetch chapters
 
     state = await result.when(
       success: (manga) async {
-        await ref.read(localDatasourceProvider).saveManga(manga);
+        await ref
+            .read(localDatasourceProvider)
+            .saveManga(manga.copyWith(initialized: true));
         return DetailsState.loaded(manga: manga);
       },
-      failure: (e) => DetailsState.error(error: e.message, manga: infoResult),
+      failure: (e) => DetailsState.error(error: e.message, manga: localManga),
     );
   }
 

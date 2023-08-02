@@ -11,13 +11,23 @@ abstract class LocalDatasource {
   /// Insert a manga into the database.
   Future<void> saveManga(Manga manga);
 
+  /// Insert a [SourceManga] into the database and return its id.
+  Future<int> saveSourceManga(SourceManga sourceManga);
+
   /// Insert a list of mangas into the database.
   Future<void> saveMangas(List<Manga> mangas);
 
   /// Get a manga from the database.
-  Future<Manga?> getManga(String mangaId);
+  Future<Manga?> getManga(int mangaId);
 
   Future<void> updateManga(Manga manga);
+
+  Future<int?> getMangaId({
+    required String title,
+    required String url,
+    required String? lang,
+    required String? source,
+  });
 }
 
 @Riverpod(keepAlive: true)
@@ -28,4 +38,17 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 @riverpod
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
+}
+
+@riverpod
+Future<int?> getMangaIdFromSource(
+  GetMangaIdFromSourceRef ref,
+  SourceManga sourceManga,
+) async {
+  return ref.watch(localDatasourceProvider).getMangaId(
+        title: sourceManga.title,
+        url: sourceManga.url,
+        lang: sourceManga.lang,
+        source: sourceManga.source,
+      );
 }

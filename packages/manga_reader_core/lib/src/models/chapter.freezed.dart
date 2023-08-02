@@ -16,19 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Chapter {
-  int? get id => throw _privateConstructorUsedError;
-  int? get mangaId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  int get mangaId => throw _privateConstructorUsedError; // Source data
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String? get scanlator => throw _privateConstructorUsedError;
+  int get dateUpload => throw _privateConstructorUsedError;
+  double get chapterNumber => throw _privateConstructorUsedError;
+  String? get scanlator => throw _privateConstructorUsedError; // Model data
   bool get read => throw _privateConstructorUsedError;
   bool get bookmark => throw _privateConstructorUsedError;
   int get lastPageRead => throw _privateConstructorUsedError;
   int get dateFetch => throw _privateConstructorUsedError;
-  int get dateUpload => throw _privateConstructorUsedError;
-  double get chapterNumber => throw _privateConstructorUsedError;
-  int get sourceOrder => throw _privateConstructorUsedError;
-  int get lastModifier => throw _privateConstructorUsedError;
+  int get lastModified => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChapterCopyWith<Chapter> get copyWith => throw _privateConstructorUsedError;
@@ -40,19 +39,18 @@ abstract class $ChapterCopyWith<$Res> {
       _$ChapterCopyWithImpl<$Res, Chapter>;
   @useResult
   $Res call(
-      {int? id,
-      int? mangaId,
+      {int id,
+      int mangaId,
       String url,
       String name,
+      int dateUpload,
+      double chapterNumber,
       String? scanlator,
       bool read,
       bool bookmark,
       int lastPageRead,
       int dateFetch,
-      int dateUpload,
-      double chapterNumber,
-      int sourceOrder,
-      int lastModifier});
+      int lastModified});
 }
 
 /// @nodoc
@@ -68,29 +66,28 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? mangaId = freezed,
+    Object? id = null,
+    Object? mangaId = null,
     Object? url = null,
     Object? name = null,
+    Object? dateUpload = null,
+    Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
     Object? bookmark = null,
     Object? lastPageRead = null,
     Object? dateFetch = null,
-    Object? dateUpload = null,
-    Object? chapterNumber = null,
-    Object? sourceOrder = null,
-    Object? lastModifier = null,
+    Object? lastModified = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mangaId: freezed == mangaId
+              as int,
+      mangaId: null == mangaId
           ? _value.mangaId
           : mangaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -99,6 +96,14 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      dateUpload: null == dateUpload
+          ? _value.dateUpload
+          : dateUpload // ignore: cast_nullable_to_non_nullable
+              as int,
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
+              as double,
       scanlator: freezed == scanlator
           ? _value.scanlator
           : scanlator // ignore: cast_nullable_to_non_nullable
@@ -119,21 +124,9 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
           ? _value.dateFetch
           : dateFetch // ignore: cast_nullable_to_non_nullable
               as int,
-      dateUpload: null == dateUpload
-          ? _value.dateUpload
-          : dateUpload // ignore: cast_nullable_to_non_nullable
-              as int,
-      chapterNumber: null == chapterNumber
-          ? _value.chapterNumber
-          : chapterNumber // ignore: cast_nullable_to_non_nullable
-              as double,
-      sourceOrder: null == sourceOrder
-          ? _value.sourceOrder
-          : sourceOrder // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastModifier: null == lastModifier
-          ? _value.lastModifier
-          : lastModifier // ignore: cast_nullable_to_non_nullable
+      lastModified: null == lastModified
+          ? _value.lastModified
+          : lastModified // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -147,19 +140,18 @@ abstract class _$$_ChapterCopyWith<$Res> implements $ChapterCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
-      int? mangaId,
+      {int id,
+      int mangaId,
       String url,
       String name,
+      int dateUpload,
+      double chapterNumber,
       String? scanlator,
       bool read,
       bool bookmark,
       int lastPageRead,
       int dateFetch,
-      int dateUpload,
-      double chapterNumber,
-      int sourceOrder,
-      int lastModifier});
+      int lastModified});
 }
 
 /// @nodoc
@@ -172,29 +164,28 @@ class __$$_ChapterCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? mangaId = freezed,
+    Object? id = null,
+    Object? mangaId = null,
     Object? url = null,
     Object? name = null,
+    Object? dateUpload = null,
+    Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
     Object? bookmark = null,
     Object? lastPageRead = null,
     Object? dateFetch = null,
-    Object? dateUpload = null,
-    Object? chapterNumber = null,
-    Object? sourceOrder = null,
-    Object? lastModifier = null,
+    Object? lastModified = null,
   }) {
     return _then(_$_Chapter(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mangaId: freezed == mangaId
+              as int,
+      mangaId: null == mangaId
           ? _value.mangaId
           : mangaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -203,6 +194,14 @@ class __$$_ChapterCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      dateUpload: null == dateUpload
+          ? _value.dateUpload
+          : dateUpload // ignore: cast_nullable_to_non_nullable
+              as int,
+      chapterNumber: null == chapterNumber
+          ? _value.chapterNumber
+          : chapterNumber // ignore: cast_nullable_to_non_nullable
+              as double,
       scanlator: freezed == scanlator
           ? _value.scanlator
           : scanlator // ignore: cast_nullable_to_non_nullable
@@ -223,21 +222,9 @@ class __$$_ChapterCopyWithImpl<$Res>
           ? _value.dateFetch
           : dateFetch // ignore: cast_nullable_to_non_nullable
               as int,
-      dateUpload: null == dateUpload
-          ? _value.dateUpload
-          : dateUpload // ignore: cast_nullable_to_non_nullable
-              as int,
-      chapterNumber: null == chapterNumber
-          ? _value.chapterNumber
-          : chapterNumber // ignore: cast_nullable_to_non_nullable
-              as double,
-      sourceOrder: null == sourceOrder
-          ? _value.sourceOrder
-          : sourceOrder // ignore: cast_nullable_to_non_nullable
-              as int,
-      lastModifier: null == lastModifier
-          ? _value.lastModifier
-          : lastModifier // ignore: cast_nullable_to_non_nullable
+      lastModified: null == lastModified
+          ? _value.lastModified
+          : lastModified // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -247,30 +234,37 @@ class __$$_ChapterCopyWithImpl<$Res>
 
 class _$_Chapter implements _Chapter {
   const _$_Chapter(
-      {this.id,
-      this.mangaId,
+      {required this.id,
+      required this.mangaId,
       required this.url,
       required this.name,
+      this.dateUpload = 0,
+      this.chapterNumber = 0.0,
       this.scanlator,
       this.read = false,
       this.bookmark = false,
       this.lastPageRead = 0,
       this.dateFetch = 0,
-      this.dateUpload = 0,
-      this.chapterNumber = 0.0,
-      this.sourceOrder = 0,
-      this.lastModifier = 0});
+      this.lastModified = 0});
 
   @override
-  final int? id;
+  final int id;
   @override
-  final int? mangaId;
+  final int mangaId;
+// Source data
   @override
   final String url;
   @override
   final String name;
   @override
+  @JsonKey()
+  final int dateUpload;
+  @override
+  @JsonKey()
+  final double chapterNumber;
+  @override
   final String? scanlator;
+// Model data
   @override
   @JsonKey()
   final bool read;
@@ -285,20 +279,11 @@ class _$_Chapter implements _Chapter {
   final int dateFetch;
   @override
   @JsonKey()
-  final int dateUpload;
-  @override
-  @JsonKey()
-  final double chapterNumber;
-  @override
-  @JsonKey()
-  final int sourceOrder;
-  @override
-  @JsonKey()
-  final int lastModifier;
+  final int lastModified;
 
   @override
   String toString() {
-    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, scanlator: $scanlator, read: $read, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, dateUpload: $dateUpload, chapterNumber: $chapterNumber, sourceOrder: $sourceOrder, lastModifier: $lastModifier)';
+    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator, read: $read, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, lastModified: $lastModified)';
   }
 
   @override
@@ -310,6 +295,10 @@ class _$_Chapter implements _Chapter {
             (identical(other.mangaId, mangaId) || other.mangaId == mangaId) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.dateUpload, dateUpload) ||
+                other.dateUpload == dateUpload) &&
+            (identical(other.chapterNumber, chapterNumber) ||
+                other.chapterNumber == chapterNumber) &&
             (identical(other.scanlator, scanlator) ||
                 other.scanlator == scanlator) &&
             (identical(other.read, read) || other.read == read) &&
@@ -319,14 +308,8 @@ class _$_Chapter implements _Chapter {
                 other.lastPageRead == lastPageRead) &&
             (identical(other.dateFetch, dateFetch) ||
                 other.dateFetch == dateFetch) &&
-            (identical(other.dateUpload, dateUpload) ||
-                other.dateUpload == dateUpload) &&
-            (identical(other.chapterNumber, chapterNumber) ||
-                other.chapterNumber == chapterNumber) &&
-            (identical(other.sourceOrder, sourceOrder) ||
-                other.sourceOrder == sourceOrder) &&
-            (identical(other.lastModifier, lastModifier) ||
-                other.lastModifier == lastModifier));
+            (identical(other.lastModified, lastModified) ||
+                other.lastModified == lastModified));
   }
 
   @override
@@ -336,15 +319,14 @@ class _$_Chapter implements _Chapter {
       mangaId,
       url,
       name,
+      dateUpload,
+      chapterNumber,
       scanlator,
       read,
       bookmark,
       lastPageRead,
       dateFetch,
-      dateUpload,
-      chapterNumber,
-      sourceOrder,
-      lastModifier);
+      lastModified);
 
   @JsonKey(ignore: true)
   @override
@@ -355,31 +337,34 @@ class _$_Chapter implements _Chapter {
 
 abstract class _Chapter implements Chapter {
   const factory _Chapter(
-      {final int? id,
-      final int? mangaId,
+      {required final int id,
+      required final int mangaId,
       required final String url,
       required final String name,
+      final int dateUpload,
+      final double chapterNumber,
       final String? scanlator,
       final bool read,
       final bool bookmark,
       final int lastPageRead,
       final int dateFetch,
-      final int dateUpload,
-      final double chapterNumber,
-      final int sourceOrder,
-      final int lastModifier}) = _$_Chapter;
+      final int lastModified}) = _$_Chapter;
 
   @override
-  int? get id;
+  int get id;
   @override
-  int? get mangaId;
-  @override
+  int get mangaId;
+  @override // Source data
   String get url;
   @override
   String get name;
   @override
-  String? get scanlator;
+  int get dateUpload;
   @override
+  double get chapterNumber;
+  @override
+  String? get scanlator;
+  @override // Model data
   bool get read;
   @override
   bool get bookmark;
@@ -388,13 +373,7 @@ abstract class _Chapter implements Chapter {
   @override
   int get dateFetch;
   @override
-  int get dateUpload;
-  @override
-  double get chapterNumber;
-  @override
-  int get sourceOrder;
-  @override
-  int get lastModifier;
+  int get lastModified;
   @override
   @JsonKey(ignore: true)
   _$$_ChapterCopyWith<_$_Chapter> get copyWith =>

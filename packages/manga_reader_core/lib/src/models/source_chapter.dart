@@ -1,0 +1,21 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'source_chapter.freezed.dart';
+part 'source_chapter.g.dart';
+
+/// Model used to handle chapter data fetched from a remote datasource.
+///
+/// It doesn't have an id because it's not stored in the database.
+@Freezed(toJson: false)
+class SourceChapter with _$SourceChapter {
+  const factory SourceChapter({
+    required String url,
+    required String name,
+    @Default(0) int dateUpload,
+    @Default(0.0) double chapterNumber,
+    String? scanlator,
+  }) = _SourceChapter;
+
+  factory SourceChapter.fromJson(Map<String, dynamic> json) =>
+      _$SourceChapterFromJson(json);
+}

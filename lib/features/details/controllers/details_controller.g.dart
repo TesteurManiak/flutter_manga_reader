@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'0dd67771809f5547ac7a9dbeb38cd383f1035327';
+String _$detailsControllerHash() => r'022e0ffaebb26c960c1695185fd68e9da5dd959d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,10 +31,10 @@ class _SystemHash {
 
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
-  late final String mangaId;
+  late final int mangaId;
 
   DetailsState build(
-    String mangaId,
+    int mangaId,
   );
 }
 
@@ -49,7 +49,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
 
   /// See also [DetailsController].
   DetailsControllerProvider call(
-    String mangaId,
+    int mangaId,
   ) {
     return DetailsControllerProvider(
       mangaId,
@@ -99,7 +99,7 @@ class DetailsControllerProvider
               DetailsControllerFamily._allTransitiveDependencies,
         );
 
-  final String mangaId;
+  final int mangaId;
 
   @override
   bool operator ==(Object other) {
