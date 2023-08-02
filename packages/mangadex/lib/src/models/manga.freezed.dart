@@ -129,13 +129,14 @@ class __$$_MangaListResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MangaListResponse implements _MangaListResponse {
+class _$_MangaListResponse extends _MangaListResponse {
   const _$_MangaListResponse(
       {final List<MangaData> data = const <MangaData>[],
       this.limit = 0,
       this.offset = 0,
       this.total = 0})
-      : _data = data;
+      : _data = data,
+        super._();
 
   factory _$_MangaListResponse.fromJson(Map<String, dynamic> json) =>
       _$$_MangaListResponseFromJson(json);
@@ -195,12 +196,13 @@ class _$_MangaListResponse implements _MangaListResponse {
   }
 }
 
-abstract class _MangaListResponse implements MangaListResponse {
+abstract class _MangaListResponse extends MangaListResponse {
   const factory _MangaListResponse(
       {final List<MangaData> data,
       final int limit,
       final int offset,
       final int total}) = _$_MangaListResponse;
+  const _MangaListResponse._() : super._();
 
   factory _MangaListResponse.fromJson(Map<String, dynamic> json) =
       _$_MangaListResponse.fromJson;

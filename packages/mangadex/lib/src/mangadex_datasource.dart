@@ -48,11 +48,10 @@ class MangadexDatasource extends MangaDatasource {
 
     return result.when(
       success: (response) async {
-        final hasMore = response.limit + response.offset < response.total;
         final mangaList = await _parsePopularMangas(response.data);
 
         return Result.success(
-          MangasPage(mangaList: mangaList, hasMore: hasMore),
+          MangasPage(mangaList: mangaList, hasMore: response.hasMore),
         );
       },
       failure: Result.failure,
@@ -153,7 +152,9 @@ class MangadexDatasource extends MangaDatasource {
   }
 
   @override
-  Future<Result<MangasPage, HttpError>> latestUpdatesRequest(int page) async {
+  Future<Result<MangasPage, HttpError>> fetchLatestUpdateRequest(
+    int page,
+  ) async {
     final result = await _client.send(
       method: HttpMethod.get,
       pathSegments: [MDConstants.chapter],
@@ -170,13 +171,12 @@ class MangadexDatasource extends MangaDatasource {
 
     return result.when(
       success: (response) async {
-        final hasMore = response.limit + response.offset < response.total;
         final mangaList = await _parseLatestUpdate(response.data);
 
         return Result.success(
           MangasPage(
             mangaList: mangaList,
-            hasMore: hasMore,
+            hasMore: response.hasMore,
           ),
         );
       },
@@ -313,6 +313,79 @@ class MangadexDatasource extends MangaDatasource {
   Future<String?> _fetchFirstVolumeCover(MangaData mangaData) async {
     return _fetchFirstVolumeCovers([mangaData])
         .then((value) => value?[mangaData.id]);
+  }
+
+  @override
+  Future<Result<List<SourceChapter>, HttpError>> fetchChapters(
+    SourceManga sourceManga,
+  ) async {
+    if (!_helper.containsUuid(sourceManga.url.trim())) {
+      return const Result.failure(HttpError(message: 'Invalid manga format'));
+    }
+
+    return _fetchPaginatedChapterList(
+      mangaId: _helper.getUuidFromUrl(sourceManga.url),
+      offset: 0,
+    ).then((value) {
+      return Result.success(
+        value.data.map<SourceChapter>((e) => null).toList(),
+      );
+    });
+  }
+
+  /// Fetch a paginated list of chapters for a manga.
+  ///
+  /// Required because the chapter list API endpoint is paginated.
+  Future<ChapterResponse> _fetchPaginatedChapterList({
+    required String mangaId,
+    required int offset,
+  }) async {
+    final result = await _client.send(
+      method: HttpMethod.get,
+      pathSegments: [MDConstants.manga, mangaId, 'feed'],
+      queryParameters: {
+        'includes[]': [
+          MDConstants.scanlationGroup,
+          MDConstants.user,
+        ],
+        'limit': 500,
+        'offset': offset,
+        'translatedLanguage[]': _dexLang,
+        'order[volume]': 'desc',
+        'order[chapter]': 'desc',
+        'includeFuturePublishAt': '0',
+        'includeEmptyPages': '0',
+        'contentRating[]': ContentRating.values.map((e) => e.name),
+      },
+    ).decode(ChapterResponse.fromJson);
+
+    return result.when(
+      success: (response) async {
+        int newOffset = response.offset;
+        bool hasNextPage = response.hasMore;
+
+        final fullChapterList = List<ChapterData>.from(response.data);
+
+        while (hasNextPage) {
+          newOffset += response.limit;
+
+          final newResult = await _fetchPaginatedChapterList(
+            mangaId: mangaId,
+            offset: newOffset,
+          );
+          fullChapterList.addAll(newResult.data);
+
+          hasNextPage = newResult.hasMore;
+        }
+
+        return ChapterResponse(
+          data: fullChapterList,
+          offset: newOffset,
+          total: fullChapterList.length,
+        );
+      },
+      failure: (_) => ChapterResponse(offset: offset),
+    );
   }
 }
 
