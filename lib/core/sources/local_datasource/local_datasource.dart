@@ -28,6 +28,12 @@ abstract class LocalDatasource {
     required String? lang,
     required String? source,
   });
+
+  /// Save a [List] of [SourceChapter] into the database.
+  Future<void> saveSourceChapters(
+    List<SourceChapter> sourceChapters,
+    int mangaId,
+  );
 }
 
 @Riverpod(keepAlive: true)

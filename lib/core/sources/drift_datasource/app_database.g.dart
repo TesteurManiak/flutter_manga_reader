@@ -652,7 +652,7 @@ class $DbChaptersTable extends DbChapters
       'chapter_number', aliasedName, false,
       type: DriftSqlType.double,
       requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+      defaultValue: const Constant(-1));
   static const VerificationMeta _scanlatorMeta =
       const VerificationMeta('scanlator');
   @override

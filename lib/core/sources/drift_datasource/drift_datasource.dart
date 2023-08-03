@@ -76,7 +76,20 @@ class DriftDatasource implements LocalDatasource {
     // Delete any existing source with the same title, lang, source and url
     await query.go();
 
-    return _database.into(_database.dbMangas).insert(sourceManga.toDbModel());
+    return _database.into(_database.dbMangas).insert(sourceManga.toCompanion());
+  }
+
+  @override
+  Future<void> saveSourceChapters(
+    List<SourceChapter> sourceChapters,
+    int mangaId,
+  ) async {
+    final companions = sourceChapters.map((e) => e.toCompanion(mangaId));
+    return _database.batch((batch) {
+      batch
+        ..deleteWhere(_database.dbChapters, (t) => t.mangaId.equals(mangaId))
+        ..insertAll(_database.dbChapters, companions);
+    });
   }
 }
 
@@ -89,7 +102,7 @@ extension on Manga {
 }
 
 extension on SourceManga {
-  DbMangasCompanion toDbModel() {
+  DbMangasCompanion toCompanion() {
     return DbMangasCompanion.insert(
       title: title,
       url: url,
@@ -104,6 +117,21 @@ extension on SourceManga {
       artist: artist != null ? Value.ofNullable(artist) : const Value.absent(),
       thumbnailUrl: thumbnailUrl != null
           ? Value.ofNullable(thumbnailUrl)
+          : const Value.absent(),
+    );
+  }
+}
+
+extension on SourceChapter {
+  DbChaptersCompanion toCompanion(int mangaId) {
+    return DbChaptersCompanion.insert(
+      mangaId: mangaId,
+      url: url,
+      name: name,
+      dateUpload: Value(dateUpload),
+      chapterNumber: Value(chapterNumber),
+      scanlator: scanlator != null
+          ? Value.ofNullable(scanlator)
           : const Value.absent(),
     );
   }

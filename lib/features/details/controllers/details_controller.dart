@@ -7,6 +7,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'details_controller.freezed.dart';
 part 'details_controller.g.dart';
 
+typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
+
 @riverpod
 class DetailsController extends _$DetailsController {
   @override
@@ -30,20 +32,57 @@ class DetailsController extends _$DetailsController {
 
     state = DetailsState.loading(manga: localManga);
 
-    final remoteDatasource = ref.read(mangaDatasourceProvider);
-    final result = await remoteDatasource.fetchMangaDetails(localManga);
-
-    // TODO(Guillaume): Fetch chapters
+    final result = await _fetchRecord(localManga);
 
     state = await result.when(
-      success: (manga) async {
-        await ref
-            .read(localDatasourceProvider)
-            .saveManga(manga.copyWith(initialized: true));
-        return DetailsState.loaded(manga: manga);
+      success: (record) async {
+        await _saveRecord(record);
+        return DetailsState.loaded(manga: record.manga);
       },
-      failure: (e) => DetailsState.error(error: e.message, manga: localManga),
+      failure: (e) => DetailsState.error(error: e, manga: localManga),
     );
+  }
+
+  Future<Result<_MangaFetchRecord, String?>> _fetchRecord(
+    Manga baseManga,
+  ) async {
+    final remoteDatasource = ref.read(mangaDatasourceProvider);
+    return Future.wait([
+      remoteDatasource.fetchMangaDetails(baseManga),
+      remoteDatasource.fetchChapters(baseManga.toSourceModel()),
+    ]).then((value) {
+      final detailsResult = value[0];
+      final chaptersResult = value[1];
+
+      if (detailsResult is! Result<Manga, HttpError>) {
+        return const Result.failure('Invalid details result');
+      } else if (chaptersResult is! Result<List<SourceChapter>, HttpError>) {
+        return const Result.failure('Invalid chapters result');
+      }
+
+      return detailsResult.when(
+        success: (manga) {
+          return chaptersResult.when(
+            success: (chapters) {
+              return Result.success((manga: manga, sourceChapters: chapters));
+            },
+            failure: (e) => Result.failure(e.message),
+          );
+        },
+        failure: (e) => Result.failure(e.message),
+      );
+    });
+  }
+
+  Future<void> _saveRecord(_MangaFetchRecord record) {
+    final localDatasource = ref.read(localDatasourceProvider);
+    return Future.wait([
+      localDatasource.saveManga(record.manga),
+      localDatasource.saveSourceChapters(
+        record.sourceChapters,
+        record.manga.id,
+      ),
+    ]);
   }
 
   Future<void> toggleFavorite() async {
