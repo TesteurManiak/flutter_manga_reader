@@ -640,11 +640,9 @@ class $DbChaptersTable extends DbChapters
   static const VerificationMeta _dateUploadMeta =
       const VerificationMeta('dateUpload');
   @override
-  late final GeneratedColumn<int> dateUpload = GeneratedColumn<int>(
-      'date_upload', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+  late final GeneratedColumn<DateTime> dateUpload = GeneratedColumn<DateTime>(
+      'date_upload', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   static const VerificationMeta _chapterNumberMeta =
       const VerificationMeta('chapterNumber');
   @override
@@ -695,19 +693,15 @@ class $DbChaptersTable extends DbChapters
   static const VerificationMeta _dateFetchMeta =
       const VerificationMeta('dateFetch');
   @override
-  late final GeneratedColumn<int> dateFetch = GeneratedColumn<int>(
-      'date_fetch', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+  late final GeneratedColumn<DateTime> dateFetch = GeneratedColumn<DateTime>(
+      'date_fetch', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   static const VerificationMeta _lastModifiedMeta =
       const VerificationMeta('lastModified');
   @override
-  late final GeneratedColumn<int> lastModified = GeneratedColumn<int>(
-      'last_modified', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
+  late final GeneratedColumn<DateTime> lastModified = GeneratedColumn<DateTime>(
+      'last_modified', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -811,7 +805,7 @@ class $DbChaptersTable extends DbChapters
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       dateUpload: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}date_upload'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_upload']),
       chapterNumber: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}chapter_number'])!,
       scanlator: attachedDatabase.typeMapping
@@ -823,9 +817,9 @@ class $DbChaptersTable extends DbChapters
       lastPageRead: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}last_page_read'])!,
       dateFetch: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}date_fetch'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_fetch']),
       lastModified: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}last_modified'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_modified']),
     );
   }
 
@@ -840,27 +834,27 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int mangaId;
   final String url;
   final String name;
-  final int dateUpload;
+  final DateTime? dateUpload;
   final double chapterNumber;
   final String? scanlator;
   final bool read;
   final bool bookmark;
   final int lastPageRead;
-  final int dateFetch;
-  final int lastModified;
+  final DateTime? dateFetch;
+  final DateTime? lastModified;
   const DbChapter(
       {required this.id,
       required this.mangaId,
       required this.url,
       required this.name,
-      required this.dateUpload,
+      this.dateUpload,
       required this.chapterNumber,
       this.scanlator,
       required this.read,
       required this.bookmark,
       required this.lastPageRead,
-      required this.dateFetch,
-      required this.lastModified});
+      this.dateFetch,
+      this.lastModified});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -868,7 +862,9 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     map['manga_id'] = Variable<int>(mangaId);
     map['url'] = Variable<String>(url);
     map['name'] = Variable<String>(name);
-    map['date_upload'] = Variable<int>(dateUpload);
+    if (!nullToAbsent || dateUpload != null) {
+      map['date_upload'] = Variable<DateTime>(dateUpload);
+    }
     map['chapter_number'] = Variable<double>(chapterNumber);
     if (!nullToAbsent || scanlator != null) {
       map['scanlator'] = Variable<String>(scanlator);
@@ -876,8 +872,12 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     map['read'] = Variable<bool>(read);
     map['bookmark'] = Variable<bool>(bookmark);
     map['last_page_read'] = Variable<int>(lastPageRead);
-    map['date_fetch'] = Variable<int>(dateFetch);
-    map['last_modified'] = Variable<int>(lastModified);
+    if (!nullToAbsent || dateFetch != null) {
+      map['date_fetch'] = Variable<DateTime>(dateFetch);
+    }
+    if (!nullToAbsent || lastModified != null) {
+      map['last_modified'] = Variable<DateTime>(lastModified);
+    }
     return map;
   }
 
@@ -887,7 +887,9 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
-      dateUpload: Value(dateUpload),
+      dateUpload: dateUpload == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateUpload),
       chapterNumber: Value(chapterNumber),
       scanlator: scanlator == null && nullToAbsent
           ? const Value.absent()
@@ -895,8 +897,12 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       read: Value(read),
       bookmark: Value(bookmark),
       lastPageRead: Value(lastPageRead),
-      dateFetch: Value(dateFetch),
-      lastModified: Value(lastModified),
+      dateFetch: dateFetch == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateFetch),
+      lastModified: lastModified == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastModified),
     );
   }
 
@@ -908,14 +914,14 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: serializer.fromJson<int>(json['mangaId']),
       url: serializer.fromJson<String>(json['url']),
       name: serializer.fromJson<String>(json['name']),
-      dateUpload: serializer.fromJson<int>(json['dateUpload']),
+      dateUpload: serializer.fromJson<DateTime?>(json['dateUpload']),
       chapterNumber: serializer.fromJson<double>(json['chapterNumber']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
       read: serializer.fromJson<bool>(json['read']),
       bookmark: serializer.fromJson<bool>(json['bookmark']),
       lastPageRead: serializer.fromJson<int>(json['lastPageRead']),
-      dateFetch: serializer.fromJson<int>(json['dateFetch']),
-      lastModified: serializer.fromJson<int>(json['lastModified']),
+      dateFetch: serializer.fromJson<DateTime?>(json['dateFetch']),
+      lastModified: serializer.fromJson<DateTime?>(json['lastModified']),
     );
   }
   @override
@@ -926,14 +932,14 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       'mangaId': serializer.toJson<int>(mangaId),
       'url': serializer.toJson<String>(url),
       'name': serializer.toJson<String>(name),
-      'dateUpload': serializer.toJson<int>(dateUpload),
+      'dateUpload': serializer.toJson<DateTime?>(dateUpload),
       'chapterNumber': serializer.toJson<double>(chapterNumber),
       'scanlator': serializer.toJson<String?>(scanlator),
       'read': serializer.toJson<bool>(read),
       'bookmark': serializer.toJson<bool>(bookmark),
       'lastPageRead': serializer.toJson<int>(lastPageRead),
-      'dateFetch': serializer.toJson<int>(dateFetch),
-      'lastModified': serializer.toJson<int>(lastModified),
+      'dateFetch': serializer.toJson<DateTime?>(dateFetch),
+      'lastModified': serializer.toJson<DateTime?>(lastModified),
     };
   }
 
@@ -942,27 +948,28 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           int? mangaId,
           String? url,
           String? name,
-          int? dateUpload,
+          Value<DateTime?> dateUpload = const Value.absent(),
           double? chapterNumber,
           Value<String?> scanlator = const Value.absent(),
           bool? read,
           bool? bookmark,
           int? lastPageRead,
-          int? dateFetch,
-          int? lastModified}) =>
+          Value<DateTime?> dateFetch = const Value.absent(),
+          Value<DateTime?> lastModified = const Value.absent()}) =>
       DbChapter(
         id: id ?? this.id,
         mangaId: mangaId ?? this.mangaId,
         url: url ?? this.url,
         name: name ?? this.name,
-        dateUpload: dateUpload ?? this.dateUpload,
+        dateUpload: dateUpload.present ? dateUpload.value : this.dateUpload,
         chapterNumber: chapterNumber ?? this.chapterNumber,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
         read: read ?? this.read,
         bookmark: bookmark ?? this.bookmark,
         lastPageRead: lastPageRead ?? this.lastPageRead,
-        dateFetch: dateFetch ?? this.dateFetch,
-        lastModified: lastModified ?? this.lastModified,
+        dateFetch: dateFetch.present ? dateFetch.value : this.dateFetch,
+        lastModified:
+            lastModified.present ? lastModified.value : this.lastModified,
       );
   @override
   String toString() {
@@ -1020,14 +1027,14 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<int> mangaId;
   final Value<String> url;
   final Value<String> name;
-  final Value<int> dateUpload;
+  final Value<DateTime?> dateUpload;
   final Value<double> chapterNumber;
   final Value<String?> scanlator;
   final Value<bool> read;
   final Value<bool> bookmark;
   final Value<int> lastPageRead;
-  final Value<int> dateFetch;
-  final Value<int> lastModified;
+  final Value<DateTime?> dateFetch;
+  final Value<DateTime?> lastModified;
   const DbChaptersCompanion({
     this.id = const Value.absent(),
     this.mangaId = const Value.absent(),
@@ -1063,14 +1070,14 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     Expression<int>? mangaId,
     Expression<String>? url,
     Expression<String>? name,
-    Expression<int>? dateUpload,
+    Expression<DateTime>? dateUpload,
     Expression<double>? chapterNumber,
     Expression<String>? scanlator,
     Expression<bool>? read,
     Expression<bool>? bookmark,
     Expression<int>? lastPageRead,
-    Expression<int>? dateFetch,
-    Expression<int>? lastModified,
+    Expression<DateTime>? dateFetch,
+    Expression<DateTime>? lastModified,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1093,14 +1100,14 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       Value<int>? mangaId,
       Value<String>? url,
       Value<String>? name,
-      Value<int>? dateUpload,
+      Value<DateTime?>? dateUpload,
       Value<double>? chapterNumber,
       Value<String?>? scanlator,
       Value<bool>? read,
       Value<bool>? bookmark,
       Value<int>? lastPageRead,
-      Value<int>? dateFetch,
-      Value<int>? lastModified}) {
+      Value<DateTime?>? dateFetch,
+      Value<DateTime?>? lastModified}) {
     return DbChaptersCompanion(
       id: id ?? this.id,
       mangaId: mangaId ?? this.mangaId,
@@ -1133,7 +1140,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       map['name'] = Variable<String>(name.value);
     }
     if (dateUpload.present) {
-      map['date_upload'] = Variable<int>(dateUpload.value);
+      map['date_upload'] = Variable<DateTime>(dateUpload.value);
     }
     if (chapterNumber.present) {
       map['chapter_number'] = Variable<double>(chapterNumber.value);
@@ -1151,10 +1158,10 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       map['last_page_read'] = Variable<int>(lastPageRead.value);
     }
     if (dateFetch.present) {
-      map['date_fetch'] = Variable<int>(dateFetch.value);
+      map['date_fetch'] = Variable<DateTime>(dateFetch.value);
     }
     if (lastModified.present) {
-      map['last_modified'] = Variable<int>(lastModified.value);
+      map['last_modified'] = Variable<DateTime>(lastModified.value);
     }
     return map;
   }

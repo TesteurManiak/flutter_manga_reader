@@ -106,7 +106,13 @@ extension on DbManga {
 }
 
 extension on DbChapter {
-  Chapter toModel() => Chapter.fromJson(toJson());
+  Chapter toModel() => Chapter.fromJson(
+        toJson(
+          serializer: const ValueSerializer.defaults(
+            serializeDateTimeValuesAsString: true,
+          ),
+        ),
+      );
 }
 
 extension on Manga {

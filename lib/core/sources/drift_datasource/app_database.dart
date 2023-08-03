@@ -29,14 +29,14 @@ class DbChapters extends Table {
   IntColumn get mangaId => integer()();
   TextColumn get url => text()();
   TextColumn get name => text()();
-  IntColumn get dateUpload => integer().withDefault(const Constant(0))();
+  DateTimeColumn get dateUpload => dateTime().nullable()();
   RealColumn get chapterNumber => real().withDefault(const Constant(-1))();
   TextColumn get scanlator => text().nullable()();
   BoolColumn get read => boolean().withDefault(const Constant(false))();
   BoolColumn get bookmark => boolean().withDefault(const Constant(false))();
   IntColumn get lastPageRead => integer().withDefault(const Constant(0))();
-  IntColumn get dateFetch => integer().withDefault(const Constant(0))();
-  IntColumn get lastModified => integer().withDefault(const Constant(0))();
+  DateTimeColumn get dateFetch => dateTime().nullable()();
+  DateTimeColumn get lastModified => dateTime().nullable()();
 }
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above

@@ -243,14 +243,11 @@ class MangadexHelper {
     );
   }
 
-  int _parseDate(String dateAsString) {
+  DateTime? _parseDate(String dateAsString) {
     try {
-      return MDConstants.dateFormatter
-          .parse(dateAsString)
-          .toUtc()
-          .millisecondsSinceEpoch;
-    } catch (e) {
-      return 0;
+      return MDConstants.dateFormatter.parse(dateAsString).toUtc();
+    } catch (_) {
+      return null;
     }
   }
 }
