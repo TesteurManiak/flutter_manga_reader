@@ -129,13 +129,14 @@ class __$$_ChapterResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChapterResponse implements _ChapterResponse {
+class _$_ChapterResponse extends _ChapterResponse {
   const _$_ChapterResponse(
       {final List<ChapterData> data = const <ChapterData>[],
       this.limit = 0,
       this.offset = 0,
       this.total = 0})
-      : _data = data;
+      : _data = data,
+        super._();
 
   factory _$_ChapterResponse.fromJson(Map<String, dynamic> json) =>
       _$$_ChapterResponseFromJson(json);
@@ -194,12 +195,13 @@ class _$_ChapterResponse implements _ChapterResponse {
   }
 }
 
-abstract class _ChapterResponse implements ChapterResponse {
+abstract class _ChapterResponse extends ChapterResponse {
   const factory _ChapterResponse(
       {final List<ChapterData> data,
       final int limit,
       final int offset,
       final int total}) = _$_ChapterResponse;
+  const _ChapterResponse._() : super._();
 
   factory _ChapterResponse.fromJson(Map<String, dynamic> json) =
       _$_ChapterResponse.fromJson;

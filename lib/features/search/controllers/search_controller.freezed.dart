@@ -21,7 +21,7 @@ mixin _$PaginatedMangaState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, bool hasMore) loading,
-    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+    required TResult Function(int page, bool hasMore, List<SourceManga> mangas)
         loaded,
     required TResult Function(int page, bool hasMore) empty,
     required TResult Function(int page, bool hasMore, String? message) error,
@@ -30,7 +30,7 @@ mixin _$PaginatedMangaState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, bool hasMore)? loading,
-    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult? Function(int page, bool hasMore)? empty,
     TResult? Function(int page, bool hasMore, String? message)? error,
   }) =>
@@ -38,7 +38,7 @@ mixin _$PaginatedMangaState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, bool hasMore)? loading,
-    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult Function(int page, bool hasMore)? empty,
     TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
@@ -188,7 +188,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, bool hasMore) loading,
-    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+    required TResult Function(int page, bool hasMore, List<SourceManga> mangas)
         loaded,
     required TResult Function(int page, bool hasMore) empty,
     required TResult Function(int page, bool hasMore, String? message) error,
@@ -200,7 +200,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, bool hasMore)? loading,
-    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult? Function(int page, bool hasMore)? empty,
     TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
@@ -211,7 +211,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, bool hasMore)? loading,
-    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult Function(int page, bool hasMore)? empty,
     TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
@@ -282,7 +282,7 @@ abstract class _$$_LoadedCopyWith<$Res>
       __$$_LoadedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int page, bool hasMore, List<Manga> mangas});
+  $Res call({int page, bool hasMore, List<SourceManga> mangas});
 }
 
 /// @nodoc
@@ -311,7 +311,7 @@ class __$$_LoadedCopyWithImpl<$Res>
       mangas: null == mangas
           ? _value._mangas
           : mangas // ignore: cast_nullable_to_non_nullable
-              as List<Manga>,
+              as List<SourceManga>,
     ));
   }
 }
@@ -322,7 +322,7 @@ class _$_Loaded extends _Loaded {
   const _$_Loaded(
       {required this.page,
       required this.hasMore,
-      required final List<Manga> mangas})
+      required final List<SourceManga> mangas})
       : _mangas = mangas,
         super._();
 
@@ -330,9 +330,9 @@ class _$_Loaded extends _Loaded {
   final int page;
   @override
   final bool hasMore;
-  final List<Manga> _mangas;
+  final List<SourceManga> _mangas;
   @override
-  List<Manga> get mangas {
+  List<SourceManga> get mangas {
     if (_mangas is EqualUnmodifiableListView) return _mangas;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_mangas);
@@ -367,7 +367,7 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, bool hasMore) loading,
-    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+    required TResult Function(int page, bool hasMore, List<SourceManga> mangas)
         loaded,
     required TResult Function(int page, bool hasMore) empty,
     required TResult Function(int page, bool hasMore, String? message) error,
@@ -379,7 +379,7 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, bool hasMore)? loading,
-    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult? Function(int page, bool hasMore)? empty,
     TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
@@ -390,7 +390,7 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, bool hasMore)? loading,
-    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult Function(int page, bool hasMore)? empty,
     TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
@@ -443,14 +443,14 @@ abstract class _Loaded extends PaginatedMangaState {
   const factory _Loaded(
       {required final int page,
       required final bool hasMore,
-      required final List<Manga> mangas}) = _$_Loaded;
+      required final List<SourceManga> mangas}) = _$_Loaded;
   const _Loaded._() : super._();
 
   @override
   int get page;
   @override
   bool get hasMore;
-  List<Manga> get mangas;
+  List<SourceManga> get mangas;
   @override
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
@@ -531,7 +531,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, bool hasMore) loading,
-    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+    required TResult Function(int page, bool hasMore, List<SourceManga> mangas)
         loaded,
     required TResult Function(int page, bool hasMore) empty,
     required TResult Function(int page, bool hasMore, String? message) error,
@@ -543,7 +543,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, bool hasMore)? loading,
-    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult? Function(int page, bool hasMore)? empty,
     TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
@@ -554,7 +554,7 @@ class _$_Empty extends _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, bool hasMore)? loading,
-    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult Function(int page, bool hasMore)? empty,
     TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),
@@ -700,7 +700,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int page, bool hasMore) loading,
-    required TResult Function(int page, bool hasMore, List<Manga> mangas)
+    required TResult Function(int page, bool hasMore, List<SourceManga> mangas)
         loaded,
     required TResult Function(int page, bool hasMore) empty,
     required TResult Function(int page, bool hasMore, String? message) error,
@@ -712,7 +712,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, bool hasMore)? loading,
-    TResult? Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult? Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult? Function(int page, bool hasMore)? empty,
     TResult? Function(int page, bool hasMore, String? message)? error,
   }) {
@@ -723,7 +723,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, bool hasMore)? loading,
-    TResult Function(int page, bool hasMore, List<Manga> mangas)? loaded,
+    TResult Function(int page, bool hasMore, List<SourceManga> mangas)? loaded,
     TResult Function(int page, bool hasMore)? empty,
     TResult Function(int page, bool hasMore, String? message)? error,
     required TResult orElse(),

@@ -28,7 +28,7 @@ class _LibraryViewState extends ConsumerState<LibraryView>
         loading: LoadingContent.new,
         loaded: (mangas) {
           return MangaGridView(
-            mangas: mangas,
+            mangas: mangas.map((e) => e.toSourceModel()).toList(),
             displayedFromSource: false,
           );
         },

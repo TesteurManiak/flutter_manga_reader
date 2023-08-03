@@ -1,7 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mangadex/src/models/author_artist.dart';
 import 'package:mangadex/src/models/cover.dart';
+import 'package:mangadex/src/models/generic_attributes.dart';
 import 'package:mangadex/src/models/manga.dart';
+import 'package:mangadex/src/models/scanlation_group.dart';
+import 'package:mangadex/src/models/user.dart';
 
 part 'relationship.freezed.dart';
 part 'relationship.g.dart';
@@ -16,18 +18,28 @@ class Relationship with _$Relationship {
   const factory Relationship.author({
     required String id,
     required String type,
-    AuthorArtistAttributes? attributes,
+    GenericAttributes? attributes,
   }) = AuthorRelationship;
   const factory Relationship.artist({
     required String id,
     required String type,
-    AuthorArtistAttributes? attributes,
+    GenericAttributes? attributes,
   }) = ArtistRelationship;
   const factory Relationship.coverArt({
     required String id,
     required String type,
     CoverArtAttributes? attributes,
   }) = CoverArtRelationship;
+  const factory Relationship.scanlationGroupRelationship({
+    required String id,
+    required String type,
+    ScanlationGroupAttributes? attributes,
+  }) = ScanlationGroupRelationship;
+  const factory Relationship.user({
+    required String id,
+    required String type,
+    UserAttributes? attributes,
+  }) = UserRelationship;
   const factory Relationship.other({
     required String id,
     required String type,
@@ -62,15 +74,28 @@ class RelationshipConverter
           id: rawRelationship.id,
           type: rawRelationship.type,
           attributes: attributes != null
-              ? AuthorArtistAttributes.fromJson(attributes)
+              ? GenericAttributes.fromJson(attributes)
               : null,
         ),
       'artist' => Relationship.artist(
           id: rawRelationship.id,
           type: rawRelationship.type,
           attributes: attributes != null
-              ? AuthorArtistAttributes.fromJson(attributes)
+              ? GenericAttributes.fromJson(attributes)
               : null,
+        ),
+      'scanlation_group' => Relationship.scanlationGroupRelationship(
+          id: rawRelationship.id,
+          type: rawRelationship.type,
+          attributes: attributes != null
+              ? ScanlationGroupAttributes.fromJson(attributes)
+              : null,
+        ),
+      'user' => Relationship.user(
+          id: rawRelationship.id,
+          type: rawRelationship.type,
+          attributes:
+              attributes != null ? UserAttributes.fromJson(attributes) : null,
         ),
       _ => Relationship.other(
           id: rawRelationship.id,
@@ -90,6 +115,8 @@ class RelationshipConverter
         author: (rel) => rel.attributes?.toJson(),
         artist: (rel) => rel.attributes?.toJson(),
         coverArt: (rel) => rel.attributes?.toJson(),
+        scanlationGroupRelationship: (rel) => rel.attributes?.toJson(),
+        user: (rel) => rel.attributes?.toJson(),
         other: (rel) => rel.attributes,
       ),
     ).toJson();

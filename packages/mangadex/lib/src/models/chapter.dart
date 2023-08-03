@@ -15,6 +15,10 @@ class ChapterResponse with _$ChapterResponse {
 
   factory ChapterResponse.fromJson(Map<String, dynamic> json) =>
       _$ChapterResponseFromJson(json);
+
+  const ChapterResponse._();
+
+  bool get hasMore => offset + limit < total;
 }
 
 @freezed

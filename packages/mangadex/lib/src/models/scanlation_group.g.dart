@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'author_artist.dart';
+part of 'scanlation_group.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AuthorArtistAttributes _$$_AuthorArtistAttributesFromJson(
+_$_ScanlationGroupAttributes _$$_ScanlationGroupAttributesFromJson(
         Map<String, dynamic> json) =>
-    _$_AuthorArtistAttributes(
+    _$_ScanlationGroupAttributes(
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_AuthorArtistAttributesToJson(
-        _$_AuthorArtistAttributes instance) =>
+Map<String, dynamic> _$$_ScanlationGroupAttributesToJson(
+        _$_ScanlationGroupAttributes instance) =>
     <String, dynamic>{
       'name': instance.name,
     };

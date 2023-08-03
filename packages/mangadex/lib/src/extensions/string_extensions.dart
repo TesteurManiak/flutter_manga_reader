@@ -15,4 +15,17 @@ extension StringExtensions on String {
       (match) => '',
     );
   }
+
+  String ifEmpty(String Function() other) {
+    return isEmpty ? other() : this;
+  }
+}
+
+extension NullableStringExtensions on String? {
+  bool get isNullOrEmpty {
+    final value = this;
+    return value == null || value.isEmpty;
+  }
+
+  bool get isNotNullOrEmpty => !isNullOrEmpty;
 }

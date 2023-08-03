@@ -13,7 +13,7 @@ class DetailsRoute extends GoRouteData {
 
   static const path = '/details/:mangaId';
 
-  final String mangaId;
+  final int mangaId;
   final bool? openedFromSource;
 
   @override

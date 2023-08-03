@@ -8,12 +8,14 @@ import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
@@ -22,7 +24,7 @@ class DetailsView extends ConsumerStatefulWidget {
     required this.openedFromSource,
   });
 
-  final String mangaId;
+  final int mangaId;
   final bool openedFromSource;
 
   @override
@@ -60,7 +62,7 @@ class _MangaContent extends ConsumerStatefulWidget {
     required this.openedFromSource,
   });
 
-  final String mangaId;
+  final int mangaId;
   final bool openedFromSource;
 
   @override
@@ -86,12 +88,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
       detailsControllerProvider(widget.mangaId).select((v) => v.isLoading),
     );
     final manga = ref.watch(
-      detailsControllerProvider(widget.mangaId).select(
-        (v) => v.whenOrNull(loaded: (manga) => manga),
-      ),
+      detailsControllerProvider(widget.mangaId).select((v) => v.manga),
     );
 
-    final theme = Theme.of(context);
     final desc = manga?.description;
     final genres = manga?.getGenres();
     final thumbnailUrl = manga?.thumbnailUrl;
@@ -101,18 +100,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
     return Stack(
       children: [
         if (thumbnailUrl != null)
-          GradientImage(
-            height: 480,
-            image: CachedNetworkImageProvider(thumbnailUrl),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                theme.scaffoldBackgroundColor.withOpacity(0.05),
-                theme.scaffoldBackgroundColor,
-              ],
-              stops: const [0, .3],
-            ),
+          _BackgroundCover(
+            thumbnailUrl: thumbnailUrl,
+            scrollController: scrollController,
           ),
         CustomScrollView(
           controller: scrollController,
@@ -120,8 +110,10 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
           slivers: [
             SliverDetailsAppBar(scrollController: scrollController),
             SliverPullToRefresh(
-              onRefresh: () async {
-                // TODO(Guillaume): force refresh manga details
+              onRefresh: () {
+                return ref
+                    .read(detailsControllerProvider(widget.mangaId).notifier)
+                    .fetchDetails(forceRefresh: true);
               },
             ),
             _SliverHeader(manga),
@@ -142,9 +134,52 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                   );
                 },
               ),
+            _SliverChapterList(widget.mangaId),
           ],
         ),
       ],
+    );
+  }
+}
+
+class _BackgroundCover extends ConsumerWidget {
+  const _BackgroundCover({
+    required this.thumbnailUrl,
+    required this.scrollController,
+  });
+
+  final String thumbnailUrl;
+  final ScrollController scrollController;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+
+    return ListenableBuilder(
+      listenable: scrollController,
+      builder: (_, child) {
+        final offset =
+            scrollController.hasClients ? scrollController.offset : 0;
+        final opacity = 1 - (offset / 200).clamp(0, 1).toDouble();
+
+        return Opacity(
+          opacity: opacity,
+          child: child,
+        );
+      },
+      child: GradientImage(
+        height: 480,
+        image: CachedNetworkImageProvider(thumbnailUrl),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            theme.scaffoldBackgroundColor.withOpacity(0.05),
+            theme.scaffoldBackgroundColor,
+          ],
+          stops: const [0, .3],
+        ),
+      ),
     );
   }
 }
@@ -164,14 +199,12 @@ class _SliverHeader extends StatelessWidget {
         child: SeparatedRow(
           separator: const SizedBox(width: 8),
           children: [
-            Flexible(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: AppNetworkImage(
-                  url: manga?.thumbnailUrl,
-                  width: size.width / 4,
-                  fit: BoxFit.cover,
-                ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: AppNetworkImage(
+                url: manga?.thumbnailUrl,
+                width: size.width / 4,
+                fit: BoxFit.cover,
               ),
             ),
             Expanded(
@@ -191,6 +224,7 @@ class _SliverHeader extends StatelessWidget {
                   _StatusAndSource(
                     status: manga?.status,
                     source: manga?.source,
+                    lang: manga?.lang,
                   ),
                 ],
               ),
@@ -206,10 +240,12 @@ class _StatusAndSource extends StatelessWidget {
   const _StatusAndSource({
     required this.status,
     required this.source,
+    required this.lang,
   });
 
   final MangaStatus? status;
   final String? source;
+  final String? lang;
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +253,6 @@ class _StatusAndSource extends StatelessWidget {
     final localSource = source;
 
     return Row(
-      mainAxisSize: MainAxisSize.min,
       children: [
         if (localStatus != null) ...[
           Icon(localStatus.icon, size: 14),
@@ -228,7 +263,16 @@ class _StatusAndSource extends StatelessWidget {
           ),
           const Text(' • '),
         ],
-        if (localSource != null) Text(localSource),
+        if (localSource != null)
+          Text(
+            () {
+              final buffer = StringBuffer(localSource);
+              final lang = this.lang;
+              if (lang != null) buffer.write(' (${lang.toUpperCase()})');
+              return buffer.toString();
+            }(),
+            maxLines: 1,
+          ),
       ],
     );
   }
@@ -260,7 +304,7 @@ class _SliverDescription extends StatelessWidget {
 class _SliverButtons extends ConsumerWidget {
   const _SliverButtons(this.id);
 
-  final String id;
+  final int id;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -290,7 +334,7 @@ class _AddToLibraryButton extends ConsumerWidget {
     required this.isLoaded,
   });
 
-  final String id;
+  final int id;
   final bool isLoaded;
 
   @override
@@ -330,6 +374,43 @@ class _SliverGenreList extends StatelessWidget {
       child: GenreList(
         compact: compact,
         genres: genres,
+      ),
+    );
+  }
+}
+
+class _SliverChapterList extends ConsumerWidget {
+  const _SliverChapterList(this.mangaId);
+
+  final int mangaId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final chapters = ref.watch(
+      detailsControllerProvider(mangaId).select((v) => v.chapters),
+    );
+
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      sliver: MultiSliver(
+        children: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                '${chapters.length} chapters'.hardcoded,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SliverList.builder(
+            itemCount: chapters.length,
+            itemBuilder: (_, index) {
+              final chapter = chapters[index];
+              return ChapterTile(chapter);
+            },
+          ),
+        ],
       ),
     );
   }

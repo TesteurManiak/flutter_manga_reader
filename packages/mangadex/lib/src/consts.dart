@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class MDConstants {
   const MDConstants._();
 
@@ -17,9 +19,12 @@ class MDConstants {
   static const user = 'user';
   static const author = 'author';
   static const artist = 'artist';
+  static const legacyNoGroupId = '00e03853-1b96-4f41-9542-c71b8692033b';
 
   static const cdnUrl = 'https://uploads.mangadex.org';
   static const apiUrl = 'https://api.mangadex.org';
+
+  static final dateFormatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss+SSS", 'en_US');
 
   static const _tagGroupContent = 'content';
   static const _tagGroupFormat = 'format';

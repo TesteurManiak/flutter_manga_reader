@@ -1,0 +1,23 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'source_manga.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_SourceManga _$$_SourceMangaFromJson(Map<String, dynamic> json) =>
+    _$_SourceManga(
+      title: json['title'] as String,
+      url: json['url'] as String,
+      description: json['description'] as String?,
+      author: json['author'] as String?,
+      status: json['status'] == null
+          ? MangaStatus.unknown
+          : const MangaStatusConverter().fromJson(json['status'] as int),
+      genre: json['genre'] as String?,
+      source: json['source'] as String?,
+      lang: json['lang'] as String?,
+      artist: json['artist'] as String?,
+      thumbnailUrl: json['thumbnailUrl'] as String?,
+    );

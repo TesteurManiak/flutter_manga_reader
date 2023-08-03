@@ -9,38 +9,34 @@ import 'package:path_provider/path_provider.dart';
 part 'app_database.g.dart';
 
 class DbMangas extends Table {
-  TextColumn get id => text()();
-  BoolColumn get favorite => boolean().withDefault(const Constant(false))();
-  TextColumn get url => text()();
-  TextColumn get source => text()();
+  IntColumn get id => integer().autoIncrement()();
   TextColumn get title => text()();
-  TextColumn get artist => text().nullable()();
-  TextColumn get author => text().nullable()();
+  TextColumn get url => text()();
   TextColumn get description => text().nullable()();
-  TextColumn get genre => text().nullable()();
+  TextColumn get author => text().nullable()();
   IntColumn get status => intEnum<MangaStatus>()();
+  TextColumn get genre => text().nullable()();
+  BoolColumn get favorite => boolean().withDefault(const Constant(false))();
+  TextColumn get source => text().nullable()();
+  TextColumn get lang => text().nullable()();
+  TextColumn get artist => text().nullable()();
   TextColumn get thumbnailUrl => text().nullable()();
-  IntColumn get updateStrategy => intEnum<UpdateStrategy>()();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
-
-  @override
-  Set<Column<Object>>? get primaryKey => {url};
 }
 
 class DbChapters extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get mangaId => text()();
+  IntColumn get mangaId => integer()();
   TextColumn get url => text()();
   TextColumn get name => text()();
+  IntColumn get dateUpload => integer().withDefault(const Constant(0))();
+  RealColumn get chapterNumber => real().withDefault(const Constant(-1))();
   TextColumn get scanlator => text().nullable()();
   BoolColumn get read => boolean().withDefault(const Constant(false))();
   BoolColumn get bookmark => boolean().withDefault(const Constant(false))();
   IntColumn get lastPageRead => integer().withDefault(const Constant(0))();
   IntColumn get dateFetch => integer().withDefault(const Constant(0))();
-  IntColumn get dateUpload => integer().withDefault(const Constant(0))();
-  RealColumn get chapterNumber => real().withDefault(const Constant(0))();
-  IntColumn get sourceOrder => integer().withDefault(const Constant(0))();
-  IntColumn get lastModifier => integer().withDefault(const Constant(0))();
+  IntColumn get lastModified => integer().withDefault(const Constant(0))();
 }
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above

@@ -1,4 +1,4 @@
-import 'package:manga_reader_core/src/models/manga.dart';
+import 'package:manga_reader_core/src/models/source_manga.dart';
 
 abstract class PageData<T> {
   const PageData({
@@ -10,11 +10,11 @@ abstract class PageData<T> {
   final bool hasMore;
 }
 
-class MangasPage extends PageData<Manga> {
+class MangasPage extends PageData<SourceManga> {
   const MangasPage({
     required this.mangaList,
     required super.hasMore,
   }) : super(data: mangaList);
 
-  final List<Manga> mangaList;
+  final List<SourceManga> mangaList;
 }

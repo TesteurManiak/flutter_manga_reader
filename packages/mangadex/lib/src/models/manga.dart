@@ -15,6 +15,10 @@ class MangaListResponse with _$MangaListResponse {
 
   factory MangaListResponse.fromJson(Map<String, dynamic> json) =>
       _$MangaListResponseFromJson(json);
+
+  const MangaListResponse._();
+
+  bool get hasMore => offset + limit < total;
 }
 
 @freezed
@@ -34,7 +38,7 @@ class MangaData with _$MangaData {
     required MangaAttributes attributes,
     @Default(<Relationship>[])
     @RelationshipConverter()
-        List<Relationship> relationships,
+    List<Relationship> relationships,
   }) = _MangaData;
 
   factory MangaData.fromJson(Map<String, dynamic> json) =>

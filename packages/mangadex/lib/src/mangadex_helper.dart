@@ -4,8 +4,10 @@ import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/map_extensions.dart';
 import 'package:mangadex/src/extensions/string_extensions.dart';
 import 'package:mangadex/src/models/aggregate.dart';
+import 'package:mangadex/src/models/chapter.dart';
 import 'package:mangadex/src/models/manga.dart';
 import 'package:mangadex/src/models/relationship.dart';
+import 'package:mangadex/src/models/user.dart';
 
 class MangadexHelper {
   const MangadexHelper();
@@ -50,7 +52,7 @@ class MangadexHelper {
     return (MDConstants.latestChapterLimit * (page - 1)).toString();
   }
 
-  Manga createBasicManga({
+  SourceManga createBasicManga({
     required MangaData mangaData,
     String? coverFileName,
     String? coverSuffix,
@@ -64,8 +66,7 @@ class MangadexHelper {
             .singleOrNull;
     final title = (dirtyTitle?.trim() ?? '').removeEntitiesAndMarkdown();
 
-    return Manga(
-      id: mangaData.id,
+    return SourceManga(
       url: '/manga/${mangaData.id}',
       source: MDConstants.sourceName,
       title: title,
@@ -77,10 +78,11 @@ class MangadexHelper {
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
             }
           : null,
+      lang: lang,
     );
   }
 
-  Manga createManga({
+  SourceManga createManga({
     required MangaData mangaData,
     required Map<String, AggregateVolume> chapters,
     String? firstVolumeCover,
@@ -159,7 +161,6 @@ class MangadexHelper {
       coverSuffix: coverSuffix,
       lang: lang,
     ).copyWith(
-      initialized: true,
       author: authors.join(', '),
       artist: artists.join(', '),
       genre: genreList.where((e) => e.isNotEmpty).join(', '),
@@ -195,6 +196,62 @@ class MangadexHelper {
         MangaStatus.completed,
       _ => tmpStatus,
     };
+  }
+
+  SourceChapter createChapter(ChapterData chapterData) {
+    final attr = chapterData.attributes;
+    final groups = chapterData.relationships
+        .whereType<ScanlationGroupRelationship>()
+        .whereNot((e) => e.id == MDConstants.legacyNoGroupId)
+        .map((e) => e.attributes?.name)
+        .whereType<String>()
+        .join(' & ')
+        .ifEmpty(() {
+      // Fallback to uploader name if no group is set.
+      final users = chapterData.relationships
+          .whereType<UserRelationship>()
+          .map((e) => e.attributes)
+          .whereType<UserAttributes>()
+          .map((e) => e.username);
+      return users.isNotEmpty ? 'Uploaded by ${users.join(' & ')}' : '';
+    }).ifEmpty(() {
+      // "No Group" as final resort
+      return 'No Group';
+    });
+
+    final title = attr.title;
+    final titleNotEmpty = title != null && title.isNotEmpty;
+    final chapterName = <String>[
+      if (attr.volume.isNotNullOrEmpty) 'Vol.${attr.volume}',
+      if (attr.chapter.isNotNullOrEmpty) 'Ch.${attr.chapter}',
+      if (titleNotEmpty) ...[
+        if (attr.volume.isNotNullOrEmpty || attr.chapter.isNotNullOrEmpty) '-',
+        title,
+      ],
+    ];
+
+    // If volume, chapter and title is empty its a oneshot.
+    if (chapterName.isEmpty) {
+      chapterName.add('Oneshot');
+    }
+
+    return SourceChapter(
+      url: '/chapter/${chapterData.id}',
+      name: chapterName.join(' ').removeEntitiesAndMarkdown(),
+      dateUpload: _parseDate(attr.publishAt),
+      scanlator: groups,
+    );
+  }
+
+  int _parseDate(String dateAsString) {
+    try {
+      return MDConstants.dateFormatter
+          .parse(dateAsString)
+          .toUtc()
+          .millisecondsSinceEpoch;
+    } catch (e) {
+      return 0;
+    }
   }
 }
 

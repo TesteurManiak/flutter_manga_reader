@@ -21,10 +21,12 @@ class SearchController extends _$SearchController with Loadable {
 
     state = result.when(
       success: (page) {
-        final currentMangas = state.mangasOrNull ?? <Manga>[];
-        final mangas = currentMangas + page.mangaList;
+        final currentMangas = state.mangasOrNull ?? [];
+        if (currentMangas.isEmpty && page.mangaList.isEmpty) {
+          return PaginatedMangaState.empty(page: nextPage);
+        }
 
-        if (mangas.isEmpty) return PaginatedMangaState.empty(page: nextPage);
+        final mangas = currentMangas + page.mangaList;
 
         return PaginatedMangaState.loaded(
           page: nextPage,
@@ -55,7 +57,7 @@ class PaginatedMangaState with _$PaginatedMangaState {
   const factory PaginatedMangaState.loaded({
     required int page,
     required bool hasMore,
-    required List<Manga> mangas,
+    required List<SourceManga> mangas,
   }) = _Loaded;
   const factory PaginatedMangaState.empty({
     required int page,
@@ -69,7 +71,7 @@ class PaginatedMangaState with _$PaginatedMangaState {
 
   const PaginatedMangaState._();
 
-  List<Manga>? get mangasOrNull {
+  List<SourceManga>? get mangasOrNull {
     return mapOrNull(loaded: (state) => state.mangas);
   }
 }
