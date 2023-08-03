@@ -8,6 +8,7 @@ import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
@@ -389,12 +390,28 @@ class _SliverChapterList extends ConsumerWidget {
       detailsControllerProvider(mangaId).select((v) => v.chapters),
     );
 
-    return MultiSliver(
-      children: [
-        SliverToBoxAdapter(
-          child: Text('${chapters.length} chapters'.hardcoded),
-        ),
-      ],
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      sliver: MultiSliver(
+        children: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                '${chapters.length} chapters'.hardcoded,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SliverList.builder(
+            itemCount: chapters.length,
+            itemBuilder: (_, index) {
+              final chapter = chapters[index];
+              return ChapterTile(chapter);
+            },
+          ),
+        ],
+      ),
     );
   }
 }
