@@ -328,7 +328,7 @@ class MangadexDatasource extends MangaDatasource {
       offset: 0,
     ).then((value) {
       return Result.success(
-        value.data.map<SourceChapter>((e) => null).toList(),
+        value.data.map<SourceChapter>(_helper.createChapter).toList(),
       );
     });
   }

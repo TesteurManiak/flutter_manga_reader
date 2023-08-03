@@ -13,7 +13,7 @@ class SourceChapter with _$SourceChapter {
     required String url,
     required String name,
     @Default(0) int dateUpload,
-    @Default(0.0) double chapterNumber,
+    @Default(-1.0) double chapterNumber,
     String? scanlator,
   }) = _SourceChapter;
 

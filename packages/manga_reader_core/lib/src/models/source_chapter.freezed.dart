@@ -154,7 +154,7 @@ class _$_SourceChapter implements _SourceChapter {
       {required this.url,
       required this.name,
       this.dateUpload = 0,
-      this.chapterNumber = 0.0,
+      this.chapterNumber = -1.0,
       this.scanlator});
 
   factory _$_SourceChapter.fromJson(Map<String, dynamic> json) =>

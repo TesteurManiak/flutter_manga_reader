@@ -11,6 +11,6 @@ _$_SourceChapter _$$_SourceChapterFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String,
       name: json['name'] as String,
       dateUpload: json['dateUpload'] as int? ?? 0,
-      chapterNumber: (json['chapterNumber'] as num?)?.toDouble() ?? 0.0,
+      chapterNumber: (json['chapterNumber'] as num?)?.toDouble() ?? -1.0,
       scanlator: json['scanlator'] as String?,
     );
