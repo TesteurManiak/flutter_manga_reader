@@ -34,6 +34,8 @@ abstract class LocalDatasource {
     List<SourceChapter> sourceChapters,
     int mangaId,
   );
+
+  Future<List<Chapter>> getChapters(int mangaId);
 }
 
 @Riverpod(keepAlive: true)

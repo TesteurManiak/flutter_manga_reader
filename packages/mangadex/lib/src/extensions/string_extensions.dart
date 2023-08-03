@@ -22,6 +22,10 @@ extension StringExtensions on String {
 }
 
 extension NullableStringExtensions on String? {
-  bool get isNullOrEmpty => this == null || this!.isEmpty;
+  bool get isNullOrEmpty {
+    final value = this;
+    return value == null || value.isEmpty;
+  }
+
   bool get isNotNullOrEmpty => !isNullOrEmpty;
 }

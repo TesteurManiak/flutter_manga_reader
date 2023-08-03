@@ -1,3 +1,4 @@
+import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,29 +18,56 @@ class DetailsController extends _$DetailsController {
   }
 
   Future<void> fetchDetails({bool forceRefresh = false}) async {
-    state = DetailsState.loading(manga: state.manga);
+    state = DetailsState.loading(
+      manga: state.manga,
+      chapters: state.chapters,
+    );
 
     final localManga =
         await ref.read(localDatasourceProvider).getManga(mangaId);
 
     if (localManga == null) {
-      state = DetailsState.error(error: 'Manga not found', manga: state.manga);
-      return;
-    } else if (!forceRefresh && localManga.initialized) {
-      state = DetailsState.loaded(manga: localManga);
+      state = DetailsState.error(
+        error: 'Manga not found'.hardcoded,
+        manga: state.manga,
+        chapters: state.chapters,
+      );
       return;
     }
 
-    state = DetailsState.loading(manga: localManga);
+    if (!forceRefresh && localManga.initialized) {
+      final localChapters =
+          await ref.read(localDatasourceProvider).getChapters(mangaId);
+      state = DetailsState.loaded(manga: localManga, chapters: localChapters);
+      return;
+    }
+
+    state = DetailsState.loading(
+      manga: localManga,
+      chapters: state.chapters,
+    );
 
     final result = await _fetchRecord(localManga);
 
     state = await result.when(
       success: (record) async {
         await _saveRecord(record);
-        return DetailsState.loaded(manga: record.manga);
+
+        final localChapters =
+            await ref.read(localDatasourceProvider).getChapters(mangaId);
+
+        return DetailsState.loaded(
+          manga: record.manga,
+          chapters: localChapters,
+        );
       },
-      failure: (e) => DetailsState.error(error: e, manga: localManga),
+      failure: (e) {
+        return DetailsState.error(
+          error: e,
+          manga: localManga,
+          chapters: state.chapters,
+        );
+      },
     );
   }
 
@@ -91,32 +119,37 @@ class DetailsController extends _$DetailsController {
 
     final newManga = currentManga.copyWith(favorite: !currentManga.favorite);
     await ref.read(localDatasourceProvider).updateManga(newManga);
-    state = DetailsState.loaded(manga: newManga);
+    state = DetailsState.loaded(manga: newManga, chapters: state.chapters);
   }
 }
 
 @freezed
 class DetailsState with _$DetailsState {
-  const factory DetailsState.loading({Manga? manga}) = _Loading;
+  const factory DetailsState.loading({
+    Manga? manga,
+    @Default(<Chapter>[]) List<Chapter> chapters,
+  }) = _Loading;
   const factory DetailsState.loaded({
     required Manga manga,
+    required List<Chapter> chapters,
   }) = _Loaded;
   const factory DetailsState.error({
     Manga? manga,
+    @Default(<Chapter>[]) List<Chapter> chapters,
     String? error,
   }) = _Error;
 
   const DetailsState._();
 
   bool get isLoaded {
-    return maybeWhen(
+    return maybeMap(
       loaded: (_) => true,
       orElse: () => false,
     );
   }
 
   bool get isLoading {
-    return maybeWhen(
+    return maybeMap(
       loading: (_) => true,
       orElse: () => false,
     );

@@ -91,10 +91,22 @@ class DriftDatasource implements LocalDatasource {
         ..insertAll(_database.dbChapters, companions);
     });
   }
+
+  @override
+  Future<List<Chapter>> getChapters(int mangaId) {
+    return (_database.select(_database.dbChapters)
+          ..where((t) => t.mangaId.equals(mangaId)))
+        .get()
+        .then((chapters) => chapters.map((e) => e.toModel()).toList());
+  }
 }
 
 extension on DbManga {
   Manga toModel() => Manga.fromJson(toJson());
+}
+
+extension on DbChapter {
+  Chapter toModel() => Chapter.fromJson(toJson());
 }
 
 extension on Manga {

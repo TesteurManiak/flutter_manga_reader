@@ -14,6 +14,7 @@ import 'package:flutter_manga_reader/features/details/widgets/manga_description.
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
@@ -132,6 +133,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                   );
                 },
               ),
+            _SliverChapterList(widget.mangaId),
           ],
         ),
       ],
@@ -372,6 +374,27 @@ class _SliverGenreList extends StatelessWidget {
         compact: compact,
         genres: genres,
       ),
+    );
+  }
+}
+
+class _SliverChapterList extends ConsumerWidget {
+  const _SliverChapterList(this.mangaId);
+
+  final int mangaId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final chapters = ref.watch(
+      detailsControllerProvider(mangaId).select((v) => v.chapters),
+    );
+
+    return MultiSliver(
+      children: [
+        SliverToBoxAdapter(
+          child: Text('${chapters.length} chapters'.hardcoded),
+        ),
+      ],
     );
   }
 }

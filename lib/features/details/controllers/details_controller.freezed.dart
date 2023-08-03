@@ -17,25 +17,30 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DetailsState {
   Manga? get manga => throw _privateConstructorUsedError;
+  List<Chapter> get chapters => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Manga? manga) loading,
-    required TResult Function(Manga manga) loaded,
-    required TResult Function(Manga? manga, String? error) error,
+    required TResult Function(Manga? manga, List<Chapter> chapters) loading,
+    required TResult Function(Manga manga, List<Chapter> chapters) loaded,
+    required TResult Function(
+            Manga? manga, List<Chapter> chapters, String? error)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Manga? manga)? loading,
-    TResult? Function(Manga manga)? loaded,
-    TResult? Function(Manga? manga, String? error)? error,
+    TResult? Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult? Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult? Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Manga? manga)? loading,
-    TResult Function(Manga manga)? loaded,
-    TResult Function(Manga? manga, String? error)? error,
+    TResult Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +78,7 @@ abstract class $DetailsStateCopyWith<$Res> {
           DetailsState value, $Res Function(DetailsState) then) =
       _$DetailsStateCopyWithImpl<$Res, DetailsState>;
   @useResult
-  $Res call({Manga manga});
+  $Res call({Manga manga, List<Chapter> chapters});
 
   $MangaCopyWith<$Res>? get manga;
 }
@@ -92,12 +97,17 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
   @override
   $Res call({
     Object? manga = null,
+    Object? chapters = null,
   }) {
     return _then(_value.copyWith(
       manga: null == manga
           ? _value.manga!
           : manga // ignore: cast_nullable_to_non_nullable
               as Manga,
+      chapters: null == chapters
+          ? _value.chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
     ) as $Val);
   }
 
@@ -122,7 +132,7 @@ abstract class _$$_LoadingCopyWith<$Res>
       __$$_LoadingCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Manga? manga});
+  $Res call({Manga? manga, List<Chapter> chapters});
 
   @override
   $MangaCopyWith<$Res>? get manga;
@@ -139,12 +149,17 @@ class __$$_LoadingCopyWithImpl<$Res>
   @override
   $Res call({
     Object? manga = freezed,
+    Object? chapters = null,
   }) {
     return _then(_$_Loading(
       manga: freezed == manga
           ? _value.manga
           : manga // ignore: cast_nullable_to_non_nullable
               as Manga?,
+      chapters: null == chapters
+          ? _value._chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
     ));
   }
 }
@@ -152,14 +167,25 @@ class __$$_LoadingCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loading extends _Loading {
-  const _$_Loading({this.manga}) : super._();
+  const _$_Loading(
+      {this.manga, final List<Chapter> chapters = const <Chapter>[]})
+      : _chapters = chapters,
+        super._();
 
   @override
   final Manga? manga;
+  final List<Chapter> _chapters;
+  @override
+  @JsonKey()
+  List<Chapter> get chapters {
+    if (_chapters is EqualUnmodifiableListView) return _chapters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_chapters);
+  }
 
   @override
   String toString() {
-    return 'DetailsState.loading(manga: $manga)';
+    return 'DetailsState.loading(manga: $manga, chapters: $chapters)';
   }
 
   @override
@@ -167,11 +193,13 @@ class _$_Loading extends _Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loading &&
-            (identical(other.manga, manga) || other.manga == manga));
+            (identical(other.manga, manga) || other.manga == manga) &&
+            const DeepCollectionEquality().equals(other._chapters, _chapters));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, manga);
+  int get hashCode => Object.hash(
+      runtimeType, manga, const DeepCollectionEquality().hash(_chapters));
 
   @JsonKey(ignore: true)
   @override
@@ -182,33 +210,37 @@ class _$_Loading extends _Loading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Manga? manga) loading,
-    required TResult Function(Manga manga) loaded,
-    required TResult Function(Manga? manga, String? error) error,
+    required TResult Function(Manga? manga, List<Chapter> chapters) loading,
+    required TResult Function(Manga manga, List<Chapter> chapters) loaded,
+    required TResult Function(
+            Manga? manga, List<Chapter> chapters, String? error)
+        error,
   }) {
-    return loading(manga);
+    return loading(manga, chapters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Manga? manga)? loading,
-    TResult? Function(Manga manga)? loaded,
-    TResult? Function(Manga? manga, String? error)? error,
+    TResult? Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult? Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult? Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
   }) {
-    return loading?.call(manga);
+    return loading?.call(manga, chapters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Manga? manga)? loading,
-    TResult Function(Manga manga)? loaded,
-    TResult Function(Manga? manga, String? error)? error,
+    TResult Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(manga);
+      return loading(manga, chapters);
     }
     return orElse();
   }
@@ -249,11 +281,14 @@ class _$_Loading extends _Loading {
 }
 
 abstract class _Loading extends DetailsState {
-  const factory _Loading({final Manga? manga}) = _$_Loading;
+  const factory _Loading({final Manga? manga, final List<Chapter> chapters}) =
+      _$_Loading;
   const _Loading._() : super._();
 
   @override
   Manga? get manga;
+  @override
+  List<Chapter> get chapters;
   @override
   @JsonKey(ignore: true)
   _$$_LoadingCopyWith<_$_Loading> get copyWith =>
@@ -266,7 +301,7 @@ abstract class _$$_LoadedCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
       __$$_LoadedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Manga manga});
+  $Res call({Manga manga, List<Chapter> chapters});
 
   @override
   $MangaCopyWith<$Res> get manga;
@@ -283,12 +318,17 @@ class __$$_LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? manga = null,
+    Object? chapters = null,
   }) {
     return _then(_$_Loaded(
       manga: null == manga
           ? _value.manga
           : manga // ignore: cast_nullable_to_non_nullable
               as Manga,
+      chapters: null == chapters
+          ? _value._chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
     ));
   }
 
@@ -304,14 +344,23 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
-  const _$_Loaded({required this.manga}) : super._();
+  const _$_Loaded({required this.manga, required final List<Chapter> chapters})
+      : _chapters = chapters,
+        super._();
 
   @override
   final Manga manga;
+  final List<Chapter> _chapters;
+  @override
+  List<Chapter> get chapters {
+    if (_chapters is EqualUnmodifiableListView) return _chapters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_chapters);
+  }
 
   @override
   String toString() {
-    return 'DetailsState.loaded(manga: $manga)';
+    return 'DetailsState.loaded(manga: $manga, chapters: $chapters)';
   }
 
   @override
@@ -319,11 +368,13 @@ class _$_Loaded extends _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            (identical(other.manga, manga) || other.manga == manga));
+            (identical(other.manga, manga) || other.manga == manga) &&
+            const DeepCollectionEquality().equals(other._chapters, _chapters));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, manga);
+  int get hashCode => Object.hash(
+      runtimeType, manga, const DeepCollectionEquality().hash(_chapters));
 
   @JsonKey(ignore: true)
   @override
@@ -334,33 +385,37 @@ class _$_Loaded extends _Loaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Manga? manga) loading,
-    required TResult Function(Manga manga) loaded,
-    required TResult Function(Manga? manga, String? error) error,
+    required TResult Function(Manga? manga, List<Chapter> chapters) loading,
+    required TResult Function(Manga manga, List<Chapter> chapters) loaded,
+    required TResult Function(
+            Manga? manga, List<Chapter> chapters, String? error)
+        error,
   }) {
-    return loaded(manga);
+    return loaded(manga, chapters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Manga? manga)? loading,
-    TResult? Function(Manga manga)? loaded,
-    TResult? Function(Manga? manga, String? error)? error,
+    TResult? Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult? Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult? Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
   }) {
-    return loaded?.call(manga);
+    return loaded?.call(manga, chapters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Manga? manga)? loading,
-    TResult Function(Manga manga)? loaded,
-    TResult Function(Manga? manga, String? error)? error,
+    TResult Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(manga);
+      return loaded(manga, chapters);
     }
     return orElse();
   }
@@ -401,11 +456,15 @@ class _$_Loaded extends _Loaded {
 }
 
 abstract class _Loaded extends DetailsState {
-  const factory _Loaded({required final Manga manga}) = _$_Loaded;
+  const factory _Loaded(
+      {required final Manga manga,
+      required final List<Chapter> chapters}) = _$_Loaded;
   const _Loaded._() : super._();
 
   @override
   Manga get manga;
+  @override
+  List<Chapter> get chapters;
   @override
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
@@ -418,7 +477,7 @@ abstract class _$$_ErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
       __$$_ErrorCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Manga? manga, String? error});
+  $Res call({Manga? manga, List<Chapter> chapters, String? error});
 
   @override
   $MangaCopyWith<$Res>? get manga;
@@ -435,6 +494,7 @@ class __$$_ErrorCopyWithImpl<$Res>
   @override
   $Res call({
     Object? manga = freezed,
+    Object? chapters = null,
     Object? error = freezed,
   }) {
     return _then(_$_Error(
@@ -442,6 +502,10 @@ class __$$_ErrorCopyWithImpl<$Res>
           ? _value.manga
           : manga // ignore: cast_nullable_to_non_nullable
               as Manga?,
+      chapters: null == chapters
+          ? _value._chapters
+          : chapters // ignore: cast_nullable_to_non_nullable
+              as List<Chapter>,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -453,16 +517,30 @@ class __$$_ErrorCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Error extends _Error {
-  const _$_Error({this.manga, this.error}) : super._();
+  const _$_Error(
+      {this.manga,
+      final List<Chapter> chapters = const <Chapter>[],
+      this.error})
+      : _chapters = chapters,
+        super._();
 
   @override
   final Manga? manga;
+  final List<Chapter> _chapters;
+  @override
+  @JsonKey()
+  List<Chapter> get chapters {
+    if (_chapters is EqualUnmodifiableListView) return _chapters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_chapters);
+  }
+
   @override
   final String? error;
 
   @override
   String toString() {
-    return 'DetailsState.error(manga: $manga, error: $error)';
+    return 'DetailsState.error(manga: $manga, chapters: $chapters, error: $error)';
   }
 
   @override
@@ -471,11 +549,13 @@ class _$_Error extends _Error {
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
             (identical(other.manga, manga) || other.manga == manga) &&
+            const DeepCollectionEquality().equals(other._chapters, _chapters) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, manga, error);
+  int get hashCode => Object.hash(runtimeType, manga,
+      const DeepCollectionEquality().hash(_chapters), error);
 
   @JsonKey(ignore: true)
   @override
@@ -486,33 +566,37 @@ class _$_Error extends _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Manga? manga) loading,
-    required TResult Function(Manga manga) loaded,
-    required TResult Function(Manga? manga, String? error) error,
+    required TResult Function(Manga? manga, List<Chapter> chapters) loading,
+    required TResult Function(Manga manga, List<Chapter> chapters) loaded,
+    required TResult Function(
+            Manga? manga, List<Chapter> chapters, String? error)
+        error,
   }) {
-    return error(manga, this.error);
+    return error(manga, chapters, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Manga? manga)? loading,
-    TResult? Function(Manga manga)? loaded,
-    TResult? Function(Manga? manga, String? error)? error,
+    TResult? Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult? Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult? Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
   }) {
-    return error?.call(manga, this.error);
+    return error?.call(manga, chapters, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Manga? manga)? loading,
-    TResult Function(Manga manga)? loaded,
-    TResult Function(Manga? manga, String? error)? error,
+    TResult Function(Manga? manga, List<Chapter> chapters)? loading,
+    TResult Function(Manga manga, List<Chapter> chapters)? loaded,
+    TResult Function(Manga? manga, List<Chapter> chapters, String? error)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(manga, this.error);
+      return error(manga, chapters, this.error);
     }
     return orElse();
   }
@@ -553,11 +637,16 @@ class _$_Error extends _Error {
 }
 
 abstract class _Error extends DetailsState {
-  const factory _Error({final Manga? manga, final String? error}) = _$_Error;
+  const factory _Error(
+      {final Manga? manga,
+      final List<Chapter> chapters,
+      final String? error}) = _$_Error;
   const _Error._() : super._();
 
   @override
   Manga? get manga;
+  @override
+  List<Chapter> get chapters;
   String? get error;
   @override
   @JsonKey(ignore: true)
