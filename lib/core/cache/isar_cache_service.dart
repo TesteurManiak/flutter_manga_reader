@@ -9,7 +9,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
   static const _instanceName = 'isar_cache_service';
 
   @protected
-  Future<Isar> getInstance() async {
+  Future<Isar> _getInstance() async {
     return Isar.getInstance(_instanceName) ??
         await Isar.open(
           [IsarCacheEntrySchema],
@@ -20,7 +20,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
 
   @override
   Future<void> delete(String key) async {
-    final isar = await getInstance();
+    final isar = await _getInstance();
 
     return isar.writeTxn(() {
       return isar.isarCacheEntrys.deleteByIsarKey(key);
@@ -41,7 +41,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
 
   @override
   Future<NetworkCacheEntry?> get(String key) async {
-    final isar = await getInstance();
+    final isar = await _getInstance();
     final entry = await isar.isarCacheEntrys.getByIsarKey(key);
 
     return validateCacheEntry(entry);
@@ -58,7 +58,7 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
       expiry: clock.now().add(cacheDuration),
     );
 
-    final isar = await getInstance();
+    final isar = await _getInstance();
     await isar.writeTxn(() async {
       // cleanup old cache entries
       await isar.isarCacheEntrys
@@ -72,13 +72,13 @@ class IsarNetworkQueryCacheService extends NetworkQueryCacheService {
 
   @override
   Future<void> clear() async {
-    final isar = await getInstance();
+    final isar = await _getInstance();
     return isar.isarCacheEntrys.clear();
   }
 
   @override
   Future<void> clearExpiredEntries() async {
-    final isar = await getInstance();
+    final isar = await _getInstance();
     return isar.writeTxn(() {
       return isar.isarCacheEntrys
           .filter()

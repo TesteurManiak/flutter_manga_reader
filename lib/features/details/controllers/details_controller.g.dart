@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'c4d5970401734ada584749ff86e20608753c6cc5';
+String _$detailsControllerHash() => r'f7edb9cda34e837da993a3ee27ebd10893b5331b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,8 +29,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$DetailsController
-    extends BuildlessAutoDisposeNotifier<DetailsState> {
+abstract class _$DetailsController extends BuildlessNotifier<DetailsState> {
   late final int mangaId;
 
   DetailsState build(
@@ -82,7 +81,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
 
 /// See also [DetailsController].
 class DetailsControllerProvider
-    extends AutoDisposeNotifierProviderImpl<DetailsController, DetailsState> {
+    extends NotifierProviderImpl<DetailsController, DetailsState> {
   /// See also [DetailsController].
   DetailsControllerProvider(
     this.mangaId,

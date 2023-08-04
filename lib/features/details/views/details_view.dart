@@ -308,15 +308,11 @@ class _SliverButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoaded = ref.watch(
-      detailsControllerProvider(id).select((v) => v.isLoaded),
-    );
-
     return SliverToBoxAdapter(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _AddToLibraryButton(id: id, isLoaded: isLoaded),
+          _AddToLibraryButton(id),
           DetailsButton(
             icon: Icons.public,
             label: context.strings.details_webview,
@@ -329,13 +325,9 @@ class _SliverButtons extends ConsumerWidget {
 }
 
 class _AddToLibraryButton extends ConsumerWidget {
-  const _AddToLibraryButton({
-    required this.id,
-    required this.isLoaded,
-  });
+  const _AddToLibraryButton(this.id);
 
   final int id;
-  final bool isLoaded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -346,11 +338,9 @@ class _AddToLibraryButton extends ConsumerWidget {
     final strings = context.strings;
 
     return DetailsButton(
-      onPressed: isLoaded
-          ? () {
-              ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
-            }
-          : null,
+      onPressed: () {
+        ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
+      },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
       label: isFavorite
           ? strings.details_in_library

@@ -38,6 +38,21 @@ final watchMangasInLibraryProvider =
 );
 
 typedef WatchMangasInLibraryRef = AutoDisposeStreamProviderRef<List<Manga>>;
+String _$watchAllMangasHash() => r'2027fb4ecf8e53167766756e0f872e70cd6279f4';
+
+/// See also [watchAllMangas].
+@ProviderFor(watchAllMangas)
+final watchAllMangasProvider = AutoDisposeStreamProvider<List<Manga>>.internal(
+  watchAllMangas,
+  name: r'watchAllMangasProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$watchAllMangasHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef WatchAllMangasRef = AutoDisposeStreamProviderRef<List<Manga>>;
 String _$getMangaIdFromSourceHash() =>
     r'fb9f87b153e6c2927b048ae7d664df3037a09987';
 

@@ -7,6 +7,7 @@ part 'local_datasource.g.dart';
 
 abstract class LocalDatasource {
   Stream<List<Manga>> watchMangasInLibrary();
+  Stream<List<Manga>> watchAllMangas();
 
   /// Insert a manga into the database.
   Future<void> saveManga(Manga manga);
@@ -46,6 +47,11 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 @riverpod
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
+}
+
+@riverpod
+Stream<List<Manga>> watchAllMangas(WatchAllMangasRef ref) {
+  return ref.watch(localDatasourceProvider).watchAllMangas();
 }
 
 @riverpod

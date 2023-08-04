@@ -19,6 +19,13 @@ class DriftDatasource implements LocalDatasource {
   }
 
   @override
+  Stream<List<Manga>> watchAllMangas() {
+    return _database.select(_database.dbMangas).watch().map(
+          (mangas) => mangas.map((e) => e.toModel()).toList(),
+        );
+  }
+
+  @override
   Future<void> saveManga(Manga manga) {
     return _database
         .into(_database.dbMangas)

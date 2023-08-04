@@ -12,7 +12,7 @@ part 'details_controller.g.dart';
 
 typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 
-@riverpod
+@Riverpod(keepAlive: true)
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId) {
