@@ -44,23 +44,64 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
   }
 }
 
-class _PageViewer extends StatelessWidget {
+class _PageViewer extends StatefulWidget {
   const _PageViewer(this.pages);
 
   final List<ChapterPage> pages;
 
   @override
-  Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: pages.length,
-      itemBuilder: (context, index) {
-        final page = pages[index];
+  State<_PageViewer> createState() => _PageViewerState();
+}
 
-        return AppNetworkImage(
-          url: page.imageUrl,
-          fit: BoxFit.fitWidth,
-        );
-      },
+class _PageViewerState extends State<_PageViewer> {
+  final pageController = PageController();
+
+  @override
+  void dispose() {
+    pageController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: widget.pages.length,
+            itemBuilder: (context, index) {
+              final page = widget.pages[index];
+              return _Page(page.imageUrl);
+            },
+          ),
+        ),
+        ListenableBuilder(
+          listenable: pageController,
+          builder: (context, _) {
+            return Text(
+              '${(pageController.page?.round() ?? 0) + 1}/${widget.pages.length}',
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _Page extends StatelessWidget {
+  const _Page(this.url);
+
+  final String? url;
+
+  @override
+  Widget build(BuildContext context) {
+    return InteractiveViewer(
+      child: AppNetworkImage(
+        url: url,
+        fit: BoxFit.fitWidth,
+      ),
     );
   }
 }
