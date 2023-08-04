@@ -15,7 +15,11 @@ _WIP_
 ## Screenshots
 
 _WIP_
-
+| Views    | Light                                                   | Dark                                                   |
+| -------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Library  | <img src="screenshots/light/library.png" height="400">  | <img src="screenshots/dark/library.png" height="400">  |
+| Explorer | <img src="screenshots/light/explorer.png" height="400"> | <img src="screenshots/dark/explorer.png" height="400"> |
+| Details  | <img src="screenshots/light/details.png" height="400">  | <img src="screenshots/dark/details.png" height="400">  |
 ## Run the app
 
 This project contains 3 flavors:
@@ -170,6 +174,10 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 ## Credits
 
 * [MangaDex][manga_dex]: For providing the API used in this project
+
+## Disclaimer
+
+The developer of this application does not have any affiliation with the content providers available.
 
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
 [internationalization_guide_link]: https://docs.flutter.dev/accessibility-and-localization/internationalization
