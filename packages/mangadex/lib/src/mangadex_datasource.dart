@@ -1,9 +1,11 @@
+import 'package:clock/clock.dart';
 import 'package:collection/collection.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/src/consts.dart';
 import 'package:mangadex/src/extensions/map_extensions.dart';
 import 'package:mangadex/src/mangadex_helper.dart';
 import 'package:mangadex/src/models/aggregate.dart';
+import 'package:mangadex/src/models/at_home.dart';
 import 'package:mangadex/src/models/chapter.dart';
 import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/manga.dart';
@@ -385,6 +387,50 @@ class MangadexDatasource extends MangaDatasource {
         );
       },
       failure: (_) => ChapterResponse(offset: offset),
+    );
+  }
+
+  @override
+  Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
+    SourceChapter chapter,
+  ) async {
+    if (!_helper.containsUuid(chapter.url)) {
+      return const Result.failure(HttpError(message: 'Invalid chapter format'));
+    }
+
+    final chapterId = chapter.url.split('/chapter/').last;
+    final requestUri = Uri.parse(MDConstants.apiUrl).replace(
+      pathSegments: ['at-home', 'server', chapterId],
+    );
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: requestUri.pathSegments,
+        )
+        .decode(AtHome.fromJson);
+
+    return result.when(
+      success: (atHome) {
+        final atHomeRequestUrl = requestUri.toString();
+        final host = atHome.baseUrl;
+        final now = clock.now();
+        final hash = atHome.chapter.hash;
+        final pageSuffix =
+            atHome.chapter.data.map((e) => '$host/data/$hash/$e');
+
+        return Result.success(
+          pageSuffix.mapIndexed((index, imgUrl) {
+            final mdAtHomeMetadataUrl = '$host,$atHomeRequestUrl,$now';
+
+            return ChapterPage(
+              index: index,
+              url: mdAtHomeMetadataUrl,
+              imageUrl: imgUrl,
+            );
+          }).toList(),
+        );
+      },
+      failure: Result.failure,
     );
   }
 }

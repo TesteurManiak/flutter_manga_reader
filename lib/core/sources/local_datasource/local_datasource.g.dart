@@ -158,5 +158,87 @@ class GetMangaIdFromSourceProvider extends AutoDisposeFutureProvider<int?> {
     return _SystemHash.finish(hash);
   }
 }
+
+String _$getChapterHash() => r'e014da0ed3e672bc5e3419a5cd7236455adb952c';
+typedef GetChapterRef = AutoDisposeFutureProviderRef<Chapter?>;
+
+/// See also [getChapter].
+@ProviderFor(getChapter)
+const getChapterProvider = GetChapterFamily();
+
+/// See also [getChapter].
+class GetChapterFamily extends Family<AsyncValue<Chapter?>> {
+  /// See also [getChapter].
+  const GetChapterFamily();
+
+  /// See also [getChapter].
+  GetChapterProvider call(
+    int chapterId,
+  ) {
+    return GetChapterProvider(
+      chapterId,
+    );
+  }
+
+  @override
+  GetChapterProvider getProviderOverride(
+    covariant GetChapterProvider provider,
+  ) {
+    return call(
+      provider.chapterId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getChapterProvider';
+}
+
+/// See also [getChapter].
+class GetChapterProvider extends AutoDisposeFutureProvider<Chapter?> {
+  /// See also [getChapter].
+  GetChapterProvider(
+    this.chapterId,
+  ) : super.internal(
+          (ref) => getChapter(
+            ref,
+            chapterId,
+          ),
+          from: getChapterProvider,
+          name: r'getChapterProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getChapterHash,
+          dependencies: GetChapterFamily._dependencies,
+          allTransitiveDependencies:
+              GetChapterFamily._allTransitiveDependencies,
+        );
+
+  final int chapterId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetChapterProvider && other.chapterId == chapterId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, chapterId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

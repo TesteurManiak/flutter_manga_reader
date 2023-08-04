@@ -37,6 +37,8 @@ abstract class LocalDatasource {
   );
 
   Future<List<Chapter>> getChapters(int mangaId);
+
+  Future<Chapter?> getChapter(int chapterId);
 }
 
 @Riverpod(keepAlive: true)
@@ -65,4 +67,9 @@ Future<int?> getMangaIdFromSource(
         lang: sourceManga.lang,
         source: sourceManga.source,
       );
+}
+
+@riverpod
+Future<Chapter?> getChapter(GetChapterRef ref, int chapterId) {
+  return ref.watch(localDatasourceProvider).getChapter(chapterId);
 }

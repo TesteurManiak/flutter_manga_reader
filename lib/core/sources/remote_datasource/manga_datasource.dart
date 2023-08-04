@@ -18,3 +18,11 @@ MangaDatasource mangaDatasource(MangaDatasourceRef ref) {
     ),
   );
 }
+
+@riverpod
+Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
+  FetchChapterPagesRef ref,
+  SourceChapter sourceChapter,
+) {
+  return ref.watch(mangaDatasourceProvider).fetchChapterPages(sourceChapter);
+}

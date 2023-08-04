@@ -1,4 +1,5 @@
 import 'package:manga_reader_core/src/http_client/http_client.dart';
+import 'package:manga_reader_core/src/models/chapter_page.dart';
 import 'package:manga_reader_core/src/models/manga.dart';
 import 'package:manga_reader_core/src/models/paginated_data.dart';
 import 'package:manga_reader_core/src/models/result.dart';
@@ -39,5 +40,9 @@ abstract class MangaDatasource {
   /// Fetch the chapters of a manga.
   Future<Result<List<SourceChapter>, HttpError>> fetchChapters(
     SourceManga sourceManga,
+  );
+
+  Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
+    SourceChapter chapter,
   );
 }

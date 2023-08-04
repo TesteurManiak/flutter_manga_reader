@@ -1,4 +1,5 @@
 export 'chapter.dart';
+export 'chapter_page.dart';
 export 'manga.dart';
 export 'manga_status.dart';
 export 'paginated_data.dart';
