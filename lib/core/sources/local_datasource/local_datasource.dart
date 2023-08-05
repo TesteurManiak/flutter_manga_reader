@@ -9,6 +9,7 @@ abstract class LocalDatasource {
   Stream<List<Manga>> watchMangasInLibrary();
   Stream<List<Manga>> watchAllMangas();
   Stream<List<Chapter>> watchChaptersForManga(int mangaId);
+  Stream<Manga?> watchManga(int id);
 
   /// Insert a manga into the database.
   Future<void> saveManga(Manga manga);
@@ -64,6 +65,11 @@ Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
 @riverpod
 Stream<List<Manga>> watchAllMangas(WatchAllMangasRef ref) {
   return ref.watch(localDatasourceProvider).watchAllMangas();
+}
+
+@Riverpod(keepAlive: true)
+Stream<Manga?> watchManga(WatchMangaRef ref, int id) {
+  return ref.watch(localDatasourceProvider).watchManga(id);
 }
 
 @riverpod

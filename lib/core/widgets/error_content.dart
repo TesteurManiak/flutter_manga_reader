@@ -9,9 +9,11 @@ class ErrorContent extends StatelessWidget {
   /// {@macro error_content}
   const ErrorContent({
     super.key,
+    this.message,
     this.onRetry,
   });
 
+  final String? message;
   final VoidCallback? onRetry;
 
   @override
@@ -23,7 +25,7 @@ class ErrorContent extends StatelessWidget {
         children: [
           const AsciiEmojiWidget(AsciiEmoji.raiseShoulders),
           Text(
-            context.strings.generic_error,
+            message ?? context.strings.generic_error,
             textAlign: TextAlign.center,
           ),
           if (onRetry != null)

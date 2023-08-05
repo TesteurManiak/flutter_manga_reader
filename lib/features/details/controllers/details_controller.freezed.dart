@@ -16,45 +16,40 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DetailsState {
-  Manga? get manga => throw _privateConstructorUsedError;
   List<Chapter> get selectedChapters => throw _privateConstructorUsedError;
   bool get selectionMode => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loading,
     required TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loaded,
-    required TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)
+    required TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)
         error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult? Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult? Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult? Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
     required TResult orElse(),
   }) =>
@@ -93,9 +88,7 @@ abstract class $DetailsStateCopyWith<$Res> {
           DetailsState value, $Res Function(DetailsState) then) =
       _$DetailsStateCopyWithImpl<$Res, DetailsState>;
   @useResult
-  $Res call({Manga manga, List<Chapter> selectedChapters, bool selectionMode});
-
-  $MangaCopyWith<$Res>? get manga;
+  $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
 /// @nodoc
@@ -111,15 +104,10 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? manga = null,
     Object? selectedChapters = null,
     Object? selectionMode = null,
   }) {
     return _then(_value.copyWith(
-      manga: null == manga
-          ? _value.manga!
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga,
       selectedChapters: null == selectedChapters
           ? _value.selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -129,18 +117,6 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
           : selectionMode // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MangaCopyWith<$Res>? get manga {
-    if (_value.manga == null) {
-      return null;
-    }
-
-    return $MangaCopyWith<$Res>(_value.manga!, (value) {
-      return _then(_value.copyWith(manga: value) as $Val);
-    });
   }
 }
 
@@ -152,10 +128,7 @@ abstract class _$$_LoadingCopyWith<$Res>
       __$$_LoadingCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Manga? manga, List<Chapter> selectedChapters, bool selectionMode});
-
-  @override
-  $MangaCopyWith<$Res>? get manga;
+  $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
 /// @nodoc
@@ -168,15 +141,10 @@ class __$$_LoadingCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? manga = freezed,
     Object? selectedChapters = null,
     Object? selectionMode = null,
   }) {
     return _then(_$_Loading(
-      manga: freezed == manga
-          ? _value.manga
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga?,
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -193,14 +161,11 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 class _$_Loading extends _Loading {
   const _$_Loading(
-      {this.manga,
-      final List<Chapter> selectedChapters = const <Chapter>[],
+      {final List<Chapter> selectedChapters = const <Chapter>[],
       this.selectionMode = false})
       : _selectedChapters = selectedChapters,
         super._();
 
-  @override
-  final Manga? manga;
   final List<Chapter> _selectedChapters;
   @override
   @JsonKey()
@@ -217,7 +182,7 @@ class _$_Loading extends _Loading {
 
   @override
   String toString() {
-    return 'DetailsState.loading(manga: $manga, selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
+    return 'DetailsState.loading(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
   }
 
   @override
@@ -225,7 +190,6 @@ class _$_Loading extends _Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loading &&
-            (identical(other.manga, manga) || other.manga == manga) &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.selectionMode, selectionMode) ||
@@ -233,7 +197,7 @@ class _$_Loading extends _Loading {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, manga,
+  int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
 
   @JsonKey(ignore: true)
@@ -246,50 +210,46 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loading,
     required TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loaded,
-    required TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)
+    required TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)
         error,
   }) {
-    return loading(manga, selectedChapters, selectionMode);
+    return loading(selectedChapters, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult? Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult? Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult? Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
   }) {
-    return loading?.call(manga, selectedChapters, selectionMode);
+    return loading?.call(selectedChapters, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(manga, selectedChapters, selectionMode);
+      return loading(selectedChapters, selectionMode);
     }
     return orElse();
   }
@@ -331,13 +291,10 @@ class _$_Loading extends _Loading {
 
 abstract class _Loading extends DetailsState {
   const factory _Loading(
-      {final Manga? manga,
-      final List<Chapter> selectedChapters,
+      {final List<Chapter> selectedChapters,
       final bool selectionMode}) = _$_Loading;
   const _Loading._() : super._();
 
-  @override
-  Manga? get manga;
   @override
   List<Chapter> get selectedChapters;
   @override
@@ -354,10 +311,7 @@ abstract class _$$_LoadedCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
       __$$_LoadedCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Manga manga, List<Chapter> selectedChapters, bool selectionMode});
-
-  @override
-  $MangaCopyWith<$Res> get manga;
+  $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
 /// @nodoc
@@ -370,15 +324,10 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? manga = null,
     Object? selectedChapters = null,
     Object? selectionMode = null,
   }) {
     return _then(_$_Loaded(
-      manga: null == manga
-          ? _value.manga
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga,
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -389,28 +338,17 @@ class __$$_LoadedCopyWithImpl<$Res>
               as bool,
     ));
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $MangaCopyWith<$Res> get manga {
-    return $MangaCopyWith<$Res>(_value.manga, (value) {
-      return _then(_value.copyWith(manga: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
   const _$_Loaded(
-      {required this.manga,
-      final List<Chapter> selectedChapters = const <Chapter>[],
+      {final List<Chapter> selectedChapters = const <Chapter>[],
       this.selectionMode = false})
       : _selectedChapters = selectedChapters,
         super._();
 
-  @override
-  final Manga manga;
   final List<Chapter> _selectedChapters;
   @override
   @JsonKey()
@@ -427,7 +365,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   String toString() {
-    return 'DetailsState.loaded(manga: $manga, selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
+    return 'DetailsState.loaded(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
   }
 
   @override
@@ -435,7 +373,6 @@ class _$_Loaded extends _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            (identical(other.manga, manga) || other.manga == manga) &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.selectionMode, selectionMode) ||
@@ -443,7 +380,7 @@ class _$_Loaded extends _Loaded {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, manga,
+  int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
 
   @JsonKey(ignore: true)
@@ -456,50 +393,46 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loading,
     required TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loaded,
-    required TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)
+    required TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)
         error,
   }) {
-    return loaded(manga, selectedChapters, selectionMode);
+    return loaded(selectedChapters, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult? Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult? Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult? Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
   }) {
-    return loaded?.call(manga, selectedChapters, selectionMode);
+    return loaded?.call(selectedChapters, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(manga, selectedChapters, selectionMode);
+      return loaded(selectedChapters, selectionMode);
     }
     return orElse();
   }
@@ -541,13 +474,10 @@ class _$_Loaded extends _Loaded {
 
 abstract class _Loaded extends DetailsState {
   const factory _Loaded(
-      {required final Manga manga,
-      final List<Chapter> selectedChapters,
+      {final List<Chapter> selectedChapters,
       final bool selectionMode}) = _$_Loaded;
   const _Loaded._() : super._();
 
-  @override
-  Manga get manga;
   @override
   List<Chapter> get selectedChapters;
   @override
@@ -565,13 +495,7 @@ abstract class _$$_ErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Manga? manga,
-      List<Chapter> selectedChapters,
-      String? error,
-      bool selectionMode});
-
-  @override
-  $MangaCopyWith<$Res>? get manga;
+      {List<Chapter> selectedChapters, String? error, bool selectionMode});
 }
 
 /// @nodoc
@@ -584,16 +508,11 @@ class __$$_ErrorCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? manga = freezed,
     Object? selectedChapters = null,
     Object? error = freezed,
     Object? selectionMode = null,
   }) {
     return _then(_$_Error(
-      manga: freezed == manga
-          ? _value.manga
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga?,
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -614,15 +533,12 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 class _$_Error extends _Error {
   const _$_Error(
-      {this.manga,
-      final List<Chapter> selectedChapters = const <Chapter>[],
+      {final List<Chapter> selectedChapters = const <Chapter>[],
       this.error,
       this.selectionMode = false})
       : _selectedChapters = selectedChapters,
         super._();
 
-  @override
-  final Manga? manga;
   final List<Chapter> _selectedChapters;
   @override
   @JsonKey()
@@ -641,7 +557,7 @@ class _$_Error extends _Error {
 
   @override
   String toString() {
-    return 'DetailsState.error(manga: $manga, selectedChapters: $selectedChapters, error: $error, selectionMode: $selectionMode)';
+    return 'DetailsState.error(selectedChapters: $selectedChapters, error: $error, selectionMode: $selectionMode)';
   }
 
   @override
@@ -649,7 +565,6 @@ class _$_Error extends _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
-            (identical(other.manga, manga) || other.manga == manga) &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.error, error) || other.error == error) &&
@@ -660,7 +575,6 @@ class _$_Error extends _Error {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      manga,
       const DeepCollectionEquality().hash(_selectedChapters),
       error,
       selectionMode);
@@ -675,50 +589,46 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loading,
     required TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)
+            List<Chapter> selectedChapters, bool selectionMode)
         loaded,
-    required TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)
+    required TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)
         error,
   }) {
-    return error(manga, selectedChapters, this.error, selectionMode);
+    return error(selectedChapters, this.error, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult? Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult? Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult? Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
   }) {
-    return error?.call(manga, selectedChapters, this.error, selectionMode);
+    return error?.call(selectedChapters, this.error, selectionMode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            Manga? manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loading,
-    TResult Function(
-            Manga manga, List<Chapter> selectedChapters, bool selectionMode)?
+    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
         loaded,
-    TResult Function(Manga? manga, List<Chapter> selectedChapters,
-            String? error, bool selectionMode)?
+    TResult Function(
+            List<Chapter> selectedChapters, String? error, bool selectionMode)?
         error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(manga, selectedChapters, this.error, selectionMode);
+      return error(selectedChapters, this.error, selectionMode);
     }
     return orElse();
   }
@@ -760,14 +670,11 @@ class _$_Error extends _Error {
 
 abstract class _Error extends DetailsState {
   const factory _Error(
-      {final Manga? manga,
-      final List<Chapter> selectedChapters,
+      {final List<Chapter> selectedChapters,
       final String? error,
       final bool selectionMode}) = _$_Error;
   const _Error._() : super._();
 
-  @override
-  Manga? get manga;
   @override
   List<Chapter> get selectedChapters;
   String? get error;

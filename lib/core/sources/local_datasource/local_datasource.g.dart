@@ -53,8 +53,7 @@ final watchAllMangasProvider = AutoDisposeStreamProvider<List<Manga>>.internal(
 );
 
 typedef WatchAllMangasRef = AutoDisposeStreamProviderRef<List<Manga>>;
-String _$getMangaIdFromSourceHash() =>
-    r'fb9f87b153e6c2927b048ae7d664df3037a09987';
+String _$watchMangaHash() => r'764b8ddbfc7c85e0c5ad6f0979f7cd2f989c8518';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -77,6 +76,89 @@ class _SystemHash {
   }
 }
 
+typedef WatchMangaRef = StreamProviderRef<Manga?>;
+
+/// See also [watchManga].
+@ProviderFor(watchManga)
+const watchMangaProvider = WatchMangaFamily();
+
+/// See also [watchManga].
+class WatchMangaFamily extends Family<AsyncValue<Manga?>> {
+  /// See also [watchManga].
+  const WatchMangaFamily();
+
+  /// See also [watchManga].
+  WatchMangaProvider call(
+    int id,
+  ) {
+    return WatchMangaProvider(
+      id,
+    );
+  }
+
+  @override
+  WatchMangaProvider getProviderOverride(
+    covariant WatchMangaProvider provider,
+  ) {
+    return call(
+      provider.id,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchMangaProvider';
+}
+
+/// See also [watchManga].
+class WatchMangaProvider extends StreamProvider<Manga?> {
+  /// See also [watchManga].
+  WatchMangaProvider(
+    this.id,
+  ) : super.internal(
+          (ref) => watchManga(
+            ref,
+            id,
+          ),
+          from: watchMangaProvider,
+          name: r'watchMangaProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$watchMangaHash,
+          dependencies: WatchMangaFamily._dependencies,
+          allTransitiveDependencies:
+              WatchMangaFamily._allTransitiveDependencies,
+        );
+
+  final int id;
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchMangaProvider && other.id == id;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, id.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$getMangaIdFromSourceHash() =>
+    r'fb9f87b153e6c2927b048ae7d664df3037a09987';
 typedef GetMangaIdFromSourceRef = AutoDisposeFutureProviderRef<int?>;
 
 /// See also [getMangaIdFromSource].

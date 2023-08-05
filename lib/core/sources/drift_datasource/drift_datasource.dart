@@ -149,6 +149,13 @@ class DriftDatasource implements LocalDatasource {
           ..where((t) => t.id.equals(mangaId)))
         .write(DbMangasCompanion(favorite: Value(favorite)));
   }
+
+  @override
+  Stream<Manga?> watchManga(int id) {
+    return (_database.select(_database.dbMangas)..where((t) => t.id.equals(id)))
+        .watchSingleOrNull()
+        .map((manga) => manga?.toModel());
+  }
 }
 
 extension on DbManga {

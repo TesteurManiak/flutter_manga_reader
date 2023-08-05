@@ -5,6 +5,7 @@ import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dar
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
+import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
@@ -50,13 +51,26 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(watchMangaProvider(widget.mangaId));
+
     return DefaultSlidableController(
       initiallyShown: false,
       child: Scaffold(
         bottomNavigationBar: _DismissableBottomBar(widget.mangaId),
-        body: _MangaContent(
-          mangaId: widget.mangaId,
-          openedFromSource: widget.openedFromSource,
+        body: state.when(
+          data: (manga) {
+            if (manga == null) {
+              return ErrorContent(message: 'Manga not found'.hardcoded);
+            }
+
+            return _MangaContent(
+              mangaId: widget.mangaId,
+              manga: manga,
+              openedFromSource: widget.openedFromSource,
+            );
+          },
+          error: (e, __) => ErrorContent(message: e.toString()),
+          loading: LoadingContent.new,
         ),
       ),
     );
@@ -66,10 +80,12 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
 class _MangaContent extends ConsumerStatefulWidget {
   const _MangaContent({
     required this.mangaId,
+    required this.manga,
     required this.openedFromSource,
   });
 
   final int mangaId;
+  final Manga manga;
   final bool openedFromSource;
 
   @override
@@ -91,18 +107,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(
-      detailsControllerProvider(widget.mangaId).select((v) => v.isLoading),
-    );
-    final manga = ref.watch(
-      detailsControllerProvider(widget.mangaId).select((v) => v.manga),
-    );
-
-    final desc = manga?.description;
-    final genres = manga?.getGenres();
-    final thumbnailUrl = manga?.thumbnailUrl;
-
-    if (manga == null && isLoading) return const LoadingContent();
+    final desc = widget.manga.description;
+    final genres = widget.manga.getGenres();
+    final thumbnailUrl = widget.manga.thumbnailUrl;
 
     return Stack(
       children: [
@@ -123,7 +130,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                     .fetchDetails(forceRefresh: true);
               },
             ),
-            _SliverHeader(manga),
+            _SliverHeader(widget.manga),
             _SliverButtons(widget.mangaId),
             if (desc != null)
               _SliverDescription(
