@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
@@ -57,7 +56,6 @@ class ChapterTile extends ConsumerWidget {
         ref
             .read(detailsControllerProvider(chapter.mangaId).notifier)
             .selectChapter(chapter);
-        DefaultSlidableController.maybeOf(context)?.show();
       },
     );
   }

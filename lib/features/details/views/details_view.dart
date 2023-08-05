@@ -107,6 +107,16 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(
+        detailsControllerProvider(widget.mangaId)
+            .select((s) => s.selectionMode), (_, next) {
+      if (next) {
+        DefaultSlidableController.maybeOf(context)?.show();
+      } else {
+        DefaultSlidableController.maybeOf(context)?.hide();
+      }
+    });
+
     final desc = widget.manga.description;
     final genres = widget.manga.getGenres();
     final thumbnailUrl = widget.manga.thumbnailUrl;
@@ -122,7 +132,10 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
           controller: scrollController,
           physics: const PullToRefreshScrollPhysics(),
           slivers: [
-            SliverDetailsAppBar(scrollController: scrollController),
+            SliverDetailsAppBar(
+              mangaId: widget.mangaId,
+              scrollController: scrollController,
+            ),
             SliverPullToRefresh(
               onRefresh: () {
                 return ref

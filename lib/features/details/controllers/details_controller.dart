@@ -140,6 +140,10 @@ class DetailsController extends _$DetailsController {
       state = state.copyWith(selectionMode: false);
     }
   }
+
+  void quitSelectionMode() {
+    state = state.copyWith(selectionMode: false, selectedChapters: []);
+  }
 }
 
 @freezed
