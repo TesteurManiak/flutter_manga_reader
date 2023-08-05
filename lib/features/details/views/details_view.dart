@@ -51,7 +51,7 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
     return DefaultSlidableController(
       initiallyShown: false,
       child: Scaffold(
-        bottomNavigationBar: const _DismissableBottomBar(),
+        bottomNavigationBar: _DismissableBottomBar(widget.mangaId),
         body: _MangaContent(
           mangaId: widget.mangaId,
           openedFromSource: widget.openedFromSource,
@@ -411,11 +411,13 @@ class _SliverChapterList extends ConsumerWidget {
   }
 }
 
-class _DismissableBottomBar extends StatelessWidget {
-  const _DismissableBottomBar();
+class _DismissableBottomBar extends ConsumerWidget {
+  const _DismissableBottomBar(this.mangaId);
+
+  final int mangaId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final padding = MediaQuery.paddingOf(context);
 
     return Slidable(
@@ -426,7 +428,12 @@ class _DismissableBottomBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                DefaultSlidableController.maybeOf(context)?.hide();
+                ref
+                    .read(detailsControllerProvider(mangaId).notifier)
+                    .markSelectedChaptersAsRead()
+                    .whenComplete(() {
+                  DefaultSlidableController.maybeOf(context)?.hide();
+                });
               },
               icon: const Icon(Icons.done_all),
             )

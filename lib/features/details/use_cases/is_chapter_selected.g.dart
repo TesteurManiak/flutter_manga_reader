@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'details_controller.dart';
+part of 'is_chapter_selected.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'871d46a9b58818c5444c5f59479e0c6f5d121ed4';
+String _$isChapterSelectedHash() => r'be911dd0fe4664a76a3ef248ce03f58ad677d918';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,38 +29,32 @@ class _SystemHash {
   }
 }
 
-abstract class _$DetailsController extends BuildlessNotifier<DetailsState> {
-  late final int mangaId;
+typedef IsChapterSelectedRef = AutoDisposeProviderRef<bool>;
 
-  DetailsState build(
-    int mangaId,
-  );
-}
+/// See also [isChapterSelected].
+@ProviderFor(isChapterSelected)
+const isChapterSelectedProvider = IsChapterSelectedFamily();
 
-/// See also [DetailsController].
-@ProviderFor(DetailsController)
-const detailsControllerProvider = DetailsControllerFamily();
+/// See also [isChapterSelected].
+class IsChapterSelectedFamily extends Family<bool> {
+  /// See also [isChapterSelected].
+  const IsChapterSelectedFamily();
 
-/// See also [DetailsController].
-class DetailsControllerFamily extends Family<DetailsState> {
-  /// See also [DetailsController].
-  const DetailsControllerFamily();
-
-  /// See also [DetailsController].
-  DetailsControllerProvider call(
-    int mangaId,
+  /// See also [isChapterSelected].
+  IsChapterSelectedProvider call(
+    Chapter chapter,
   ) {
-    return DetailsControllerProvider(
-      mangaId,
+    return IsChapterSelectedProvider(
+      chapter,
     );
   }
 
   @override
-  DetailsControllerProvider getProviderOverride(
-    covariant DetailsControllerProvider provider,
+  IsChapterSelectedProvider getProviderOverride(
+    covariant IsChapterSelectedProvider provider,
   ) {
     return call(
-      provider.mangaId,
+      provider.chapter,
     );
   }
 
@@ -76,50 +70,43 @@ class DetailsControllerFamily extends Family<DetailsState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'detailsControllerProvider';
+  String? get name => r'isChapterSelectedProvider';
 }
 
-/// See also [DetailsController].
-class DetailsControllerProvider
-    extends NotifierProviderImpl<DetailsController, DetailsState> {
-  /// See also [DetailsController].
-  DetailsControllerProvider(
-    this.mangaId,
+/// See also [isChapterSelected].
+class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
+  /// See also [isChapterSelected].
+  IsChapterSelectedProvider(
+    this.chapter,
   ) : super.internal(
-          () => DetailsController()..mangaId = mangaId,
-          from: detailsControllerProvider,
-          name: r'detailsControllerProvider',
+          (ref) => isChapterSelected(
+            ref,
+            chapter,
+          ),
+          from: isChapterSelectedProvider,
+          name: r'isChapterSelectedProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$detailsControllerHash,
-          dependencies: DetailsControllerFamily._dependencies,
+                  : _$isChapterSelectedHash,
+          dependencies: IsChapterSelectedFamily._dependencies,
           allTransitiveDependencies:
-              DetailsControllerFamily._allTransitiveDependencies,
+              IsChapterSelectedFamily._allTransitiveDependencies,
         );
 
-  final int mangaId;
+  final Chapter chapter;
 
   @override
   bool operator ==(Object other) {
-    return other is DetailsControllerProvider && other.mangaId == mangaId;
+    return other is IsChapterSelectedProvider && other.chapter == chapter;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, mangaId.hashCode);
+    hash = _SystemHash.combine(hash, chapter.hashCode);
 
     return _SystemHash.finish(hash);
-  }
-
-  @override
-  DetailsState runNotifierBuild(
-    covariant DetailsController notifier,
-  ) {
-    return notifier.build(
-      mangaId,
-    );
   }
 }
 // ignore_for_file: type=lint

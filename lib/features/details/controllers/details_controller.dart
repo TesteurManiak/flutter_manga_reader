@@ -120,6 +120,39 @@ class DetailsController extends _$DetailsController {
     await ref.read(localDatasourceProvider).updateManga(newManga);
     state = DetailsState.loaded(manga: newManga, chapters: state.chapters);
   }
+
+  Future<void> markSelectedChaptersAsRead() async {
+    final selectedChapters = state.selectedChapters;
+    if (selectedChapters.isEmpty) return;
+
+    final localDatasource = ref.read(localDatasourceProvider);
+    await localDatasource.setChaptersRead(
+      chapterIds: selectedChapters.map((e) => e.id).toList(),
+      read: true,
+    );
+
+    state = state.copyWith(selectedChapters: []);
+  }
+
+  void switchMode() {
+    state = state.copyWith(selectionMode: !state.selectionMode);
+  }
+
+  void selectChapter(Chapter chapter) {
+    state = state.copyWith(selectionMode: true);
+
+    final selectedChapters = List<Chapter>.from(state.selectedChapters);
+    if (selectedChapters.contains(chapter)) {
+      selectedChapters.remove(chapter);
+    } else {
+      selectedChapters.add(chapter);
+    }
+    state = state.copyWith(selectedChapters: selectedChapters);
+
+    if (state.selectedChapters.isEmpty) {
+      state = state.copyWith(selectionMode: false);
+    }
+  }
 }
 
 @freezed
@@ -127,15 +160,21 @@ class DetailsState with _$DetailsState {
   const factory DetailsState.loading({
     Manga? manga,
     @Default(<Chapter>[]) List<Chapter> chapters,
+    @Default(<Chapter>[]) List<Chapter> selectedChapters,
+    @Default(false) bool selectionMode,
   }) = _Loading;
   const factory DetailsState.loaded({
     required Manga manga,
     required List<Chapter> chapters,
+    @Default(<Chapter>[]) List<Chapter> selectedChapters,
+    @Default(false) bool selectionMode,
   }) = _Loaded;
   const factory DetailsState.error({
     Manga? manga,
     @Default(<Chapter>[]) List<Chapter> chapters,
+    @Default(<Chapter>[]) List<Chapter> selectedChapters,
     String? error,
+    @Default(false) bool selectionMode,
   }) = _Error;
 
   const DetailsState._();

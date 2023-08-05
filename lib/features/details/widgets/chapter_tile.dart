@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
+import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class ChapterTile extends StatelessWidget {
+class ChapterTile extends ConsumerWidget {
   const ChapterTile(this.chapter, {super.key});
 
   final Chapter chapter;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isSelected = ref.watch(isChapterSelectedProvider(chapter));
+
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
     final subtitle = <String>[
@@ -21,6 +26,7 @@ class ChapterTile extends StatelessWidget {
     final readStyle = TextStyle(color: Colors.white.withOpacity(.3));
 
     return ListTile(
+      selected: isSelected,
       title: Text(
         chapter.name,
         style: chapter.read ? readStyle : null,
@@ -34,9 +40,21 @@ class ChapterTile extends StatelessWidget {
         icon: Icon(Icons.download_for_offline_outlined),
       ),
       onTap: () {
+        final selectionMode =
+            ref.read(detailsControllerProvider(chapter.mangaId)).selectionMode;
+        if (selectionMode) {
+          ref
+              .read(detailsControllerProvider(chapter.mangaId).notifier)
+              .selectChapter(chapter);
+          return;
+        }
+
         ChapterViewerRoute(chapterId: chapter.id).push<void>(context);
       },
       onLongPress: () {
+        ref
+            .read(detailsControllerProvider(chapter.mangaId).notifier)
+            .selectChapter(chapter);
         DefaultSlidableController.maybeOf(context)?.show();
       },
     );

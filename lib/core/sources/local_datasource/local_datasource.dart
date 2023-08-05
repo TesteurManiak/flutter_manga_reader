@@ -41,6 +41,10 @@ abstract class LocalDatasource {
 
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChapterRead({required int chapterId, required bool read});
+  Future<void> setChaptersRead({
+    required List<int> chapterIds,
+    required bool read,
+  });
 }
 
 @Riverpod(keepAlive: true)
