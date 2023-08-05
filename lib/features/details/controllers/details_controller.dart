@@ -1,7 +1,6 @@
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
-import 'package:flutter_manga_reader/features/details/use_cases/get_chapters_for_manga.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/get_manga_from_id.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -16,6 +15,10 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId) {
+    ref.listen(watchChaptersForMangaProvider(mangaId), (_, next) {
+      next.whenData((value) => state = state.copyWith(chapters: value));
+    });
+
     return const DetailsState.loading();
   }
 
@@ -37,9 +40,7 @@ class DetailsController extends _$DetailsController {
     }
 
     if (!forceRefresh && localManga.initialized) {
-      final localChapters =
-          await ref.read(getChaptersForMangaProvider(mangaId).future);
-      state = DetailsState.loaded(manga: localManga, chapters: localChapters);
+      state = DetailsState.loaded(manga: localManga, chapters: state.chapters);
       return;
     }
 
@@ -54,12 +55,9 @@ class DetailsController extends _$DetailsController {
       success: (record) async {
         await _saveRecord(record);
 
-        final localChapters =
-            await ref.read(getChaptersForMangaProvider(mangaId).future);
-
         return DetailsState.loaded(
           manga: record.manga,
-          chapters: localChapters,
+          chapters: state.chapters,
         );
       },
       failure: (e) {

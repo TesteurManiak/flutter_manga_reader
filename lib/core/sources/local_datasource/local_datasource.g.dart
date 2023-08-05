@@ -240,5 +240,88 @@ class GetChapterProvider extends AutoDisposeFutureProvider<Chapter?> {
     return _SystemHash.finish(hash);
   }
 }
+
+String _$watchChaptersForMangaHash() =>
+    r'3b8b3b6a1bc7a876fd0904e9df8a48176dd0e716';
+typedef WatchChaptersForMangaRef = StreamProviderRef<List<Chapter>>;
+
+/// See also [watchChaptersForManga].
+@ProviderFor(watchChaptersForManga)
+const watchChaptersForMangaProvider = WatchChaptersForMangaFamily();
+
+/// See also [watchChaptersForManga].
+class WatchChaptersForMangaFamily extends Family<AsyncValue<List<Chapter>>> {
+  /// See also [watchChaptersForManga].
+  const WatchChaptersForMangaFamily();
+
+  /// See also [watchChaptersForManga].
+  WatchChaptersForMangaProvider call(
+    int mangaId,
+  ) {
+    return WatchChaptersForMangaProvider(
+      mangaId,
+    );
+  }
+
+  @override
+  WatchChaptersForMangaProvider getProviderOverride(
+    covariant WatchChaptersForMangaProvider provider,
+  ) {
+    return call(
+      provider.mangaId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchChaptersForMangaProvider';
+}
+
+/// See also [watchChaptersForManga].
+class WatchChaptersForMangaProvider extends StreamProvider<List<Chapter>> {
+  /// See also [watchChaptersForManga].
+  WatchChaptersForMangaProvider(
+    this.mangaId,
+  ) : super.internal(
+          (ref) => watchChaptersForManga(
+            ref,
+            mangaId,
+          ),
+          from: watchChaptersForMangaProvider,
+          name: r'watchChaptersForMangaProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$watchChaptersForMangaHash,
+          dependencies: WatchChaptersForMangaFamily._dependencies,
+          allTransitiveDependencies:
+              WatchChaptersForMangaFamily._allTransitiveDependencies,
+        );
+
+  final int mangaId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchChaptersForMangaProvider && other.mangaId == mangaId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, mangaId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

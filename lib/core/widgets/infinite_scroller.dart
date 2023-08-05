@@ -52,10 +52,10 @@ class _RawInfiniteScroller extends StatefulWidget {
   final Widget child;
 
   @override
-  State<_RawInfiniteScroller> createState() => __RawInfiniteScrollerState();
+  State<_RawInfiniteScroller> createState() => _RawInfiniteScrollerState();
 }
 
-class __RawInfiniteScrollerState extends State<_RawInfiniteScroller> {
+class _RawInfiniteScrollerState extends State<_RawInfiniteScroller> {
   double lastPixelsThreshold = 0;
 
   @override

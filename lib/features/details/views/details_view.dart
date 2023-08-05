@@ -6,6 +6,7 @@ import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
+import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
@@ -47,10 +48,14 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _MangaContent(
-        mangaId: widget.mangaId,
-        openedFromSource: widget.openedFromSource,
+    return DefaultSlidableController(
+      initiallyShown: false,
+      child: Scaffold(
+        bottomNavigationBar: const _DismissableBottomBar(),
+        body: _MangaContent(
+          mangaId: widget.mangaId,
+          openedFromSource: widget.openedFromSource,
+        ),
       ),
     );
   }
@@ -401,6 +406,32 @@ class _SliverChapterList extends ConsumerWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _DismissableBottomBar extends StatelessWidget {
+  const _DismissableBottomBar();
+
+  @override
+  Widget build(BuildContext context) {
+    final padding = MediaQuery.paddingOf(context);
+
+    return Slidable(
+      height: kBottomNavigationBarHeight + padding.bottom,
+      child: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                DefaultSlidableController.maybeOf(context)?.hide();
+              },
+              icon: const Icon(Icons.done_all),
+            )
+          ],
+        ),
       ),
     );
   }

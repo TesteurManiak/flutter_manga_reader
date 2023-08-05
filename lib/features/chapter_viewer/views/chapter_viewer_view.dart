@@ -51,6 +51,7 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
     final state = ref.watch(chapterViewerControllerProvider(widget.chapterId));
 
     return Scaffold(
+      appBar: AppBar(),
       body: state.when(
         loading: LoadingContent.new,
         loaded: (pages) {
@@ -119,7 +120,7 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
 
                 return AppNetworkImage(
                   url: page.imageUrl,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.contain,
                 );
               },
               onPageChanged: (value) => pageNotifier.value = value,

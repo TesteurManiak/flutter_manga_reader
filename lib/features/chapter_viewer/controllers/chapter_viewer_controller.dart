@@ -34,13 +34,9 @@ class ChapterViewerController extends _$ChapterViewerController {
     );
   }
 
-  Future<void> markChapterAsRead() async {
+  Future<void> markChapterAsRead() {
     final localDatasource = ref.read(localDatasourceProvider);
-    final localChapter = await localDatasource.getChapter(chapterId);
-
-    if (localChapter == null) return;
-
-    return localDatasource.updateChapter(localChapter.copyWith(read: true));
+    return localDatasource.setChapterRead(chapterId: chapterId, read: true);
   }
 }
 

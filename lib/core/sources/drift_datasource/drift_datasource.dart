@@ -116,8 +116,18 @@ class DriftDatasource implements LocalDatasource {
   }
 
   @override
-  Future<void> updateChapter(Chapter chapter) {
-    return _database.update(_database.dbChapters).replace(chapter.toDbModel());
+  Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
+    return (_database.select(_database.dbChapters)
+          ..where((t) => t.mangaId.equals(mangaId)))
+        .watch()
+        .map((chapters) => chapters.map((e) => e.toModel()).toList());
+  }
+
+  @override
+  Future<void> setChapterRead({required int chapterId, required bool read}) {
+    return (_database.update(_database.dbChapters)
+          ..where((t) => t.id.equals(chapterId)))
+        .write(DbChaptersCompanion(read: Value(read)));
   }
 }
 
@@ -137,10 +147,6 @@ extension on DbChapter {
 
 extension on Manga {
   DbManga toDbModel() => DbManga.fromJson(toJson());
-}
-
-extension on Chapter {
-  DbChapter toDbModel() => DbChapter.fromJson(toJson());
 }
 
 extension on SourceManga {

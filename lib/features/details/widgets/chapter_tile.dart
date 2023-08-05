@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:intl/intl.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -17,9 +18,17 @@ class ChapterTile extends StatelessWidget {
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];
 
+    final readStyle = TextStyle(color: Colors.white.withOpacity(.3));
+
     return ListTile(
-      title: Text(chapter.name),
-      subtitle: Text(subtitle.join(' • ')),
+      title: Text(
+        chapter.name,
+        style: chapter.read ? readStyle : null,
+      ),
+      subtitle: Text(
+        subtitle.join(' • '),
+        style: chapter.read ? readStyle : null,
+      ),
       trailing: const IconButton(
         onPressed: null, // TODO(Guillaume): download
         icon: Icon(Icons.download_for_offline_outlined),
@@ -28,7 +37,7 @@ class ChapterTile extends StatelessWidget {
         ChapterViewerRoute(chapterId: chapter.id).push<void>(context);
       },
       onLongPress: () {
-        // TODO(Guillaume): open menu
+        DefaultSlidableController.maybeOf(context)?.show();
       },
     );
   }
