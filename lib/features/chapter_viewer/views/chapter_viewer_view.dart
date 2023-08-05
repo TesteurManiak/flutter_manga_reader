@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
@@ -23,11 +24,19 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
   void initState() {
     super.initState();
 
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(chapterViewerControllerProvider(widget.chapterId).notifier)
           .fetchPages();
     });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
   }
 
   @override
