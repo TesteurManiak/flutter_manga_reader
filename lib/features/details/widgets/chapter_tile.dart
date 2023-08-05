@@ -18,22 +18,24 @@ class ChapterTile extends ConsumerWidget {
 
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
+    final read = chapter.read;
     final subtitle = <String>[
       if (dateUpload != null) DateFormat.yMd().format(dateUpload),
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];
 
-    final readStyle = TextStyle(color: Colors.white.withOpacity(.3));
+    final baseColor = DefaultTextStyle.of(context).style.color;
+    final readStyle = TextStyle(color: baseColor?.withOpacity(.3));
 
     return ListTile(
       selected: isSelected,
       title: Text(
         chapter.name,
-        style: chapter.read ? readStyle : null,
+        style: read ? readStyle : null,
       ),
       subtitle: Text(
         subtitle.join(' • '),
-        style: chapter.read ? readStyle : null,
+        style: read ? readStyle : null,
       ),
       trailing: const IconButton(
         onPressed: null, // TODO(Guillaume): download

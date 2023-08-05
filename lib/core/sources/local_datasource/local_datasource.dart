@@ -45,6 +45,10 @@ abstract class LocalDatasource {
     required List<int> chapterIds,
     required bool read,
   });
+  Future<void> setMangaFavorite({
+    required int mangaId,
+    required bool favorite,
+  });
 }
 
 @Riverpod(keepAlive: true)

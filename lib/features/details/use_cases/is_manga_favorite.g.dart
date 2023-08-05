@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'details_controller.dart';
+part of 'is_manga_favorite.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'64e4c0a2bb064efb412db1e8823a952307c3c081';
+String _$isMangaFavoriteHash() => r'68f17de4d9428a8a45aa20d8a86e34e36f790d7e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,35 +29,29 @@ class _SystemHash {
   }
 }
 
-abstract class _$DetailsController extends BuildlessNotifier<DetailsState> {
-  late final int mangaId;
+typedef IsMangaFavoriteRef = AutoDisposeProviderRef<bool>;
 
-  DetailsState build(
-    int mangaId,
-  );
-}
+/// See also [isMangaFavorite].
+@ProviderFor(isMangaFavorite)
+const isMangaFavoriteProvider = IsMangaFavoriteFamily();
 
-/// See also [DetailsController].
-@ProviderFor(DetailsController)
-const detailsControllerProvider = DetailsControllerFamily();
+/// See also [isMangaFavorite].
+class IsMangaFavoriteFamily extends Family<bool> {
+  /// See also [isMangaFavorite].
+  const IsMangaFavoriteFamily();
 
-/// See also [DetailsController].
-class DetailsControllerFamily extends Family<DetailsState> {
-  /// See also [DetailsController].
-  const DetailsControllerFamily();
-
-  /// See also [DetailsController].
-  DetailsControllerProvider call(
+  /// See also [isMangaFavorite].
+  IsMangaFavoriteProvider call(
     int mangaId,
   ) {
-    return DetailsControllerProvider(
+    return IsMangaFavoriteProvider(
       mangaId,
     );
   }
 
   @override
-  DetailsControllerProvider getProviderOverride(
-    covariant DetailsControllerProvider provider,
+  IsMangaFavoriteProvider getProviderOverride(
+    covariant IsMangaFavoriteProvider provider,
   ) {
     return call(
       provider.mangaId,
@@ -76,33 +70,35 @@ class DetailsControllerFamily extends Family<DetailsState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'detailsControllerProvider';
+  String? get name => r'isMangaFavoriteProvider';
 }
 
-/// See also [DetailsController].
-class DetailsControllerProvider
-    extends NotifierProviderImpl<DetailsController, DetailsState> {
-  /// See also [DetailsController].
-  DetailsControllerProvider(
+/// See also [isMangaFavorite].
+class IsMangaFavoriteProvider extends AutoDisposeProvider<bool> {
+  /// See also [isMangaFavorite].
+  IsMangaFavoriteProvider(
     this.mangaId,
   ) : super.internal(
-          () => DetailsController()..mangaId = mangaId,
-          from: detailsControllerProvider,
-          name: r'detailsControllerProvider',
+          (ref) => isMangaFavorite(
+            ref,
+            mangaId,
+          ),
+          from: isMangaFavoriteProvider,
+          name: r'isMangaFavoriteProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$detailsControllerHash,
-          dependencies: DetailsControllerFamily._dependencies,
+                  : _$isMangaFavoriteHash,
+          dependencies: IsMangaFavoriteFamily._dependencies,
           allTransitiveDependencies:
-              DetailsControllerFamily._allTransitiveDependencies,
+              IsMangaFavoriteFamily._allTransitiveDependencies,
         );
 
   final int mangaId;
 
   @override
   bool operator ==(Object other) {
-    return other is DetailsControllerProvider && other.mangaId == mangaId;
+    return other is IsMangaFavoriteProvider && other.mangaId == mangaId;
   }
 
   @override
@@ -111,15 +107,6 @@ class DetailsControllerProvider
     hash = _SystemHash.combine(hash, mangaId.hashCode);
 
     return _SystemHash.finish(hash);
-  }
-
-  @override
-  DetailsState runNotifierBuild(
-    covariant DetailsController notifier,
-  ) {
-    return notifier.build(
-      mangaId,
-    );
   }
 }
 // ignore_for_file: type=lint

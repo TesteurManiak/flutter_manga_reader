@@ -2,6 +2,7 @@ import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/get_manga_from_id.dart';
+import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -15,18 +16,11 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId) {
-    ref.listen(watchChaptersForMangaProvider(mangaId), (_, next) {
-      next.whenData((value) => state = state.copyWith(chapters: value));
-    });
-
     return const DetailsState.loading();
   }
 
   Future<void> fetchDetails({bool forceRefresh = false}) async {
-    state = DetailsState.loading(
-      manga: state.manga,
-      chapters: state.chapters,
-    );
+    state = DetailsState.loading(manga: state.manga);
 
     final localManga = await ref.read(getMangaFromIdProvider(mangaId).future);
 
@@ -34,39 +28,29 @@ class DetailsController extends _$DetailsController {
       state = DetailsState.error(
         error: 'Manga not found'.hardcoded,
         manga: state.manga,
-        chapters: state.chapters,
       );
       return;
     }
 
     if (!forceRefresh && localManga.initialized) {
-      state = DetailsState.loaded(manga: localManga, chapters: state.chapters);
+      state = DetailsState.loaded(manga: localManga);
       return;
     }
 
-    state = DetailsState.loading(
-      manga: localManga,
-      chapters: state.chapters,
-    );
+    state = DetailsState.loading(manga: localManga);
 
     final result = await _fetchRecord(localManga);
 
     state = await result.when(
       success: (record) async {
-        await _saveRecord(record);
+        final mangaToSave = record.manga.copyWith(initialized: true);
+        await _saveRecord(
+          (manga: mangaToSave, sourceChapters: record.sourceChapters),
+        );
 
-        return DetailsState.loaded(
-          manga: record.manga,
-          chapters: state.chapters,
-        );
+        return DetailsState.loaded(manga: mangaToSave);
       },
-      failure: (e) {
-        return DetailsState.error(
-          error: e,
-          manga: localManga,
-          chapters: state.chapters,
-        );
-      },
+      failure: (e) => DetailsState.error(error: e, manga: localManga),
     );
   }
 
@@ -112,13 +96,12 @@ class DetailsController extends _$DetailsController {
     ]);
   }
 
-  Future<void> toggleFavorite() async {
-    final currentManga = state.manga;
-    if (currentManga == null) return;
-
-    final newManga = currentManga.copyWith(favorite: !currentManga.favorite);
-    await ref.read(localDatasourceProvider).updateManga(newManga);
-    state = DetailsState.loaded(manga: newManga, chapters: state.chapters);
+  Future<void> toggleFavorite() {
+    final currentFavoriteState = ref.read(isMangaFavoriteProvider(mangaId));
+    return ref.read(localDatasourceProvider).setMangaFavorite(
+          mangaId: mangaId,
+          favorite: !currentFavoriteState,
+        );
   }
 
   Future<void> markSelectedChaptersAsRead() async {
@@ -159,19 +142,16 @@ class DetailsController extends _$DetailsController {
 class DetailsState with _$DetailsState {
   const factory DetailsState.loading({
     Manga? manga,
-    @Default(<Chapter>[]) List<Chapter> chapters,
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     @Default(false) bool selectionMode,
   }) = _Loading;
   const factory DetailsState.loaded({
     required Manga manga,
-    required List<Chapter> chapters,
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     @Default(false) bool selectionMode,
   }) = _Loaded;
   const factory DetailsState.error({
     Manga? manga,
-    @Default(<Chapter>[]) List<Chapter> chapters,
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     String? error,
     @Default(false) bool selectionMode,
