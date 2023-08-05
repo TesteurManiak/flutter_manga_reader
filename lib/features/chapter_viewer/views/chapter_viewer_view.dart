@@ -11,9 +11,11 @@ class ChapterViewerView extends ConsumerStatefulWidget {
   const ChapterViewerView({
     super.key,
     required this.chapterId,
+    this.initialPage,
   });
 
   final int chapterId;
+  final int? initialPage;
 
   @override
   ConsumerState<ChapterViewerView> createState() => _ChapterViewerViewState();
@@ -51,70 +53,85 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
     return Scaffold(
       body: state.when(
         loading: LoadingContent.new,
-        loaded: _PageViewer.new,
+        loaded: (pages) {
+          return _PageViewer(
+            pages: pages,
+            initialPage: widget.initialPage,
+            chapterId: widget.chapterId,
+          );
+        },
         error: (_) => ErrorContent(onRetry: controller.fetchPages),
       ),
     );
   }
 }
 
-class _PageViewer extends StatefulWidget {
-  const _PageViewer(this.pages);
+class _PageViewer extends ConsumerStatefulWidget {
+  const _PageViewer({
+    required this.pages,
+    required this.initialPage,
+    required this.chapterId,
+  });
 
   final List<ChapterPage> pages;
+  final int? initialPage;
+  final int chapterId;
 
   @override
-  State<_PageViewer> createState() => _PageViewerState();
+  ConsumerState<_PageViewer> createState() => _PageViewerState();
 }
 
-class _PageViewerState extends State<_PageViewer> {
-  final pageController = PageController();
+class _PageViewerState extends ConsumerState<_PageViewer> {
+  late final pageController = PageController(
+    initialPage: widget.initialPage ?? 0,
+  );
+  late final pageNotifier = ValueNotifier<int>(pageController.initialPage);
 
   @override
   void dispose() {
     pageController.dispose();
+    pageNotifier.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: widget.pages.length,
-            itemBuilder: (context, index) {
-              final page = widget.pages[index];
-              return _Page(page.imageUrl);
+    return WillPopScope(
+      onWillPop: () async {
+        // If on last page of the chapter, mark it as read.
+        if (pageController.page == widget.pages.length - 1) {
+          await ref
+              .read(chapterViewerControllerProvider(widget.chapterId).notifier)
+              .markChapterAsRead();
+        }
+
+        return true;
+      },
+      child: Column(
+        children: [
+          Expanded(
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: widget.pages.length,
+              itemBuilder: (context, index) {
+                final page = widget.pages[index];
+
+                return AppNetworkImage(
+                  url: page.imageUrl,
+                  fit: BoxFit.fitWidth,
+                );
+              },
+              onPageChanged: (value) => pageNotifier.value = value,
+            ),
+          ),
+          ValueListenableBuilder<int>(
+            valueListenable: pageNotifier,
+            builder: (_, page, __) {
+              return Text('${page + 1}/${widget.pages.length}');
             },
           ),
-        ),
-        ListenableBuilder(
-          listenable: pageController,
-          builder: (context, _) {
-            return Text(
-              '${(pageController.page?.round() ?? 0) + 1}/${widget.pages.length}',
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _Page extends StatelessWidget {
-  const _Page(this.url);
-
-  final String? url;
-
-  @override
-  Widget build(BuildContext context) {
-    return InteractiveViewer(
-      child: AppNetworkImage(
-        url: url,
-        fit: BoxFit.fitWidth,
+        ],
       ),
     );
   }

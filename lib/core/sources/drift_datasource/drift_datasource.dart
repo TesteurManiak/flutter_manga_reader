@@ -114,6 +114,11 @@ class DriftDatasource implements LocalDatasource {
         .getSingleOrNull()
         .then((chapter) => chapter?.toModel());
   }
+
+  @override
+  Future<void> updateChapter(Chapter chapter) {
+    return _database.update(_database.dbChapters).replace(chapter.toDbModel());
+  }
 }
 
 extension on DbManga {
@@ -132,6 +137,10 @@ extension on DbChapter {
 
 extension on Manga {
   DbManga toDbModel() => DbManga.fromJson(toJson());
+}
+
+extension on Chapter {
+  DbChapter toDbModel() => DbChapter.fromJson(toJson());
 }
 
 extension on SourceManga {

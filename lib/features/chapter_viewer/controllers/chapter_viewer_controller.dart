@@ -33,6 +33,15 @@ class ChapterViewerController extends _$ChapterViewerController {
       failure: (e) => ChapterViewerState.error(error: e.message),
     );
   }
+
+  Future<void> markChapterAsRead() async {
+    final localDatasource = ref.read(localDatasourceProvider);
+    final localChapter = await localDatasource.getChapter(chapterId);
+
+    if (localChapter == null) return;
+
+    return localDatasource.updateChapter(localChapter.copyWith(read: true));
+  }
 }
 
 @freezed
