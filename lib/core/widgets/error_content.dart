@@ -7,7 +7,12 @@ import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 /// {@endtemplate}
 class ErrorContent extends StatelessWidget {
   /// {@macro error_content}
-  const ErrorContent({super.key});
+  const ErrorContent({
+    super.key,
+    this.onRetry,
+  });
+
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +26,11 @@ class ErrorContent extends StatelessWidget {
             context.strings.generic_error,
             textAlign: TextAlign.center,
           ),
+          if (onRetry != null)
+            ElevatedButton(
+              onPressed: onRetry,
+              child: Text('Retry'.hardcoded),
+            ),
         ],
       ),
     );

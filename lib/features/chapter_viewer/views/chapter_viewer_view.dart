@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
+import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,12 +20,17 @@ class ChapterViewerView extends ConsumerStatefulWidget {
 }
 
 class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
+  late final ChapterViewerController controller;
+
   @override
   void initState() {
     super.initState();
 
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
+    controller = ref.read(
+      chapterViewerControllerProvider(widget.chapterId).notifier,
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref
           .read(chapterViewerControllerProvider(widget.chapterId).notifier)
@@ -47,7 +52,7 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
       body: state.when(
         loading: LoadingContent.new,
         loaded: _PageViewer.new,
-        error: (_) => _Error(widget.chapterId),
+        error: (_) => ErrorContent(onRetry: controller.fetchPages),
       ),
     );
   }
@@ -110,35 +115,6 @@ class _Page extends StatelessWidget {
       child: AppNetworkImage(
         url: url,
         fit: BoxFit.fitWidth,
-      ),
-    );
-  }
-}
-
-class _Error extends ConsumerWidget {
-  const _Error(this.chapterId);
-
-  final int chapterId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final strings = context.strings;
-
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.error),
-          Text(strings.generic_error),
-          ElevatedButton(
-            onPressed: () {
-              ref
-                  .read(chapterViewerControllerProvider(chapterId).notifier)
-                  .fetchPages();
-            },
-            child: Text('Retry'.hardcoded),
-          ),
-        ],
       ),
     );
   }
