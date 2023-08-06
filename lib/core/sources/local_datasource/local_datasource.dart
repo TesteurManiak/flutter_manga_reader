@@ -6,24 +6,26 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'local_datasource.g.dart';
 
 abstract class LocalDatasource {
+  /// Return a [Stream] of [Manga] in the library.
   Stream<List<Manga>> watchMangasInLibrary();
-  Stream<List<Manga>> watchAllMangas();
+
+  /// Return a [Stream] of [Chapter] for a given [mangaId] and ordered by index.
   Stream<List<Chapter>> watchChaptersForManga(int mangaId);
+
+  /// Return a [Stream] for the [Manga] with the given [id].
   Stream<Manga?> watchManga(int id);
 
-  /// Insert a manga into the database.
+  /// Upsert a manga into the database.
   Future<void> saveManga(Manga manga);
+
+  /// Upsert a [List] of [Manga]s into the database.
+  Future<void> saveMangas(List<Manga> mangas);
 
   /// Insert a [SourceManga] into the database and return its id.
   Future<int> saveSourceManga(SourceManga sourceManga);
 
-  /// Insert a list of mangas into the database.
-  Future<void> saveMangas(List<Manga> mangas);
-
-  /// Get a manga from the database.
+  /// Read a manga from the database.
   Future<Manga?> getManga(int mangaId);
-
-  Future<void> updateManga(Manga manga);
 
   Future<int?> getMangaId({
     required String title,
@@ -37,8 +39,6 @@ abstract class LocalDatasource {
     List<SourceChapter> sourceChapters,
     int mangaId,
   );
-
-  Future<List<Chapter>> getChapters(int mangaId);
 
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChapterRead({required int chapterId, required bool read});
@@ -60,11 +60,6 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
 @riverpod
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
-}
-
-@riverpod
-Stream<List<Manga>> watchAllMangas(WatchAllMangasRef ref) {
-  return ref.watch(localDatasourceProvider).watchAllMangas();
 }
 
 @Riverpod(keepAlive: true)

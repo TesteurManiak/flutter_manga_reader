@@ -19,13 +19,6 @@ class DriftDatasource implements LocalDatasource {
   }
 
   @override
-  Stream<List<Manga>> watchAllMangas() {
-    return _database.select(_database.dbMangas).watch().map(
-          (mangas) => mangas.map((e) => e.toModel()).toList(),
-        );
-  }
-
-  @override
   Future<void> saveManga(Manga manga) {
     return _database
         .into(_database.dbMangas)
@@ -35,7 +28,7 @@ class DriftDatasource implements LocalDatasource {
   @override
   Future<void> saveMangas(List<Manga> mangas) {
     return _database.batch((batch) {
-      batch.insertAllOnConflictUpdate(
+      batch.insertAllOnConflictUpdate<$DbMangasTable, DbManga>(
         _database.dbMangas,
         mangas.map((e) => e.toDbModel()),
       );
@@ -49,11 +42,6 @@ class DriftDatasource implements LocalDatasource {
         .getSingleOrNull();
 
     return manga?.toModel();
-  }
-
-  @override
-  Future<void> updateManga(Manga manga) {
-    return _database.update(_database.dbMangas).replace(manga.toDbModel());
   }
 
   @override
@@ -91,20 +79,22 @@ class DriftDatasource implements LocalDatasource {
     List<SourceChapter> sourceChapters,
     int mangaId,
   ) async {
-    final companions = sourceChapters.map((e) => e.toCompanion(mangaId));
+    final chapters = sourceChapters.map((e) => e.toCompanion(mangaId)).toList();
     return _database.batch((batch) {
-      batch
-        ..deleteWhere(_database.dbChapters, (t) => t.mangaId.equals(mangaId))
-        ..insertAll(_database.dbChapters, companions);
+      batch.insertAll<$DbChaptersTable, DbChapter>(
+        _database.dbChapters,
+        chapters,
+        onConflict: DoUpdate(
+          (old) => DbChaptersCompanion.custom(
+            index: old.index,
+            read: old.read,
+            bookmark: old.bookmark,
+            lastPageRead: old.lastPageRead,
+          ),
+          target: _database.dbChapters.uniqueKeys.first.toList(),
+        ),
+      );
     });
-  }
-
-  @override
-  Future<List<Chapter>> getChapters(int mangaId) {
-    return (_database.select(_database.dbChapters)
-          ..where((t) => t.mangaId.equals(mangaId)))
-        .get()
-        .then((chapters) => chapters.map((e) => e.toModel()).toList());
   }
 
   @override
@@ -118,7 +108,8 @@ class DriftDatasource implements LocalDatasource {
   @override
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
     return (_database.select(_database.dbChapters)
-          ..where((t) => t.mangaId.equals(mangaId)))
+          ..where((t) => t.mangaId.equals(mangaId))
+          ..orderBy([(t) => OrderingTerm(expression: t.index)]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -203,6 +194,7 @@ extension on SourceChapter {
       mangaId: mangaId,
       url: url,
       name: name,
+      index: index,
       dateUpload: Value(dateUpload),
       chapterNumber: Value(chapterNumber),
       scanlator: scanlator != null

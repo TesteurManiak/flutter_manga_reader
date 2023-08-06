@@ -11,6 +11,7 @@ _$_Chapter _$$_ChapterFromJson(Map<String, dynamic> json) => _$_Chapter(
       mangaId: json['mangaId'] as int,
       url: json['url'] as String,
       name: json['name'] as String,
+      index: json['index'] as int,
       dateUpload: json['dateUpload'] == null
           ? null
           : DateTime.parse(json['dateUpload'] as String),
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$_ChapterToJson(_$_Chapter instance) =>
       'mangaId': instance.mangaId,
       'url': instance.url,
       'name': instance.name,
+      'index': instance.index,
       'dateUpload': instance.dateUpload?.toIso8601String(),
       'chapterNumber': instance.chapterNumber,
       'scanlator': instance.scanlator,

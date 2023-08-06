@@ -637,6 +637,11 @@ class $DbChaptersTable extends DbChapters
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
       'name', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _indexMeta = const VerificationMeta('index');
+  @override
+  late final GeneratedColumn<int> index = GeneratedColumn<int>(
+      'index', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _dateUploadMeta =
       const VerificationMeta('dateUpload');
   @override
@@ -708,6 +713,7 @@ class $DbChaptersTable extends DbChapters
         mangaId,
         url,
         name,
+        index,
         dateUpload,
         chapterNumber,
         scanlator,
@@ -746,6 +752,12 @@ class $DbChaptersTable extends DbChapters
           _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
+    }
+    if (data.containsKey('index')) {
+      context.handle(
+          _indexMeta, index.isAcceptableOrUnknown(data['index']!, _indexMeta));
+    } else if (isInserting) {
+      context.missing(_indexMeta);
     }
     if (data.containsKey('date_upload')) {
       context.handle(
@@ -793,6 +805,10 @@ class $DbChaptersTable extends DbChapters
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {mangaId, url, name},
+      ];
+  @override
   DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbChapter(
@@ -804,6 +820,8 @@ class $DbChaptersTable extends DbChapters
           .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      index: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}index'])!,
       dateUpload: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}date_upload']),
       chapterNumber: attachedDatabase.typeMapping
@@ -834,6 +852,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int mangaId;
   final String url;
   final String name;
+  final int index;
   final DateTime? dateUpload;
   final double chapterNumber;
   final String? scanlator;
@@ -847,6 +866,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       required this.mangaId,
       required this.url,
       required this.name,
+      required this.index,
       this.dateUpload,
       required this.chapterNumber,
       this.scanlator,
@@ -862,6 +882,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     map['manga_id'] = Variable<int>(mangaId);
     map['url'] = Variable<String>(url);
     map['name'] = Variable<String>(name);
+    map['index'] = Variable<int>(index);
     if (!nullToAbsent || dateUpload != null) {
       map['date_upload'] = Variable<DateTime>(dateUpload);
     }
@@ -887,6 +908,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
+      index: Value(index),
       dateUpload: dateUpload == null && nullToAbsent
           ? const Value.absent()
           : Value(dateUpload),
@@ -914,6 +936,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: serializer.fromJson<int>(json['mangaId']),
       url: serializer.fromJson<String>(json['url']),
       name: serializer.fromJson<String>(json['name']),
+      index: serializer.fromJson<int>(json['index']),
       dateUpload: serializer.fromJson<DateTime?>(json['dateUpload']),
       chapterNumber: serializer.fromJson<double>(json['chapterNumber']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
@@ -932,6 +955,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       'mangaId': serializer.toJson<int>(mangaId),
       'url': serializer.toJson<String>(url),
       'name': serializer.toJson<String>(name),
+      'index': serializer.toJson<int>(index),
       'dateUpload': serializer.toJson<DateTime?>(dateUpload),
       'chapterNumber': serializer.toJson<double>(chapterNumber),
       'scanlator': serializer.toJson<String?>(scanlator),
@@ -948,6 +972,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           int? mangaId,
           String? url,
           String? name,
+          int? index,
           Value<DateTime?> dateUpload = const Value.absent(),
           double? chapterNumber,
           Value<String?> scanlator = const Value.absent(),
@@ -961,6 +986,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
         mangaId: mangaId ?? this.mangaId,
         url: url ?? this.url,
         name: name ?? this.name,
+        index: index ?? this.index,
         dateUpload: dateUpload.present ? dateUpload.value : this.dateUpload,
         chapterNumber: chapterNumber ?? this.chapterNumber,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
@@ -978,6 +1004,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           ..write('mangaId: $mangaId, ')
           ..write('url: $url, ')
           ..write('name: $name, ')
+          ..write('index: $index, ')
           ..write('dateUpload: $dateUpload, ')
           ..write('chapterNumber: $chapterNumber, ')
           ..write('scanlator: $scanlator, ')
@@ -996,6 +1023,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId,
       url,
       name,
+      index,
       dateUpload,
       chapterNumber,
       scanlator,
@@ -1012,6 +1040,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           other.mangaId == this.mangaId &&
           other.url == this.url &&
           other.name == this.name &&
+          other.index == this.index &&
           other.dateUpload == this.dateUpload &&
           other.chapterNumber == this.chapterNumber &&
           other.scanlator == this.scanlator &&
@@ -1027,6 +1056,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<int> mangaId;
   final Value<String> url;
   final Value<String> name;
+  final Value<int> index;
   final Value<DateTime?> dateUpload;
   final Value<double> chapterNumber;
   final Value<String?> scanlator;
@@ -1040,6 +1070,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.mangaId = const Value.absent(),
     this.url = const Value.absent(),
     this.name = const Value.absent(),
+    this.index = const Value.absent(),
     this.dateUpload = const Value.absent(),
     this.chapterNumber = const Value.absent(),
     this.scanlator = const Value.absent(),
@@ -1054,6 +1085,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     required int mangaId,
     required String url,
     required String name,
+    required int index,
     this.dateUpload = const Value.absent(),
     this.chapterNumber = const Value.absent(),
     this.scanlator = const Value.absent(),
@@ -1064,12 +1096,14 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.lastModified = const Value.absent(),
   })  : mangaId = Value(mangaId),
         url = Value(url),
-        name = Value(name);
+        name = Value(name),
+        index = Value(index);
   static Insertable<DbChapter> custom({
     Expression<int>? id,
     Expression<int>? mangaId,
     Expression<String>? url,
     Expression<String>? name,
+    Expression<int>? index,
     Expression<DateTime>? dateUpload,
     Expression<double>? chapterNumber,
     Expression<String>? scanlator,
@@ -1084,6 +1118,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       if (mangaId != null) 'manga_id': mangaId,
       if (url != null) 'url': url,
       if (name != null) 'name': name,
+      if (index != null) 'index': index,
       if (dateUpload != null) 'date_upload': dateUpload,
       if (chapterNumber != null) 'chapter_number': chapterNumber,
       if (scanlator != null) 'scanlator': scanlator,
@@ -1100,6 +1135,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       Value<int>? mangaId,
       Value<String>? url,
       Value<String>? name,
+      Value<int>? index,
       Value<DateTime?>? dateUpload,
       Value<double>? chapterNumber,
       Value<String?>? scanlator,
@@ -1113,6 +1149,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       mangaId: mangaId ?? this.mangaId,
       url: url ?? this.url,
       name: name ?? this.name,
+      index: index ?? this.index,
       dateUpload: dateUpload ?? this.dateUpload,
       chapterNumber: chapterNumber ?? this.chapterNumber,
       scanlator: scanlator ?? this.scanlator,
@@ -1138,6 +1175,9 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     }
     if (name.present) {
       map['name'] = Variable<String>(name.value);
+    }
+    if (index.present) {
+      map['index'] = Variable<int>(index.value);
     }
     if (dateUpload.present) {
       map['date_upload'] = Variable<DateTime>(dateUpload.value);
@@ -1173,6 +1213,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
           ..write('mangaId: $mangaId, ')
           ..write('url: $url, ')
           ..write('name: $name, ')
+          ..write('index: $index, ')
           ..write('dateUpload: $dateUpload, ')
           ..write('chapterNumber: $chapterNumber, ')
           ..write('scanlator: $scanlator, ')
