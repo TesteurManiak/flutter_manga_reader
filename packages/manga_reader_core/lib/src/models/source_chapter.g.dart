@@ -10,6 +10,7 @@ _$_SourceChapter _$$_SourceChapterFromJson(Map<String, dynamic> json) =>
     _$_SourceChapter(
       url: json['url'] as String,
       name: json['name'] as String,
+      index: json['index'] as int,
       dateUpload: json['dateUpload'] == null
           ? null
           : DateTime.parse(json['dateUpload'] as String),

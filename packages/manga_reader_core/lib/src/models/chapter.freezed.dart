@@ -24,6 +24,7 @@ mixin _$Chapter {
   int get mangaId => throw _privateConstructorUsedError; // Source data
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
   DateTime? get dateUpload => throw _privateConstructorUsedError;
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError; // Model data
@@ -48,6 +49,7 @@ abstract class $ChapterCopyWith<$Res> {
       int mangaId,
       String url,
       String name,
+      int index,
       DateTime? dateUpload,
       double chapterNumber,
       String? scanlator,
@@ -75,6 +77,7 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
     Object? mangaId = null,
     Object? url = null,
     Object? name = null,
+    Object? index = null,
     Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
@@ -101,6 +104,10 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
@@ -149,6 +156,7 @@ abstract class _$$_ChapterCopyWith<$Res> implements $ChapterCopyWith<$Res> {
       int mangaId,
       String url,
       String name,
+      int index,
       DateTime? dateUpload,
       double chapterNumber,
       String? scanlator,
@@ -173,6 +181,7 @@ class __$$_ChapterCopyWithImpl<$Res>
     Object? mangaId = null,
     Object? url = null,
     Object? name = null,
+    Object? index = null,
     Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
@@ -199,6 +208,10 @@ class __$$_ChapterCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
@@ -243,6 +256,7 @@ class _$_Chapter extends _Chapter {
       required this.mangaId,
       required this.url,
       required this.name,
+      required this.index,
       this.dateUpload,
       this.chapterNumber = 0.0,
       this.scanlator,
@@ -265,6 +279,8 @@ class _$_Chapter extends _Chapter {
   final String url;
   @override
   final String name;
+  @override
+  final int index;
   @override
   final DateTime? dateUpload;
   @override
@@ -289,7 +305,7 @@ class _$_Chapter extends _Chapter {
 
   @override
   String toString() {
-    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator, read: $read, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, lastModified: $lastModified)';
+    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, index: $index, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator, read: $read, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, lastModified: $lastModified)';
   }
 
   @override
@@ -301,6 +317,7 @@ class _$_Chapter extends _Chapter {
             (identical(other.mangaId, mangaId) || other.mangaId == mangaId) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.dateUpload, dateUpload) ||
                 other.dateUpload == dateUpload) &&
             (identical(other.chapterNumber, chapterNumber) ||
@@ -326,6 +343,7 @@ class _$_Chapter extends _Chapter {
       mangaId,
       url,
       name,
+      index,
       dateUpload,
       chapterNumber,
       scanlator,
@@ -355,6 +373,7 @@ abstract class _Chapter extends Chapter {
       required final int mangaId,
       required final String url,
       required final String name,
+      required final int index,
       final DateTime? dateUpload,
       final double chapterNumber,
       final String? scanlator,
@@ -375,6 +394,8 @@ abstract class _Chapter extends Chapter {
   String get url;
   @override
   String get name;
+  @override
+  int get index;
   @override
   DateTime? get dateUpload;
   @override

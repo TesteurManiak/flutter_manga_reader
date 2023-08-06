@@ -198,7 +198,7 @@ class MangadexHelper {
     };
   }
 
-  SourceChapter createChapter(ChapterData chapterData) {
+  SourceChapter createChapter(int index, ChapterData chapterData) {
     final attr = chapterData.attributes;
     final groups = chapterData.relationships
         .whereType<ScanlationGroupRelationship>()
@@ -236,6 +236,7 @@ class MangadexHelper {
     }
 
     return SourceChapter(
+      index: index,
       url: '/chapter/${chapterData.id}',
       name: chapterName.join(' ').removeEntitiesAndMarkdown(),
       dateUpload: _parseDate(attr.publishAt),

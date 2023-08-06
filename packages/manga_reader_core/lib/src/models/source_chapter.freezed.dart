@@ -22,6 +22,7 @@ SourceChapter _$SourceChapterFromJson(Map<String, dynamic> json) {
 mixin _$SourceChapter {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get index => throw _privateConstructorUsedError;
   DateTime? get dateUpload => throw _privateConstructorUsedError;
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError;
@@ -40,6 +41,7 @@ abstract class $SourceChapterCopyWith<$Res> {
   $Res call(
       {String url,
       String name,
+      int index,
       DateTime? dateUpload,
       double chapterNumber,
       String? scanlator});
@@ -60,6 +62,7 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? index = null,
     Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
@@ -73,6 +76,10 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
@@ -100,6 +107,7 @@ abstract class _$$_SourceChapterCopyWith<$Res>
   $Res call(
       {String url,
       String name,
+      int index,
       DateTime? dateUpload,
       double chapterNumber,
       String? scanlator});
@@ -118,6 +126,7 @@ class __$$_SourceChapterCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? name = null,
+    Object? index = null,
     Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
@@ -131,6 +140,10 @@ class __$$_SourceChapterCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      index: null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
       dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
@@ -153,6 +166,7 @@ class _$_SourceChapter implements _SourceChapter {
   const _$_SourceChapter(
       {required this.url,
       required this.name,
+      required this.index,
       this.dateUpload,
       this.chapterNumber = -1.0,
       this.scanlator});
@@ -165,6 +179,8 @@ class _$_SourceChapter implements _SourceChapter {
   @override
   final String name;
   @override
+  final int index;
+  @override
   final DateTime? dateUpload;
   @override
   @JsonKey()
@@ -174,7 +190,7 @@ class _$_SourceChapter implements _SourceChapter {
 
   @override
   String toString() {
-    return 'SourceChapter(url: $url, name: $name, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator)';
+    return 'SourceChapter(url: $url, name: $name, index: $index, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator)';
   }
 
   @override
@@ -184,6 +200,7 @@ class _$_SourceChapter implements _SourceChapter {
             other is _$_SourceChapter &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.index, index) || other.index == index) &&
             (identical(other.dateUpload, dateUpload) ||
                 other.dateUpload == dateUpload) &&
             (identical(other.chapterNumber, chapterNumber) ||
@@ -194,8 +211,8 @@ class _$_SourceChapter implements _SourceChapter {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, url, name, dateUpload, chapterNumber, scanlator);
+  int get hashCode => Object.hash(
+      runtimeType, url, name, index, dateUpload, chapterNumber, scanlator);
 
   @JsonKey(ignore: true)
   @override
@@ -208,6 +225,7 @@ abstract class _SourceChapter implements SourceChapter {
   const factory _SourceChapter(
       {required final String url,
       required final String name,
+      required final int index,
       final DateTime? dateUpload,
       final double chapterNumber,
       final String? scanlator}) = _$_SourceChapter;
@@ -219,6 +237,8 @@ abstract class _SourceChapter implements SourceChapter {
   String get url;
   @override
   String get name;
+  @override
+  int get index;
   @override
   DateTime? get dateUpload;
   @override

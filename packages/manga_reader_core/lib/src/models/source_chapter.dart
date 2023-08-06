@@ -12,6 +12,7 @@ class SourceChapter with _$SourceChapter {
   const factory SourceChapter({
     required String url,
     required String name,
+    required int index,
     DateTime? dateUpload,
     @Default(-1.0) double chapterNumber,
     String? scanlator,
