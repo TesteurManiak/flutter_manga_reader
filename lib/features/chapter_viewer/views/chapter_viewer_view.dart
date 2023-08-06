@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
+import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -50,18 +51,46 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
   Widget build(BuildContext context) {
     final state = ref.watch(chapterViewerControllerProvider(widget.chapterId));
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: state.when(
-        loading: LoadingContent.new,
-        loaded: (pages) {
-          return _PageViewer(
-            pages: pages,
-            initialPage: widget.initialPage,
-            chapterId: widget.chapterId,
-          );
-        },
-        error: (_) => ErrorContent(onRetry: controller.fetchPages),
+    return DefaultSlidableController(
+      initiallyShown: false,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            state.when(
+              loading: LoadingContent.new,
+              loaded: (pages) {
+                return _PageViewer(
+                  pages: pages,
+                  initialPage: widget.initialPage,
+                  chapterId: widget.chapterId,
+                );
+              },
+              error: (_) => ErrorContent(onRetry: controller.fetchPages),
+            ),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: _DismissableBottomBar(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DismissableBottomBar extends StatelessWidget {
+  const _DismissableBottomBar();
+
+  @override
+  Widget build(BuildContext context) {
+    final padding = MediaQuery.paddingOf(context);
+
+    return Slidable(
+      height: kBottomNavigationBarHeight + padding.bottom,
+      child: const BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
       ),
     );
   }
@@ -109,30 +138,35 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
 
         return true;
       },
-      child: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: pageController,
-              itemCount: widget.pages.length,
-              itemBuilder: (context, index) {
-                final page = widget.pages[index];
+      child: GestureDetector(
+        onTap: () {
+          DefaultSlidableController.maybeOf(context)?.toggle();
+        },
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: pageController,
+                itemCount: widget.pages.length,
+                itemBuilder: (context, index) {
+                  final page = widget.pages[index];
 
-                return AppNetworkImage(
-                  url: page.imageUrl,
-                  fit: BoxFit.contain,
-                );
-              },
-              onPageChanged: (value) => pageNotifier.value = value,
+                  return AppNetworkImage(
+                    url: page.imageUrl,
+                    fit: BoxFit.contain,
+                  );
+                },
+                onPageChanged: (value) => pageNotifier.value = value,
+              ),
             ),
-          ),
-          ValueListenableBuilder<int>(
-            valueListenable: pageNotifier,
-            builder: (_, page, __) {
-              return Text('${page + 1}/${widget.pages.length}');
-            },
-          ),
-        ],
+            ValueListenableBuilder<int>(
+              valueListenable: pageNotifier,
+              builder: (_, page, __) {
+                return Text('${page + 1}/${widget.pages.length}');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

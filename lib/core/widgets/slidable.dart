@@ -2,23 +2,30 @@ import 'package:flutter/material.dart';
 
 const _kShownByDefault = true;
 
+typedef SlidableWidgetBuilder = Widget Function(
+  BuildContext context,
+  // ignore: avoid_positional_boolean_parameters
+  bool isShown,
+);
+
 class Slidable extends StatefulWidget {
-  const Slidable({
+  Slidable({
     super.key,
     required this.height,
-    required this.child,
+    required Widget child,
+    this.controller,
+    this.initiallyShown,
+    this.duration,
+  }) : builder = ((_, __) => child);
+
+  const Slidable.builder({
+    super.key,
+    required this.height,
+    required this.builder,
     this.controller,
     this.initiallyShown,
     this.duration,
   });
-
-  Slidable.fromPreferredSize({
-    super.key,
-    required PreferredSizeWidget this.child,
-    this.controller,
-    this.initiallyShown,
-    this.duration,
-  }) : height = child.preferredSize.height;
 
   final SlidableController? controller;
 
@@ -31,7 +38,7 @@ class Slidable extends StatefulWidget {
   final bool? initiallyShown;
 
   final double height;
-  final Widget child;
+  final SlidableWidgetBuilder builder;
 
   @override
   State<Slidable> createState() => _SlidableState();
@@ -81,7 +88,7 @@ class _SlidableState extends State<Slidable> {
     return AnimatedContainer(
       duration: widget.duration ?? const Duration(milliseconds: 300),
       height: isShown ? widget.height : 0,
-      child: Wrap(children: [widget.child]),
+      child: Wrap(children: [widget.builder(context, isShown)]),
     );
   }
 
@@ -117,6 +124,11 @@ class SlidableController extends ChangeNotifier {
 
   void hide() {
     _isShown = false;
+    notifyListeners();
+  }
+
+  void toggle() {
+    _isShown = !_isShown;
     notifyListeners();
   }
 }
