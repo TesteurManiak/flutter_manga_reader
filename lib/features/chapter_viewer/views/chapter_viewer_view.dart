@@ -73,9 +73,7 @@ class _ContentState extends ConsumerState<_Content> {
       chapterViewerControllerProvider(widget.chapterId).notifier,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(chapterViewerControllerProvider(widget.chapterId).notifier)
-          .fetchPages();
+      controller.fetchPages();
     });
   }
 
