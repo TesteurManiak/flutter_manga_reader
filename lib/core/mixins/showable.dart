@@ -47,3 +47,17 @@ mixin ShowableSnackBarMixin on Widget {
     );
   }
 }
+
+@optionalTypeArgs
+mixin ShowableBottomSheetMixin<T> on Widget {
+  Future<T?> show(
+    BuildContext context, {
+    bool isScrollControlled = false,
+  }) {
+    return showModalBottomSheet(
+      context: context,
+      isScrollControlled: isScrollControlled,
+      builder: (_) => this,
+    );
+  }
+}

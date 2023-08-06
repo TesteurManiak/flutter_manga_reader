@@ -6,6 +6,7 @@ import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_settings_bottom_sheet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -121,6 +122,16 @@ class _DismissableAppBar extends ConsumerWidget with AppBarSizeMixin {
         title: Text.rich(
           TextSpan(text: chapterTitle),
         ),
+        actions: const [
+          IconButton(
+            icon: Icon(Icons.bookmark_outline),
+            onPressed: null,
+          ),
+          IconButton(
+            icon: Icon(Icons.public),
+            onPressed: null,
+          )
+        ],
       ),
     );
   }
@@ -136,11 +147,19 @@ class _DismissableBottomBar extends StatelessWidget {
 
     return Slidable(
       height: height,
-      child: const BottomAppBar(
+      child: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.next_plan),
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () {
+                const ChapterSettingsBottomSheet().show(
+                  context,
+                  isScrollControlled: true,
+                );
+              },
+            ),
           ],
         ),
       ),
