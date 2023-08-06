@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const _kShownByDefault = true;
+const _kDefaultDuration = Duration(milliseconds: 300);
 
 typedef SlidableWidgetBuilder = Widget Function(
   BuildContext context,
@@ -86,7 +87,7 @@ class _SlidableState extends State<Slidable> {
     final isShown = this.isShown ?? widget.initiallyShown ?? _kShownByDefault;
 
     return AnimatedContainer(
-      duration: widget.duration ?? const Duration(milliseconds: 300),
+      duration: widget.duration ?? _kDefaultDuration,
       height: isShown ? widget.height : 0,
       child: Wrap(children: [widget.builder(context, isShown)]),
     );
@@ -192,5 +193,107 @@ class _DefaultSlidableControllerScope extends InheritedWidget {
   @override
   bool updateShouldNotify(_DefaultSlidableControllerScope oldWidget) {
     return controller != oldWidget.controller;
+  }
+}
+
+class SlidablePreferredSize extends StatefulWidget
+    implements PreferredSizeWidget {
+  const SlidablePreferredSize({
+    super.key,
+    this.controller,
+    this.initiallyShown,
+    this.duration,
+    required this.child,
+  });
+
+  final SlidableController? controller;
+  final bool? initiallyShown;
+  final Duration? duration;
+  final PreferredSizeWidget child;
+
+  @override
+  State<SlidablePreferredSize> createState() => _SlidablePreferredSizeState();
+
+  @override
+  Size get preferredSize => child.preferredSize;
+}
+
+class _SlidablePreferredSizeState extends State<SlidablePreferredSize>
+    with SingleTickerProviderStateMixin {
+  late final internalController = SlidableController(
+    initiallyShown: widget.initiallyShown ?? _kShownByDefault,
+  );
+
+  late final animationController = AnimationController(
+    vsync: this,
+    duration: widget.duration ?? _kDefaultDuration,
+    value: widget.initiallyShown ?? _kShownByDefault ? 1 : 0,
+  );
+
+  SlidableController? controller;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    updateController();
+    onShownChanged();
+  }
+
+  @override
+  void didUpdateWidget(covariant SlidablePreferredSize oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.controller != oldWidget.controller) {
+      updateController();
+      onShownChanged();
+    }
+  }
+
+  @override
+  void dispose() {
+    controller?.removeListener(onShownChanged);
+    controller = null;
+
+    internalController.dispose();
+    animationController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: Offset.zero,
+        end: const Offset(0, -1),
+      ).animate(
+        CurvedAnimation(
+          parent: animationController,
+          curve: Curves.fastOutSlowIn,
+        ),
+      ),
+      child: widget.child,
+    );
+  }
+
+  void onShownChanged() {
+    if (controller?.isShown ?? false) {
+      animationController.reverse();
+    } else {
+      animationController.forward();
+    }
+  }
+
+  void updateController() {
+    final newController = widget.controller ??
+        DefaultSlidableController.maybeOf(context) ??
+        internalController;
+
+    if (newController == controller) return;
+
+    controller?.removeListener(onShownChanged);
+    controller = newController;
+    controller?.addListener(onShownChanged);
   }
 }

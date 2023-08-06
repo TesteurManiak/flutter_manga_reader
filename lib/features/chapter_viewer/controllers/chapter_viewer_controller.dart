@@ -29,7 +29,12 @@ class ChapterViewerController extends _$ChapterViewerController {
         .read(fetchChapterPagesProvider(localChapter.toSourceModel()).future);
 
     state = result.when(
-      success: (pages) => ChapterViewerState.loaded(pages: pages),
+      success: (pages) {
+        return ChapterViewerState.loaded(
+          pages: pages,
+          chapter: localChapter,
+        );
+      },
       failure: (e) => ChapterViewerState.error(error: e.message),
     );
   }
@@ -44,6 +49,7 @@ class ChapterViewerController extends _$ChapterViewerController {
 class ChapterViewerState with _$ChapterViewerState {
   const factory ChapterViewerState.loading() = _Loading;
   const factory ChapterViewerState.loaded({
+    required Chapter chapter,
     required List<ChapterPage> pages,
   }) = _Loaded;
   const factory ChapterViewerState.error({String? error}) = _Error;

@@ -19,21 +19,21 @@ mixin _$ChapterViewerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<ChapterPage> pages) loaded,
+    required TResult Function(Chapter chapter, List<ChapterPage> pages) loaded,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<ChapterPage> pages)? loaded,
+    TResult? Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult? Function(String? error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<ChapterPage> pages)? loaded,
+    TResult Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -118,7 +118,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<ChapterPage> pages) loaded,
+    required TResult Function(Chapter chapter, List<ChapterPage> pages) loaded,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -128,7 +128,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<ChapterPage> pages)? loaded,
+    TResult? Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult? Function(String? error)? error,
   }) {
     return loading?.call();
@@ -138,7 +138,7 @@ class _$_Loading extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<ChapterPage> pages)? loaded,
+    TResult Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -193,7 +193,9 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ChapterPage> pages});
+  $Res call({Chapter chapter, List<ChapterPage> pages});
+
+  $ChapterCopyWith<$Res> get chapter;
 }
 
 /// @nodoc
@@ -206,24 +208,40 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? chapter = null,
     Object? pages = null,
   }) {
     return _then(_$_Loaded(
+      chapter: null == chapter
+          ? _value.chapter
+          : chapter // ignore: cast_nullable_to_non_nullable
+              as Chapter,
       pages: null == pages
           ? _value._pages
           : pages // ignore: cast_nullable_to_non_nullable
               as List<ChapterPage>,
     ));
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ChapterCopyWith<$Res> get chapter {
+    return $ChapterCopyWith<$Res>(_value.chapter, (value) {
+      return _then(_value.copyWith(chapter: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Loaded extends _Loaded {
-  const _$_Loaded({required final List<ChapterPage> pages})
+  const _$_Loaded(
+      {required this.chapter, required final List<ChapterPage> pages})
       : _pages = pages,
         super._();
 
+  @override
+  final Chapter chapter;
   final List<ChapterPage> _pages;
   @override
   List<ChapterPage> get pages {
@@ -234,7 +252,7 @@ class _$_Loaded extends _Loaded {
 
   @override
   String toString() {
-    return 'ChapterViewerState.loaded(pages: $pages)';
+    return 'ChapterViewerState.loaded(chapter: $chapter, pages: $pages)';
   }
 
   @override
@@ -242,12 +260,13 @@ class _$_Loaded extends _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
+            (identical(other.chapter, chapter) || other.chapter == chapter) &&
             const DeepCollectionEquality().equals(other._pages, _pages));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_pages));
+  int get hashCode => Object.hash(
+      runtimeType, chapter, const DeepCollectionEquality().hash(_pages));
 
   @JsonKey(ignore: true)
   @override
@@ -259,32 +278,32 @@ class _$_Loaded extends _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<ChapterPage> pages) loaded,
+    required TResult Function(Chapter chapter, List<ChapterPage> pages) loaded,
     required TResult Function(String? error) error,
   }) {
-    return loaded(pages);
+    return loaded(chapter, pages);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<ChapterPage> pages)? loaded,
+    TResult? Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult? Function(String? error)? error,
   }) {
-    return loaded?.call(pages);
+    return loaded?.call(chapter, pages);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<ChapterPage> pages)? loaded,
+    TResult Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(pages);
+      return loaded(chapter, pages);
     }
     return orElse();
   }
@@ -325,9 +344,12 @@ class _$_Loaded extends _Loaded {
 }
 
 abstract class _Loaded extends ChapterViewerState {
-  const factory _Loaded({required final List<ChapterPage> pages}) = _$_Loaded;
+  const factory _Loaded(
+      {required final Chapter chapter,
+      required final List<ChapterPage> pages}) = _$_Loaded;
   const _Loaded._() : super._();
 
+  Chapter get chapter;
   List<ChapterPage> get pages;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
@@ -397,7 +419,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<ChapterPage> pages) loaded,
+    required TResult Function(Chapter chapter, List<ChapterPage> pages) loaded,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -407,7 +429,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<ChapterPage> pages)? loaded,
+    TResult? Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult? Function(String? error)? error,
   }) {
     return error?.call(this.error);
@@ -417,7 +439,7 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<ChapterPage> pages)? loaded,
+    TResult Function(Chapter chapter, List<ChapterPage> pages)? loaded,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
