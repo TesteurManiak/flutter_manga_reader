@@ -23,19 +23,14 @@ class ChapterTile extends ConsumerWidget {
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final baseColor = DefaultTextStyle.of(context).style.color;
-    final readStyle = TextStyle(color: baseColor?.withOpacity(.3));
 
     return ListTile(
       selected: isSelected,
-      title: Text(
-        chapter.name,
-        style: read ? readStyle : null,
-      ),
-      subtitle: Text(
-        subtitle.join(' • '),
-        style: read ? readStyle : null,
-      ),
+      textColor: read ? baseColor?.withOpacity(isDark ? .3 : .4) : null,
+      title: Text(chapter.name),
+      subtitle: Text(subtitle.join(' • ')),
       trailing: const IconButton(
         onPressed: null, // TODO(Guillaume): download
         icon: Icon(Icons.download_for_offline_outlined),
