@@ -118,7 +118,7 @@ class DetailsController extends _$DetailsController {
       read: true,
     );
 
-    state = state.copyWith(selectedChapters: []);
+    state = state.copyWith(selectedChapters: [], selectionMode: false);
   }
 
   void switchMode() {

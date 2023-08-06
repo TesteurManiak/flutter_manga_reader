@@ -451,10 +451,7 @@ class _DismissableBottomBar extends ConsumerWidget {
               onPressed: () {
                 ref
                     .read(detailsControllerProvider(mangaId).notifier)
-                    .markSelectedChaptersAsRead()
-                    .whenComplete(() {
-                  DefaultSlidableController.maybeOf(context)?.hide();
-                });
+                    .markSelectedChaptersAsRead();
               },
               icon: const Icon(Icons.done_all),
             )
