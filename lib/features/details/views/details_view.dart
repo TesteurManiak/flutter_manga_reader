@@ -13,6 +13,7 @@ import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
+import 'package:flutter_manga_reader/features/details/widgets/details_bottom_bar.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
@@ -57,7 +58,10 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
       initiallyShown: false,
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: _DismissableBottomBar(widget.mangaId),
+        bottomNavigationBar: Slidable(
+          direction: SlideDirection.down,
+          child: DetailsBottomBar(mangaId: widget.mangaId),
+        ),
         body: state.when(
           data: (manga) {
             if (manga == null) {
@@ -428,57 +432,6 @@ class _SliverChapterList extends ConsumerWidget {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _DismissableBottomBar extends ConsumerWidget {
-  const _DismissableBottomBar(this.mangaId);
-
-  final int mangaId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final hasRead = ref.watch(
-      detailsControllerProvider(mangaId).select(
-        (s) => s.selectedChapters.any((e) => e.read),
-      ),
-    );
-    final hasUnread = ref.watch(
-      detailsControllerProvider(mangaId).select(
-        (s) => s.selectedChapters.any((e) => !e.read),
-      ),
-    );
-
-    return Slidable(
-      direction: SlideDirection.down,
-      child: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (hasUnread)
-              IconButton(
-                tooltip: 'Mark as read'.hardcoded,
-                onPressed: () {
-                  ref
-                      .read(detailsControllerProvider(mangaId).notifier)
-                      .markSelectedChaptersAsRead();
-                },
-                icon: const Icon(Icons.done_all),
-              ),
-            if (hasRead)
-              IconButton(
-                tooltip: 'Mark as unread'.hardcoded,
-                onPressed: () {
-                  ref
-                      .read(detailsControllerProvider(mangaId).notifier)
-                      .markSelectedChaptersAsUnread();
-                },
-                icon: const Icon(Icons.remove_done),
-              ),
-          ],
-        ),
       ),
     );
   }
