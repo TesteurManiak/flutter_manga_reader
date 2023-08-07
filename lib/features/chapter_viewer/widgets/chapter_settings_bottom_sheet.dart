@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 
 class ChapterSettingsBottomSheet extends StatelessWidget
     with ShowableBottomSheetMixin {
@@ -7,6 +8,7 @@ class ChapterSettingsBottomSheet extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.strings;
     final listTileTheme = ListTileTheme.of(context);
 
     return DraggableScrollableSheet(
@@ -22,11 +24,28 @@ class ChapterSettingsBottomSheet extends StatelessWidget
             Padding(
               padding: listTileTheme.contentPadding ??
                   const EdgeInsetsDirectional.only(start: 16, end: 24),
-              child: const Text('For this series'),
+              child: Text('For this series'.hardcoded),
             ),
-            const ListTile(
-              title: Text('Lecture mode'),
-              // trailing: DropdownMenu(dropdownMenuEntries: dropdownMenuEntries),
+            ListTile(
+              title: Text('Lecture mode'.hardcoded),
+              trailing: DropdownMenu<ReadingDirection>(
+                inputDecorationTheme: const InputDecorationTheme(
+                  border: InputBorder.none,
+                ),
+                initialSelection: ReadingDirection.leftToRight,
+                dropdownMenuEntries: [
+                  for (final v in ReadingDirection.values)
+                    DropdownMenuEntry(
+                      value: v,
+                      label: v.localized(strings),
+                    ),
+                ],
+                onSelected: (direction) {
+                  if (direction != null) {
+                    // TODO(Guillaume): change reading direction
+                  }
+                },
+              ),
             ),
           ],
         );
