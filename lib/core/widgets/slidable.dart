@@ -203,12 +203,14 @@ class SlidablePreferredSize extends StatefulWidget
     this.controller,
     this.initiallyShown,
     this.duration,
+    required this.direction,
     required this.child,
   });
 
   final SlidableController? controller;
   final bool? initiallyShown;
   final Duration? duration;
+  final SlideDirection direction;
   final PreferredSizeWidget child;
 
   @override
@@ -266,7 +268,7 @@ class _SlidablePreferredSizeState extends State<SlidablePreferredSize>
     return SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
-        end: const Offset(0, -1),
+        end: widget.direction.offset,
       ).animate(
         CurvedAnimation(
           parent: animationController,
@@ -296,4 +298,15 @@ class _SlidablePreferredSizeState extends State<SlidablePreferredSize>
     controller = newController;
     controller?.addListener(onShownChanged);
   }
+}
+
+enum SlideDirection {
+  right(Offset(-1, 0)),
+  left(Offset(1, 0)),
+  down(Offset(0, 1)),
+  up(Offset(0, -1));
+
+  const SlideDirection(this.offset);
+
+  final Offset offset;
 }

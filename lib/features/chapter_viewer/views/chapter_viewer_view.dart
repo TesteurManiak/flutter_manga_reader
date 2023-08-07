@@ -120,6 +120,7 @@ class _DismissableAppBar extends ConsumerWidget with AppBarSizeMixin {
       ),
     );
     return SlidablePreferredSize(
+      direction: SlideDirection.up,
       child: AppBar(
         title: Text.rich(
           TextSpan(text: chapterTitle),

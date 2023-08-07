@@ -1,0 +1,9 @@
+{
+    "dart.flutterCreatePlatforms": [
+        "android",
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+    ],
+}

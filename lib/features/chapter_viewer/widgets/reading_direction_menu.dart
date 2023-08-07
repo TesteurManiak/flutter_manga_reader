@@ -27,7 +27,7 @@ class ReadingDirectionPopupMenuButton extends ConsumerWidget {
             .read(readingDirectionControllerProvider.notifier)
             .setDirection(direction);
       },
-      child: const Icon(Icons.phone_android_sharp),
+      child: const Icon(Icons.phonelink_setup_rounded),
     );
   }
 }
