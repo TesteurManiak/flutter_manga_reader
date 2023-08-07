@@ -5,19 +5,17 @@ import 'package:flutter_manga_reader/gen/app_localizations.dart';
 enum ReadingDirection {
   leftToRight(Axis.horizontal, _leftToRight),
   rightToLeft(Axis.horizontal, _rightToLeft, reverse: true),
-  webtoon(Axis.vertical, _webtoon, fit: BoxFit.fitWidth, pageSnapping: false);
+  webtoon(Axis.vertical, _webtoon, pageSnapping: false);
 
   const ReadingDirection(
     this.direction,
     this.localized, {
-    this.fit = BoxFit.contain,
     this.pageSnapping = true,
     this.reverse = false,
   });
 
   final Axis direction;
   final bool reverse;
-  final BoxFit fit;
   final bool pageSnapping;
   final LocalizedStringFetcher localized;
 

@@ -230,7 +230,7 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
 
                   return AppNetworkImage(
                     url: page.imageUrl,
-                    fit: readingDirection.fit,
+                    fit: BoxFit.contain,
                   );
                 },
                 onPageChanged: (value) {
