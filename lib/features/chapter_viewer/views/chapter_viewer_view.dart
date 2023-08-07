@@ -187,7 +187,7 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
   late final pageController = PageController(
     initialPage: widget.initialPage ?? 0,
   );
-  late final pageNotifier = ValueNotifier<int>(pageController.initialPage);
+  late final pageNotifier = ValueNotifier<int>(widget.initialPage ?? 0);
 
   @override
   void dispose() {
@@ -204,7 +204,7 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
     return WillPopScope(
       onWillPop: () async {
         // If on last page of the chapter, mark it as read.
-        if (pageController.page == widget.pages.length - 1) {
+        if (pageNotifier.value == widget.pages.length - 1) {
           await ref
               .read(chapterViewerControllerProvider(widget.chapterId).notifier)
               .markChapterAsRead();
@@ -216,38 +216,44 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
         onTap: () {
           DefaultSlidableController.maybeOf(context)?.toggle();
         },
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: PageView.builder(
-                controller: pageController,
-                reverse: readingDirection.reverse,
-                scrollDirection: readingDirection.direction,
-                pageSnapping: readingDirection.pageSnapping,
-                itemCount: widget.pages.length,
-                itemBuilder: (context, index) {
-                  final page = widget.pages[index];
+            PageView.builder(
+              controller: pageController,
+              reverse: readingDirection.reverse,
+              scrollDirection: readingDirection.direction,
+              pageSnapping: !readingDirection.isContinuous,
+              clipBehavior:
+                  readingDirection.isContinuous ? Clip.none : Clip.hardEdge,
+              itemCount: widget.pages.length,
+              itemBuilder: (context, index) {
+                final page = widget.pages[index];
 
-                  return AppNetworkImage(
-                    url: page.imageUrl,
-                    fit: BoxFit.contain,
-                  );
-                },
-                onPageChanged: (value) {
-                  pageNotifier.value = value;
-                  DefaultSlidableController.maybeOf(context)?.hide();
+                return AppNetworkImage(
+                  url: page.imageUrl,
+                  fit: BoxFit.contain,
+                );
+              },
+              onPageChanged: onPageChanged,
+              allowImplicitScrolling: true,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: ValueListenableBuilder<int>(
+                valueListenable: pageNotifier,
+                builder: (_, page, __) {
+                  return Text('${page + 1}/${widget.pages.length}');
                 },
               ),
-            ),
-            ValueListenableBuilder<int>(
-              valueListenable: pageNotifier,
-              builder: (_, page, __) {
-                return Text('${page + 1}/${widget.pages.length}');
-              },
             ),
           ],
         ),
       ),
     );
+  }
+
+  void onPageChanged(int index) {
+    pageNotifier.value = index;
+    DefaultSlidableController.maybeOf(context)?.hide();
   }
 }
