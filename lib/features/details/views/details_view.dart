@@ -440,20 +440,43 @@ class _DismissableBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final hasRead = ref.watch(
+      detailsControllerProvider(mangaId).select(
+        (s) => s.selectedChapters.any((e) => e.read),
+      ),
+    );
+    final hasUnread = ref.watch(
+      detailsControllerProvider(mangaId).select(
+        (s) => s.selectedChapters.any((e) => !e.read),
+      ),
+    );
+
     return Slidable(
       direction: SlideDirection.down,
       child: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              onPressed: () {
-                ref
-                    .read(detailsControllerProvider(mangaId).notifier)
-                    .markSelectedChaptersAsRead();
-              },
-              icon: const Icon(Icons.done_all),
-            )
+            if (hasUnread)
+              IconButton(
+                tooltip: 'Mark as read'.hardcoded,
+                onPressed: () {
+                  ref
+                      .read(detailsControllerProvider(mangaId).notifier)
+                      .markSelectedChaptersAsRead();
+                },
+                icon: const Icon(Icons.done_all),
+              ),
+            if (hasRead)
+              IconButton(
+                tooltip: 'Mark as unread'.hardcoded,
+                onPressed: () {
+                  ref
+                      .read(detailsControllerProvider(mangaId).notifier)
+                      .markSelectedChaptersAsUnread();
+                },
+                icon: const Icon(Icons.remove_done),
+              ),
           ],
         ),
       ),

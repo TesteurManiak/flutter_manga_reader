@@ -121,8 +121,24 @@ class DetailsController extends _$DetailsController {
     state = state.copyWith(selectedChapters: [], selectionMode: false);
   }
 
-  void switchMode() {
-    state = state.copyWith(selectionMode: !state.selectionMode);
+  Future<void> markSelectedChaptersAsUnread() async {
+    final selectedChapters = state.selectedChapters;
+    if (selectedChapters.isEmpty) return;
+
+    final localDatasource = ref.read(localDatasourceProvider);
+    await localDatasource.setChaptersRead(
+      chapterIds: selectedChapters.map((e) => e.id).toList(),
+      read: false,
+    );
+
+    state = state.copyWith(selectedChapters: [], selectionMode: false);
+  }
+
+  void toggleMode() {
+    state = state.copyWith(
+      selectedChapters: [],
+      selectionMode: !state.selectionMode,
+    );
   }
 
   void selectChapter(Chapter chapter) {
