@@ -6,6 +6,7 @@ import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_settings_bottom_sheet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -198,6 +199,8 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
 
   @override
   Widget build(BuildContext context) {
+    final readingDirection = ref.watch(readingDirectionControllerProvider);
+
     return WillPopScope(
       onWillPop: () async {
         // If on last page of the chapter, mark it as read.
@@ -218,13 +221,16 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
             Expanded(
               child: PageView.builder(
                 controller: pageController,
+                reverse: readingDirection.reverse,
+                scrollDirection: readingDirection.direction,
+                pageSnapping: readingDirection.pageSnapping,
                 itemCount: widget.pages.length,
                 itemBuilder: (context, index) {
                   final page = widget.pages[index];
 
                   return AppNetworkImage(
                     url: page.imageUrl,
-                    fit: BoxFit.contain,
+                    fit: readingDirection.fit,
                   );
                 },
                 onPageChanged: (value) {

@@ -37,5 +37,19 @@
         "body": [
             "final strings = context.strings;",
         ],
+    },
+    "Generate Riverpod Notifier": {
+        "prefix": "controller",
+        "description": "Generate a Riverpod Notifier based off riverpod_generator",
+        "body": [
+            "@riverpod",
+            "class $1Controller extends _$$1Controller {",
+            "\t@override",
+            "\tObject build() {",
+            "\t\t// TODO: implement build",
+            "\t\tthrow UnimplementedError();",
+            "\t}",
+            "}",
+        ],
     }
 }
