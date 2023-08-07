@@ -145,7 +145,7 @@ class _DismissableBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CoreSlidable(
+    return Slidable(
       direction: SlideDirection.down,
       child: BottomAppBar(
         child: Row(

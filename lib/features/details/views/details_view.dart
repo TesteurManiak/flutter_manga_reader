@@ -56,6 +56,7 @@ class _DetailsViewState extends ConsumerState<DetailsView> {
     return DefaultSlidableController(
       initiallyShown: false,
       child: Scaffold(
+        extendBody: true,
         bottomNavigationBar: _DismissableBottomBar(widget.mangaId),
         body: state.when(
           data: (manga) {
@@ -439,10 +440,8 @@ class _DismissableBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final padding = MediaQuery.paddingOf(context);
-
     return Slidable(
-      height: kBottomNavigationBarHeight + padding.bottom,
+      direction: SlideDirection.down,
       child: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

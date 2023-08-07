@@ -3,113 +3,6 @@ import 'package:flutter/material.dart';
 const _kShownByDefault = true;
 const _kDefaultDuration = Duration(milliseconds: 300);
 
-typedef SlidableWidgetBuilder = Widget Function(
-  BuildContext context,
-  // ignore: avoid_positional_boolean_parameters
-  bool isShown,
-);
-
-class Slidable extends StatefulWidget {
-  Slidable({
-    super.key,
-    required this.height,
-    required Widget child,
-    this.controller,
-    this.initiallyShown,
-    this.duration,
-  }) : builder = ((_, __) => child);
-
-  const Slidable.builder({
-    super.key,
-    required this.height,
-    required this.builder,
-    this.controller,
-    this.initiallyShown,
-    this.duration,
-  });
-
-  final SlidableController? controller;
-
-  /// Defaults to 300ms.
-  final Duration? duration;
-
-  /// {@template initially_shown}
-  /// Defaults to true.
-  /// {@endtemplate}
-  final bool? initiallyShown;
-
-  final double height;
-  final SlidableWidgetBuilder builder;
-
-  @override
-  State<Slidable> createState() => _SlidableState();
-}
-
-class _SlidableState extends State<Slidable> {
-  late final internalController = SlidableController(
-    initiallyShown: widget.initiallyShown ?? _kShownByDefault,
-  );
-
-  bool? isShown;
-
-  SlidableController? controller;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    updateController();
-    isShown = controller?.isShown;
-  }
-
-  @override
-  void didUpdateWidget(covariant Slidable oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.controller != oldWidget.controller) {
-      updateController();
-      isShown = controller?.isShown;
-    }
-  }
-
-  @override
-  void dispose() {
-    controller?.removeListener(onShownChanged);
-    controller = null;
-
-    internalController.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final isShown = this.isShown ?? widget.initiallyShown ?? _kShownByDefault;
-
-    return AnimatedContainer(
-      duration: widget.duration ?? _kDefaultDuration,
-      height: isShown ? widget.height : 0,
-      child: Wrap(children: [widget.builder(context, isShown)]),
-    );
-  }
-
-  void onShownChanged() {
-    setState(() => isShown = controller?.isShown);
-  }
-
-  void updateController() {
-    final newController = widget.controller ??
-        DefaultSlidableController.maybeOf(context) ??
-        internalController;
-
-    if (newController == controller) return;
-
-    controller?.removeListener(onShownChanged);
-    controller = newController;
-    controller?.addListener(onShownChanged);
-  }
-}
-
 class SlidableController extends ChangeNotifier {
   SlidableController({
     bool initiallyShown = _kShownByDefault,
@@ -218,7 +111,7 @@ class SlidablePreferredSize extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return CoreSlidable(
+    return Slidable(
       controller: controller,
       initiallyShown: initiallyShown,
       duration: duration,
@@ -228,8 +121,8 @@ class SlidablePreferredSize extends StatelessWidget
   }
 }
 
-class CoreSlidable extends StatefulWidget {
-  const CoreSlidable({
+class Slidable extends StatefulWidget {
+  const Slidable({
     super.key,
     this.controller,
     this.initiallyShown,
@@ -245,10 +138,10 @@ class CoreSlidable extends StatefulWidget {
   final Widget child;
 
   @override
-  State<CoreSlidable> createState() => _CoreSlidableState();
+  State<Slidable> createState() => _SlidableState();
 }
 
-class _CoreSlidableState extends State<CoreSlidable>
+class _SlidableState extends State<Slidable>
     with SingleTickerProviderStateMixin {
   late final internalController = SlidableController(
     initiallyShown: widget.initiallyShown ?? _kShownByDefault,
@@ -271,7 +164,7 @@ class _CoreSlidableState extends State<CoreSlidable>
   }
 
   @override
-  void didUpdateWidget(covariant CoreSlidable oldWidget) {
+  void didUpdateWidget(covariant Slidable oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.controller != oldWidget.controller) {
