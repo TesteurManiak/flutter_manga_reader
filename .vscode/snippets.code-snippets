@@ -51,5 +51,21 @@
             "\t}",
             "}",
         ],
+    },
+     "Create GoRouteData": {
+        "prefix": "goRouteData",
+        "description": "Create a GoRouteData",
+        "body": [
+            "class $1Route extends GoRouteData {",
+            "\tconst $1Route();",
+            "",
+            "\tstatic const path = '/$1';\n",
+            "",
+            "\t@override",
+            "\tWidget build(BuildContext context, GoRouterState state) {",
+            "\t\treturn Container();",
+            "\t}",
+            "}",
+        ],
     }
 }
