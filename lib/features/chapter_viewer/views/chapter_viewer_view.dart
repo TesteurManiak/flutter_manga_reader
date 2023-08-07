@@ -145,11 +145,8 @@ class _DismissableBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottom = MediaQuery.paddingOf(context).bottom;
-    final height = kBottomNavigationBarHeight + bottom;
-
-    return Slidable(
-      height: height,
+    return CoreSlidable(
+      direction: SlideDirection.down,
       child: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

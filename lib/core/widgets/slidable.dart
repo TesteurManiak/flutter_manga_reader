@@ -196,7 +196,7 @@ class _DefaultSlidableControllerScope extends InheritedWidget {
   }
 }
 
-class SlidablePreferredSize extends StatefulWidget
+class SlidablePreferredSize extends StatelessWidget
     implements PreferredSizeWidget {
   const SlidablePreferredSize({
     super.key,
@@ -214,13 +214,41 @@ class SlidablePreferredSize extends StatefulWidget
   final PreferredSizeWidget child;
 
   @override
-  State<SlidablePreferredSize> createState() => _SlidablePreferredSizeState();
+  Size get preferredSize => child.preferredSize;
 
   @override
-  Size get preferredSize => child.preferredSize;
+  Widget build(BuildContext context) {
+    return CoreSlidable(
+      controller: controller,
+      initiallyShown: initiallyShown,
+      duration: duration,
+      direction: direction,
+      child: child,
+    );
+  }
 }
 
-class _SlidablePreferredSizeState extends State<SlidablePreferredSize>
+class CoreSlidable extends StatefulWidget {
+  const CoreSlidable({
+    super.key,
+    this.controller,
+    this.initiallyShown,
+    this.duration,
+    required this.direction,
+    required this.child,
+  });
+
+  final SlidableController? controller;
+  final bool? initiallyShown;
+  final Duration? duration;
+  final SlideDirection direction;
+  final Widget child;
+
+  @override
+  State<CoreSlidable> createState() => _CoreSlidableState();
+}
+
+class _CoreSlidableState extends State<CoreSlidable>
     with SingleTickerProviderStateMixin {
   late final internalController = SlidableController(
     initiallyShown: widget.initiallyShown ?? _kShownByDefault,
@@ -243,7 +271,7 @@ class _SlidablePreferredSizeState extends State<SlidablePreferredSize>
   }
 
   @override
-  void didUpdateWidget(covariant SlidablePreferredSize oldWidget) {
+  void didUpdateWidget(covariant CoreSlidable oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.controller != oldWidget.controller) {
