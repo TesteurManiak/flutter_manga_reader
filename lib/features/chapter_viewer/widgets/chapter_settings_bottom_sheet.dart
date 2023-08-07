@@ -10,6 +10,8 @@ class ChapterSettingsBottomSheet extends ConsumerWidget
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final initialSelection = ref.watch(readingDirectionControllerProvider);
+
     final strings = context.strings;
     final listTileTheme = ListTileTheme.of(context);
 
@@ -34,7 +36,7 @@ class ChapterSettingsBottomSheet extends ConsumerWidget
                 inputDecorationTheme: const InputDecorationTheme(
                   border: InputBorder.none,
                 ),
-                initialSelection: ReadingDirection.leftToRight,
+                initialSelection: initialSelection,
                 dropdownMenuEntries: [
                   for (final v in ReadingDirection.values)
                     DropdownMenuEntry(
@@ -43,11 +45,9 @@ class ChapterSettingsBottomSheet extends ConsumerWidget
                     ),
                 ],
                 onSelected: (direction) {
-                  if (direction != null) {
-                    ref
-                        .read(readingDirectionControllerProvider.notifier)
-                        .setDirection(direction);
-                  }
+                  ref
+                      .read(readingDirectionControllerProvider.notifier)
+                      .setDirection(direction);
                 },
               ),
             ),

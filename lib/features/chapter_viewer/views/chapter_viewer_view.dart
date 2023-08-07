@@ -8,6 +8,7 @@ import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_settings_bottom_sheet.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/reading_direction_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -150,8 +151,9 @@ class _DismissableBottomBar extends StatelessWidget {
       height: height,
       child: BottomAppBar(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            const ReadingDirectionPopupMenuButton(),
             IconButton(
               icon: const Icon(Icons.settings_outlined),
               onPressed: () {

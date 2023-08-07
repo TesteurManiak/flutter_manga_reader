@@ -10,9 +10,7 @@ class ReadingDirectionController extends _$ReadingDirectionController {
     return ReadingDirection.leftToRight;
   }
 
-  void setDirection(ReadingDirection direction) {
-    if (state != direction) {
-      state = direction;
-    }
+  void setDirection(ReadingDirection? direction) {
+    if (direction != null) state = direction;
   }
 }
