@@ -66,6 +66,10 @@ class _Content extends ConsumerStatefulWidget {
 
 class _ContentState extends ConsumerState<_Content> {
   late final ChapterViewerController controller;
+  late final pageController = PageController(
+    initialPage: widget.initialPage ?? 0,
+  );
+  late final pageNotifier = ValueNotifier<int>(widget.initialPage ?? 0);
 
   @override
   void initState() {
@@ -80,6 +84,13 @@ class _ContentState extends ConsumerState<_Content> {
   }
 
   @override
+  void dispose() {
+    pageController.dispose();
+    pageNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = ref.watch(chapterViewerControllerProvider(widget.chapterId));
 
@@ -87,11 +98,17 @@ class _ContentState extends ConsumerState<_Content> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: ChapterViewerAppBar(widget.chapterId),
-      bottomNavigationBar: const ChapterViewerBottomBar(),
+      bottomNavigationBar: ChapterViewerBottomBar(
+        chapterId: widget.chapterId,
+        pageNotifier: pageNotifier,
+        pageController: pageController,
+      ),
       body: state.when(
         loading: LoadingContent.new,
         loaded: (_, pages) {
           return _PageViewer(
+            pageNotifier: pageNotifier,
+            pageController: pageController,
             pages: pages,
             initialPage: widget.initialPage,
             chapterId: widget.chapterId,
@@ -103,45 +120,31 @@ class _ContentState extends ConsumerState<_Content> {
   }
 }
 
-class _PageViewer extends ConsumerStatefulWidget {
+class _PageViewer extends ConsumerWidget {
   const _PageViewer({
+    required this.pageNotifier,
+    required this.pageController,
     required this.pages,
     required this.initialPage,
     required this.chapterId,
   });
 
+  final ValueNotifier<int> pageNotifier;
+  final PageController pageController;
   final List<ChapterPage> pages;
   final int? initialPage;
   final int chapterId;
 
   @override
-  ConsumerState<_PageViewer> createState() => _PageViewerState();
-}
-
-class _PageViewerState extends ConsumerState<_PageViewer> {
-  late final pageController = PageController(
-    initialPage: widget.initialPage ?? 0,
-  );
-  late final pageNotifier = ValueNotifier<int>(widget.initialPage ?? 0);
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    pageNotifier.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final readingDirection = ref.watch(readingDirectionControllerProvider);
 
     return WillPopScope(
       onWillPop: () async {
         // If on last page of the chapter, mark it as read.
-        if (pageNotifier.value == widget.pages.length - 1) {
+        if (pageNotifier.value == pages.length - 1) {
           await ref
-              .read(chapterViewerControllerProvider(widget.chapterId).notifier)
+              .read(chapterViewerControllerProvider(chapterId).notifier)
               .markChapterAsRead();
         }
 
@@ -160,16 +163,18 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
               pageSnapping: !readingDirection.isContinuous,
               clipBehavior:
                   readingDirection.isContinuous ? Clip.none : Clip.hardEdge,
-              itemCount: widget.pages.length,
+              itemCount: pages.length,
               itemBuilder: (context, index) {
-                final page = widget.pages[index];
+                final page = pages[index];
 
                 return AppNetworkImage(
                   url: page.imageUrl,
                   fit: BoxFit.contain,
                 );
               },
-              onPageChanged: onPageChanged,
+              onPageChanged: (index) {
+                pageNotifier.value = index;
+              },
               allowImplicitScrolling: true,
             ),
             Align(
@@ -177,7 +182,7 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
               child: ValueListenableBuilder<int>(
                 valueListenable: pageNotifier,
                 builder: (_, page, __) {
-                  return Text('${page + 1}/${widget.pages.length}');
+                  return Text('${page + 1}/${pages.length}');
                 },
               ),
             ),
@@ -185,10 +190,5 @@ class _PageViewerState extends ConsumerState<_PageViewer> {
         ),
       ),
     );
-  }
-
-  void onPageChanged(int index) {
-    pageNotifier.value = index;
-    DefaultSlidableController.maybeOf(context)?.hide();
   }
 }
