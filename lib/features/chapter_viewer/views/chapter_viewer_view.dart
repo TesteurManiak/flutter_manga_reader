@@ -4,6 +4,7 @@ import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_viewer_app_bar.dart';
@@ -66,10 +67,9 @@ class _Content extends ConsumerStatefulWidget {
 
 class _ContentState extends ConsumerState<_Content> {
   late final ChapterViewerController controller;
-  late final pageController = PageController(
-    initialPage: widget.initialPage ?? 0,
+  late final chapterPageController = ChapterPageController(
+    initialPage: widget.initialPage,
   );
-  late final pageNotifier = ValueNotifier<int>(widget.initialPage ?? 0);
 
   @override
   void initState() {
@@ -85,8 +85,7 @@ class _ContentState extends ConsumerState<_Content> {
 
   @override
   void dispose() {
-    pageController.dispose();
-    pageNotifier.dispose();
+    chapterPageController.dispose();
     super.dispose();
   }
 
@@ -100,15 +99,13 @@ class _ContentState extends ConsumerState<_Content> {
       appBar: ChapterViewerAppBar(widget.chapterId),
       bottomNavigationBar: ChapterViewerBottomBar(
         chapterId: widget.chapterId,
-        pageNotifier: pageNotifier,
-        pageController: pageController,
+        chapterController: chapterPageController,
       ),
       body: state.when(
         loading: LoadingContent.new,
         loaded: (_, pages) {
           return _PageViewer(
-            pageNotifier: pageNotifier,
-            pageController: pageController,
+            chapterController: chapterPageController,
             pages: pages,
             initialPage: widget.initialPage,
             chapterId: widget.chapterId,
@@ -122,15 +119,13 @@ class _ContentState extends ConsumerState<_Content> {
 
 class _PageViewer extends ConsumerWidget {
   const _PageViewer({
-    required this.pageNotifier,
-    required this.pageController,
+    required this.chapterController,
     required this.pages,
     required this.initialPage,
     required this.chapterId,
   });
 
-  final ValueNotifier<int> pageNotifier;
-  final PageController pageController;
+  final ChapterPageController chapterController;
   final List<ChapterPage> pages;
   final int? initialPage;
   final int chapterId;
@@ -142,7 +137,7 @@ class _PageViewer extends ConsumerWidget {
     return WillPopScope(
       onWillPop: () async {
         // If on last page of the chapter, mark it as read.
-        if (pageNotifier.value == pages.length - 1) {
+        if (chapterController.page == pages.length - 1) {
           await ref
               .read(chapterViewerControllerProvider(chapterId).notifier)
               .markChapterAsRead();
@@ -157,7 +152,7 @@ class _PageViewer extends ConsumerWidget {
         child: Stack(
           children: [
             PageView.builder(
-              controller: pageController,
+              controller: chapterController.pageController,
               reverse: readingDirection.reverse,
               scrollDirection: readingDirection.direction,
               pageSnapping: !readingDirection.isContinuous,
@@ -172,15 +167,12 @@ class _PageViewer extends ConsumerWidget {
                   fit: BoxFit.contain,
                 );
               },
-              onPageChanged: (index) {
-                pageNotifier.value = index;
-              },
               allowImplicitScrolling: true,
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: ValueListenableBuilder<int>(
-                valueListenable: pageNotifier,
+                valueListenable: chapterController,
                 builder: (_, page, __) {
                   return Text('${page + 1}/${pages.length}');
                 },
