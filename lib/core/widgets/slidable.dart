@@ -28,7 +28,7 @@ class SlidableController extends ChangeNotifier {
 }
 
 /// {@template default_slidable_controller}
-/// Widget that provides a [SlidableController] to its descendants.
+/// Creates a default [SlidableController] for the given [child] widget.
 /// {@endtemplate}
 class DefaultSlidableController extends StatefulWidget {
   /// {@macro default_slidable_controller}
@@ -47,10 +47,43 @@ class DefaultSlidableController extends StatefulWidget {
   State<DefaultSlidableController> createState() =>
       _DefaultSlidableControllerState();
 
+  /// The closest instance of [DefaultSlidableController] that encloses the
+  /// given context, or null if none is found.
+  ///
+  /// Calling this method will create a dependency on the closest
+  /// [DefaultSlidableController] in the [context], if there is one.
+  ///
+  /// See also:
+  ///
+  /// * [DefaultSlidableController.of], which is similar to this method, but
+  /// asserts if no [DefaultSlidableController] is found.
   static SlidableController? maybeOf(BuildContext context) {
     return context
         .dependOnInheritedWidgetOfExactType<_DefaultSlidableControllerScope>()
         ?.controller;
+  }
+
+  /// The closest instance of [DefaultSlidableController] that encloses the
+  /// given context.
+  ///
+  /// If no instance is found, this method will throw an exception.
+  static SlidableController of(BuildContext context) {
+    final controller = maybeOf(context);
+
+    if (controller == null) {
+      throw FlutterError(
+        'DefaultSlidableController.of() called with a context that does not '
+        'contain a DefaultSlidableController.\n'
+        'No DefaultSlidableController ancestor could be found starting from '
+        'the context that was passed to DefaultSlidableController.of(). This '
+        'can happen because you are using a widget that looks for a '
+        'DefaultSlidableController ancestor, but no such ancestor exists.\n'
+        'The context used was:\n'
+        '  $context',
+      );
+    }
+
+    return controller;
   }
 }
 
