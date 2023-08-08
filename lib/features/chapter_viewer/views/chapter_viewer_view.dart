@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_settings_bottom_sheet.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/widgets/reading_direction_menu.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_viewer_app_bar.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_viewer_bottom_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -87,8 +86,8 @@ class _ContentState extends ConsumerState<_Content> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: _DismissableAppBar(widget.chapterId),
-      bottomNavigationBar: const _DismissableBottomBar(),
+      appBar: ChapterViewerAppBar(widget.chapterId),
+      bottomNavigationBar: const ChapterViewerBottomBar(),
       body: state.when(
         loading: LoadingContent.new,
         loaded: (_, pages) {
@@ -99,70 +98,6 @@ class _ContentState extends ConsumerState<_Content> {
           );
         },
         error: (_) => ErrorContent(onRetry: controller.fetchPages),
-      ),
-    );
-  }
-}
-
-class _DismissableAppBar extends ConsumerWidget with AppBarSizeMixin {
-  const _DismissableAppBar(this.chapterId);
-
-  final int chapterId;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final chapterTitle = ref.watch(
-      chapterViewerControllerProvider(chapterId).select(
-        (s) => s.maybeMap(
-          loaded: (loaded) => loaded.chapter.name,
-          orElse: () => null,
-        ),
-      ),
-    );
-    return SlidablePreferredSize(
-      direction: SlideDirection.up,
-      child: AppBar(
-        title: Text.rich(
-          TextSpan(text: chapterTitle),
-        ),
-        actions: const [
-          IconButton(
-            icon: Icon(Icons.bookmark_outline),
-            onPressed: null,
-          ),
-          IconButton(
-            icon: Icon(Icons.public),
-            onPressed: null,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _DismissableBottomBar extends StatelessWidget {
-  const _DismissableBottomBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Slidable(
-      direction: SlideDirection.down,
-      child: BottomAppBar(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const ReadingDirectionPopupMenuButton(),
-            IconButton(
-              icon: const Icon(Icons.settings_outlined),
-              onPressed: () {
-                const ChapterSettingsBottomSheet().show(
-                  context,
-                  isScrollControlled: true,
-                );
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
