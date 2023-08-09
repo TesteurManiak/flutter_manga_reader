@@ -22,7 +22,7 @@ class PopularMangaController extends _$PopularMangaController
 
     state = convertToState(
       result: result,
-      currentMangas: state.mangasOrNull ?? [],
+      currentMangas: state.mangasOrEmpty,
       nextPage: nextPage,
     );
   }

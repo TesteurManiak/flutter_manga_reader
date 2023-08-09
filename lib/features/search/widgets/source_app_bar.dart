@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const _kBottomHeight = 48.0;
 
-class SourceAppBar extends StatelessWidget with AppBarSizeMixin {
+class SourceAppBar extends ConsumerWidget with AppBarSizeMixin {
   const SourceAppBar({
     super.key,
-    required this.title,
+    required this.onFilterChanged,
   });
 
-  final String title;
+  final ValueChanged<FilterType> onFilterChanged;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final title = ref.watch(mangaDatasourceProvider.select((v) => v.name));
+
     return AppBar(
       title: Text(title),
       actions: const [
@@ -30,7 +33,7 @@ class SourceAppBar extends StatelessWidget with AppBarSizeMixin {
           onPressed: null,
         ),
       ],
-      bottom: const _FilterChipList(),
+      bottom: _FilterChipList(onFilterChanged: onFilterChanged),
     );
   }
 
@@ -41,7 +44,11 @@ class SourceAppBar extends StatelessWidget with AppBarSizeMixin {
 }
 
 class _FilterChipList extends StatefulWidget implements PreferredSizeWidget {
-  const _FilterChipList();
+  const _FilterChipList({
+    required this.onFilterChanged,
+  });
+
+  final ValueChanged<FilterType> onFilterChanged;
 
   @override
   State<_FilterChipList> createState() => _FilterChipListState();
@@ -51,7 +58,7 @@ class _FilterChipList extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _FilterChipListState extends State<_FilterChipList> {
-  _FilterType _selectedFilter = _FilterType.popular;
+  FilterType _selectedFilter = FilterType.popular;
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +68,19 @@ class _FilterChipListState extends State<_FilterChipList> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final filterType = _FilterType.values[index];
+          final filterType = FilterType.values[index];
 
           return _FilterChip(
             type: filterType,
             selected: filterType == _selectedFilter,
-            onTap: () => setState(() => _selectedFilter = filterType),
+            onTap: () {
+              setState(() => _selectedFilter = filterType);
+              widget.onFilterChanged(filterType);
+            },
           );
         },
         separatorBuilder: (_, __) => const SizedBox(width: 6),
-        itemCount: _FilterType.values.length,
+        itemCount: FilterType.values.length,
       ),
     );
   }
@@ -83,7 +93,7 @@ class _FilterChip extends StatelessWidget {
     required this.onTap,
   });
 
-  final _FilterType type;
+  final FilterType type;
   final bool selected;
   final VoidCallback onTap;
 
@@ -105,12 +115,12 @@ class _FilterChip extends StatelessWidget {
   }
 }
 
-enum _FilterType {
+enum FilterType {
   popular(Icons.favorite, _popular),
   latest(Icons.new_releases_outlined, _latest),
   filters(Icons.filter_list, _filters, enabled: false);
 
-  const _FilterType(this.icon, this.text, {this.enabled = true});
+  const FilterType(this.icon, this.text, {this.enabled = true});
 
   final IconData icon;
   final LocalizedStringFetcher text;

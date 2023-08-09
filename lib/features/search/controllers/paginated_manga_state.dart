@@ -29,4 +29,11 @@ class PaginatedMangaState with _$PaginatedMangaState {
   List<SourceManga>? get mangasOrNull {
     return mapOrNull(loaded: (state) => state.mangas);
   }
+
+  List<SourceManga> get mangasOrEmpty {
+    return maybeMap(
+      loaded: (state) => state.mangas,
+      orElse: () => [],
+    );
+  }
 }

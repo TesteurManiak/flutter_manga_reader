@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
-import 'package:flutter_manga_reader/core/widgets/error_content.dart';
-import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/features/library/controllers/library_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
