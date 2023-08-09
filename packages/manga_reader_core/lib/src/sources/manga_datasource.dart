@@ -26,7 +26,7 @@ abstract class MangaDatasource {
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);
 
   /// Fetch the latest updated mangas from the source.
-  Future<Result<MangasPage, HttpError>> fetchLatestUpdateRequest(int page);
+  Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(int page);
 
   /// Query the source for a manga.
   Future<Result<MangasPage, HttpError>> fetchSearchManga(

@@ -7,7 +7,7 @@ part of 'reading_direction_controller.dart';
 // **************************************************************************
 
 String _$readingDirectionControllerHash() =>
-    r'8e20d081cfbeceecbe74ec537c774a1591205c33';
+    r'0215df09b883f49480121904255282fa95d67ee3';
 
 /// See also [ReadingDirectionController].
 @ProviderFor(ReadingDirectionController)

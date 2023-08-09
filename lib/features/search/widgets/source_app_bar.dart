@@ -99,7 +99,7 @@ class _FilterChip extends StatelessWidget {
       selected: selected,
       isEnabled: type.enabled,
       selectedColor: theme.colorScheme.primary.withOpacity(.2),
-      side: selected ? const BorderSide(style: BorderStyle.none) : null,
+      side: const BorderSide(style: BorderStyle.none),
       showCheckmark: false,
     );
   }
@@ -107,7 +107,7 @@ class _FilterChip extends StatelessWidget {
 
 enum _FilterType {
   popular(Icons.favorite, _popular),
-  latest(Icons.new_releases_outlined, _latest, enabled: false),
+  latest(Icons.new_releases_outlined, _latest),
   filters(Icons.filter_list, _filters, enabled: false);
 
   const _FilterType(this.icon, this.text, {this.enabled = true});

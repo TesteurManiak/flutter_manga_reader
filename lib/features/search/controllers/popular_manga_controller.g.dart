@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_controller.dart';
+part of 'popular_manga_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchControllerHash() => r'8720b3aceaa69d4f972ce4750547360a6811d5b4';
+String _$popularMangaControllerHash() =>
+    r'd0300fd08a2b02793f1096a494c2d1a3426a2222';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +30,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$SearchController
+abstract class _$PopularMangaController
     extends BuildlessAutoDisposeNotifier<PaginatedMangaState> {
   late final MangaDatasource datasource;
 
@@ -38,27 +39,27 @@ abstract class _$SearchController
   );
 }
 
-/// See also [SearchController].
-@ProviderFor(SearchController)
-const searchControllerProvider = SearchControllerFamily();
+/// See also [PopularMangaController].
+@ProviderFor(PopularMangaController)
+const popularMangaControllerProvider = PopularMangaControllerFamily();
 
-/// See also [SearchController].
-class SearchControllerFamily extends Family<PaginatedMangaState> {
-  /// See also [SearchController].
-  const SearchControllerFamily();
+/// See also [PopularMangaController].
+class PopularMangaControllerFamily extends Family<PaginatedMangaState> {
+  /// See also [PopularMangaController].
+  const PopularMangaControllerFamily();
 
-  /// See also [SearchController].
-  SearchControllerProvider call(
+  /// See also [PopularMangaController].
+  PopularMangaControllerProvider call(
     MangaDatasource datasource,
   ) {
-    return SearchControllerProvider(
+    return PopularMangaControllerProvider(
       datasource,
     );
   }
 
   @override
-  SearchControllerProvider getProviderOverride(
-    covariant SearchControllerProvider provider,
+  PopularMangaControllerProvider getProviderOverride(
+    covariant PopularMangaControllerProvider provider,
   ) {
     return call(
       provider.datasource,
@@ -77,33 +78,34 @@ class SearchControllerFamily extends Family<PaginatedMangaState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'searchControllerProvider';
+  String? get name => r'popularMangaControllerProvider';
 }
 
-/// See also [SearchController].
-class SearchControllerProvider extends AutoDisposeNotifierProviderImpl<
-    SearchController, PaginatedMangaState> {
-  /// See also [SearchController].
-  SearchControllerProvider(
+/// See also [PopularMangaController].
+class PopularMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
+    PopularMangaController, PaginatedMangaState> {
+  /// See also [PopularMangaController].
+  PopularMangaControllerProvider(
     this.datasource,
   ) : super.internal(
-          () => SearchController()..datasource = datasource,
-          from: searchControllerProvider,
-          name: r'searchControllerProvider',
+          () => PopularMangaController()..datasource = datasource,
+          from: popularMangaControllerProvider,
+          name: r'popularMangaControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$searchControllerHash,
-          dependencies: SearchControllerFamily._dependencies,
+                  : _$popularMangaControllerHash,
+          dependencies: PopularMangaControllerFamily._dependencies,
           allTransitiveDependencies:
-              SearchControllerFamily._allTransitiveDependencies,
+              PopularMangaControllerFamily._allTransitiveDependencies,
         );
 
   final MangaDatasource datasource;
 
   @override
   bool operator ==(Object other) {
-    return other is SearchControllerProvider && other.datasource == datasource;
+    return other is PopularMangaControllerProvider &&
+        other.datasource == datasource;
   }
 
   @override
@@ -116,7 +118,7 @@ class SearchControllerProvider extends AutoDisposeNotifierProviderImpl<
 
   @override
   PaginatedMangaState runNotifierBuild(
-    covariant SearchController notifier,
+    covariant PopularMangaController notifier,
   ) {
     return notifier.build(
       datasource,

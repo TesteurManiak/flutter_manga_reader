@@ -1,3 +1,4 @@
-mixin Loadable on Object {
+mixin Loadable {
+  /// Loads the data.
   Future<void> load();
 }

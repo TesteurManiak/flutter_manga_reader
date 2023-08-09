@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
-import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
-import 'package:flutter_manga_reader/core/widgets/infinite_scroller.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
-import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
-import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
+import 'package:flutter_manga_reader/features/search/controllers/popular_manga_controller.dart';
 import 'package:flutter_manga_reader/features/search/widgets/source_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -29,7 +26,7 @@ class _SearchViewState extends ConsumerState<SearchView>
     datasource = ref.read(mangaDatasourceProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(searchControllerProvider(datasource).notifier).fetchNextMangas();
+      ref.read(popularMangaControllerProvider(datasource).notifier).load();
     });
   }
 
@@ -37,7 +34,7 @@ class _SearchViewState extends ConsumerState<SearchView>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final state = ref.watch(searchControllerProvider(datasource));
+    final state = ref.watch(popularMangaControllerProvider(datasource));
 
     return Scaffold(
       appBar: SourceAppBar(title: datasource.name),
@@ -81,8 +78,8 @@ class _LoadedState extends ConsumerState<_Loaded> {
       scrollController: scrollController,
       fetchMore: () {
         return ref
-            .read(searchControllerProvider(widget.datasource).notifier)
-            .fetchNextMangas();
+            .read(popularMangaControllerProvider(widget.datasource).notifier)
+            .fetchNext();
       },
       child: MangaGridView(
         controller: scrollController,

@@ -154,7 +154,7 @@ class MangadexDatasource extends MangaDatasource {
   }
 
   @override
-  Future<Result<MangasPage, HttpError>> fetchLatestUpdateRequest(
+  Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(
     int page,
   ) async {
     final result = await _client.send(
