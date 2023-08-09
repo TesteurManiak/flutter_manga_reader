@@ -1,5 +1,5 @@
 import 'package:flutter_manga_reader/core/mixins/loadable.dart';
-import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
+import 'package:flutter_manga_reader/features/search/controllers/paginated_manga_state.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 mixin LoadablePaginatedMangaMixin implements Loadable {

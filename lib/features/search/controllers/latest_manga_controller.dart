@@ -1,4 +1,4 @@
-import 'package:flutter_manga_reader/features/search/controllers/search_controller.dart';
+import 'package:flutter_manga_reader/features/search/controllers/paginated_manga_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'latest_manga_controller.g.dart';

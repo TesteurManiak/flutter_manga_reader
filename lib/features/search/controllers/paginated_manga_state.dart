@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-part 'search_controller.freezed.dart';
+part 'paginated_manga_state.freezed.dart';
 
 @freezed
 class PaginatedMangaState with _$PaginatedMangaState {
