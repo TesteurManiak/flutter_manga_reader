@@ -79,7 +79,9 @@ class _SliverDetailsAppBarState extends ConsumerState<SliverDetailsAppBar>
                   selectionMode ? _StopSelectionButton(widget.mangaId) : null,
               title: selectionMode ? Text('$chaptersNum') : null,
               actions: selectionMode
-                  ? []
+                  ? [
+                      _SelectAllChaptersButton(widget.mangaId),
+                    ]
                   : const [
                       IconButton(
                         onPressed: null,
@@ -116,6 +118,24 @@ class _StopSelectionButton extends ConsumerWidget {
             .quitSelectionMode();
       },
       icon: const Icon(Icons.close),
+    );
+  }
+}
+
+class _SelectAllChaptersButton extends ConsumerWidget {
+  const _SelectAllChaptersButton(this.mangaId);
+
+  final int mangaId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return IconButton(
+      onPressed: () {
+        ref
+            .read(DetailsControllerProvider(mangaId).notifier)
+            .selectAllChapters();
+      },
+      icon: const Icon(Icons.select_all),
     );
   }
 }

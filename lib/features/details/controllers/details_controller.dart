@@ -156,6 +156,15 @@ class DetailsController extends _$DetailsController {
     }
   }
 
+  void selectAllChapters() {
+    ref.read(watchChaptersForMangaProvider(mangaId)).whenData((chapters) {
+      state = state.copyWith(
+        selectedChapters: chapters,
+        selectionMode: true,
+      );
+    });
+  }
+
   void quitSelectionMode() {
     state = state.copyWith(selectionMode: false, selectedChapters: []);
   }
