@@ -249,7 +249,7 @@ class MangadexDatasource extends MangaDatasource {
         'title': query,
         'limit': MDConstants.mangaLimit,
         'offset': _helper.getMangaListOffset(page),
-        'includes[]': MDConstants.coverArt,
+        'translatedLanguage[]': _dexLang,
       },
     ).decode(MangaListResponse.fromJson);
 
