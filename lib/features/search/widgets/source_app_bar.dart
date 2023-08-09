@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const _kBottomHeight = 48.0;
 
-class SourceAppBar extends ConsumerWidget with AppBarSizeMixin {
+class SourceAppBar extends ConsumerStatefulWidget
+    implements PreferredSizeWidget {
   const SourceAppBar({
     super.key,
     required this.onFilterChanged,
@@ -14,28 +15,7 @@ class SourceAppBar extends ConsumerWidget with AppBarSizeMixin {
   final ValueChanged<FilterType> onFilterChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final title = ref.watch(mangaDatasourceProvider.select((v) => v.name));
-
-    return AppBar(
-      title: Text(title),
-      actions: const [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: null,
-        ),
-        IconButton(
-          icon: Icon(Icons.view_module),
-          onPressed: null,
-        ),
-        IconButton(
-          icon: Icon(Icons.public),
-          onPressed: null,
-        ),
-      ],
-      bottom: _FilterChipList(onFilterChanged: onFilterChanged),
-    );
-  }
+  ConsumerState<SourceAppBar> createState() => _SourceAppBarState();
 
   @override
   Size get preferredSize {
@@ -43,11 +23,114 @@ class SourceAppBar extends ConsumerWidget with AppBarSizeMixin {
   }
 }
 
+class _SourceAppBarState extends ConsumerState<SourceAppBar> {
+  final selectedFilterNotifier = ValueNotifier<FilterType>(FilterType.popular);
+
+  bool searchMode = false;
+
+  @override
+  void dispose() {
+    selectedFilterNotifier.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final title = ref.watch(mangaDatasourceProvider.select((v) => v.name));
+
+    return AppBar(
+      title: searchMode
+          ? _SearchField(
+              onSubmitted: (value) {
+                selectedFilterNotifier.value = FilterType.filters;
+              },
+            )
+          : Text(title),
+      actions: [
+        if (!searchMode)
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () => setState(() => searchMode = true),
+          ),
+        const IconButton(
+          icon: Icon(Icons.view_module),
+          onPressed: null,
+        ),
+        const IconButton(
+          icon: Icon(Icons.public),
+          onPressed: null,
+        ),
+      ],
+      bottom: _FilterChipList(
+        controller: selectedFilterNotifier,
+        onFilterChanged: widget.onFilterChanged,
+      ),
+    );
+  }
+}
+
+class _SearchField extends StatefulWidget {
+  const _SearchField({
+    required this.onSubmitted,
+  });
+
+  final ValueChanged<String> onSubmitted;
+
+  @override
+  State<_SearchField> createState() => _SearchFieldState();
+}
+
+class _SearchFieldState extends State<_SearchField> {
+  final textController = TextEditingController();
+
+  bool showClearButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    textController.addListener(() {
+      setState(() => showClearButton = textController.text.isNotEmpty);
+    });
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      autofocus: true,
+      autocorrect: false,
+      controller: textController,
+      onSubmitted: (value) {
+        widget.onSubmitted(value);
+      },
+      decoration: InputDecoration(
+        hintText: 'Recherche...'.hardcoded,
+        suffixIcon: showClearButton
+            ? IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: textController.clear,
+              )
+            : null,
+      ),
+    );
+  }
+}
+
 class _FilterChipList extends StatefulWidget implements PreferredSizeWidget {
   const _FilterChipList({
+    required this.controller,
     required this.onFilterChanged,
   });
 
+  final ValueNotifier<FilterType> controller;
   final ValueChanged<FilterType> onFilterChanged;
 
   @override
@@ -58,29 +141,32 @@ class _FilterChipList extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _FilterChipListState extends State<_FilterChipList> {
-  FilterType _selectedFilter = FilterType.popular;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.preferredSize.height,
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          final filterType = FilterType.values[index];
+      child: ValueListenableBuilder<FilterType>(
+        valueListenable: widget.controller,
+        builder: (context, selectedFilter, _) {
+          return ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              final filterType = FilterType.values[index];
 
-          return _FilterChip(
-            type: filterType,
-            selected: filterType == _selectedFilter,
-            onTap: () {
-              setState(() => _selectedFilter = filterType);
-              widget.onFilterChanged(filterType);
+              return _FilterChip(
+                type: filterType,
+                selected: filterType == selectedFilter,
+                onTap: () {
+                  widget.controller.value = filterType;
+                  widget.onFilterChanged(filterType);
+                },
+              );
             },
+            separatorBuilder: (_, __) => const SizedBox(width: 6),
+            itemCount: FilterType.values.length,
           );
         },
-        separatorBuilder: (_, __) => const SizedBox(width: 6),
-        itemCount: FilterType.values.length,
       ),
     );
   }

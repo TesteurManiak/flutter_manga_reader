@@ -50,7 +50,7 @@ class MangadexDatasource extends MangaDatasource {
 
     return result.when(
       success: (response) async {
-        final mangaList = await _parsePopularMangas(response.data);
+        final mangaList = await _parseMangas(response.data);
 
         return Result.success(
           MangasPage(mangaList: mangaList, hasMore: response.hasMore),
@@ -60,7 +60,7 @@ class MangadexDatasource extends MangaDatasource {
     );
   }
 
-  Future<List<SourceManga>> _parsePopularMangas(List<MangaData> data) async {
+  Future<List<SourceManga>> _parseMangas(List<MangaData> data) async {
     final firstVolumeCovers = await _fetchFirstVolumeCovers(data);
 
     return data.map((manga) {
@@ -238,12 +238,31 @@ class MangadexDatasource extends MangaDatasource {
   }
 
   @override
-  Future<Result<MangasPage, HttpError>> fetchSearchManga(
+  Future<Result<MangasPage, HttpError>> searchMangaList(
     int page,
     String query,
-  ) {
-    // TODO(Guillaume): implement fetchSearchManga
-    throw UnimplementedError();
+  ) async {
+    final result = await _client.send(
+      method: HttpMethod.get,
+      pathSegments: [MDConstants.manga],
+      queryParameters: {
+        'title': query,
+        'limit': MDConstants.mangaLimit,
+        'offset': _helper.getMangaListOffset(page),
+        'includes[]': MDConstants.coverArt,
+      },
+    ).decode(MangaListResponse.fromJson);
+
+    return result.when(
+      success: (response) async {
+        final mangaList = await _parseMangas(response.data);
+
+        return Result.success(
+          MangasPage(mangaList: mangaList, hasMore: response.hasMore),
+        );
+      },
+      failure: Result.failure,
+    );
   }
 
   /// Fetch the chapters for a manga.

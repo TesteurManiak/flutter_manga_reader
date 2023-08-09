@@ -29,7 +29,7 @@ abstract class MangaDatasource {
   Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(int page);
 
   /// Query the source for a manga.
-  Future<Result<MangasPage, HttpError>> fetchSearchManga(
+  Future<Result<MangasPage, HttpError>> searchMangaList(
     int page,
     String query,
   );
