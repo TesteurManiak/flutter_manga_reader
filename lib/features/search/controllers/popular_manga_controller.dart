@@ -7,7 +7,7 @@ part 'popular_manga_controller.g.dart';
 
 @riverpod
 class PopularMangaController extends _$PopularMangaController
-    with LoadablePaginatedMangaMixin {
+    with LoadablePaginatedMangaMixin, PaginatedMangaConverterMixin {
   @override
   PaginatedMangaState build(MangaDatasource datasource) {
     return const PaginatedMangaState.loading(page: 0);

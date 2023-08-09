@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/features/search/controllers/filtered_manga_controller.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,15 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
   bool searchMode = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    selectedFilterNotifier.addListener(() {
+      widget.onFilterChanged(selectedFilterNotifier.value);
+    });
+  }
+
+  @override
   void dispose() {
     selectedFilterNotifier.dispose();
 
@@ -41,11 +51,7 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
 
     return AppBar(
       title: searchMode
-          ? _SearchField(
-              onSubmitted: (value) {
-                selectedFilterNotifier.value = FilterType.filters;
-              },
-            )
+          ? _SearchField(controller: selectedFilterNotifier)
           : Text(title),
       actions: [
         if (!searchMode)
@@ -62,26 +68,23 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
           onPressed: null,
         ),
       ],
-      bottom: _FilterChipList(
-        controller: selectedFilterNotifier,
-        onFilterChanged: widget.onFilterChanged,
-      ),
+      bottom: _FilterChipList(controller: selectedFilterNotifier),
     );
   }
 }
 
-class _SearchField extends StatefulWidget {
+class _SearchField extends ConsumerStatefulWidget {
   const _SearchField({
-    required this.onSubmitted,
+    required this.controller,
   });
 
-  final ValueChanged<String> onSubmitted;
+  final ValueNotifier<FilterType> controller;
 
   @override
-  State<_SearchField> createState() => _SearchFieldState();
+  ConsumerState<_SearchField> createState() => _SearchFieldState();
 }
 
-class _SearchFieldState extends State<_SearchField> {
+class _SearchFieldState extends ConsumerState<_SearchField> {
   final textController = TextEditingController();
 
   bool showClearButton = false;
@@ -104,12 +107,20 @@ class _SearchFieldState extends State<_SearchField> {
 
   @override
   Widget build(BuildContext context) {
+    final mangaDatasource = ref.watch(mangaDatasourceProvider);
+    final filteredMangaProvider =
+        filteredMangaControllerProvider(mangaDatasource);
+
+    // Needed to keep the provider alive until the widget is instantiated
+    ref.watch(filteredMangaProvider);
+
     return TextField(
       autofocus: true,
       autocorrect: false,
       controller: textController,
       onSubmitted: (value) {
-        widget.onSubmitted(value);
+        widget.controller.value = FilterType.filters;
+        ref.read(filteredMangaProvider.notifier).startSearch(value.trim());
       },
       decoration: InputDecoration(
         hintText: 'Recherche...'.hardcoded,
@@ -125,13 +136,9 @@ class _SearchFieldState extends State<_SearchField> {
 }
 
 class _FilterChipList extends StatefulWidget implements PreferredSizeWidget {
-  const _FilterChipList({
-    required this.controller,
-    required this.onFilterChanged,
-  });
+  const _FilterChipList({required this.controller});
 
   final ValueNotifier<FilterType> controller;
-  final ValueChanged<FilterType> onFilterChanged;
 
   @override
   State<_FilterChipList> createState() => _FilterChipListState();
@@ -157,10 +164,7 @@ class _FilterChipListState extends State<_FilterChipList> {
               return _FilterChip(
                 type: filterType,
                 selected: filterType == selectedFilter,
-                onTap: () {
-                  widget.controller.value = filterType;
-                  widget.onFilterChanged(filterType);
-                },
+                onTap: () => widget.controller.value = filterType,
               );
             },
             separatorBuilder: (_, __) => const SizedBox(width: 6),

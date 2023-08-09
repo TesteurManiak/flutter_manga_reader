@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'latest_manga_controller.dart';
+part of 'filtered_manga_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$latestMangaControllerHash() =>
-    r'4f2fcb54b62dce6e8efda11096db2557811e9cb3';
+String _$filteredMangaControllerHash() =>
+    r'505eca061227efd75804d3ec72ac28854bd1b57d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,7 +30,7 @@ class _SystemHash {
   }
 }
 
-abstract class _$LatestMangaController
+abstract class _$FilteredMangaController
     extends BuildlessAutoDisposeNotifier<PaginatedMangaState> {
   late final MangaDatasource datasource;
 
@@ -39,27 +39,27 @@ abstract class _$LatestMangaController
   );
 }
 
-/// See also [LatestMangaController].
-@ProviderFor(LatestMangaController)
-const latestMangaControllerProvider = LatestMangaControllerFamily();
+/// See also [FilteredMangaController].
+@ProviderFor(FilteredMangaController)
+const filteredMangaControllerProvider = FilteredMangaControllerFamily();
 
-/// See also [LatestMangaController].
-class LatestMangaControllerFamily extends Family<PaginatedMangaState> {
-  /// See also [LatestMangaController].
-  const LatestMangaControllerFamily();
+/// See also [FilteredMangaController].
+class FilteredMangaControllerFamily extends Family<PaginatedMangaState> {
+  /// See also [FilteredMangaController].
+  const FilteredMangaControllerFamily();
 
-  /// See also [LatestMangaController].
-  LatestMangaControllerProvider call(
+  /// See also [FilteredMangaController].
+  FilteredMangaControllerProvider call(
     MangaDatasource datasource,
   ) {
-    return LatestMangaControllerProvider(
+    return FilteredMangaControllerProvider(
       datasource,
     );
   }
 
   @override
-  LatestMangaControllerProvider getProviderOverride(
-    covariant LatestMangaControllerProvider provider,
+  FilteredMangaControllerProvider getProviderOverride(
+    covariant FilteredMangaControllerProvider provider,
   ) {
     return call(
       provider.datasource,
@@ -78,33 +78,33 @@ class LatestMangaControllerFamily extends Family<PaginatedMangaState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'latestMangaControllerProvider';
+  String? get name => r'filteredMangaControllerProvider';
 }
 
-/// See also [LatestMangaController].
-class LatestMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
-    LatestMangaController, PaginatedMangaState> {
-  /// See also [LatestMangaController].
-  LatestMangaControllerProvider(
+/// See also [FilteredMangaController].
+class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
+    FilteredMangaController, PaginatedMangaState> {
+  /// See also [FilteredMangaController].
+  FilteredMangaControllerProvider(
     this.datasource,
   ) : super.internal(
-          () => LatestMangaController()..datasource = datasource,
-          from: latestMangaControllerProvider,
-          name: r'latestMangaControllerProvider',
+          () => FilteredMangaController()..datasource = datasource,
+          from: filteredMangaControllerProvider,
+          name: r'filteredMangaControllerProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$latestMangaControllerHash,
-          dependencies: LatestMangaControllerFamily._dependencies,
+                  : _$filteredMangaControllerHash,
+          dependencies: FilteredMangaControllerFamily._dependencies,
           allTransitiveDependencies:
-              LatestMangaControllerFamily._allTransitiveDependencies,
+              FilteredMangaControllerFamily._allTransitiveDependencies,
         );
 
   final MangaDatasource datasource;
 
   @override
   bool operator ==(Object other) {
-    return other is LatestMangaControllerProvider &&
+    return other is FilteredMangaControllerProvider &&
         other.datasource == datasource;
   }
 
@@ -118,7 +118,7 @@ class LatestMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
 
   @override
   PaginatedMangaState runNotifierBuild(
-    covariant LatestMangaController notifier,
+    covariant FilteredMangaController notifier,
   ) {
     return notifier.build(
       datasource,

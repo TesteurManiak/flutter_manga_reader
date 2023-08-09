@@ -2,12 +2,7 @@ import 'package:flutter_manga_reader/core/mixins/loadable.dart';
 import 'package:flutter_manga_reader/features/search/controllers/paginated_manga_state.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-mixin LoadablePaginatedMangaMixin implements Loadable {
-  @override
-  Future<void> load() => fetchNext();
-
-  Future<void> fetchNext();
-
+mixin PaginatedMangaConverterMixin {
   PaginatedMangaState convertToState({
     required Result<MangasPage, HttpError> result,
     required List<SourceManga> currentMangas,
@@ -36,4 +31,11 @@ mixin LoadablePaginatedMangaMixin implements Loadable {
       },
     );
   }
+}
+
+mixin LoadablePaginatedMangaMixin implements Loadable {
+  @override
+  Future<void> load() => fetchNext();
+
+  Future<void> fetchNext();
 }
