@@ -25,6 +25,9 @@ class ChapterPageController extends ChangeNotifier
   /// Current page of the [PageView].
   int get page => _page;
 
+  /// Short hand for [pageController.jumpToPage].
+  set page(int value) => pageController.jumpToPage(value);
+
   @override
   int get value => _page;
 

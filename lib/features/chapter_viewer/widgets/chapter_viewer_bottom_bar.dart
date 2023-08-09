@@ -38,8 +38,7 @@ class ChapterViewerBottomBar extends ConsumerWidget {
                 builder: (_, page, __) {
                   return _Slider(
                     totalPages: pageNumber,
-                    currentPage: page,
-                    pageController: chapterController.pageController,
+                    chapterController: chapterController,
                   );
                 },
               ),
@@ -97,14 +96,12 @@ class _UnconstrainedBottomBar extends StatelessWidget {
 
 class _Slider extends StatelessWidget {
   const _Slider({
-    required this.currentPage,
     required this.totalPages,
-    required this.pageController,
+    required this.chapterController,
   });
 
-  final int currentPage;
   final int totalPages;
-  final PageController pageController;
+  final ChapterPageController chapterController;
 
   @override
   Widget build(BuildContext context) {
@@ -112,15 +109,13 @@ class _Slider extends StatelessWidget {
 
     return Row(
       children: [
-        Text('${currentPage + 1}', style: style),
+        Text('${chapterController.page + 1}', style: style),
         Expanded(
           child: Slider(
             max: totalPages.toDouble(),
-            value: currentPage.toDouble(),
+            value: chapterController.page.toDouble(),
             divisions: totalPages - 1,
-            onChanged: (value) {
-              pageController.jumpToPage((value - 1).toInt());
-            },
+            onChanged: (v) => chapterController.page = (v - 1).toInt(),
           ),
         ),
         Text('$totalPages', style: style),
