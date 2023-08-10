@@ -374,6 +374,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Marquer comme non lu'**
   String get mark_as_unread;
+
+  /// No description provided for @last_page.
+  ///
+  /// In fr, this message translates to:
+  /// **'Page {page}'**
+  String last_page(int page);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

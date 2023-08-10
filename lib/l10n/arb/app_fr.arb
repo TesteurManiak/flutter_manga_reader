@@ -53,5 +53,13 @@
     "chapter_settings_for_this_series": "Pour cette série",
     "lecture_mode": "Mode de lecture",
     "mark_as_read": "Marquer comme lu",
-    "mark_as_unread": "Marquer comme non lu"
+    "mark_as_unread": "Marquer comme non lu",
+    "last_page": "Page {page}",
+    "@last_page": {
+        "placeholders": {
+            "page": {
+                "type": "int"
+            }
+        }
+    }
 }

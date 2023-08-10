@@ -53,5 +53,13 @@
     "chapter_settings_for_this_series": "For this series",
     "lecture_mode": "Lecture mode",
     "mark_as_read": "Mark as read",
-    "mark_as_unread": "Mark as unread"
+    "mark_as_unread": "Mark as unread",
+    "last_page": "Page {page}",
+    "@last_page": {
+        "placeholders": {
+            "page": {
+                "type": "int"
+            }
+        }
+    }
 }
