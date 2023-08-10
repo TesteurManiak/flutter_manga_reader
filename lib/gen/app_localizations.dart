@@ -285,6 +285,12 @@ abstract class AppLocalizations {
   /// **'WebView'**
   String get details_webview;
 
+  /// No description provided for @details_chapter_count.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count, plural, =0{{count} chapitre} =1{{count} chapitre} other{{count} chapitres}}'**
+  String details_chapter_count(num count);
+
   /// No description provided for @filter_popular.
   ///
   /// In fr, this message translates to:
@@ -332,6 +338,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Le chapitre n\'a pas été trouvé'**
   String get chapter_not_found;
+
+  /// No description provided for @manga_not_found.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le manga n\'a pas été trouvé'**
+  String get manga_not_found;
 
   /// No description provided for @chapter_settings_for_this_series.
   ///

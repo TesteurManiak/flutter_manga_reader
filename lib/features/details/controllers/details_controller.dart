@@ -1,4 +1,3 @@
-import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -29,7 +28,7 @@ class DetailsController extends _$DetailsController {
       state = next.when(
         data: (manga) {
           if (manga == null) {
-            return DetailsState.error(error: 'Manga not found'.hardcoded);
+            return const DetailsState.error(error: 'Manga not found');
           }
 
           return const DetailsState.loaded();
@@ -45,7 +44,7 @@ class DetailsController extends _$DetailsController {
   Future<void> fetchDetails({bool forceRefresh = false}) async {
     final currentManga = await ref.read(watchMangaProvider(mangaId).future);
     if (currentManga == null) {
-      state = DetailsState.error(error: 'Manga not found'.hardcoded);
+      state = const DetailsState.error(error: 'Manga not found');
       return;
     }
 

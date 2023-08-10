@@ -64,7 +64,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
         body: state.when(
           data: (manga) {
             if (manga == null) {
-              return ErrorContent(message: 'Manga not found'.hardcoded);
+              return ErrorContent(message: context.strings.manga_not_found);
             }
 
             return _MangaContent(
@@ -431,7 +431,7 @@ class _SliverChapterList extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                '${chapters.length} chapters'.hardcoded,
+                context.strings.details_chapter_count(chapters.length),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

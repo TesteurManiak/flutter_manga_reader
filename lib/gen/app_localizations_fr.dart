@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 /// The translations for French (`fr`).
@@ -101,6 +103,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get details_webview => 'WebView';
 
   @override
+  String details_chapter_count(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count chapitres',
+      one: '$count chapitre',
+      zero: '$count chapitre',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get filter_popular => 'Populaire';
 
   @override
@@ -123,6 +137,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chapter_not_found => 'Le chapitre n\'a pas été trouvé';
+
+  @override
+  String get manga_not_found => 'Le manga n\'a pas été trouvé';
 
   @override
   String get chapter_settings_for_this_series => 'Pour cette série';

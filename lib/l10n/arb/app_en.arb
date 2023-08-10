@@ -32,6 +32,14 @@
     "generic_retry": "Retry",
     "details_add_to_library": "Add to library",
     "details_webview": "WebView",
+    "details_chapter_count": "{count, plural, =0{{count} chapter} =1{{count} chapter} other{{count} chapters}}",
+    "@details_chapter_count": {
+        "placeholders": {
+            "count": {
+                "type": "num"
+            }
+        }
+    },
     "filter_popular": "Popular",
     "filter_latest": "Recent",
     "filter_other": "Filter",
@@ -40,6 +48,7 @@
     "webtoon": "Webtoon",
     "in_library": "In library",
     "chapter_not_found": "Chapter not found",
+    "manga_not_found": "Manga not found",
     "chapter_settings_for_this_series": "For this series",
     "lecture_mode": "Lecture mode"
 }

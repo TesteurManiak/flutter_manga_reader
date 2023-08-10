@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 /// The translations for English (`en`).
@@ -101,6 +103,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get details_webview => 'WebView';
 
   @override
+  String details_chapter_count(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count chapters',
+      one: '$count chapter',
+      zero: '$count chapter',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get filter_popular => 'Popular';
 
   @override
@@ -123,6 +137,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chapter_not_found => 'Chapter not found';
+
+  @override
+  String get manga_not_found => 'Manga not found';
 
   @override
   String get chapter_settings_for_this_series => 'For this series';
