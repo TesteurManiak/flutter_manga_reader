@@ -348,11 +348,7 @@ class _SliverButtons extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _AddToLibraryButton(id),
-          DetailsButton(
-            icon: Icons.public,
-            label: context.strings.details_webview,
-            onPressed: null,
-          ),
+          const _OpenWebViewButton(),
         ],
       ),
     );
@@ -377,6 +373,19 @@ class _AddToLibraryButton extends ConsumerWidget {
       },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
       label: isFavorite ? strings.in_library : strings.details_add_to_library,
+    );
+  }
+}
+
+class _OpenWebViewButton extends ConsumerWidget {
+  const _OpenWebViewButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return DetailsButton(
+      icon: Icons.public,
+      label: context.strings.details_webview,
+      onPressed: null,
     );
   }
 }
