@@ -7,6 +7,7 @@ part 'manga_datasource.g.dart';
 
 @Riverpod(dependencies: [])
 MangaDatasource mangaDatasource(MangaDatasourceRef ref) {
+  // Starts unimplemented because we need to override it in the route.
   throw UnimplementedError();
 }
 
@@ -20,18 +21,19 @@ Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
 
 @riverpod
 Map<String, MangaDatasource> mangaDatasources(MangaDatasourcesRef ref) {
-  final mangadexEn = MangadexDatasource(
-    lang: 'en',
-    client: RestClient(
-      baseUri: Uri.parse(MDConstants.apiUrl),
-      httpClient: CacheClient(
-        cacheService: IsarNetworkQueryCacheService(),
-      ),
+  final mangadexClient = RestClient(
+    baseUri: Uri.parse(MDConstants.apiUrl),
+    httpClient: CacheClient(
+      cacheService: IsarNetworkQueryCacheService(),
     ),
   );
 
+  final mangadexEn = MangadexDatasource(lang: 'en', client: mangadexClient);
+  final mangadexFr = MangadexDatasource(lang: 'fr', client: mangadexClient);
+
   return {
     mangadexEn.sourceId: mangadexEn,
+    mangadexFr.sourceId: mangadexFr,
   };
 }
 
