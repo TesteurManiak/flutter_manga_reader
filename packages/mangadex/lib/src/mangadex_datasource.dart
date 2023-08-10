@@ -23,30 +23,40 @@ class MangadexDatasource extends MangaDatasource {
   /// {@macro mangadex_datasource}
   MangadexDatasource({
     required super.lang,
-    required String dexLang,
+    String? dexLang,
     RestClient? client,
-  })  : _dexLang = dexLang,
+  })  : _dexLang = dexLang ?? lang,
         _helper = const MangadexHelper(),
         _client = client ?? RestClient(baseUri: Uri.parse(MDConstants.apiUrl)),
-        super(name: MDConstants.sourceName);
+        super(
+          name: MDConstants.sourceName,
+          baseUrl: 'https://mangadex.org',
+        );
 
   final String _dexLang;
   final MangadexHelper _helper;
   final RestClient _client;
 
+  Map<String, String>? _headersBuilder() {
+    return {'Referer': '$baseUrl/'};
+  }
+
   @override
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [MDConstants.manga],
-      queryParameters: {
-        'order[followedCount]': 'desc',
-        'availableTranslatedLanguage[]': _dexLang,
-        'limit': MDConstants.mangaLimit,
-        'offset': _helper.getMangaListOffset(page),
-        'includes[]': MDConstants.coverArt,
-      },
-    ).decode(MangaListResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: [MDConstants.manga],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'order[followedCount]': 'desc',
+            'availableTranslatedLanguage[]': _dexLang,
+            'limit': MDConstants.mangaLimit,
+            'offset': _helper.getMangaListOffset(page),
+            'includes[]': MDConstants.coverArt,
+          },
+        )
+        .decode(MangaListResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -93,17 +103,20 @@ class MangadexDatasource extends MangaDatasource {
         .toSet();
     final limit = (mangaMap.length * locales.length).clamp(1, 100);
 
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: ['cover'],
-      queryParameters: {
-        'order[volume]': 'asc',
-        'manga[]': mangaMap.keys,
-        'locales[]': locales,
-        'limit': limit,
-        'offset': '0',
-      },
-    ).decode(CoverListResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: ['cover'],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'order[volume]': 'asc',
+            'manga[]': mangaMap.keys,
+            'locales[]': locales,
+            'limit': limit,
+            'offset': '0',
+          },
+        )
+        .decode(CoverListResponse.fromJson);
 
     return result.when(
       success: (response) {
@@ -157,19 +170,22 @@ class MangadexDatasource extends MangaDatasource {
   Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(
     int page,
   ) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [MDConstants.chapter],
-      queryParameters: {
-        'offset': _helper.getLatestChapterOffset(page),
-        'limit': MDConstants.latestChapterLimit,
-        'translatedLanguage[]': _dexLang,
-        'order[publishAt]': 'desc',
-        'includeFutureUpdates': '0',
-        'includeFuturePublishAt': '0',
-        'includeEmptyPages': '0',
-      },
-    ).decode(ChapterResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: [MDConstants.chapter],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'offset': _helper.getLatestChapterOffset(page),
+            'limit': MDConstants.latestChapterLimit,
+            'translatedLanguage[]': _dexLang,
+            'order[publishAt]': 'desc',
+            'includeFutureUpdates': '0',
+            'includeFuturePublishAt': '0',
+            'includeEmptyPages': '0',
+          },
+        )
+        .decode(ChapterResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -199,15 +215,18 @@ class MangadexDatasource extends MangaDatasource {
 
     if (mangaIds.isEmpty) return [];
 
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: ['manga'],
-      queryParameters: {
-        'includes[]': MDConstants.coverArt,
-        'limit': mangaIds.length,
-        'ids[]': mangaIds,
-      },
-    ).decode(MangaListResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: ['manga'],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'includes[]': MDConstants.coverArt,
+            'limit': mangaIds.length,
+            'ids[]': mangaIds,
+          },
+        )
+        .decode(MangaListResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -242,16 +261,19 @@ class MangadexDatasource extends MangaDatasource {
     int page,
     String query,
   ) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [MDConstants.manga],
-      queryParameters: {
-        'title': query,
-        'limit': MDConstants.mangaLimit,
-        'offset': _helper.getMangaListOffset(page),
-        'includes[]': MDConstants.coverArt,
-      },
-    ).decode(MangaListResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: [MDConstants.manga],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'title': query,
+            'limit': MDConstants.mangaLimit,
+            'offset': _helper.getMangaListOffset(page),
+            'includes[]': MDConstants.coverArt,
+          },
+        )
+        .decode(MangaListResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -275,6 +297,7 @@ class MangadexDatasource extends MangaDatasource {
     final result = await _client.send(
       method: HttpMethod.get,
       pathSegments: manga.pathSegments,
+      headers: _headersBuilder(),
       queryParameters: {
         'includes[]': [
           MDConstants.coverArt,
@@ -313,14 +336,17 @@ class MangadexDatasource extends MangaDatasource {
     MangaData mangaData,
     String langCode,
   ) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [
-        mangaData.id,
-        'aggregate',
-      ],
-      queryParameters: {'translatedLanguage[]': langCode},
-    ).decode(AggregateResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: [
+            mangaData.id,
+            'aggregate',
+          ],
+          headers: _headersBuilder(),
+          queryParameters: {'translatedLanguage[]': langCode},
+        )
+        .decode(AggregateResponse.fromJson);
 
     return result.when(
       success: (response) => response.volumes ?? {},
@@ -361,24 +387,27 @@ class MangadexDatasource extends MangaDatasource {
     required String mangaId,
     required int offset,
   }) async {
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: [MDConstants.manga, mangaId, 'feed'],
-      queryParameters: {
-        'includes[]': [
-          MDConstants.scanlationGroup,
-          MDConstants.user,
-        ],
-        'limit': 500,
-        'offset': offset,
-        'translatedLanguage[]': _dexLang,
-        'order[volume]': 'desc',
-        'order[chapter]': 'desc',
-        'includeFuturePublishAt': '0',
-        'includeEmptyPages': '0',
-        'contentRating[]': ContentRating.values.map((e) => e.name),
-      },
-    ).decode(ChapterResponse.fromJson);
+    final result = await _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: [MDConstants.manga, mangaId, 'feed'],
+          headers: _headersBuilder(),
+          queryParameters: {
+            'includes[]': [
+              MDConstants.scanlationGroup,
+              MDConstants.user,
+            ],
+            'limit': 500,
+            'offset': offset,
+            'translatedLanguage[]': _dexLang,
+            'order[volume]': 'desc',
+            'order[chapter]': 'desc',
+            'includeFuturePublishAt': '0',
+            'includeEmptyPages': '0',
+            'contentRating[]': ContentRating.values.map((e) => e.name),
+          },
+        )
+        .decode(ChapterResponse.fromJson);
 
     return result.when(
       success: (response) async {
@@ -424,6 +453,7 @@ class MangadexDatasource extends MangaDatasource {
     final result = await _client
         .send(
           method: HttpMethod.get,
+          headers: _headersBuilder(),
           pathSegments: requestUri.pathSegments,
         )
         .decode(AtHome.fromJson);

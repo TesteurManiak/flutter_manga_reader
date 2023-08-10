@@ -9,7 +9,6 @@ part 'manga_datasource.g.dart';
 MangaDatasource mangaDatasource(MangaDatasourceRef ref) {
   return MangadexDatasource(
     lang: 'en',
-    dexLang: 'en',
     client: RestClient(
       baseUri: Uri.parse(MDConstants.apiUrl),
       httpClient: CacheClient(

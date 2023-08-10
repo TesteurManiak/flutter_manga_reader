@@ -14,6 +14,7 @@ abstract class MangaDatasource {
   const MangaDatasource({
     required this.lang,
     required this.name,
+    required this.baseUrl,
   });
 
   /// The language of the source.
@@ -21,6 +22,11 @@ abstract class MangaDatasource {
 
   /// The name of the source.
   final String name;
+
+  /// The base url of the source.
+  ///
+  /// Used to open webview for the source.
+  final String baseUrl;
 
   /// Fetch the most popular mangas from the source.
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);
