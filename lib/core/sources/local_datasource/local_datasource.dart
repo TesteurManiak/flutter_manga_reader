@@ -57,7 +57,7 @@ LocalDatasource localDatasource(LocalDatasourceRef ref) {
   return DriftDatasource(appDatabase: AppDatabase());
 }
 
-@Riverpod(dependencies: [localDatasource])
+@Riverpod(keepAlive: true, dependencies: [localDatasource])
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
 }

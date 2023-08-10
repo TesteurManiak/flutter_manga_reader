@@ -22,12 +22,11 @@ final localDatasourceProvider = Provider<LocalDatasource>.internal(
 
 typedef LocalDatasourceRef = ProviderRef<LocalDatasource>;
 String _$watchMangasInLibraryHash() =>
-    r'50aa1914f665e58ca991df4527f3b77ad8c9ee19';
+    r'7609a9322afb2e2910b2ee3edbec1ceac84bc34e';
 
 /// See also [watchMangasInLibrary].
 @ProviderFor(watchMangasInLibrary)
-final watchMangasInLibraryProvider =
-    AutoDisposeStreamProvider<List<Manga>>.internal(
+final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
   watchMangasInLibrary,
   name: r'watchMangasInLibraryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -40,7 +39,7 @@ final watchMangasInLibraryProvider =
   },
 );
 
-typedef WatchMangasInLibraryRef = AutoDisposeStreamProviderRef<List<Manga>>;
+typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
 String _$watchMangaHash() => r'9b59ee664e348ac46a82ba7ab7051fce57e11bc5';
 
 /// Copied from Dart SDK

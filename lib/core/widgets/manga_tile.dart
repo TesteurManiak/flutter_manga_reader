@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/use_cases/is_manga_in_library.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +28,8 @@ class _MangaTileState extends ConsumerState<MangaTile>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    final isFavorite = ref.watch(isMangaInLibraryProvider(widget.manga));
 
     return GestureDetector(
       onTap: () async {
@@ -61,6 +64,14 @@ class _MangaTileState extends ConsumerState<MangaTile>
               height: double.infinity,
               width: double.infinity,
             ),
+            if (isFavorite && widget.displayedFromSource)
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(.7),
+                  ),
+                ),
+              ),
             Positioned(
               bottom: 0,
               left: 0,
