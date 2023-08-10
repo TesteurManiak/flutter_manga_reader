@@ -13,7 +13,7 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 @riverpod
 class DetailsController extends _$DetailsController {
   @override
-  DetailsState build(int mangaId) {
+  DetailsState build(int mangaId, MangaDatasource source) {
     ref.listen(watchMangaProvider(mangaId), (prev, next) {
       state = next.when(
         data: (manga) {
@@ -60,10 +60,9 @@ class DetailsController extends _$DetailsController {
   Future<Result<_MangaFetchRecord, String?>> _fetchRecord(
     Manga baseManga,
   ) async {
-    final remoteDatasource = ref.read(mangaDatasourceProvider);
-    return Future.wait([
-      remoteDatasource.fetchMangaDetails(baseManga),
-      remoteDatasource.fetchChapters(baseManga.toSourceModel()),
+    return Future.wait<Result<Object, HttpError>>([
+      source.fetchMangaDetails(baseManga),
+      source.fetchChapters(baseManga.toSourceModel()),
     ]).then((value) {
       final detailsResult = value[0];
       final chaptersResult = value[1];

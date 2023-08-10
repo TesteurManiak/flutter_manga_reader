@@ -178,8 +178,8 @@ extension on SourceManga {
       author: author != null ? Value.ofNullable(author) : const Value.absent(),
       status: status,
       genre: genre != null ? Value.ofNullable(genre) : const Value.absent(),
-      source: source != null ? Value.ofNullable(source) : const Value.absent(),
-      lang: lang != null ? Value.ofNullable(lang) : const Value.absent(),
+      source: source,
+      lang: lang,
       artist: artist != null ? Value.ofNullable(artist) : const Value.absent(),
       thumbnailUrl: thumbnailUrl != null
           ? Value.ofNullable(thumbnailUrl)

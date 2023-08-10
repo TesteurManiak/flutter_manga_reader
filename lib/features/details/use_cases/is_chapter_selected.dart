@@ -5,10 +5,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'is_chapter_selected.g.dart';
 
 @riverpod
-bool isChapterSelected(IsChapterSelectedRef ref, Chapter chapter) {
+bool isChapterSelected(
+  IsChapterSelectedRef ref,
+  Chapter chapter,
+  MangaDatasource mangaDatasource,
+) {
   return ref
       .watch(
-        detailsControllerProvider(chapter.mangaId)
+        detailsControllerProvider(chapter.mangaId, mangaDatasource)
             .select((s) => s.selectedChapters),
       )
       .contains(chapter);

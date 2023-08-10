@@ -31,16 +31,17 @@ class DetailsView extends ConsumerStatefulWidget {
   final bool openedFromSource;
 
   @override
-  ConsumerState<DetailsView> createState() => _DetailsViewState();
+  ConsumerState<DetailsView> createState() => _DetailsContentState();
 }
 
-class _DetailsViewState extends ConsumerState<DetailsView> {
+class _DetailsContentState extends ConsumerState<DetailsView> {
   @override
   void initState() {
     super.initState();
 
+    final source = ref.read(mangaDatasourceProvider);
     final detailsController = ref.read(
-      detailsControllerProvider(widget.mangaId).notifier,
+      detailsControllerProvider(widget.mangaId, source).notifier,
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -110,8 +111,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
+    final source = ref.watch(mangaDatasourceProvider);
     ref.listen(
-        detailsControllerProvider(widget.mangaId)
+        detailsControllerProvider(widget.mangaId, source)
             .select((s) => s.selectionMode), (_, next) {
       if (next) {
         DefaultSlidableController.maybeOf(context)?.show();
@@ -141,8 +143,11 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
             ),
             SliverPullToRefresh(
               onRefresh: () {
+                final source = ref.read(mangaDatasourceProvider);
+                final provider =
+                    detailsControllerProvider(widget.mangaId, source);
                 return ref
-                    .read(detailsControllerProvider(widget.mangaId).notifier)
+                    .read(provider.notifier)
                     .fetchDetails(forceRefresh: true);
               },
             ),
@@ -366,7 +371,9 @@ class _AddToLibraryButton extends ConsumerWidget {
 
     return DetailsButton(
       onPressed: () {
-        ref.read(detailsControllerProvider(id).notifier).toggleFavorite();
+        final source = ref.read(mangaDatasourceProvider);
+        final provider = detailsControllerProvider(id, source);
+        ref.read(provider.notifier).toggleFavorite();
       },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
       label: isFavorite

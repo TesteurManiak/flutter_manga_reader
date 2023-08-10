@@ -15,7 +15,7 @@ abstract class MangaDatasource {
     required this.lang,
     required this.name,
     required this.baseUrl,
-  });
+  }) : sourceId = '${name}_$lang';
 
   /// The language of the source.
   final String lang;
@@ -27,6 +27,8 @@ abstract class MangaDatasource {
   ///
   /// Used to open webview for the source.
   final String baseUrl;
+
+  final String sourceId;
 
   /// Fetch the most popular mangas from the source.
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);

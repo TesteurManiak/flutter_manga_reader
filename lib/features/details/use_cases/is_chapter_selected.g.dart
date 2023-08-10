@@ -6,7 +6,7 @@ part of 'is_chapter_selected.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isChapterSelectedHash() => r'be911dd0fe4664a76a3ef248ce03f58ad677d918';
+String _$isChapterSelectedHash() => r'e30c02026e21f028b4b0f32d38049c22c0d05756';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -43,9 +43,11 @@ class IsChapterSelectedFamily extends Family<bool> {
   /// See also [isChapterSelected].
   IsChapterSelectedProvider call(
     Chapter chapter,
+    MangaDatasource mangaDatasource,
   ) {
     return IsChapterSelectedProvider(
       chapter,
+      mangaDatasource,
     );
   }
 
@@ -55,6 +57,7 @@ class IsChapterSelectedFamily extends Family<bool> {
   ) {
     return call(
       provider.chapter,
+      provider.mangaDatasource,
     );
   }
 
@@ -78,10 +81,12 @@ class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
   /// See also [isChapterSelected].
   IsChapterSelectedProvider(
     this.chapter,
+    this.mangaDatasource,
   ) : super.internal(
           (ref) => isChapterSelected(
             ref,
             chapter,
+            mangaDatasource,
           ),
           from: isChapterSelectedProvider,
           name: r'isChapterSelectedProvider',
@@ -95,16 +100,20 @@ class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
         );
 
   final Chapter chapter;
+  final MangaDatasource mangaDatasource;
 
   @override
   bool operator ==(Object other) {
-    return other is IsChapterSelectedProvider && other.chapter == chapter;
+    return other is IsChapterSelectedProvider &&
+        other.chapter == chapter &&
+        other.mangaDatasource == mangaDatasource;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, chapter.hashCode);
+    hash = _SystemHash.combine(hash, mangaDatasource.hashCode);
 
     return _SystemHash.finish(hash);
   }

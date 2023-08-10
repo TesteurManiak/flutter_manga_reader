@@ -16,8 +16,8 @@ _$_SourceManga _$$_SourceMangaFromJson(Map<String, dynamic> json) =>
           ? MangaStatus.unknown
           : const MangaStatusConverter().fromJson(json['status'] as int),
       genre: json['genre'] as String?,
-      source: json['source'] as String?,
-      lang: json['lang'] as String?,
+      source: json['source'] as String,
+      lang: json['lang'] as String,
       artist: json['artist'] as String?,
       thumbnailUrl: json['thumbnailUrl'] as String?,
     );

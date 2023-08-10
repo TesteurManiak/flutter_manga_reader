@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
@@ -13,7 +14,8 @@ class ChapterTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isSelected = ref.watch(isChapterSelectedProvider(chapter));
+    final source = ref.watch(mangaDatasourceProvider);
+    final isSelected = ref.watch(isChapterSelectedProvider(chapter, source));
 
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
@@ -36,21 +38,22 @@ class ChapterTile extends ConsumerWidget {
         icon: Icon(Icons.download_for_offline_outlined),
       ),
       onTap: () {
-        final selectionMode =
-            ref.read(detailsControllerProvider(chapter.mangaId)).selectionMode;
+        final source = ref.read(mangaDatasourceProvider);
+        final provider = detailsControllerProvider(chapter.mangaId, source);
+        final selectionMode = ref.read(provider).selectionMode;
+
         if (selectionMode) {
-          ref
-              .read(detailsControllerProvider(chapter.mangaId).notifier)
-              .selectChapter(chapter);
+          ref.read(provider.notifier).selectChapter(chapter);
           return;
         }
 
         ChapterViewerRoute(chapterId: chapter.id).push<void>(context);
       },
       onLongPress: () {
-        ref
-            .read(detailsControllerProvider(chapter.mangaId).notifier)
-            .selectChapter(chapter);
+        final source = ref.read(mangaDatasourceProvider);
+        final provider = detailsControllerProvider(chapter.mangaId, source);
+
+        ref.read(provider.notifier).selectChapter(chapter);
       },
     );
   }

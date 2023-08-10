@@ -17,8 +17,8 @@ class SourceManga with _$SourceManga {
     String? author,
     @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
     String? genre,
-    String? source,
-    String? lang,
+    required String source,
+    required String lang,
     String? artist,
     String? thumbnailUrl,
   }) = _SourceManga;
@@ -29,4 +29,8 @@ class SourceManga with _$SourceManga {
   factory SourceManga.fromModel(Manga manga) {
     return SourceManga.fromJson(manga.toJson());
   }
+
+  const SourceManga._();
+
+  String get sourceId => '${source}_$lang';
 }

@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'7fd2d82845afbb8b46d0be1dee5da35bf1986b1f';
+String _$detailsControllerHash() => r'100f74b016c7663dedf1a15f1062df425ae51195';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -32,9 +32,11 @@ class _SystemHash {
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
   late final int mangaId;
+  late final MangaDatasource source;
 
   DetailsState build(
     int mangaId,
+    MangaDatasource source,
   );
 }
 
@@ -50,9 +52,11 @@ class DetailsControllerFamily extends Family<DetailsState> {
   /// See also [DetailsController].
   DetailsControllerProvider call(
     int mangaId,
+    MangaDatasource source,
   ) {
     return DetailsControllerProvider(
       mangaId,
+      source,
     );
   }
 
@@ -62,6 +66,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
   ) {
     return call(
       provider.mangaId,
+      provider.source,
     );
   }
 
@@ -86,8 +91,11 @@ class DetailsControllerProvider
   /// See also [DetailsController].
   DetailsControllerProvider(
     this.mangaId,
+    this.source,
   ) : super.internal(
-          () => DetailsController()..mangaId = mangaId,
+          () => DetailsController()
+            ..mangaId = mangaId
+            ..source = source,
           from: detailsControllerProvider,
           name: r'detailsControllerProvider',
           debugGetCreateSourceHash:
@@ -100,16 +108,20 @@ class DetailsControllerProvider
         );
 
   final int mangaId;
+  final MangaDatasource source;
 
   @override
   bool operator ==(Object other) {
-    return other is DetailsControllerProvider && other.mangaId == mangaId;
+    return other is DetailsControllerProvider &&
+        other.mangaId == mangaId &&
+        other.source == source;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, mangaId.hashCode);
+    hash = _SystemHash.combine(hash, source.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -120,6 +132,7 @@ class DetailsControllerProvider
   ) {
     return notifier.build(
       mangaId,
+      source,
     );
   }
 }

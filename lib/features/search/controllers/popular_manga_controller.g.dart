@@ -7,7 +7,7 @@ part of 'popular_manga_controller.dart';
 // **************************************************************************
 
 String _$popularMangaControllerHash() =>
-    r'edc129b330e6a2ea646c4e8bef0570302ecd3094';
+    r'79e6fed023584f1c2be4c127f215cc01920d0792';
 
 /// Copied from Dart SDK
 class _SystemHash {

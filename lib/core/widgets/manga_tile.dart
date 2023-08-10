@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/navigation/route.dart';
@@ -44,6 +45,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
         if (!mounted) return;
         unawaited(
           DetailsRoute(
+            sourceId: ref.read(getSourceIdProvider(widget.manga)),
             mangaId: mangaId,
             openedFromSource: widget.displayedFromSource,
           ).push<void>(context),

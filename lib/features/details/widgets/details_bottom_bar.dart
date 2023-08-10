@@ -13,15 +13,13 @@ class DetailsBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final source = ref.watch(mangaDatasourceProvider);
+    final provider = detailsControllerProvider(mangaId, source);
     final hasRead = ref.watch(
-      detailsControllerProvider(mangaId).select(
-        (s) => s.selectedChapters.any((e) => e.read),
-      ),
+      provider.select((s) => s.selectedChapters.any((e) => e.read)),
     );
     final hasUnread = ref.watch(
-      detailsControllerProvider(mangaId).select(
-        (s) => s.selectedChapters.any((e) => !e.read),
-      ),
+      provider.select((s) => s.selectedChapters.any((e) => !e.read)),
     );
 
     return BottomAppBar(
@@ -32,9 +30,7 @@ class DetailsBottomBar extends ConsumerWidget {
             IconButton(
               tooltip: 'Mark as read'.hardcoded,
               onPressed: () {
-                ref
-                    .read(detailsControllerProvider(mangaId).notifier)
-                    .markSelectedChaptersAsRead();
+                ref.read(provider.notifier).markSelectedChaptersAsRead();
               },
               icon: const Icon(Icons.done_all),
             ),
@@ -42,9 +38,7 @@ class DetailsBottomBar extends ConsumerWidget {
             IconButton(
               tooltip: 'Mark as unread'.hardcoded,
               onPressed: () {
-                ref
-                    .read(detailsControllerProvider(mangaId).notifier)
-                    .markSelectedChaptersAsUnread();
+                ref.read(provider.notifier).markSelectedChaptersAsUnread();
               },
               icon: const Icon(Icons.remove_done),
             ),

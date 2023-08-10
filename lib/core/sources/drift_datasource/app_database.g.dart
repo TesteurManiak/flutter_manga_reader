@@ -65,13 +65,13 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
   late final GeneratedColumn<String> source = GeneratedColumn<String>(
-      'source', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+      'source', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _langMeta = const VerificationMeta('lang');
   @override
   late final GeneratedColumn<String> lang = GeneratedColumn<String>(
-      'lang', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+      'lang', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _artistMeta = const VerificationMeta('artist');
   @override
   late final GeneratedColumn<String> artist = GeneratedColumn<String>(
@@ -158,10 +158,14 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     if (data.containsKey('source')) {
       context.handle(_sourceMeta,
           source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
+    } else if (isInserting) {
+      context.missing(_sourceMeta);
     }
     if (data.containsKey('lang')) {
       context.handle(
           _langMeta, lang.isAcceptableOrUnknown(data['lang']!, _langMeta));
+    } else if (isInserting) {
+      context.missing(_langMeta);
     }
     if (data.containsKey('artist')) {
       context.handle(_artistMeta,
@@ -206,9 +210,9 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       favorite: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
       source: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source']),
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
       lang: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}lang']),
+          .read(DriftSqlType.string, data['${effectivePrefix}lang'])!,
       artist: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}artist']),
       thumbnailUrl: attachedDatabase.typeMapping
@@ -236,8 +240,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final MangaStatus status;
   final String? genre;
   final bool favorite;
-  final String? source;
-  final String? lang;
+  final String source;
+  final String lang;
   final String? artist;
   final String? thumbnailUrl;
   final bool initialized;
@@ -250,8 +254,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       required this.status,
       this.genre,
       required this.favorite,
-      this.source,
-      this.lang,
+      required this.source,
+      required this.lang,
       this.artist,
       this.thumbnailUrl,
       required this.initialized});
@@ -275,12 +279,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       map['genre'] = Variable<String>(genre);
     }
     map['favorite'] = Variable<bool>(favorite);
-    if (!nullToAbsent || source != null) {
-      map['source'] = Variable<String>(source);
-    }
-    if (!nullToAbsent || lang != null) {
-      map['lang'] = Variable<String>(lang);
-    }
+    map['source'] = Variable<String>(source);
+    map['lang'] = Variable<String>(lang);
     if (!nullToAbsent || artist != null) {
       map['artist'] = Variable<String>(artist);
     }
@@ -305,9 +305,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       genre:
           genre == null && nullToAbsent ? const Value.absent() : Value(genre),
       favorite: Value(favorite),
-      source:
-          source == null && nullToAbsent ? const Value.absent() : Value(source),
-      lang: lang == null && nullToAbsent ? const Value.absent() : Value(lang),
+      source: Value(source),
+      lang: Value(lang),
       artist:
           artist == null && nullToAbsent ? const Value.absent() : Value(artist),
       thumbnailUrl: thumbnailUrl == null && nullToAbsent
@@ -330,8 +329,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           .fromJson(serializer.fromJson<int>(json['status'])),
       genre: serializer.fromJson<String?>(json['genre']),
       favorite: serializer.fromJson<bool>(json['favorite']),
-      source: serializer.fromJson<String?>(json['source']),
-      lang: serializer.fromJson<String?>(json['lang']),
+      source: serializer.fromJson<String>(json['source']),
+      lang: serializer.fromJson<String>(json['lang']),
       artist: serializer.fromJson<String?>(json['artist']),
       thumbnailUrl: serializer.fromJson<String?>(json['thumbnailUrl']),
       initialized: serializer.fromJson<bool>(json['initialized']),
@@ -350,8 +349,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
       'genre': serializer.toJson<String?>(genre),
       'favorite': serializer.toJson<bool>(favorite),
-      'source': serializer.toJson<String?>(source),
-      'lang': serializer.toJson<String?>(lang),
+      'source': serializer.toJson<String>(source),
+      'lang': serializer.toJson<String>(lang),
       'artist': serializer.toJson<String?>(artist),
       'thumbnailUrl': serializer.toJson<String?>(thumbnailUrl),
       'initialized': serializer.toJson<bool>(initialized),
@@ -367,8 +366,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           MangaStatus? status,
           Value<String?> genre = const Value.absent(),
           bool? favorite,
-          Value<String?> source = const Value.absent(),
-          Value<String?> lang = const Value.absent(),
+          String? source,
+          String? lang,
           Value<String?> artist = const Value.absent(),
           Value<String?> thumbnailUrl = const Value.absent(),
           bool? initialized}) =>
@@ -381,8 +380,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         status: status ?? this.status,
         genre: genre.present ? genre.value : this.genre,
         favorite: favorite ?? this.favorite,
-        source: source.present ? source.value : this.source,
-        lang: lang.present ? lang.value : this.lang,
+        source: source ?? this.source,
+        lang: lang ?? this.lang,
         artist: artist.present ? artist.value : this.artist,
         thumbnailUrl:
             thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
@@ -439,8 +438,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<MangaStatus> status;
   final Value<String?> genre;
   final Value<bool> favorite;
-  final Value<String?> source;
-  final Value<String?> lang;
+  final Value<String> source;
+  final Value<String> lang;
   final Value<String?> artist;
   final Value<String?> thumbnailUrl;
   final Value<bool> initialized;
@@ -468,14 +467,16 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     required MangaStatus status,
     this.genre = const Value.absent(),
     this.favorite = const Value.absent(),
-    this.source = const Value.absent(),
-    this.lang = const Value.absent(),
+    required String source,
+    required String lang,
     this.artist = const Value.absent(),
     this.thumbnailUrl = const Value.absent(),
     this.initialized = const Value.absent(),
   })  : title = Value(title),
         url = Value(url),
-        status = Value(status);
+        status = Value(status),
+        source = Value(source),
+        lang = Value(lang);
   static Insertable<DbManga> custom({
     Expression<int>? id,
     Expression<String>? title,
@@ -517,8 +518,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       Value<MangaStatus>? status,
       Value<String?>? genre,
       Value<bool>? favorite,
-      Value<String?>? source,
-      Value<String?>? lang,
+      Value<String>? source,
+      Value<String>? lang,
       Value<String?>? artist,
       Value<String?>? thumbnailUrl,
       Value<bool>? initialized}) {

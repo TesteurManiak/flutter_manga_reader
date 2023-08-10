@@ -29,8 +29,8 @@ mixin _$Manga {
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
-  String? get source => throw _privateConstructorUsedError;
-  String? get lang => throw _privateConstructorUsedError;
+  String get source => throw _privateConstructorUsedError;
+  String get lang => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   bool get initialized => throw _privateConstructorUsedError;
@@ -54,8 +54,8 @@ abstract class $MangaCopyWith<$Res> {
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       bool favorite,
-      String? source,
-      String? lang,
+      String source,
+      String lang,
       String? artist,
       String? thumbnailUrl,
       bool initialized});
@@ -82,8 +82,8 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? status = null,
     Object? genre = freezed,
     Object? favorite = null,
-    Object? source = freezed,
-    Object? lang = freezed,
+    Object? source = null,
+    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
     Object? initialized = null,
@@ -121,14 +121,14 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      source: freezed == source
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lang: freezed == lang
+              as String,
+      lang: null == lang
           ? _value.lang
           : lang // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -160,8 +160,8 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       bool favorite,
-      String? source,
-      String? lang,
+      String source,
+      String lang,
       String? artist,
       String? thumbnailUrl,
       bool initialized});
@@ -184,8 +184,8 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     Object? status = null,
     Object? genre = freezed,
     Object? favorite = null,
-    Object? source = freezed,
-    Object? lang = freezed,
+    Object? source = null,
+    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
     Object? initialized = null,
@@ -223,14 +223,14 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      source: freezed == source
+      source: null == source
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lang: freezed == lang
+              as String,
+      lang: null == lang
           ? _value.lang
           : lang // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -259,8 +259,8 @@ class _$_Manga extends _Manga {
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.genre,
       this.favorite = false,
-      this.source,
-      this.lang,
+      required this.source,
+      required this.lang,
       this.artist,
       this.thumbnailUrl,
       this.initialized = false})
@@ -289,9 +289,9 @@ class _$_Manga extends _Manga {
   @JsonKey()
   final bool favorite;
   @override
-  final String? source;
+  final String source;
   @override
-  final String? lang;
+  final String lang;
   @override
   final String? artist;
   @override
@@ -371,8 +371,8 @@ abstract class _Manga extends Manga {
       @MangaStatusConverter() final MangaStatus status,
       final String? genre,
       final bool favorite,
-      final String? source,
-      final String? lang,
+      required final String source,
+      required final String lang,
       final String? artist,
       final String? thumbnailUrl,
       final bool initialized}) = _$_Manga;
@@ -398,9 +398,9 @@ abstract class _Manga extends Manga {
   @override
   bool get favorite;
   @override
-  String? get source;
+  String get source;
   @override
-  String? get lang;
+  String get lang;
   @override
   String? get artist;
   @override

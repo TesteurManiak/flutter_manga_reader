@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/features/library/views/library_view.dart';
-import 'package:flutter_manga_reader/features/search/views/search_view.dart';
+import 'package:flutter_manga_reader/features/search/views/source_list_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/settings_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HomeViewState extends State<HomeView> {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           LibraryView(),
-          SearchView(),
+          BrowseView(),
           SettingsView(),
         ],
       ),

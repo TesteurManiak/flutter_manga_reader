@@ -11,19 +11,20 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $detailsRoute => GoRouteData.$route(
-      path: '/details/:mangaId',
+      path: '/details/:sourceId/:mangaId',
       factory: $DetailsRouteExtension._fromState,
     );
 
 extension $DetailsRouteExtension on DetailsRoute {
   static DetailsRoute _fromState(GoRouterState state) => DetailsRoute(
+        sourceId: state.pathParameters['sourceId']!,
         mangaId: int.parse(state.pathParameters['mangaId']!),
         openedFromSource: _$convertMapValue(
             'opened-from-source', state.uri.queryParameters, _$boolConverter),
       );
 
   String get location => GoRouteData.$location(
-        '/details/${Uri.encodeComponent(mangaId.toString())}',
+        '/details/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(mangaId.toString())}',
         queryParams: {
           if (openedFromSource != null)
             'opened-from-source': openedFromSource!.toString(),

@@ -59,7 +59,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_about_open_source_licenses => 'Open source licenses';
 
   @override
-  String get search_title => 'Explore';
+  String get search_title => 'Browse';
 
   @override
   String get search_empty => 'No manga found';
