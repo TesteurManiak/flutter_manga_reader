@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/use_cases/get_unread_chapters.dart';
 import 'package:flutter_manga_reader/core/use_cases/is_manga_in_library.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/details/navigation/route.dart';
@@ -31,8 +32,8 @@ class _MangaTileState extends ConsumerState<MangaTile>
 
     final isFavorite = ref.watch(isMangaInLibraryProvider(widget.manga));
     final alreadyInLibrary = isFavorite && widget.displayedFromSource;
+    final showRemainingChapters = isFavorite && !widget.displayedFromSource;
     final strings = context.strings;
-    final theme = Theme.of(context);
 
     return GestureDetector(
       onTap: () async {
@@ -110,21 +111,14 @@ class _MangaTileState extends ConsumerState<MangaTile>
                 top: 4,
                 left: 4,
                 right: 4,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: theme.colorScheme.primary,
-                  ),
-                  child: Text(
-                    strings.in_library,
-                    style: TextStyle(
-                      color: theme.colorScheme.onPrimary,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              )
+                child: _LabelContainer(strings.in_library),
+              ),
+            if (showRemainingChapters)
+              Positioned(
+                top: 4,
+                left: 4,
+                child: _ChaptersLeftToRead(widget.manga),
+              ),
           ],
         ),
       ),
@@ -133,4 +127,47 @@ class _MangaTileState extends ConsumerState<MangaTile>
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class _ChaptersLeftToRead extends ConsumerWidget {
+  const _ChaptersLeftToRead(this.sourceManga);
+
+  final SourceManga sourceManga;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final unreadChaptersCount =
+        ref.watch(getUnreadChaptersProvider(sourceManga));
+
+    if (unreadChaptersCount == null) return const SizedBox.shrink();
+
+    return _LabelContainer(unreadChaptersCount.toString());
+  }
+}
+
+class _LabelContainer extends StatelessWidget {
+  const _LabelContainer(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: colorScheme.primary,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 12,
+          color: colorScheme.onPrimary,
+        ),
+      ),
+    );
+  }
 }

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'is_manga_in_library.dart';
+part of 'get_unread_chapters.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isMangaInLibraryHash() => r'28dff622facec93b5c9488b8a714874398192398';
+String _$getUnreadChaptersHash() => r'e75825ba5b6c6cd99f9be232fb41ad9b983a1577';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +29,29 @@ class _SystemHash {
   }
 }
 
-typedef IsMangaInLibraryRef = AutoDisposeProviderRef<bool>;
+typedef GetUnreadChaptersRef = AutoDisposeProviderRef<int?>;
 
-/// See also [isMangaInLibrary].
-@ProviderFor(isMangaInLibrary)
-const isMangaInLibraryProvider = IsMangaInLibraryFamily();
+/// See also [getUnreadChapters].
+@ProviderFor(getUnreadChapters)
+const getUnreadChaptersProvider = GetUnreadChaptersFamily();
 
-/// See also [isMangaInLibrary].
-class IsMangaInLibraryFamily extends Family<bool> {
-  /// See also [isMangaInLibrary].
-  const IsMangaInLibraryFamily();
+/// See also [getUnreadChapters].
+class GetUnreadChaptersFamily extends Family<int?> {
+  /// See also [getUnreadChapters].
+  const GetUnreadChaptersFamily();
 
-  /// See also [isMangaInLibrary].
-  IsMangaInLibraryProvider call(
+  /// See also [getUnreadChapters].
+  GetUnreadChaptersProvider call(
     SourceManga sourceManga,
   ) {
-    return IsMangaInLibraryProvider(
+    return GetUnreadChaptersProvider(
       sourceManga,
     );
   }
 
   @override
-  IsMangaInLibraryProvider getProviderOverride(
-    covariant IsMangaInLibraryProvider provider,
+  GetUnreadChaptersProvider getProviderOverride(
+    covariant GetUnreadChaptersProvider provider,
   ) {
     return call(
       provider.sourceManga,
@@ -59,7 +59,7 @@ class IsMangaInLibraryFamily extends Family<bool> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    watchMangasInLibraryProvider
+    getMangaIdFromSourceProvider
   ];
 
   @override
@@ -67,8 +67,8 @@ class IsMangaInLibraryFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    watchMangasInLibraryProvider,
-    ...?watchMangasInLibraryProvider.allTransitiveDependencies
+    getMangaIdFromSourceProvider,
+    ...?getMangaIdFromSourceProvider.allTransitiveDependencies
   };
 
   @override
@@ -76,35 +76,35 @@ class IsMangaInLibraryFamily extends Family<bool> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'isMangaInLibraryProvider';
+  String? get name => r'getUnreadChaptersProvider';
 }
 
-/// See also [isMangaInLibrary].
-class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
-  /// See also [isMangaInLibrary].
-  IsMangaInLibraryProvider(
+/// See also [getUnreadChapters].
+class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
+  /// See also [getUnreadChapters].
+  GetUnreadChaptersProvider(
     this.sourceManga,
   ) : super.internal(
-          (ref) => isMangaInLibrary(
+          (ref) => getUnreadChapters(
             ref,
             sourceManga,
           ),
-          from: isMangaInLibraryProvider,
-          name: r'isMangaInLibraryProvider',
+          from: getUnreadChaptersProvider,
+          name: r'getUnreadChaptersProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$isMangaInLibraryHash,
-          dependencies: IsMangaInLibraryFamily._dependencies,
+                  : _$getUnreadChaptersHash,
+          dependencies: GetUnreadChaptersFamily._dependencies,
           allTransitiveDependencies:
-              IsMangaInLibraryFamily._allTransitiveDependencies,
+              GetUnreadChaptersFamily._allTransitiveDependencies,
         );
 
   final SourceManga sourceManga;
 
   @override
   bool operator ==(Object other) {
-    return other is IsMangaInLibraryProvider &&
+    return other is GetUnreadChaptersProvider &&
         other.sourceManga == sourceManga;
   }
 

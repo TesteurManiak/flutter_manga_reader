@@ -12,6 +12,10 @@ abstract class LocalDatasource {
   /// Return a [Stream] of [Chapter] for a given [mangaId] and ordered by index.
   Stream<List<Chapter>> watchChaptersForManga(int mangaId);
 
+  /// Return a [Stream] of [Chapter] with their read value at false for a given
+  /// [mangaId] and ordered by index.
+  Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId);
+
   /// Return a [Stream] for the [Manga] with the given [id].
   Stream<Manga?> watchManga(int id);
 
@@ -91,4 +95,15 @@ Stream<List<Chapter>> watchChaptersForManga(
   int mangaId,
 ) {
   return ref.watch(localDatasourceProvider).watchChaptersForManga(mangaId);
+}
+
+@Riverpod(dependencies: [localDatasource])
+Stream<int> watchUnreadChaptersCountForManga(
+  WatchUnreadChaptersCountForMangaRef ref,
+  int mangaId,
+) {
+  return ref
+      .watch(localDatasourceProvider)
+      .watchUnreadChaptersForManga(mangaId)
+      .map((chapters) => chapters.length);
 }
