@@ -418,7 +418,7 @@ class WatchChaptersForMangaProvider extends StreamProvider<List<Chapter>> {
 }
 
 String _$watchUnreadChaptersCountForMangaHash() =>
-    r'1017e8b55c3d1f94a84a49f1cc42b420d917e0ec';
+    r'54c2aee35357a308697f52f76c7a2f826513a101';
 typedef WatchUnreadChaptersCountForMangaRef = AutoDisposeStreamProviderRef<int>;
 
 /// See also [watchUnreadChaptersCountForManga].
@@ -449,12 +449,18 @@ class WatchUnreadChaptersCountForMangaFamily extends Family<AsyncValue<int>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

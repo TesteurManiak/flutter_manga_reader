@@ -61,6 +61,7 @@ class ChapterTile extends ConsumerWidget {
         ChapterViewerRoute(
           chapterId: chapter.id,
           sourceId: sourceId,
+          initialPage: lastPageRead,
         ).push<void>(context);
       },
       onLongPress: () {
