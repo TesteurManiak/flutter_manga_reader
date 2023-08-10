@@ -28,10 +28,10 @@ class ChapterSettingsBottomSheet extends ConsumerWidget
             Padding(
               padding: listTileTheme.contentPadding ??
                   const EdgeInsetsDirectional.only(start: 16, end: 24),
-              child: Text('For this series'.hardcoded),
+              child: Text(strings.chapter_settings_for_this_series),
             ),
             ListTile(
-              title: Text('Lecture mode'.hardcoded),
+              title: Text(strings.lecture_mode),
               trailing: DropdownMenu<ReadingDirection>(
                 inputDecorationTheme: const InputDecorationTheme(
                   border: InputBorder.none,

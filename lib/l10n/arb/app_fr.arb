@@ -29,6 +29,7 @@
     "manga_status_on_hiatus": "En pause",
     "generic_error": "Une erreur est survenue",
     "generic_cancel": "Annuler",
+    "generic_retry": "Réessayer",
     "details_add_to_library": "Ajouter à la bibliothèque",
     "details_webview": "WebView",
     "filter_popular": "Populaire",
@@ -37,5 +38,8 @@
     "left_to_right": "De gauche à droite",
     "right_to_left": "De droite à gauche",
     "webtoon": "Webtoon",
-    "in_library": "Dans la bibliothèque"
+    "in_library": "Dans la bibliothèque",
+    "chapter_not_found": "Le chapitre n'a pas été trouvé",
+    "chapter_settings_for_this_series": "Pour cette série",
+    "lecture_mode": "Mode de lecture"
 }

@@ -19,6 +19,17 @@ extension StringExtensions on String {
   String ifEmpty(String Function() other) {
     return isEmpty ? other() : this;
   }
+
+  String toLocalized() {
+    switch (toLowerCase()) {
+      case 'ja':
+        return 'Japanese';
+      case 'ko':
+        return 'Korean';
+      default:
+        return toUpperCase();
+    }
+  }
 }
 
 extension NullableStringExtensions on String? {

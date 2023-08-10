@@ -103,9 +103,8 @@ class MangadexHelper {
           publicationDemographic != PublicationDemographic.none)
         publicationDemographic.name.capitalizeFirst(),
       if (contentRating != null && contentRating != ContentRating.safe)
-        contentRating.name.capitalizeFirst(), // TODO(Guillaume): translate
-      if (originalLanguage != null)
-        originalLanguage.toUpperCase(), // TODO(Guillaume): translate
+        contentRating.name.capitalizeFirst(),
+      if (originalLanguage != null) originalLanguage.toLocalized(),
     ];
 
     final authors = mangaData.relationships

@@ -267,6 +267,12 @@ abstract class AppLocalizations {
   /// **'Annuler'**
   String get generic_cancel;
 
+  /// No description provided for @generic_retry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réessayer'**
+  String get generic_retry;
+
   /// No description provided for @details_add_to_library.
   ///
   /// In fr, this message translates to:
@@ -320,6 +326,24 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Dans la bibliothèque'**
   String get in_library;
+
+  /// No description provided for @chapter_not_found.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le chapitre n\'a pas été trouvé'**
+  String get chapter_not_found;
+
+  /// No description provided for @chapter_settings_for_this_series.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour cette série'**
+  String get chapter_settings_for_this_series;
+
+  /// No description provided for @lecture_mode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode de lecture'**
+  String get lecture_mode;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

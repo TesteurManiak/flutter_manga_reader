@@ -30,7 +30,7 @@ class ErrorContent extends StatelessWidget {
           if (onRetry != null)
             ElevatedButton(
               onPressed: onRetry,
-              child: Text('Retry'.hardcoded),
+              child: Text(context.strings.generic_retry),
             ),
         ],
       ),

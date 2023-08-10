@@ -92,6 +92,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generic_cancel => 'Cancel';
 
   @override
+  String get generic_retry => 'Retry';
+
+  @override
   String get details_add_to_library => 'Add to library';
 
   @override
@@ -117,4 +120,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get in_library => 'In library';
+
+  @override
+  String get chapter_not_found => 'Chapter not found';
+
+  @override
+  String get chapter_settings_for_this_series => 'For this series';
+
+  @override
+  String get lecture_mode => 'Lecture mode';
 }
