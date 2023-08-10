@@ -12,6 +12,9 @@ import 'package:mangadex/src/models/user.dart';
 class MangadexHelper {
   const MangadexHelper();
 
+  static final titleSpecialCharactersRegex = RegExp('[^a-z0-9]+');
+  static final trailingHyphenRegex = RegExp(r'-+$');
+
   /// Gets the UUID from the url.
   String getUuidFromUrl(String url) => url.split('/').last;
 
@@ -250,6 +253,19 @@ class MangadexHelper {
     } catch (_) {
       return null;
     }
+  }
+
+  String titleToSlug(String title) {
+    return title
+        .trim()
+        .toLowerCase()
+        .replaceAll(titleSpecialCharactersRegex, '-')
+        .replaceAll(trailingHyphenRegex, '')
+        .split('-')
+        .reduce((accumulator, element) {
+      final currentSlug = '$accumulator-$element';
+      return currentSlug.length > 100 ? accumulator : currentSlug;
+    });
   }
 }
 

@@ -40,6 +40,11 @@ abstract class MangaDatasource {
     String query,
   );
 
+  /// Return the url of the manga in the source.
+  ///
+  /// Used to open webview for the manga.
+  String getMangaUrl(SourceManga sourceManga);
+
   /// Fetch the details of a manga. (Does not include chapters)
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga);
 

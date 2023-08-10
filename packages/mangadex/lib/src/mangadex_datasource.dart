@@ -482,6 +482,14 @@ class MangadexDatasource extends MangaDatasource {
       failure: Result.failure,
     );
   }
+
+  @override
+  String getMangaUrl(SourceManga sourceManga) {
+    final title = sourceManga.title;
+    final url = sourceManga.url.replaceFirst('manga', 'title');
+
+    return '$url/${_helper.titleToSlug(title)}';
+  }
 }
 
 extension on Manga {
