@@ -97,6 +97,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get generic_retry => 'Réessayer';
 
   @override
+  String get generic_search => 'Recherche...';
+
+  @override
   String get details_add_to_library => 'Ajouter à la bibliothèque';
 
   @override
@@ -146,4 +149,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get lecture_mode => 'Mode de lecture';
+
+  @override
+  String get mark_as_read => 'Marquer comme lu';
+
+  @override
+  String get mark_as_unread => 'Marquer comme non lu';
 }

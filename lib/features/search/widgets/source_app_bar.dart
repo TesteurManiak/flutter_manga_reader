@@ -123,7 +123,7 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
         ref.read(filteredMangaProvider.notifier).startSearch(value.trim());
       },
       decoration: InputDecoration(
-        hintText: 'Recherche...'.hardcoded,
+        hintText: context.strings.generic_search,
         suffixIcon: showClearButton
             ? IconButton(
                 icon: const Icon(Icons.clear),

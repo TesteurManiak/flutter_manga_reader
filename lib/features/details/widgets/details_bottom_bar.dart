@@ -21,6 +21,7 @@ class DetailsBottomBar extends ConsumerWidget {
     final hasUnread = ref.watch(
       provider.select((s) => s.selectedChapters.any((e) => !e.read)),
     );
+    final strings = context.strings;
 
     return BottomAppBar(
       child: Row(
@@ -28,7 +29,7 @@ class DetailsBottomBar extends ConsumerWidget {
         children: [
           if (hasUnread)
             IconButton(
-              tooltip: 'Mark as read'.hardcoded,
+              tooltip: strings.mark_as_read,
               onPressed: () {
                 ref.read(provider.notifier).markSelectedChaptersAsRead();
               },
@@ -36,7 +37,7 @@ class DetailsBottomBar extends ConsumerWidget {
             ),
           if (hasRead)
             IconButton(
-              tooltip: 'Mark as unread'.hardcoded,
+              tooltip: strings.mark_as_unread,
               onPressed: () {
                 ref.read(provider.notifier).markSelectedChaptersAsUnread();
               },

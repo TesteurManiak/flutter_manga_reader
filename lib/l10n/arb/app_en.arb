@@ -30,6 +30,7 @@
     "generic_error": "Something went wrong",
     "generic_cancel": "Cancel",
     "generic_retry": "Retry",
+    "generic_search": "Search...",
     "details_add_to_library": "Add to library",
     "details_webview": "WebView",
     "details_chapter_count": "{count, plural, =0{{count} chapter} =1{{count} chapter} other{{count} chapters}}",
@@ -50,5 +51,7 @@
     "chapter_not_found": "Chapter not found",
     "manga_not_found": "Manga not found",
     "chapter_settings_for_this_series": "For this series",
-    "lecture_mode": "Lecture mode"
+    "lecture_mode": "Lecture mode",
+    "mark_as_read": "Mark as read",
+    "mark_as_unread": "Mark as unread"
 }

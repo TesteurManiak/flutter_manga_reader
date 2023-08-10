@@ -273,6 +273,12 @@ abstract class AppLocalizations {
   /// **'Réessayer'**
   String get generic_retry;
 
+  /// No description provided for @generic_search.
+  ///
+  /// In fr, this message translates to:
+  /// **'Recherche...'**
+  String get generic_search;
+
   /// No description provided for @details_add_to_library.
   ///
   /// In fr, this message translates to:
@@ -356,6 +362,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Mode de lecture'**
   String get lecture_mode;
+
+  /// No description provided for @mark_as_read.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marquer comme lu'**
+  String get mark_as_read;
+
+  /// No description provided for @mark_as_unread.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marquer comme non lu'**
+  String get mark_as_unread;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

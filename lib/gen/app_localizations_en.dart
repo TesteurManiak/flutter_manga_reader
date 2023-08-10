@@ -97,6 +97,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get generic_retry => 'Retry';
 
   @override
+  String get generic_search => 'Search...';
+
+  @override
   String get details_add_to_library => 'Add to library';
 
   @override
@@ -146,4 +149,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lecture_mode => 'Lecture mode';
+
+  @override
+  String get mark_as_read => 'Mark as read';
+
+  @override
+  String get mark_as_unread => 'Mark as unread';
 }
