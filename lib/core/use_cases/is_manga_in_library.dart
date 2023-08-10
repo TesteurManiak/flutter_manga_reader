@@ -13,12 +13,3 @@ bool isMangaInLibrary(IsMangaInLibraryRef ref, SourceManga sourceManga) {
         orElse: () => false,
       );
 }
-
-extension on Manga {
-  bool isSameAs(SourceManga sourceManga) {
-    return title == sourceManga.title &&
-        url == sourceManga.url &&
-        lang == sourceManga.lang &&
-        source == sourceManga.source;
-  }
-}

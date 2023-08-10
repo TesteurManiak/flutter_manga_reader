@@ -41,4 +41,11 @@ class Manga with _$Manga {
   }
 
   SourceManga toSourceModel() => SourceManga.fromJson(toJson());
+
+  bool isSameAs(SourceManga sourceManga) {
+    return title == sourceManga.title &&
+        url == sourceManga.url &&
+        lang == sourceManga.lang &&
+        source == sourceManga.source;
+  }
 }

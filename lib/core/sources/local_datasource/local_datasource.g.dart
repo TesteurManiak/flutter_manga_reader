@@ -416,5 +416,91 @@ class WatchChaptersForMangaProvider extends StreamProvider<List<Chapter>> {
     return _SystemHash.finish(hash);
   }
 }
+
+String _$watchUnreadChaptersCountForMangaHash() =>
+    r'1017e8b55c3d1f94a84a49f1cc42b420d917e0ec';
+typedef WatchUnreadChaptersCountForMangaRef = AutoDisposeStreamProviderRef<int>;
+
+/// See also [watchUnreadChaptersCountForManga].
+@ProviderFor(watchUnreadChaptersCountForManga)
+const watchUnreadChaptersCountForMangaProvider =
+    WatchUnreadChaptersCountForMangaFamily();
+
+/// See also [watchUnreadChaptersCountForManga].
+class WatchUnreadChaptersCountForMangaFamily extends Family<AsyncValue<int>> {
+  /// See also [watchUnreadChaptersCountForManga].
+  const WatchUnreadChaptersCountForMangaFamily();
+
+  /// See also [watchUnreadChaptersCountForManga].
+  WatchUnreadChaptersCountForMangaProvider call(
+    int mangaId,
+  ) {
+    return WatchUnreadChaptersCountForMangaProvider(
+      mangaId,
+    );
+  }
+
+  @override
+  WatchUnreadChaptersCountForMangaProvider getProviderOverride(
+    covariant WatchUnreadChaptersCountForMangaProvider provider,
+  ) {
+    return call(
+      provider.mangaId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'watchUnreadChaptersCountForMangaProvider';
+}
+
+/// See also [watchUnreadChaptersCountForManga].
+class WatchUnreadChaptersCountForMangaProvider
+    extends AutoDisposeStreamProvider<int> {
+  /// See also [watchUnreadChaptersCountForManga].
+  WatchUnreadChaptersCountForMangaProvider(
+    this.mangaId,
+  ) : super.internal(
+          (ref) => watchUnreadChaptersCountForManga(
+            ref,
+            mangaId,
+          ),
+          from: watchUnreadChaptersCountForMangaProvider,
+          name: r'watchUnreadChaptersCountForMangaProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$watchUnreadChaptersCountForMangaHash,
+          dependencies: WatchUnreadChaptersCountForMangaFamily._dependencies,
+          allTransitiveDependencies:
+              WatchUnreadChaptersCountForMangaFamily._allTransitiveDependencies,
+        );
+
+  final int mangaId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is WatchUnreadChaptersCountForMangaProvider &&
+        other.mangaId == mangaId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, mangaId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
