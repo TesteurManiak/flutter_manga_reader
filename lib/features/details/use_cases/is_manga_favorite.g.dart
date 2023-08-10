@@ -6,7 +6,7 @@ part of 'is_manga_favorite.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isMangaFavoriteHash() => r'68f17de4d9428a8a45aa20d8a86e34e36f790d7e';
+String _$isMangaFavoriteHash() => r'bd1e3acd5d9ef1874f14a6178ccbaecf49048b6a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -58,12 +58,18 @@ class IsMangaFavoriteFamily extends Family<bool> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    watchMangasInLibraryProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    watchMangasInLibraryProvider,
+    ...?watchMangasInLibraryProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

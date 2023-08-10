@@ -7,7 +7,7 @@ part of 'chapter_viewer_controller.dart';
 // **************************************************************************
 
 String _$chapterViewerControllerHash() =>
-    r'1c24e29378901da5ec81ebe20962ced5bef52681';
+    r'30efb85520508e569d6207e2773f415d6981734d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -66,12 +66,21 @@ class ChapterViewerControllerFamily extends Family<ChapterViewerState> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider,
+    fetchChapterPagesProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies,
+    fetchChapterPagesProvider,
+    ...?fetchChapterPagesProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

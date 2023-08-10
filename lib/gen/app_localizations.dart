@@ -302,6 +302,24 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Filtre'**
   String get filter_other;
+
+  /// No description provided for @left_to_right.
+  ///
+  /// In fr, this message translates to:
+  /// **'De gauche à droite'**
+  String get left_to_right;
+
+  /// No description provided for @right_to_left.
+  ///
+  /// In fr, this message translates to:
+  /// **'De droite à gauche'**
+  String get right_to_left;
+
+  /// No description provided for @webtoon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Webtoon'**
+  String get webtoon;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

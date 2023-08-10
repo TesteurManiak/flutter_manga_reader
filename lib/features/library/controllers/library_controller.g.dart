@@ -6,7 +6,7 @@ part of 'library_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$libraryControllerHash() => r'5153a31182519fbc0bf057955a44671905b501c7';
+String _$libraryControllerHash() => r'9f66a489bf03db37bc4ea49f79b115ce1291241e';
 
 /// See also [LibraryController].
 @ProviderFor(LibraryController)
@@ -17,8 +17,11 @@ final libraryControllerProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$libraryControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[watchMangasInLibraryProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    watchMangasInLibraryProvider,
+    ...?watchMangasInLibraryProvider.allTransitiveDependencies
+  },
 );
 
 typedef _$LibraryController = AutoDisposeNotifier<LibraryState>;

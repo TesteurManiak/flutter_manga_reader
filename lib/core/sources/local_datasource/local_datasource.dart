@@ -52,22 +52,22 @@ abstract class LocalDatasource {
   });
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [])
 LocalDatasource localDatasource(LocalDatasourceRef ref) {
   return DriftDatasource(appDatabase: AppDatabase());
 }
 
-@riverpod
+@Riverpod(dependencies: [localDatasource])
 Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [localDatasource])
 Stream<Manga?> watchManga(WatchMangaRef ref, int id) {
   return ref.watch(localDatasourceProvider).watchManga(id);
 }
 
-@riverpod
+@Riverpod(dependencies: [localDatasource])
 Future<int?> getMangaIdFromSource(
   GetMangaIdFromSourceRef ref,
   SourceManga sourceManga,
@@ -80,12 +80,12 @@ Future<int?> getMangaIdFromSource(
       );
 }
 
-@riverpod
+@Riverpod(dependencies: [localDatasource])
 Future<Chapter?> getChapter(GetChapterRef ref, int chapterId) {
   return ref.watch(localDatasourceProvider).getChapter(chapterId);
 }
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [localDatasource])
 Stream<List<Chapter>> watchChaptersForManga(
   WatchChaptersForMangaRef ref,
   int mangaId,

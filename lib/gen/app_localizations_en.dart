@@ -108,4 +108,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get filter_other => 'Filter';
+
+  @override
+  String get left_to_right => 'Left to right';
+
+  @override
+  String get right_to_left => 'Right to left';
+
+  @override
+  String get webtoon => 'Webtoon';
 }

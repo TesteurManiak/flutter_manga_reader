@@ -19,15 +19,7 @@ enum ReadingDirection {
   final bool isContinuous;
   final LocalizedStringFetcher localized;
 
-  static String _leftToRight(AppLocalizations strings) {
-    return 'Left to right'.hardcoded;
-  }
-
-  static String _rightToLeft(AppLocalizations strings) {
-    return 'Right to left'.hardcoded;
-  }
-
-  static String _webtoon(AppLocalizations strings) {
-    return 'Webtoon'.hardcoded;
-  }
+  static String _leftToRight(AppLocalizations strings) => strings.left_to_right;
+  static String _rightToLeft(AppLocalizations strings) => strings.right_to_left;
+  static String _webtoon(AppLocalizations strings) => strings.webtoon;
 }

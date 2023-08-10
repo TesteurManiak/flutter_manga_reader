@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_manga_reader/features/search/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,7 +38,7 @@ class _SourceTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(source.name),
-      subtitle: Text(source.lang.hardcoded),
+      subtitle: Text(Locale(source.lang).translatedLocaleName),
       onTap: () {
         BrowseSourceRoute(sourceId: source.sourceId).push<void>(context);
       },

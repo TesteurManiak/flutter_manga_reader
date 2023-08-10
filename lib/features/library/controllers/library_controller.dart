@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'library_controller.freezed.dart';
 part 'library_controller.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [watchMangasInLibrary])
 class LibraryController extends _$LibraryController {
   @override
   LibraryState build() {

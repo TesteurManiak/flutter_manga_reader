@@ -8,8 +8,13 @@ import 'package:intl/intl.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class ChapterTile extends ConsumerWidget {
-  const ChapterTile(this.chapter, {super.key});
+  const ChapterTile({
+    super.key,
+    required this.sourceId,
+    required this.chapter,
+  });
 
+  final String sourceId;
   final Chapter chapter;
 
   @override
@@ -47,7 +52,10 @@ class ChapterTile extends ConsumerWidget {
           return;
         }
 
-        ChapterViewerRoute(chapterId: chapter.id).push<void>(context);
+        ChapterViewerRoute(
+          chapterId: chapter.id,
+          sourceId: sourceId,
+        ).push<void>(context);
       },
       onLongPress: () {
         final source = ref.read(mangaDatasourceProvider);

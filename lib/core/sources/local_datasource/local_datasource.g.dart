@@ -6,7 +6,7 @@ part of 'local_datasource.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localDatasourceHash() => r'3fc9a93f9e3999c336e790f8338a6f15134f4003';
+String _$localDatasourceHash() => r'0987826b9fa0c06880a8eb900a84eae68c413521';
 
 /// See also [localDatasource].
 @ProviderFor(localDatasource)
@@ -16,13 +16,13 @@ final localDatasourceProvider = Provider<LocalDatasource>.internal(
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$localDatasourceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef LocalDatasourceRef = ProviderRef<LocalDatasource>;
 String _$watchMangasInLibraryHash() =>
-    r'76e7db8f2ea22cb4edf3ab8af1269c17fab63267';
+    r'50aa1914f665e58ca991df4527f3b77ad8c9ee19';
 
 /// See also [watchMangasInLibrary].
 @ProviderFor(watchMangasInLibrary)
@@ -33,12 +33,15 @@ final watchMangasInLibraryProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$watchMangasInLibraryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[localDatasourceProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  },
 );
 
 typedef WatchMangasInLibraryRef = AutoDisposeStreamProviderRef<List<Manga>>;
-String _$watchMangaHash() => r'764b8ddbfc7c85e0c5ad6f0979f7cd2f989c8518';
+String _$watchMangaHash() => r'9b59ee664e348ac46a82ba7ab7051fce57e11bc5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -90,12 +93,18 @@ class WatchMangaFamily extends Family<AsyncValue<Manga?>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -143,7 +152,7 @@ class WatchMangaProvider extends StreamProvider<Manga?> {
 }
 
 String _$getMangaIdFromSourceHash() =>
-    r'fb9f87b153e6c2927b048ae7d664df3037a09987';
+    r'2b7787864eac6bb632ede963b021c0045ec1fae1';
 typedef GetMangaIdFromSourceRef = AutoDisposeFutureProviderRef<int?>;
 
 /// See also [getMangaIdFromSource].
@@ -173,12 +182,18 @@ class GetMangaIdFromSourceFamily extends Family<AsyncValue<int?>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -226,7 +241,7 @@ class GetMangaIdFromSourceProvider extends AutoDisposeFutureProvider<int?> {
   }
 }
 
-String _$getChapterHash() => r'e014da0ed3e672bc5e3419a5cd7236455adb952c';
+String _$getChapterHash() => r'4672c29091fa9608cd2cc9428f0ce51b341000c4';
 typedef GetChapterRef = AutoDisposeFutureProviderRef<Chapter?>;
 
 /// See also [getChapter].
@@ -256,12 +271,18 @@ class GetChapterFamily extends Family<AsyncValue<Chapter?>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -309,7 +330,7 @@ class GetChapterProvider extends AutoDisposeFutureProvider<Chapter?> {
 }
 
 String _$watchChaptersForMangaHash() =>
-    r'3b8b3b6a1bc7a876fd0904e9df8a48176dd0e716';
+    r'7ca21d7a80527ec656ab38d30e2fbf58962bd766';
 typedef WatchChaptersForMangaRef = StreamProviderRef<List<Chapter>>;
 
 /// See also [watchChaptersForManga].
@@ -339,12 +360,18 @@ class WatchChaptersForMangaFamily extends Family<AsyncValue<List<Chapter>>> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    localDatasourceProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

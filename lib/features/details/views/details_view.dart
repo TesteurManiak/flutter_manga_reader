@@ -433,7 +433,10 @@ class _SliverChapterList extends ConsumerWidget {
             itemCount: chapters.length,
             itemBuilder: (_, index) {
               final chapter = chapters[index];
-              return ChapterTile(chapter);
+              return ChapterTile(
+                sourceId: ref.read(mangaDatasourceProvider).sourceId,
+                chapter: chapter,
+              );
             },
           ),
         ],

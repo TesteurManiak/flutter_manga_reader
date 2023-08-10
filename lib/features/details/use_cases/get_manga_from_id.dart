@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'get_manga_from_id.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [localDatasource])
 Future<Manga?> getMangaFromId(GetMangaFromIdRef ref, int id) {
   return ref.watch(localDatasourceProvider).getManga(id);
 }

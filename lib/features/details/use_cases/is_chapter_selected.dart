@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'is_chapter_selected.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [DetailsController])
 bool isChapterSelected(
   IsChapterSelectedRef ref,
   Chapter chapter,

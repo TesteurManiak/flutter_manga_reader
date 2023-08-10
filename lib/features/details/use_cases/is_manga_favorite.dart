@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'is_manga_favorite.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [watchMangasInLibrary])
 bool isMangaFavorite(IsMangaFavoriteRef ref, int mangaId) {
   return ref.watch(watchMangasInLibraryProvider).maybeWhen(
         data: (mangas) => mangas.any((manga) => manga.id == mangaId),

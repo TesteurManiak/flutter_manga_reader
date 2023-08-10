@@ -6,7 +6,7 @@ part of 'is_chapter_selected.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isChapterSelectedHash() => r'e30c02026e21f028b4b0f32d38049c22c0d05756';
+String _$isChapterSelectedHash() => r'3c777435212fd1583327f727d8812a339f293683';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -61,12 +61,18 @@ class IsChapterSelectedFamily extends Family<bool> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    detailsControllerProvider
+  ];
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    detailsControllerProvider,
+    ...?detailsControllerProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

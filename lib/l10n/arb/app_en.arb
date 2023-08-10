@@ -34,5 +34,8 @@
     "details_webview": "WebView",
     "filter_popular": "Popular",
     "filter_latest": "Recent",
-    "filter_other": "Filter"
+    "filter_other": "Filter",
+    "left_to_right": "Left to right",
+    "right_to_left": "Right to left",
+    "webtoon": "Webtoon"
 }

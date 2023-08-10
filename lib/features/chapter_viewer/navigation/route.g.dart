@@ -11,18 +11,19 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $chapterViewerRoute => GoRouteData.$route(
-      path: '/chapter/:chapterId',
+      path: '/chapter/:sourceId/:chapterId',
       factory: $ChapterViewerRouteExtension._fromState,
     );
 
 extension $ChapterViewerRouteExtension on ChapterViewerRoute {
   static ChapterViewerRoute _fromState(GoRouterState state) =>
       ChapterViewerRoute(
+        sourceId: state.pathParameters['sourceId']!,
         chapterId: int.parse(state.pathParameters['chapterId']!),
       );
 
   String get location => GoRouteData.$location(
-        '/chapter/${Uri.encodeComponent(chapterId.toString())}',
+        '/chapter/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(chapterId.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);

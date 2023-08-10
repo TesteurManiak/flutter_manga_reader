@@ -108,4 +108,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get filter_other => 'Filtre';
+
+  @override
+  String get left_to_right => 'De gauche à droite';
+
+  @override
+  String get right_to_left => 'De droite à gauche';
+
+  @override
+  String get webtoon => 'Webtoon';
 }

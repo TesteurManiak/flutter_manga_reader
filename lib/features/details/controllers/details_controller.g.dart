@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'100f74b016c7663dedf1a15f1062df425ae51195';
+String _$detailsControllerHash() => r'1d99cbd8596651b4a4e7edf99b6707bca4252da9';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -70,12 +70,27 @@ class DetailsControllerFamily extends Family<DetailsState> {
     );
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>{
+    watchMangaProvider,
+    localDatasourceProvider,
+    isMangaFavoriteProvider,
+    watchChaptersForMangaProvider
+  };
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    watchMangaProvider,
+    ...?watchMangaProvider.allTransitiveDependencies,
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies,
+    isMangaFavoriteProvider,
+    ...?isMangaFavoriteProvider.allTransitiveDependencies,
+    watchChaptersForMangaProvider,
+    ...?watchChaptersForMangaProvider.allTransitiveDependencies
+  };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

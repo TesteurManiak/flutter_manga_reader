@@ -10,7 +10,18 @@ part 'details_controller.g.dart';
 
 typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 
-@riverpod
+@Riverpod(
+  dependencies: [
+    watchManga,
+    watchManga,
+    localDatasource,
+    isMangaFavorite,
+    localDatasource,
+    localDatasource,
+    localDatasource,
+    watchChaptersForManga,
+  ],
+)
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId, MangaDatasource source) {
