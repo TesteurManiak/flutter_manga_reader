@@ -30,6 +30,9 @@ class _MangaTileState extends ConsumerState<MangaTile>
     super.build(context);
 
     final isFavorite = ref.watch(isMangaInLibraryProvider(widget.manga));
+    final alreadyInLibrary = isFavorite && widget.displayedFromSource;
+    final strings = context.strings;
+    final theme = Theme.of(context);
 
     return GestureDetector(
       onTap: () async {
@@ -64,7 +67,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
               height: double.infinity,
               width: double.infinity,
             ),
-            if (isFavorite && widget.displayedFromSource)
+            if (alreadyInLibrary)
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -102,6 +105,26 @@ class _MangaTileState extends ConsumerState<MangaTile>
                 ),
               ),
             ),
+            if (alreadyInLibrary)
+              Positioned(
+                top: 4,
+                left: 4,
+                right: 4,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: theme.colorScheme.primary,
+                  ),
+                  child: Text(
+                    strings.in_library,
+                    style: TextStyle(
+                      color: theme.colorScheme.onPrimary,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              )
           ],
         ),
       ),

@@ -376,9 +376,7 @@ class _AddToLibraryButton extends ConsumerWidget {
         ref.read(provider.notifier).toggleFavorite();
       },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
-      label: isFavorite
-          ? strings.details_in_library
-          : strings.details_add_to_library,
+      label: isFavorite ? strings.in_library : strings.details_add_to_library,
     );
   }
 }

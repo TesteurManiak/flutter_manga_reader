@@ -30,12 +30,12 @@
     "generic_error": "Something went wrong",
     "generic_cancel": "Cancel",
     "details_add_to_library": "Add to library",
-    "details_in_library": "In library",
     "details_webview": "WebView",
     "filter_popular": "Popular",
     "filter_latest": "Recent",
     "filter_other": "Filter",
     "left_to_right": "Left to right",
     "right_to_left": "Right to left",
-    "webtoon": "Webtoon"
+    "webtoon": "Webtoon",
+    "in_library": "In library"
 }

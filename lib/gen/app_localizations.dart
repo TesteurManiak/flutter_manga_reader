@@ -273,12 +273,6 @@ abstract class AppLocalizations {
   /// **'Ajouter à la bibliothèque'**
   String get details_add_to_library;
 
-  /// No description provided for @details_in_library.
-  ///
-  /// In fr, this message translates to:
-  /// **'Dans la bibliothèque'**
-  String get details_in_library;
-
   /// No description provided for @details_webview.
   ///
   /// In fr, this message translates to:
@@ -320,6 +314,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Webtoon'**
   String get webtoon;
+
+  /// No description provided for @in_library.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dans la bibliothèque'**
+  String get in_library;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

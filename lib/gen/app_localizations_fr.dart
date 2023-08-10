@@ -95,9 +95,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get details_add_to_library => 'Ajouter à la bibliothèque';
 
   @override
-  String get details_in_library => 'Dans la bibliothèque';
-
-  @override
   String get details_webview => 'WebView';
 
   @override
@@ -117,4 +114,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get webtoon => 'Webtoon';
+
+  @override
+  String get in_library => 'Dans la bibliothèque';
 }
