@@ -16,4 +16,5 @@ export 'widgets/loading_content.dart';
 export 'widgets/manga_grid_view.dart';
 export 'widgets/separated_column.dart';
 export 'widgets/separated_row.dart';
+export 'widgets/source_provider_scope.dart';
 export 'widgets/theme_mode_dropdown.dart';
