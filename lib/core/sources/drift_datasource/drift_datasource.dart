@@ -157,6 +157,16 @@ class DriftDatasource implements LocalDatasource {
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
+
+  @override
+  Future<void> setChapterLastPageRead({
+    required int chapterId,
+    required int lastPageRead,
+  }) {
+    return (_database.update(_database.dbChapters)
+          ..where((t) => t.id.equals(chapterId)))
+        .write(DbChaptersCompanion(lastPageRead: Value(lastPageRead)));
+  }
 }
 
 extension on DbManga {

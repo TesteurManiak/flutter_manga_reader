@@ -54,6 +54,10 @@ abstract class LocalDatasource {
     required int mangaId,
     required bool favorite,
   });
+  Future<void> setChapterLastPageRead({
+    required int chapterId,
+    required int lastPageRead,
+  });
 }
 
 @Riverpod(keepAlive: true, dependencies: [])

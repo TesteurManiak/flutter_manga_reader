@@ -136,11 +136,17 @@ class _PageViewer extends ConsumerWidget {
 
     return WillPopScope(
       onWillPop: () async {
+        final page = chapterController.page;
+
         // If on last page of the chapter, mark it as read.
-        if (chapterController.page == pages.length - 1) {
+        if (page == pages.length - 1) {
           await ref
               .read(chapterViewerControllerProvider(chapterId).notifier)
               .markChapterAsRead();
+        } else if (page != 0 && page != initialPage) {
+          await ref
+              .read(chapterViewerControllerProvider(chapterId).notifier)
+              .setLastPageRead(page);
         }
 
         return true;
