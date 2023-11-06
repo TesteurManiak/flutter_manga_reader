@@ -53,7 +53,7 @@ dev_dependencies:
   flutter_gen: ^5.3.1
   flutter_gen_runner: ^5.3.1
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.1
+  flutter_native_splash: ^2.3.5
   flutter_test:
     sdk: flutter
   freezed: ^2.4.1
