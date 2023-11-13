@@ -47,9 +47,9 @@ dev_dependencies:
   alchemist: ^0.7.0
   build_runner: ^2.4.6
   build_verify: ^3.1.0
-  custom_lint: ^0.4.0
+  custom_lint: ^0.5.6
   drift_dev: ^2.13.1
-  fd_lints: ^2.0.1
+  fd_lints: ^2.2.0
   flutter_gen: ^5.3.1
   flutter_gen_runner: ^5.3.1
   flutter_launcher_icons: ^0.13.1
@@ -62,7 +62,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mocktail: ^0.3.0
   riverpod_generator: ^2.2.4
-  riverpod_lint: ^1.4.0
+  riverpod_lint: ^2.1.1
   theme_tailor: ^2.0.0
 
 flutter:
