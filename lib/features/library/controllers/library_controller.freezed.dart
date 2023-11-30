@@ -15,58 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$LibraryState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String message) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String message)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
+mixin _$LibraryState {}
 
 /// @nodoc
 abstract class $LibraryStateCopyWith<$Res> {
@@ -87,25 +36,25 @@ class _$LibraryStateCopyWithImpl<$Res, $Val extends LibraryState>
 }
 
 /// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(
-          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
-      __$$LoadingImplCopyWithImpl<$Res>;
+abstract class _$$LibraryLoadingImplCopyWith<$Res> {
+  factory _$$LibraryLoadingImplCopyWith(_$LibraryLoadingImpl value,
+          $Res Function(_$LibraryLoadingImpl) then) =
+      __$$LibraryLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LoadingImpl>
-    implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(
-      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+class __$$LibraryLoadingImplCopyWithImpl<$Res>
+    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryLoadingImpl>
+    implements _$$LibraryLoadingImplCopyWith<$Res> {
+  __$$LibraryLoadingImplCopyWithImpl(
+      _$LibraryLoadingImpl _value, $Res Function(_$LibraryLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadingImpl extends _Loading {
-  const _$LoadingImpl() : super._();
+class _$LibraryLoadingImpl extends LibraryLoading {
+  const _$LibraryLoadingImpl() : super._();
 
   @override
   String toString() {
@@ -115,107 +64,33 @@ class _$LoadingImpl extends _Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingImpl);
+        (other.runtimeType == runtimeType && other is _$LibraryLoadingImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String message) error,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String message)? error,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class _Loading extends LibraryState {
-  const factory _Loading() = _$LoadingImpl;
-  const _Loading._() : super._();
+abstract class LibraryLoading extends LibraryState {
+  const factory LibraryLoading() = _$LibraryLoadingImpl;
+  const LibraryLoading._() : super._();
 }
 
 /// @nodoc
-abstract class _$$LoadedImplCopyWith<$Res> {
-  factory _$$LoadedImplCopyWith(
-          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
-      __$$LoadedImplCopyWithImpl<$Res>;
+abstract class _$$LibraryLoadedImplCopyWith<$Res> {
+  factory _$$LibraryLoadedImplCopyWith(
+          _$LibraryLoadedImpl value, $Res Function(_$LibraryLoadedImpl) then) =
+      __$$LibraryLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Manga> mangas});
 }
 
 /// @nodoc
-class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LoadedImpl>
-    implements _$$LoadedImplCopyWith<$Res> {
-  __$$LoadedImplCopyWithImpl(
-      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+class __$$LibraryLoadedImplCopyWithImpl<$Res>
+    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryLoadedImpl>
+    implements _$$LibraryLoadedImplCopyWith<$Res> {
+  __$$LibraryLoadedImplCopyWithImpl(
+      _$LibraryLoadedImpl _value, $Res Function(_$LibraryLoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -223,7 +98,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? mangas = null,
   }) {
-    return _then(_$LoadedImpl(
+    return _then(_$LibraryLoadedImpl(
       mangas: null == mangas
           ? _value._mangas
           : mangas // ignore: cast_nullable_to_non_nullable
@@ -234,8 +109,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl extends _Loaded {
-  const _$LoadedImpl({required final List<Manga> mangas})
+class _$LibraryLoadedImpl extends LibraryLoaded {
+  const _$LibraryLoadedImpl({required final List<Manga> mangas})
       : _mangas = mangas,
         super._();
 
@@ -256,7 +131,7 @@ class _$LoadedImpl extends _Loaded {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadedImpl &&
+            other is _$LibraryLoadedImpl &&
             const DeepCollectionEquality().equals(other._mangas, _mangas));
   }
 
@@ -267,114 +142,41 @@ class _$LoadedImpl extends _Loaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
-      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String message) error,
-  }) {
-    return loaded(mangas);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String message)? error,
-  }) {
-    return loaded?.call(mangas);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(mangas);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
+  _$$LibraryLoadedImplCopyWith<_$LibraryLoadedImpl> get copyWith =>
+      __$$LibraryLoadedImplCopyWithImpl<_$LibraryLoadedImpl>(this, _$identity);
 }
 
-abstract class _Loaded extends LibraryState {
-  const factory _Loaded({required final List<Manga> mangas}) = _$LoadedImpl;
-  const _Loaded._() : super._();
+abstract class LibraryLoaded extends LibraryState {
+  const factory LibraryLoaded({required final List<Manga> mangas}) =
+      _$LibraryLoadedImpl;
+  const LibraryLoaded._() : super._();
 
   List<Manga> get mangas;
   @JsonKey(ignore: true)
-  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+  _$$LibraryLoadedImplCopyWith<_$LibraryLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$EmptyImplCopyWith<$Res> {
-  factory _$$EmptyImplCopyWith(
-          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
-      __$$EmptyImplCopyWithImpl<$Res>;
+abstract class _$$LibraryEmptyImplCopyWith<$Res> {
+  factory _$$LibraryEmptyImplCopyWith(
+          _$LibraryEmptyImpl value, $Res Function(_$LibraryEmptyImpl) then) =
+      __$$LibraryEmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$EmptyImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$EmptyImpl>
-    implements _$$EmptyImplCopyWith<$Res> {
-  __$$EmptyImplCopyWithImpl(
-      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+class __$$LibraryEmptyImplCopyWithImpl<$Res>
+    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryEmptyImpl>
+    implements _$$LibraryEmptyImplCopyWith<$Res> {
+  __$$LibraryEmptyImplCopyWithImpl(
+      _$LibraryEmptyImpl _value, $Res Function(_$LibraryEmptyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$EmptyImpl extends _Empty {
-  const _$EmptyImpl() : super._();
+class _$LibraryEmptyImpl extends LibraryEmpty {
+  const _$LibraryEmptyImpl() : super._();
 
   @override
   String toString() {
@@ -384,107 +186,33 @@ class _$EmptyImpl extends _Empty {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+        (other.runtimeType == runtimeType && other is _$LibraryEmptyImpl);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String message) error,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String message)? error,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
 }
 
-abstract class _Empty extends LibraryState {
-  const factory _Empty() = _$EmptyImpl;
-  const _Empty._() : super._();
+abstract class LibraryEmpty extends LibraryState {
+  const factory LibraryEmpty() = _$LibraryEmptyImpl;
+  const LibraryEmpty._() : super._();
 }
 
 /// @nodoc
-abstract class _$$ErrorImplCopyWith<$Res> {
-  factory _$$ErrorImplCopyWith(
-          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
-      __$$ErrorImplCopyWithImpl<$Res>;
+abstract class _$$LibraryErrorImplCopyWith<$Res> {
+  factory _$$LibraryErrorImplCopyWith(
+          _$LibraryErrorImpl value, $Res Function(_$LibraryErrorImpl) then) =
+      __$$LibraryErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$ErrorImpl>
-    implements _$$ErrorImplCopyWith<$Res> {
-  __$$ErrorImplCopyWithImpl(
-      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+class __$$LibraryErrorImplCopyWithImpl<$Res>
+    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryErrorImpl>
+    implements _$$LibraryErrorImplCopyWith<$Res> {
+  __$$LibraryErrorImplCopyWithImpl(
+      _$LibraryErrorImpl _value, $Res Function(_$LibraryErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -492,7 +220,7 @@ class __$$ErrorImplCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$ErrorImpl(
+    return _then(_$LibraryErrorImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -503,8 +231,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl extends _Error {
-  const _$ErrorImpl({required this.message}) : super._();
+class _$LibraryErrorImpl extends LibraryError {
+  const _$LibraryErrorImpl({required this.message}) : super._();
 
   @override
   final String message;
@@ -518,7 +246,7 @@ class _$ErrorImpl extends _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorImpl &&
+            other is _$LibraryErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -528,90 +256,17 @@ class _$ErrorImpl extends _Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
-      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(List<Manga> mangas) loaded,
-    required TResult Function() empty,
-    required TResult Function(String message) error,
-  }) {
-    return error(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(List<Manga> mangas)? loaded,
-    TResult? Function()? empty,
-    TResult? Function(String message)? error,
-  }) {
-    return error?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(List<Manga> mangas)? loaded,
-    TResult Function()? empty,
-    TResult Function(String message)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Empty value) empty,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Empty value)? empty,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Empty value)? empty,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+  _$$LibraryErrorImplCopyWith<_$LibraryErrorImpl> get copyWith =>
+      __$$LibraryErrorImplCopyWithImpl<_$LibraryErrorImpl>(this, _$identity);
 }
 
-abstract class _Error extends LibraryState {
-  const factory _Error({required final String message}) = _$ErrorImpl;
-  const _Error._() : super._();
+abstract class LibraryError extends LibraryState {
+  const factory LibraryError({required final String message}) =
+      _$LibraryErrorImpl;
+  const LibraryError._() : super._();
 
   String get message;
   @JsonKey(ignore: true)
-  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+  _$$LibraryErrorImplCopyWith<_$LibraryErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

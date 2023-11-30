@@ -180,34 +180,34 @@ class DetailsController extends _$DetailsController {
 }
 
 @freezed
-class DetailsState with _$DetailsState {
+sealed class DetailsState with _$DetailsState {
   const factory DetailsState.loading({
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     @Default(false) bool selectionMode,
-  }) = _Loading;
+  }) = DetailsLoading;
   const factory DetailsState.loaded({
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     @Default(false) bool selectionMode,
-  }) = _Loaded;
+  }) = DetailsLoaded;
   const factory DetailsState.error({
     @Default(<Chapter>[]) List<Chapter> selectedChapters,
     String? error,
     @Default(false) bool selectionMode,
-  }) = _Error;
+  }) = DetailsError;
 
   const DetailsState._();
 
   bool get isLoaded {
-    return maybeMap(
-      loaded: (_) => true,
-      orElse: () => false,
-    );
+    return switch (this) {
+      DetailsLoaded() => true,
+      _ => false,
+    };
   }
 
   bool get isLoading {
-    return maybeMap(
-      loading: (_) => true,
-      orElse: () => false,
-    );
+    return switch (this) {
+      DetailsLoading() => true,
+      _ => false,
+    };
   }
 }

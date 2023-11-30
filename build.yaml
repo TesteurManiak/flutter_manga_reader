@@ -1,0 +1,11 @@
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable
+
+    options:
+      # Disable the generation of copyWith/== for the entire project
+      # copy_with: false
+      # Disable both `map` and `when` as they are now obsolete thanks to Pattern Matching support with Dart 3
+      map: false
+      when: false

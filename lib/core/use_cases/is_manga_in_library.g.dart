@@ -6,7 +6,7 @@ part of 'is_manga_in_library.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isMangaInLibraryHash() => r'28dff622facec93b5c9488b8a714874398192398';
+String _$isMangaInLibraryHash() => r'cc430d9defcfa2356ae12ea69492cc823fe48e6f';
 
 /// Copied from Dart SDK
 class _SystemHash {

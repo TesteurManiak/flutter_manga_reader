@@ -6,10 +6,12 @@ part 'is_manga_in_library.g.dart';
 
 @Riverpod(dependencies: [watchMangasInLibrary])
 bool isMangaInLibrary(IsMangaInLibraryRef ref, SourceManga sourceManga) {
-  return ref.watch(watchMangasInLibraryProvider).maybeWhen(
-        data: (mangas) {
-          return mangas.any((manga) => manga.isSameAs(sourceManga));
-        },
+  return ref.watch(
+    watchMangasInLibraryProvider.select((value) {
+      return value.maybeWhen(
+        data: (mangas) => mangas.any((manga) => manga.isSameAs(sourceManga)),
         orElse: () => false,
       );
+    }),
+  );
 }

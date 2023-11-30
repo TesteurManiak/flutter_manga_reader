@@ -20,9 +20,10 @@ class ChapterViewerBottomBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final pageNumber = ref.watch(
       chapterViewerControllerProvider(chapterId).select((s) {
-        return s.whenOrNull(
-          loaded: (_, pages) => pages.length,
-        );
+        return switch (s) {
+          ChapterViewerLoaded(:final pages) => pages.length,
+          _ => null,
+        };
       }),
     );
 

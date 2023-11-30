@@ -16,12 +16,13 @@ class ChapterViewerAppBar extends ConsumerWidget with AppBarSizeMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     final chapterTitle = ref.watch(
       chapterViewerControllerProvider(chapterId).select(
-        (s) => s.maybeMap(
-          loaded: (loaded) => loaded.chapter.name,
-          orElse: () => null,
-        ),
+        (s) => switch (s) {
+          ChapterViewerLoaded(:final chapter) => chapter.name,
+          _ => null,
+        },
       ),
     );
+
     return SlidablePreferredSize(
       direction: SlideDirection.up,
       child: AppBar(

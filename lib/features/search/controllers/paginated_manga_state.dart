@@ -4,36 +4,39 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 part 'paginated_manga_state.freezed.dart';
 
 @freezed
-class PaginatedMangaState with _$PaginatedMangaState {
+sealed class PaginatedMangaState with _$PaginatedMangaState {
   const factory PaginatedMangaState.loading({
     required int page,
     @Default(true) bool hasMore,
-  }) = _Loading;
+  }) = PaginatedMangaLoading;
   const factory PaginatedMangaState.loaded({
     required int page,
     required bool hasMore,
     required List<SourceManga> mangas,
-  }) = _Loaded;
+  }) = PaginatedMangaLoaded;
   const factory PaginatedMangaState.empty({
     required int page,
     @Default(false) bool hasMore,
-  }) = _Empty;
+  }) = PaginatedMangaEmpty;
   const factory PaginatedMangaState.error({
     required int page,
     required bool hasMore,
     String? message,
-  }) = _Error;
+  }) = PaginatedMangaError;
 
   const PaginatedMangaState._();
 
   List<SourceManga>? get mangasOrNull {
-    return mapOrNull(loaded: (state) => state.mangas);
+    return switch (this) {
+      PaginatedMangaLoaded(:final mangas) => mangas,
+      _ => null,
+    };
   }
 
   List<SourceManga> get mangasOrEmpty {
-    return maybeMap(
-      loaded: (state) => state.mangas,
-      orElse: () => [],
-    );
+    return switch (this) {
+      PaginatedMangaLoaded(:final mangas) => mangas,
+      _ => [],
+    };
   }
 }

@@ -101,18 +101,16 @@ class _ContentState extends ConsumerState<_Content> {
         chapterId: widget.chapterId,
         chapterController: chapterPageController,
       ),
-      body: state.when(
-        loading: LoadingContent.new,
-        loaded: (_, pages) {
-          return _PageViewer(
+      body: switch (state) {
+        ChapterViewerLoading() => const LoadingContent(),
+        ChapterViewerLoaded(:final pages) => _PageViewer(
             chapterController: chapterPageController,
             pages: pages,
             initialPage: widget.initialPage,
             chapterId: widget.chapterId,
-          );
-        },
-        error: (_) => ErrorContent(onRetry: controller.fetchPages),
-      ),
+          ),
+        ChapterViewerError() => ErrorContent(onRetry: controller.fetchPages),
+      },
     );
   }
 }
