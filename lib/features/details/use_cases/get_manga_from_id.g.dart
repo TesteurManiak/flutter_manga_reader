@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef GetMangaFromIdRef = AutoDisposeFutureProviderRef<Manga?>;
-
 /// See also [getMangaFromId].
 @ProviderFor(getMangaFromId)
 const getMangaFromIdProvider = GetMangaFromIdFamily();
@@ -83,10 +81,10 @@ class GetMangaFromIdFamily extends Family<AsyncValue<Manga?>> {
 class GetMangaFromIdProvider extends AutoDisposeFutureProvider<Manga?> {
   /// See also [getMangaFromId].
   GetMangaFromIdProvider(
-    this.id,
-  ) : super.internal(
+    int id,
+  ) : this._internal(
           (ref) => getMangaFromId(
-            ref,
+            ref as GetMangaFromIdRef,
             id,
           ),
           from: getMangaFromIdProvider,
@@ -98,9 +96,43 @@ class GetMangaFromIdProvider extends AutoDisposeFutureProvider<Manga?> {
           dependencies: GetMangaFromIdFamily._dependencies,
           allTransitiveDependencies:
               GetMangaFromIdFamily._allTransitiveDependencies,
+          id: id,
         );
 
+  GetMangaFromIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.id,
+  }) : super.internal();
+
   final int id;
+
+  @override
+  Override overrideWith(
+    FutureOr<Manga?> Function(GetMangaFromIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetMangaFromIdProvider._internal(
+        (ref) => create(ref as GetMangaFromIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        id: id,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Manga?> createElement() {
+    return _GetMangaFromIdProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -115,5 +147,18 @@ class GetMangaFromIdProvider extends AutoDisposeFutureProvider<Manga?> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin GetMangaFromIdRef on AutoDisposeFutureProviderRef<Manga?> {
+  /// The parameter `id` of this provider.
+  int get id;
+}
+
+class _GetMangaFromIdProviderElement
+    extends AutoDisposeFutureProviderElement<Manga?> with GetMangaFromIdRef {
+  _GetMangaFromIdProviderElement(super.provider);
+
+  @override
+  int get id => (origin as GetMangaFromIdProvider).id;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

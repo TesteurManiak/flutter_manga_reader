@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef HasFeatureFlagRef = AutoDisposeProviderRef<bool>;
-
 /// See also [hasFeatureFlag].
 @ProviderFor(hasFeatureFlag)
 const hasFeatureFlagProvider = HasFeatureFlagFamily();
@@ -77,10 +75,10 @@ class HasFeatureFlagFamily extends Family<bool> {
 class HasFeatureFlagProvider extends AutoDisposeProvider<bool> {
   /// See also [hasFeatureFlag].
   HasFeatureFlagProvider(
-    this.flag,
-  ) : super.internal(
+    FeatureFlag flag,
+  ) : this._internal(
           (ref) => hasFeatureFlag(
-            ref,
+            ref as HasFeatureFlagRef,
             flag,
           ),
           from: hasFeatureFlagProvider,
@@ -92,9 +90,43 @@ class HasFeatureFlagProvider extends AutoDisposeProvider<bool> {
           dependencies: HasFeatureFlagFamily._dependencies,
           allTransitiveDependencies:
               HasFeatureFlagFamily._allTransitiveDependencies,
+          flag: flag,
         );
 
+  HasFeatureFlagProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.flag,
+  }) : super.internal();
+
   final FeatureFlag flag;
+
+  @override
+  Override overrideWith(
+    bool Function(HasFeatureFlagRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: HasFeatureFlagProvider._internal(
+        (ref) => create(ref as HasFeatureFlagRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        flag: flag,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _HasFeatureFlagProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -108,6 +140,19 @@ class HasFeatureFlagProvider extends AutoDisposeProvider<bool> {
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin HasFeatureFlagRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `flag` of this provider.
+  FeatureFlag get flag;
+}
+
+class _HasFeatureFlagProviderElement extends AutoDisposeProviderElement<bool>
+    with HasFeatureFlagRef {
+  _HasFeatureFlagProviderElement(super.provider);
+
+  @override
+  FeatureFlag get flag => (origin as HasFeatureFlagProvider).flag;
 }
 
 String _$featureFlagControllerHash() =>
@@ -128,4 +173,4 @@ final featureFlagControllerProvider =
 
 typedef _$FeatureFlagController = Notifier<Map<FeatureFlag, bool>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

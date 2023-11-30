@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef IsMangaFavoriteRef = AutoDisposeProviderRef<bool>;
-
 /// See also [isMangaFavorite].
 @ProviderFor(isMangaFavorite)
 const isMangaFavoriteProvider = IsMangaFavoriteFamily();
@@ -83,10 +81,10 @@ class IsMangaFavoriteFamily extends Family<bool> {
 class IsMangaFavoriteProvider extends AutoDisposeProvider<bool> {
   /// See also [isMangaFavorite].
   IsMangaFavoriteProvider(
-    this.mangaId,
-  ) : super.internal(
+    int mangaId,
+  ) : this._internal(
           (ref) => isMangaFavorite(
-            ref,
+            ref as IsMangaFavoriteRef,
             mangaId,
           ),
           from: isMangaFavoriteProvider,
@@ -98,9 +96,43 @@ class IsMangaFavoriteProvider extends AutoDisposeProvider<bool> {
           dependencies: IsMangaFavoriteFamily._dependencies,
           allTransitiveDependencies:
               IsMangaFavoriteFamily._allTransitiveDependencies,
+          mangaId: mangaId,
         );
 
+  IsMangaFavoriteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.mangaId,
+  }) : super.internal();
+
   final int mangaId;
+
+  @override
+  Override overrideWith(
+    bool Function(IsMangaFavoriteRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: IsMangaFavoriteProvider._internal(
+        (ref) => create(ref as IsMangaFavoriteRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        mangaId: mangaId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _IsMangaFavoriteProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -115,5 +147,18 @@ class IsMangaFavoriteProvider extends AutoDisposeProvider<bool> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin IsMangaFavoriteRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `mangaId` of this provider.
+  int get mangaId;
+}
+
+class _IsMangaFavoriteProviderElement extends AutoDisposeProviderElement<bool>
+    with IsMangaFavoriteRef {
+  _IsMangaFavoriteProviderElement(super.provider);
+
+  @override
+  int get mangaId => (origin as IsMangaFavoriteProvider).mangaId;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

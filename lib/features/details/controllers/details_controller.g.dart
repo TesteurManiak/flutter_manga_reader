@@ -105,9 +105,9 @@ class DetailsControllerProvider
     extends AutoDisposeNotifierProviderImpl<DetailsController, DetailsState> {
   /// See also [DetailsController].
   DetailsControllerProvider(
-    this.mangaId,
-    this.source,
-  ) : super.internal(
+    int mangaId,
+    MangaDatasource source,
+  ) : this._internal(
           () => DetailsController()
             ..mangaId = mangaId
             ..source = source,
@@ -120,10 +120,58 @@ class DetailsControllerProvider
           dependencies: DetailsControllerFamily._dependencies,
           allTransitiveDependencies:
               DetailsControllerFamily._allTransitiveDependencies,
+          mangaId: mangaId,
+          source: source,
         );
+
+  DetailsControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.mangaId,
+    required this.source,
+  }) : super.internal();
 
   final int mangaId;
   final MangaDatasource source;
+
+  @override
+  DetailsState runNotifierBuild(
+    covariant DetailsController notifier,
+  ) {
+    return notifier.build(
+      mangaId,
+      source,
+    );
+  }
+
+  @override
+  Override overrideWith(DetailsController Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: DetailsControllerProvider._internal(
+        () => create()
+          ..mangaId = mangaId
+          ..source = source,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        mangaId: mangaId,
+        source: source,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<DetailsController, DetailsState>
+      createElement() {
+    return _DetailsControllerProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -140,16 +188,25 @@ class DetailsControllerProvider
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin DetailsControllerRef on AutoDisposeNotifierProviderRef<DetailsState> {
+  /// The parameter `mangaId` of this provider.
+  int get mangaId;
+
+  /// The parameter `source` of this provider.
+  MangaDatasource get source;
+}
+
+class _DetailsControllerProviderElement
+    extends AutoDisposeNotifierProviderElement<DetailsController, DetailsState>
+    with DetailsControllerRef {
+  _DetailsControllerProviderElement(super.provider);
 
   @override
-  DetailsState runNotifierBuild(
-    covariant DetailsController notifier,
-  ) {
-    return notifier.build(
-      mangaId,
-      source,
-    );
-  }
+  int get mangaId => (origin as DetailsControllerProvider).mangaId;
+  @override
+  MangaDatasource get source => (origin as DetailsControllerProvider).source;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

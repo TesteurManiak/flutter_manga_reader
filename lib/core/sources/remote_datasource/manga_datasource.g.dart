@@ -44,9 +44,6 @@ class _SystemHash {
   }
 }
 
-typedef FetchChapterPagesRef
-    = AutoDisposeFutureProviderRef<Result<List<ChapterPage>, HttpError>>;
-
 /// See also [fetchChapterPages].
 @ProviderFor(fetchChapterPages)
 const fetchChapterPagesProvider = FetchChapterPagesFamily();
@@ -101,10 +98,10 @@ class FetchChapterPagesProvider
     extends AutoDisposeFutureProvider<Result<List<ChapterPage>, HttpError>> {
   /// See also [fetchChapterPages].
   FetchChapterPagesProvider(
-    this.sourceChapter,
-  ) : super.internal(
+    SourceChapter sourceChapter,
+  ) : this._internal(
           (ref) => fetchChapterPages(
-            ref,
+            ref as FetchChapterPagesRef,
             sourceChapter,
           ),
           from: fetchChapterPagesProvider,
@@ -116,9 +113,46 @@ class FetchChapterPagesProvider
           dependencies: FetchChapterPagesFamily._dependencies,
           allTransitiveDependencies:
               FetchChapterPagesFamily._allTransitiveDependencies,
+          sourceChapter: sourceChapter,
         );
 
+  FetchChapterPagesProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceChapter,
+  }) : super.internal();
+
   final SourceChapter sourceChapter;
+
+  @override
+  Override overrideWith(
+    FutureOr<Result<List<ChapterPage>, HttpError>> Function(
+            FetchChapterPagesRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FetchChapterPagesProvider._internal(
+        (ref) => create(ref as FetchChapterPagesRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceChapter: sourceChapter,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<Result<List<ChapterPage>, HttpError>>
+      createElement() {
+    return _FetchChapterPagesProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -133,6 +167,22 @@ class FetchChapterPagesProvider
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin FetchChapterPagesRef
+    on AutoDisposeFutureProviderRef<Result<List<ChapterPage>, HttpError>> {
+  /// The parameter `sourceChapter` of this provider.
+  SourceChapter get sourceChapter;
+}
+
+class _FetchChapterPagesProviderElement
+    extends AutoDisposeFutureProviderElement<
+        Result<List<ChapterPage>, HttpError>> with FetchChapterPagesRef {
+  _FetchChapterPagesProviderElement(super.provider);
+
+  @override
+  SourceChapter get sourceChapter =>
+      (origin as FetchChapterPagesProvider).sourceChapter;
 }
 
 String _$mangaDatasourcesHash() => r'7e4636c95c4834419bf6d1a5aabd901c552c3d06';
@@ -153,7 +203,6 @@ final mangaDatasourcesProvider =
 typedef MangaDatasourcesRef
     = AutoDisposeProviderRef<Map<String, MangaDatasource>>;
 String _$getSourceFromIdHash() => r'0704196c0d899ecec4f2e8dd9d5168339fbc2390';
-typedef GetSourceFromIdRef = AutoDisposeProviderRef<MangaDatasource>;
 
 /// See also [getSourceFromId].
 @ProviderFor(getSourceFromId)
@@ -201,10 +250,10 @@ class GetSourceFromIdFamily extends Family<MangaDatasource> {
 class GetSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource> {
   /// See also [getSourceFromId].
   GetSourceFromIdProvider(
-    this.sourceId,
-  ) : super.internal(
+    String sourceId,
+  ) : this._internal(
           (ref) => getSourceFromId(
-            ref,
+            ref as GetSourceFromIdRef,
             sourceId,
           ),
           from: getSourceFromIdProvider,
@@ -216,9 +265,43 @@ class GetSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource> {
           dependencies: GetSourceFromIdFamily._dependencies,
           allTransitiveDependencies:
               GetSourceFromIdFamily._allTransitiveDependencies,
+          sourceId: sourceId,
         );
 
+  GetSourceFromIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceId,
+  }) : super.internal();
+
   final String sourceId;
+
+  @override
+  Override overrideWith(
+    MangaDatasource Function(GetSourceFromIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetSourceFromIdProvider._internal(
+        (ref) => create(ref as GetSourceFromIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceId: sourceId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<MangaDatasource> createElement() {
+    return _GetSourceFromIdProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -234,8 +317,21 @@ class GetSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource> {
   }
 }
 
+mixin GetSourceFromIdRef on AutoDisposeProviderRef<MangaDatasource> {
+  /// The parameter `sourceId` of this provider.
+  String get sourceId;
+}
+
+class _GetSourceFromIdProviderElement
+    extends AutoDisposeProviderElement<MangaDatasource>
+    with GetSourceFromIdRef {
+  _GetSourceFromIdProviderElement(super.provider);
+
+  @override
+  String get sourceId => (origin as GetSourceFromIdProvider).sourceId;
+}
+
 String _$getSourceIdHash() => r'9a005ef6d48ce920fb314bdcbb5e57bbb93f711e';
-typedef GetSourceIdRef = AutoDisposeProviderRef<String>;
 
 /// See also [getSourceId].
 @ProviderFor(getSourceId)
@@ -283,10 +379,10 @@ class GetSourceIdFamily extends Family<String> {
 class GetSourceIdProvider extends AutoDisposeProvider<String> {
   /// See also [getSourceId].
   GetSourceIdProvider(
-    this.sourceManga,
-  ) : super.internal(
+    SourceManga sourceManga,
+  ) : this._internal(
           (ref) => getSourceId(
-            ref,
+            ref as GetSourceIdRef,
             sourceManga,
           ),
           from: getSourceIdProvider,
@@ -298,9 +394,43 @@ class GetSourceIdProvider extends AutoDisposeProvider<String> {
           dependencies: GetSourceIdFamily._dependencies,
           allTransitiveDependencies:
               GetSourceIdFamily._allTransitiveDependencies,
+          sourceManga: sourceManga,
         );
 
+  GetSourceIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceManga,
+  }) : super.internal();
+
   final SourceManga sourceManga;
+
+  @override
+  Override overrideWith(
+    String Function(GetSourceIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetSourceIdProvider._internal(
+        (ref) => create(ref as GetSourceIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceManga: sourceManga,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<String> createElement() {
+    return _GetSourceIdProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -315,5 +445,18 @@ class GetSourceIdProvider extends AutoDisposeProvider<String> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin GetSourceIdRef on AutoDisposeProviderRef<String> {
+  /// The parameter `sourceManga` of this provider.
+  SourceManga get sourceManga;
+}
+
+class _GetSourceIdProviderElement extends AutoDisposeProviderElement<String>
+    with GetSourceIdRef {
+  _GetSourceIdProviderElement(super.provider);
+
+  @override
+  SourceManga get sourceManga => (origin as GetSourceIdProvider).sourceManga;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

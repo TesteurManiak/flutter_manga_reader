@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef GetUnreadChaptersRef = AutoDisposeProviderRef<int?>;
-
 /// See also [getUnreadChapters].
 @ProviderFor(getUnreadChapters)
 const getUnreadChaptersProvider = GetUnreadChaptersFamily();
@@ -86,10 +84,10 @@ class GetUnreadChaptersFamily extends Family<int?> {
 class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
   /// See also [getUnreadChapters].
   GetUnreadChaptersProvider(
-    this.sourceManga,
-  ) : super.internal(
+    SourceManga sourceManga,
+  ) : this._internal(
           (ref) => getUnreadChapters(
-            ref,
+            ref as GetUnreadChaptersRef,
             sourceManga,
           ),
           from: getUnreadChaptersProvider,
@@ -101,9 +99,43 @@ class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
           dependencies: GetUnreadChaptersFamily._dependencies,
           allTransitiveDependencies:
               GetUnreadChaptersFamily._allTransitiveDependencies,
+          sourceManga: sourceManga,
         );
 
+  GetUnreadChaptersProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceManga,
+  }) : super.internal();
+
   final SourceManga sourceManga;
+
+  @override
+  Override overrideWith(
+    int? Function(GetUnreadChaptersRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: GetUnreadChaptersProvider._internal(
+        (ref) => create(ref as GetUnreadChaptersRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceManga: sourceManga,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<int?> createElement() {
+    return _GetUnreadChaptersProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -119,5 +151,19 @@ class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin GetUnreadChaptersRef on AutoDisposeProviderRef<int?> {
+  /// The parameter `sourceManga` of this provider.
+  SourceManga get sourceManga;
+}
+
+class _GetUnreadChaptersProviderElement extends AutoDisposeProviderElement<int?>
+    with GetUnreadChaptersRef {
+  _GetUnreadChaptersProviderElement(super.provider);
+
+  @override
+  SourceManga get sourceManga =>
+      (origin as GetUnreadChaptersProvider).sourceManga;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

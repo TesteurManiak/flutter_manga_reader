@@ -114,21 +114,22 @@ class _$PaginatedMangaStateCopyWithImpl<$Res, $Val extends PaginatedMangaState>
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res>
+abstract class _$$LoadingImplCopyWith<$Res>
     implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, bool hasMore});
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -137,7 +138,7 @@ class __$$_LoadingCopyWithImpl<$Res>
     Object? page = null,
     Object? hasMore = null,
   }) {
-    return _then(_$_Loading(
+    return _then(_$LoadingImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -152,8 +153,8 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading extends _Loading {
-  const _$_Loading({required this.page, this.hasMore = true}) : super._();
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl({required this.page, this.hasMore = true}) : super._();
 
   @override
   final int page;
@@ -170,7 +171,7 @@ class _$_Loading extends _Loading {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Loading &&
+            other is _$LoadingImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
@@ -181,8 +182,8 @@ class _$_Loading extends _Loading {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
-      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
+      __$$LoadingImplCopyWithImpl<_$LoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -262,7 +263,7 @@ class _$_Loading extends _Loading {
 
 abstract class _Loading extends PaginatedMangaState {
   const factory _Loading({required final int page, final bool hasMore}) =
-      _$_Loading;
+      _$LoadingImpl;
   const _Loading._() : super._();
 
   @override
@@ -271,25 +272,27 @@ abstract class _Loading extends PaginatedMangaState {
   bool get hasMore;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+  _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res>
+abstract class _$$LoadedImplCopyWith<$Res>
     implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
+  factory _$$LoadedImplCopyWith(
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, bool hasMore, List<SourceManga> mangas});
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+class __$$LoadedImplCopyWithImpl<$Res>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$LoadedImpl>
+    implements _$$LoadedImplCopyWith<$Res> {
+  __$$LoadedImplCopyWithImpl(
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -299,7 +302,7 @@ class __$$_LoadedCopyWithImpl<$Res>
     Object? hasMore = null,
     Object? mangas = null,
   }) {
-    return _then(_$_Loaded(
+    return _then(_$LoadedImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -318,8 +321,8 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded extends _Loaded {
-  const _$_Loaded(
+class _$LoadedImpl extends _Loaded {
+  const _$LoadedImpl(
       {required this.page,
       required this.hasMore,
       required final List<SourceManga> mangas})
@@ -347,7 +350,7 @@ class _$_Loaded extends _Loaded {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Loaded &&
+            other is _$LoadedImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             const DeepCollectionEquality().equals(other._mangas, _mangas));
@@ -360,8 +363,8 @@ class _$_Loaded extends _Loaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      __$$_LoadedCopyWithImpl<_$_Loaded>(this, _$identity);
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      __$$LoadedImplCopyWithImpl<_$LoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -443,7 +446,7 @@ abstract class _Loaded extends PaginatedMangaState {
   const factory _Loaded(
       {required final int page,
       required final bool hasMore,
-      required final List<SourceManga> mangas}) = _$_Loaded;
+      required final List<SourceManga> mangas}) = _$LoadedImpl;
   const _Loaded._() : super._();
 
   @override
@@ -453,25 +456,27 @@ abstract class _Loaded extends PaginatedMangaState {
   List<SourceManga> get mangas;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
+  _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_EmptyCopyWith<$Res>
+abstract class _$$EmptyImplCopyWith<$Res>
     implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$_EmptyCopyWith(_$_Empty value, $Res Function(_$_Empty) then) =
-      __$$_EmptyCopyWithImpl<$Res>;
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, bool hasMore});
 }
 
 /// @nodoc
-class __$$_EmptyCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Empty>
-    implements _$$_EmptyCopyWith<$Res> {
-  __$$_EmptyCopyWithImpl(_$_Empty _value, $Res Function(_$_Empty) _then)
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -480,7 +485,7 @@ class __$$_EmptyCopyWithImpl<$Res>
     Object? page = null,
     Object? hasMore = null,
   }) {
-    return _then(_$_Empty(
+    return _then(_$EmptyImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -495,8 +500,8 @@ class __$$_EmptyCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Empty extends _Empty {
-  const _$_Empty({required this.page, this.hasMore = false}) : super._();
+class _$EmptyImpl extends _Empty {
+  const _$EmptyImpl({required this.page, this.hasMore = false}) : super._();
 
   @override
   final int page;
@@ -513,7 +518,7 @@ class _$_Empty extends _Empty {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Empty &&
+            other is _$EmptyImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
   }
@@ -524,8 +529,8 @@ class _$_Empty extends _Empty {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
-      __$$_EmptyCopyWithImpl<_$_Empty>(this, _$identity);
+  _$$EmptyImplCopyWith<_$EmptyImpl> get copyWith =>
+      __$$EmptyImplCopyWithImpl<_$EmptyImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -605,7 +610,7 @@ class _$_Empty extends _Empty {
 
 abstract class _Empty extends PaginatedMangaState {
   const factory _Empty({required final int page, final bool hasMore}) =
-      _$_Empty;
+      _$EmptyImpl;
   const _Empty._() : super._();
 
   @override
@@ -614,25 +619,27 @@ abstract class _Empty extends PaginatedMangaState {
   bool get hasMore;
   @override
   @JsonKey(ignore: true)
-  _$$_EmptyCopyWith<_$_Empty> get copyWith =>
+  _$$EmptyImplCopyWith<_$EmptyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res>
+abstract class _$$ErrorImplCopyWith<$Res>
     implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, bool hasMore, String? message});
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -642,7 +649,7 @@ class __$$_ErrorCopyWithImpl<$Res>
     Object? hasMore = null,
     Object? message = freezed,
   }) {
-    return _then(_$_Error(
+    return _then(_$ErrorImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -661,8 +668,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error extends _Error {
-  const _$_Error({required this.page, required this.hasMore, this.message})
+class _$ErrorImpl extends _Error {
+  const _$ErrorImpl({required this.page, required this.hasMore, this.message})
       : super._();
 
   @override
@@ -681,7 +688,7 @@ class _$_Error extends _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$ErrorImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             (identical(other.message, message) || other.message == message));
@@ -693,8 +700,8 @@ class _$_Error extends _Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -776,7 +783,7 @@ abstract class _Error extends PaginatedMangaState {
   const factory _Error(
       {required final int page,
       required final bool hasMore,
-      final String? message}) = _$_Error;
+      final String? message}) = _$ErrorImpl;
   const _Error._() : super._();
 
   @override
@@ -786,6 +793,6 @@ abstract class _Error extends PaginatedMangaState {
   String? get message;
   @override
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

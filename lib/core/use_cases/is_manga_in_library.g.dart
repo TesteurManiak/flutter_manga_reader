@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef IsMangaInLibraryRef = AutoDisposeProviderRef<bool>;
-
 /// See also [isMangaInLibrary].
 @ProviderFor(isMangaInLibrary)
 const isMangaInLibraryProvider = IsMangaInLibraryFamily();
@@ -83,10 +81,10 @@ class IsMangaInLibraryFamily extends Family<bool> {
 class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
   /// See also [isMangaInLibrary].
   IsMangaInLibraryProvider(
-    this.sourceManga,
-  ) : super.internal(
+    SourceManga sourceManga,
+  ) : this._internal(
           (ref) => isMangaInLibrary(
-            ref,
+            ref as IsMangaInLibraryRef,
             sourceManga,
           ),
           from: isMangaInLibraryProvider,
@@ -98,9 +96,43 @@ class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
           dependencies: IsMangaInLibraryFamily._dependencies,
           allTransitiveDependencies:
               IsMangaInLibraryFamily._allTransitiveDependencies,
+          sourceManga: sourceManga,
         );
 
+  IsMangaInLibraryProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceManga,
+  }) : super.internal();
+
   final SourceManga sourceManga;
+
+  @override
+  Override overrideWith(
+    bool Function(IsMangaInLibraryRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: IsMangaInLibraryProvider._internal(
+        (ref) => create(ref as IsMangaInLibraryRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceManga: sourceManga,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _IsMangaInLibraryProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -116,5 +148,19 @@ class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin IsMangaInLibraryRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `sourceManga` of this provider.
+  SourceManga get sourceManga;
+}
+
+class _IsMangaInLibraryProviderElement extends AutoDisposeProviderElement<bool>
+    with IsMangaInLibraryRef {
+  _IsMangaInLibraryProviderElement(super.provider);
+
+  @override
+  SourceManga get sourceManga =>
+      (origin as IsMangaInLibraryProvider).sourceManga;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

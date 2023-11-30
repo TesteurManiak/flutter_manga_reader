@@ -29,8 +29,6 @@ class _SystemHash {
   }
 }
 
-typedef IsChapterSelectedRef = AutoDisposeProviderRef<bool>;
-
 /// See also [isChapterSelected].
 @ProviderFor(isChapterSelected)
 const isChapterSelectedProvider = IsChapterSelectedFamily();
@@ -86,11 +84,11 @@ class IsChapterSelectedFamily extends Family<bool> {
 class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
   /// See also [isChapterSelected].
   IsChapterSelectedProvider(
-    this.chapter,
-    this.mangaDatasource,
-  ) : super.internal(
+    Chapter chapter,
+    MangaDatasource mangaDatasource,
+  ) : this._internal(
           (ref) => isChapterSelected(
-            ref,
+            ref as IsChapterSelectedRef,
             chapter,
             mangaDatasource,
           ),
@@ -103,10 +101,47 @@ class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
           dependencies: IsChapterSelectedFamily._dependencies,
           allTransitiveDependencies:
               IsChapterSelectedFamily._allTransitiveDependencies,
+          chapter: chapter,
+          mangaDatasource: mangaDatasource,
         );
+
+  IsChapterSelectedProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.chapter,
+    required this.mangaDatasource,
+  }) : super.internal();
 
   final Chapter chapter;
   final MangaDatasource mangaDatasource;
+
+  @override
+  Override overrideWith(
+    bool Function(IsChapterSelectedRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: IsChapterSelectedProvider._internal(
+        (ref) => create(ref as IsChapterSelectedRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        chapter: chapter,
+        mangaDatasource: mangaDatasource,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _IsChapterSelectedProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -124,5 +159,24 @@ class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin IsChapterSelectedRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `chapter` of this provider.
+  Chapter get chapter;
+
+  /// The parameter `mangaDatasource` of this provider.
+  MangaDatasource get mangaDatasource;
+}
+
+class _IsChapterSelectedProviderElement extends AutoDisposeProviderElement<bool>
+    with IsChapterSelectedRef {
+  _IsChapterSelectedProviderElement(super.provider);
+
+  @override
+  Chapter get chapter => (origin as IsChapterSelectedProvider).chapter;
+  @override
+  MangaDatasource get mangaDatasource =>
+      (origin as IsChapterSelectedProvider).mangaDatasource;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
