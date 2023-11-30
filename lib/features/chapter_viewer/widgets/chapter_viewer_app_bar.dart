@@ -36,7 +36,7 @@ class ChapterViewerAppBar extends ConsumerWidget with AppBarSizeMixin {
           IconButton(
             icon: Icon(Icons.public),
             onPressed: null,
-          )
+          ),
         ],
       ),
     );

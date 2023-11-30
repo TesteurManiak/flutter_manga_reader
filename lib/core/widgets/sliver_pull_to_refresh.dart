@@ -6,8 +6,9 @@ const _kMinimumDuration = Duration(milliseconds: 800);
 
 /// {@template sliver_pull_to_refresh}
 /// The sliver way to create a pull to refresh effect.
-/// {@endTemplate}
+/// {@endtemplate}
 class SliverPullToRefresh extends StatelessWidget {
+  /// {@macro sliver_pull_to_refresh}
   const SliverPullToRefresh({
     super.key,
     required this.onRefresh,

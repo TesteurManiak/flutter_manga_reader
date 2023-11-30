@@ -34,7 +34,7 @@ class MDConstants {
     _tagGroupContent,
     _tagGroupFormat,
     _tagGroupGenre,
-    _tagGroupTheme
+    _tagGroupTheme,
   ];
 
   static const tagAnthologyUuid = '51d83883-4103-437c-b4b1-731cb73d786c';
