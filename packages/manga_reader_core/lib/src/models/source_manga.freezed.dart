@@ -126,11 +126,11 @@ class _$SourceMangaCopyWithImpl<$Res, $Val extends SourceManga>
 }
 
 /// @nodoc
-abstract class _$$_SourceMangaCopyWith<$Res>
+abstract class _$$SourceMangaImplCopyWith<$Res>
     implements $SourceMangaCopyWith<$Res> {
-  factory _$$_SourceMangaCopyWith(
-          _$_SourceManga value, $Res Function(_$_SourceManga) then) =
-      __$$_SourceMangaCopyWithImpl<$Res>;
+  factory _$$SourceMangaImplCopyWith(
+          _$SourceMangaImpl value, $Res Function(_$SourceMangaImpl) then) =
+      __$$SourceMangaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +147,11 @@ abstract class _$$_SourceMangaCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SourceMangaCopyWithImpl<$Res>
-    extends _$SourceMangaCopyWithImpl<$Res, _$_SourceManga>
-    implements _$$_SourceMangaCopyWith<$Res> {
-  __$$_SourceMangaCopyWithImpl(
-      _$_SourceManga _value, $Res Function(_$_SourceManga) _then)
+class __$$SourceMangaImplCopyWithImpl<$Res>
+    extends _$SourceMangaCopyWithImpl<$Res, _$SourceMangaImpl>
+    implements _$$SourceMangaImplCopyWith<$Res> {
+  __$$SourceMangaImplCopyWithImpl(
+      _$SourceMangaImpl _value, $Res Function(_$SourceMangaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -168,7 +168,7 @@ class __$$_SourceMangaCopyWithImpl<$Res>
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
   }) {
-    return _then(_$_SourceManga(
+    return _then(_$SourceMangaImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -215,8 +215,8 @@ class __$$_SourceMangaCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_SourceManga extends _SourceManga {
-  const _$_SourceManga(
+class _$SourceMangaImpl extends _SourceManga {
+  const _$SourceMangaImpl(
       {required this.title,
       required this.url,
       this.description,
@@ -229,8 +229,8 @@ class _$_SourceManga extends _SourceManga {
       this.thumbnailUrl})
       : super._();
 
-  factory _$_SourceManga.fromJson(Map<String, dynamic> json) =>
-      _$$_SourceMangaFromJson(json);
+  factory _$SourceMangaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SourceMangaImplFromJson(json);
 
   @override
   final String title;
@@ -264,7 +264,7 @@ class _$_SourceManga extends _SourceManga {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SourceManga &&
+            other is _$SourceMangaImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.description, description) ||
@@ -287,8 +287,8 @@ class _$_SourceManga extends _SourceManga {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SourceMangaCopyWith<_$_SourceManga> get copyWith =>
-      __$$_SourceMangaCopyWithImpl<_$_SourceManga>(this, _$identity);
+  _$$SourceMangaImplCopyWith<_$SourceMangaImpl> get copyWith =>
+      __$$SourceMangaImplCopyWithImpl<_$SourceMangaImpl>(this, _$identity);
 }
 
 abstract class _SourceManga extends SourceManga {
@@ -302,11 +302,11 @@ abstract class _SourceManga extends SourceManga {
       required final String source,
       required final String lang,
       final String? artist,
-      final String? thumbnailUrl}) = _$_SourceManga;
+      final String? thumbnailUrl}) = _$SourceMangaImpl;
   const _SourceManga._() : super._();
 
   factory _SourceManga.fromJson(Map<String, dynamic> json) =
-      _$_SourceManga.fromJson;
+      _$SourceMangaImpl.fromJson;
 
   @override
   String get title;
@@ -331,6 +331,6 @@ abstract class _SourceManga extends SourceManga {
   String? get thumbnailUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_SourceMangaCopyWith<_$_SourceManga> get copyWith =>
+  _$$SourceMangaImplCopyWith<_$SourceMangaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

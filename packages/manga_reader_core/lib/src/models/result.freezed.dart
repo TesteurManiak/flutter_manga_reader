@@ -75,20 +75,20 @@ class _$ResultCopyWithImpl<S, F, $Res, $Val extends Result<S, F>>
 }
 
 /// @nodoc
-abstract class _$$SuccessCopyWith<S, F, $Res> {
-  factory _$$SuccessCopyWith(
-          _$Success<S, F> value, $Res Function(_$Success<S, F>) then) =
-      __$$SuccessCopyWithImpl<S, F, $Res>;
+abstract class _$$SuccessImplCopyWith<S, F, $Res> {
+  factory _$$SuccessImplCopyWith(
+          _$SuccessImpl<S, F> value, $Res Function(_$SuccessImpl<S, F>) then) =
+      __$$SuccessImplCopyWithImpl<S, F, $Res>;
   @useResult
   $Res call({S success});
 }
 
 /// @nodoc
-class __$$SuccessCopyWithImpl<S, F, $Res>
-    extends _$ResultCopyWithImpl<S, F, $Res, _$Success<S, F>>
-    implements _$$SuccessCopyWith<S, F, $Res> {
-  __$$SuccessCopyWithImpl(
-      _$Success<S, F> _value, $Res Function(_$Success<S, F>) _then)
+class __$$SuccessImplCopyWithImpl<S, F, $Res>
+    extends _$ResultCopyWithImpl<S, F, $Res, _$SuccessImpl<S, F>>
+    implements _$$SuccessImplCopyWith<S, F, $Res> {
+  __$$SuccessImplCopyWithImpl(
+      _$SuccessImpl<S, F> _value, $Res Function(_$SuccessImpl<S, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -96,7 +96,7 @@ class __$$SuccessCopyWithImpl<S, F, $Res>
   $Res call({
     Object? success = freezed,
   }) {
-    return _then(_$Success<S, F>(
+    return _then(_$SuccessImpl<S, F>(
       freezed == success
           ? _value.success
           : success // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$SuccessCopyWithImpl<S, F, $Res>
 
 /// @nodoc
 
-class _$Success<S, F> extends Success<S, F> {
-  const _$Success(this.success) : super._();
+class _$SuccessImpl<S, F> extends Success<S, F> {
+  const _$SuccessImpl(this.success) : super._();
 
   @override
   final S success;
@@ -122,7 +122,7 @@ class _$Success<S, F> extends Success<S, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Success<S, F> &&
+            other is _$SuccessImpl<S, F> &&
             const DeepCollectionEquality().equals(other.success, success));
   }
 
@@ -133,8 +133,8 @@ class _$Success<S, F> extends Success<S, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SuccessCopyWith<S, F, _$Success<S, F>> get copyWith =>
-      __$$SuccessCopyWithImpl<S, F, _$Success<S, F>>(this, _$identity);
+  _$$SuccessImplCopyWith<S, F, _$SuccessImpl<S, F>> get copyWith =>
+      __$$SuccessImplCopyWithImpl<S, F, _$SuccessImpl<S, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -200,30 +200,30 @@ class _$Success<S, F> extends Success<S, F> {
 }
 
 abstract class Success<S, F> extends Result<S, F> {
-  const factory Success(final S success) = _$Success<S, F>;
+  const factory Success(final S success) = _$SuccessImpl<S, F>;
   const Success._() : super._();
 
   S get success;
   @JsonKey(ignore: true)
-  _$$SuccessCopyWith<S, F, _$Success<S, F>> get copyWith =>
+  _$$SuccessImplCopyWith<S, F, _$SuccessImpl<S, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FailureCopyWith<S, F, $Res> {
-  factory _$$FailureCopyWith(
-          _$Failure<S, F> value, $Res Function(_$Failure<S, F>) then) =
-      __$$FailureCopyWithImpl<S, F, $Res>;
+abstract class _$$FailureImplCopyWith<S, F, $Res> {
+  factory _$$FailureImplCopyWith(
+          _$FailureImpl<S, F> value, $Res Function(_$FailureImpl<S, F>) then) =
+      __$$FailureImplCopyWithImpl<S, F, $Res>;
   @useResult
   $Res call({F failure});
 }
 
 /// @nodoc
-class __$$FailureCopyWithImpl<S, F, $Res>
-    extends _$ResultCopyWithImpl<S, F, $Res, _$Failure<S, F>>
-    implements _$$FailureCopyWith<S, F, $Res> {
-  __$$FailureCopyWithImpl(
-      _$Failure<S, F> _value, $Res Function(_$Failure<S, F>) _then)
+class __$$FailureImplCopyWithImpl<S, F, $Res>
+    extends _$ResultCopyWithImpl<S, F, $Res, _$FailureImpl<S, F>>
+    implements _$$FailureImplCopyWith<S, F, $Res> {
+  __$$FailureImplCopyWithImpl(
+      _$FailureImpl<S, F> _value, $Res Function(_$FailureImpl<S, F>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -231,7 +231,7 @@ class __$$FailureCopyWithImpl<S, F, $Res>
   $Res call({
     Object? failure = freezed,
   }) {
-    return _then(_$Failure<S, F>(
+    return _then(_$FailureImpl<S, F>(
       freezed == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -242,8 +242,8 @@ class __$$FailureCopyWithImpl<S, F, $Res>
 
 /// @nodoc
 
-class _$Failure<S, F> extends Failure<S, F> {
-  const _$Failure(this.failure) : super._();
+class _$FailureImpl<S, F> extends Failure<S, F> {
+  const _$FailureImpl(this.failure) : super._();
 
   @override
   final F failure;
@@ -257,7 +257,7 @@ class _$Failure<S, F> extends Failure<S, F> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Failure<S, F> &&
+            other is _$FailureImpl<S, F> &&
             const DeepCollectionEquality().equals(other.failure, failure));
   }
 
@@ -268,8 +268,8 @@ class _$Failure<S, F> extends Failure<S, F> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FailureCopyWith<S, F, _$Failure<S, F>> get copyWith =>
-      __$$FailureCopyWithImpl<S, F, _$Failure<S, F>>(this, _$identity);
+  _$$FailureImplCopyWith<S, F, _$FailureImpl<S, F>> get copyWith =>
+      __$$FailureImplCopyWithImpl<S, F, _$FailureImpl<S, F>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -335,11 +335,11 @@ class _$Failure<S, F> extends Failure<S, F> {
 }
 
 abstract class Failure<S, F> extends Result<S, F> {
-  const factory Failure(final F failure) = _$Failure<S, F>;
+  const factory Failure(final F failure) = _$FailureImpl<S, F>;
   const Failure._() : super._();
 
   F get failure;
   @JsonKey(ignore: true)
-  _$$FailureCopyWith<S, F, _$Failure<S, F>> get copyWith =>
+  _$$FailureImplCopyWith<S, F, _$FailureImpl<S, F>> get copyWith =>
       throw _privateConstructorUsedError;
 }

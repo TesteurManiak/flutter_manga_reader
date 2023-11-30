@@ -6,8 +6,9 @@ part of 'cover.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CoverListResponse _$$_CoverListResponseFromJson(Map<String, dynamic> json) =>
-    _$_CoverListResponse(
+_$CoverListResponseImpl _$$CoverListResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CoverListResponseImpl(
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => CoverArt.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -17,8 +18,8 @@ _$_CoverListResponse _$$_CoverListResponseFromJson(Map<String, dynamic> json) =>
       total: json['total'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_CoverListResponseToJson(
-        _$_CoverListResponse instance) =>
+Map<String, dynamic> _$$CoverListResponseImplToJson(
+        _$CoverListResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
       'limit': instance.limit,
@@ -26,35 +27,33 @@ Map<String, dynamic> _$$_CoverListResponseToJson(
       'total': instance.total,
     };
 
-_$_CoverArt _$$_CoverArtFromJson(Map<String, dynamic> json) => _$_CoverArt(
+_$CoverArtImpl _$$CoverArtImplFromJson(Map<String, dynamic> json) =>
+    _$CoverArtImpl(
       attributes: json['attributes'] == null
           ? null
           : CoverArtAttributes.fromJson(
               json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => const RelationshipConverter()
-                  .fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
 
-Map<String, dynamic> _$$_CoverArtToJson(_$_CoverArt instance) =>
+Map<String, dynamic> _$$CoverArtImplToJson(_$CoverArtImpl instance) =>
     <String, dynamic>{
       'attributes': instance.attributes,
-      'relationships': instance.relationships
-          .map(const RelationshipConverter().toJson)
-          .toList(),
+      'relationships': instance.relationships,
     };
 
-_$_CoverArtAttributes _$$_CoverArtAttributesFromJson(
+_$CoverArtAttributesImpl _$$CoverArtAttributesImplFromJson(
         Map<String, dynamic> json) =>
-    _$_CoverArtAttributes(
+    _$CoverArtAttributesImpl(
       fileName: json['fileName'] as String?,
       locale: json['locale'] as String?,
     );
 
-Map<String, dynamic> _$$_CoverArtAttributesToJson(
-        _$_CoverArtAttributes instance) =>
+Map<String, dynamic> _$$CoverArtAttributesImplToJson(
+        _$CoverArtAttributesImpl instance) =>
     <String, dynamic>{
       'fileName': instance.fileName,
       'locale': instance.locale,

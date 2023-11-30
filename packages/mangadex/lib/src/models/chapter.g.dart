@@ -6,8 +6,9 @@ part of 'chapter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ChapterResponse _$$_ChapterResponseFromJson(Map<String, dynamic> json) =>
-    _$_ChapterResponse(
+_$ChapterResponseImpl _$$ChapterResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChapterResponseImpl(
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => ChapterData.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -17,7 +18,8 @@ _$_ChapterResponse _$$_ChapterResponseFromJson(Map<String, dynamic> json) =>
       total: json['total'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_ChapterResponseToJson(_$_ChapterResponse instance) =>
+Map<String, dynamic> _$$ChapterResponseImplToJson(
+        _$ChapterResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
       'limit': instance.limit,
@@ -25,29 +27,27 @@ Map<String, dynamic> _$$_ChapterResponseToJson(_$_ChapterResponse instance) =>
       'total': instance.total,
     };
 
-_$_ChapterData _$$_ChapterDataFromJson(Map<String, dynamic> json) =>
-    _$_ChapterData(
+_$ChapterDataImpl _$$ChapterDataImplFromJson(Map<String, dynamic> json) =>
+    _$ChapterDataImpl(
       id: json['id'] as String,
       attributes: ChapterAttributes.fromJson(
           json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => const RelationshipConverter()
-                  .fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
 
-Map<String, dynamic> _$$_ChapterDataToJson(_$_ChapterData instance) =>
+Map<String, dynamic> _$$ChapterDataImplToJson(_$ChapterDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
-      'relationships': instance.relationships
-          .map(const RelationshipConverter().toJson)
-          .toList(),
+      'relationships': instance.relationships,
     };
 
-_$_ChapterAttributes _$$_ChapterAttributesFromJson(Map<String, dynamic> json) =>
-    _$_ChapterAttributes(
+_$ChapterAttributesImpl _$$ChapterAttributesImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChapterAttributesImpl(
       title: json['title'] as String?,
       volume: json['volume'] as String?,
       chapter: json['chapter'] as String?,
@@ -56,8 +56,8 @@ _$_ChapterAttributes _$$_ChapterAttributesFromJson(Map<String, dynamic> json) =>
       externalUrl: json['externalUrl'] as String?,
     );
 
-Map<String, dynamic> _$$_ChapterAttributesToJson(
-        _$_ChapterAttributes instance) =>
+Map<String, dynamic> _$$ChapterAttributesImplToJson(
+        _$ChapterAttributesImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
       'volume': instance.volume,

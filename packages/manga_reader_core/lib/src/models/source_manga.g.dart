@@ -6,8 +6,8 @@ part of 'source_manga.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SourceManga _$$_SourceMangaFromJson(Map<String, dynamic> json) =>
-    _$_SourceManga(
+_$SourceMangaImpl _$$SourceMangaImplFromJson(Map<String, dynamic> json) =>
+    _$SourceMangaImpl(
       title: json['title'] as String,
       url: json['url'] as String,
       description: json['description'] as String?,

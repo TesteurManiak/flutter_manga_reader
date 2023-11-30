@@ -28,11 +28,11 @@ mixin _$ScanlationGroupAttributes {
 
 /// @nodoc
 @JsonSerializable()
-class _$_ScanlationGroupAttributes implements _ScanlationGroupAttributes {
-  const _$_ScanlationGroupAttributes({required this.name});
+class _$ScanlationGroupAttributesImpl implements _ScanlationGroupAttributes {
+  const _$ScanlationGroupAttributesImpl({required this.name});
 
-  factory _$_ScanlationGroupAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_ScanlationGroupAttributesFromJson(json);
+  factory _$ScanlationGroupAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ScanlationGroupAttributesImplFromJson(json);
 
   @override
   final String name;
@@ -46,7 +46,7 @@ class _$_ScanlationGroupAttributes implements _ScanlationGroupAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ScanlationGroupAttributes &&
+            other is _$ScanlationGroupAttributesImpl &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -56,7 +56,7 @@ class _$_ScanlationGroupAttributes implements _ScanlationGroupAttributes {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ScanlationGroupAttributesToJson(
+    return _$$ScanlationGroupAttributesImplToJson(
       this,
     );
   }
@@ -64,10 +64,10 @@ class _$_ScanlationGroupAttributes implements _ScanlationGroupAttributes {
 
 abstract class _ScanlationGroupAttributes implements ScanlationGroupAttributes {
   const factory _ScanlationGroupAttributes({required final String name}) =
-      _$_ScanlationGroupAttributes;
+      _$ScanlationGroupAttributesImpl;
 
   factory _ScanlationGroupAttributes.fromJson(Map<String, dynamic> json) =
-      _$_ScanlationGroupAttributes.fromJson;
+      _$ScanlationGroupAttributesImpl.fromJson;
 
   @override
   String get name;

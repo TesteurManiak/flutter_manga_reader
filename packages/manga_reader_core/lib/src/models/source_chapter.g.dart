@@ -6,8 +6,8 @@ part of 'source_chapter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SourceChapter _$$_SourceChapterFromJson(Map<String, dynamic> json) =>
-    _$_SourceChapter(
+_$SourceChapterImpl _$$SourceChapterImplFromJson(Map<String, dynamic> json) =>
+    _$SourceChapterImpl(
       url: json['url'] as String,
       name: json['name'] as String,
       index: json['index'] as int,
