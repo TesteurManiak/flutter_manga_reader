@@ -1,0 +1,12 @@
+name: flutter_manga_reader
+
+packages:
+  - packages/*
+  - ./
+
+scripts:
+  gen:
+    description: Run build_runner to generate files
+    run: dart run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      dependsOn: build_runner
