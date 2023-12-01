@@ -32,7 +32,7 @@ class ChapterReader extends ConsumerWidget {
           false => _HorizontalReader(
               controller: controller,
               pages: pages,
-              pageSnapping: readingDirection.isContinuous,
+              pageSnapping: !readingDirection.isContinuous,
               reverse: readingDirection.reverse,
             ),
         };
