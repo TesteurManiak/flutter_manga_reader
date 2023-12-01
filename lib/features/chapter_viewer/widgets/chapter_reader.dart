@@ -136,10 +136,7 @@ class _VerticalReaderState extends State<_VerticalReader> {
                 ? widget.pages.length - realIndex - 1
                 : realIndex;
             final page = widget.pages[index];
-            return AppNetworkImage(
-              url: page.imageUrl,
-              progressIndicatorBuilder: (_, progress) => _Loader(progress),
-            );
+            return AppNetworkImage(url: page.imageUrl);
           },
         ),
       ],
@@ -157,18 +154,5 @@ class _VerticalReaderState extends State<_VerticalReader> {
     final offset = index * size.height;
 
     scrollController.jumpTo(offset);
-  }
-}
-
-class _Loader extends StatelessWidget {
-  const _Loader(this.progress);
-
-  final double? progress;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(value: progress),
-    );
   }
 }
