@@ -89,11 +89,23 @@ class _VerticalReaderState extends State<_VerticalReader> {
   @override
   void initState() {
     super.initState();
+
+    // Sync page controller with scroll offset
     widget.controller.addListener(_pageControllerListener);
 
+    // Sync scroll offset with page controller
     scrollController.addListener(() {
       final page = scrollController.offset / MediaQuery.sizeOf(context).height;
       widget.controller.page = page.round();
+    });
+
+    // Set initial offset
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final page = widget.controller.page;
+      if (page == 0) return;
+
+      final offset = page * MediaQuery.sizeOf(context).height;
+      scrollController.jumpTo(offset);
     });
   }
 
@@ -125,9 +137,9 @@ class _VerticalReaderState extends State<_VerticalReader> {
   void _pageControllerListener() {
     final size = MediaQuery.sizeOf(context);
     final page = widget.controller.page;
-    final scrollPage = (scrollController.offset / size.height).round();
+    final currentScrollPage = (scrollController.offset / size.height).round();
 
-    if (page == scrollPage) return;
+    if (page == currentScrollPage) return;
 
     final index = widget.reverse ? widget.pages.length - page - 1 : page;
     final offset = index * size.height;
