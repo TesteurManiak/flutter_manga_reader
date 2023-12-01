@@ -20,10 +20,9 @@ class _LibraryViewState extends ConsumerState<LibraryView>
 
     return Scaffold(
       appBar: _AppBar(),
-      body: state.when(
-        loading: LoadingContent.new,
-        loaded: (mangas) {
-          return RefreshIndicator(
+      body: switch (state) {
+        LibraryLoading() => const LoadingContent(),
+        LibraryLoaded(:final mangas) => RefreshIndicator(
             onRefresh: () async {
               // TODO(Guillaume): refresh library chapters
             },
@@ -31,11 +30,10 @@ class _LibraryViewState extends ConsumerState<LibraryView>
               mangas: mangas.map((e) => e.toSourceModel()).toList(),
               displayedFromSource: false,
             ),
-          );
-        },
-        empty: () => const _Empty(),
-        error: (_) => const ErrorContent(),
-      ),
+          ),
+        LibraryEmpty() => const _Empty(),
+        LibraryError() => const ErrorContent(),
+      },
     );
   }
 

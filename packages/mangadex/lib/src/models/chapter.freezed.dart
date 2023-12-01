@@ -80,22 +80,22 @@ class _$ChapterResponseCopyWithImpl<$Res, $Val extends ChapterResponse>
 }
 
 /// @nodoc
-abstract class _$$_ChapterResponseCopyWith<$Res>
+abstract class _$$ChapterResponseImplCopyWith<$Res>
     implements $ChapterResponseCopyWith<$Res> {
-  factory _$$_ChapterResponseCopyWith(
-          _$_ChapterResponse value, $Res Function(_$_ChapterResponse) then) =
-      __$$_ChapterResponseCopyWithImpl<$Res>;
+  factory _$$ChapterResponseImplCopyWith(_$ChapterResponseImpl value,
+          $Res Function(_$ChapterResponseImpl) then) =
+      __$$ChapterResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<ChapterData> data, int limit, int offset, int total});
 }
 
 /// @nodoc
-class __$$_ChapterResponseCopyWithImpl<$Res>
-    extends _$ChapterResponseCopyWithImpl<$Res, _$_ChapterResponse>
-    implements _$$_ChapterResponseCopyWith<$Res> {
-  __$$_ChapterResponseCopyWithImpl(
-      _$_ChapterResponse _value, $Res Function(_$_ChapterResponse) _then)
+class __$$ChapterResponseImplCopyWithImpl<$Res>
+    extends _$ChapterResponseCopyWithImpl<$Res, _$ChapterResponseImpl>
+    implements _$$ChapterResponseImplCopyWith<$Res> {
+  __$$ChapterResponseImplCopyWithImpl(
+      _$ChapterResponseImpl _value, $Res Function(_$ChapterResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_ChapterResponseCopyWithImpl<$Res>
     Object? offset = null,
     Object? total = null,
   }) {
-    return _then(_$_ChapterResponse(
+    return _then(_$ChapterResponseImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -129,8 +129,8 @@ class __$$_ChapterResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChapterResponse extends _ChapterResponse {
-  const _$_ChapterResponse(
+class _$ChapterResponseImpl extends _ChapterResponse {
+  const _$ChapterResponseImpl(
       {final List<ChapterData> data = const <ChapterData>[],
       this.limit = 0,
       this.offset = 0,
@@ -138,8 +138,8 @@ class _$_ChapterResponse extends _ChapterResponse {
       : _data = data,
         super._();
 
-  factory _$_ChapterResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_ChapterResponseFromJson(json);
+  factory _$ChapterResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChapterResponseImplFromJson(json);
 
   final List<ChapterData> _data;
   @override
@@ -169,7 +169,7 @@ class _$_ChapterResponse extends _ChapterResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChapterResponse &&
+            other is _$ChapterResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.offset, offset) || other.offset == offset) &&
@@ -184,12 +184,13 @@ class _$_ChapterResponse extends _ChapterResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChapterResponseCopyWith<_$_ChapterResponse> get copyWith =>
-      __$$_ChapterResponseCopyWithImpl<_$_ChapterResponse>(this, _$identity);
+  _$$ChapterResponseImplCopyWith<_$ChapterResponseImpl> get copyWith =>
+      __$$ChapterResponseImplCopyWithImpl<_$ChapterResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChapterResponseToJson(
+    return _$$ChapterResponseImplToJson(
       this,
     );
   }
@@ -200,11 +201,11 @@ abstract class _ChapterResponse extends ChapterResponse {
       {final List<ChapterData> data,
       final int limit,
       final int offset,
-      final int total}) = _$_ChapterResponse;
+      final int total}) = _$ChapterResponseImpl;
   const _ChapterResponse._() : super._();
 
   factory _ChapterResponse.fromJson(Map<String, dynamic> json) =
-      _$_ChapterResponse.fromJson;
+      _$ChapterResponseImpl.fromJson;
 
   @override
   List<ChapterData> get data;
@@ -216,7 +217,7 @@ abstract class _ChapterResponse extends ChapterResponse {
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$$_ChapterResponseCopyWith<_$_ChapterResponse> get copyWith =>
+  _$$ChapterResponseImplCopyWith<_$ChapterResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -228,7 +229,6 @@ ChapterData _$ChapterDataFromJson(Map<String, dynamic> json) {
 mixin _$ChapterData {
   String get id => throw _privateConstructorUsedError;
   ChapterAttributes get attributes => throw _privateConstructorUsedError;
-  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -246,7 +246,7 @@ abstract class $ChapterDataCopyWith<$Res> {
   $Res call(
       {String id,
       ChapterAttributes attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+      List<Relationship> relationships});
 
   $ChapterAttributesCopyWith<$Res> get attributes;
 }
@@ -294,28 +294,28 @@ class _$ChapterDataCopyWithImpl<$Res, $Val extends ChapterData>
 }
 
 /// @nodoc
-abstract class _$$_ChapterDataCopyWith<$Res>
+abstract class _$$ChapterDataImplCopyWith<$Res>
     implements $ChapterDataCopyWith<$Res> {
-  factory _$$_ChapterDataCopyWith(
-          _$_ChapterData value, $Res Function(_$_ChapterData) then) =
-      __$$_ChapterDataCopyWithImpl<$Res>;
+  factory _$$ChapterDataImplCopyWith(
+          _$ChapterDataImpl value, $Res Function(_$ChapterDataImpl) then) =
+      __$$ChapterDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       ChapterAttributes attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+      List<Relationship> relationships});
 
   @override
   $ChapterAttributesCopyWith<$Res> get attributes;
 }
 
 /// @nodoc
-class __$$_ChapterDataCopyWithImpl<$Res>
-    extends _$ChapterDataCopyWithImpl<$Res, _$_ChapterData>
-    implements _$$_ChapterDataCopyWith<$Res> {
-  __$$_ChapterDataCopyWithImpl(
-      _$_ChapterData _value, $Res Function(_$_ChapterData) _then)
+class __$$ChapterDataImplCopyWithImpl<$Res>
+    extends _$ChapterDataCopyWithImpl<$Res, _$ChapterDataImpl>
+    implements _$$ChapterDataImplCopyWith<$Res> {
+  __$$ChapterDataImplCopyWithImpl(
+      _$ChapterDataImpl _value, $Res Function(_$ChapterDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -325,7 +325,7 @@ class __$$_ChapterDataCopyWithImpl<$Res>
     Object? attributes = null,
     Object? relationships = null,
   }) {
-    return _then(_$_ChapterData(
+    return _then(_$ChapterDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -344,16 +344,15 @@ class __$$_ChapterDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChapterData implements _ChapterData {
-  const _$_ChapterData(
+class _$ChapterDataImpl implements _ChapterData {
+  const _$ChapterDataImpl(
       {required this.id,
       required this.attributes,
-      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
-  factory _$_ChapterData.fromJson(Map<String, dynamic> json) =>
-      _$$_ChapterDataFromJson(json);
+  factory _$ChapterDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChapterDataImplFromJson(json);
 
   @override
   final String id;
@@ -362,7 +361,6 @@ class _$_ChapterData implements _ChapterData {
   final List<Relationship> _relationships;
   @override
   @JsonKey()
-  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -378,7 +376,7 @@ class _$_ChapterData implements _ChapterData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChapterData &&
+            other is _$ChapterDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.attributes, attributes) ||
                 other.attributes == attributes) &&
@@ -394,12 +392,12 @@ class _$_ChapterData implements _ChapterData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChapterDataCopyWith<_$_ChapterData> get copyWith =>
-      __$$_ChapterDataCopyWithImpl<_$_ChapterData>(this, _$identity);
+  _$$ChapterDataImplCopyWith<_$ChapterDataImpl> get copyWith =>
+      __$$ChapterDataImplCopyWithImpl<_$ChapterDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChapterDataToJson(
+    return _$$ChapterDataImplToJson(
       this,
     );
   }
@@ -407,24 +405,22 @@ class _$_ChapterData implements _ChapterData {
 
 abstract class _ChapterData implements ChapterData {
   const factory _ChapterData(
-          {required final String id,
-          required final ChapterAttributes attributes,
-          @RelationshipConverter() final List<Relationship> relationships}) =
-      _$_ChapterData;
+      {required final String id,
+      required final ChapterAttributes attributes,
+      final List<Relationship> relationships}) = _$ChapterDataImpl;
 
   factory _ChapterData.fromJson(Map<String, dynamic> json) =
-      _$_ChapterData.fromJson;
+      _$ChapterDataImpl.fromJson;
 
   @override
   String get id;
   @override
   ChapterAttributes get attributes;
   @override
-  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)
-  _$$_ChapterDataCopyWith<_$_ChapterData> get copyWith =>
+  _$$ChapterDataImplCopyWith<_$ChapterDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -512,11 +508,11 @@ class _$ChapterAttributesCopyWithImpl<$Res, $Val extends ChapterAttributes>
 }
 
 /// @nodoc
-abstract class _$$_ChapterAttributesCopyWith<$Res>
+abstract class _$$ChapterAttributesImplCopyWith<$Res>
     implements $ChapterAttributesCopyWith<$Res> {
-  factory _$$_ChapterAttributesCopyWith(_$_ChapterAttributes value,
-          $Res Function(_$_ChapterAttributes) then) =
-      __$$_ChapterAttributesCopyWithImpl<$Res>;
+  factory _$$ChapterAttributesImplCopyWith(_$ChapterAttributesImpl value,
+          $Res Function(_$ChapterAttributesImpl) then) =
+      __$$ChapterAttributesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -529,11 +525,11 @@ abstract class _$$_ChapterAttributesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ChapterAttributesCopyWithImpl<$Res>
-    extends _$ChapterAttributesCopyWithImpl<$Res, _$_ChapterAttributes>
-    implements _$$_ChapterAttributesCopyWith<$Res> {
-  __$$_ChapterAttributesCopyWithImpl(
-      _$_ChapterAttributes _value, $Res Function(_$_ChapterAttributes) _then)
+class __$$ChapterAttributesImplCopyWithImpl<$Res>
+    extends _$ChapterAttributesCopyWithImpl<$Res, _$ChapterAttributesImpl>
+    implements _$$ChapterAttributesImplCopyWith<$Res> {
+  __$$ChapterAttributesImplCopyWithImpl(_$ChapterAttributesImpl _value,
+      $Res Function(_$ChapterAttributesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -546,7 +542,7 @@ class __$$_ChapterAttributesCopyWithImpl<$Res>
     Object? publishAt = null,
     Object? externalUrl = freezed,
   }) {
-    return _then(_$_ChapterAttributes(
+    return _then(_$ChapterAttributesImpl(
       title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -577,8 +573,8 @@ class __$$_ChapterAttributesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ChapterAttributes extends _ChapterAttributes {
-  const _$_ChapterAttributes(
+class _$ChapterAttributesImpl extends _ChapterAttributes {
+  const _$ChapterAttributesImpl(
       {this.title,
       this.volume,
       this.chapter,
@@ -587,8 +583,8 @@ class _$_ChapterAttributes extends _ChapterAttributes {
       this.externalUrl})
       : super._();
 
-  factory _$_ChapterAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_ChapterAttributesFromJson(json);
+  factory _$ChapterAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChapterAttributesImplFromJson(json);
 
   @override
   final String? title;
@@ -613,7 +609,7 @@ class _$_ChapterAttributes extends _ChapterAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChapterAttributes &&
+            other is _$ChapterAttributesImpl &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.volume, volume) || other.volume == volume) &&
             (identical(other.chapter, chapter) || other.chapter == chapter) &&
@@ -632,13 +628,13 @@ class _$_ChapterAttributes extends _ChapterAttributes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChapterAttributesCopyWith<_$_ChapterAttributes> get copyWith =>
-      __$$_ChapterAttributesCopyWithImpl<_$_ChapterAttributes>(
+  _$$ChapterAttributesImplCopyWith<_$ChapterAttributesImpl> get copyWith =>
+      __$$ChapterAttributesImplCopyWithImpl<_$ChapterAttributesImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ChapterAttributesToJson(
+    return _$$ChapterAttributesImplToJson(
       this,
     );
   }
@@ -651,11 +647,11 @@ abstract class _ChapterAttributes extends ChapterAttributes {
       final String? chapter,
       final int pages,
       required final String publishAt,
-      final String? externalUrl}) = _$_ChapterAttributes;
+      final String? externalUrl}) = _$ChapterAttributesImpl;
   const _ChapterAttributes._() : super._();
 
   factory _ChapterAttributes.fromJson(Map<String, dynamic> json) =
-      _$_ChapterAttributes.fromJson;
+      _$ChapterAttributesImpl.fromJson;
 
   @override
   String? get title;
@@ -671,6 +667,6 @@ abstract class _ChapterAttributes extends ChapterAttributes {
   String? get externalUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_ChapterAttributesCopyWith<_$_ChapterAttributes> get copyWith =>
+  _$$ChapterAttributesImplCopyWith<_$ChapterAttributesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

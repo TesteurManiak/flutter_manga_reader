@@ -6,8 +6,9 @@ part of 'manga.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_MangaListResponse _$$_MangaListResponseFromJson(Map<String, dynamic> json) =>
-    _$_MangaListResponse(
+_$MangaListResponseImpl _$$MangaListResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MangaListResponseImpl(
       data: (json['data'] as List<dynamic>?)
               ?.map((e) => MangaData.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -17,8 +18,8 @@ _$_MangaListResponse _$$_MangaListResponseFromJson(Map<String, dynamic> json) =>
       total: json['total'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_MangaListResponseToJson(
-        _$_MangaListResponse instance) =>
+Map<String, dynamic> _$$MangaListResponseImplToJson(
+        _$MangaListResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
       'limit': instance.limit,
@@ -26,38 +27,37 @@ Map<String, dynamic> _$$_MangaListResponseToJson(
       'total': instance.total,
     };
 
-_$_MangaResponse _$$_MangaResponseFromJson(Map<String, dynamic> json) =>
-    _$_MangaResponse(
+_$MangaResponseImpl _$$MangaResponseImplFromJson(Map<String, dynamic> json) =>
+    _$MangaResponseImpl(
       data: MangaData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_MangaResponseToJson(_$_MangaResponse instance) =>
+Map<String, dynamic> _$$MangaResponseImplToJson(_$MangaResponseImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
     };
 
-_$_MangaData _$$_MangaDataFromJson(Map<String, dynamic> json) => _$_MangaData(
+_$MangaDataImpl _$$MangaDataImplFromJson(Map<String, dynamic> json) =>
+    _$MangaDataImpl(
       id: json['id'] as String,
       attributes:
           MangaAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
       relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => const RelationshipConverter()
-                  .fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Relationship>[],
     );
 
-Map<String, dynamic> _$$_MangaDataToJson(_$_MangaData instance) =>
+Map<String, dynamic> _$$MangaDataImplToJson(_$MangaDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
-      'relationships': instance.relationships
-          .map(const RelationshipConverter().toJson)
-          .toList(),
+      'relationships': instance.relationships,
     };
 
-_$_MangaAttributes _$$_MangaAttributesFromJson(Map<String, dynamic> json) =>
-    _$_MangaAttributes(
+_$MangaAttributesImpl _$$MangaAttributesImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MangaAttributesImpl(
       title: Map<String, String>.from(json['title'] as Map),
       altTitles: (json['altTitles'] as List<dynamic>)
           .map((e) => Map<String, String>.from(e as Map))
@@ -76,7 +76,8 @@ _$_MangaAttributes _$$_MangaAttributesFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_MangaAttributesToJson(_$_MangaAttributes instance) =>
+Map<String, dynamic> _$$MangaAttributesImplToJson(
+        _$MangaAttributesImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
       'altTitles': instance.altTitles,
@@ -113,24 +114,24 @@ const _$StatusEnumMap = {
   Status.cancelled: 'cancelled',
 };
 
-_$_Tag _$$_TagFromJson(Map<String, dynamic> json) => _$_Tag(
+_$TagImpl _$$TagImplFromJson(Map<String, dynamic> json) => _$TagImpl(
       id: json['id'] as String? ?? '',
       attributes:
           TagAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_TagToJson(_$_Tag instance) => <String, dynamic>{
+Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
     };
 
-_$_TagAttributes _$$_TagAttributesFromJson(Map<String, dynamic> json) =>
-    _$_TagAttributes(
+_$TagAttributesImpl _$$TagAttributesImplFromJson(Map<String, dynamic> json) =>
+    _$TagAttributesImpl(
       name: Map<String, String>.from(json['name'] as Map),
       group: json['group'] as String,
     );
 
-Map<String, dynamic> _$$_TagAttributesToJson(_$_TagAttributes instance) =>
+Map<String, dynamic> _$$TagAttributesImplToJson(_$TagAttributesImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'group': instance.group,

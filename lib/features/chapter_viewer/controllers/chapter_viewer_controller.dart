@@ -47,16 +47,22 @@ class ChapterViewerController extends _$ChapterViewerController {
     final localDatasource = ref.read(localDatasourceProvider);
     return localDatasource.setChapterRead(chapterId: chapterId, read: true);
   }
+
+  Future<void> setLastPageRead(int page) {
+    final localDatasource = ref.read(localDatasourceProvider);
+    return localDatasource.setChapterLastPageRead(
+      chapterId: chapterId,
+      lastPageRead: page,
+    );
+  }
 }
 
 @freezed
-class ChapterViewerState with _$ChapterViewerState {
-  const factory ChapterViewerState.loading() = _Loading;
+sealed class ChapterViewerState with _$ChapterViewerState {
+  const factory ChapterViewerState.loading() = ChapterViewerLoading;
   const factory ChapterViewerState.loaded({
     required Chapter chapter,
     required List<ChapterPage> pages,
-  }) = _Loaded;
-  const factory ChapterViewerState.error({String? error}) = _Error;
-
-  const ChapterViewerState._();
+  }) = ChapterViewerLoaded;
+  const factory ChapterViewerState.error({String? error}) = ChapterViewerError;
 }

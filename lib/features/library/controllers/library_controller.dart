@@ -27,13 +27,13 @@ class LibraryController extends _$LibraryController {
 }
 
 @freezed
-class LibraryState with _$LibraryState {
-  const factory LibraryState.loading() = _Loading;
+sealed class LibraryState with _$LibraryState {
+  const factory LibraryState.loading() = LibraryLoading;
   const factory LibraryState.loaded({
     required List<Manga> mangas,
-  }) = _Loaded;
-  const factory LibraryState.empty() = _Empty;
-  const factory LibraryState.error({required String message}) = _Error;
+  }) = LibraryLoaded;
+  const factory LibraryState.empty() = LibraryEmpty;
+  const factory LibraryState.error({required String message}) = LibraryError;
 
   const LibraryState._();
 }

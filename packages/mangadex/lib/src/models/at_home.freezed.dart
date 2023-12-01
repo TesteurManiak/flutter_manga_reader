@@ -76,9 +76,10 @@ class _$AtHomeCopyWithImpl<$Res, $Val extends AtHome>
 }
 
 /// @nodoc
-abstract class _$$_AtHomeCopyWith<$Res> implements $AtHomeCopyWith<$Res> {
-  factory _$$_AtHomeCopyWith(_$_AtHome value, $Res Function(_$_AtHome) then) =
-      __$$_AtHomeCopyWithImpl<$Res>;
+abstract class _$$AtHomeImplCopyWith<$Res> implements $AtHomeCopyWith<$Res> {
+  factory _$$AtHomeImplCopyWith(
+          _$AtHomeImpl value, $Res Function(_$AtHomeImpl) then) =
+      __$$AtHomeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String baseUrl, AtHomeChapter chapter});
@@ -88,10 +89,11 @@ abstract class _$$_AtHomeCopyWith<$Res> implements $AtHomeCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AtHomeCopyWithImpl<$Res>
-    extends _$AtHomeCopyWithImpl<$Res, _$_AtHome>
-    implements _$$_AtHomeCopyWith<$Res> {
-  __$$_AtHomeCopyWithImpl(_$_AtHome _value, $Res Function(_$_AtHome) _then)
+class __$$AtHomeImplCopyWithImpl<$Res>
+    extends _$AtHomeCopyWithImpl<$Res, _$AtHomeImpl>
+    implements _$$AtHomeImplCopyWith<$Res> {
+  __$$AtHomeImplCopyWithImpl(
+      _$AtHomeImpl _value, $Res Function(_$AtHomeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +102,7 @@ class __$$_AtHomeCopyWithImpl<$Res>
     Object? baseUrl = null,
     Object? chapter = null,
   }) {
-    return _then(_$_AtHome(
+    return _then(_$AtHomeImpl(
       baseUrl: null == baseUrl
           ? _value.baseUrl
           : baseUrl // ignore: cast_nullable_to_non_nullable
@@ -115,11 +117,11 @@ class __$$_AtHomeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AtHome implements _AtHome {
-  const _$_AtHome({required this.baseUrl, required this.chapter});
+class _$AtHomeImpl implements _AtHome {
+  const _$AtHomeImpl({required this.baseUrl, required this.chapter});
 
-  factory _$_AtHome.fromJson(Map<String, dynamic> json) =>
-      _$$_AtHomeFromJson(json);
+  factory _$AtHomeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AtHomeImplFromJson(json);
 
   @override
   final String baseUrl;
@@ -135,7 +137,7 @@ class _$_AtHome implements _AtHome {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AtHome &&
+            other is _$AtHomeImpl &&
             (identical(other.baseUrl, baseUrl) || other.baseUrl == baseUrl) &&
             (identical(other.chapter, chapter) || other.chapter == chapter));
   }
@@ -147,12 +149,12 @@ class _$_AtHome implements _AtHome {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AtHomeCopyWith<_$_AtHome> get copyWith =>
-      __$$_AtHomeCopyWithImpl<_$_AtHome>(this, _$identity);
+  _$$AtHomeImplCopyWith<_$AtHomeImpl> get copyWith =>
+      __$$AtHomeImplCopyWithImpl<_$AtHomeImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AtHomeToJson(
+    return _$$AtHomeImplToJson(
       this,
     );
   }
@@ -161,9 +163,9 @@ class _$_AtHome implements _AtHome {
 abstract class _AtHome implements AtHome {
   const factory _AtHome(
       {required final String baseUrl,
-      required final AtHomeChapter chapter}) = _$_AtHome;
+      required final AtHomeChapter chapter}) = _$AtHomeImpl;
 
-  factory _AtHome.fromJson(Map<String, dynamic> json) = _$_AtHome.fromJson;
+  factory _AtHome.fromJson(Map<String, dynamic> json) = _$AtHomeImpl.fromJson;
 
   @override
   String get baseUrl;
@@ -171,7 +173,7 @@ abstract class _AtHome implements AtHome {
   AtHomeChapter get chapter;
   @override
   @JsonKey(ignore: true)
-  _$$_AtHomeCopyWith<_$_AtHome> get copyWith =>
+  _$$AtHomeImplCopyWith<_$AtHomeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -235,22 +237,22 @@ class _$AtHomeChapterCopyWithImpl<$Res, $Val extends AtHomeChapter>
 }
 
 /// @nodoc
-abstract class _$$_AtHomeChapterCopyWith<$Res>
+abstract class _$$AtHomeChapterImplCopyWith<$Res>
     implements $AtHomeChapterCopyWith<$Res> {
-  factory _$$_AtHomeChapterCopyWith(
-          _$_AtHomeChapter value, $Res Function(_$_AtHomeChapter) then) =
-      __$$_AtHomeChapterCopyWithImpl<$Res>;
+  factory _$$AtHomeChapterImplCopyWith(
+          _$AtHomeChapterImpl value, $Res Function(_$AtHomeChapterImpl) then) =
+      __$$AtHomeChapterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String hash, List<String> data, List<String> dataSaver});
 }
 
 /// @nodoc
-class __$$_AtHomeChapterCopyWithImpl<$Res>
-    extends _$AtHomeChapterCopyWithImpl<$Res, _$_AtHomeChapter>
-    implements _$$_AtHomeChapterCopyWith<$Res> {
-  __$$_AtHomeChapterCopyWithImpl(
-      _$_AtHomeChapter _value, $Res Function(_$_AtHomeChapter) _then)
+class __$$AtHomeChapterImplCopyWithImpl<$Res>
+    extends _$AtHomeChapterCopyWithImpl<$Res, _$AtHomeChapterImpl>
+    implements _$$AtHomeChapterImplCopyWith<$Res> {
+  __$$AtHomeChapterImplCopyWithImpl(
+      _$AtHomeChapterImpl _value, $Res Function(_$AtHomeChapterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -260,7 +262,7 @@ class __$$_AtHomeChapterCopyWithImpl<$Res>
     Object? data = null,
     Object? dataSaver = null,
   }) {
-    return _then(_$_AtHomeChapter(
+    return _then(_$AtHomeChapterImpl(
       hash: null == hash
           ? _value.hash
           : hash // ignore: cast_nullable_to_non_nullable
@@ -279,16 +281,16 @@ class __$$_AtHomeChapterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AtHomeChapter implements _AtHomeChapter {
-  const _$_AtHomeChapter(
+class _$AtHomeChapterImpl implements _AtHomeChapter {
+  const _$AtHomeChapterImpl(
       {required this.hash,
       required final List<String> data,
       required final List<String> dataSaver})
       : _data = data,
         _dataSaver = dataSaver;
 
-  factory _$_AtHomeChapter.fromJson(Map<String, dynamic> json) =>
-      _$$_AtHomeChapterFromJson(json);
+  factory _$AtHomeChapterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AtHomeChapterImplFromJson(json);
 
   @override
   final String hash;
@@ -317,7 +319,7 @@ class _$_AtHomeChapter implements _AtHomeChapter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AtHomeChapter &&
+            other is _$AtHomeChapterImpl &&
             (identical(other.hash, hash) || other.hash == hash) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             const DeepCollectionEquality()
@@ -335,12 +337,12 @@ class _$_AtHomeChapter implements _AtHomeChapter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AtHomeChapterCopyWith<_$_AtHomeChapter> get copyWith =>
-      __$$_AtHomeChapterCopyWithImpl<_$_AtHomeChapter>(this, _$identity);
+  _$$AtHomeChapterImplCopyWith<_$AtHomeChapterImpl> get copyWith =>
+      __$$AtHomeChapterImplCopyWithImpl<_$AtHomeChapterImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AtHomeChapterToJson(
+    return _$$AtHomeChapterImplToJson(
       this,
     );
   }
@@ -350,10 +352,10 @@ abstract class _AtHomeChapter implements AtHomeChapter {
   const factory _AtHomeChapter(
       {required final String hash,
       required final List<String> data,
-      required final List<String> dataSaver}) = _$_AtHomeChapter;
+      required final List<String> dataSaver}) = _$AtHomeChapterImpl;
 
   factory _AtHomeChapter.fromJson(Map<String, dynamic> json) =
-      _$_AtHomeChapter.fromJson;
+      _$AtHomeChapterImpl.fromJson;
 
   @override
   String get hash;
@@ -363,7 +365,7 @@ abstract class _AtHomeChapter implements AtHomeChapter {
   List<String> get dataSaver;
   @override
   @JsonKey(ignore: true)
-  _$$_AtHomeChapterCopyWith<_$_AtHomeChapter> get copyWith =>
+  _$$AtHomeChapterImplCopyWith<_$AtHomeChapterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -434,22 +436,22 @@ class _$ImageReportCopyWithImpl<$Res, $Val extends ImageReport>
 }
 
 /// @nodoc
-abstract class _$$_ImageReportCopyWith<$Res>
+abstract class _$$ImageReportImplCopyWith<$Res>
     implements $ImageReportCopyWith<$Res> {
-  factory _$$_ImageReportCopyWith(
-          _$_ImageReport value, $Res Function(_$_ImageReport) then) =
-      __$$_ImageReportCopyWithImpl<$Res>;
+  factory _$$ImageReportImplCopyWith(
+          _$ImageReportImpl value, $Res Function(_$ImageReportImpl) then) =
+      __$$ImageReportImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String url, bool success, int? bytes, bool cached, int duration});
 }
 
 /// @nodoc
-class __$$_ImageReportCopyWithImpl<$Res>
-    extends _$ImageReportCopyWithImpl<$Res, _$_ImageReport>
-    implements _$$_ImageReportCopyWith<$Res> {
-  __$$_ImageReportCopyWithImpl(
-      _$_ImageReport _value, $Res Function(_$_ImageReport) _then)
+class __$$ImageReportImplCopyWithImpl<$Res>
+    extends _$ImageReportCopyWithImpl<$Res, _$ImageReportImpl>
+    implements _$$ImageReportImplCopyWith<$Res> {
+  __$$ImageReportImplCopyWithImpl(
+      _$ImageReportImpl _value, $Res Function(_$ImageReportImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -461,7 +463,7 @@ class __$$_ImageReportCopyWithImpl<$Res>
     Object? cached = null,
     Object? duration = null,
   }) {
-    return _then(_$_ImageReport(
+    return _then(_$ImageReportImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -488,8 +490,8 @@ class __$$_ImageReportCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ImageReport implements _ImageReport {
-  const _$_ImageReport(
+class _$ImageReportImpl implements _ImageReport {
+  const _$ImageReportImpl(
       {required this.url,
       required this.success,
       this.bytes,
@@ -516,7 +518,7 @@ class _$_ImageReport implements _ImageReport {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ImageReport &&
+            other is _$ImageReportImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.bytes, bytes) || other.bytes == bytes) &&
@@ -532,8 +534,8 @@ class _$_ImageReport implements _ImageReport {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ImageReportCopyWith<_$_ImageReport> get copyWith =>
-      __$$_ImageReportCopyWithImpl<_$_ImageReport>(this, _$identity);
+  _$$ImageReportImplCopyWith<_$ImageReportImpl> get copyWith =>
+      __$$ImageReportImplCopyWithImpl<_$ImageReportImpl>(this, _$identity);
 }
 
 abstract class _ImageReport implements ImageReport {
@@ -542,7 +544,7 @@ abstract class _ImageReport implements ImageReport {
       required final bool success,
       final int? bytes,
       required final bool cached,
-      required final int duration}) = _$_ImageReport;
+      required final int duration}) = _$ImageReportImpl;
 
   @override
   String get url;
@@ -556,6 +558,6 @@ abstract class _ImageReport implements ImageReport {
   int get duration;
   @override
   @JsonKey(ignore: true)
-  _$$_ImageReportCopyWith<_$_ImageReport> get copyWith =>
+  _$$ImageReportImplCopyWith<_$ImageReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

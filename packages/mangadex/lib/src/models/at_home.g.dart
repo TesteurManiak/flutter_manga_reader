@@ -6,25 +6,26 @@ part of 'at_home.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AtHome _$$_AtHomeFromJson(Map<String, dynamic> json) => _$_AtHome(
+_$AtHomeImpl _$$AtHomeImplFromJson(Map<String, dynamic> json) => _$AtHomeImpl(
       baseUrl: json['baseUrl'] as String,
       chapter: AtHomeChapter.fromJson(json['chapter'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_AtHomeToJson(_$_AtHome instance) => <String, dynamic>{
+Map<String, dynamic> _$$AtHomeImplToJson(_$AtHomeImpl instance) =>
+    <String, dynamic>{
       'baseUrl': instance.baseUrl,
       'chapter': instance.chapter,
     };
 
-_$_AtHomeChapter _$$_AtHomeChapterFromJson(Map<String, dynamic> json) =>
-    _$_AtHomeChapter(
+_$AtHomeChapterImpl _$$AtHomeChapterImplFromJson(Map<String, dynamic> json) =>
+    _$AtHomeChapterImpl(
       hash: json['hash'] as String,
       data: (json['data'] as List<dynamic>).map((e) => e as String).toList(),
       dataSaver:
           (json['dataSaver'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
-Map<String, dynamic> _$$_AtHomeChapterToJson(_$_AtHomeChapter instance) =>
+Map<String, dynamic> _$$AtHomeChapterImplToJson(_$AtHomeChapterImpl instance) =>
     <String, dynamic>{
       'hash': instance.hash,
       'data': instance.data,

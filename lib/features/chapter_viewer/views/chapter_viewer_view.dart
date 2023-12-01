@@ -101,18 +101,16 @@ class _ContentState extends ConsumerState<_Content> {
         chapterId: widget.chapterId,
         chapterController: chapterPageController,
       ),
-      body: state.when(
-        loading: LoadingContent.new,
-        loaded: (_, pages) {
-          return _PageViewer(
+      body: switch (state) {
+        ChapterViewerLoading() => const LoadingContent(),
+        ChapterViewerLoaded(:final pages) => _PageViewer(
             chapterController: chapterPageController,
             pages: pages,
             initialPage: widget.initialPage,
             chapterId: widget.chapterId,
-          );
-        },
-        error: (_) => ErrorContent(onRetry: controller.fetchPages),
-      ),
+          ),
+        ChapterViewerError() => ErrorContent(onRetry: controller.fetchPages),
+      },
     );
   }
 }
@@ -134,21 +132,23 @@ class _PageViewer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final readingDirection = ref.watch(readingDirectionControllerProvider);
 
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvoked: (didPop) {
+        final page = chapterController.page;
+
         // If on last page of the chapter, mark it as read.
-        if (chapterController.page == pages.length - 1) {
-          await ref
+        if (page == pages.length - 1) {
+          ref
               .read(chapterViewerControllerProvider(chapterId).notifier)
               .markChapterAsRead();
+        } else if (page != 0 && page != initialPage) {
+          ref
+              .read(chapterViewerControllerProvider(chapterId).notifier)
+              .setLastPageRead(page);
         }
-
-        return true;
       },
       child: GestureDetector(
-        onTap: () {
-          DefaultSlidableController.maybeOf(context)?.toggle();
-        },
+        onTap: () => DefaultSlidableController.maybeOf(context)?.toggle(),
         child: Stack(
           children: [
             PageView.builder(

@@ -6,14 +6,14 @@ part of 'scanlation_group.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ScanlationGroupAttributes _$$_ScanlationGroupAttributesFromJson(
+_$ScanlationGroupAttributesImpl _$$ScanlationGroupAttributesImplFromJson(
         Map<String, dynamic> json) =>
-    _$_ScanlationGroupAttributes(
+    _$ScanlationGroupAttributesImpl(
       name: json['name'] as String,
     );
 
-Map<String, dynamic> _$$_ScanlationGroupAttributesToJson(
-        _$_ScanlationGroupAttributes instance) =>
+Map<String, dynamic> _$$ScanlationGroupAttributesImplToJson(
+        _$ScanlationGroupAttributesImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
     };

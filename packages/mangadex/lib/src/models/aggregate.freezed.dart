@@ -69,22 +69,22 @@ class _$AggregateResponseCopyWithImpl<$Res, $Val extends AggregateResponse>
 }
 
 /// @nodoc
-abstract class _$$_AggregateResponseCopyWith<$Res>
+abstract class _$$AggregateResponseImplCopyWith<$Res>
     implements $AggregateResponseCopyWith<$Res> {
-  factory _$$_AggregateResponseCopyWith(_$_AggregateResponse value,
-          $Res Function(_$_AggregateResponse) then) =
-      __$$_AggregateResponseCopyWithImpl<$Res>;
+  factory _$$AggregateResponseImplCopyWith(_$AggregateResponseImpl value,
+          $Res Function(_$AggregateResponseImpl) then) =
+      __$$AggregateResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String result, Map<String, AggregateVolume>? volumes});
 }
 
 /// @nodoc
-class __$$_AggregateResponseCopyWithImpl<$Res>
-    extends _$AggregateResponseCopyWithImpl<$Res, _$_AggregateResponse>
-    implements _$$_AggregateResponseCopyWith<$Res> {
-  __$$_AggregateResponseCopyWithImpl(
-      _$_AggregateResponse _value, $Res Function(_$_AggregateResponse) _then)
+class __$$AggregateResponseImplCopyWithImpl<$Res>
+    extends _$AggregateResponseCopyWithImpl<$Res, _$AggregateResponseImpl>
+    implements _$$AggregateResponseImplCopyWith<$Res> {
+  __$$AggregateResponseImplCopyWithImpl(_$AggregateResponseImpl _value,
+      $Res Function(_$AggregateResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +93,7 @@ class __$$_AggregateResponseCopyWithImpl<$Res>
     Object? result = null,
     Object? volumes = freezed,
   }) {
-    return _then(_$_AggregateResponse(
+    return _then(_$AggregateResponseImpl(
       result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
@@ -108,13 +108,13 @@ class __$$_AggregateResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AggregateResponse implements _AggregateResponse {
-  const _$_AggregateResponse(
+class _$AggregateResponseImpl implements _AggregateResponse {
+  const _$AggregateResponseImpl(
       {required this.result, final Map<String, AggregateVolume>? volumes})
       : _volumes = volumes;
 
-  factory _$_AggregateResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_AggregateResponseFromJson(json);
+  factory _$AggregateResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AggregateResponseImplFromJson(json);
 
   @override
   final String result;
@@ -137,7 +137,7 @@ class _$_AggregateResponse implements _AggregateResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AggregateResponse &&
+            other is _$AggregateResponseImpl &&
             (identical(other.result, result) || other.result == result) &&
             const DeepCollectionEquality().equals(other._volumes, _volumes));
   }
@@ -150,13 +150,13 @@ class _$_AggregateResponse implements _AggregateResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AggregateResponseCopyWith<_$_AggregateResponse> get copyWith =>
-      __$$_AggregateResponseCopyWithImpl<_$_AggregateResponse>(
+  _$$AggregateResponseImplCopyWith<_$AggregateResponseImpl> get copyWith =>
+      __$$AggregateResponseImplCopyWithImpl<_$AggregateResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AggregateResponseToJson(
+    return _$$AggregateResponseImplToJson(
       this,
     );
   }
@@ -165,10 +165,10 @@ class _$_AggregateResponse implements _AggregateResponse {
 abstract class _AggregateResponse implements AggregateResponse {
   const factory _AggregateResponse(
       {required final String result,
-      final Map<String, AggregateVolume>? volumes}) = _$_AggregateResponse;
+      final Map<String, AggregateVolume>? volumes}) = _$AggregateResponseImpl;
 
   factory _AggregateResponse.fromJson(Map<String, dynamic> json) =
-      _$_AggregateResponse.fromJson;
+      _$AggregateResponseImpl.fromJson;
 
   @override
   String get result;
@@ -176,7 +176,7 @@ abstract class _AggregateResponse implements AggregateResponse {
   Map<String, AggregateVolume>? get volumes;
   @override
   @JsonKey(ignore: true)
-  _$$_AggregateResponseCopyWith<_$_AggregateResponse> get copyWith =>
+  _$$AggregateResponseImplCopyWith<_$AggregateResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -242,11 +242,11 @@ class _$AggregateVolumeCopyWithImpl<$Res, $Val extends AggregateVolume>
 }
 
 /// @nodoc
-abstract class _$$_AggregateVolumeCopyWith<$Res>
+abstract class _$$AggregateVolumeImplCopyWith<$Res>
     implements $AggregateVolumeCopyWith<$Res> {
-  factory _$$_AggregateVolumeCopyWith(
-          _$_AggregateVolume value, $Res Function(_$_AggregateVolume) then) =
-      __$$_AggregateVolumeCopyWithImpl<$Res>;
+  factory _$$AggregateVolumeImplCopyWith(_$AggregateVolumeImpl value,
+          $Res Function(_$AggregateVolumeImpl) then) =
+      __$$AggregateVolumeImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -254,11 +254,11 @@ abstract class _$$_AggregateVolumeCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AggregateVolumeCopyWithImpl<$Res>
-    extends _$AggregateVolumeCopyWithImpl<$Res, _$_AggregateVolume>
-    implements _$$_AggregateVolumeCopyWith<$Res> {
-  __$$_AggregateVolumeCopyWithImpl(
-      _$_AggregateVolume _value, $Res Function(_$_AggregateVolume) _then)
+class __$$AggregateVolumeImplCopyWithImpl<$Res>
+    extends _$AggregateVolumeCopyWithImpl<$Res, _$AggregateVolumeImpl>
+    implements _$$AggregateVolumeImplCopyWith<$Res> {
+  __$$AggregateVolumeImplCopyWithImpl(
+      _$AggregateVolumeImpl _value, $Res Function(_$AggregateVolumeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -268,7 +268,7 @@ class __$$_AggregateVolumeCopyWithImpl<$Res>
     Object? count = null,
     Object? chapters = null,
   }) {
-    return _then(_$_AggregateVolume(
+    return _then(_$AggregateVolumeImpl(
       volume: null == volume
           ? _value.volume
           : volume // ignore: cast_nullable_to_non_nullable
@@ -287,15 +287,15 @@ class __$$_AggregateVolumeCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AggregateVolume implements _AggregateVolume {
-  const _$_AggregateVolume(
+class _$AggregateVolumeImpl implements _AggregateVolume {
+  const _$AggregateVolumeImpl(
       {required this.volume,
       required this.count,
       required final Map<String, AggregateChapter> chapters})
       : _chapters = chapters;
 
-  factory _$_AggregateVolume.fromJson(Map<String, dynamic> json) =>
-      _$$_AggregateVolumeFromJson(json);
+  factory _$AggregateVolumeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AggregateVolumeImplFromJson(json);
 
   @override
   final String volume;
@@ -318,7 +318,7 @@ class _$_AggregateVolume implements _AggregateVolume {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AggregateVolume &&
+            other is _$AggregateVolumeImpl &&
             (identical(other.volume, volume) || other.volume == volume) &&
             (identical(other.count, count) || other.count == count) &&
             const DeepCollectionEquality().equals(other._chapters, _chapters));
@@ -332,12 +332,13 @@ class _$_AggregateVolume implements _AggregateVolume {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AggregateVolumeCopyWith<_$_AggregateVolume> get copyWith =>
-      __$$_AggregateVolumeCopyWithImpl<_$_AggregateVolume>(this, _$identity);
+  _$$AggregateVolumeImplCopyWith<_$AggregateVolumeImpl> get copyWith =>
+      __$$AggregateVolumeImplCopyWithImpl<_$AggregateVolumeImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AggregateVolumeToJson(
+    return _$$AggregateVolumeImplToJson(
       this,
     );
   }
@@ -348,10 +349,10 @@ abstract class _AggregateVolume implements AggregateVolume {
           {required final String volume,
           required final String count,
           required final Map<String, AggregateChapter> chapters}) =
-      _$_AggregateVolume;
+      _$AggregateVolumeImpl;
 
   factory _AggregateVolume.fromJson(Map<String, dynamic> json) =
-      _$_AggregateVolume.fromJson;
+      _$AggregateVolumeImpl.fromJson;
 
   @override
   String get volume;
@@ -361,7 +362,7 @@ abstract class _AggregateVolume implements AggregateVolume {
   Map<String, AggregateChapter> get chapters;
   @override
   @JsonKey(ignore: true)
-  _$$_AggregateVolumeCopyWith<_$_AggregateVolume> get copyWith =>
+  _$$AggregateVolumeImplCopyWith<_$AggregateVolumeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -419,22 +420,22 @@ class _$AggregateChapterCopyWithImpl<$Res, $Val extends AggregateChapter>
 }
 
 /// @nodoc
-abstract class _$$_AggregateChapterCopyWith<$Res>
+abstract class _$$AggregateChapterImplCopyWith<$Res>
     implements $AggregateChapterCopyWith<$Res> {
-  factory _$$_AggregateChapterCopyWith(
-          _$_AggregateChapter value, $Res Function(_$_AggregateChapter) then) =
-      __$$_AggregateChapterCopyWithImpl<$Res>;
+  factory _$$AggregateChapterImplCopyWith(_$AggregateChapterImpl value,
+          $Res Function(_$AggregateChapterImpl) then) =
+      __$$AggregateChapterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String chapter, String count});
 }
 
 /// @nodoc
-class __$$_AggregateChapterCopyWithImpl<$Res>
-    extends _$AggregateChapterCopyWithImpl<$Res, _$_AggregateChapter>
-    implements _$$_AggregateChapterCopyWith<$Res> {
-  __$$_AggregateChapterCopyWithImpl(
-      _$_AggregateChapter _value, $Res Function(_$_AggregateChapter) _then)
+class __$$AggregateChapterImplCopyWithImpl<$Res>
+    extends _$AggregateChapterCopyWithImpl<$Res, _$AggregateChapterImpl>
+    implements _$$AggregateChapterImplCopyWith<$Res> {
+  __$$AggregateChapterImplCopyWithImpl(_$AggregateChapterImpl _value,
+      $Res Function(_$AggregateChapterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -443,7 +444,7 @@ class __$$_AggregateChapterCopyWithImpl<$Res>
     Object? chapter = null,
     Object? count = null,
   }) {
-    return _then(_$_AggregateChapter(
+    return _then(_$AggregateChapterImpl(
       chapter: null == chapter
           ? _value.chapter
           : chapter // ignore: cast_nullable_to_non_nullable
@@ -458,11 +459,11 @@ class __$$_AggregateChapterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AggregateChapter implements _AggregateChapter {
-  const _$_AggregateChapter({required this.chapter, required this.count});
+class _$AggregateChapterImpl implements _AggregateChapter {
+  const _$AggregateChapterImpl({required this.chapter, required this.count});
 
-  factory _$_AggregateChapter.fromJson(Map<String, dynamic> json) =>
-      _$$_AggregateChapterFromJson(json);
+  factory _$AggregateChapterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AggregateChapterImplFromJson(json);
 
   @override
   final String chapter;
@@ -478,7 +479,7 @@ class _$_AggregateChapter implements _AggregateChapter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AggregateChapter &&
+            other is _$AggregateChapterImpl &&
             (identical(other.chapter, chapter) || other.chapter == chapter) &&
             (identical(other.count, count) || other.count == count));
   }
@@ -490,12 +491,13 @@ class _$_AggregateChapter implements _AggregateChapter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AggregateChapterCopyWith<_$_AggregateChapter> get copyWith =>
-      __$$_AggregateChapterCopyWithImpl<_$_AggregateChapter>(this, _$identity);
+  _$$AggregateChapterImplCopyWith<_$AggregateChapterImpl> get copyWith =>
+      __$$AggregateChapterImplCopyWithImpl<_$AggregateChapterImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AggregateChapterToJson(
+    return _$$AggregateChapterImplToJson(
       this,
     );
   }
@@ -504,10 +506,10 @@ class _$_AggregateChapter implements _AggregateChapter {
 abstract class _AggregateChapter implements AggregateChapter {
   const factory _AggregateChapter(
       {required final String chapter,
-      required final String count}) = _$_AggregateChapter;
+      required final String count}) = _$AggregateChapterImpl;
 
   factory _AggregateChapter.fromJson(Map<String, dynamic> json) =
-      _$_AggregateChapter.fromJson;
+      _$AggregateChapterImpl.fromJson;
 
   @override
   String get chapter;
@@ -515,6 +517,6 @@ abstract class _AggregateChapter implements AggregateChapter {
   String get count;
   @override
   @JsonKey(ignore: true)
-  _$$_AggregateChapterCopyWith<_$_AggregateChapter> get copyWith =>
+  _$$AggregateChapterImplCopyWith<_$AggregateChapterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

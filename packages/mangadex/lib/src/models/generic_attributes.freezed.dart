@@ -27,11 +27,11 @@ mixin _$GenericAttributes {
 
 /// @nodoc
 @JsonSerializable()
-class _$_GenericAttributes implements _GenericAttributes {
-  const _$_GenericAttributes({required this.name});
+class _$GenericAttributesImpl implements _GenericAttributes {
+  const _$GenericAttributesImpl({required this.name});
 
-  factory _$_GenericAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_GenericAttributesFromJson(json);
+  factory _$GenericAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GenericAttributesImplFromJson(json);
 
   @override
   final String name;
@@ -45,7 +45,7 @@ class _$_GenericAttributes implements _GenericAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenericAttributes &&
+            other is _$GenericAttributesImpl &&
             (identical(other.name, name) || other.name == name));
   }
 
@@ -55,7 +55,7 @@ class _$_GenericAttributes implements _GenericAttributes {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GenericAttributesToJson(
+    return _$$GenericAttributesImplToJson(
       this,
     );
   }
@@ -63,10 +63,10 @@ class _$_GenericAttributes implements _GenericAttributes {
 
 abstract class _GenericAttributes implements GenericAttributes {
   const factory _GenericAttributes({required final String name}) =
-      _$_GenericAttributes;
+      _$GenericAttributesImpl;
 
   factory _GenericAttributes.fromJson(Map<String, dynamic> json) =
-      _$_GenericAttributes.fromJson;
+      _$GenericAttributesImpl.fromJson;
 
   @override
   String get name;

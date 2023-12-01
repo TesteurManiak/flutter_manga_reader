@@ -155,4 +155,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mark_as_unread => 'Marquer comme non lu';
+
+  @override
+  String last_page(int page) {
+    return 'Page $page';
+  }
 }

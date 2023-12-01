@@ -146,9 +146,10 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
 }
 
 /// @nodoc
-abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
-  factory _$$_MangaCopyWith(_$_Manga value, $Res Function(_$_Manga) then) =
-      __$$_MangaCopyWithImpl<$Res>;
+abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
+  factory _$$MangaImplCopyWith(
+          _$MangaImpl value, $Res Function(_$MangaImpl) then) =
+      __$$MangaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -168,9 +169,11 @@ abstract class _$$_MangaCopyWith<$Res> implements $MangaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
-    implements _$$_MangaCopyWith<$Res> {
-  __$$_MangaCopyWithImpl(_$_Manga _value, $Res Function(_$_Manga) _then)
+class __$$MangaImplCopyWithImpl<$Res>
+    extends _$MangaCopyWithImpl<$Res, _$MangaImpl>
+    implements _$$MangaImplCopyWith<$Res> {
+  __$$MangaImplCopyWithImpl(
+      _$MangaImpl _value, $Res Function(_$MangaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -190,7 +193,7 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
     Object? thumbnailUrl = freezed,
     Object? initialized = null,
   }) {
-    return _then(_$_Manga(
+    return _then(_$MangaImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -249,8 +252,8 @@ class __$$_MangaCopyWithImpl<$Res> extends _$MangaCopyWithImpl<$Res, _$_Manga>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Manga extends _Manga {
-  const _$_Manga(
+class _$MangaImpl extends _Manga {
+  const _$MangaImpl(
       {required this.id,
       required this.title,
       required this.url,
@@ -266,8 +269,8 @@ class _$_Manga extends _Manga {
       this.initialized = false})
       : super._();
 
-  factory _$_Manga.fromJson(Map<String, dynamic> json) =>
-      _$$_MangaFromJson(json);
+  factory _$MangaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MangaImplFromJson(json);
 
   @override
   final int id;
@@ -309,7 +312,7 @@ class _$_Manga extends _Manga {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Manga &&
+            other is _$MangaImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.url, url) || other.url == url) &&
@@ -350,12 +353,12 @@ class _$_Manga extends _Manga {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MangaCopyWith<_$_Manga> get copyWith =>
-      __$$_MangaCopyWithImpl<_$_Manga>(this, _$identity);
+  _$$MangaImplCopyWith<_$MangaImpl> get copyWith =>
+      __$$MangaImplCopyWithImpl<_$MangaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MangaToJson(
+    return _$$MangaImplToJson(
       this,
     );
   }
@@ -375,10 +378,10 @@ abstract class _Manga extends Manga {
       required final String lang,
       final String? artist,
       final String? thumbnailUrl,
-      final bool initialized}) = _$_Manga;
+      final bool initialized}) = _$MangaImpl;
   const _Manga._() : super._();
 
-  factory _Manga.fromJson(Map<String, dynamic> json) = _$_Manga.fromJson;
+  factory _Manga.fromJson(Map<String, dynamic> json) = _$MangaImpl.fromJson;
 
   @override
   int get id;
@@ -409,6 +412,6 @@ abstract class _Manga extends Manga {
   bool get initialized;
   @override
   @JsonKey(ignore: true)
-  _$$_MangaCopyWith<_$_Manga> get copyWith =>
+  _$$MangaImplCopyWith<_$MangaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -80,22 +80,22 @@ class _$CoverListResponseCopyWithImpl<$Res, $Val extends CoverListResponse>
 }
 
 /// @nodoc
-abstract class _$$_CoverListResponseCopyWith<$Res>
+abstract class _$$CoverListResponseImplCopyWith<$Res>
     implements $CoverListResponseCopyWith<$Res> {
-  factory _$$_CoverListResponseCopyWith(_$_CoverListResponse value,
-          $Res Function(_$_CoverListResponse) then) =
-      __$$_CoverListResponseCopyWithImpl<$Res>;
+  factory _$$CoverListResponseImplCopyWith(_$CoverListResponseImpl value,
+          $Res Function(_$CoverListResponseImpl) then) =
+      __$$CoverListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<CoverArt> data, int limit, int offset, int total});
 }
 
 /// @nodoc
-class __$$_CoverListResponseCopyWithImpl<$Res>
-    extends _$CoverListResponseCopyWithImpl<$Res, _$_CoverListResponse>
-    implements _$$_CoverListResponseCopyWith<$Res> {
-  __$$_CoverListResponseCopyWithImpl(
-      _$_CoverListResponse _value, $Res Function(_$_CoverListResponse) _then)
+class __$$CoverListResponseImplCopyWithImpl<$Res>
+    extends _$CoverListResponseCopyWithImpl<$Res, _$CoverListResponseImpl>
+    implements _$$CoverListResponseImplCopyWith<$Res> {
+  __$$CoverListResponseImplCopyWithImpl(_$CoverListResponseImpl _value,
+      $Res Function(_$CoverListResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_CoverListResponseCopyWithImpl<$Res>
     Object? offset = null,
     Object? total = null,
   }) {
-    return _then(_$_CoverListResponse(
+    return _then(_$CoverListResponseImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -129,16 +129,16 @@ class __$$_CoverListResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CoverListResponse implements _CoverListResponse {
-  const _$_CoverListResponse(
+class _$CoverListResponseImpl implements _CoverListResponse {
+  const _$CoverListResponseImpl(
       {final List<CoverArt> data = const <CoverArt>[],
       this.limit = 0,
       this.offset = 0,
       this.total = 0})
       : _data = data;
 
-  factory _$_CoverListResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_CoverListResponseFromJson(json);
+  factory _$CoverListResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CoverListResponseImplFromJson(json);
 
   final List<CoverArt> _data;
   @override
@@ -168,7 +168,7 @@ class _$_CoverListResponse implements _CoverListResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CoverListResponse &&
+            other is _$CoverListResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.offset, offset) || other.offset == offset) &&
@@ -183,13 +183,13 @@ class _$_CoverListResponse implements _CoverListResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CoverListResponseCopyWith<_$_CoverListResponse> get copyWith =>
-      __$$_CoverListResponseCopyWithImpl<_$_CoverListResponse>(
+  _$$CoverListResponseImplCopyWith<_$CoverListResponseImpl> get copyWith =>
+      __$$CoverListResponseImplCopyWithImpl<_$CoverListResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CoverListResponseToJson(
+    return _$$CoverListResponseImplToJson(
       this,
     );
   }
@@ -200,10 +200,10 @@ abstract class _CoverListResponse implements CoverListResponse {
       {final List<CoverArt> data,
       final int limit,
       final int offset,
-      final int total}) = _$_CoverListResponse;
+      final int total}) = _$CoverListResponseImpl;
 
   factory _CoverListResponse.fromJson(Map<String, dynamic> json) =
-      _$_CoverListResponse.fromJson;
+      _$CoverListResponseImpl.fromJson;
 
   @override
   List<CoverArt> get data;
@@ -215,7 +215,7 @@ abstract class _CoverListResponse implements CoverListResponse {
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$$_CoverListResponseCopyWith<_$_CoverListResponse> get copyWith =>
+  _$$CoverListResponseImplCopyWith<_$CoverListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -226,7 +226,6 @@ CoverArt _$CoverArtFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CoverArt {
   CoverArtAttributes? get attributes => throw _privateConstructorUsedError;
-  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -240,9 +239,7 @@ abstract class $CoverArtCopyWith<$Res> {
   factory $CoverArtCopyWith(CoverArt value, $Res Function(CoverArt) then) =
       _$CoverArtCopyWithImpl<$Res, CoverArt>;
   @useResult
-  $Res call(
-      {CoverArtAttributes? attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+  $Res call({CoverArtAttributes? attributes, List<Relationship> relationships});
 
   $CoverArtAttributesCopyWith<$Res>? get attributes;
 }
@@ -289,26 +286,25 @@ class _$CoverArtCopyWithImpl<$Res, $Val extends CoverArt>
 }
 
 /// @nodoc
-abstract class _$$_CoverArtCopyWith<$Res> implements $CoverArtCopyWith<$Res> {
-  factory _$$_CoverArtCopyWith(
-          _$_CoverArt value, $Res Function(_$_CoverArt) then) =
-      __$$_CoverArtCopyWithImpl<$Res>;
+abstract class _$$CoverArtImplCopyWith<$Res>
+    implements $CoverArtCopyWith<$Res> {
+  factory _$$CoverArtImplCopyWith(
+          _$CoverArtImpl value, $Res Function(_$CoverArtImpl) then) =
+      __$$CoverArtImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {CoverArtAttributes? attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+  $Res call({CoverArtAttributes? attributes, List<Relationship> relationships});
 
   @override
   $CoverArtAttributesCopyWith<$Res>? get attributes;
 }
 
 /// @nodoc
-class __$$_CoverArtCopyWithImpl<$Res>
-    extends _$CoverArtCopyWithImpl<$Res, _$_CoverArt>
-    implements _$$_CoverArtCopyWith<$Res> {
-  __$$_CoverArtCopyWithImpl(
-      _$_CoverArt _value, $Res Function(_$_CoverArt) _then)
+class __$$CoverArtImplCopyWithImpl<$Res>
+    extends _$CoverArtCopyWithImpl<$Res, _$CoverArtImpl>
+    implements _$$CoverArtImplCopyWith<$Res> {
+  __$$CoverArtImplCopyWithImpl(
+      _$CoverArtImpl _value, $Res Function(_$CoverArtImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -317,7 +313,7 @@ class __$$_CoverArtCopyWithImpl<$Res>
     Object? attributes = freezed,
     Object? relationships = null,
   }) {
-    return _then(_$_CoverArt(
+    return _then(_$CoverArtImpl(
       attributes: freezed == attributes
           ? _value.attributes
           : attributes // ignore: cast_nullable_to_non_nullable
@@ -332,22 +328,20 @@ class __$$_CoverArtCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CoverArt implements _CoverArt {
-  const _$_CoverArt(
+class _$CoverArtImpl implements _CoverArt {
+  const _$CoverArtImpl(
       {this.attributes,
-      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
-  factory _$_CoverArt.fromJson(Map<String, dynamic> json) =>
-      _$$_CoverArtFromJson(json);
+  factory _$CoverArtImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CoverArtImplFromJson(json);
 
   @override
   final CoverArtAttributes? attributes;
   final List<Relationship> _relationships;
   @override
   @JsonKey()
-  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -363,7 +357,7 @@ class _$_CoverArt implements _CoverArt {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CoverArt &&
+            other is _$CoverArtImpl &&
             (identical(other.attributes, attributes) ||
                 other.attributes == attributes) &&
             const DeepCollectionEquality()
@@ -378,12 +372,12 @@ class _$_CoverArt implements _CoverArt {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CoverArtCopyWith<_$_CoverArt> get copyWith =>
-      __$$_CoverArtCopyWithImpl<_$_CoverArt>(this, _$identity);
+  _$$CoverArtImplCopyWith<_$CoverArtImpl> get copyWith =>
+      __$$CoverArtImplCopyWithImpl<_$CoverArtImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CoverArtToJson(
+    return _$$CoverArtImplToJson(
       this,
     );
   }
@@ -391,20 +385,19 @@ class _$_CoverArt implements _CoverArt {
 
 abstract class _CoverArt implements CoverArt {
   const factory _CoverArt(
-          {final CoverArtAttributes? attributes,
-          @RelationshipConverter() final List<Relationship> relationships}) =
-      _$_CoverArt;
+      {final CoverArtAttributes? attributes,
+      final List<Relationship> relationships}) = _$CoverArtImpl;
 
-  factory _CoverArt.fromJson(Map<String, dynamic> json) = _$_CoverArt.fromJson;
+  factory _CoverArt.fromJson(Map<String, dynamic> json) =
+      _$CoverArtImpl.fromJson;
 
   @override
   CoverArtAttributes? get attributes;
   @override
-  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)
-  _$$_CoverArtCopyWith<_$_CoverArt> get copyWith =>
+  _$$CoverArtImplCopyWith<_$CoverArtImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -462,22 +455,22 @@ class _$CoverArtAttributesCopyWithImpl<$Res, $Val extends CoverArtAttributes>
 }
 
 /// @nodoc
-abstract class _$$_CoverArtAttributesCopyWith<$Res>
+abstract class _$$CoverArtAttributesImplCopyWith<$Res>
     implements $CoverArtAttributesCopyWith<$Res> {
-  factory _$$_CoverArtAttributesCopyWith(_$_CoverArtAttributes value,
-          $Res Function(_$_CoverArtAttributes) then) =
-      __$$_CoverArtAttributesCopyWithImpl<$Res>;
+  factory _$$CoverArtAttributesImplCopyWith(_$CoverArtAttributesImpl value,
+          $Res Function(_$CoverArtAttributesImpl) then) =
+      __$$CoverArtAttributesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? fileName, String? locale});
 }
 
 /// @nodoc
-class __$$_CoverArtAttributesCopyWithImpl<$Res>
-    extends _$CoverArtAttributesCopyWithImpl<$Res, _$_CoverArtAttributes>
-    implements _$$_CoverArtAttributesCopyWith<$Res> {
-  __$$_CoverArtAttributesCopyWithImpl(
-      _$_CoverArtAttributes _value, $Res Function(_$_CoverArtAttributes) _then)
+class __$$CoverArtAttributesImplCopyWithImpl<$Res>
+    extends _$CoverArtAttributesCopyWithImpl<$Res, _$CoverArtAttributesImpl>
+    implements _$$CoverArtAttributesImplCopyWith<$Res> {
+  __$$CoverArtAttributesImplCopyWithImpl(_$CoverArtAttributesImpl _value,
+      $Res Function(_$CoverArtAttributesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -486,7 +479,7 @@ class __$$_CoverArtAttributesCopyWithImpl<$Res>
     Object? fileName = freezed,
     Object? locale = freezed,
   }) {
-    return _then(_$_CoverArtAttributes(
+    return _then(_$CoverArtAttributesImpl(
       fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
@@ -501,11 +494,11 @@ class __$$_CoverArtAttributesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CoverArtAttributes implements _CoverArtAttributes {
-  const _$_CoverArtAttributes({this.fileName, this.locale});
+class _$CoverArtAttributesImpl implements _CoverArtAttributes {
+  const _$CoverArtAttributesImpl({this.fileName, this.locale});
 
-  factory _$_CoverArtAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_CoverArtAttributesFromJson(json);
+  factory _$CoverArtAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CoverArtAttributesImplFromJson(json);
 
   @override
   final String? fileName;
@@ -521,7 +514,7 @@ class _$_CoverArtAttributes implements _CoverArtAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CoverArtAttributes &&
+            other is _$CoverArtAttributesImpl &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
             (identical(other.locale, locale) || other.locale == locale));
@@ -534,13 +527,13 @@ class _$_CoverArtAttributes implements _CoverArtAttributes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CoverArtAttributesCopyWith<_$_CoverArtAttributes> get copyWith =>
-      __$$_CoverArtAttributesCopyWithImpl<_$_CoverArtAttributes>(
+  _$$CoverArtAttributesImplCopyWith<_$CoverArtAttributesImpl> get copyWith =>
+      __$$CoverArtAttributesImplCopyWithImpl<_$CoverArtAttributesImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CoverArtAttributesToJson(
+    return _$$CoverArtAttributesImplToJson(
       this,
     );
   }
@@ -548,10 +541,11 @@ class _$_CoverArtAttributes implements _CoverArtAttributes {
 
 abstract class _CoverArtAttributes implements CoverArtAttributes {
   const factory _CoverArtAttributes(
-      {final String? fileName, final String? locale}) = _$_CoverArtAttributes;
+      {final String? fileName,
+      final String? locale}) = _$CoverArtAttributesImpl;
 
   factory _CoverArtAttributes.fromJson(Map<String, dynamic> json) =
-      _$_CoverArtAttributes.fromJson;
+      _$CoverArtAttributesImpl.fromJson;
 
   @override
   String? get fileName;
@@ -559,6 +553,6 @@ abstract class _CoverArtAttributes implements CoverArtAttributes {
   String? get locale;
   @override
   @JsonKey(ignore: true)
-  _$$_CoverArtAttributesCopyWith<_$_CoverArtAttributes> get copyWith =>
+  _$$CoverArtAttributesImplCopyWith<_$CoverArtAttributesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

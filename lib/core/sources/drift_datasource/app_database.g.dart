@@ -52,16 +52,13 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   static const VerificationMeta _favoriteMeta =
       const VerificationMeta('favorite');
   @override
-  late final GeneratedColumn<bool> favorite =
-      GeneratedColumn<bool>('favorite', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: false,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("favorite" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }),
-          defaultValue: const Constant(false));
+  late final GeneratedColumn<bool> favorite = GeneratedColumn<bool>(
+      'favorite', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("favorite" IN (0, 1))'),
+      defaultValue: const Constant(false));
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
   late final GeneratedColumn<String> source = GeneratedColumn<String>(
@@ -86,16 +83,13 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   static const VerificationMeta _initializedMeta =
       const VerificationMeta('initialized');
   @override
-  late final GeneratedColumn<bool> initialized =
-      GeneratedColumn<bool>('initialized', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: false,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("initialized" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }),
-          defaultValue: const Constant(false));
+  late final GeneratedColumn<bool> initialized = GeneratedColumn<bool>(
+      'initialized', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("initialized" IN (0, 1))'),
+      defaultValue: const Constant(false));
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -113,9 +107,10 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
         initialized
       ];
   @override
-  String get aliasedName => _alias ?? 'db_mangas';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'db_mangas';
+  String get actualTableName => $name;
+  static const String $name = 'db_mangas';
   @override
   VerificationContext validateIntegrity(Insertable<DbManga> instance,
       {bool isInserting = false}) {
@@ -560,6 +555,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     }
     if (status.present) {
       final converter = $DbMangasTable.$converterstatus;
+
       map['status'] = Variable<int>(converter.toSql(status.value));
     }
     if (genre.present) {
@@ -665,29 +661,23 @@ class $DbChaptersTable extends DbChapters
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _readMeta = const VerificationMeta('read');
   @override
-  late final GeneratedColumn<bool> read =
-      GeneratedColumn<bool>('read', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: false,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("read" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }),
-          defaultValue: const Constant(false));
+  late final GeneratedColumn<bool> read = GeneratedColumn<bool>(
+      'read', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("read" IN (0, 1))'),
+      defaultValue: const Constant(false));
   static const VerificationMeta _bookmarkMeta =
       const VerificationMeta('bookmark');
   @override
-  late final GeneratedColumn<bool> bookmark =
-      GeneratedColumn<bool>('bookmark', aliasedName, false,
-          type: DriftSqlType.bool,
-          requiredDuringInsert: false,
-          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
-            SqlDialect.sqlite: 'CHECK ("bookmark" IN (0, 1))',
-            SqlDialect.mysql: '',
-            SqlDialect.postgres: '',
-          }),
-          defaultValue: const Constant(false));
+  late final GeneratedColumn<bool> bookmark = GeneratedColumn<bool>(
+      'bookmark', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("bookmark" IN (0, 1))'),
+      defaultValue: const Constant(false));
   static const VerificationMeta _lastPageReadMeta =
       const VerificationMeta('lastPageRead');
   @override
@@ -725,9 +715,10 @@ class $DbChaptersTable extends DbChapters
         lastModified
       ];
   @override
-  String get aliasedName => _alias ?? 'db_chapters';
+  String get aliasedName => _alias ?? actualTableName;
   @override
-  String get actualTableName => 'db_chapters';
+  String get actualTableName => $name;
+  static const String $name = 'db_chapters';
   @override
   VerificationContext validateIntegrity(Insertable<DbChapter> instance,
       {bool isInserting = false}) {

@@ -41,7 +41,7 @@ class DbChapters extends Table {
 
   @override
   List<Set<Column<Object>>>? get uniqueKeys => [
-        {mangaId, url, name}
+        {mangaId, url, name},
       ];
 }
 

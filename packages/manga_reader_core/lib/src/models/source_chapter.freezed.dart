@@ -97,11 +97,11 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
 }
 
 /// @nodoc
-abstract class _$$_SourceChapterCopyWith<$Res>
+abstract class _$$SourceChapterImplCopyWith<$Res>
     implements $SourceChapterCopyWith<$Res> {
-  factory _$$_SourceChapterCopyWith(
-          _$_SourceChapter value, $Res Function(_$_SourceChapter) then) =
-      __$$_SourceChapterCopyWithImpl<$Res>;
+  factory _$$SourceChapterImplCopyWith(
+          _$SourceChapterImpl value, $Res Function(_$SourceChapterImpl) then) =
+      __$$SourceChapterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -114,11 +114,11 @@ abstract class _$$_SourceChapterCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SourceChapterCopyWithImpl<$Res>
-    extends _$SourceChapterCopyWithImpl<$Res, _$_SourceChapter>
-    implements _$$_SourceChapterCopyWith<$Res> {
-  __$$_SourceChapterCopyWithImpl(
-      _$_SourceChapter _value, $Res Function(_$_SourceChapter) _then)
+class __$$SourceChapterImplCopyWithImpl<$Res>
+    extends _$SourceChapterCopyWithImpl<$Res, _$SourceChapterImpl>
+    implements _$$SourceChapterImplCopyWith<$Res> {
+  __$$SourceChapterImplCopyWithImpl(
+      _$SourceChapterImpl _value, $Res Function(_$SourceChapterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$_SourceChapterCopyWithImpl<$Res>
     Object? chapterNumber = null,
     Object? scanlator = freezed,
   }) {
-    return _then(_$_SourceChapter(
+    return _then(_$SourceChapterImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -162,8 +162,8 @@ class __$$_SourceChapterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$_SourceChapter implements _SourceChapter {
-  const _$_SourceChapter(
+class _$SourceChapterImpl implements _SourceChapter {
+  const _$SourceChapterImpl(
       {required this.url,
       required this.name,
       required this.index,
@@ -171,8 +171,8 @@ class _$_SourceChapter implements _SourceChapter {
       this.chapterNumber = -1.0,
       this.scanlator});
 
-  factory _$_SourceChapter.fromJson(Map<String, dynamic> json) =>
-      _$$_SourceChapterFromJson(json);
+  factory _$SourceChapterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SourceChapterImplFromJson(json);
 
   @override
   final String url;
@@ -197,7 +197,7 @@ class _$_SourceChapter implements _SourceChapter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SourceChapter &&
+            other is _$SourceChapterImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.index, index) || other.index == index) &&
@@ -217,8 +217,8 @@ class _$_SourceChapter implements _SourceChapter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SourceChapterCopyWith<_$_SourceChapter> get copyWith =>
-      __$$_SourceChapterCopyWithImpl<_$_SourceChapter>(this, _$identity);
+  _$$SourceChapterImplCopyWith<_$SourceChapterImpl> get copyWith =>
+      __$$SourceChapterImplCopyWithImpl<_$SourceChapterImpl>(this, _$identity);
 }
 
 abstract class _SourceChapter implements SourceChapter {
@@ -228,10 +228,10 @@ abstract class _SourceChapter implements SourceChapter {
       required final int index,
       final DateTime? dateUpload,
       final double chapterNumber,
-      final String? scanlator}) = _$_SourceChapter;
+      final String? scanlator}) = _$SourceChapterImpl;
 
   factory _SourceChapter.fromJson(Map<String, dynamic> json) =
-      _$_SourceChapter.fromJson;
+      _$SourceChapterImpl.fromJson;
 
   @override
   String get url;
@@ -247,6 +247,6 @@ abstract class _SourceChapter implements SourceChapter {
   String? get scanlator;
   @override
   @JsonKey(ignore: true)
-  _$$_SourceChapterCopyWith<_$_SourceChapter> get copyWith =>
+  _$$SourceChapterImplCopyWith<_$SourceChapterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

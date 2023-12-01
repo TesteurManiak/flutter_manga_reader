@@ -18,64 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$DetailsState {
   List<Chapter> get selectedChapters => throw _privateConstructorUsedError;
   bool get selectionMode => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loading,
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loaded,
-    required TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)
-        error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult? Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DetailsStateCopyWith<DetailsState> get copyWith =>
@@ -121,21 +63,22 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res>
+abstract class _$$DetailsLoadingImplCopyWith<$Res>
     implements $DetailsStateCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+  factory _$$DetailsLoadingImplCopyWith(_$DetailsLoadingImpl value,
+          $Res Function(_$DetailsLoadingImpl) then) =
+      __$$DetailsLoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+class __$$DetailsLoadingImplCopyWithImpl<$Res>
+    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsLoadingImpl>
+    implements _$$DetailsLoadingImplCopyWith<$Res> {
+  __$$DetailsLoadingImplCopyWithImpl(
+      _$DetailsLoadingImpl _value, $Res Function(_$DetailsLoadingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,7 +87,7 @@ class __$$_LoadingCopyWithImpl<$Res>
     Object? selectedChapters = null,
     Object? selectionMode = null,
   }) {
-    return _then(_$_Loading(
+    return _then(_$DetailsLoadingImpl(
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -159,8 +102,8 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading extends _Loading {
-  const _$_Loading(
+class _$DetailsLoadingImpl extends DetailsLoading {
+  const _$DetailsLoadingImpl(
       {final List<Chapter> selectedChapters = const <Chapter>[],
       this.selectionMode = false})
       : _selectedChapters = selectedChapters,
@@ -189,7 +132,7 @@ class _$_Loading extends _Loading {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Loading &&
+            other is _$DetailsLoadingImpl &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.selectionMode, selectionMode) ||
@@ -203,97 +146,16 @@ class _$_Loading extends _Loading {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
-      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loading,
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loaded,
-    required TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)
-        error,
-  }) {
-    return loading(selectedChapters, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult? Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-  }) {
-    return loading?.call(selectedChapters, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(selectedChapters, selectionMode);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
+  _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
+      __$$DetailsLoadingImplCopyWithImpl<_$DetailsLoadingImpl>(
+          this, _$identity);
 }
 
-abstract class _Loading extends DetailsState {
-  const factory _Loading(
+abstract class DetailsLoading extends DetailsState {
+  const factory DetailsLoading(
       {final List<Chapter> selectedChapters,
-      final bool selectionMode}) = _$_Loading;
-  const _Loading._() : super._();
+      final bool selectionMode}) = _$DetailsLoadingImpl;
+  const DetailsLoading._() : super._();
 
   @override
   List<Chapter> get selectedChapters;
@@ -301,24 +163,27 @@ abstract class _Loading extends DetailsState {
   bool get selectionMode;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+  _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadedCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
-  factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
-      __$$_LoadedCopyWithImpl<$Res>;
+abstract class _$$DetailsLoadedImplCopyWith<$Res>
+    implements $DetailsStateCopyWith<$Res> {
+  factory _$$DetailsLoadedImplCopyWith(
+          _$DetailsLoadedImpl value, $Res Function(_$DetailsLoadedImpl) then) =
+      __$$DetailsLoadedImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
 /// @nodoc
-class __$$_LoadedCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$_Loaded>
-    implements _$$_LoadedCopyWith<$Res> {
-  __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
+class __$$DetailsLoadedImplCopyWithImpl<$Res>
+    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsLoadedImpl>
+    implements _$$DetailsLoadedImplCopyWith<$Res> {
+  __$$DetailsLoadedImplCopyWithImpl(
+      _$DetailsLoadedImpl _value, $Res Function(_$DetailsLoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -327,7 +192,7 @@ class __$$_LoadedCopyWithImpl<$Res>
     Object? selectedChapters = null,
     Object? selectionMode = null,
   }) {
-    return _then(_$_Loaded(
+    return _then(_$DetailsLoadedImpl(
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -342,8 +207,8 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded extends _Loaded {
-  const _$_Loaded(
+class _$DetailsLoadedImpl extends DetailsLoaded {
+  const _$DetailsLoadedImpl(
       {final List<Chapter> selectedChapters = const <Chapter>[],
       this.selectionMode = false})
       : _selectedChapters = selectedChapters,
@@ -372,7 +237,7 @@ class _$_Loaded extends _Loaded {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Loaded &&
+            other is _$DetailsLoadedImpl &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.selectionMode, selectionMode) ||
@@ -386,97 +251,15 @@ class _$_Loaded extends _Loaded {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
-      __$$_LoadedCopyWithImpl<_$_Loaded>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loading,
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loaded,
-    required TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)
-        error,
-  }) {
-    return loaded(selectedChapters, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult? Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-  }) {
-    return loaded?.call(selectedChapters, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(selectedChapters, selectionMode);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return loaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return loaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (loaded != null) {
-      return loaded(this);
-    }
-    return orElse();
-  }
+  _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
+      __$$DetailsLoadedImplCopyWithImpl<_$DetailsLoadedImpl>(this, _$identity);
 }
 
-abstract class _Loaded extends DetailsState {
-  const factory _Loaded(
+abstract class DetailsLoaded extends DetailsState {
+  const factory DetailsLoaded(
       {final List<Chapter> selectedChapters,
-      final bool selectionMode}) = _$_Loaded;
-  const _Loaded._() : super._();
+      final bool selectionMode}) = _$DetailsLoadedImpl;
+  const DetailsLoaded._() : super._();
 
   @override
   List<Chapter> get selectedChapters;
@@ -484,14 +267,16 @@ abstract class _Loaded extends DetailsState {
   bool get selectionMode;
   @override
   @JsonKey(ignore: true)
-  _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
+  _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
+abstract class _$$DetailsErrorImplCopyWith<$Res>
+    implements $DetailsStateCopyWith<$Res> {
+  factory _$$DetailsErrorImplCopyWith(
+          _$DetailsErrorImpl value, $Res Function(_$DetailsErrorImpl) then) =
+      __$$DetailsErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -499,10 +284,11 @@ abstract class _$$_ErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+class __$$DetailsErrorImplCopyWithImpl<$Res>
+    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsErrorImpl>
+    implements _$$DetailsErrorImplCopyWith<$Res> {
+  __$$DetailsErrorImplCopyWithImpl(
+      _$DetailsErrorImpl _value, $Res Function(_$DetailsErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -512,7 +298,7 @@ class __$$_ErrorCopyWithImpl<$Res>
     Object? error = freezed,
     Object? selectionMode = null,
   }) {
-    return _then(_$_Error(
+    return _then(_$DetailsErrorImpl(
       selectedChapters: null == selectedChapters
           ? _value._selectedChapters
           : selectedChapters // ignore: cast_nullable_to_non_nullable
@@ -531,8 +317,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error extends _Error {
-  const _$_Error(
+class _$DetailsErrorImpl extends DetailsError {
+  const _$DetailsErrorImpl(
       {final List<Chapter> selectedChapters = const <Chapter>[],
       this.error,
       this.selectionMode = false})
@@ -564,7 +350,7 @@ class _$_Error extends _Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Error &&
+            other is _$DetailsErrorImpl &&
             const DeepCollectionEquality()
                 .equals(other._selectedChapters, _selectedChapters) &&
             (identical(other.error, error) || other.error == error) &&
@@ -582,98 +368,16 @@ class _$_Error extends _Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loading,
-    required TResult Function(
-            List<Chapter> selectedChapters, bool selectionMode)
-        loaded,
-    required TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)
-        error,
-  }) {
-    return error(selectedChapters, this.error, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult? Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult? Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-  }) {
-    return error?.call(selectedChapters, this.error, selectionMode);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loading,
-    TResult Function(List<Chapter> selectedChapters, bool selectionMode)?
-        loaded,
-    TResult Function(
-            List<Chapter> selectedChapters, String? error, bool selectionMode)?
-        error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(selectedChapters, this.error, selectionMode);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Loaded value) loaded,
-    required TResult Function(_Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Loaded value)? loaded,
-    TResult? Function(_Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Loaded value)? loaded,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
+  _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
+      __$$DetailsErrorImplCopyWithImpl<_$DetailsErrorImpl>(this, _$identity);
 }
 
-abstract class _Error extends DetailsState {
-  const factory _Error(
+abstract class DetailsError extends DetailsState {
+  const factory DetailsError(
       {final List<Chapter> selectedChapters,
       final String? error,
-      final bool selectionMode}) = _$_Error;
-  const _Error._() : super._();
+      final bool selectionMode}) = _$DetailsErrorImpl;
+  const DetailsError._() : super._();
 
   @override
   List<Chapter> get selectedChapters;
@@ -682,6 +386,6 @@ abstract class _Error extends DetailsState {
   bool get selectionMode;
   @override
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

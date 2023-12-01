@@ -86,8 +86,8 @@ class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
     FilteredMangaController, PaginatedMangaState> {
   /// See also [FilteredMangaController].
   FilteredMangaControllerProvider(
-    this.datasource,
-  ) : super.internal(
+    MangaDatasource datasource,
+  ) : this._internal(
           () => FilteredMangaController()..datasource = datasource,
           from: filteredMangaControllerProvider,
           name: r'filteredMangaControllerProvider',
@@ -98,9 +98,51 @@ class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
           dependencies: FilteredMangaControllerFamily._dependencies,
           allTransitiveDependencies:
               FilteredMangaControllerFamily._allTransitiveDependencies,
+          datasource: datasource,
         );
 
+  FilteredMangaControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.datasource,
+  }) : super.internal();
+
   final MangaDatasource datasource;
+
+  @override
+  PaginatedMangaState runNotifierBuild(
+    covariant FilteredMangaController notifier,
+  ) {
+    return notifier.build(
+      datasource,
+    );
+  }
+
+  @override
+  Override overrideWith(FilteredMangaController Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: FilteredMangaControllerProvider._internal(
+        () => create()..datasource = datasource,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        datasource: datasource,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<FilteredMangaController,
+      PaginatedMangaState> createElement() {
+    return _FilteredMangaControllerProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -115,15 +157,22 @@ class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin FilteredMangaControllerRef
+    on AutoDisposeNotifierProviderRef<PaginatedMangaState> {
+  /// The parameter `datasource` of this provider.
+  MangaDatasource get datasource;
+}
+
+class _FilteredMangaControllerProviderElement
+    extends AutoDisposeNotifierProviderElement<FilteredMangaController,
+        PaginatedMangaState> with FilteredMangaControllerRef {
+  _FilteredMangaControllerProviderElement(super.provider);
 
   @override
-  PaginatedMangaState runNotifierBuild(
-    covariant FilteredMangaController notifier,
-  ) {
-    return notifier.build(
-      datasource,
-    );
-  }
+  MangaDatasource get datasource =>
+      (origin as FilteredMangaControllerProvider).datasource;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

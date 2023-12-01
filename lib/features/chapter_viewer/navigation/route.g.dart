@@ -20,10 +20,15 @@ extension $ChapterViewerRouteExtension on ChapterViewerRoute {
       ChapterViewerRoute(
         sourceId: state.pathParameters['sourceId']!,
         chapterId: int.parse(state.pathParameters['chapterId']!),
+        initialPage: _$convertMapValue(
+            'initial-page', state.uri.queryParameters, int.parse),
       );
 
   String get location => GoRouteData.$location(
         '/chapter/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(chapterId.toString())}',
+        queryParams: {
+          if (initialPage != null) 'initial-page': initialPage!.toString(),
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -34,4 +39,13 @@ extension $ChapterViewerRouteExtension on ChapterViewerRoute {
       context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+T? _$convertMapValue<T>(
+  String key,
+  Map<String, String> map,
+  T Function(String) converter,
+) {
+  final value = map[key];
+  return value == null ? null : converter(value);
 }

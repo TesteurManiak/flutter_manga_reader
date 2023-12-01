@@ -6,7 +6,7 @@ part of 'manga.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Manga _$$_MangaFromJson(Map<String, dynamic> json) => _$_Manga(
+_$MangaImpl _$$MangaImplFromJson(Map<String, dynamic> json) => _$MangaImpl(
       id: json['id'] as int,
       title: json['title'] as String,
       url: json['url'] as String,
@@ -24,7 +24,8 @@ _$_Manga _$$_MangaFromJson(Map<String, dynamic> json) => _$_Manga(
       initialized: json['initialized'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_MangaToJson(_$_Manga instance) => <String, dynamic>{
+Map<String, dynamic> _$$MangaImplToJson(_$MangaImpl instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'url': instance.url,

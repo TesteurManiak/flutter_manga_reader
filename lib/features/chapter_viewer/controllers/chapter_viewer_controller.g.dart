@@ -7,7 +7,7 @@ part of 'chapter_viewer_controller.dart';
 // **************************************************************************
 
 String _$chapterViewerControllerHash() =>
-    r'30efb85520508e569d6207e2773f415d6981734d';
+    r'32696e98e89ac7bfe1fa47fc6313db41021e39af';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -95,8 +95,8 @@ class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
     ChapterViewerController, ChapterViewerState> {
   /// See also [ChapterViewerController].
   ChapterViewerControllerProvider(
-    this.chapterId,
-  ) : super.internal(
+    int chapterId,
+  ) : this._internal(
           () => ChapterViewerController()..chapterId = chapterId,
           from: chapterViewerControllerProvider,
           name: r'chapterViewerControllerProvider',
@@ -107,9 +107,51 @@ class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
           dependencies: ChapterViewerControllerFamily._dependencies,
           allTransitiveDependencies:
               ChapterViewerControllerFamily._allTransitiveDependencies,
+          chapterId: chapterId,
         );
 
+  ChapterViewerControllerProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.chapterId,
+  }) : super.internal();
+
   final int chapterId;
+
+  @override
+  ChapterViewerState runNotifierBuild(
+    covariant ChapterViewerController notifier,
+  ) {
+    return notifier.build(
+      chapterId,
+    );
+  }
+
+  @override
+  Override overrideWith(ChapterViewerController Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ChapterViewerControllerProvider._internal(
+        () => create()..chapterId = chapterId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        chapterId: chapterId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<ChapterViewerController,
+      ChapterViewerState> createElement() {
+    return _ChapterViewerControllerProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -124,15 +166,21 @@ class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
 
     return _SystemHash.finish(hash);
   }
+}
+
+mixin ChapterViewerControllerRef
+    on AutoDisposeNotifierProviderRef<ChapterViewerState> {
+  /// The parameter `chapterId` of this provider.
+  int get chapterId;
+}
+
+class _ChapterViewerControllerProviderElement
+    extends AutoDisposeNotifierProviderElement<ChapterViewerController,
+        ChapterViewerState> with ChapterViewerControllerRef {
+  _ChapterViewerControllerProviderElement(super.provider);
 
   @override
-  ChapterViewerState runNotifierBuild(
-    covariant ChapterViewerController notifier,
-  ) {
-    return notifier.build(
-      chapterId,
-    );
-  }
+  int get chapterId => (origin as ChapterViewerControllerProvider).chapterId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

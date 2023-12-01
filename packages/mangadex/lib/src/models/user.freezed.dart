@@ -27,11 +27,11 @@ mixin _$UserAttributes {
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserAttributes implements _UserAttributes {
-  const _$_UserAttributes({required this.username});
+class _$UserAttributesImpl implements _UserAttributes {
+  const _$UserAttributesImpl({required this.username});
 
-  factory _$_UserAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_UserAttributesFromJson(json);
+  factory _$UserAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UserAttributesImplFromJson(json);
 
   @override
   final String username;
@@ -45,7 +45,7 @@ class _$_UserAttributes implements _UserAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserAttributes &&
+            other is _$UserAttributesImpl &&
             (identical(other.username, username) ||
                 other.username == username));
   }
@@ -56,7 +56,7 @@ class _$_UserAttributes implements _UserAttributes {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserAttributesToJson(
+    return _$$UserAttributesImplToJson(
       this,
     );
   }
@@ -64,10 +64,10 @@ class _$_UserAttributes implements _UserAttributes {
 
 abstract class _UserAttributes implements UserAttributes {
   const factory _UserAttributes({required final String username}) =
-      _$_UserAttributes;
+      _$UserAttributesImpl;
 
   factory _UserAttributes.fromJson(Map<String, dynamic> json) =
-      _$_UserAttributes.fromJson;
+      _$UserAttributesImpl.fromJson;
 
   @override
   String get username;

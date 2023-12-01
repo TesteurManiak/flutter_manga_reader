@@ -9,7 +9,6 @@ class AppTheme {
   static ThemeData light() {
     final baseTheme = ThemeData.light();
     return baseTheme.copyWith(
-      useMaterial3: true,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
@@ -28,7 +27,6 @@ class AppTheme {
     final baseTheme = ThemeData.dark();
 
     return baseTheme.copyWith(
-      useMaterial3: true,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
         surfaceTintColor: Colors.transparent,

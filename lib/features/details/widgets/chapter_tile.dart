@@ -25,8 +25,10 @@ class ChapterTile extends ConsumerWidget {
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
     final read = chapter.read;
+    final lastPageRead = chapter.lastPageRead;
     final subtitle = <String>[
       if (dateUpload != null) DateFormat.yMd().format(dateUpload),
+      if (lastPageRead > 0) context.strings.last_page(lastPageRead + 1),
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];
 
@@ -37,7 +39,11 @@ class ChapterTile extends ConsumerWidget {
       selected: isSelected,
       textColor: read ? baseColor?.withOpacity(isDark ? .3 : .4) : null,
       title: Text(chapter.name),
-      subtitle: Text(subtitle.join(' • ')),
+      subtitle: Text(
+        subtitle.join(' • '),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: const IconButton(
         onPressed: null, // TODO(Guillaume): download
         icon: Icon(Icons.download_for_offline_outlined),
@@ -55,6 +61,7 @@ class ChapterTile extends ConsumerWidget {
         ChapterViewerRoute(
           chapterId: chapter.id,
           sourceId: sourceId,
+          initialPage: lastPageRead,
         ).push<void>(context);
       },
       onLongPress: () {

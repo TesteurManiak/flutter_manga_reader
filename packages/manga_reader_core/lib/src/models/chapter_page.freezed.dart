@@ -69,22 +69,22 @@ class _$ChapterPageCopyWithImpl<$Res, $Val extends ChapterPage>
 }
 
 /// @nodoc
-abstract class _$$_ChapterPageCopyWith<$Res>
+abstract class _$$ChapterPageImplCopyWith<$Res>
     implements $ChapterPageCopyWith<$Res> {
-  factory _$$_ChapterPageCopyWith(
-          _$_ChapterPage value, $Res Function(_$_ChapterPage) then) =
-      __$$_ChapterPageCopyWithImpl<$Res>;
+  factory _$$ChapterPageImplCopyWith(
+          _$ChapterPageImpl value, $Res Function(_$ChapterPageImpl) then) =
+      __$$ChapterPageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int index, String url, String? imageUrl});
 }
 
 /// @nodoc
-class __$$_ChapterPageCopyWithImpl<$Res>
-    extends _$ChapterPageCopyWithImpl<$Res, _$_ChapterPage>
-    implements _$$_ChapterPageCopyWith<$Res> {
-  __$$_ChapterPageCopyWithImpl(
-      _$_ChapterPage _value, $Res Function(_$_ChapterPage) _then)
+class __$$ChapterPageImplCopyWithImpl<$Res>
+    extends _$ChapterPageCopyWithImpl<$Res, _$ChapterPageImpl>
+    implements _$$ChapterPageImplCopyWith<$Res> {
+  __$$ChapterPageImplCopyWithImpl(
+      _$ChapterPageImpl _value, $Res Function(_$ChapterPageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_ChapterPageCopyWithImpl<$Res>
     Object? url = null,
     Object? imageUrl = freezed,
   }) {
-    return _then(_$_ChapterPage(
+    return _then(_$ChapterPageImpl(
       index: null == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_ChapterPageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChapterPage extends _ChapterPage {
-  const _$_ChapterPage({required this.index, this.url = '', this.imageUrl})
+class _$ChapterPageImpl extends _ChapterPage {
+  const _$ChapterPageImpl({required this.index, this.url = '', this.imageUrl})
       : super._();
 
   @override
@@ -134,7 +134,7 @@ class _$_ChapterPage extends _ChapterPage {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChapterPage &&
+            other is _$ChapterPageImpl &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -147,15 +147,15 @@ class _$_ChapterPage extends _ChapterPage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChapterPageCopyWith<_$_ChapterPage> get copyWith =>
-      __$$_ChapterPageCopyWithImpl<_$_ChapterPage>(this, _$identity);
+  _$$ChapterPageImplCopyWith<_$ChapterPageImpl> get copyWith =>
+      __$$ChapterPageImplCopyWithImpl<_$ChapterPageImpl>(this, _$identity);
 }
 
 abstract class _ChapterPage extends ChapterPage {
   const factory _ChapterPage(
       {required final int index,
       final String url,
-      final String? imageUrl}) = _$_ChapterPage;
+      final String? imageUrl}) = _$ChapterPageImpl;
   const _ChapterPage._() : super._();
 
   @override
@@ -166,6 +166,6 @@ abstract class _ChapterPage extends ChapterPage {
   String? get imageUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_ChapterPageCopyWith<_$_ChapterPage> get copyWith =>
+  _$$ChapterPageImplCopyWith<_$ChapterPageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -10,18 +10,23 @@ class ChapterViewerRoute extends GoRouteData {
   const ChapterViewerRoute({
     required this.sourceId,
     required this.chapterId,
+    this.initialPage,
   });
 
   static const path = '/chapter/:sourceId/:chapterId';
 
   final String sourceId;
   final int chapterId;
+  final int? initialPage;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SourceProviderScope(
       sourceId: sourceId,
-      child: ChapterViewerView(chapterId: chapterId),
+      child: ChapterViewerView(
+        chapterId: chapterId,
+        initialPage: initialPage,
+      ),
     );
   }
 }

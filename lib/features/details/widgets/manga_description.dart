@@ -71,7 +71,7 @@ class _MangaDescriptionState extends State<MangaDescription> {
                       child: const Icon(Icons.keyboard_arrow_down_sharp),
                     ),
                   ),
-                )
+                ),
               ],
             ),
             if (isExpanded) const SizedBox(height: 30),

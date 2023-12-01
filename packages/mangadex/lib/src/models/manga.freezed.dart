@@ -80,22 +80,22 @@ class _$MangaListResponseCopyWithImpl<$Res, $Val extends MangaListResponse>
 }
 
 /// @nodoc
-abstract class _$$_MangaListResponseCopyWith<$Res>
+abstract class _$$MangaListResponseImplCopyWith<$Res>
     implements $MangaListResponseCopyWith<$Res> {
-  factory _$$_MangaListResponseCopyWith(_$_MangaListResponse value,
-          $Res Function(_$_MangaListResponse) then) =
-      __$$_MangaListResponseCopyWithImpl<$Res>;
+  factory _$$MangaListResponseImplCopyWith(_$MangaListResponseImpl value,
+          $Res Function(_$MangaListResponseImpl) then) =
+      __$$MangaListResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<MangaData> data, int limit, int offset, int total});
 }
 
 /// @nodoc
-class __$$_MangaListResponseCopyWithImpl<$Res>
-    extends _$MangaListResponseCopyWithImpl<$Res, _$_MangaListResponse>
-    implements _$$_MangaListResponseCopyWith<$Res> {
-  __$$_MangaListResponseCopyWithImpl(
-      _$_MangaListResponse _value, $Res Function(_$_MangaListResponse) _then)
+class __$$MangaListResponseImplCopyWithImpl<$Res>
+    extends _$MangaListResponseCopyWithImpl<$Res, _$MangaListResponseImpl>
+    implements _$$MangaListResponseImplCopyWith<$Res> {
+  __$$MangaListResponseImplCopyWithImpl(_$MangaListResponseImpl _value,
+      $Res Function(_$MangaListResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_MangaListResponseCopyWithImpl<$Res>
     Object? offset = null,
     Object? total = null,
   }) {
-    return _then(_$_MangaListResponse(
+    return _then(_$MangaListResponseImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -129,8 +129,8 @@ class __$$_MangaListResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MangaListResponse extends _MangaListResponse {
-  const _$_MangaListResponse(
+class _$MangaListResponseImpl extends _MangaListResponse {
+  const _$MangaListResponseImpl(
       {final List<MangaData> data = const <MangaData>[],
       this.limit = 0,
       this.offset = 0,
@@ -138,8 +138,8 @@ class _$_MangaListResponse extends _MangaListResponse {
       : _data = data,
         super._();
 
-  factory _$_MangaListResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_MangaListResponseFromJson(json);
+  factory _$MangaListResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MangaListResponseImplFromJson(json);
 
   final List<MangaData> _data;
   @override
@@ -169,7 +169,7 @@ class _$_MangaListResponse extends _MangaListResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MangaListResponse &&
+            other is _$MangaListResponseImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.limit, limit) || other.limit == limit) &&
             (identical(other.offset, offset) || other.offset == offset) &&
@@ -184,13 +184,13 @@ class _$_MangaListResponse extends _MangaListResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MangaListResponseCopyWith<_$_MangaListResponse> get copyWith =>
-      __$$_MangaListResponseCopyWithImpl<_$_MangaListResponse>(
+  _$$MangaListResponseImplCopyWith<_$MangaListResponseImpl> get copyWith =>
+      __$$MangaListResponseImplCopyWithImpl<_$MangaListResponseImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MangaListResponseToJson(
+    return _$$MangaListResponseImplToJson(
       this,
     );
   }
@@ -201,11 +201,11 @@ abstract class _MangaListResponse extends MangaListResponse {
       {final List<MangaData> data,
       final int limit,
       final int offset,
-      final int total}) = _$_MangaListResponse;
+      final int total}) = _$MangaListResponseImpl;
   const _MangaListResponse._() : super._();
 
   factory _MangaListResponse.fromJson(Map<String, dynamic> json) =
-      _$_MangaListResponse.fromJson;
+      _$MangaListResponseImpl.fromJson;
 
   @override
   List<MangaData> get data;
@@ -217,7 +217,7 @@ abstract class _MangaListResponse extends MangaListResponse {
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$$_MangaListResponseCopyWith<_$_MangaListResponse> get copyWith =>
+  _$$MangaListResponseImplCopyWith<_$MangaListResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -279,11 +279,11 @@ class _$MangaResponseCopyWithImpl<$Res, $Val extends MangaResponse>
 }
 
 /// @nodoc
-abstract class _$$_MangaResponseCopyWith<$Res>
+abstract class _$$MangaResponseImplCopyWith<$Res>
     implements $MangaResponseCopyWith<$Res> {
-  factory _$$_MangaResponseCopyWith(
-          _$_MangaResponse value, $Res Function(_$_MangaResponse) then) =
-      __$$_MangaResponseCopyWithImpl<$Res>;
+  factory _$$MangaResponseImplCopyWith(
+          _$MangaResponseImpl value, $Res Function(_$MangaResponseImpl) then) =
+      __$$MangaResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({MangaData data});
@@ -293,11 +293,11 @@ abstract class _$$_MangaResponseCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MangaResponseCopyWithImpl<$Res>
-    extends _$MangaResponseCopyWithImpl<$Res, _$_MangaResponse>
-    implements _$$_MangaResponseCopyWith<$Res> {
-  __$$_MangaResponseCopyWithImpl(
-      _$_MangaResponse _value, $Res Function(_$_MangaResponse) _then)
+class __$$MangaResponseImplCopyWithImpl<$Res>
+    extends _$MangaResponseCopyWithImpl<$Res, _$MangaResponseImpl>
+    implements _$$MangaResponseImplCopyWith<$Res> {
+  __$$MangaResponseImplCopyWithImpl(
+      _$MangaResponseImpl _value, $Res Function(_$MangaResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -305,7 +305,7 @@ class __$$_MangaResponseCopyWithImpl<$Res>
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$_MangaResponse(
+    return _then(_$MangaResponseImpl(
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -316,11 +316,11 @@ class __$$_MangaResponseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MangaResponse implements _MangaResponse {
-  const _$_MangaResponse({required this.data});
+class _$MangaResponseImpl implements _MangaResponse {
+  const _$MangaResponseImpl({required this.data});
 
-  factory _$_MangaResponse.fromJson(Map<String, dynamic> json) =>
-      _$$_MangaResponseFromJson(json);
+  factory _$MangaResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MangaResponseImplFromJson(json);
 
   @override
   final MangaData data;
@@ -334,7 +334,7 @@ class _$_MangaResponse implements _MangaResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MangaResponse &&
+            other is _$MangaResponseImpl &&
             (identical(other.data, data) || other.data == data));
   }
 
@@ -345,12 +345,12 @@ class _$_MangaResponse implements _MangaResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MangaResponseCopyWith<_$_MangaResponse> get copyWith =>
-      __$$_MangaResponseCopyWithImpl<_$_MangaResponse>(this, _$identity);
+  _$$MangaResponseImplCopyWith<_$MangaResponseImpl> get copyWith =>
+      __$$MangaResponseImplCopyWithImpl<_$MangaResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MangaResponseToJson(
+    return _$$MangaResponseImplToJson(
       this,
     );
   }
@@ -358,16 +358,16 @@ class _$_MangaResponse implements _MangaResponse {
 
 abstract class _MangaResponse implements MangaResponse {
   const factory _MangaResponse({required final MangaData data}) =
-      _$_MangaResponse;
+      _$MangaResponseImpl;
 
   factory _MangaResponse.fromJson(Map<String, dynamic> json) =
-      _$_MangaResponse.fromJson;
+      _$MangaResponseImpl.fromJson;
 
   @override
   MangaData get data;
   @override
   @JsonKey(ignore: true)
-  _$$_MangaResponseCopyWith<_$_MangaResponse> get copyWith =>
+  _$$MangaResponseImplCopyWith<_$MangaResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -379,7 +379,6 @@ MangaData _$MangaDataFromJson(Map<String, dynamic> json) {
 mixin _$MangaData {
   String get id => throw _privateConstructorUsedError;
   MangaAttributes get attributes => throw _privateConstructorUsedError;
-  @RelationshipConverter()
   List<Relationship> get relationships => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -396,7 +395,7 @@ abstract class $MangaDataCopyWith<$Res> {
   $Res call(
       {String id,
       MangaAttributes attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+      List<Relationship> relationships});
 
   $MangaAttributesCopyWith<$Res> get attributes;
 }
@@ -444,27 +443,28 @@ class _$MangaDataCopyWithImpl<$Res, $Val extends MangaData>
 }
 
 /// @nodoc
-abstract class _$$_MangaDataCopyWith<$Res> implements $MangaDataCopyWith<$Res> {
-  factory _$$_MangaDataCopyWith(
-          _$_MangaData value, $Res Function(_$_MangaData) then) =
-      __$$_MangaDataCopyWithImpl<$Res>;
+abstract class _$$MangaDataImplCopyWith<$Res>
+    implements $MangaDataCopyWith<$Res> {
+  factory _$$MangaDataImplCopyWith(
+          _$MangaDataImpl value, $Res Function(_$MangaDataImpl) then) =
+      __$$MangaDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       MangaAttributes attributes,
-      @RelationshipConverter() List<Relationship> relationships});
+      List<Relationship> relationships});
 
   @override
   $MangaAttributesCopyWith<$Res> get attributes;
 }
 
 /// @nodoc
-class __$$_MangaDataCopyWithImpl<$Res>
-    extends _$MangaDataCopyWithImpl<$Res, _$_MangaData>
-    implements _$$_MangaDataCopyWith<$Res> {
-  __$$_MangaDataCopyWithImpl(
-      _$_MangaData _value, $Res Function(_$_MangaData) _then)
+class __$$MangaDataImplCopyWithImpl<$Res>
+    extends _$MangaDataCopyWithImpl<$Res, _$MangaDataImpl>
+    implements _$$MangaDataImplCopyWith<$Res> {
+  __$$MangaDataImplCopyWithImpl(
+      _$MangaDataImpl _value, $Res Function(_$MangaDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -474,7 +474,7 @@ class __$$_MangaDataCopyWithImpl<$Res>
     Object? attributes = null,
     Object? relationships = null,
   }) {
-    return _then(_$_MangaData(
+    return _then(_$MangaDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -493,16 +493,15 @@ class __$$_MangaDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MangaData implements _MangaData {
-  const _$_MangaData(
+class _$MangaDataImpl implements _MangaData {
+  const _$MangaDataImpl(
       {required this.id,
       required this.attributes,
-      @RelationshipConverter()
       final List<Relationship> relationships = const <Relationship>[]})
       : _relationships = relationships;
 
-  factory _$_MangaData.fromJson(Map<String, dynamic> json) =>
-      _$$_MangaDataFromJson(json);
+  factory _$MangaDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MangaDataImplFromJson(json);
 
   @override
   final String id;
@@ -511,7 +510,6 @@ class _$_MangaData implements _MangaData {
   final List<Relationship> _relationships;
   @override
   @JsonKey()
-  @RelationshipConverter()
   List<Relationship> get relationships {
     if (_relationships is EqualUnmodifiableListView) return _relationships;
     // ignore: implicit_dynamic_type
@@ -527,7 +525,7 @@ class _$_MangaData implements _MangaData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MangaData &&
+            other is _$MangaDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.attributes, attributes) ||
                 other.attributes == attributes) &&
@@ -543,12 +541,12 @@ class _$_MangaData implements _MangaData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MangaDataCopyWith<_$_MangaData> get copyWith =>
-      __$$_MangaDataCopyWithImpl<_$_MangaData>(this, _$identity);
+  _$$MangaDataImplCopyWith<_$MangaDataImpl> get copyWith =>
+      __$$MangaDataImplCopyWithImpl<_$MangaDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MangaDataToJson(
+    return _$$MangaDataImplToJson(
       this,
     );
   }
@@ -556,24 +554,22 @@ class _$_MangaData implements _MangaData {
 
 abstract class _MangaData implements MangaData {
   const factory _MangaData(
-          {required final String id,
-          required final MangaAttributes attributes,
-          @RelationshipConverter() final List<Relationship> relationships}) =
-      _$_MangaData;
+      {required final String id,
+      required final MangaAttributes attributes,
+      final List<Relationship> relationships}) = _$MangaDataImpl;
 
   factory _MangaData.fromJson(Map<String, dynamic> json) =
-      _$_MangaData.fromJson;
+      _$MangaDataImpl.fromJson;
 
   @override
   String get id;
   @override
   MangaAttributes get attributes;
   @override
-  @RelationshipConverter()
   List<Relationship> get relationships;
   @override
   @JsonKey(ignore: true)
-  _$$_MangaDataCopyWith<_$_MangaData> get copyWith =>
+  _$$MangaDataImplCopyWith<_$MangaDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -690,11 +686,11 @@ class _$MangaAttributesCopyWithImpl<$Res, $Val extends MangaAttributes>
 }
 
 /// @nodoc
-abstract class _$$_MangaAttributesCopyWith<$Res>
+abstract class _$$MangaAttributesImplCopyWith<$Res>
     implements $MangaAttributesCopyWith<$Res> {
-  factory _$$_MangaAttributesCopyWith(
-          _$_MangaAttributes value, $Res Function(_$_MangaAttributes) then) =
-      __$$_MangaAttributesCopyWithImpl<$Res>;
+  factory _$$MangaAttributesImplCopyWith(_$MangaAttributesImpl value,
+          $Res Function(_$MangaAttributesImpl) then) =
+      __$$MangaAttributesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -711,11 +707,11 @@ abstract class _$$_MangaAttributesCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MangaAttributesCopyWithImpl<$Res>
-    extends _$MangaAttributesCopyWithImpl<$Res, _$_MangaAttributes>
-    implements _$$_MangaAttributesCopyWith<$Res> {
-  __$$_MangaAttributesCopyWithImpl(
-      _$_MangaAttributes _value, $Res Function(_$_MangaAttributes) _then)
+class __$$MangaAttributesImplCopyWithImpl<$Res>
+    extends _$MangaAttributesCopyWithImpl<$Res, _$MangaAttributesImpl>
+    implements _$$MangaAttributesImplCopyWith<$Res> {
+  __$$MangaAttributesImplCopyWithImpl(
+      _$MangaAttributesImpl _value, $Res Function(_$MangaAttributesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -732,7 +728,7 @@ class __$$_MangaAttributesCopyWithImpl<$Res>
     Object? status = freezed,
     Object? tags = null,
   }) {
-    return _then(_$_MangaAttributes(
+    return _then(_$MangaAttributesImpl(
       title: null == title
           ? _value._title
           : title // ignore: cast_nullable_to_non_nullable
@@ -779,8 +775,8 @@ class __$$_MangaAttributesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_MangaAttributes implements _MangaAttributes {
-  const _$_MangaAttributes(
+class _$MangaAttributesImpl implements _MangaAttributes {
+  const _$MangaAttributesImpl(
       {required final Map<String, String> title,
       required final List<Map<String, String>> altTitles,
       required final Map<String, String> description,
@@ -796,8 +792,8 @@ class _$_MangaAttributes implements _MangaAttributes {
         _description = description,
         _tags = tags;
 
-  factory _$_MangaAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_MangaAttributesFromJson(json);
+  factory _$MangaAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MangaAttributesImplFromJson(json);
 
   final Map<String, String> _title;
   @override
@@ -852,7 +848,7 @@ class _$_MangaAttributes implements _MangaAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MangaAttributes &&
+            other is _$MangaAttributesImpl &&
             const DeepCollectionEquality().equals(other._title, _title) &&
             const DeepCollectionEquality()
                 .equals(other._altTitles, _altTitles) &&
@@ -890,12 +886,13 @@ class _$_MangaAttributes implements _MangaAttributes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MangaAttributesCopyWith<_$_MangaAttributes> get copyWith =>
-      __$$_MangaAttributesCopyWithImpl<_$_MangaAttributes>(this, _$identity);
+  _$$MangaAttributesImplCopyWith<_$MangaAttributesImpl> get copyWith =>
+      __$$MangaAttributesImplCopyWithImpl<_$MangaAttributesImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MangaAttributesToJson(
+    return _$$MangaAttributesImplToJson(
       this,
     );
   }
@@ -912,10 +909,10 @@ abstract class _MangaAttributes implements MangaAttributes {
       final ContentRating? contentRating,
       final PublicationDemographic? publicationDemographic,
       final Status? status,
-      required final List<Tag> tags}) = _$_MangaAttributes;
+      required final List<Tag> tags}) = _$MangaAttributesImpl;
 
   factory _MangaAttributes.fromJson(Map<String, dynamic> json) =
-      _$_MangaAttributes.fromJson;
+      _$MangaAttributesImpl.fromJson;
 
   @override
   Map<String, String> get title;
@@ -939,7 +936,7 @@ abstract class _MangaAttributes implements MangaAttributes {
   List<Tag> get tags;
   @override
   @JsonKey(ignore: true)
-  _$$_MangaAttributesCopyWith<_$_MangaAttributes> get copyWith =>
+  _$$MangaAttributesImplCopyWith<_$MangaAttributesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1004,9 +1001,9 @@ class _$TagCopyWithImpl<$Res, $Val extends Tag> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
-  factory _$$_TagCopyWith(_$_Tag value, $Res Function(_$_Tag) then) =
-      __$$_TagCopyWithImpl<$Res>;
+abstract class _$$TagImplCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$$TagImplCopyWith(_$TagImpl value, $Res Function(_$TagImpl) then) =
+      __$$TagImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, TagAttributes attributes});
@@ -1016,9 +1013,9 @@ abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
-    implements _$$_TagCopyWith<$Res> {
-  __$$_TagCopyWithImpl(_$_Tag _value, $Res Function(_$_Tag) _then)
+class __$$TagImplCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$TagImpl>
+    implements _$$TagImplCopyWith<$Res> {
+  __$$TagImplCopyWithImpl(_$TagImpl _value, $Res Function(_$TagImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1027,7 +1024,7 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
     Object? id = null,
     Object? attributes = null,
   }) {
-    return _then(_$_Tag(
+    return _then(_$TagImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1042,10 +1039,11 @@ class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res, _$_Tag>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Tag implements _Tag {
-  const _$_Tag({this.id = '', required this.attributes});
+class _$TagImpl implements _Tag {
+  const _$TagImpl({this.id = '', required this.attributes});
 
-  factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
+  factory _$TagImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TagImplFromJson(json);
 
   @override
   @JsonKey()
@@ -1062,7 +1060,7 @@ class _$_Tag implements _Tag {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tag &&
+            other is _$TagImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.attributes, attributes) ||
                 other.attributes == attributes));
@@ -1075,12 +1073,12 @@ class _$_Tag implements _Tag {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TagCopyWith<_$_Tag> get copyWith =>
-      __$$_TagCopyWithImpl<_$_Tag>(this, _$identity);
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      __$$TagImplCopyWithImpl<_$TagImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TagToJson(
+    return _$$TagImplToJson(
       this,
     );
   }
@@ -1088,9 +1086,9 @@ class _$_Tag implements _Tag {
 
 abstract class _Tag implements Tag {
   const factory _Tag(
-      {final String id, required final TagAttributes attributes}) = _$_Tag;
+      {final String id, required final TagAttributes attributes}) = _$TagImpl;
 
-  factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
+  factory _Tag.fromJson(Map<String, dynamic> json) = _$TagImpl.fromJson;
 
   @override
   String get id;
@@ -1098,7 +1096,8 @@ abstract class _Tag implements Tag {
   TagAttributes get attributes;
   @override
   @JsonKey(ignore: true)
-  _$$_TagCopyWith<_$_Tag> get copyWith => throw _privateConstructorUsedError;
+  _$$TagImplCopyWith<_$TagImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 TagAttributes _$TagAttributesFromJson(Map<String, dynamic> json) {
@@ -1155,22 +1154,22 @@ class _$TagAttributesCopyWithImpl<$Res, $Val extends TagAttributes>
 }
 
 /// @nodoc
-abstract class _$$_TagAttributesCopyWith<$Res>
+abstract class _$$TagAttributesImplCopyWith<$Res>
     implements $TagAttributesCopyWith<$Res> {
-  factory _$$_TagAttributesCopyWith(
-          _$_TagAttributes value, $Res Function(_$_TagAttributes) then) =
-      __$$_TagAttributesCopyWithImpl<$Res>;
+  factory _$$TagAttributesImplCopyWith(
+          _$TagAttributesImpl value, $Res Function(_$TagAttributesImpl) then) =
+      __$$TagAttributesImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Map<String, String> name, String group});
 }
 
 /// @nodoc
-class __$$_TagAttributesCopyWithImpl<$Res>
-    extends _$TagAttributesCopyWithImpl<$Res, _$_TagAttributes>
-    implements _$$_TagAttributesCopyWith<$Res> {
-  __$$_TagAttributesCopyWithImpl(
-      _$_TagAttributes _value, $Res Function(_$_TagAttributes) _then)
+class __$$TagAttributesImplCopyWithImpl<$Res>
+    extends _$TagAttributesCopyWithImpl<$Res, _$TagAttributesImpl>
+    implements _$$TagAttributesImplCopyWith<$Res> {
+  __$$TagAttributesImplCopyWithImpl(
+      _$TagAttributesImpl _value, $Res Function(_$TagAttributesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1179,7 +1178,7 @@ class __$$_TagAttributesCopyWithImpl<$Res>
     Object? name = null,
     Object? group = null,
   }) {
-    return _then(_$_TagAttributes(
+    return _then(_$TagAttributesImpl(
       name: null == name
           ? _value._name
           : name // ignore: cast_nullable_to_non_nullable
@@ -1194,13 +1193,13 @@ class __$$_TagAttributesCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_TagAttributes implements _TagAttributes {
-  const _$_TagAttributes(
+class _$TagAttributesImpl implements _TagAttributes {
+  const _$TagAttributesImpl(
       {required final Map<String, String> name, required this.group})
       : _name = name;
 
-  factory _$_TagAttributes.fromJson(Map<String, dynamic> json) =>
-      _$$_TagAttributesFromJson(json);
+  factory _$TagAttributesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TagAttributesImplFromJson(json);
 
   final Map<String, String> _name;
   @override
@@ -1222,7 +1221,7 @@ class _$_TagAttributes implements _TagAttributes {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TagAttributes &&
+            other is _$TagAttributesImpl &&
             const DeepCollectionEquality().equals(other._name, _name) &&
             (identical(other.group, group) || other.group == group));
   }
@@ -1235,12 +1234,12 @@ class _$_TagAttributes implements _TagAttributes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TagAttributesCopyWith<_$_TagAttributes> get copyWith =>
-      __$$_TagAttributesCopyWithImpl<_$_TagAttributes>(this, _$identity);
+  _$$TagAttributesImplCopyWith<_$TagAttributesImpl> get copyWith =>
+      __$$TagAttributesImplCopyWithImpl<_$TagAttributesImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TagAttributesToJson(
+    return _$$TagAttributesImplToJson(
       this,
     );
   }
@@ -1249,10 +1248,10 @@ class _$_TagAttributes implements _TagAttributes {
 abstract class _TagAttributes implements TagAttributes {
   const factory _TagAttributes(
       {required final Map<String, String> name,
-      required final String group}) = _$_TagAttributes;
+      required final String group}) = _$TagAttributesImpl;
 
   factory _TagAttributes.fromJson(Map<String, dynamic> json) =
-      _$_TagAttributes.fromJson;
+      _$TagAttributesImpl.fromJson;
 
   @override
   Map<String, String> get name;
@@ -1260,6 +1259,6 @@ abstract class _TagAttributes implements TagAttributes {
   String get group;
   @override
   @JsonKey(ignore: true)
-  _$$_TagAttributesCopyWith<_$_TagAttributes> get copyWith =>
+  _$$TagAttributesImplCopyWith<_$TagAttributesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

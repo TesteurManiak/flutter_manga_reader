@@ -21,9 +21,7 @@ class CoverListResponse with _$CoverListResponse {
 class CoverArt with _$CoverArt {
   const factory CoverArt({
     CoverArtAttributes? attributes,
-    @Default(<Relationship>[])
-    @RelationshipConverter()
-    List<Relationship> relationships,
+    @Default(<Relationship>[]) List<Relationship> relationships,
   }) = _CoverArt;
 
   factory CoverArt.fromJson(Map<String, dynamic> json) =>
