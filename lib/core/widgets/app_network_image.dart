@@ -1,6 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+typedef ProgressIndicatorBuilder = Widget Function(
+  BuildContext context,
+  double? progress,
+);
+
 class AppNetworkImage extends StatelessWidget {
   const AppNetworkImage({
     super.key,
@@ -8,12 +13,14 @@ class AppNetworkImage extends StatelessWidget {
     this.height,
     this.width,
     this.fit,
+    this.progressIndicatorBuilder,
   });
 
   final String? url;
   final double? height;
   final double? width;
   final BoxFit? fit;
+  final ProgressIndicatorBuilder? progressIndicatorBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +37,10 @@ class AppNetworkImage extends StatelessWidget {
       width: width,
       fit: fit,
       progressIndicatorBuilder: (context, url, progress) {
+        if (progressIndicatorBuilder case final builder?) {
+          return builder(context, progress.progress);
+        }
+
         return Center(
           child: CircularProgressIndicator(value: progress.progress),
         );

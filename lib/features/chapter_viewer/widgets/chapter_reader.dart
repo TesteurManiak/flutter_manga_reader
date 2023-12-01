@@ -119,6 +119,7 @@ class _VerticalReaderState extends State<_VerticalReader> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: scrollController,
       slivers: [
         SliverList.builder(
           itemCount: widget.pages.length,
@@ -127,7 +128,10 @@ class _VerticalReaderState extends State<_VerticalReader> {
                 ? widget.pages.length - realIndex - 1
                 : realIndex;
             final page = widget.pages[index];
-            return AppNetworkImage(url: page.imageUrl);
+            return AppNetworkImage(
+              url: page.imageUrl,
+              progressIndicatorBuilder: (_, progress) => _Loader(progress),
+            );
           },
         ),
       ],
@@ -145,5 +149,26 @@ class _VerticalReaderState extends State<_VerticalReader> {
     final offset = index * size.height;
 
     scrollController.jumpTo(offset);
+  }
+}
+
+class _Loader extends StatelessWidget {
+  const _Loader(this.progress);
+
+  final double? progress;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minHeight: size.height,
+        minWidth: size.width,
+      ),
+      child: Center(
+        child: CircularProgressIndicator(value: progress),
+      ),
+    );
   }
 }
