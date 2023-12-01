@@ -8,30 +8,38 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 class ChapterReader extends ConsumerWidget {
   const ChapterReader({
     super.key,
+    required this.mangaId,
     required this.controller,
     required this.pages,
   });
 
+  final int mangaId;
   final ChapterPageController controller;
   final List<ChapterPage> pages;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final readingDirection = ref.watch(readingDirectionControllerProvider);
+    final value = ref.watch(readingDirectionControllerProvider(mangaId));
 
-    return switch (readingDirection.isVertical) {
-      true => _VerticalReader(
-          controller: controller,
-          pages: pages,
-          reverse: readingDirection.reverse,
-        ),
-      false => _HorizontalReader(
-          controller: controller,
-          pages: pages,
-          pageSnapping: readingDirection.isContinuous,
-          reverse: readingDirection.reverse,
-        ),
-    };
+    return value.when(
+      data: (readingDirection) {
+        return switch (readingDirection.isVertical) {
+          true => _VerticalReader(
+              controller: controller,
+              pages: pages,
+              reverse: readingDirection.reverse,
+            ),
+          false => _HorizontalReader(
+              controller: controller,
+              pages: pages,
+              pageSnapping: readingDirection.isContinuous,
+              reverse: readingDirection.reverse,
+            ),
+        };
+      },
+      error: (error, stack) => Center(child: Text(error.toString())),
+      loading: () => const Center(child: CircularProgressIndicator()),
+    );
   }
 }
 
@@ -159,16 +167,8 @@ class _Loader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minHeight: size.height,
-        minWidth: size.width,
-      ),
-      child: Center(
-        child: CircularProgressIndicator(value: progress),
-      ),
+    return Center(
+      child: CircularProgressIndicator(value: progress),
     );
   }
 }

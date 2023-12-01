@@ -9,10 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ChapterViewerBottomBar extends ConsumerWidget {
   const ChapterViewerBottomBar({
     super.key,
+    required this.mangaId,
     required this.chapterId,
     required this.chapterController,
   });
 
+  final int mangaId;
   final int chapterId;
   final ChapterPageController chapterController;
 
@@ -46,11 +48,11 @@ class ChapterViewerBottomBar extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const ReadingDirectionPopupMenuButton(),
+                ReadingDirectionPopupMenuButton(mangaId),
                 IconButton(
                   icon: const Icon(Icons.settings_outlined),
                   onPressed: () {
-                    const ChapterSettingsBottomSheet().show(
+                    ChapterSettingsBottomSheet(mangaId).show(
                       context,
                       isScrollControlled: true,
                     );

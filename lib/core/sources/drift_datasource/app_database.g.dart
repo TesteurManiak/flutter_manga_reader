@@ -1219,13 +1219,202 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   }
 }
 
+class $DbReadingDirectionTable extends DbReadingDirection
+    with TableInfo<$DbReadingDirectionTable, DbReadingDirectionData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DbReadingDirectionTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _mangaIdMeta =
+      const VerificationMeta('mangaId');
+  @override
+  late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
+      'manga_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _directionMeta =
+      const VerificationMeta('direction');
+  @override
+  late final GeneratedColumnWithTypeConverter<ReadingDirection, int> direction =
+      GeneratedColumn<int>('direction', aliasedName, false,
+              type: DriftSqlType.int, requiredDuringInsert: true)
+          .withConverter<ReadingDirection>(
+              $DbReadingDirectionTable.$converterdirection);
+  @override
+  List<GeneratedColumn> get $columns => [mangaId, direction];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'db_reading_direction';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<DbReadingDirectionData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('manga_id')) {
+      context.handle(_mangaIdMeta,
+          mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+    }
+    context.handle(_directionMeta, const VerificationResult.success());
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {mangaId};
+  @override
+  DbReadingDirectionData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DbReadingDirectionData(
+      mangaId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
+      direction: $DbReadingDirectionTable.$converterdirection.fromSql(
+          attachedDatabase.typeMapping
+              .read(DriftSqlType.int, data['${effectivePrefix}direction'])!),
+    );
+  }
+
+  @override
+  $DbReadingDirectionTable createAlias(String alias) {
+    return $DbReadingDirectionTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<ReadingDirection, int, int> $converterdirection =
+      const EnumIndexConverter<ReadingDirection>(ReadingDirection.values);
+}
+
+class DbReadingDirectionData extends DataClass
+    implements Insertable<DbReadingDirectionData> {
+  final int mangaId;
+  final ReadingDirection direction;
+  const DbReadingDirectionData(
+      {required this.mangaId, required this.direction});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['manga_id'] = Variable<int>(mangaId);
+    {
+      final converter = $DbReadingDirectionTable.$converterdirection;
+      map['direction'] = Variable<int>(converter.toSql(direction));
+    }
+    return map;
+  }
+
+  DbReadingDirectionCompanion toCompanion(bool nullToAbsent) {
+    return DbReadingDirectionCompanion(
+      mangaId: Value(mangaId),
+      direction: Value(direction),
+    );
+  }
+
+  factory DbReadingDirectionData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DbReadingDirectionData(
+      mangaId: serializer.fromJson<int>(json['mangaId']),
+      direction: $DbReadingDirectionTable.$converterdirection
+          .fromJson(serializer.fromJson<int>(json['direction'])),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'mangaId': serializer.toJson<int>(mangaId),
+      'direction': serializer.toJson<int>(
+          $DbReadingDirectionTable.$converterdirection.toJson(direction)),
+    };
+  }
+
+  DbReadingDirectionData copyWith(
+          {int? mangaId, ReadingDirection? direction}) =>
+      DbReadingDirectionData(
+        mangaId: mangaId ?? this.mangaId,
+        direction: direction ?? this.direction,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DbReadingDirectionData(')
+          ..write('mangaId: $mangaId, ')
+          ..write('direction: $direction')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(mangaId, direction);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DbReadingDirectionData &&
+          other.mangaId == this.mangaId &&
+          other.direction == this.direction);
+}
+
+class DbReadingDirectionCompanion
+    extends UpdateCompanion<DbReadingDirectionData> {
+  final Value<int> mangaId;
+  final Value<ReadingDirection> direction;
+  const DbReadingDirectionCompanion({
+    this.mangaId = const Value.absent(),
+    this.direction = const Value.absent(),
+  });
+  DbReadingDirectionCompanion.insert({
+    this.mangaId = const Value.absent(),
+    required ReadingDirection direction,
+  }) : direction = Value(direction);
+  static Insertable<DbReadingDirectionData> custom({
+    Expression<int>? mangaId,
+    Expression<int>? direction,
+  }) {
+    return RawValuesInsertable({
+      if (mangaId != null) 'manga_id': mangaId,
+      if (direction != null) 'direction': direction,
+    });
+  }
+
+  DbReadingDirectionCompanion copyWith(
+      {Value<int>? mangaId, Value<ReadingDirection>? direction}) {
+    return DbReadingDirectionCompanion(
+      mangaId: mangaId ?? this.mangaId,
+      direction: direction ?? this.direction,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (mangaId.present) {
+      map['manga_id'] = Variable<int>(mangaId.value);
+    }
+    if (direction.present) {
+      final converter = $DbReadingDirectionTable.$converterdirection;
+
+      map['direction'] = Variable<int>(converter.toSql(direction.value));
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DbReadingDirectionCompanion(')
+          ..write('mangaId: $mangaId, ')
+          ..write('direction: $direction')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $DbMangasTable dbMangas = $DbMangasTable(this);
   late final $DbChaptersTable dbChapters = $DbChaptersTable(this);
+  late final $DbReadingDirectionTable dbReadingDirection =
+      $DbReadingDirectionTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [dbMangas, dbChapters];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [dbMangas, dbChapters, dbReadingDirection];
 }

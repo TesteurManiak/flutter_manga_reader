@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -45,8 +46,16 @@ class DbChapters extends Table {
       ];
 }
 
+class DbReadingDirection extends Table {
+  IntColumn get mangaId => integer()();
+  IntColumn get direction => intEnum<ReadingDirection>()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {mangaId};
+}
+
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
-@DriftDatabase(tables: [DbMangas, DbChapters])
+@DriftDatabase(tables: [DbMangas, DbChapters, DbReadingDirection])
 class AppDatabase extends _$AppDatabase {
   // We tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());

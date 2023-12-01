@@ -5,29 +5,36 @@ import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ReadingDirectionPopupMenuButton extends ConsumerWidget {
-  const ReadingDirectionPopupMenuButton({super.key});
+  const ReadingDirectionPopupMenuButton(this.mangaId, {super.key});
+
+  final int mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initialValue = ref.watch(readingDirectionControllerProvider);
+    final value = ref.watch(readingDirectionControllerProvider(mangaId));
 
-    return PopupMenuButton<ReadingDirection>(
-      initialValue: initialValue,
-      itemBuilder: (context) {
-        return [
-          for (final v in ReadingDirection.values)
-            PopupMenuItem(
-              value: v,
-              child: Text(v.localized(context.strings)),
-            ),
-        ];
+    return value.maybeWhen(
+      data: (initialValue) {
+        return PopupMenuButton<ReadingDirection>(
+          initialValue: initialValue,
+          itemBuilder: (context) {
+            return [
+              for (final v in ReadingDirection.values)
+                PopupMenuItem(
+                  value: v,
+                  child: Text(v.localized(context.strings)),
+                ),
+            ];
+          },
+          onSelected: (direction) {
+            ref
+                .read(readingDirectionControllerProvider(mangaId).notifier)
+                .setDirection(direction);
+          },
+          child: const Icon(Icons.phonelink_setup_rounded),
+        );
       },
-      onSelected: (direction) {
-        ref
-            .read(readingDirectionControllerProvider.notifier)
-            .setDirection(direction);
-      },
-      child: const Icon(Icons.phonelink_setup_rounded),
+      orElse: () => const CircularProgressIndicator(),
     );
   }
 }

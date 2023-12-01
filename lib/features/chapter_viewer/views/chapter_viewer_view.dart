@@ -14,10 +14,12 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 class ChapterViewerView extends ConsumerStatefulWidget {
   const ChapterViewerView({
     super.key,
+    required this.mangaId,
     required this.chapterId,
     this.initialPage,
   });
 
+  final int mangaId;
   final int chapterId;
   final int? initialPage;
 
@@ -44,6 +46,7 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
     return DefaultSlidableController(
       initiallyShown: false,
       child: _Content(
+        mangaId: widget.mangaId,
         chapterId: widget.chapterId,
         initialPage: widget.initialPage,
       ),
@@ -53,10 +56,12 @@ class _ChapterViewerViewState extends ConsumerState<ChapterViewerView> {
 
 class _Content extends ConsumerStatefulWidget {
   const _Content({
+    required this.mangaId,
     required this.chapterId,
     required this.initialPage,
   });
 
+  final int mangaId;
   final int chapterId;
   final int? initialPage;
 
@@ -97,12 +102,14 @@ class _ContentState extends ConsumerState<_Content> {
       extendBody: true,
       appBar: ChapterViewerAppBar(widget.chapterId),
       bottomNavigationBar: ChapterViewerBottomBar(
+        mangaId: widget.mangaId,
         chapterId: widget.chapterId,
         chapterController: chapterPageController,
       ),
       body: switch (state) {
         ChapterViewerLoading() => const LoadingContent(),
         ChapterViewerLoaded(:final pages) => _PageViewer(
+            mangaId: widget.mangaId,
             chapterController: chapterPageController,
             pages: pages,
             initialPage: widget.initialPage,
@@ -119,12 +126,14 @@ class _PageViewer extends ConsumerWidget {
     required this.chapterController,
     required this.pages,
     required this.initialPage,
+    required this.mangaId,
     required this.chapterId,
   });
 
   final ChapterPageController chapterController;
   final List<ChapterPage> pages;
   final int? initialPage;
+  final int mangaId;
   final int chapterId;
 
   @override
@@ -149,6 +158,7 @@ class _PageViewer extends ConsumerWidget {
         child: Stack(
           children: [
             ChapterReader(
+              mangaId: mangaId,
               controller: chapterController,
               pages: pages,
             ),

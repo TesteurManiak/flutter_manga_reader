@@ -1,3 +1,4 @@
+import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/drift_datasource.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -18,6 +19,15 @@ abstract class LocalDatasource {
 
   /// Return a [Stream] for the [Manga] with the given [id].
   Stream<Manga?> watchManga(int id);
+
+  /// Return a [Stream] for the [ReadingDirection] of the manga with the given
+  /// [mangaId].
+  Stream<ReadingDirection> watchReadingDirection(int mangaId);
+
+  Future<void> setReadingDirection({
+    required int mangaId,
+    required ReadingDirection direction,
+  });
 
   /// Upsert a manga into the database.
   Future<void> saveManga(Manga manga);

@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -166,6 +167,24 @@ class DriftDatasource implements LocalDatasource {
     return (_database.update(_database.dbChapters)
           ..where((t) => t.id.equals(chapterId)))
         .write(DbChaptersCompanion(lastPageRead: Value(lastPageRead)));
+  }
+
+  @override
+  Stream<ReadingDirection> watchReadingDirection(int mangaId) {
+    return (_database.select(_database.dbReadingDirection)
+          ..where((t) => t.mangaId.equals(mangaId)))
+        .watchSingleOrNull()
+        .map((data) => data?.direction ?? ReadingDirection.leftToRight);
+  }
+
+  @override
+  Future<void> setReadingDirection({
+    required int mangaId,
+    required ReadingDirection direction,
+  }) {
+    return _database.into(_database.dbReadingDirection).insertOnConflictUpdate(
+          DbReadingDirectionData(mangaId: mangaId, direction: direction),
+        );
   }
 }
 

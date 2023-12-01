@@ -11,7 +11,7 @@ List<RouteBase> get $appRoutes => [
     ];
 
 RouteBase get $chapterViewerRoute => GoRouteData.$route(
-      path: '/chapter/:sourceId/:chapterId',
+      path: '/chapter/:sourceId/:mangaId/:chapterId',
       factory: $ChapterViewerRouteExtension._fromState,
     );
 
@@ -19,13 +19,14 @@ extension $ChapterViewerRouteExtension on ChapterViewerRoute {
   static ChapterViewerRoute _fromState(GoRouterState state) =>
       ChapterViewerRoute(
         sourceId: state.pathParameters['sourceId']!,
+        mangaId: int.parse(state.pathParameters['mangaId']!),
         chapterId: int.parse(state.pathParameters['chapterId']!),
         initialPage: _$convertMapValue(
             'initial-page', state.uri.queryParameters, int.parse),
       );
 
   String get location => GoRouteData.$location(
-        '/chapter/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(chapterId.toString())}',
+        '/chapter/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(mangaId.toString())}/${Uri.encodeComponent(chapterId.toString())}',
         queryParams: {
           if (initialPage != null) 'initial-page': initialPage!.toString(),
         },
