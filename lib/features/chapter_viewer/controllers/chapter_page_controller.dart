@@ -26,7 +26,14 @@ class ChapterPageController extends ChangeNotifier
   int get page => _page;
 
   /// Short hand for [pageController.jumpToPage].
-  set page(int value) => pageController.jumpToPage(value);
+  set page(int value) {
+    int actualValue = value;
+    if (value < 0) actualValue = 0;
+
+    if (pageController.hasClients) pageController.jumpToPage(actualValue);
+    _page = actualValue;
+    notifyListeners();
+  }
 
   @override
   int get value => _page;

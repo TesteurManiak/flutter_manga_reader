@@ -11,10 +11,12 @@ class ChapterTile extends ConsumerWidget {
   const ChapterTile({
     super.key,
     required this.sourceId,
+    required this.mangaId,
     required this.chapter,
   });
 
   final String sourceId;
+  final int mangaId;
   final Chapter chapter;
 
   @override
@@ -59,6 +61,7 @@ class ChapterTile extends ConsumerWidget {
         }
 
         ChapterViewerRoute(
+          mangaId: mangaId,
           chapterId: chapter.id,
           sourceId: sourceId,
           initialPage: lastPageRead,

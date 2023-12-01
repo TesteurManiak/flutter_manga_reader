@@ -19,6 +19,9 @@ enum ReadingDirection {
   final bool isContinuous;
   final LocalizedStringFetcher localized;
 
+  bool get isHorizontal => direction == Axis.horizontal;
+  bool get isVertical => direction == Axis.vertical;
+
   static String _leftToRight(AppLocalizations strings) => strings.left_to_right;
   static String _rightToLeft(AppLocalizations strings) => strings.right_to_left;
   static String _webtoon(AppLocalizations strings) => strings.webtoon;

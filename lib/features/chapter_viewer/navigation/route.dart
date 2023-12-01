@@ -9,13 +9,15 @@ part 'route.g.dart';
 class ChapterViewerRoute extends GoRouteData {
   const ChapterViewerRoute({
     required this.sourceId,
+    required this.mangaId,
     required this.chapterId,
     this.initialPage,
   });
 
-  static const path = '/chapter/:sourceId/:chapterId';
+  static const path = '/chapter/:sourceId/:mangaId/:chapterId';
 
   final String sourceId;
+  final int mangaId;
   final int chapterId;
   final int? initialPage;
 
@@ -24,6 +26,7 @@ class ChapterViewerRoute extends GoRouteData {
     return SourceProviderScope(
       sourceId: sourceId,
       child: ChapterViewerView(
+        mangaId: mangaId,
         chapterId: chapterId,
         initialPage: initialPage,
       ),

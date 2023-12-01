@@ -6,11 +6,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChapterSettingsBottomSheet extends ConsumerWidget
     with ShowableBottomSheetMixin {
-  const ChapterSettingsBottomSheet({super.key});
+  const ChapterSettingsBottomSheet(this.mangaId, {super.key});
+
+  final int mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initialSelection = ref.watch(readingDirectionControllerProvider);
+    final initialSelectionValue = ref.watch(
+      readingDirectionControllerProvider(mangaId),
+    );
 
     final strings = context.strings;
     final listTileTheme = ListTileTheme.of(context);
@@ -32,27 +36,51 @@ class ChapterSettingsBottomSheet extends ConsumerWidget
             ),
             ListTile(
               title: Text(strings.lecture_mode),
-              trailing: DropdownMenu<ReadingDirection>(
-                inputDecorationTheme: const InputDecorationTheme(
-                  border: InputBorder.none,
-                ),
-                initialSelection: initialSelection,
-                dropdownMenuEntries: [
-                  for (final v in ReadingDirection.values)
-                    DropdownMenuEntry(
-                      value: v,
-                      label: v.localized(strings),
-                    ),
-                ],
-                onSelected: (direction) {
-                  ref
-                      .read(readingDirectionControllerProvider.notifier)
-                      .setDirection(direction);
+              trailing: initialSelectionValue.maybeWhen(
+                data: (initialSelection) {
+                  return _ReadingDirectionDropdown(
+                    mangaId: mangaId,
+                    initialSelection: initialSelection,
+                  );
                 },
+                orElse: () => const CircularProgressIndicator(),
               ),
             ),
           ],
         );
+      },
+    );
+  }
+}
+
+class _ReadingDirectionDropdown extends ConsumerWidget {
+  const _ReadingDirectionDropdown({
+    required this.mangaId,
+    required this.initialSelection,
+  });
+
+  final int mangaId;
+  final ReadingDirection initialSelection;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final strings = context.strings;
+    return DropdownMenu<ReadingDirection>(
+      inputDecorationTheme: const InputDecorationTheme(
+        border: InputBorder.none,
+      ),
+      initialSelection: initialSelection,
+      dropdownMenuEntries: [
+        for (final v in ReadingDirection.values)
+          DropdownMenuEntry(
+            value: v,
+            label: v.localized(strings),
+          ),
+      ],
+      onSelected: (direction) {
+        ref
+            .read(readingDirectionControllerProvider(mangaId).notifier)
+            .setDirection(direction);
       },
     );
   }
