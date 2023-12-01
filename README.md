@@ -4,6 +4,8 @@
 
 <h1 align="center">Flutter Manga Reader</h1>
 
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg)](https://github.com/invertase/melos)
+
 A cross-platform manga reader built with Flutter.
 
 This app is a Flutter clone of [Tachiyomi][tachiyomi] mainly to provide an iOS version of the app.
@@ -15,11 +17,13 @@ _WIP_
 ## Screenshots
 
 _WIP_
+
 | Views    | Light                                                   | Dark                                                   |
 | -------- | ------------------------------------------------------- | ------------------------------------------------------ |
 | Library  | <img src="screenshots/light/library.png" height="400">  | <img src="screenshots/dark/library.png" height="400">  |
 | Explorer | <img src="screenshots/light/explorer.png" height="400"> | <img src="screenshots/dark/explorer.png" height="400"> |
 | Details  | <img src="screenshots/light/details.png" height="400">  | <img src="screenshots/dark/details.png" height="400">  |
+
 ## Run the app
 
 This project contains 3 flavors:
