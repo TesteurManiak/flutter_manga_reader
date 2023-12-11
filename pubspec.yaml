@@ -57,7 +57,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.4.5
-  go_router_builder: ^2.3.4
+  go_router_builder: ^2.4.0
   isar_generator: ^3.1.0+1
   json_serializable: ^6.7.1
   melos: ^3.4.0
