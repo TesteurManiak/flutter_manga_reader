@@ -51,7 +51,7 @@ dev_dependencies:
   drift_dev: ^2.14.1
   fd_lints: ^2.2.0
   flutter_gen: ^5.3.2
-  flutter_gen_runner: ^5.3.2
+  flutter_gen_runner: ^5.4.0
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.9
   flutter_test:
