@@ -39,7 +39,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
   shared_preferences: ^2.2.2
   sliver_tools: ^0.2.12
-  sqlite3_flutter_libs: ^0.5.18
+  sqlite3_flutter_libs: ^0.5.19+1
   theme_tailor_annotation: ^2.0.2
   url_launcher: ^6.2.3
 
