@@ -64,7 +64,7 @@ dev_dependencies:
   mocktail: ^1.0.3
   riverpod_generator: ^2.3.3
   riverpod_lint: ^2.1.1
-  theme_tailor: ^2.0.2
+  theme_tailor: ^2.1.0
 
 flutter:
   uses-material-design: true
