@@ -40,7 +40,7 @@ dependencies:
   shared_preferences: ^2.2.2
   sliver_tools: ^0.2.12
   sqlite3_flutter_libs: ^0.5.19+1
-  theme_tailor_annotation: ^2.0.2
+  theme_tailor_annotation: ^2.1.0
   url_launcher: ^6.2.4
 
 dev_dependencies:
