@@ -40,7 +40,7 @@ dependencies:
   shared_preferences: ^2.2.2
   sliver_tools: ^0.2.12
   sqlite3_flutter_libs: ^0.5.20
-  theme_tailor_annotation: ^2.1.0
+  theme_tailor_annotation: ^3.0.1
   url_launcher: ^6.2.4
 
 dev_dependencies:
@@ -64,7 +64,7 @@ dev_dependencies:
   mocktail: ^1.0.3
   riverpod_generator: ^2.3.3
   riverpod_lint: ^2.1.1
-  theme_tailor: ^2.1.0
+  theme_tailor: ^3.0.1
 
 flutter:
   uses-material-design: true

@@ -1372,18 +1372,18 @@ packages:
     dependency: "direct dev"
     description:
       name: theme_tailor
-      sha256: "792059e4769b6c9293382827cf6b9f666562cd0edff9702ecc77fb071d888dbe"
+      sha256: "176c88b37f56996c2dc7b9e426a2db6fd66f95e1454288f7205ea4faa9380a3a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.1"
   theme_tailor_annotation:
     dependency: "direct main"
     description:
       name: theme_tailor_annotation
-      sha256: "539f609455376e4a13def409aa36e8c983c0efcbd398a7b8e3103a4162ff8ca6"
+      sha256: "2990264653b700c7eece3557a5fe5f999cdcd32981aed67023a66004943db08d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.1"
   time:
     dependency: transitive
     description:
