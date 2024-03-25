@@ -297,6 +297,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.7.1"
+  cross_file:
+    dependency: transitive
+    description:
+      name: cross_file
+      sha256: fedaadfa3a6996f75211d835aaeb8fede285dae94262485698afd832371b9a5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3+8"
   crypto:
     dependency: transitive
     description:
@@ -413,10 +421,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: caa6bc229eab3e32eb2f37b53a5f9d22a6981474afd210c512a7546c1e1a04f6
+      sha256: d1d0ac3966b36dc3e66eeefb40280c17feb87fa2099c6e22e6a1fc959327bd03
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.0"
+    version: "8.0.0+1"
   fixnum:
     dependency: transitive
     description:
@@ -959,10 +967,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: f4f88d4a900933e7267e2b353594774fc0d07fb072b47eedcd5b54e1ea3269f8
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.7"
+    version: "2.1.8"
   pointycastle:
     dependency: transitive
     description:
@@ -1572,10 +1580,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "7c99c0e1e2fa190b48d25c81ca5e42036d5cac81430ef249027d97b0935c553f"
+      sha256: "464f5674532865248444b4c3daca12bd9bf2d7c47f759ce2617986e7229494a8"
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.0"
+    version: "5.2.0"
   xdg_directories:
     dependency: transitive
     description:
