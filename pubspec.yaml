@@ -41,7 +41,7 @@ dependencies:
   sliver_tools: ^0.2.12
   sqlite3_flutter_libs: ^0.5.20
   theme_tailor_annotation: ^3.0.1
-  url_launcher: ^6.2.5
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   alchemist: ^0.7.0
