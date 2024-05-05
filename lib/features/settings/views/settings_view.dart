@@ -36,6 +36,14 @@ class SettingsView extends ConsumerWidget {
         onTap: () => const AppearanceSettingsRoute().push<void>(context),
       ),
       _SettingData(
+        titleFetcher: (strings) => strings.settings_extensions,
+        subtitleFetcher: (strings) => strings.settings_extensions_subtitle,
+        icon: Icons.explore_rounded,
+        onTap: () {
+          // TODO(Guillaume): Implement extension settings
+        },
+      ),
+      _SettingData(
         titleFetcher: (strings) => strings.settings_about,
         subtitleFetcher: (_) => '${Consts.appName} $appVersion',
         icon: Icons.info_outline,

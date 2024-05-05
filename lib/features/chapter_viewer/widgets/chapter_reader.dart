@@ -126,6 +126,7 @@ class _VerticalReaderState extends State<_VerticalReader> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
     return CustomScrollView(
       controller: scrollController,
       slivers: [
@@ -136,7 +137,13 @@ class _VerticalReaderState extends State<_VerticalReader> {
                 ? widget.pages.length - realIndex - 1
                 : realIndex;
             final page = widget.pages[index];
-            return AppNetworkImage(url: page.imageUrl);
+            return AppNetworkImage(
+              url: page.imageUrl,
+              width: size.width,
+              progressIndicatorBuilder: (_, progress) {
+                return _LoadingPlaceholder(progress);
+              },
+            );
           },
         ),
       ],
@@ -154,5 +161,22 @@ class _VerticalReaderState extends State<_VerticalReader> {
     final offset = index * size.height;
 
     scrollController.jumpTo(offset);
+  }
+}
+
+class _LoadingPlaceholder extends StatelessWidget {
+  const _LoadingPlaceholder(this.progress);
+
+  final double? progress;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+    return Container(
+      height: size.height,
+      width: size.width,
+      alignment: Alignment.center,
+      child: CircularProgressIndicator(value: progress),
+    );
   }
 }
