@@ -32,20 +32,29 @@ class AppNetworkImage extends StatelessWidget {
       return _ErrorWidget(height: height, width: width);
     }
 
-    return CachedNetworkImage(
-      imageUrl: localUrl,
+    return Image(
+      image: CachedNetworkImageProvider(localUrl),
+      height: height,
       width: width,
       fit: fit,
-      progressIndicatorBuilder: (context, url, progress) {
+      loadingBuilder: (context, child, loadingProgress) {
+        final progress = switch ((
+          loadingProgress?.expectedTotalBytes,
+          loadingProgress?.cumulativeBytesLoaded
+        )) {
+          (final total?, final loaded?) => loaded / total,
+          _ => null,
+        };
+
+        if (progress == null || progress == 1) return child;
+
         if (progressIndicatorBuilder case final builder?) {
-          return builder(context, progress.progress);
+          return builder(context, progress);
         }
 
-        return Center(
-          child: CircularProgressIndicator(value: progress.progress),
-        );
+        return Center(child: CircularProgressIndicator(value: progress));
       },
-      errorWidget: (_, __, ___) => _ErrorWidget(height: height, width: width),
+      errorBuilder: (_, __, ___) => _ErrorWidget(height: height, width: width),
     );
   }
 }
