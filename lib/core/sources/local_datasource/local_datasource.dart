@@ -72,7 +72,7 @@ abstract class LocalDatasource {
 
 @Riverpod(keepAlive: true, dependencies: [])
 LocalDatasource localDatasource(LocalDatasourceRef ref) {
-  return DriftDatasource(appDatabase: AppDatabase());
+  return DriftDatasource(appDatabase: ref.watch(appDatabaseProvider));
 }
 
 @Riverpod(keepAlive: true, dependencies: [localDatasource])

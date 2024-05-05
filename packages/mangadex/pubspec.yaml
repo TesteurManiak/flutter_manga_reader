@@ -12,12 +12,12 @@ dependencies:
   collection: ^1.18.0
   freezed_annotation: ^2.4.1
   intl: ^0.18.1
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   manga_reader_core:
     path: ../manga_reader_core
 
 dev_dependencies:
-  build_runner: ^2.4.7
-  fd_lints: ^2.2.0
-  freezed: ^2.4.5
-  json_serializable: ^6.7.1
+  build_runner: ^2.4.9
+  fd_lints: ^2.2.1
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0

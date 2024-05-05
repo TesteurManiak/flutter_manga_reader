@@ -6,6 +6,7 @@ import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_database.g.dart';
 
@@ -54,8 +55,19 @@ class DbReadingDirection extends Table {
   Set<Column<Object>>? get primaryKey => {mangaId};
 }
 
+class DbCacheEntries extends Table {
+  TextColumn get key => text()();
+  TextColumn get response => text()();
+  DateTimeColumn get expiry => dateTime()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {key};
+}
+
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
-@DriftDatabase(tables: [DbMangas, DbChapters, DbReadingDirection])
+@DriftDatabase(
+  tables: [DbMangas, DbChapters, DbReadingDirection, DbCacheEntries],
+)
 class AppDatabase extends _$AppDatabase {
   // We tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());
@@ -76,3 +88,6 @@ class AppDatabase extends _$AppDatabase {
     });
   }
 }
+
+@Riverpod(keepAlive: true)
+AppDatabase appDatabase(AppDatabaseRef ref) => AppDatabase();

@@ -267,8 +267,8 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       map['author'] = Variable<String>(author);
     }
     {
-      final converter = $DbMangasTable.$converterstatus;
-      map['status'] = Variable<int>(converter.toSql(status));
+      map['status'] =
+          Variable<int>($DbMangasTable.$converterstatus.toSql(status));
     }
     if (!nullToAbsent || genre != null) {
       map['genre'] = Variable<String>(genre);
@@ -554,9 +554,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       map['author'] = Variable<String>(author.value);
     }
     if (status.present) {
-      final converter = $DbMangasTable.$converterstatus;
-
-      map['status'] = Variable<int>(converter.toSql(status.value));
+      map['status'] =
+          Variable<int>($DbMangasTable.$converterstatus.toSql(status.value));
     }
     if (genre.present) {
       map['genre'] = Variable<String>(genre.value);
@@ -1294,8 +1293,8 @@ class DbReadingDirectionData extends DataClass
     final map = <String, Expression>{};
     map['manga_id'] = Variable<int>(mangaId);
     {
-      final converter = $DbReadingDirectionTable.$converterdirection;
-      map['direction'] = Variable<int>(converter.toSql(direction));
+      map['direction'] = Variable<int>(
+          $DbReadingDirectionTable.$converterdirection.toSql(direction));
     }
     return map;
   }
@@ -1388,9 +1387,8 @@ class DbReadingDirectionCompanion
       map['manga_id'] = Variable<int>(mangaId.value);
     }
     if (direction.present) {
-      final converter = $DbReadingDirectionTable.$converterdirection;
-
-      map['direction'] = Variable<int>(converter.toSql(direction.value));
+      map['direction'] = Variable<int>(
+          $DbReadingDirectionTable.$converterdirection.toSql(direction.value));
     }
     return map;
   }
@@ -1405,16 +1403,1006 @@ class DbReadingDirectionCompanion
   }
 }
 
+class $DbCacheEntriesTable extends DbCacheEntries
+    with TableInfo<$DbCacheEntriesTable, DbCacheEntry> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DbCacheEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _keyMeta = const VerificationMeta('key');
+  @override
+  late final GeneratedColumn<String> key = GeneratedColumn<String>(
+      'key', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _responseMeta =
+      const VerificationMeta('response');
+  @override
+  late final GeneratedColumn<String> response = GeneratedColumn<String>(
+      'response', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _expiryMeta = const VerificationMeta('expiry');
+  @override
+  late final GeneratedColumn<DateTime> expiry = GeneratedColumn<DateTime>(
+      'expiry', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [key, response, expiry];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'db_cache_entries';
+  @override
+  VerificationContext validateIntegrity(Insertable<DbCacheEntry> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('key')) {
+      context.handle(
+          _keyMeta, key.isAcceptableOrUnknown(data['key']!, _keyMeta));
+    } else if (isInserting) {
+      context.missing(_keyMeta);
+    }
+    if (data.containsKey('response')) {
+      context.handle(_responseMeta,
+          response.isAcceptableOrUnknown(data['response']!, _responseMeta));
+    } else if (isInserting) {
+      context.missing(_responseMeta);
+    }
+    if (data.containsKey('expiry')) {
+      context.handle(_expiryMeta,
+          expiry.isAcceptableOrUnknown(data['expiry']!, _expiryMeta));
+    } else if (isInserting) {
+      context.missing(_expiryMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {key};
+  @override
+  DbCacheEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DbCacheEntry(
+      key: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}key'])!,
+      response: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}response'])!,
+      expiry: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}expiry'])!,
+    );
+  }
+
+  @override
+  $DbCacheEntriesTable createAlias(String alias) {
+    return $DbCacheEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class DbCacheEntry extends DataClass implements Insertable<DbCacheEntry> {
+  final String key;
+  final String response;
+  final DateTime expiry;
+  const DbCacheEntry(
+      {required this.key, required this.response, required this.expiry});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['key'] = Variable<String>(key);
+    map['response'] = Variable<String>(response);
+    map['expiry'] = Variable<DateTime>(expiry);
+    return map;
+  }
+
+  DbCacheEntriesCompanion toCompanion(bool nullToAbsent) {
+    return DbCacheEntriesCompanion(
+      key: Value(key),
+      response: Value(response),
+      expiry: Value(expiry),
+    );
+  }
+
+  factory DbCacheEntry.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DbCacheEntry(
+      key: serializer.fromJson<String>(json['key']),
+      response: serializer.fromJson<String>(json['response']),
+      expiry: serializer.fromJson<DateTime>(json['expiry']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'key': serializer.toJson<String>(key),
+      'response': serializer.toJson<String>(response),
+      'expiry': serializer.toJson<DateTime>(expiry),
+    };
+  }
+
+  DbCacheEntry copyWith({String? key, String? response, DateTime? expiry}) =>
+      DbCacheEntry(
+        key: key ?? this.key,
+        response: response ?? this.response,
+        expiry: expiry ?? this.expiry,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DbCacheEntry(')
+          ..write('key: $key, ')
+          ..write('response: $response, ')
+          ..write('expiry: $expiry')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(key, response, expiry);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DbCacheEntry &&
+          other.key == this.key &&
+          other.response == this.response &&
+          other.expiry == this.expiry);
+}
+
+class DbCacheEntriesCompanion extends UpdateCompanion<DbCacheEntry> {
+  final Value<String> key;
+  final Value<String> response;
+  final Value<DateTime> expiry;
+  final Value<int> rowid;
+  const DbCacheEntriesCompanion({
+    this.key = const Value.absent(),
+    this.response = const Value.absent(),
+    this.expiry = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DbCacheEntriesCompanion.insert({
+    required String key,
+    required String response,
+    required DateTime expiry,
+    this.rowid = const Value.absent(),
+  })  : key = Value(key),
+        response = Value(response),
+        expiry = Value(expiry);
+  static Insertable<DbCacheEntry> custom({
+    Expression<String>? key,
+    Expression<String>? response,
+    Expression<DateTime>? expiry,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (key != null) 'key': key,
+      if (response != null) 'response': response,
+      if (expiry != null) 'expiry': expiry,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DbCacheEntriesCompanion copyWith(
+      {Value<String>? key,
+      Value<String>? response,
+      Value<DateTime>? expiry,
+      Value<int>? rowid}) {
+    return DbCacheEntriesCompanion(
+      key: key ?? this.key,
+      response: response ?? this.response,
+      expiry: expiry ?? this.expiry,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (key.present) {
+      map['key'] = Variable<String>(key.value);
+    }
+    if (response.present) {
+      map['response'] = Variable<String>(response.value);
+    }
+    if (expiry.present) {
+      map['expiry'] = Variable<DateTime>(expiry.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DbCacheEntriesCompanion(')
+          ..write('key: $key, ')
+          ..write('response: $response, ')
+          ..write('expiry: $expiry, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
+  _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
   late final $DbMangasTable dbMangas = $DbMangasTable(this);
   late final $DbChaptersTable dbChapters = $DbChaptersTable(this);
   late final $DbReadingDirectionTable dbReadingDirection =
       $DbReadingDirectionTable(this);
+  late final $DbCacheEntriesTable dbCacheEntries = $DbCacheEntriesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [dbMangas, dbChapters, dbReadingDirection];
+      [dbMangas, dbChapters, dbReadingDirection, dbCacheEntries];
 }
+
+typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
+  Value<int> id,
+  required String title,
+  required String url,
+  Value<String?> description,
+  Value<String?> author,
+  required MangaStatus status,
+  Value<String?> genre,
+  Value<bool> favorite,
+  required String source,
+  required String lang,
+  Value<String?> artist,
+  Value<String?> thumbnailUrl,
+  Value<bool> initialized,
+});
+typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
+  Value<int> id,
+  Value<String> title,
+  Value<String> url,
+  Value<String?> description,
+  Value<String?> author,
+  Value<MangaStatus> status,
+  Value<String?> genre,
+  Value<bool> favorite,
+  Value<String> source,
+  Value<String> lang,
+  Value<String?> artist,
+  Value<String?> thumbnailUrl,
+  Value<bool> initialized,
+});
+
+class $$DbMangasTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbMangasTable,
+    DbManga,
+    $$DbMangasTableFilterComposer,
+    $$DbMangasTableOrderingComposer,
+    $$DbMangasTableProcessedTableManager,
+    $$DbMangasTableInsertCompanionBuilder,
+    $$DbMangasTableUpdateCompanionBuilder> {
+  $$DbMangasTableTableManager(_$AppDatabase db, $DbMangasTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbMangasTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbMangasTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$DbMangasTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            Value<MangaStatus> status = const Value.absent(),
+            Value<String?> genre = const Value.absent(),
+            Value<bool> favorite = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<String> lang = const Value.absent(),
+            Value<String?> artist = const Value.absent(),
+            Value<String?> thumbnailUrl = const Value.absent(),
+            Value<bool> initialized = const Value.absent(),
+          }) =>
+              DbMangasCompanion(
+            id: id,
+            title: title,
+            url: url,
+            description: description,
+            author: author,
+            status: status,
+            genre: genre,
+            favorite: favorite,
+            source: source,
+            lang: lang,
+            artist: artist,
+            thumbnailUrl: thumbnailUrl,
+            initialized: initialized,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required String title,
+            required String url,
+            Value<String?> description = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            required MangaStatus status,
+            Value<String?> genre = const Value.absent(),
+            Value<bool> favorite = const Value.absent(),
+            required String source,
+            required String lang,
+            Value<String?> artist = const Value.absent(),
+            Value<String?> thumbnailUrl = const Value.absent(),
+            Value<bool> initialized = const Value.absent(),
+          }) =>
+              DbMangasCompanion.insert(
+            id: id,
+            title: title,
+            url: url,
+            description: description,
+            author: author,
+            status: status,
+            genre: genre,
+            favorite: favorite,
+            source: source,
+            lang: lang,
+            artist: artist,
+            thumbnailUrl: thumbnailUrl,
+            initialized: initialized,
+          ),
+        ));
+}
+
+class $$DbMangasTableProcessedTableManager extends ProcessedTableManager<
+    _$AppDatabase,
+    $DbMangasTable,
+    DbManga,
+    $$DbMangasTableFilterComposer,
+    $$DbMangasTableOrderingComposer,
+    $$DbMangasTableProcessedTableManager,
+    $$DbMangasTableInsertCompanionBuilder,
+    $$DbMangasTableUpdateCompanionBuilder> {
+  $$DbMangasTableProcessedTableManager(super.$state);
+}
+
+class $$DbMangasTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $DbMangasTable> {
+  $$DbMangasTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get url => $state.composableBuilder(
+      column: $state.table.url,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get author => $state.composableBuilder(
+      column: $state.table.author,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<MangaStatus, MangaStatus, int> get status =>
+      $state.composableBuilder(
+          column: $state.table.status,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get genre => $state.composableBuilder(
+      column: $state.table.genre,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get favorite => $state.composableBuilder(
+      column: $state.table.favorite,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get source => $state.composableBuilder(
+      column: $state.table.source,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get lang => $state.composableBuilder(
+      column: $state.table.lang,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get artist => $state.composableBuilder(
+      column: $state.table.artist,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get thumbnailUrl => $state.composableBuilder(
+      column: $state.table.thumbnailUrl,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get initialized => $state.composableBuilder(
+      column: $state.table.initialized,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$DbMangasTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $DbMangasTable> {
+  $$DbMangasTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get url => $state.composableBuilder(
+      column: $state.table.url,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get author => $state.composableBuilder(
+      column: $state.table.author,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get status => $state.composableBuilder(
+      column: $state.table.status,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get genre => $state.composableBuilder(
+      column: $state.table.genre,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get favorite => $state.composableBuilder(
+      column: $state.table.favorite,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get source => $state.composableBuilder(
+      column: $state.table.source,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get lang => $state.composableBuilder(
+      column: $state.table.lang,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get artist => $state.composableBuilder(
+      column: $state.table.artist,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get thumbnailUrl => $state.composableBuilder(
+      column: $state.table.thumbnailUrl,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get initialized => $state.composableBuilder(
+      column: $state.table.initialized,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$DbChaptersTableInsertCompanionBuilder = DbChaptersCompanion Function({
+  Value<int> id,
+  required int mangaId,
+  required String url,
+  required String name,
+  required int index,
+  Value<DateTime?> dateUpload,
+  Value<double> chapterNumber,
+  Value<String?> scanlator,
+  Value<bool> read,
+  Value<bool> bookmark,
+  Value<int> lastPageRead,
+  Value<DateTime?> dateFetch,
+  Value<DateTime?> lastModified,
+});
+typedef $$DbChaptersTableUpdateCompanionBuilder = DbChaptersCompanion Function({
+  Value<int> id,
+  Value<int> mangaId,
+  Value<String> url,
+  Value<String> name,
+  Value<int> index,
+  Value<DateTime?> dateUpload,
+  Value<double> chapterNumber,
+  Value<String?> scanlator,
+  Value<bool> read,
+  Value<bool> bookmark,
+  Value<int> lastPageRead,
+  Value<DateTime?> dateFetch,
+  Value<DateTime?> lastModified,
+});
+
+class $$DbChaptersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbChaptersTable,
+    DbChapter,
+    $$DbChaptersTableFilterComposer,
+    $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableProcessedTableManager,
+    $$DbChaptersTableInsertCompanionBuilder,
+    $$DbChaptersTableUpdateCompanionBuilder> {
+  $$DbChaptersTableTableManager(_$AppDatabase db, $DbChaptersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbChaptersTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbChaptersTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$DbChaptersTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<int> mangaId = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<int> index = const Value.absent(),
+            Value<DateTime?> dateUpload = const Value.absent(),
+            Value<double> chapterNumber = const Value.absent(),
+            Value<String?> scanlator = const Value.absent(),
+            Value<bool> read = const Value.absent(),
+            Value<bool> bookmark = const Value.absent(),
+            Value<int> lastPageRead = const Value.absent(),
+            Value<DateTime?> dateFetch = const Value.absent(),
+            Value<DateTime?> lastModified = const Value.absent(),
+          }) =>
+              DbChaptersCompanion(
+            id: id,
+            mangaId: mangaId,
+            url: url,
+            name: name,
+            index: index,
+            dateUpload: dateUpload,
+            chapterNumber: chapterNumber,
+            scanlator: scanlator,
+            read: read,
+            bookmark: bookmark,
+            lastPageRead: lastPageRead,
+            dateFetch: dateFetch,
+            lastModified: lastModified,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required int mangaId,
+            required String url,
+            required String name,
+            required int index,
+            Value<DateTime?> dateUpload = const Value.absent(),
+            Value<double> chapterNumber = const Value.absent(),
+            Value<String?> scanlator = const Value.absent(),
+            Value<bool> read = const Value.absent(),
+            Value<bool> bookmark = const Value.absent(),
+            Value<int> lastPageRead = const Value.absent(),
+            Value<DateTime?> dateFetch = const Value.absent(),
+            Value<DateTime?> lastModified = const Value.absent(),
+          }) =>
+              DbChaptersCompanion.insert(
+            id: id,
+            mangaId: mangaId,
+            url: url,
+            name: name,
+            index: index,
+            dateUpload: dateUpload,
+            chapterNumber: chapterNumber,
+            scanlator: scanlator,
+            read: read,
+            bookmark: bookmark,
+            lastPageRead: lastPageRead,
+            dateFetch: dateFetch,
+            lastModified: lastModified,
+          ),
+        ));
+}
+
+class $$DbChaptersTableProcessedTableManager extends ProcessedTableManager<
+    _$AppDatabase,
+    $DbChaptersTable,
+    DbChapter,
+    $$DbChaptersTableFilterComposer,
+    $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableProcessedTableManager,
+    $$DbChaptersTableInsertCompanionBuilder,
+    $$DbChaptersTableUpdateCompanionBuilder> {
+  $$DbChaptersTableProcessedTableManager(super.$state);
+}
+
+class $$DbChaptersTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $DbChaptersTable> {
+  $$DbChaptersTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get url => $state.composableBuilder(
+      column: $state.table.url,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get index => $state.composableBuilder(
+      column: $state.table.index,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get dateUpload => $state.composableBuilder(
+      column: $state.table.dateUpload,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get chapterNumber => $state.composableBuilder(
+      column: $state.table.chapterNumber,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get scanlator => $state.composableBuilder(
+      column: $state.table.scanlator,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get read => $state.composableBuilder(
+      column: $state.table.read,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get bookmark => $state.composableBuilder(
+      column: $state.table.bookmark,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get lastPageRead => $state.composableBuilder(
+      column: $state.table.lastPageRead,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get dateFetch => $state.composableBuilder(
+      column: $state.table.dateFetch,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get lastModified => $state.composableBuilder(
+      column: $state.table.lastModified,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$DbChaptersTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $DbChaptersTable> {
+  $$DbChaptersTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get url => $state.composableBuilder(
+      column: $state.table.url,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get index => $state.composableBuilder(
+      column: $state.table.index,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get dateUpload => $state.composableBuilder(
+      column: $state.table.dateUpload,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get chapterNumber => $state.composableBuilder(
+      column: $state.table.chapterNumber,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get scanlator => $state.composableBuilder(
+      column: $state.table.scanlator,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get read => $state.composableBuilder(
+      column: $state.table.read,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get bookmark => $state.composableBuilder(
+      column: $state.table.bookmark,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get lastPageRead => $state.composableBuilder(
+      column: $state.table.lastPageRead,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get dateFetch => $state.composableBuilder(
+      column: $state.table.dateFetch,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get lastModified => $state.composableBuilder(
+      column: $state.table.lastModified,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$DbReadingDirectionTableInsertCompanionBuilder
+    = DbReadingDirectionCompanion Function({
+  Value<int> mangaId,
+  required ReadingDirection direction,
+});
+typedef $$DbReadingDirectionTableUpdateCompanionBuilder
+    = DbReadingDirectionCompanion Function({
+  Value<int> mangaId,
+  Value<ReadingDirection> direction,
+});
+
+class $$DbReadingDirectionTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbReadingDirectionTable,
+    DbReadingDirectionData,
+    $$DbReadingDirectionTableFilterComposer,
+    $$DbReadingDirectionTableOrderingComposer,
+    $$DbReadingDirectionTableProcessedTableManager,
+    $$DbReadingDirectionTableInsertCompanionBuilder,
+    $$DbReadingDirectionTableUpdateCompanionBuilder> {
+  $$DbReadingDirectionTableTableManager(
+      _$AppDatabase db, $DbReadingDirectionTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbReadingDirectionTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$DbReadingDirectionTableOrderingComposer(
+              ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$DbReadingDirectionTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> mangaId = const Value.absent(),
+            Value<ReadingDirection> direction = const Value.absent(),
+          }) =>
+              DbReadingDirectionCompanion(
+            mangaId: mangaId,
+            direction: direction,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> mangaId = const Value.absent(),
+            required ReadingDirection direction,
+          }) =>
+              DbReadingDirectionCompanion.insert(
+            mangaId: mangaId,
+            direction: direction,
+          ),
+        ));
+}
+
+class $$DbReadingDirectionTableProcessedTableManager
+    extends ProcessedTableManager<
+        _$AppDatabase,
+        $DbReadingDirectionTable,
+        DbReadingDirectionData,
+        $$DbReadingDirectionTableFilterComposer,
+        $$DbReadingDirectionTableOrderingComposer,
+        $$DbReadingDirectionTableProcessedTableManager,
+        $$DbReadingDirectionTableInsertCompanionBuilder,
+        $$DbReadingDirectionTableUpdateCompanionBuilder> {
+  $$DbReadingDirectionTableProcessedTableManager(super.$state);
+}
+
+class $$DbReadingDirectionTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $DbReadingDirectionTable> {
+  $$DbReadingDirectionTableFilterComposer(super.$state);
+  ColumnFilters<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnWithTypeConverterFilters<ReadingDirection, ReadingDirection, int>
+      get direction => $state.composableBuilder(
+          column: $state.table.direction,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+}
+
+class $$DbReadingDirectionTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $DbReadingDirectionTable> {
+  $$DbReadingDirectionTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get direction => $state.composableBuilder(
+      column: $state.table.direction,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+typedef $$DbCacheEntriesTableInsertCompanionBuilder = DbCacheEntriesCompanion
+    Function({
+  required String key,
+  required String response,
+  required DateTime expiry,
+  Value<int> rowid,
+});
+typedef $$DbCacheEntriesTableUpdateCompanionBuilder = DbCacheEntriesCompanion
+    Function({
+  Value<String> key,
+  Value<String> response,
+  Value<DateTime> expiry,
+  Value<int> rowid,
+});
+
+class $$DbCacheEntriesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbCacheEntriesTable,
+    DbCacheEntry,
+    $$DbCacheEntriesTableFilterComposer,
+    $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableProcessedTableManager,
+    $$DbCacheEntriesTableInsertCompanionBuilder,
+    $$DbCacheEntriesTableUpdateCompanionBuilder> {
+  $$DbCacheEntriesTableTableManager(
+      _$AppDatabase db, $DbCacheEntriesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbCacheEntriesTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbCacheEntriesTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$DbCacheEntriesTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<String> key = const Value.absent(),
+            Value<String> response = const Value.absent(),
+            Value<DateTime> expiry = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DbCacheEntriesCompanion(
+            key: key,
+            response: response,
+            expiry: expiry,
+            rowid: rowid,
+          ),
+          getInsertCompanionBuilder: ({
+            required String key,
+            required String response,
+            required DateTime expiry,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DbCacheEntriesCompanion.insert(
+            key: key,
+            response: response,
+            expiry: expiry,
+            rowid: rowid,
+          ),
+        ));
+}
+
+class $$DbCacheEntriesTableProcessedTableManager extends ProcessedTableManager<
+    _$AppDatabase,
+    $DbCacheEntriesTable,
+    DbCacheEntry,
+    $$DbCacheEntriesTableFilterComposer,
+    $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableProcessedTableManager,
+    $$DbCacheEntriesTableInsertCompanionBuilder,
+    $$DbCacheEntriesTableUpdateCompanionBuilder> {
+  $$DbCacheEntriesTableProcessedTableManager(super.$state);
+}
+
+class $$DbCacheEntriesTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $DbCacheEntriesTable> {
+  $$DbCacheEntriesTableFilterComposer(super.$state);
+  ColumnFilters<String> get key => $state.composableBuilder(
+      column: $state.table.key,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get response => $state.composableBuilder(
+      column: $state.table.response,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get expiry => $state.composableBuilder(
+      column: $state.table.expiry,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$DbCacheEntriesTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $DbCacheEntriesTable> {
+  $$DbCacheEntriesTableOrderingComposer(super.$state);
+  ColumnOrderings<String> get key => $state.composableBuilder(
+      column: $state.table.key,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get response => $state.composableBuilder(
+      column: $state.table.response,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get expiry => $state.composableBuilder(
+      column: $state.table.expiry,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
+class _$AppDatabaseManager {
+  final _$AppDatabase _db;
+  _$AppDatabaseManager(this._db);
+  $$DbMangasTableTableManager get dbMangas =>
+      $$DbMangasTableTableManager(_db, _db.dbMangas);
+  $$DbChaptersTableTableManager get dbChapters =>
+      $$DbChaptersTableTableManager(_db, _db.dbChapters);
+  $$DbReadingDirectionTableTableManager get dbReadingDirection =>
+      $$DbReadingDirectionTableTableManager(_db, _db.dbReadingDirection);
+  $$DbCacheEntriesTableTableManager get dbCacheEntries =>
+      $$DbCacheEntriesTableTableManager(_db, _db.dbCacheEntries);
+}
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$appDatabaseHash() => r'92a246abcb363d93aa5a028712241f464abc4efe';
+
+/// See also [appDatabase].
+@ProviderFor(appDatabase)
+final appDatabaseProvider = Provider<AppDatabase>.internal(
+  appDatabase,
+  name: r'appDatabaseProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appDatabaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AppDatabaseRef = ProviderRef<AppDatabase>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

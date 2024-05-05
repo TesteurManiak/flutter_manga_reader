@@ -1,4 +1,6 @@
-import 'package:flutter_manga_reader/core/cache/isar_cache_service.dart';
+import 'package:flutter_manga_reader/core/cache/drift_cache_service.dart';
+import 'package:flutter_manga_reader/core/providers/clock.dart';
+import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/mangadex.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,7 +26,10 @@ Map<String, MangaDatasource> mangaDatasources(MangaDatasourcesRef ref) {
   final mangadexClient = RestClient(
     baseUri: Uri.parse(MDConstants.apiUrl),
     httpClient: CacheClient(
-      cacheService: IsarNetworkQueryCacheService(),
+      cacheService: DriftNetworkQueryCacheService(
+        clock: ref.watch(appClockProvider),
+        database: ref.watch(appDatabaseProvider),
+      ),
     ),
   );
 

@@ -211,18 +211,14 @@ extension on SourceManga {
     return DbMangasCompanion.insert(
       title: title,
       url: url,
-      description: description != null
-          ? Value.ofNullable(description)
-          : const Value.absent(),
-      author: author != null ? Value.ofNullable(author) : const Value.absent(),
+      description: Value.absentIfNull(description),
+      author: Value.absentIfNull(author),
       status: status,
-      genre: genre != null ? Value.ofNullable(genre) : const Value.absent(),
+      genre: Value.absentIfNull(genre),
       source: source,
       lang: lang,
-      artist: artist != null ? Value.ofNullable(artist) : const Value.absent(),
-      thumbnailUrl: thumbnailUrl != null
-          ? Value.ofNullable(thumbnailUrl)
-          : const Value.absent(),
+      artist: Value.absentIfNull(artist),
+      thumbnailUrl: Value.absentIfNull(thumbnailUrl),
     );
   }
 }
@@ -236,9 +232,7 @@ extension on SourceChapter {
       index: index,
       dateUpload: Value(dateUpload),
       chapterNumber: Value(chapterNumber),
-      scanlator: scanlator != null
-          ? Value.ofNullable(scanlator)
-          : const Value.absent(),
+      scanlator: Value.absentIfNull(scanlator),
     );
   }
 }

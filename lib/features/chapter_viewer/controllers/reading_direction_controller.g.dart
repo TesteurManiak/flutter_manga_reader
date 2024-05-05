@@ -166,7 +166,7 @@ class _WatchReadingDirectionProviderElement
 }
 
 String _$readingDirectionControllerHash() =>
-    r'8d9b077b586e391edc93964b48bc007b3b55c606';
+    r'448f5eaeecaf6ec57bd4985df66c951d3e37f122';
 
 abstract class _$ReadingDirectionController
     extends BuildlessAutoDisposeNotifier<AsyncValue<ReadingDirection>> {

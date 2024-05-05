@@ -185,7 +185,7 @@ class _FetchChapterPagesProviderElement
       (origin as FetchChapterPagesProvider).sourceChapter;
 }
 
-String _$mangaDatasourcesHash() => r'7e4636c95c4834419bf6d1a5aabd901c552c3d06';
+String _$mangaDatasourcesHash() => r'576fd17eb850fd3c37a85721671e86de58fcc3d8';
 
 /// See also [mangaDatasources].
 @ProviderFor(mangaDatasources)

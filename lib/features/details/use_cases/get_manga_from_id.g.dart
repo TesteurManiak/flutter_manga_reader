@@ -6,7 +6,7 @@ part of 'get_manga_from_id.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getMangaFromIdHash() => r'bfa3dca2b1e2a5587993607f411e3ae34d338208';
+String _$getMangaFromIdHash() => r'16e96d0c71783cbffc4f38dc71e8ce5e4f5bff40';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -56,18 +56,12 @@ class GetMangaFromIdFamily extends Family<AsyncValue<Manga?>> {
     );
   }
 
-  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
-  ];
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
 
   @override
   Iterable<ProviderOrFamily>? get dependencies => _dependencies;
 
-  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
-      <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>

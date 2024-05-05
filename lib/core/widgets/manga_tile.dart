@@ -49,14 +49,15 @@ class _MangaTileState extends ConsumerState<MangaTile>
           mangaId = localId;
         }
 
-        if (!mounted) return;
-        unawaited(
-          DetailsRoute(
-            sourceId: ref.read(getSourceIdProvider(widget.manga)),
-            mangaId: mangaId,
-            openedFromSource: widget.displayedFromSource,
-          ).push<void>(context),
-        );
+        if (context.mounted) {
+          unawaited(
+            DetailsRoute(
+              sourceId: ref.read(getSourceIdProvider(widget.manga)),
+              mangaId: mangaId,
+              openedFromSource: widget.displayedFromSource,
+            ).push<void>(context),
+          );
+        }
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(6),
