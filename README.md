@@ -177,6 +177,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## Credits
 
+* [Tachiyomi][tachiyomi]: For providing the inspiration for this project
 * [MangaDex][manga_dex]: For providing the API used in this project
 
 ## Disclaimer
