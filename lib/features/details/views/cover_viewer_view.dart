@@ -4,7 +4,7 @@ import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 class CoverViewerView extends StatelessWidget {
   const CoverViewerView(this.coverUrl, {super.key});
 
-  final String? coverUrl;
+  final String coverUrl;
 
   static const tag = 'cover_viewer';
 

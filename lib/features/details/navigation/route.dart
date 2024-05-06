@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/views/details_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,6 +28,27 @@ class DetailsRoute extends GoRouteData {
         mangaId: mangaId,
         openedFromSource: openedFromSource ?? false,
       ),
+    );
+  }
+}
+
+@TypedGoRoute<CoverViewerRoute>(path: CoverViewerRoute.path)
+class CoverViewerRoute extends GoRouteData {
+  const CoverViewerRoute({
+    required this.coverUrl,
+  });
+
+  final String coverUrl;
+
+  static const path = '/cover/:coverUrl';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      opaque: false,
+      fullscreenDialog: true,
+      transitionsBuilder: (_, __, ___, child) => child,
+      child: CoverViewerView(coverUrl),
     );
   }
 }

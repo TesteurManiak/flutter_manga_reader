@@ -8,6 +8,7 @@ part of 'route.dart';
 
 List<RouteBase> get $appRoutes => [
       $detailsRoute,
+      $coverViewerRoute,
     ];
 
 RouteBase get $detailsRoute => GoRouteData.$route(
@@ -59,4 +60,28 @@ bool _$boolConverter(String value) {
     default:
       throw UnsupportedError('Cannot convert "$value" into a bool.');
   }
+}
+
+RouteBase get $coverViewerRoute => GoRouteData.$route(
+      path: '/cover/:coverUrl',
+      factory: $CoverViewerRouteExtension._fromState,
+    );
+
+extension $CoverViewerRouteExtension on CoverViewerRoute {
+  static CoverViewerRoute _fromState(GoRouterState state) => CoverViewerRoute(
+        coverUrl: state.pathParameters['coverUrl']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/cover/${Uri.encodeComponent(coverUrl)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
