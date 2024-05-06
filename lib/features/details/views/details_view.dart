@@ -9,7 +9,9 @@ import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/features/details/navigation/cover_viewer_page.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
+import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_bottom_bar.dart';
 import 'package:flutter_manga_reader/features/details/widgets/details_button.dart';
@@ -236,10 +238,18 @@ class _SliverHeader extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
-              child: AppNetworkImage(
-                url: manga?.thumbnailUrl,
-                width: size.width / 4,
-                fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, CoverViewerPage(manga?.thumbnailUrl));
+                },
+                child: Hero(
+                  tag: CoverViewerView.tag,
+                  child: AppNetworkImage(
+                    url: manga?.thumbnailUrl,
+                    width: size.width / 4,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             Expanded(
