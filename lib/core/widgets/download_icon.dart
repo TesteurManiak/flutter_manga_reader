@@ -21,10 +21,11 @@ class DownloadIcon extends StatelessWidget {
     final inProgress = progress > 0 && progress < 1;
 
     if (inProgress) {
-      return const Stack(
+      return Stack(
         children: [
           downloadIcon,
           // TODO(Guillaume): Paint a progress circle on top of the icon.
+          CircularProgressIndicator(value: progress),
         ],
       );
     }

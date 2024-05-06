@@ -5,45 +5,17 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'result.freezed.dart';
 
 @freezed
-class Result<S, F> with _$Result<S, F> {
+sealed class Result<S, F> with _$Result<S, F> {
   const factory Result.success(S success) = Success<S, F>;
   const factory Result.failure(F failure) = Failure<S, F>;
 
   const Result._();
 
-  bool get isSuccess {
-    return when(
-      success: (_) => true,
-      failure: (_) => false,
-    );
-  }
-
-  bool get isFailure {
-    return when(
-      success: (_) => false,
-      failure: (_) => true,
-    );
-  }
-
-  S? get successOrNull {
-    return when(
-      success: (success) => success,
-      failure: (_) => null,
-    );
-  }
-
-  F? get failureOrNull {
-    return when(
-      success: (_) => null,
-      failure: (failure) => failure,
-    );
-  }
-
   Result<TResult, F> whenSuccess<TResult>(TResult Function(S) onSuccess) {
-    return when(
-      success: (s) => Result.success(onSuccess(s)),
-      failure: Result.failure,
-    );
+    return switch (this) {
+      Success(:final success) => Result.success(onSuccess(success)),
+      Failure(:final failure) => Result.failure(failure),
+    };
   }
 }
 

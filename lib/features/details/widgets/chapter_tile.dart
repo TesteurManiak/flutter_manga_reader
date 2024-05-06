@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
+import 'package:flutter_manga_reader/features/details/controllers/chapter_download_progress_controller.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,9 +48,20 @@ class ChapterTile extends ConsumerWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: const IconButton(
-        onPressed: null, // TODO(Guillaume): download
-        icon: Icon(Icons.download_for_offline_outlined),
+      trailing: IconButton(
+        onPressed: () {
+          ref
+              .read(detailsControllerProvider(mangaId, source).notifier)
+              .downloadChapter(chapter);
+        },
+        icon: Consumer(
+          builder: (context, ref, child) {
+            final progress = ref.watch(
+              chapterDownloadProgressControllerProvider(chapter),
+            );
+            return DownloadIcon(progress: progress);
+          },
+        ),
       ),
       onTap: () {
         final source = ref.read(mangaDatasourceProvider);

@@ -1,4 +1,7 @@
+import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
+import 'package:flutter_manga_reader/features/details/controllers/chapter_download_progress_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -19,6 +22,7 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
     localDatasource,
     localDatasource,
     watchChaptersForManga,
+    fetchChapterPages,
   ],
 )
 class DetailsController extends _$DetailsController {
@@ -176,6 +180,35 @@ class DetailsController extends _$DetailsController {
 
   void quitSelectionMode() {
     state = state.copyWith(selectionMode: false, selectedChapters: []);
+  }
+
+  Future<void> downloadChapter(Chapter chapter) async {
+    final result = await ref
+        .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
+    if (result case Success(success: final pages) when pages.isNotEmpty) {
+      final tasks = [
+        for (final page in pages)
+          if (page.imageUrl case final url?)
+            DownloadTask(
+              taskId: '${chapter.id}-${page.number}',
+              url: url,
+              filename: '${page.number.toString().padLeft(3, '0')}.jpg',
+              directory: 'MangaReader/$mangaId/${chapter.id}',
+              updates: Updates.statusAndProgress,
+              retries: 3,
+            ),
+      ];
+
+      await FileDownloader().downloadBatch(
+        tasks,
+        batchProgressCallback: (success, failed) {
+          final progress = (success + failed) / tasks.length;
+          ref
+              .read(chapterDownloadProgressControllerProvider(chapter).notifier)
+              .updateProgress(progress);
+        },
+      );
+    }
   }
 }
 
