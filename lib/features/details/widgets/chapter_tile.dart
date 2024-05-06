@@ -48,20 +48,13 @@ class ChapterTile extends ConsumerWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: IconButton(
+      trailing: _DownloadButton(
         onPressed: () {
           ref
               .read(detailsControllerProvider(mangaId, source).notifier)
               .downloadChapter(chapter);
         },
-        icon: Consumer(
-          builder: (context, ref, child) {
-            final progress = ref.watch(
-              chapterDownloadProgressControllerProvider(chapter),
-            );
-            return DownloadIcon(progress: progress);
-          },
-        ),
+        chapter: chapter,
       ),
       onTap: () {
         final source = ref.read(mangaDatasourceProvider);
@@ -86,6 +79,29 @@ class ChapterTile extends ConsumerWidget {
 
         ref.read(provider.notifier).selectChapter(chapter);
       },
+    );
+  }
+}
+
+class _DownloadButton extends ConsumerWidget {
+  const _DownloadButton({
+    required this.chapter,
+    required this.onPressed,
+  });
+
+  final Chapter chapter;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = ref.watch(
+      chapterDownloadProgressControllerProvider(chapter)
+          .select((value) => value.valueOrNull ?? 0),
+    );
+
+    return IconButton(
+      onPressed: progress == 0 ? onPressed : null,
+      icon: DownloadIcon(progress: progress),
     );
   }
 }

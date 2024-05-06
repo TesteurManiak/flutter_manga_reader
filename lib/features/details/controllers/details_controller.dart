@@ -192,7 +192,7 @@ class DetailsController extends _$DetailsController {
             DownloadTask(
               taskId: '${chapter.id}-${page.number}',
               url: url,
-              filename: '${page.number.toString().padLeft(3, '0')}.jpg',
+              filename: page.getFilename(),
               directory: 'MangaReader/$mangaId/${chapter.id}',
               updates: Updates.statusAndProgress,
               retries: 3,
