@@ -20,7 +20,6 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
     localDatasource,
     localDatasource,
     watchChaptersForManga,
-    fetchChapterPages,
   ],
 )
 class DetailsController extends _$DetailsController {

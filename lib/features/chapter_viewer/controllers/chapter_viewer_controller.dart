@@ -8,12 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'chapter_viewer_controller.freezed.dart';
 part 'chapter_viewer_controller.g.dart';
 
-@Riverpod(
-  dependencies: [
-    localDatasource,
-    fetchChapterPages,
-  ],
-)
+@Riverpod(dependencies: [localDatasource, fetchChapterPages])
 class ChapterViewerController extends _$ChapterViewerController {
   @override
   ChapterViewerState build(int chapterId) {

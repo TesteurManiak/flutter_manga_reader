@@ -5,6 +5,7 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 
 class SinglePageReader extends StatelessWidget {
   const SinglePageReader({
+    required this.chapter,
     required this.controller,
     required this.reverse,
     required this.scrollDirection,
@@ -12,6 +13,7 @@ class SinglePageReader extends StatelessWidget {
     super.key,
   });
 
+  final Chapter chapter;
   final ChapterPageController controller;
   final bool reverse;
   final Axis scrollDirection;
@@ -26,7 +28,11 @@ class SinglePageReader extends StatelessWidget {
       itemCount: pages.length,
       itemBuilder: (context, index) {
         final page = pages[index];
-        return ChapterPageImage(page: page, fit: BoxFit.contain);
+        return ChapterPageImage(
+          chapter: chapter,
+          page: page,
+          fit: BoxFit.contain,
+        );
       },
       allowImplicitScrolling: true,
     );

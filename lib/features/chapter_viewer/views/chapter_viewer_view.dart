@@ -108,12 +108,11 @@ class _ContentState extends ConsumerState<_Content> {
       ),
       body: switch (state) {
         ChapterViewerLoading() => const LoadingContent(),
-        ChapterViewerLoaded(:final pages) => _PageViewer(
-            mangaId: widget.mangaId,
+        ChapterViewerLoaded(:final chapter, :final pages) => _PageViewer(
+            chapter: chapter,
             chapterController: chapterPageController,
             pages: pages,
             initialPage: widget.initialPage,
-            chapterId: widget.chapterId,
           ),
         ChapterViewerError() => ErrorContent(onRetry: controller.fetchPages),
       },
@@ -126,15 +125,13 @@ class _PageViewer extends ConsumerWidget {
     required this.chapterController,
     required this.pages,
     required this.initialPage,
-    required this.mangaId,
-    required this.chapterId,
+    required this.chapter,
   });
 
   final ChapterPageController chapterController;
   final List<ChapterPage> pages;
   final int? initialPage;
-  final int mangaId;
-  final int chapterId;
+  final Chapter chapter;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -145,11 +142,11 @@ class _PageViewer extends ConsumerWidget {
         // If on last page of the chapter, mark it as read.
         if (page == pages.length - 1) {
           ref
-              .read(chapterViewerControllerProvider(chapterId).notifier)
+              .read(chapterViewerControllerProvider(chapter.id).notifier)
               .markChapterAsRead();
         } else if (page != 0 && page != initialPage) {
           ref
-              .read(chapterViewerControllerProvider(chapterId).notifier)
+              .read(chapterViewerControllerProvider(chapter.id).notifier)
               .setLastPageRead(page);
         }
       },
@@ -158,7 +155,7 @@ class _PageViewer extends ConsumerWidget {
         child: Stack(
           children: [
             ChapterReader(
-              mangaId: mangaId,
+              chapter: chapter,
               controller: chapterController,
               pages: pages,
             ),

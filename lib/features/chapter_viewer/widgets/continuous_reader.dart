@@ -5,6 +5,7 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 
 class ContinuousReader extends StatefulWidget {
   const ContinuousReader({
+    required this.chapter,
     required this.controller,
     required this.reverse,
     required this.scrollDirection,
@@ -12,6 +13,7 @@ class ContinuousReader extends StatefulWidget {
     super.key,
   });
 
+  final Chapter chapter;
   final ChapterPageController controller;
   final bool reverse;
   final Axis scrollDirection;
@@ -65,7 +67,11 @@ class _ContinuousReaderState extends State<ContinuousReader> {
       cacheExtent: size.height * 2,
       itemBuilder: (context, index) {
         final page = widget.pages[index];
-        return ChapterPageImage(page: page, fit: BoxFit.fitWidth);
+        return ChapterPageImage(
+          chapter: widget.chapter,
+          page: page,
+          fit: BoxFit.fitWidth,
+        );
       },
     );
   }

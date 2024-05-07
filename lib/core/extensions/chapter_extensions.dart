@@ -13,3 +13,9 @@ extension ChapterExtensions on Chapter {
     );
   }
 }
+
+extension ChapterPageExtensions on ChapterPage {
+  String getLocalPath(String chapterPath) {
+    return path.join(chapterPath, getFilename());
+  }
+}

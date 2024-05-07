@@ -9,29 +9,32 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 class ChapterReader extends ConsumerWidget {
   const ChapterReader({
     super.key,
-    required this.mangaId,
+    required this.chapter,
     required this.controller,
     required this.pages,
   });
 
-  final int mangaId;
+  final Chapter chapter;
   final ChapterPageController controller;
   final List<ChapterPage> pages;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final value = ref.watch(readingDirectionControllerProvider(mangaId));
+    final value =
+        ref.watch(readingDirectionControllerProvider(chapter.mangaId));
 
     return value.when(
       data: (readingDirection) {
         return switch (readingDirection.isContinuous) {
           true => ContinuousReader(
+              chapter: chapter,
               controller: controller,
               reverse: readingDirection.reverse,
               scrollDirection: readingDirection.direction,
               pages: pages,
             ),
           false => SinglePageReader(
+              chapter: chapter,
               controller: controller,
               reverse: readingDirection.reverse,
               scrollDirection: readingDirection.direction,
