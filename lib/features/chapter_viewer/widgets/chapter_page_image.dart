@@ -71,7 +71,8 @@ class _LocaleImage extends ConsumerWidget {
     final documentsDir = ref.watch(applicationDocumentsDirectoryProvider);
     return documentsDir.when(
       data: (baseDir) {
-        final file = File(page.getLocalPath(chapter.getLocalPath(baseDir)));
+        final file =
+            File(page.getFullLocalPath(chapter.getFullLocalPath(baseDir)));
         return Image.file(
           file,
           fit: fit,

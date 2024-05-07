@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
-import 'package:flutter_manga_reader/core/providers/directories.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
@@ -19,22 +17,17 @@ class DownloadQueueController extends _$DownloadQueueController {
     final localDatasource = ref.watch(localDatasourceProvider);
 
     ref.listenSelf((_, next) {
-      final (:completedTaskIds, :failedTaskIds) =
-          _parseTasks(next.values.toList());
-
-      if (completedTaskIds.isEmpty && failedTaskIds.isEmpty) return;
+      final completedTaskIds = _parseTasks(next.values.toList());
+      if (completedTaskIds.isEmpty) return;
 
       localDatasource.setChaptersDownloaded(
         chapterIds: completedTaskIds,
         downloaded: true,
       );
 
-      // Remove completed & failed tasks
+      // Remove completed tasks
       final newMap = Map.of(state);
       for (final id in completedTaskIds) {
-        newMap.remove(id);
-      }
-      for (final id in failedTaskIds) {
         newMap.remove(id);
       }
       state = newMap;
@@ -50,12 +43,9 @@ class DownloadQueueController extends _$DownloadQueueController {
       final task = ChapterDownloadTask(chapter: chapter, pages: pages);
       state = {...state, chapter.id: task};
 
-      final baseDir =
-          await ref.read(applicationDocumentsDirectoryProvider.future);
-
       unawaited(
         FileDownloader().downloadBatch(
-          task.toDownloadTaskBatch(baseDir),
+          task.toDownloadTaskBatch(),
           batchProgressCallback: (success, failed) {
             if (failed > 0) {
               _onDownloadTaskError(chapter.id);
@@ -82,33 +72,34 @@ class DownloadQueueController extends _$DownloadQueueController {
     }
   }
 
-  void _onDownloadTaskError(int chapterId) {
+  Future<void> _onDownloadTaskError(int chapterId) async {
     if (state[chapterId] case final task?
         when task.status != DownloadTaskStatus.failed) {
       final newTask = task.copyWith(status: DownloadTaskStatus.failed);
+      await FileDownloader().cancelTasksWithIds(task.taskIds);
       state = {...state, chapterId: newTask};
+    }
+  }
+
+  Future<void> cancelTask(int taskId) async {
+    if (state[taskId] case final task?) {
+      await FileDownloader().cancelTasksWithIds(task.taskIds);
+      final newMap = Map.of(state)..remove(taskId);
+      state = newMap;
     }
   }
 }
 
-typedef _RemovableTaskRecord = ({
-  List<int> completedTaskIds,
-  List<int> failedTaskIds
-});
-
-_RemovableTaskRecord _parseTasks(List<ChapterDownloadTask> tasks) {
+List<int> _parseTasks(List<ChapterDownloadTask> tasks) {
   final completedTaskIds = <int>[];
-  final failedTaskIds = <int>[];
 
   for (final task in tasks) {
     if (task.status == DownloadTaskStatus.completed) {
       completedTaskIds.add(task.chapter.id);
-    } else if (task.status == DownloadTaskStatus.failed) {
-      failedTaskIds.add(task.chapter.id);
     }
   }
 
-  return (completedTaskIds: completedTaskIds, failedTaskIds: failedTaskIds);
+  return completedTaskIds;
 }
 
 @Riverpod(dependencies: [DownloadQueueController])
@@ -123,15 +114,16 @@ ChapterDownloadTask? chapterDownloadTask(
 }
 
 extension on ChapterDownloadTask {
-  List<DownloadTask> toDownloadTaskBatch(Directory baseDir) {
+  List<DownloadTask> toDownloadTaskBatch() {
     return [
       for (final page in pages)
-        DownloadTask(
-          taskId: '${chapter.id}-${page.number}',
-          url: page.imageUrl,
-          filename: page.getFilename(),
-          directory: chapter.getLocalPath(baseDir),
-        ),
+        if (page.imageUrl.isNotEmpty)
+          DownloadTask(
+            taskId: page.imageUrl,
+            url: page.imageUrl,
+            filename: page.getFilename(),
+            directory: chapter.localPath,
+          ),
     ];
   }
 }

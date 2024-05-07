@@ -11,6 +11,15 @@ class ChapterDownloadTask with _$ChapterDownloadTask {
     @Default(DownloadTaskStatus.pending) DownloadTaskStatus status,
     @Default(0) double progress,
   }) = _ChapterDownloadTask;
+
+  const ChapterDownloadTask._();
+
+  List<String> get taskIds {
+    return [
+      for (final page in pages)
+        if (page.imageUrl.isNotEmpty) page.imageUrl,
+    ];
+  }
 }
 
 enum DownloadTaskStatus {

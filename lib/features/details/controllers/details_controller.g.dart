@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'152e5fc451c87f534581e166a74d93d1c62311f5';
+String _$detailsControllerHash() => r'471f3e310c9ac8d57c7ee1e0bc89534fe7004644';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -74,8 +74,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
     watchMangaProvider,
     localDatasourceProvider,
     isMangaFavoriteProvider,
-    watchChaptersForMangaProvider,
-    fetchChapterPagesProvider
+    watchChaptersForMangaProvider
   };
 
   @override
@@ -90,9 +89,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
     isMangaFavoriteProvider,
     ...?isMangaFavoriteProvider.allTransitiveDependencies,
     watchChaptersForMangaProvider,
-    ...?watchChaptersForMangaProvider.allTransitiveDependencies,
-    fetchChapterPagesProvider,
-    ...?fetchChapterPagesProvider.allTransitiveDependencies
+    ...?watchChaptersForMangaProvider.allTransitiveDependencies
   };
 
   @override

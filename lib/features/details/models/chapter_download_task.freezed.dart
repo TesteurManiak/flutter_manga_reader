@@ -145,13 +145,14 @@ class __$$ChapterDownloadTaskImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChapterDownloadTaskImpl implements _ChapterDownloadTask {
+class _$ChapterDownloadTaskImpl extends _ChapterDownloadTask {
   const _$ChapterDownloadTaskImpl(
       {required this.chapter,
       required final List<ChapterPage> pages,
       this.status = DownloadTaskStatus.pending,
       this.progress = 0})
-      : _pages = pages;
+      : _pages = pages,
+        super._();
 
   @override
   final Chapter chapter;
@@ -199,12 +200,13 @@ class _$ChapterDownloadTaskImpl implements _ChapterDownloadTask {
           this, _$identity);
 }
 
-abstract class _ChapterDownloadTask implements ChapterDownloadTask {
+abstract class _ChapterDownloadTask extends ChapterDownloadTask {
   const factory _ChapterDownloadTask(
       {required final Chapter chapter,
       required final List<ChapterPage> pages,
       final DownloadTaskStatus status,
       final double progress}) = _$ChapterDownloadTaskImpl;
+  const _ChapterDownloadTask._() : super._();
 
   @override
   Chapter get chapter;
