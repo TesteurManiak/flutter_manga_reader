@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
+import 'package:flutter_manga_reader/core/providers/theme_controller.dart';
 import 'package:flutter_manga_reader/env.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:flutter_manga_reader/navigation/router.dart';

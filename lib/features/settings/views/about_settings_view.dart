@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/platform/app_info.dart';
 import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/core/widgets/app_asset_image.dart';

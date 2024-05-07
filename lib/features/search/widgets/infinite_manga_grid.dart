@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/widgets/infinite_scroller.dart';
+import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class InfiniteMangaGrid extends StatefulWidget {

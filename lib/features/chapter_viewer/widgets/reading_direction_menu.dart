@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

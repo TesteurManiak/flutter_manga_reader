@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
+import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 
 /// {@template error_content}
 /// Display an ascii art error emoji centered on the screen.
@@ -17,6 +19,7 @@ class ErrorContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.strings;
     return Center(
       child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
@@ -24,13 +27,13 @@ class ErrorContent extends StatelessWidget {
         children: [
           const AsciiEmojiWidget(AsciiEmoji.raiseShoulders),
           Text(
-            message ?? context.strings.generic_error,
+            message ?? strings.generic_error,
             textAlign: TextAlign.center,
           ),
           if (onRetry != null)
             ElevatedButton(
               onPressed: onRetry,
-              child: Text(context.strings.generic_retry),
+              child: Text(strings.generic_retry),
             ),
         ],
       ),

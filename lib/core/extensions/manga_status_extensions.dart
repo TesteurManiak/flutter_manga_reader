@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 extension MangaStatusExtensions on MangaStatus {

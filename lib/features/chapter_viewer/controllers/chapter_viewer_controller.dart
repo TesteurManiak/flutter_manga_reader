@@ -1,5 +1,6 @@
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

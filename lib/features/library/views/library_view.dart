@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/mixins/app_bar_size.dart';
+import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
+import 'package:flutter_manga_reader/core/widgets/error_content.dart';
+import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
+import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
+import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/library/controllers/library_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

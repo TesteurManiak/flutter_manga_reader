@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/providers/theme_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A widget that selects a theme mode.

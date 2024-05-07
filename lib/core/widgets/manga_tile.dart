@@ -1,8 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/use_cases/get_unread_chapters.dart';
 import 'package:flutter_manga_reader/core/use_cases/is_manga_in_library.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';

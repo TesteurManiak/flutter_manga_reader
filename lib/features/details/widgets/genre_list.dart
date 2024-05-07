@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
 
 class GenreList extends StatelessWidget {
   const GenreList({

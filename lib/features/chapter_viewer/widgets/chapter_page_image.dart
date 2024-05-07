@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
+import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class ChapterPageImage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/extensions/iterable_extensions.dart';
 import 'package:flutter_manga_reader/features/feature_flags/controllers/feature_flag_controller.dart';
 import 'package:flutter_manga_reader/features/feature_flags/models/feature_flag.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

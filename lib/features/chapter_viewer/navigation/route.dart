@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/core.dart';
+import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/views/chapter_viewer_view.dart';
 import 'package:go_router/go_router.dart';
 
