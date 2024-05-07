@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/vertical_reader.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -24,7 +25,7 @@ class ChapterReader extends ConsumerWidget {
     return value.when(
       data: (readingDirection) {
         return switch (readingDirection.isVertical) {
-          true => _VerticalReader(
+          true => VerticalReader(
               controller: controller,
               pages: pages,
               reverse: readingDirection.reverse,
@@ -72,111 +73,6 @@ class _HorizontalReader extends StatelessWidget {
         );
       },
       allowImplicitScrolling: true,
-    );
-  }
-}
-
-class _VerticalReader extends StatefulWidget {
-  const _VerticalReader({
-    required this.controller,
-    required this.pages,
-    required this.reverse,
-  });
-
-  final ChapterPageController controller;
-  final List<ChapterPage> pages;
-  final bool reverse;
-
-  @override
-  State<_VerticalReader> createState() => _VerticalReaderState();
-}
-
-class _VerticalReaderState extends State<_VerticalReader> {
-  final scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Sync page controller with scroll offset
-    widget.controller.addListener(_pageControllerListener);
-
-    // Sync scroll offset with page controller
-    scrollController.addListener(() {
-      final page = scrollController.offset / MediaQuery.sizeOf(context).height;
-      widget.controller.page = page.round();
-    });
-
-    // Set initial offset
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final page = widget.controller.page;
-      if (page == 0) return;
-
-      final offset = page * MediaQuery.sizeOf(context).height;
-      scrollController.jumpTo(offset);
-    });
-  }
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_pageControllerListener);
-    scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-    return CustomScrollView(
-      controller: scrollController,
-      slivers: [
-        SliverList.builder(
-          itemCount: widget.pages.length,
-          itemBuilder: (context, realIndex) {
-            final index = widget.reverse
-                ? widget.pages.length - realIndex - 1
-                : realIndex;
-            final page = widget.pages[index];
-            return AppNetworkImage(
-              url: page.imageUrl,
-              width: size.width,
-              progressIndicatorBuilder: (_, progress) {
-                return _LoadingPlaceholder(progress);
-              },
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  void _pageControllerListener() {
-    final size = MediaQuery.sizeOf(context);
-    final page = widget.controller.page;
-    final currentScrollPage = (scrollController.offset / size.height).round();
-
-    if (page == currentScrollPage) return;
-
-    final index = widget.reverse ? widget.pages.length - page - 1 : page;
-    final offset = index * size.height;
-
-    scrollController.jumpTo(offset);
-  }
-}
-
-class _LoadingPlaceholder extends StatelessWidget {
-  const _LoadingPlaceholder(this.progress);
-
-  final double? progress;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-    return Container(
-      height: size.height,
-      width: size.width,
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(value: progress),
     );
   }
 }
