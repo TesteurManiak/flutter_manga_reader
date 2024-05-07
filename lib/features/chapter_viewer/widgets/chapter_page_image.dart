@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/core.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
 
 class ChapterPageImage extends StatefulWidget {
   const ChapterPageImage({
-    required this.imageUrl,
+    required this.page,
     this.fit,
     super.key,
   });
 
-  final String? imageUrl;
+  final ChapterPage page;
   final BoxFit? fit;
 
   @override
@@ -23,7 +24,7 @@ class _ChapterPageImageState extends State<ChapterPageImage> {
   Widget build(BuildContext context) {
     return AppNetworkImage(
       key: imageKey,
-      url: widget.imageUrl,
+      url: widget.page.imageUrl,
       fit: widget.fit,
       progressIndicatorBuilder: (_, progress) {
         return _LoadingPlaceholder(progress);

@@ -65,10 +65,7 @@ class _ContinuousReaderState extends State<ContinuousReader> {
       cacheExtent: size.height * 2,
       itemBuilder: (context, index) {
         final page = widget.pages[index];
-        return ChapterPageImage(
-          imageUrl: page.imageUrl,
-          fit: BoxFit.fitWidth,
-        );
+        return ChapterPageImage(page: page, fit: BoxFit.fitWidth);
       },
     );
   }

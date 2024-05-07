@@ -26,11 +26,7 @@ class SinglePageReader extends StatelessWidget {
       itemCount: pages.length,
       itemBuilder: (context, index) {
         final page = pages[index];
-
-        return ChapterPageImage(
-          imageUrl: page.imageUrl,
-          fit: BoxFit.contain,
-        );
+        return ChapterPageImage(page: page, fit: BoxFit.contain);
       },
       allowImplicitScrolling: true,
     );
