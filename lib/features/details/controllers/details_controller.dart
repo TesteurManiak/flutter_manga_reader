@@ -2,7 +2,6 @@ import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
-import 'package:flutter_manga_reader/features/details/controllers/chapter_download_progress_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -183,7 +182,10 @@ class DetailsController extends _$DetailsController {
     state = state.copyWith(selectionMode: false, selectedChapters: []);
   }
 
-  Future<void> downloadChapter(Chapter chapter) async {
+  Future<void> downloadChapter({
+    required Chapter chapter,
+    DownloadProgressCallback? onProgress,
+  }) async {
     final result = await ref
         .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
     if (result case Success(success: final pages) when pages.isNotEmpty) {
@@ -204,16 +206,15 @@ class DetailsController extends _$DetailsController {
       await FileDownloader().downloadBatch(
         tasks,
         batchProgressCallback: (success, failed) {
-          // TODO(Guillaume): add error handling
           final progress = (success + failed) / tasks.length;
-          ref
-              .read(chapterDownloadProgressControllerProvider(chapter).notifier)
-              .updateProgress(progress);
+          onProgress?.call(progress);
         },
       );
     }
   }
 }
+
+typedef DownloadProgressCallback = void Function(double progress);
 
 @freezed
 sealed class DetailsState with _$DetailsState {

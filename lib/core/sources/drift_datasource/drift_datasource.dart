@@ -186,6 +186,26 @@ class DriftDatasource implements LocalDatasource {
           DbReadingDirectionData(mangaId: mangaId, direction: direction),
         );
   }
+
+  @override
+  Future<void> setChapterDownloaded({
+    required int chapterId,
+    required bool downloaded,
+  }) {
+    return (_database.update(_database.dbChapters)
+          ..where((t) => t.id.equals(chapterId)))
+        .write(DbChaptersCompanion(downloaded: Value(downloaded)));
+  }
+
+  @override
+  Future<void> setChaptersDownloaded({
+    required List<int> chapterIds,
+    required bool downloaded,
+  }) {
+    return (_database.update(_database.dbChapters)
+          ..where((tbl) => tbl.id.isIn(chapterIds)))
+        .write(DbChaptersCompanion(downloaded: Value(downloaded)));
+  }
 }
 
 extension on DbManga {

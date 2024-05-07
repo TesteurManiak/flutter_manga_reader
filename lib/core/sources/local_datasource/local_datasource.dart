@@ -68,6 +68,14 @@ abstract class LocalDatasource {
     required int chapterId,
     required int lastPageRead,
   });
+  Future<void> setChapterDownloaded({
+    required int chapterId,
+    required bool downloaded,
+  });
+  Future<void> setChaptersDownloaded({
+    required List<int> chapterIds,
+    required bool downloaded,
+  });
 }
 
 @Riverpod(keepAlive: true, dependencies: [])
