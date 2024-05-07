@@ -12,7 +12,7 @@ part of 'chapter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Chapter _$ChapterFromJson(Map<String, dynamic> json) {
   return _Chapter.fromJson(json);
@@ -29,6 +29,7 @@ mixin _$Chapter {
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError; // Model data
   bool get read => throw _privateConstructorUsedError;
+  bool get downloaded => throw _privateConstructorUsedError;
   bool get bookmark => throw _privateConstructorUsedError;
   int get lastPageRead => throw _privateConstructorUsedError;
   DateTime? get dateFetch => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $ChapterCopyWith<$Res> {
       double chapterNumber,
       String? scanlator,
       bool read,
+      bool downloaded,
       bool bookmark,
       int lastPageRead,
       DateTime? dateFetch,
@@ -82,6 +84,7 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
     Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
+    Object? downloaded = null,
     Object? bookmark = null,
     Object? lastPageRead = null,
     Object? dateFetch = freezed,
@@ -124,6 +127,10 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
               as bool,
+      downloaded: null == downloaded
+          ? _value.downloaded
+          : downloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       bookmark: null == bookmark
           ? _value.bookmark
           : bookmark // ignore: cast_nullable_to_non_nullable
@@ -161,6 +168,7 @@ abstract class _$$ChapterImplCopyWith<$Res> implements $ChapterCopyWith<$Res> {
       double chapterNumber,
       String? scanlator,
       bool read,
+      bool downloaded,
       bool bookmark,
       int lastPageRead,
       DateTime? dateFetch,
@@ -187,6 +195,7 @@ class __$$ChapterImplCopyWithImpl<$Res>
     Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
+    Object? downloaded = null,
     Object? bookmark = null,
     Object? lastPageRead = null,
     Object? dateFetch = freezed,
@@ -229,6 +238,10 @@ class __$$ChapterImplCopyWithImpl<$Res>
           ? _value.read
           : read // ignore: cast_nullable_to_non_nullable
               as bool,
+      downloaded: null == downloaded
+          ? _value.downloaded
+          : downloaded // ignore: cast_nullable_to_non_nullable
+              as bool,
       bookmark: null == bookmark
           ? _value.bookmark
           : bookmark // ignore: cast_nullable_to_non_nullable
@@ -262,6 +275,7 @@ class _$ChapterImpl extends _Chapter {
       this.chapterNumber = 0.0,
       this.scanlator,
       this.read = false,
+      this.downloaded = false,
       this.bookmark = false,
       this.lastPageRead = 0,
       this.dateFetch,
@@ -295,6 +309,9 @@ class _$ChapterImpl extends _Chapter {
   final bool read;
   @override
   @JsonKey()
+  final bool downloaded;
+  @override
+  @JsonKey()
   final bool bookmark;
   @override
   @JsonKey()
@@ -306,11 +323,11 @@ class _$ChapterImpl extends _Chapter {
 
   @override
   String toString() {
-    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, index: $index, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator, read: $read, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, lastModified: $lastModified)';
+    return 'Chapter(id: $id, mangaId: $mangaId, url: $url, name: $name, index: $index, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator, read: $read, downloaded: $downloaded, bookmark: $bookmark, lastPageRead: $lastPageRead, dateFetch: $dateFetch, lastModified: $lastModified)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChapterImpl &&
@@ -326,6 +343,8 @@ class _$ChapterImpl extends _Chapter {
             (identical(other.scanlator, scanlator) ||
                 other.scanlator == scanlator) &&
             (identical(other.read, read) || other.read == read) &&
+            (identical(other.downloaded, downloaded) ||
+                other.downloaded == downloaded) &&
             (identical(other.bookmark, bookmark) ||
                 other.bookmark == bookmark) &&
             (identical(other.lastPageRead, lastPageRead) ||
@@ -349,6 +368,7 @@ class _$ChapterImpl extends _Chapter {
       chapterNumber,
       scanlator,
       read,
+      downloaded,
       bookmark,
       lastPageRead,
       dateFetch,
@@ -379,6 +399,7 @@ abstract class _Chapter extends Chapter {
       final double chapterNumber,
       final String? scanlator,
       final bool read,
+      final bool downloaded,
       final bool bookmark,
       final int lastPageRead,
       final DateTime? dateFetch,
@@ -405,6 +426,8 @@ abstract class _Chapter extends Chapter {
   String? get scanlator;
   @override // Model data
   bool get read;
+  @override
+  bool get downloaded;
   @override
   bool get bookmark;
   @override

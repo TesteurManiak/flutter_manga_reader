@@ -7,14 +7,15 @@ part of 'manga.dart';
 // **************************************************************************
 
 _$MangaImpl _$$MangaImplFromJson(Map<String, dynamic> json) => _$MangaImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       url: json['url'] as String,
       description: json['description'] as String?,
       author: json['author'] as String?,
       status: json['status'] == null
           ? MangaStatus.unknown
-          : const MangaStatusConverter().fromJson(json['status'] as int),
+          : const MangaStatusConverter()
+              .fromJson((json['status'] as num).toInt()),
       genre: json['genre'] as String?,
       favorite: json['favorite'] as bool? ?? false,
       source: json['source'] as String,

@@ -1,4 +1,6 @@
-import 'package:background_downloader/background_downloader.dart';
+import 'dart:io';
+
+import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -22,8 +24,17 @@ Future<bool> chapterDownloaded(
   ChapterDownloadedRef ref,
   Chapter chapter,
 ) async {
-  // TODO(Guillaume): check if the chapter is already downloaded
-  final db = FileDownloader().database;
-  final tasks = await db.allRecordsWithStatus(TaskStatus.complete);
-  return tasks.any((e) => e.taskId.startsWith('${chapter.id}-'));
+  final localPath = await ref.read(chapterLocalPathProvider(chapter).future);
+  final localDir = Directory(localPath);
+
+  final dirExists = localDir.existsSync();
+  if (!dirExists) return false;
+
+  final files = localDir.listSync();
+  return files.isNotEmpty;
+}
+
+@riverpod
+Future<String> chapterLocalPath(ChapterLocalPathRef ref, Chapter chapter) {
+  return chapter.getLocalPath();
 }

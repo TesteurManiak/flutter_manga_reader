@@ -667,6 +667,16 @@ class $DbChaptersTable extends DbChapters
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("read" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _downloadedMeta =
+      const VerificationMeta('downloaded');
+  @override
+  late final GeneratedColumn<bool> downloaded = GeneratedColumn<bool>(
+      'downloaded', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("downloaded" IN (0, 1))'),
+      defaultValue: const Constant(false));
   static const VerificationMeta _bookmarkMeta =
       const VerificationMeta('bookmark');
   @override
@@ -708,6 +718,7 @@ class $DbChaptersTable extends DbChapters
         chapterNumber,
         scanlator,
         read,
+        downloaded,
         bookmark,
         lastPageRead,
         dateFetch,
@@ -770,6 +781,12 @@ class $DbChaptersTable extends DbChapters
       context.handle(
           _readMeta, read.isAcceptableOrUnknown(data['read']!, _readMeta));
     }
+    if (data.containsKey('downloaded')) {
+      context.handle(
+          _downloadedMeta,
+          downloaded.isAcceptableOrUnknown(
+              data['downloaded']!, _downloadedMeta));
+    }
     if (data.containsKey('bookmark')) {
       context.handle(_bookmarkMeta,
           bookmark.isAcceptableOrUnknown(data['bookmark']!, _bookmarkMeta));
@@ -821,6 +838,8 @@ class $DbChaptersTable extends DbChapters
           .read(DriftSqlType.string, data['${effectivePrefix}scanlator']),
       read: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}read'])!,
+      downloaded: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}downloaded'])!,
       bookmark: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}bookmark'])!,
       lastPageRead: attachedDatabase.typeMapping
@@ -848,6 +867,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final double chapterNumber;
   final String? scanlator;
   final bool read;
+  final bool downloaded;
   final bool bookmark;
   final int lastPageRead;
   final DateTime? dateFetch;
@@ -862,6 +882,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       required this.chapterNumber,
       this.scanlator,
       required this.read,
+      required this.downloaded,
       required this.bookmark,
       required this.lastPageRead,
       this.dateFetch,
@@ -882,6 +903,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       map['scanlator'] = Variable<String>(scanlator);
     }
     map['read'] = Variable<bool>(read);
+    map['downloaded'] = Variable<bool>(downloaded);
     map['bookmark'] = Variable<bool>(bookmark);
     map['last_page_read'] = Variable<int>(lastPageRead);
     if (!nullToAbsent || dateFetch != null) {
@@ -908,6 +930,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           ? const Value.absent()
           : Value(scanlator),
       read: Value(read),
+      downloaded: Value(downloaded),
       bookmark: Value(bookmark),
       lastPageRead: Value(lastPageRead),
       dateFetch: dateFetch == null && nullToAbsent
@@ -932,6 +955,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       chapterNumber: serializer.fromJson<double>(json['chapterNumber']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
       read: serializer.fromJson<bool>(json['read']),
+      downloaded: serializer.fromJson<bool>(json['downloaded']),
       bookmark: serializer.fromJson<bool>(json['bookmark']),
       lastPageRead: serializer.fromJson<int>(json['lastPageRead']),
       dateFetch: serializer.fromJson<DateTime?>(json['dateFetch']),
@@ -951,6 +975,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       'chapterNumber': serializer.toJson<double>(chapterNumber),
       'scanlator': serializer.toJson<String?>(scanlator),
       'read': serializer.toJson<bool>(read),
+      'downloaded': serializer.toJson<bool>(downloaded),
       'bookmark': serializer.toJson<bool>(bookmark),
       'lastPageRead': serializer.toJson<int>(lastPageRead),
       'dateFetch': serializer.toJson<DateTime?>(dateFetch),
@@ -968,6 +993,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           double? chapterNumber,
           Value<String?> scanlator = const Value.absent(),
           bool? read,
+          bool? downloaded,
           bool? bookmark,
           int? lastPageRead,
           Value<DateTime?> dateFetch = const Value.absent(),
@@ -982,6 +1008,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
         chapterNumber: chapterNumber ?? this.chapterNumber,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
         read: read ?? this.read,
+        downloaded: downloaded ?? this.downloaded,
         bookmark: bookmark ?? this.bookmark,
         lastPageRead: lastPageRead ?? this.lastPageRead,
         dateFetch: dateFetch.present ? dateFetch.value : this.dateFetch,
@@ -1000,6 +1027,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           ..write('chapterNumber: $chapterNumber, ')
           ..write('scanlator: $scanlator, ')
           ..write('read: $read, ')
+          ..write('downloaded: $downloaded, ')
           ..write('bookmark: $bookmark, ')
           ..write('lastPageRead: $lastPageRead, ')
           ..write('dateFetch: $dateFetch, ')
@@ -1019,6 +1047,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       chapterNumber,
       scanlator,
       read,
+      downloaded,
       bookmark,
       lastPageRead,
       dateFetch,
@@ -1036,6 +1065,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           other.chapterNumber == this.chapterNumber &&
           other.scanlator == this.scanlator &&
           other.read == this.read &&
+          other.downloaded == this.downloaded &&
           other.bookmark == this.bookmark &&
           other.lastPageRead == this.lastPageRead &&
           other.dateFetch == this.dateFetch &&
@@ -1052,6 +1082,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<double> chapterNumber;
   final Value<String?> scanlator;
   final Value<bool> read;
+  final Value<bool> downloaded;
   final Value<bool> bookmark;
   final Value<int> lastPageRead;
   final Value<DateTime?> dateFetch;
@@ -1066,6 +1097,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.chapterNumber = const Value.absent(),
     this.scanlator = const Value.absent(),
     this.read = const Value.absent(),
+    this.downloaded = const Value.absent(),
     this.bookmark = const Value.absent(),
     this.lastPageRead = const Value.absent(),
     this.dateFetch = const Value.absent(),
@@ -1081,6 +1113,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.chapterNumber = const Value.absent(),
     this.scanlator = const Value.absent(),
     this.read = const Value.absent(),
+    this.downloaded = const Value.absent(),
     this.bookmark = const Value.absent(),
     this.lastPageRead = const Value.absent(),
     this.dateFetch = const Value.absent(),
@@ -1099,6 +1132,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     Expression<double>? chapterNumber,
     Expression<String>? scanlator,
     Expression<bool>? read,
+    Expression<bool>? downloaded,
     Expression<bool>? bookmark,
     Expression<int>? lastPageRead,
     Expression<DateTime>? dateFetch,
@@ -1114,6 +1148,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       if (chapterNumber != null) 'chapter_number': chapterNumber,
       if (scanlator != null) 'scanlator': scanlator,
       if (read != null) 'read': read,
+      if (downloaded != null) 'downloaded': downloaded,
       if (bookmark != null) 'bookmark': bookmark,
       if (lastPageRead != null) 'last_page_read': lastPageRead,
       if (dateFetch != null) 'date_fetch': dateFetch,
@@ -1131,6 +1166,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       Value<double>? chapterNumber,
       Value<String?>? scanlator,
       Value<bool>? read,
+      Value<bool>? downloaded,
       Value<bool>? bookmark,
       Value<int>? lastPageRead,
       Value<DateTime?>? dateFetch,
@@ -1145,6 +1181,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       chapterNumber: chapterNumber ?? this.chapterNumber,
       scanlator: scanlator ?? this.scanlator,
       read: read ?? this.read,
+      downloaded: downloaded ?? this.downloaded,
       bookmark: bookmark ?? this.bookmark,
       lastPageRead: lastPageRead ?? this.lastPageRead,
       dateFetch: dateFetch ?? this.dateFetch,
@@ -1182,6 +1219,9 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     if (read.present) {
       map['read'] = Variable<bool>(read.value);
     }
+    if (downloaded.present) {
+      map['downloaded'] = Variable<bool>(downloaded.value);
+    }
     if (bookmark.present) {
       map['bookmark'] = Variable<bool>(bookmark.value);
     }
@@ -1209,6 +1249,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
           ..write('chapterNumber: $chapterNumber, ')
           ..write('scanlator: $scanlator, ')
           ..write('read: $read, ')
+          ..write('downloaded: $downloaded, ')
           ..write('bookmark: $bookmark, ')
           ..write('lastPageRead: $lastPageRead, ')
           ..write('dateFetch: $dateFetch, ')
@@ -1915,6 +1956,7 @@ typedef $$DbChaptersTableInsertCompanionBuilder = DbChaptersCompanion Function({
   Value<double> chapterNumber,
   Value<String?> scanlator,
   Value<bool> read,
+  Value<bool> downloaded,
   Value<bool> bookmark,
   Value<int> lastPageRead,
   Value<DateTime?> dateFetch,
@@ -1930,6 +1972,7 @@ typedef $$DbChaptersTableUpdateCompanionBuilder = DbChaptersCompanion Function({
   Value<double> chapterNumber,
   Value<String?> scanlator,
   Value<bool> read,
+  Value<bool> downloaded,
   Value<bool> bookmark,
   Value<int> lastPageRead,
   Value<DateTime?> dateFetch,
@@ -1965,6 +2008,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             Value<double> chapterNumber = const Value.absent(),
             Value<String?> scanlator = const Value.absent(),
             Value<bool> read = const Value.absent(),
+            Value<bool> downloaded = const Value.absent(),
             Value<bool> bookmark = const Value.absent(),
             Value<int> lastPageRead = const Value.absent(),
             Value<DateTime?> dateFetch = const Value.absent(),
@@ -1980,6 +2024,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             chapterNumber: chapterNumber,
             scanlator: scanlator,
             read: read,
+            downloaded: downloaded,
             bookmark: bookmark,
             lastPageRead: lastPageRead,
             dateFetch: dateFetch,
@@ -1995,6 +2040,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             Value<double> chapterNumber = const Value.absent(),
             Value<String?> scanlator = const Value.absent(),
             Value<bool> read = const Value.absent(),
+            Value<bool> downloaded = const Value.absent(),
             Value<bool> bookmark = const Value.absent(),
             Value<int> lastPageRead = const Value.absent(),
             Value<DateTime?> dateFetch = const Value.absent(),
@@ -2010,6 +2056,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             chapterNumber: chapterNumber,
             scanlator: scanlator,
             read: read,
+            downloaded: downloaded,
             bookmark: bookmark,
             lastPageRead: lastPageRead,
             dateFetch: dateFetch,
@@ -2075,6 +2122,11 @@ class $$DbChaptersTableFilterComposer
 
   ColumnFilters<bool> get read => $state.composableBuilder(
       column: $state.table.read,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get downloaded => $state.composableBuilder(
+      column: $state.table.downloaded,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2144,6 +2196,11 @@ class $$DbChaptersTableOrderingComposer
 
   ColumnOrderings<bool> get read => $state.composableBuilder(
       column: $state.table.read,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get downloaded => $state.composableBuilder(
+      column: $state.table.downloaded,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

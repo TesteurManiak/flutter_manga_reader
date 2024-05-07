@@ -20,7 +20,6 @@ import 'package:flutter_manga_reader/features/details/widgets/manga_description.
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
 class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
@@ -437,8 +436,8 @@ class _SliverChapterList extends ConsumerWidget {
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 16),
-      sliver: MultiSliver(
-        children: [
+      sliver: SliverMainAxisGroup(
+        slivers: [
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),

@@ -36,6 +36,7 @@ class DbChapters extends Table {
   RealColumn get chapterNumber => real().withDefault(const Constant(-1))();
   TextColumn get scanlator => text().nullable()();
   BoolColumn get read => boolean().withDefault(const Constant(false))();
+  BoolColumn get downloaded => boolean().withDefault(const Constant(false))();
   BoolColumn get bookmark => boolean().withDefault(const Constant(false))();
   IntColumn get lastPageRead => integer().withDefault(const Constant(0))();
   DateTimeColumn get dateFetch => dateTime().nullable()();

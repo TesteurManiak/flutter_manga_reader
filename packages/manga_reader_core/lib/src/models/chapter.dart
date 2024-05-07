@@ -18,6 +18,7 @@ class Chapter with _$Chapter {
     String? scanlator,
     // Model data
     @Default(false) bool read,
+    @Default(false) bool downloaded,
     @Default(false) bool bookmark,
     @Default(0) int lastPageRead,
     DateTime? dateFetch,

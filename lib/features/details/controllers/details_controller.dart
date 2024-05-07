@@ -1,4 +1,5 @@
 import 'package:background_downloader/background_downloader.dart';
+import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/chapter_download_progress_controller.dart';
@@ -186,6 +187,7 @@ class DetailsController extends _$DetailsController {
     final result = await ref
         .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
     if (result case Success(success: final pages) when pages.isNotEmpty) {
+      final targetDir = await chapter.getLocalPath();
       final tasks = [
         for (final page in pages)
           if (page.imageUrl case final url?)
@@ -193,7 +195,7 @@ class DetailsController extends _$DetailsController {
               taskId: '${chapter.id}-${page.number}',
               url: url,
               filename: page.getFilename(),
-              directory: 'MangaReader/$mangaId/${chapter.id}',
+              directory: targetDir,
               updates: Updates.statusAndProgress,
               retries: 3,
             ),
@@ -202,6 +204,7 @@ class DetailsController extends _$DetailsController {
       await FileDownloader().downloadBatch(
         tasks,
         batchProgressCallback: (success, failed) {
+          // TODO(Guillaume): add error handling
           final progress = (success + failed) / tasks.length;
           ref
               .read(chapterDownloadProgressControllerProvider(chapter).notifier)

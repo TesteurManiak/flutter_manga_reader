@@ -6,7 +6,7 @@ part of 'chapter_download_progress_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chapterDownloadedHash() => r'e5c5d1779b5e1336b2bd9cdbcebcab745a01635a';
+String _$chapterDownloadedHash() => r'2c1209244df66fde21d2a02ef7440e213bd74460';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -155,8 +155,136 @@ class _ChapterDownloadedProviderElement
   Chapter get chapter => (origin as ChapterDownloadedProvider).chapter;
 }
 
+String _$chapterLocalPathHash() => r'cd1849b5270236c23b592b977b91b6c7c6b08624';
+
+/// See also [chapterLocalPath].
+@ProviderFor(chapterLocalPath)
+const chapterLocalPathProvider = ChapterLocalPathFamily();
+
+/// See also [chapterLocalPath].
+class ChapterLocalPathFamily extends Family<AsyncValue<String>> {
+  /// See also [chapterLocalPath].
+  const ChapterLocalPathFamily();
+
+  /// See also [chapterLocalPath].
+  ChapterLocalPathProvider call(
+    Chapter chapter,
+  ) {
+    return ChapterLocalPathProvider(
+      chapter,
+    );
+  }
+
+  @override
+  ChapterLocalPathProvider getProviderOverride(
+    covariant ChapterLocalPathProvider provider,
+  ) {
+    return call(
+      provider.chapter,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'chapterLocalPathProvider';
+}
+
+/// See also [chapterLocalPath].
+class ChapterLocalPathProvider extends AutoDisposeFutureProvider<String> {
+  /// See also [chapterLocalPath].
+  ChapterLocalPathProvider(
+    Chapter chapter,
+  ) : this._internal(
+          (ref) => chapterLocalPath(
+            ref as ChapterLocalPathRef,
+            chapter,
+          ),
+          from: chapterLocalPathProvider,
+          name: r'chapterLocalPathProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$chapterLocalPathHash,
+          dependencies: ChapterLocalPathFamily._dependencies,
+          allTransitiveDependencies:
+              ChapterLocalPathFamily._allTransitiveDependencies,
+          chapter: chapter,
+        );
+
+  ChapterLocalPathProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.chapter,
+  }) : super.internal();
+
+  final Chapter chapter;
+
+  @override
+  Override overrideWith(
+    FutureOr<String> Function(ChapterLocalPathRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ChapterLocalPathProvider._internal(
+        (ref) => create(ref as ChapterLocalPathRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        chapter: chapter,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<String> createElement() {
+    return _ChapterLocalPathProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ChapterLocalPathProvider && other.chapter == chapter;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, chapter.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ChapterLocalPathRef on AutoDisposeFutureProviderRef<String> {
+  /// The parameter `chapter` of this provider.
+  Chapter get chapter;
+}
+
+class _ChapterLocalPathProviderElement
+    extends AutoDisposeFutureProviderElement<String> with ChapterLocalPathRef {
+  _ChapterLocalPathProviderElement(super.provider);
+
+  @override
+  Chapter get chapter => (origin as ChapterLocalPathProvider).chapter;
+}
+
 String _$chapterDownloadProgressControllerHash() =>
-    r'0e368e993bde096f4bbc6a50b87119d1e0750104';
+    r'1c1217bab365440e68867d39b172c204cba9062a';
 
 abstract class _$ChapterDownloadProgressController
     extends BuildlessAutoDisposeAsyncNotifier<double> {

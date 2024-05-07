@@ -10,7 +10,7 @@ _$SourceChapterImpl _$$SourceChapterImplFromJson(Map<String, dynamic> json) =>
     _$SourceChapterImpl(
       url: json['url'] as String,
       name: json['name'] as String,
-      index: json['index'] as int,
+      index: (json['index'] as num).toInt(),
       dateUpload: json['dateUpload'] == null
           ? null
           : DateTime.parse(json['dateUpload'] as String),

@@ -36,7 +36,6 @@ dependencies:
   permission_handler: ^11.3.1
   riverpod_annotation: ^2.3.5
   shared_preferences: ^2.2.3
-  sliver_tools: ^0.2.12
   sqlite3_flutter_libs: ^0.5.21
   theme_tailor_annotation: ^3.0.1
   url_launcher: ^6.2.6

@@ -14,7 +14,8 @@ _$SourceMangaImpl _$$SourceMangaImplFromJson(Map<String, dynamic> json) =>
       author: json['author'] as String?,
       status: json['status'] == null
           ? MangaStatus.unknown
-          : const MangaStatusConverter().fromJson(json['status'] as int),
+          : const MangaStatusConverter()
+              .fromJson((json['status'] as num).toInt()),
       genre: json['genre'] as String?,
       source: json['source'] as String,
       lang: json['lang'] as String,

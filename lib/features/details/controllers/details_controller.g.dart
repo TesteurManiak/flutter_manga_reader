@@ -6,7 +6,7 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'e6bfc94dea1e2b95ac1ac6e3e174f1b2ef928fb1';
+String _$detailsControllerHash() => r'767d6ba225ab4c031951e579b0215795763f009e';
 
 /// Copied from Dart SDK
 class _SystemHash {
