@@ -126,13 +126,12 @@ extension on ChapterDownloadTask {
   List<DownloadTask> toDownloadTaskBatch(Directory baseDir) {
     return [
       for (final page in pages)
-        if (page.imageUrl case final imageUrl?)
-          DownloadTask(
-            taskId: '${chapter.id}-${page.number}',
-            url: imageUrl,
-            filename: page.getFilename(),
-            directory: chapter.getLocalPath(baseDir),
-          ),
+        DownloadTask(
+          taskId: '${chapter.id}-${page.number}',
+          url: page.imageUrl,
+          filename: page.getFilename(),
+          directory: chapter.getLocalPath(baseDir),
+        ),
     ];
   }
 }

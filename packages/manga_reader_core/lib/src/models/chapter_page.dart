@@ -8,7 +8,7 @@ class ChapterPage with _$ChapterPage {
   const factory ChapterPage({
     required int index,
     @Default('') String url,
-    String? imageUrl,
+    @Default('') String imageUrl,
   }) = _ChapterPage;
 
   const ChapterPage._();
@@ -16,12 +16,8 @@ class ChapterPage with _$ChapterPage {
   int get number => index + 1;
 
   String getFilename({ImageExtension defaultExt = ImageExtension.jpg}) {
-    final fileExt = switch (imageUrl) {
-      final imageUrl? =>
-        ImageExtension.tryParse(imageUrl.split('.').lastOrNull) ?? defaultExt,
-      _ => defaultExt,
-    };
-
+    final fileExt =
+        ImageExtension.tryParse(imageUrl.split('.').lastOrNull) ?? defaultExt;
     return '$number.$fileExt';
   }
 }

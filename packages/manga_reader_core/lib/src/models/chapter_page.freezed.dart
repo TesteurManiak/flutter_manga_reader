@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ChapterPage {
   int get index => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChapterPageCopyWith<ChapterPage> get copyWith =>
@@ -31,7 +31,7 @@ abstract class $ChapterPageCopyWith<$Res> {
           ChapterPage value, $Res Function(ChapterPage) then) =
       _$ChapterPageCopyWithImpl<$Res, ChapterPage>;
   @useResult
-  $Res call({int index, String url, String? imageUrl});
+  $Res call({int index, String url, String imageUrl});
 }
 
 /// @nodoc
@@ -49,7 +49,7 @@ class _$ChapterPageCopyWithImpl<$Res, $Val extends ChapterPage>
   $Res call({
     Object? index = null,
     Object? url = null,
-    Object? imageUrl = freezed,
+    Object? imageUrl = null,
   }) {
     return _then(_value.copyWith(
       index: null == index
@@ -60,10 +60,10 @@ class _$ChapterPageCopyWithImpl<$Res, $Val extends ChapterPage>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: freezed == imageUrl
+      imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -76,7 +76,7 @@ abstract class _$$ChapterPageImplCopyWith<$Res>
       __$$ChapterPageImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index, String url, String? imageUrl});
+  $Res call({int index, String url, String imageUrl});
 }
 
 /// @nodoc
@@ -92,7 +92,7 @@ class __$$ChapterPageImplCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? url = null,
-    Object? imageUrl = freezed,
+    Object? imageUrl = null,
   }) {
     return _then(_$ChapterPageImpl(
       index: null == index
@@ -103,10 +103,10 @@ class __$$ChapterPageImplCopyWithImpl<$Res>
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      imageUrl: freezed == imageUrl
+      imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -114,7 +114,8 @@ class __$$ChapterPageImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChapterPageImpl extends _ChapterPage {
-  const _$ChapterPageImpl({required this.index, this.url = '', this.imageUrl})
+  const _$ChapterPageImpl(
+      {required this.index, this.url = '', this.imageUrl = ''})
       : super._();
 
   @override
@@ -123,7 +124,8 @@ class _$ChapterPageImpl extends _ChapterPage {
   @JsonKey()
   final String url;
   @override
-  final String? imageUrl;
+  @JsonKey()
+  final String imageUrl;
 
   @override
   String toString() {
@@ -155,7 +157,7 @@ abstract class _ChapterPage extends ChapterPage {
   const factory _ChapterPage(
       {required final int index,
       final String url,
-      final String? imageUrl}) = _$ChapterPageImpl;
+      final String imageUrl}) = _$ChapterPageImpl;
   const _ChapterPage._() : super._();
 
   @override
@@ -163,7 +165,7 @@ abstract class _ChapterPage extends ChapterPage {
   @override
   String get url;
   @override
-  String? get imageUrl;
+  String get imageUrl;
   @override
   @JsonKey(ignore: true)
   _$$ChapterPageImplCopyWith<_$ChapterPageImpl> get copyWith =>
