@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/widgets/vertical_reader.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/continuous_reader.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/single_page_reader.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -24,55 +24,23 @@ class ChapterReader extends ConsumerWidget {
 
     return value.when(
       data: (readingDirection) {
-        return switch (readingDirection.isVertical) {
-          true => VerticalReader(
+        return switch (readingDirection.isContinuous) {
+          true => ContinuousReader(
               controller: controller,
-              pages: pages,
               reverse: readingDirection.reverse,
+              scrollDirection: readingDirection.direction,
+              pages: pages,
             ),
-          false => _HorizontalReader(
+          false => SinglePageReader(
               controller: controller,
-              pages: pages,
-              pageSnapping: !readingDirection.isContinuous,
               reverse: readingDirection.reverse,
+              scrollDirection: readingDirection.direction,
+              pages: pages,
             ),
         };
       },
       error: (error, stack) => Center(child: Text(error.toString())),
       loading: () => const Center(child: CircularProgressIndicator()),
-    );
-  }
-}
-
-class _HorizontalReader extends StatelessWidget {
-  const _HorizontalReader({
-    required this.controller,
-    required this.reverse,
-    required this.pageSnapping,
-    required this.pages,
-  });
-
-  final ChapterPageController controller;
-  final bool reverse;
-  final bool pageSnapping;
-  final List<ChapterPage> pages;
-
-  @override
-  Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: controller.pageController,
-      reverse: reverse,
-      pageSnapping: pageSnapping,
-      itemCount: pages.length,
-      itemBuilder: (context, index) {
-        final page = pages[index];
-
-        return AppNetworkImage(
-          url: page.imageUrl,
-          fit: BoxFit.contain,
-        );
-      },
-      allowImplicitScrolling: true,
     );
   }
 }

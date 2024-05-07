@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
+import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_page_image.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class VerticalReader extends StatefulWidget {
-  const VerticalReader({
+class ContinuousReader extends StatefulWidget {
+  const ContinuousReader({
     required this.controller,
-    required this.pages,
     required this.reverse,
+    required this.scrollDirection,
+    required this.pages,
     super.key,
   });
 
   final ChapterPageController controller;
-  final List<ChapterPage> pages;
   final bool reverse;
+  final Axis scrollDirection;
+  final List<ChapterPage> pages;
 
   @override
-  State<VerticalReader> createState() => _VerticalReaderState();
+  State<ContinuousReader> createState() => _ContinuousReaderState();
 }
 
-class _VerticalReaderState extends State<VerticalReader> {
+class _ContinuousReaderState extends State<ContinuousReader> {
   final scrollController = ScrollController();
 
   @override
@@ -58,16 +60,14 @@ class _VerticalReaderState extends State<VerticalReader> {
 
     return ListView.builder(
       reverse: widget.reverse,
+      scrollDirection: widget.scrollDirection,
       itemCount: widget.pages.length,
       cacheExtent: size.height * 2,
       itemBuilder: (context, index) {
         final page = widget.pages[index];
-        return AppNetworkImage(
-          url: page.imageUrl,
+        return ChapterPageImage(
+          imageUrl: page.imageUrl,
           fit: BoxFit.fitWidth,
-          progressIndicatorBuilder: (_, progress) {
-            return _LoadingPlaceholder(progress);
-          },
         );
       },
     );
@@ -84,22 +84,5 @@ class _VerticalReaderState extends State<VerticalReader> {
     final offset = index * size.height;
 
     scrollController.jumpTo(offset);
-  }
-}
-
-class _LoadingPlaceholder extends StatelessWidget {
-  const _LoadingPlaceholder(this.progress);
-
-  final double? progress;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-    return Container(
-      height: size.height,
-      width: size.width,
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(value: progress),
-    );
   }
 }
