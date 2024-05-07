@@ -76,6 +76,10 @@ abstract class LocalDatasource {
     required List<int> chapterIds,
     required bool downloaded,
   });
+
+  /// Delete downloaded chapters from the filesystem and set their `downloaded`
+  /// property to false in the database.
+  Future<void> deleteChapters(List<int> chapterIds);
 }
 
 @Riverpod(keepAlive: true, dependencies: [])

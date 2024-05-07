@@ -206,6 +206,11 @@ class DriftDatasource implements LocalDatasource {
           ..where((tbl) => tbl.id.isIn(chapterIds)))
         .write(DbChaptersCompanion(downloaded: Value(downloaded)));
   }
+
+  @override
+  Future<void> deleteChapters(List<int> chapterIds) async {
+    // TODO(Guillaume): delete local files
+  }
 }
 
 extension on DbManga {

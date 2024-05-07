@@ -1,5 +1,4 @@
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
-import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -138,6 +137,18 @@ class DetailsController extends _$DetailsController {
     await localDatasource.setChaptersRead(
       chapterIds: selectedChapters.map((e) => e.id).toList(),
       read: false,
+    );
+
+    state = state.copyWith(selectedChapters: [], selectionMode: false);
+  }
+
+  Future<void> deleteSelectedChapters() async {
+    final selectedChapters = state.selectedChapters;
+    if (selectedChapters.isEmpty) return;
+
+    final localDatasource = ref.read(localDatasourceProvider);
+    await localDatasource.deleteChapters(
+      selectedChapters.map((e) => e.id).toList(),
     );
 
     state = state.copyWith(selectedChapters: [], selectionMode: false);

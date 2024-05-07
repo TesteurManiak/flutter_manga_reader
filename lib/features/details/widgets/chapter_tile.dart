@@ -54,9 +54,9 @@ class ChapterTile extends ConsumerWidget {
         chapterId: chapter.id,
         initiallyDownloaded: chapter.downloaded,
         onPressed: () {
-          ref.read(downloadQueueControllerProvider.notifier).queueChapter(
-                chapter,
-              );
+          ref
+              .read(downloadQueueControllerProvider.notifier)
+              .queueChapterDownload(chapter);
         },
       ),
       onTap: () {

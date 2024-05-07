@@ -22,6 +22,10 @@ class DetailsBottomBar extends ConsumerWidget {
     final hasUnread = ref.watch(
       provider.select((s) => s.selectedChapters.any((e) => !e.read)),
     );
+    final hasDownloaded = ref.watch(
+      provider.select((s) => s.selectedChapters.any((e) => e.downloaded)),
+    );
+
     final strings = context.strings;
 
     return BottomAppBar(
@@ -43,6 +47,14 @@ class DetailsBottomBar extends ConsumerWidget {
                 ref.read(provider.notifier).markSelectedChaptersAsUnread();
               },
               icon: const Icon(Icons.remove_done),
+            ),
+          if (hasDownloaded)
+            IconButton(
+              tooltip: 'Delete',
+              onPressed: () {
+                // ref.read(provider.notifier).deleteSelectedChapters();
+              },
+              icon: const Icon(Icons.delete),
             ),
         ],
       ),

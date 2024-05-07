@@ -36,7 +36,7 @@ class DownloadQueueController extends _$DownloadQueueController {
     return {};
   }
 
-  Future<void> queueChapter(Chapter chapter) async {
+  Future<void> queueChapterDownload(Chapter chapter) async {
     final result = await ref
         .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
     if (result case Success(success: final pages) when pages.isNotEmpty) {
