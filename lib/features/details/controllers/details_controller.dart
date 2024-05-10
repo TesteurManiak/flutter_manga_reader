@@ -15,6 +15,7 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
   dependencies: [
     watchManga,
     watchManga,
+    scopedMangaDatasource,
     localDatasource,
     isMangaFavorite,
     localDatasource,
@@ -27,7 +28,7 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 )
 class DetailsController extends _$DetailsController {
   @override
-  DetailsState build(int mangaId, MangaDatasource source) {
+  DetailsState build(int mangaId) {
     ref.listen(watchMangaProvider(mangaId), (prev, next) {
       state = next.when(
         data: (manga) {
@@ -74,6 +75,7 @@ class DetailsController extends _$DetailsController {
   Future<Result<_MangaFetchRecord, String?>> _fetchRecord(
     Manga baseManga,
   ) async {
+    final source = ref.read(scopedMangaDatasourceProvider);
     return Future.wait<Result<Object, HttpError>>([
       source.fetchMangaDetails(baseManga),
       source.fetchChapters(baseManga.toSourceModel()),
@@ -207,11 +209,10 @@ class DetailsController extends _$DetailsController {
   }
 }
 
-@Riverpod(dependencies: [scopedMangaDatasource, DetailsController])
+@Riverpod(dependencies: [DetailsController])
 bool scopedSelectionMode(ScopedSelectionModeRef ref, int mangaId) {
-  final source = ref.watch(scopedMangaDatasourceProvider);
   return ref.watch(
-    detailsControllerProvider(mangaId, source).select((s) => s.selectionMode),
+    detailsControllerProvider(mangaId).select((s) => s.selectionMode),
   );
 }
 

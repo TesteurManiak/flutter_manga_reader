@@ -44,14 +44,11 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
   void initState() {
     super.initState();
 
-    final source = ref.read(scopedMangaDatasourceProvider);
-    final detailsController = ref.read(
-      detailsControllerProvider(widget.mangaId, source).notifier,
-    );
-
     // TODO(Guillaume): refactor this to use an initialize async provider
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      detailsController.fetchDetails();
+      ref
+          .read(detailsControllerProvider(widget.mangaId).notifier)
+          .fetchDetails();
     });
   }
 
@@ -144,9 +141,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
             ),
             SliverPullToRefresh(
               onRefresh: () {
-                final source = ref.read(scopedMangaDatasourceProvider);
-                final provider =
-                    detailsControllerProvider(widget.mangaId, source);
+                final provider = detailsControllerProvider(widget.mangaId);
                 return ref
                     .read(provider.notifier)
                     .fetchDetails(forceRefresh: true);
@@ -378,8 +373,7 @@ class _AddToLibraryButton extends ConsumerWidget {
 
     return DetailsButton(
       onPressed: () {
-        final source = ref.read(scopedMangaDatasourceProvider);
-        final provider = detailsControllerProvider(id, source);
+        final provider = detailsControllerProvider(id);
         ref.read(provider.notifier).toggleFavorite();
       },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,

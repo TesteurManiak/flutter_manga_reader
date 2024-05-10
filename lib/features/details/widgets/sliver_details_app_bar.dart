@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,8 +33,7 @@ class _SliverDetailsAppBarState extends ConsumerState<SliverDetailsAppBar>
 
   @override
   Widget build(BuildContext context) {
-    final source = ref.watch(scopedMangaDatasourceProvider);
-    final provider = detailsControllerProvider(widget.mangaId, source);
+    final provider = detailsControllerProvider(widget.mangaId);
 
     final theme = Theme.of(context);
     final schemeColor = theme.brightness == Brightness.light
@@ -116,10 +114,9 @@ class _StopSelectionButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       onPressed: () {
-        final source = ref.read(scopedMangaDatasourceProvider);
-        final provider = detailsControllerProvider(mangaId, source);
-
-        ref.read(provider.notifier).quitSelectionMode();
+        ref
+            .read(detailsControllerProvider(mangaId).notifier)
+            .quitSelectionMode();
       },
       icon: const Icon(Icons.close),
     );
@@ -135,10 +132,9 @@ class _SelectAllChaptersButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       onPressed: () {
-        final source = ref.read(scopedMangaDatasourceProvider);
-        final provider = detailsControllerProvider(mangaId, source);
-
-        ref.read(provider.notifier).selectAllChapters();
+        ref
+            .read(detailsControllerProvider(mangaId).notifier)
+            .selectAllChapters();
       },
       icon: const Icon(Icons.select_all),
     );

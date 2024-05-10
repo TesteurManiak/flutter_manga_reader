@@ -7,7 +7,7 @@ part of 'details_controller.dart';
 // **************************************************************************
 
 String _$scopedSelectionModeHash() =>
-    r'ea92ffb9eab7f2d9bc402f401d13d521b48927e3';
+    r'453b49c85870907597bfdd2059d4a17818bb57ab';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -58,7 +58,6 @@ class ScopedSelectionModeFamily extends Family<bool> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    scopedMangaDatasourceProvider,
     detailsControllerProvider
   ];
 
@@ -67,8 +66,6 @@ class ScopedSelectionModeFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    scopedMangaDatasourceProvider,
-    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
     detailsControllerProvider,
     ...?detailsControllerProvider.allTransitiveDependencies
   };
@@ -165,16 +162,14 @@ class _ScopedSelectionModeProviderElement
   int get mangaId => (origin as ScopedSelectionModeProvider).mangaId;
 }
 
-String _$detailsControllerHash() => r'dae570fbaabd046ac4f4c1f9f784edc5661c8721';
+String _$detailsControllerHash() => r'f1ad59371fefe607f9a99ae7af88d271243882e1';
 
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
   late final int mangaId;
-  late final MangaDatasource source;
 
   DetailsState build(
     int mangaId,
-    MangaDatasource source,
   );
 }
 
@@ -190,11 +185,9 @@ class DetailsControllerFamily extends Family<DetailsState> {
   /// See also [DetailsController].
   DetailsControllerProvider call(
     int mangaId,
-    MangaDatasource source,
   ) {
     return DetailsControllerProvider(
       mangaId,
-      source,
     );
   }
 
@@ -204,12 +197,12 @@ class DetailsControllerFamily extends Family<DetailsState> {
   ) {
     return call(
       provider.mangaId,
-      provider.source,
     );
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>{
     watchMangaProvider,
+    scopedMangaDatasourceProvider,
     localDatasourceProvider,
     isMangaFavoriteProvider,
     downloadQueueControllerProvider,
@@ -223,6 +216,8 @@ class DetailsControllerFamily extends Family<DetailsState> {
       <ProviderOrFamily>{
     watchMangaProvider,
     ...?watchMangaProvider.allTransitiveDependencies,
+    scopedMangaDatasourceProvider,
+    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
     localDatasourceProvider,
     ...?localDatasourceProvider.allTransitiveDependencies,
     isMangaFavoriteProvider,
@@ -247,11 +242,8 @@ class DetailsControllerProvider
   /// See also [DetailsController].
   DetailsControllerProvider(
     int mangaId,
-    MangaDatasource source,
   ) : this._internal(
-          () => DetailsController()
-            ..mangaId = mangaId
-            ..source = source,
+          () => DetailsController()..mangaId = mangaId,
           from: detailsControllerProvider,
           name: r'detailsControllerProvider',
           debugGetCreateSourceHash:
@@ -262,7 +254,6 @@ class DetailsControllerProvider
           allTransitiveDependencies:
               DetailsControllerFamily._allTransitiveDependencies,
           mangaId: mangaId,
-          source: source,
         );
 
   DetailsControllerProvider._internal(
@@ -273,11 +264,9 @@ class DetailsControllerProvider
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.mangaId,
-    required this.source,
   }) : super.internal();
 
   final int mangaId;
-  final MangaDatasource source;
 
   @override
   DetailsState runNotifierBuild(
@@ -285,7 +274,6 @@ class DetailsControllerProvider
   ) {
     return notifier.build(
       mangaId,
-      source,
     );
   }
 
@@ -294,16 +282,13 @@ class DetailsControllerProvider
     return ProviderOverride(
       origin: this,
       override: DetailsControllerProvider._internal(
-        () => create()
-          ..mangaId = mangaId
-          ..source = source,
+        () => create()..mangaId = mangaId,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         mangaId: mangaId,
-        source: source,
       ),
     );
   }
@@ -316,16 +301,13 @@ class DetailsControllerProvider
 
   @override
   bool operator ==(Object other) {
-    return other is DetailsControllerProvider &&
-        other.mangaId == mangaId &&
-        other.source == source;
+    return other is DetailsControllerProvider && other.mangaId == mangaId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, mangaId.hashCode);
-    hash = _SystemHash.combine(hash, source.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -334,9 +316,6 @@ class DetailsControllerProvider
 mixin DetailsControllerRef on AutoDisposeNotifierProviderRef<DetailsState> {
   /// The parameter `mangaId` of this provider.
   int get mangaId;
-
-  /// The parameter `source` of this provider.
-  MangaDatasource get source;
 }
 
 class _DetailsControllerProviderElement
@@ -346,8 +325,6 @@ class _DetailsControllerProviderElement
 
   @override
   int get mangaId => (origin as DetailsControllerProvider).mangaId;
-  @override
-  MangaDatasource get source => (origin as DetailsControllerProvider).source;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -7,7 +7,7 @@ part of 'is_chapter_selected.dart';
 // **************************************************************************
 
 String _$scopedChapterSelectedHash() =>
-    r'dbbcdc94b04a292b24d7ac53dd69a9e4e577b416';
+    r'd2ffe5e23d6646758acc26fdfe452ad7027bd421';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -58,7 +58,6 @@ class ScopedChapterSelectedFamily extends Family<bool> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    scopedMangaDatasourceProvider,
     detailsControllerProvider
   ];
 
@@ -67,8 +66,6 @@ class ScopedChapterSelectedFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    scopedMangaDatasourceProvider,
-    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
     detailsControllerProvider,
     ...?detailsControllerProvider.allTransitiveDependencies
   };

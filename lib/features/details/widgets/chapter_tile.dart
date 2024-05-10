@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
@@ -63,8 +62,7 @@ class ChapterTile extends ConsumerWidget {
               },
             ),
       onTap: () {
-        final source = ref.read(scopedMangaDatasourceProvider);
-        final provider = detailsControllerProvider(chapter.mangaId, source);
+        final provider = detailsControllerProvider(chapter.mangaId);
         final selectionMode = ref.read(provider).selectionMode;
 
         if (selectionMode) {
@@ -80,8 +78,7 @@ class ChapterTile extends ConsumerWidget {
         ).push<void>(context);
       },
       onLongPress: () {
-        final source = ref.read(scopedMangaDatasourceProvider);
-        final provider = detailsControllerProvider(chapter.mangaId, source);
+        final provider = detailsControllerProvider(chapter.mangaId);
 
         ref.read(provider.notifier).selectChapter(chapter);
       },
