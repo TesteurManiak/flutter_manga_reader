@@ -2,9 +2,9 @@
     "dart.flutterCreatePlatforms": [
         "android",
         "ios",
-        "linux",
-        "macos",
-        "windows"
+        // "linux",
+        // "windows",
+        "macos"
     ],
     "search.exclude": {
         "**/*.g.dart": true,
