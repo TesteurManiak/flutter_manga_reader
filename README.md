@@ -12,6 +12,12 @@ This app is a Flutter clone of [Tachiyomi][tachiyomi] mainly to provide an iOS v
 
 ## Features
 
+* Webtoon and paginated manga reading
+* Download manga chapters for offline reading
+* Browse content from MangaDex
+* Language support for English and French
+* Light and dark themes
+
 _WIP_
 
 ## Screenshots
