@@ -120,13 +120,6 @@ class DriftDatasource implements LocalDatasource {
   }
 
   @override
-  Future<void> setChapterRead({required int chapterId, required bool read}) {
-    return (_database.update(_database.dbChapters)
-          ..where((t) => t.id.equals(chapterId)))
-        .write(DbChaptersCompanion(read: Value(read)));
-  }
-
-  @override
   Future<void> setChaptersRead({
     required List<int> chapterIds,
     required bool read,
@@ -189,16 +182,6 @@ class DriftDatasource implements LocalDatasource {
     return _database.into(_database.dbReadingDirection).insertOnConflictUpdate(
           DbReadingDirectionData(mangaId: mangaId, direction: direction),
         );
-  }
-
-  @override
-  Future<void> setChapterDownloaded({
-    required int chapterId,
-    required bool downloaded,
-  }) {
-    return (_database.update(_database.dbChapters)
-          ..where((t) => t.id.equals(chapterId)))
-        .write(DbChaptersCompanion(downloaded: Value(downloaded)));
   }
 
   @override

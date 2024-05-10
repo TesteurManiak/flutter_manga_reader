@@ -25,8 +25,6 @@ class ChapterTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSelected = ref.watch(scopedChapterSelectedProvider(chapter));
-    final multiSelectionEnabled =
-        ref.watch(scopedSelectionModeProvider(chapter.mangaId));
 
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
@@ -50,17 +48,15 @@ class ChapterTile extends ConsumerWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: multiSelectionEnabled
-          ? null
-          : _DownloadButton(
-              chapterId: chapter.id,
-              initiallyDownloaded: chapter.downloaded,
-              onPressed: () {
-                ref
-                    .read(downloadQueueControllerProvider.notifier)
-                    .queueChapterDownload(chapter);
-              },
-            ),
+      trailing: _DownloadButton(
+        chapterId: chapter.id,
+        initiallyDownloaded: chapter.downloaded,
+        onPressed: () {
+          ref
+              .read(downloadQueueControllerProvider.notifier)
+              .queueChapterDownload(chapter);
+        },
+      ),
       onTap: () {
         final provider = detailsControllerProvider(chapter.mangaId);
         final selectionMode = ref.read(provider).selectionMode;

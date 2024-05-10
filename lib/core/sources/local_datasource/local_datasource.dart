@@ -55,7 +55,6 @@ abstract class LocalDatasource {
   );
 
   Future<Chapter?> getChapter(int chapterId);
-  Future<void> setChapterRead({required int chapterId, required bool read});
   Future<void> setChaptersRead({
     required List<int> chapterIds,
     required bool read,
@@ -67,10 +66,6 @@ abstract class LocalDatasource {
   Future<void> setChapterLastPageRead({
     required int chapterId,
     required int lastPageRead,
-  });
-  Future<void> setChapterDownloaded({
-    required int chapterId,
-    required bool downloaded,
   });
   Future<void> setChaptersDownloaded({
     required List<int> chapterIds,
