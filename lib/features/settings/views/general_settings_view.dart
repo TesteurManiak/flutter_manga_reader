@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
+import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/locale_switcher_dialog.dart';
@@ -53,7 +54,15 @@ class _ClearCache extends ConsumerWidget {
     return ListTile(
       leading: const Icon(Icons.cleaning_services),
       title: Text(context.strings.settings_general_clear_cache),
-      onTap: () => ref.read(appCacheManagerProvider).clearCache(),
+      onTap: () async {
+        await ref.read(appCacheManagerProvider).clearCache();
+        if (context.mounted) {
+          ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+            // TODO(Guillaume): localize
+            SnackBar(content: Text('Cache cleared'.hardcoded)),
+          );
+        }
+      },
     );
   }
 }
