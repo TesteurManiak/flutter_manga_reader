@@ -52,12 +52,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_library_subtitle => 'Catégories, mise à jour globale';
 
   @override
-  String get settings_extensions => 'Extensions';
-
-  @override
-  String get settings_extensions_subtitle => 'Gérer les extensions';
-
-  @override
   String get settings_about => 'À propos';
 
   @override
