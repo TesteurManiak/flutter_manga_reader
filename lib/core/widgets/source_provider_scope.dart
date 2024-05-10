@@ -16,7 +16,7 @@ class SourceProviderScope extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: [
-        mangaDatasourceProvider.overrideWith((ref) {
+        scopedMangaDatasourceProvider.overrideWith((ref) {
           return ref.watch(getSourceFromIdProvider(sourceId));
         }),
       ],

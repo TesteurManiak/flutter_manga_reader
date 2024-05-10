@@ -25,8 +25,9 @@ class ChapterTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final source = ref.watch(mangaDatasourceProvider);
-    final isSelected = ref.watch(isChapterSelectedProvider(chapter, source));
+    final isSelected = ref.watch(scopedChapterSelectedProvider(chapter));
+    final multiSelectionEnabled =
+        ref.watch(scopedSelectionModeProvider(chapter.mangaId));
 
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
@@ -50,17 +51,19 @@ class ChapterTile extends ConsumerWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      trailing: _DownloadButton(
-        chapterId: chapter.id,
-        initiallyDownloaded: chapter.downloaded,
-        onPressed: () {
-          ref
-              .read(downloadQueueControllerProvider.notifier)
-              .queueChapterDownload(chapter);
-        },
-      ),
+      trailing: multiSelectionEnabled
+          ? null
+          : _DownloadButton(
+              chapterId: chapter.id,
+              initiallyDownloaded: chapter.downloaded,
+              onPressed: () {
+                ref
+                    .read(downloadQueueControllerProvider.notifier)
+                    .queueChapterDownload(chapter);
+              },
+            ),
       onTap: () {
-        final source = ref.read(mangaDatasourceProvider);
+        final source = ref.read(scopedMangaDatasourceProvider);
         final provider = detailsControllerProvider(chapter.mangaId, source);
         final selectionMode = ref.read(provider).selectionMode;
 
@@ -77,7 +80,7 @@ class ChapterTile extends ConsumerWidget {
         ).push<void>(context);
       },
       onLongPress: () {
-        final source = ref.read(mangaDatasourceProvider);
+        final source = ref.read(scopedMangaDatasourceProvider);
         final provider = detailsControllerProvider(chapter.mangaId, source);
 
         ref.read(provider.notifier).selectChapter(chapter);

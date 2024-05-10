@@ -44,11 +44,12 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
   void initState() {
     super.initState();
 
-    final source = ref.read(mangaDatasourceProvider);
+    final source = ref.read(scopedMangaDatasourceProvider);
     final detailsController = ref.read(
       detailsControllerProvider(widget.mangaId, source).notifier,
     );
 
+    // TODO(Guillaume): refactor this to use an initialize async provider
     WidgetsBinding.instance.addPostFrameCallback((_) {
       detailsController.fetchDetails();
     });
@@ -116,15 +117,10 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
-    final source = ref.watch(mangaDatasourceProvider);
-    ref.listen(
-        detailsControllerProvider(widget.mangaId, source)
-            .select((s) => s.selectionMode), (_, next) {
-      if (next) {
-        DefaultSlidableController.maybeOf(context)?.show();
-      } else {
-        DefaultSlidableController.maybeOf(context)?.hide();
-      }
+    ref.listen(scopedSelectionModeProvider(widget.mangaId), (_, enabled) {
+      final controller = DefaultSlidableController.maybeOf(context);
+      final func = enabled ? controller?.show : controller?.hide;
+      func?.call();
     });
 
     final desc = widget.manga.description;
@@ -148,7 +144,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
             ),
             SliverPullToRefresh(
               onRefresh: () {
-                final source = ref.read(mangaDatasourceProvider);
+                final source = ref.read(scopedMangaDatasourceProvider);
                 final provider =
                     detailsControllerProvider(widget.mangaId, source);
                 return ref
@@ -382,7 +378,7 @@ class _AddToLibraryButton extends ConsumerWidget {
 
     return DetailsButton(
       onPressed: () {
-        final source = ref.read(mangaDatasourceProvider);
+        final source = ref.read(scopedMangaDatasourceProvider);
         final provider = detailsControllerProvider(id, source);
         ref.read(provider.notifier).toggleFavorite();
       },
@@ -457,7 +453,7 @@ class _SliverChapterList extends ConsumerWidget {
               final chapter = chapters[index];
               return ChapterTile(
                 mangaId: mangaId,
-                sourceId: ref.read(mangaDatasourceProvider).sourceId,
+                sourceId: ref.read(scopedMangaDatasourceProvider).sourceId,
                 chapter: chapter,
               );
             },

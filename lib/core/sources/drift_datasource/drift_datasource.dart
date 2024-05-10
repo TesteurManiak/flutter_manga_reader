@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:drift/drift.dart';
+import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DriftDatasource implements LocalDatasource {
   DriftDatasource({
@@ -209,7 +213,29 @@ class DriftDatasource implements LocalDatasource {
 
   @override
   Future<void> deleteChapters(List<int> chapterIds) async {
-    // TODO(Guillaume): delete local files
+    try {
+      final localDir = await getApplicationDocumentsDirectory();
+      final localChapters = await (_database.select(_database.dbChapters)
+            ..where((tbl) => tbl.id.isIn(chapterIds)))
+          .get();
+
+      final futures = <Future<void>>[];
+      for (final chapter in localChapters) {
+        final chapterPath = chapter.getFullLocalPath(localDir);
+        final chapterDir = Directory(chapterPath);
+        if (chapterDir.existsSync()) {
+          futures.add(chapterDir.delete(recursive: true));
+        }
+      }
+
+      // Delete local files
+      await Future.wait(futures);
+    } finally {
+      // Update database
+      await (_database.update(_database.dbChapters)
+            ..where((tbl) => tbl.id.isIn(chapterIds)))
+          .write(const DbChaptersCompanion(downloaded: Value(false)));
+    }
   }
 }
 

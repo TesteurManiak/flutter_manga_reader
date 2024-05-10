@@ -34,7 +34,7 @@ class _SliverDetailsAppBarState extends ConsumerState<SliverDetailsAppBar>
 
   @override
   Widget build(BuildContext context) {
-    final source = ref.watch(mangaDatasourceProvider);
+    final source = ref.watch(scopedMangaDatasourceProvider);
     final provider = detailsControllerProvider(widget.mangaId, source);
 
     final theme = Theme.of(context);
@@ -116,7 +116,7 @@ class _StopSelectionButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       onPressed: () {
-        final source = ref.read(mangaDatasourceProvider);
+        final source = ref.read(scopedMangaDatasourceProvider);
         final provider = detailsControllerProvider(mangaId, source);
 
         ref.read(provider.notifier).quitSelectionMode();
@@ -135,7 +135,7 @@ class _SelectAllChaptersButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       onPressed: () {
-        final source = ref.read(mangaDatasourceProvider);
+        final source = ref.read(scopedMangaDatasourceProvider);
         final provider = detailsControllerProvider(mangaId, source);
 
         ref.read(provider.notifier).selectAllChapters();

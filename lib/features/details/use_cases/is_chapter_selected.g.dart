@@ -6,7 +6,8 @@ part of 'is_chapter_selected.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isChapterSelectedHash() => r'3c777435212fd1583327f727d8812a339f293683';
+String _$scopedChapterSelectedHash() =>
+    r'dbbcdc94b04a292b24d7ac53dd69a9e4e577b416';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,37 +30,35 @@ class _SystemHash {
   }
 }
 
-/// See also [isChapterSelected].
-@ProviderFor(isChapterSelected)
-const isChapterSelectedProvider = IsChapterSelectedFamily();
+/// See also [scopedChapterSelected].
+@ProviderFor(scopedChapterSelected)
+const scopedChapterSelectedProvider = ScopedChapterSelectedFamily();
 
-/// See also [isChapterSelected].
-class IsChapterSelectedFamily extends Family<bool> {
-  /// See also [isChapterSelected].
-  const IsChapterSelectedFamily();
+/// See also [scopedChapterSelected].
+class ScopedChapterSelectedFamily extends Family<bool> {
+  /// See also [scopedChapterSelected].
+  const ScopedChapterSelectedFamily();
 
-  /// See also [isChapterSelected].
-  IsChapterSelectedProvider call(
+  /// See also [scopedChapterSelected].
+  ScopedChapterSelectedProvider call(
     Chapter chapter,
-    MangaDatasource mangaDatasource,
   ) {
-    return IsChapterSelectedProvider(
+    return ScopedChapterSelectedProvider(
       chapter,
-      mangaDatasource,
     );
   }
 
   @override
-  IsChapterSelectedProvider getProviderOverride(
-    covariant IsChapterSelectedProvider provider,
+  ScopedChapterSelectedProvider getProviderOverride(
+    covariant ScopedChapterSelectedProvider provider,
   ) {
     return call(
       provider.chapter,
-      provider.mangaDatasource,
     );
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    scopedMangaDatasourceProvider,
     detailsControllerProvider
   ];
 
@@ -68,6 +67,8 @@ class IsChapterSelectedFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
+    scopedMangaDatasourceProvider,
+    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
     detailsControllerProvider,
     ...?detailsControllerProvider.allTransitiveDependencies
   };
@@ -77,35 +78,32 @@ class IsChapterSelectedFamily extends Family<bool> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'isChapterSelectedProvider';
+  String? get name => r'scopedChapterSelectedProvider';
 }
 
-/// See also [isChapterSelected].
-class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
-  /// See also [isChapterSelected].
-  IsChapterSelectedProvider(
+/// See also [scopedChapterSelected].
+class ScopedChapterSelectedProvider extends AutoDisposeProvider<bool> {
+  /// See also [scopedChapterSelected].
+  ScopedChapterSelectedProvider(
     Chapter chapter,
-    MangaDatasource mangaDatasource,
   ) : this._internal(
-          (ref) => isChapterSelected(
-            ref as IsChapterSelectedRef,
+          (ref) => scopedChapterSelected(
+            ref as ScopedChapterSelectedRef,
             chapter,
-            mangaDatasource,
           ),
-          from: isChapterSelectedProvider,
-          name: r'isChapterSelectedProvider',
+          from: scopedChapterSelectedProvider,
+          name: r'scopedChapterSelectedProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$isChapterSelectedHash,
-          dependencies: IsChapterSelectedFamily._dependencies,
+                  : _$scopedChapterSelectedHash,
+          dependencies: ScopedChapterSelectedFamily._dependencies,
           allTransitiveDependencies:
-              IsChapterSelectedFamily._allTransitiveDependencies,
+              ScopedChapterSelectedFamily._allTransitiveDependencies,
           chapter: chapter,
-          mangaDatasource: mangaDatasource,
         );
 
-  IsChapterSelectedProvider._internal(
+  ScopedChapterSelectedProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -113,70 +111,58 @@ class IsChapterSelectedProvider extends AutoDisposeProvider<bool> {
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.chapter,
-    required this.mangaDatasource,
   }) : super.internal();
 
   final Chapter chapter;
-  final MangaDatasource mangaDatasource;
 
   @override
   Override overrideWith(
-    bool Function(IsChapterSelectedRef provider) create,
+    bool Function(ScopedChapterSelectedRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: IsChapterSelectedProvider._internal(
-        (ref) => create(ref as IsChapterSelectedRef),
+      override: ScopedChapterSelectedProvider._internal(
+        (ref) => create(ref as ScopedChapterSelectedRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         chapter: chapter,
-        mangaDatasource: mangaDatasource,
       ),
     );
   }
 
   @override
   AutoDisposeProviderElement<bool> createElement() {
-    return _IsChapterSelectedProviderElement(this);
+    return _ScopedChapterSelectedProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is IsChapterSelectedProvider &&
-        other.chapter == chapter &&
-        other.mangaDatasource == mangaDatasource;
+    return other is ScopedChapterSelectedProvider && other.chapter == chapter;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, chapter.hashCode);
-    hash = _SystemHash.combine(hash, mangaDatasource.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin IsChapterSelectedRef on AutoDisposeProviderRef<bool> {
+mixin ScopedChapterSelectedRef on AutoDisposeProviderRef<bool> {
   /// The parameter `chapter` of this provider.
   Chapter get chapter;
-
-  /// The parameter `mangaDatasource` of this provider.
-  MangaDatasource get mangaDatasource;
 }
 
-class _IsChapterSelectedProviderElement extends AutoDisposeProviderElement<bool>
-    with IsChapterSelectedRef {
-  _IsChapterSelectedProviderElement(super.provider);
+class _ScopedChapterSelectedProviderElement
+    extends AutoDisposeProviderElement<bool> with ScopedChapterSelectedRef {
+  _ScopedChapterSelectedProviderElement(super.provider);
 
   @override
-  Chapter get chapter => (origin as IsChapterSelectedProvider).chapter;
-  @override
-  MangaDatasource get mangaDatasource =>
-      (origin as IsChapterSelectedProvider).mangaDatasource;
+  Chapter get chapter => (origin as ScopedChapterSelectedProvider).chapter;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -8,17 +8,19 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'manga_datasource.g.dart';
 
 @Riverpod(dependencies: [])
-MangaDatasource mangaDatasource(MangaDatasourceRef ref) {
+MangaDatasource scopedMangaDatasource(ScopedMangaDatasourceRef ref) {
   // Starts unimplemented because we need to override it in the route.
-  throw UnimplementedError();
+  throw UnimplementedError('No datasource set in this scope.');
 }
 
-@Riverpod(dependencies: [mangaDatasource])
+@Riverpod(dependencies: [scopedMangaDatasource])
 Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
   FetchChapterPagesRef ref,
   SourceChapter sourceChapter,
 ) {
-  return ref.watch(mangaDatasourceProvider).fetchChapterPages(sourceChapter);
+  return ref
+      .watch(scopedMangaDatasourceProvider)
+      .fetchChapterPages(sourceChapter);
 }
 
 @riverpod

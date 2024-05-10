@@ -22,14 +22,14 @@ class _PopularMangaExplorerState extends ConsumerState<PopularMangaExplorer> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final datasource = ref.read(mangaDatasourceProvider);
+      final datasource = ref.read(scopedMangaDatasourceProvider);
       ref.read(popularMangaControllerProvider(datasource).notifier).load();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final mangaDatasource = ref.watch(mangaDatasourceProvider);
+    final mangaDatasource = ref.watch(scopedMangaDatasourceProvider);
     final provider = popularMangaControllerProvider(mangaDatasource);
     final state = ref.watch(provider);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,7 @@ class DetailsBottomBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final source = ref.watch(mangaDatasourceProvider);
+    final source = ref.watch(scopedMangaDatasourceProvider);
     final provider = detailsControllerProvider(mangaId, source);
     final hasRead = ref.watch(
       provider.select((s) => s.selectedChapters.any((e) => e.read)),
@@ -24,6 +25,9 @@ class DetailsBottomBar extends ConsumerWidget {
     );
     final hasDownloaded = ref.watch(
       provider.select((s) => s.selectedChapters.any((e) => e.downloaded)),
+    );
+    final hasNonDownloaded = ref.watch(
+      provider.select((s) => s.selectedChapters.any((e) => !e.downloaded)),
     );
 
     final strings = context.strings;
@@ -48,11 +52,21 @@ class DetailsBottomBar extends ConsumerWidget {
               },
               icon: const Icon(Icons.remove_done),
             ),
+          if (hasNonDownloaded)
+            IconButton(
+              // TODO(Guillaume): localize
+              tooltip: 'Download'.hardcoded,
+              onPressed: () {
+                ref.read(provider.notifier).downloadSelectedChapters();
+              },
+              icon: const Icon(Icons.download),
+            ),
           if (hasDownloaded)
             IconButton(
-              tooltip: 'Delete',
+              // TODO(Guillaume): localize
+              tooltip: 'Delete'.hardcoded,
               onPressed: () {
-                // ref.read(provider.notifier).deleteSelectedChapters();
+                ref.read(provider.notifier).deleteSelectedChapters();
               },
               icon: const Icon(Icons.delete),
             ),

@@ -6,22 +6,24 @@ part of 'manga_datasource.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mangaDatasourceHash() => r'4240c992e98a36379c464aff902bff0c95178832';
+String _$scopedMangaDatasourceHash() =>
+    r'5eeea64a6292d207248d6e9d67ef191942e25fe4';
 
-/// See also [mangaDatasource].
-@ProviderFor(mangaDatasource)
-final mangaDatasourceProvider = AutoDisposeProvider<MangaDatasource>.internal(
-  mangaDatasource,
-  name: r'mangaDatasourceProvider',
+/// See also [scopedMangaDatasource].
+@ProviderFor(scopedMangaDatasource)
+final scopedMangaDatasourceProvider =
+    AutoDisposeProvider<MangaDatasource>.internal(
+  scopedMangaDatasource,
+  name: r'scopedMangaDatasourceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$mangaDatasourceHash,
+      : _$scopedMangaDatasourceHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
-typedef MangaDatasourceRef = AutoDisposeProviderRef<MangaDatasource>;
-String _$fetchChapterPagesHash() => r'59680b1872de0d206467553f43ebec609fe46244';
+typedef ScopedMangaDatasourceRef = AutoDisposeProviderRef<MangaDatasource>;
+String _$fetchChapterPagesHash() => r'107df8ce05c5f4e05b5a580ff7320d156cb6a0f1';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -73,7 +75,7 @@ class FetchChapterPagesFamily
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    mangaDatasourceProvider
+    scopedMangaDatasourceProvider
   ];
 
   @override
@@ -81,8 +83,8 @@ class FetchChapterPagesFamily
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    mangaDatasourceProvider,
-    ...?mangaDatasourceProvider.allTransitiveDependencies
+    scopedMangaDatasourceProvider,
+    ...?scopedMangaDatasourceProvider.allTransitiveDependencies
   };
 
   @override

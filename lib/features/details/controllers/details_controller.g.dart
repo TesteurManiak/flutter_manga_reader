@@ -6,7 +6,8 @@ part of 'details_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$detailsControllerHash() => r'471f3e310c9ac8d57c7ee1e0bc89534fe7004644';
+String _$scopedSelectionModeHash() =>
+    r'ea92ffb9eab7f2d9bc402f401d13d521b48927e3';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -28,6 +29,143 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+/// See also [scopedSelectionMode].
+@ProviderFor(scopedSelectionMode)
+const scopedSelectionModeProvider = ScopedSelectionModeFamily();
+
+/// See also [scopedSelectionMode].
+class ScopedSelectionModeFamily extends Family<bool> {
+  /// See also [scopedSelectionMode].
+  const ScopedSelectionModeFamily();
+
+  /// See also [scopedSelectionMode].
+  ScopedSelectionModeProvider call(
+    int mangaId,
+  ) {
+    return ScopedSelectionModeProvider(
+      mangaId,
+    );
+  }
+
+  @override
+  ScopedSelectionModeProvider getProviderOverride(
+    covariant ScopedSelectionModeProvider provider,
+  ) {
+    return call(
+      provider.mangaId,
+    );
+  }
+
+  static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
+    scopedMangaDatasourceProvider,
+    detailsControllerProvider
+  ];
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
+      <ProviderOrFamily>{
+    scopedMangaDatasourceProvider,
+    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
+    detailsControllerProvider,
+    ...?detailsControllerProvider.allTransitiveDependencies
+  };
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'scopedSelectionModeProvider';
+}
+
+/// See also [scopedSelectionMode].
+class ScopedSelectionModeProvider extends AutoDisposeProvider<bool> {
+  /// See also [scopedSelectionMode].
+  ScopedSelectionModeProvider(
+    int mangaId,
+  ) : this._internal(
+          (ref) => scopedSelectionMode(
+            ref as ScopedSelectionModeRef,
+            mangaId,
+          ),
+          from: scopedSelectionModeProvider,
+          name: r'scopedSelectionModeProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$scopedSelectionModeHash,
+          dependencies: ScopedSelectionModeFamily._dependencies,
+          allTransitiveDependencies:
+              ScopedSelectionModeFamily._allTransitiveDependencies,
+          mangaId: mangaId,
+        );
+
+  ScopedSelectionModeProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.mangaId,
+  }) : super.internal();
+
+  final int mangaId;
+
+  @override
+  Override overrideWith(
+    bool Function(ScopedSelectionModeRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ScopedSelectionModeProvider._internal(
+        (ref) => create(ref as ScopedSelectionModeRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        mangaId: mangaId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<bool> createElement() {
+    return _ScopedSelectionModeProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ScopedSelectionModeProvider && other.mangaId == mangaId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, mangaId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin ScopedSelectionModeRef on AutoDisposeProviderRef<bool> {
+  /// The parameter `mangaId` of this provider.
+  int get mangaId;
+}
+
+class _ScopedSelectionModeProviderElement
+    extends AutoDisposeProviderElement<bool> with ScopedSelectionModeRef {
+  _ScopedSelectionModeProviderElement(super.provider);
+
+  @override
+  int get mangaId => (origin as ScopedSelectionModeProvider).mangaId;
+}
+
+String _$detailsControllerHash() => r'dae570fbaabd046ac4f4c1f9f784edc5661c8721';
 
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
@@ -74,6 +212,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
     watchMangaProvider,
     localDatasourceProvider,
     isMangaFavoriteProvider,
+    downloadQueueControllerProvider,
     watchChaptersForMangaProvider
   };
 
@@ -88,6 +227,8 @@ class DetailsControllerFamily extends Family<DetailsState> {
     ...?localDatasourceProvider.allTransitiveDependencies,
     isMangaFavoriteProvider,
     ...?isMangaFavoriteProvider.allTransitiveDependencies,
+    downloadQueueControllerProvider,
+    ...?downloadQueueControllerProvider.allTransitiveDependencies,
     watchChaptersForMangaProvider,
     ...?watchChaptersForMangaProvider.allTransitiveDependencies
   };

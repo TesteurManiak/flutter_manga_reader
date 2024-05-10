@@ -1,4 +1,6 @@
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
+import 'package:flutter_manga_reader/features/details/controllers/download_queue_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -18,6 +20,8 @@ typedef _MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
     localDatasource,
     localDatasource,
     localDatasource,
+    localDatasource,
+    DownloadQueueController,
     watchChaptersForManga,
   ],
 )
@@ -142,14 +146,26 @@ class DetailsController extends _$DetailsController {
     state = state.copyWith(selectedChapters: [], selectionMode: false);
   }
 
-  Future<void> deleteSelectedChapters() async {
+  void deleteSelectedChapters() {
     final selectedChapters = state.selectedChapters;
     if (selectedChapters.isEmpty) return;
 
-    final localDatasource = ref.read(localDatasourceProvider);
-    await localDatasource.deleteChapters(
-      selectedChapters.map((e) => e.id).toList(),
-    );
+    ref
+        .read(localDatasourceProvider)
+        .deleteChapters(selectedChapters.map((e) => e.id).toList());
+
+    state = state.copyWith(selectedChapters: [], selectionMode: false);
+  }
+
+  Future<void> downloadSelectedChapters() async {
+    final selectedChapters = state.selectedChapters;
+    if (selectedChapters.isEmpty) return;
+
+    for (final chapter in selectedChapters) {
+      await ref
+          .read(downloadQueueControllerProvider.notifier)
+          .queueChapterDownload(chapter);
+    }
 
     state = state.copyWith(selectedChapters: [], selectionMode: false);
   }
@@ -191,7 +207,13 @@ class DetailsController extends _$DetailsController {
   }
 }
 
-typedef DownloadProgressCallback = void Function(double progress);
+@Riverpod(dependencies: [scopedMangaDatasource, DetailsController])
+bool scopedSelectionMode(ScopedSelectionModeRef ref, int mangaId) {
+  final source = ref.watch(scopedMangaDatasourceProvider);
+  return ref.watch(
+    detailsControllerProvider(mangaId, source).select((s) => s.selectionMode),
+  );
+}
 
 @freezed
 sealed class DetailsState with _$DetailsState {

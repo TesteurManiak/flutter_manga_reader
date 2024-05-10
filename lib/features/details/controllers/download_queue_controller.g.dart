@@ -165,7 +165,7 @@ class _ChapterDownloadTaskProviderElement
 }
 
 String _$downloadQueueControllerHash() =>
-    r'd37c20759009c60da35f0b8757bda60128f988f7';
+    r'8d1c27a322254b970a2174834e9d0790936ce247';
 
 /// See also [DownloadQueueController].
 @ProviderFor(DownloadQueueController)

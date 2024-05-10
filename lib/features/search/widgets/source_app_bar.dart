@@ -48,7 +48,8 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final title = ref.watch(mangaDatasourceProvider.select((v) => v.name));
+    final title =
+        ref.watch(scopedMangaDatasourceProvider.select((v) => v.name));
 
     return AppBar(
       title: searchMode
@@ -108,9 +109,8 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    final mangaDatasource = ref.watch(mangaDatasourceProvider);
-    final filteredMangaProvider =
-        filteredMangaControllerProvider(mangaDatasource);
+    final source = ref.watch(scopedMangaDatasourceProvider);
+    final filteredMangaProvider = filteredMangaControllerProvider(source);
 
     // Needed to keep the provider alive until the widget is instantiated
     ref.watch(filteredMangaProvider);

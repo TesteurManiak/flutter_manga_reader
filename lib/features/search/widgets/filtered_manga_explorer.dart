@@ -13,7 +13,7 @@ class FilteredMangaExplorer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mangaDatasource = ref.watch(mangaDatasourceProvider);
+    final mangaDatasource = ref.watch(scopedMangaDatasourceProvider);
     final provider = filteredMangaControllerProvider(mangaDatasource);
     final state = ref.watch(provider);
 
