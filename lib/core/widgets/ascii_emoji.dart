@@ -32,4 +32,7 @@ enum AsciiEmoji {
   const AsciiEmoji(this.ascii);
 
   final String ascii;
+
+  @override
+  String toString() => ascii;
 }

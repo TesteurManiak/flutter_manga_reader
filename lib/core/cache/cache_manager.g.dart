@@ -22,7 +22,7 @@ final networkCacheServiceProvider = Provider<NetworkQueryCacheService>.internal(
 );
 
 typedef NetworkCacheServiceRef = ProviderRef<NetworkQueryCacheService>;
-String _$cacheManagerHash() => r'579eedc786f7260af9788bf1c68950ec7b319fe9';
+String _$cacheManagerHash() => r'56930418845ed444505f4ba0bf81d704f8fbbbfa';
 
 /// See also [cacheManager].
 @ProviderFor(cacheManager)

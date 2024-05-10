@@ -34,9 +34,7 @@ NetworkQueryCacheService networkCacheService(NetworkCacheServiceRef ref) {
 }
 
 @Riverpod(keepAlive: true)
-CacheManager cacheManager(CacheManagerRef ref) {
-  return DefaultCacheManager();
-}
+CacheManager cacheManager(CacheManagerRef ref) => DefaultCacheManager();
 
 @Riverpod(keepAlive: true)
 AppCacheManager appCacheManager(AppCacheManagerRef ref) {
