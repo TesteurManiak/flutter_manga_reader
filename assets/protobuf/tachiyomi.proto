@@ -1,0 +1,213 @@
+syntax = "proto2";
+
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.Backup'
+message Backup {
+  repeated BackupManga backupManga = 1;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupCategory backupCategories = 2;
+  // WARNING: a default value decoded when value is missing
+  repeated BrokenBackupSource backupBrokenSources = 100;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupSource backupSources = 101;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupPreference backupPreferences = 104;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupSourcePreferences backupSourcePreferences = 105;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupManga'
+message BackupManga {
+  required int64 source = 1;
+  required string url = 2;
+  // WARNING: a default value decoded when value is missing
+  optional string title = 3;
+  // WARNING: a default value decoded when value is missing
+  optional string artist = 4;
+  // WARNING: a default value decoded when value is missing
+  optional string author = 5;
+  // WARNING: a default value decoded when value is missing
+  optional string description = 6;
+  // WARNING: a default value decoded when value is missing
+  repeated string genre = 7;
+  // WARNING: a default value decoded when value is missing
+  optional int32 status = 8;
+  // WARNING: a default value decoded when value is missing
+  optional string thumbnailUrl = 9;
+  // WARNING: a default value decoded when value is missing
+  optional int64 dateAdded = 13;
+  // WARNING: a default value decoded when value is missing
+  optional int32 viewer = 14;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupChapter chapters = 16;
+  // WARNING: a default value decoded when value is missing
+  repeated int64 categories = 17;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupTracking tracking = 18;
+  // WARNING: a default value decoded when value is missing
+  optional bool favorite = 100;
+  // WARNING: a default value decoded when value is missing
+  optional int32 chapterFlags = 101;
+  // WARNING: a default value decoded when value is missing
+  repeated BrokenBackupHistory brokenHistory = 102;
+  // WARNING: a default value decoded when value is missing
+  optional int32 viewer_flags = 103;
+  // WARNING: a default value decoded when value is missing
+  repeated BackupHistory history = 104;
+  // WARNING: a default value decoded when value is missing
+  optional UpdateStrategy updateStrategy = 105;
+  // WARNING: a default value decoded when value is missing
+  optional int64 lastModifiedAt = 106;
+  // WARNING: a default value decoded when value is missing
+  optional int64 favoriteModifiedAt = 107;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupCategory'
+message BackupCategory {
+  required string name = 1;
+  // WARNING: a default value decoded when value is missing
+  optional int64 order = 2;
+  // WARNING: a default value decoded when value is missing
+  optional int64 flags = 100;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupSource'
+message BrokenBackupSource {
+  // WARNING: a default value decoded when value is missing
+  optional string name = 0;
+  required int64 sourceId = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupSource'
+message BackupSource {
+  // WARNING: a default value decoded when value is missing
+  optional string name = 1;
+  required int64 sourceId = 2;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupPreference'
+message BackupPreference {
+  required string key = 1;
+  required PreferenceValue value = 2;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupSourcePreferences'
+message BackupSourcePreferences {
+  required string sourceKey = 1;
+  repeated BackupPreference prefs = 2;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupChapter'
+message BackupChapter {
+  required string url = 1;
+  required string name = 2;
+  // WARNING: a default value decoded when value is missing
+  optional string scanlator = 3;
+  // WARNING: a default value decoded when value is missing
+  optional bool read = 4;
+  // WARNING: a default value decoded when value is missing
+  optional bool bookmark = 5;
+  // WARNING: a default value decoded when value is missing
+  optional int64 lastPageRead = 6;
+  // WARNING: a default value decoded when value is missing
+  optional int64 dateFetch = 7;
+  // WARNING: a default value decoded when value is missing
+  optional int64 dateUpload = 8;
+  // WARNING: a default value decoded when value is missing
+  optional float chapterNumber = 9;
+  // WARNING: a default value decoded when value is missing
+  optional int64 sourceOrder = 10;
+  // WARNING: a default value decoded when value is missing
+  optional int64 lastModifiedAt = 11;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupTracking'
+message BackupTracking {
+  required int32 syncId = 1;
+  required int64 libraryId = 2;
+  // WARNING: a default value decoded when value is missing
+  optional int32 mediaIdInt = 3;
+  // WARNING: a default value decoded when value is missing
+  optional string trackingUrl = 4;
+  // WARNING: a default value decoded when value is missing
+  optional string title = 5;
+  // WARNING: a default value decoded when value is missing
+  optional float lastChapterRead = 6;
+  // WARNING: a default value decoded when value is missing
+  optional int32 totalChapters = 7;
+  // WARNING: a default value decoded when value is missing
+  optional float score = 8;
+  // WARNING: a default value decoded when value is missing
+  optional int32 status = 9;
+  // WARNING: a default value decoded when value is missing
+  optional int64 startedReadingDate = 10;
+  // WARNING: a default value decoded when value is missing
+  optional int64 finishedReadingDate = 11;
+  // WARNING: a default value decoded when value is missing
+  optional int64 mediaId = 100;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupHistory'
+message BrokenBackupHistory {
+  required string url = 0;
+  required int64 lastRead = 1;
+  // WARNING: a default value decoded when value is missing
+  optional int64 readDuration = 2;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupHistory'
+message BackupHistory {
+  required string url = 1;
+  required int64 lastRead = 2;
+  // WARNING: a default value decoded when value is missing
+  optional int64 readDuration = 3;
+}
+
+// serial name 'eu.kanade.tachiyomi.source.model.UpdateStrategy'
+enum UpdateStrategy {
+  ALWAYS_UPDATE = 0;
+  ONLY_FETCH_ONCE = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.PreferenceValue'
+message PreferenceValue {
+  required string type = 1;
+  // decoded as message with one of these types:
+  //   message BooleanPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.BooleanPreferenceValue'
+  //   message FloatPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.FloatPreferenceValue'
+  //   message IntPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.IntPreferenceValue'
+  //   message LongPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.LongPreferenceValue'
+  //   message StringPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.StringPreferenceValue'
+  //   message StringSetPreferenceValue, serial name 'eu.kanade.tachiyomi.data.backup.models.StringSetPreferenceValue'
+  required bytes value = 2;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.BooleanPreferenceValue'
+message BooleanPreferenceValue {
+  required bool value = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.FloatPreferenceValue'
+message FloatPreferenceValue {
+  required float value = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.IntPreferenceValue'
+message IntPreferenceValue {
+  required int32 value = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.LongPreferenceValue'
+message LongPreferenceValue {
+  required int64 value = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.StringPreferenceValue'
+message StringPreferenceValue {
+  required string value = 1;
+}
+
+// serial name 'eu.kanade.tachiyomi.data.backup.models.StringSetPreferenceValue'
+message StringSetPreferenceValue {
+  repeated string value = 1;
+}
