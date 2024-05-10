@@ -30,6 +30,8 @@ class _ContinuousReaderState extends State<ContinuousReader> {
   void initState() {
     super.initState();
 
+    // TODO(Guillaume): fix synchronization between slider and scroll.
+
     // Sync page controller with scroll offset
     widget.controller.addListener(_pageControllerListener);
 

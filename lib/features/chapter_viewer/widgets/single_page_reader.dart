@@ -24,6 +24,7 @@ class SinglePageReader extends StatelessWidget {
     return PageView.builder(
       controller: controller.pageController,
       reverse: reverse,
+      allowImplicitScrolling: true,
       scrollDirection: scrollDirection,
       itemCount: pages.length,
       itemBuilder: (context, index) {
@@ -34,7 +35,6 @@ class SinglePageReader extends StatelessWidget {
           fit: BoxFit.contain,
         );
       },
-      allowImplicitScrolling: true,
     );
   }
 }
