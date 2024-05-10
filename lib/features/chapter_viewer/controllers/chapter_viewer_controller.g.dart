@@ -7,7 +7,7 @@ part of 'chapter_viewer_controller.dart';
 // **************************************************************************
 
 String _$chapterViewerControllerHash() =>
-    r'32696e98e89ac7bfe1fa47fc6313db41021e39af';
+    r'eebc6ee26ea5f958fa700c951ede8f43030de3f8';
 
 /// Copied from Dart SDK
 class _SystemHash {
