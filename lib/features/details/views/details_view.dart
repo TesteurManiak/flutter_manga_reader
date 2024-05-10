@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
@@ -200,7 +201,10 @@ class _BackgroundCover extends ConsumerWidget {
       },
       child: GradientImage(
         height: 480,
-        image: CachedNetworkImageProvider(thumbnailUrl),
+        image: CachedNetworkImageProvider(
+          thumbnailUrl,
+          cacheManager: ref.watch(cacheManagerProvider),
+        ),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

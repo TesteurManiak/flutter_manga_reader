@@ -7,6 +7,7 @@
     "settings_general_subtitle": "Langue de l'application, notifications",
     "settings_general_language": "Langue de l'application",
     "settings_general_language_default": "Par défaut",
+    "settings_general_clear_cache": "Vider le cache",
     "settings_appearance": "Apparence",
     "settings_appearance_subtitle": "Thème, format de la date et de l'heure",
     "settings_appearance_dark_mode": "Mode sombre",

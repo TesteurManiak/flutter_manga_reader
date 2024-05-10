@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 typedef ImageProgressIndicatorBuilder = Widget Function(
   BuildContext context,
@@ -12,7 +14,7 @@ typedef ImageErrorBuilder = Widget Function(
   StackTrace? stackTrace,
 );
 
-class AppNetworkImage extends StatelessWidget {
+class AppNetworkImage extends ConsumerWidget {
   const AppNetworkImage({
     super.key,
     required this.url,
@@ -31,7 +33,7 @@ class AppNetworkImage extends StatelessWidget {
   final ImageErrorBuilder? errorBuilder;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localUrl = url;
 
     if (localUrl == null ||
@@ -41,7 +43,10 @@ class AppNetworkImage extends StatelessWidget {
     }
 
     return Image(
-      image: CachedNetworkImageProvider(localUrl),
+      image: CachedNetworkImageProvider(
+        localUrl,
+        cacheManager: ref.watch(cacheManagerProvider),
+      ),
       height: height,
       width: width,
       fit: fit,

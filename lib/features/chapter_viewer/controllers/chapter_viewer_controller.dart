@@ -21,6 +21,7 @@ class ChapterViewerController extends _$ChapterViewerController {
     final localChapter =
         await ref.read(localDatasourceProvider).getChapter(chapterId);
     if (localChapter == null) {
+      // TODO(Guillaume): localize
       state = ChapterViewerState.error(error: 'Chapter not found'.hardcoded);
       return;
     }
