@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 extension IterableExtensions<T> on Iterable<T> {
   /// Return a new iterable with the elements of this iterable separated by the
   /// given [separator].
@@ -26,5 +28,12 @@ extension IterableExtensions<T> on Iterable<T> {
         yield separator;
       }
     }
+  }
+}
+
+extension QueueExtensions<T> on Queue<T> {
+  T? removeFirstOrNull() {
+    if (isEmpty) return null;
+    return removeFirst();
   }
 }

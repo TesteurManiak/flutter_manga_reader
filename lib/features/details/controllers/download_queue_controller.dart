@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
+import 'package:flutter_manga_reader/core/extensions/iterable_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
@@ -12,28 +14,20 @@ part 'download_queue_controller.g.dart';
 
 @Riverpod(keepAlive: true, dependencies: [localDatasource, fetchChapterPages])
 class DownloadQueueController extends _$DownloadQueueController {
+  final _waiting = ListQueue<ChapterDownloadTask>();
+  var _readyForEnqueue = Completer<void>();
+
   @override
   Map<int, ChapterDownloadTask> build() {
-    final localDatasource = ref.watch(localDatasourceProvider);
-
-    ref.listenSelf((_, next) {
-      final completedTaskIds = _parseTasks(next.values.toList());
-      if (completedTaskIds.isEmpty) return;
-
-      localDatasource.setChaptersDownloaded(
-        chapterIds: completedTaskIds,
-        downloaded: true,
-      );
-
-      // Remove completed tasks
-      final newMap = Map.of(state);
-      for (final id in completedTaskIds) {
-        newMap.remove(id);
-      }
-      state = newMap;
-    });
-
+    ref.onDispose(_dispose);
+    _readyForEnqueue.complete();
     return {};
+  }
+
+  void _dispose() {
+    if (!_readyForEnqueue.isCompleted) {
+      _readyForEnqueue.complete();
+    }
   }
 
   Future<void> queueChapterDownload(Chapter chapter) async {
@@ -42,42 +36,8 @@ class DownloadQueueController extends _$DownloadQueueController {
     if (result case Success(success: final pages) when pages.isNotEmpty) {
       final task = ChapterDownloadTask(chapter: chapter, pages: pages);
       state = {...state, chapter.id: task};
-
-      unawaited(
-        FileDownloader().downloadBatch(
-          task.toDownloadTaskBatch(),
-          batchProgressCallback: (success, failed) {
-            if (failed > 0) {
-              _onDownloadTaskError(chapter.id);
-              return;
-            }
-
-            final progress = (success + failed) / task.pages.length;
-            _updateProgress(chapter.id, progress);
-          },
-        ),
-      );
-    }
-  }
-
-  void _updateProgress(int chapterId, double progress) {
-    if (state[chapterId] case final task?) {
-      final newTask = task.copyWith(
-        progress: progress,
-        status: progress == 1
-            ? DownloadTaskStatus.completed
-            : DownloadTaskStatus.downloading,
-      );
-      state = {...state, chapterId: newTask};
-    }
-  }
-
-  Future<void> _onDownloadTaskError(int chapterId) async {
-    if (state[chapterId] case final task?
-        when task.status != DownloadTaskStatus.failed) {
-      final newTask = task.copyWith(status: DownloadTaskStatus.failed);
-      await FileDownloader().cancelTasksWithIds(task.taskIds);
-      state = {...state, chapterId: newTask};
+      _waiting.add(task);
+      _advanceQueue();
     }
   }
 
@@ -88,18 +48,65 @@ class DownloadQueueController extends _$DownloadQueueController {
       state = newMap;
     }
   }
-}
 
-List<int> _parseTasks(List<ChapterDownloadTask> tasks) {
-  final completedTaskIds = <int>[];
+  void _advanceQueue() {
+    if (_readyForEnqueue.isCompleted) {
+      final task = _waiting.removeFirstOrNull();
+      if (task == null) return;
 
-  for (final task in tasks) {
-    if (task.status == DownloadTaskStatus.completed) {
-      completedTaskIds.add(task.chapter.id);
+      _readyForEnqueue = Completer<void>();
+
+      // Start enqueueing the next task
+      FileDownloader().downloadBatch(
+        task.toDownloadTaskBatch(),
+        batchProgressCallback: (success, failed) {
+          if (failed > 0) {
+            _onDownloadTaskError(task.chapter.id);
+            return;
+          }
+
+          final progress = (success + failed) / task.pages.length;
+          _updateProgress(task.chapter.id, progress);
+        },
+      );
+      _readyForEnqueue.future.then((_) => _advanceQueue());
     }
   }
 
-  return completedTaskIds;
+  Future<void> _updateProgress(int chapterId, double progress) async {
+    if (state[chapterId] case final task?) {
+      final newStatus = switch (progress) {
+        1 => DownloadTaskStatus.completed,
+        _ => DownloadTaskStatus.downloading,
+      };
+
+      final newTask = task.copyWith(progress: progress, status: newStatus);
+
+      if (newStatus == DownloadTaskStatus.completed) {
+        await ref.read(localDatasourceProvider).setChaptersDownloaded(
+          chapterIds: [task.chapter.id],
+          downloaded: true,
+        );
+        final newMap = Map.of(state)..remove(chapterId);
+        state = newMap;
+        _readyForEnqueue.complete();
+        return;
+      }
+
+      // Update progress
+      state = {...state, chapterId: newTask};
+    }
+  }
+
+  Future<void> _onDownloadTaskError(int chapterId) async {
+    if (state[chapterId] case final task?
+        when task.status != DownloadTaskStatus.failed) {
+      final newTask = task.copyWith(status: DownloadTaskStatus.failed);
+      await FileDownloader().cancelTasksWithIds(task.taskIds);
+      state = {...state, chapterId: newTask};
+      _readyForEnqueue.complete();
+    }
+  }
 }
 
 @Riverpod(dependencies: [DownloadQueueController])
