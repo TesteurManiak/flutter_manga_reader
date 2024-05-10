@@ -392,6 +392,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Page {page}'**
   String last_page(int page);
+
+  /// No description provided for @download.
+  ///
+  /// In fr, this message translates to:
+  /// **'Télécharger'**
+  String get download;
+
+  /// No description provided for @delete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer'**
+  String get delete;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

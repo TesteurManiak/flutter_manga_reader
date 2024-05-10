@@ -63,5 +63,7 @@
                 "type": "int"
             }
         }
-    }
+    },
+    "download": "Télécharger",
+    "delete": "Supprimer"
 }

@@ -166,4 +166,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String last_page(int page) {
     return 'Page $page';
   }
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get delete => 'Delete';
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -52,8 +51,7 @@ class DetailsBottomBar extends ConsumerWidget {
             ),
           if (hasNonDownloaded)
             IconButton(
-              // TODO(Guillaume): localize
-              tooltip: 'Download'.hardcoded,
+              tooltip: strings.download,
               onPressed: () {
                 ref.read(provider.notifier).downloadSelectedChapters();
               },
@@ -61,8 +59,7 @@ class DetailsBottomBar extends ConsumerWidget {
             ),
           if (hasDownloaded)
             IconButton(
-              // TODO(Guillaume): localize
-              tooltip: 'Delete'.hardcoded,
+              tooltip: strings.delete,
               onPressed: () {
                 ref.read(provider.notifier).deleteSelectedChapters();
               },
