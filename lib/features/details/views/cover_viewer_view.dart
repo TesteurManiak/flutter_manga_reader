@@ -17,9 +17,12 @@ class CoverViewerView extends StatelessWidget {
         body: Center(
           child: Hero(
             tag: tag,
-            child: AppNetworkImage(
-              url: coverUrl,
-              fit: BoxFit.cover,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: AppNetworkImage(
+                url: coverUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

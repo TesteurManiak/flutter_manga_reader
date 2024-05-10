@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/core/providers/theme_controller.dart';
 import 'package:flutter_manga_reader/core/utils/logger.dart';
-import 'package:flutter_manga_reader/features/feature_flags/controllers/feature_flag_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,7 +21,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   await Future.wait<void>([
     container.read(themeControllerProvider.notifier).init(),
     container.read(localeControllerProvider.notifier).init(),
-    container.read(featureFlagControllerProvider.notifier).init(),
   ]);
 
   GoRouter.optionURLReflectsImperativeAPIs = true;
