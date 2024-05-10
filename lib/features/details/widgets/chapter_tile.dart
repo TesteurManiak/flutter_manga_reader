@@ -82,6 +82,7 @@ class ChapterTile extends ConsumerWidget {
   }
 }
 
+// TODO(Guillaume): Rework the design
 class _DownloadButton extends ConsumerWidget {
   const _DownloadButton({
     required this.chapterId,

@@ -10,6 +10,8 @@ A cross-platform manga reader built with Flutter.
 
 This app is a Flutter clone of [Tachiyomi][tachiyomi] mainly to provide an iOS version of the app.
 
+**This project is still a work in progress.**
+
 ## Features
 
 * Webtoon and paginated manga reading
