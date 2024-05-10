@@ -1,8 +1,12 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
-library;
+library mangabox;
 
-export 'src/mangabox_base.dart';
+export 'src/consts.dart';
+export 'src/mangakakalot/mangakakalot.dart';
 
-// TODO: Export any libraries intended for clients of this package.
+// final mangaboxSourceList = <MangaDatasource>[
+//   // Mangabat (EN)
+//   // Mangairo (EN)
+//   // Mangakakalot (EN)
+//   MangakakalotDatasource(),
+//   // Manganato (EN)
+// ];

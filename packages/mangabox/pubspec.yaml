@@ -1,15 +1,23 @@
 name: mangabox
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+description: Wrapper for the Mangabox's websites.
+version: 0.0.1
+homepage: https://github.com/TesteurManiak/flutter_manga_reader
+publish_to: none
 
 environment:
-  sdk: ^3.3.4
+  sdk: ">=3.0.0 <4.0.0"
 
-# Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  clock: ^1.1.1
+  collection: ^1.18.0
+  freezed_annotation: ^2.4.1
+  intl: ^0.18.1
+  json_annotation: ^4.9.0
+  manga_reader_core:
+    path: ../manga_reader_core
 
 dev_dependencies:
-  lints: ^3.0.0
-  test: ^1.24.0
+  build_runner: ^2.4.9
+  fd_lints: ^2.2.1
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0

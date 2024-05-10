@@ -29,6 +29,8 @@ dependencies:
   logging: ^1.2.0
   manga_reader_core:
     path: packages/manga_reader_core
+  mangabox:
+    path: packages/mangabox
   mangadex:
     path: packages/mangadex
   package_info_plus: ^8.0.0
