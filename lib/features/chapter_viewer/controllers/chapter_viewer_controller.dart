@@ -41,7 +41,7 @@ class ChapterViewerController extends _$ChapterViewerController {
 
   Future<void> markChapterAsRead() {
     final localDatasource = ref.read(localDatasourceProvider);
-    return localDatasource.setChapterRead(chapterId: chapterId, read: true);
+    return localDatasource.setChaptersRead(chapterIds: [chapterId], read: true);
   }
 
   Future<void> setLastPageRead(int page) {
