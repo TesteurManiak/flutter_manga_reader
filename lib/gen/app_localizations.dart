@@ -398,6 +398,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Supprimer'**
   String get delete;
+
+  /// No description provided for @cache_cleared.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cache vidé'**
+  String get cache_cleared;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

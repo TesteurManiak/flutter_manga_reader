@@ -1,4 +1,3 @@
-import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -21,8 +20,7 @@ class ChapterViewerController extends _$ChapterViewerController {
     final localChapter =
         await ref.read(localDatasourceProvider).getChapter(chapterId);
     if (localChapter == null) {
-      // TODO(Guillaume): localize
-      state = ChapterViewerState.error(error: 'Chapter not found'.hardcoded);
+      state = const ChapterViewerState.error(error: 'Chapter not found');
       return;
     }
 

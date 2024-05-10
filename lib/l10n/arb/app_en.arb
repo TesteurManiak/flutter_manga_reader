@@ -64,5 +64,6 @@
         }
     },
     "download": "Download",
-    "delete": "Delete"
+    "delete": "Delete",
+    "cache_cleared": "Cache cleared"
 }

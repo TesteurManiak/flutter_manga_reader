@@ -64,5 +64,6 @@
         }
     },
     "download": "Télécharger",
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "cache_cleared": "Cache vidé"
 }
