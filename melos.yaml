@@ -10,3 +10,7 @@ scripts:
     run: dart run build_runner build --delete-conflicting-outputs
     packageFilters:
       dependsOn: build_runner
+
+  protobuf-gen:
+    description: Generate protobuf files
+    run: protoc --dart_out=lib/gen -I=protos protos/*.proto

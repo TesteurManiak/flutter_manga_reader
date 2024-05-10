@@ -74,8 +74,8 @@ message BackupCategory {
 // serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupSource'
 message BrokenBackupSource {
   // WARNING: a default value decoded when value is missing
-  optional string name = 0;
-  required int64 sourceId = 1;
+  optional string name = 1;
+  required int64 sourceId = 2;
 }
 
 // serial name 'eu.kanade.tachiyomi.data.backup.models.BackupSource'
@@ -149,10 +149,10 @@ message BackupTracking {
 
 // serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupHistory'
 message BrokenBackupHistory {
-  required string url = 0;
-  required int64 lastRead = 1;
+  required string url = 1;
+  required int64 lastRead = 2;
   // WARNING: a default value decoded when value is missing
-  optional int64 readDuration = 2;
+  optional int64 readDuration = 3;
 }
 
 // serial name 'eu.kanade.tachiyomi.data.backup.models.BackupHistory'
