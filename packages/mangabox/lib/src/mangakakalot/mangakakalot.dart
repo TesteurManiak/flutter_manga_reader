@@ -1,6 +1,6 @@
-import 'package:mangabox/src/mangabox.dart';
+import 'package:mangabox/src/mangabox_datasource.dart';
 
-class MangakakalotDatasource extends Mangabox {
+class MangakakalotDatasource extends MangaboxDatasource {
   MangakakalotDatasource({super.client})
       : super(
           lang: 'en',

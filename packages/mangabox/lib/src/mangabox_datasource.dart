@@ -7,8 +7,8 @@ typedef RequestPropsRecord = ({
   Map<String, String> queryParameters,
 });
 
-abstract class Mangabox extends MangaDatasource {
-  Mangabox({
+abstract class MangaboxDatasource extends MangaDatasource {
+  MangaboxDatasource({
     required super.lang,
     required super.name,
     required super.baseUrl,
