@@ -46,7 +46,7 @@ extension ElementExtension on dom.Element {
     return query.attr;
   }
 
-  List<String>? xpath(String xpath) {
+  List<String> xpath(String xpath) {
     final htmlXPath = HtmlXPath.html(outerHtml);
     final query = htmlXPath.query(xpath);
     if (query.nodes.length > 1) {

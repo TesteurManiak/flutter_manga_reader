@@ -89,16 +89,16 @@ extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
 }
 
 extension ResultHtmlDecoder<F> on Result<dom.Document, F> {
-  Result<String, F> decodeHtmlBody() {
+  Result<dom.Element, F> decodeHtmlBody() {
     return whenSuccess((document) {
-      if (document.body?.text case final body?) return body;
+      if (document.body case final body?) return body;
       throw InvalidHtmlException(document.body);
     });
   }
 }
 
 extension FutureResultHtmlDecoder<F> on Future<Result<dom.Document, F>> {
-  Future<Result<String, F>> decodeHtmlBody() async {
+  Future<Result<dom.Element, F>> decodeHtmlBody() async {
     return (await this).decodeHtmlBody();
   }
 }

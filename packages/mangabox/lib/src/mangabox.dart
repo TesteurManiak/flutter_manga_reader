@@ -1,3 +1,4 @@
+import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' show parse;
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -91,24 +92,21 @@ abstract class Mangabox extends MangaDatasource {
     throw UnimplementedError();
   }
 
-  MangasPage parseResult(String result) {
+  MangasPage parseResult(dom.Element result) {
     final mangaList = <SourceManga>[];
-    List<String> urls = xpath(
-      result,
+    List<String> urls = result.xpath(
       '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/@href',
     );
-    List<String> names = xpath(
-      result,
+    List<String> names = result.xpath(
       '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/text()',
     );
-    final images = xpath(
-      result,
+    final images = result.xpath(
       '//*[ @class="content-genres-item"  or @class="list-story-item" or @class="story-item" or @class="list-truyen-item-wrap"]/a/img/@src',
     );
 
     if (names.isEmpty) {
-      names = xpath(result, '//*[@class="list-story-item"]/a/@title');
-      urls = xpath(result, '//*[@class="list-story-item"]/a/@href');
+      names = result.xpath('//*[@class="list-story-item"]/a/@title');
+      urls = result.xpath('//*[@class="list-story-item"]/a/@href');
     }
 
     for (int i = 0; i < names.length; i++) {
