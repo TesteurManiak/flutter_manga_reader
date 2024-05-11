@@ -1,5 +1,9 @@
 name: flutter_manga_reader
 
+ide:
+  intellij:
+    enabled: false
+
 packages:
   - packages/*
   - ./

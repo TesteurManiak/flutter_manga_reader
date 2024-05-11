@@ -1,3 +1,4 @@
+import 'package:html/parser.dart' show parse;
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 typedef RequestPropsRecord = ({
@@ -18,27 +19,39 @@ abstract class Mangabox extends MangaDatasource {
   @override
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page) async {
     final (:pathSegments, :queryParameters) = popularUrlPath(page);
-    final result = await client.send(
-      method: HttpMethod.get,
-      pathSegments: pathSegments,
-      queryParameters: queryParameters,
-    );
+    final result = await client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: pathSegments,
+          queryParameters: queryParameters,
+        )
+        .decodeString(parse)
+        .decodeHtmlBody();
 
     return result.when(
-      success: (data) {
-        // TODO(Guillaume): parse the response to extract the body
-        print(data);
-
-        throw UnimplementedError();
-      },
+      success: (body) => Result.success(parseResult(body)),
       failure: Result.failure,
     );
   }
 
   @override
-  Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(int page) {
-    // TODO(Guillaume): implement fetchLatestUpdatedMangas
-    throw UnimplementedError();
+  Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(
+    int page,
+  ) async {
+    final (:pathSegments, :queryParameters) = latestUrlPath(page);
+    final result = await client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: pathSegments,
+          queryParameters: queryParameters,
+        )
+        .decodeString(parse)
+        .decodeHtmlBody();
+
+    return result.when(
+      success: (body) => Result.success(parseResult(body)),
+      failure: Result.failure,
+    );
   }
 
   @override
@@ -78,12 +91,38 @@ abstract class Mangabox extends MangaDatasource {
     throw UnimplementedError();
   }
 
-  MangasPage parseResult() {
+  MangasPage parseResult(String result) {
     final mangaList = <SourceManga>[];
+    List<String> urls = xpath(
+      result,
+      '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/@href',
+    );
+    List<String> names = xpath(
+      result,
+      '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/text()',
+    );
+    final images = xpath(
+      result,
+      '//*[ @class="content-genres-item"  or @class="list-story-item" or @class="story-item" or @class="list-truyen-item-wrap"]/a/img/@src',
+    );
 
-    // TODO(Guillaume): implement parsing logic
+    if (names.isEmpty) {
+      names = xpath(result, '//*[@class="list-story-item"]/a/@title');
+      urls = xpath(result, '//*[@class="list-story-item"]/a/@href');
+    }
 
-    return MangasPage(mangaList: mangaList, hasMore: false);
+    for (int i = 0; i < names.length; i++) {
+      final manga = SourceManga(
+        title: names[i],
+        url: urls[i],
+        source: name,
+        thumbnailUrl: images[i],
+        lang: lang,
+      );
+      mangaList.add(manga);
+    }
+
+    return MangasPage(mangaList: mangaList, hasMore: true);
   }
 
   RequestPropsRecord popularUrlPath(int page);
