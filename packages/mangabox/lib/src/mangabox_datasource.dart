@@ -30,7 +30,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
         .decodeHtmlBody();
 
     return result.when(
-      success: (body) => Result.success(parseResult(body)),
+      success: (body) => Result.success(_parseBody(body)),
       failure: Result.failure,
     );
   }
@@ -50,7 +50,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
         .decodeHtmlBody();
 
     return result.when(
-      success: (body) => Result.success(parseResult(body)),
+      success: (body) => Result.success(_parseBody(body)),
       failure: Result.failure,
     );
   }
@@ -65,9 +65,57 @@ abstract class MangaboxDatasource extends MangaDatasource {
   }
 
   @override
-  Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) {
-    // TODO(Guillaume): implement fetchMangaDetails
-    throw UnimplementedError();
+  Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
+    final result = await client
+        .send(method: HttpMethod.get, baseUrl: manga.url)
+        .decodeString(parse)
+        .decodeHtmlBody();
+
+    return result.when(
+      success: (body) {
+        final author = body.xpathFirst(
+          '//*[@class="table-label" and contains(text(), "Author")]/parent::tr/td[2]/text()|//li[contains(text(), "Author")]/a/text()',
+        );
+        final alternative = body.xpathFirst(
+          '//*[@class="table-label" and contains(text(), "Alternative")]/parent::tr/td[2]/text()',
+        );
+        String? description = body.xpathFirst(
+          '//*[@id="panel-story-info-description" ]/text() | //*[@id="story_discription" ]/text() | //div[@id="noidungm"]/text()',
+        );
+
+        if (description case final desc? when desc.isNotEmpty) {
+          String cleanedDesc = desc
+              .split(RegExp('summary:', caseSensitive: false))
+              .last
+              .replaceAll('\n', ' ')
+              .replaceAll('Description :', '')
+              .trim();
+          if (alternative case final alt? when alt.isNotEmpty) {
+            cleanedDesc += '\n\nAlternative Name: $alt';
+          }
+          description = cleanedDesc;
+        }
+
+        final statusStr = body.xpathFirst(
+          '//*[@class="table-label" and contains(text(), "Status")]/parent::tr/td[2]/text() | //li[contains(text(), "Status")]/text() | //li[contains(text(), "Status")]/a/text()',
+        );
+        final status = _parseStatus(statusStr?.split(':').last.trim());
+
+        final genres = body.xpath(
+          '//*[@class="table-label" and contains(text(), "Genres")]/parent::tr/td[2]/a/text() | //li[contains(text(), "Genres")]/a/text()',
+        );
+
+        return Result.success(
+          manga.copyWith(
+            author: author,
+            description: description,
+            status: status,
+            genre: genres.isNotEmpty ? genres.join(', ') : null,
+          ),
+        );
+      },
+      failure: Result.failure,
+    );
   }
 
   @override
@@ -81,9 +129,19 @@ abstract class MangaboxDatasource extends MangaDatasource {
   @override
   Future<Result<List<SourceChapter>, HttpError>> fetchChapters(
     SourceManga sourceManga,
-  ) {
-    // TODO(Guillaume): implement fetchChapters
-    throw UnimplementedError();
+  ) async {
+    final result = await client
+        .send(method: HttpMethod.get, baseUrl: sourceManga.url)
+        .decodeString(parse)
+        .decodeHtmlBody();
+
+    return result.when(
+      success: (body) {
+        // TODO(Guillaume): parse chapters
+        return const Result.success([]);
+      },
+      failure: Result.failure,
+    );
   }
 
   @override
@@ -92,21 +150,21 @@ abstract class MangaboxDatasource extends MangaDatasource {
     throw UnimplementedError();
   }
 
-  MangasPage parseResult(dom.Element result) {
+  MangasPage _parseBody(dom.Element body) {
     final mangaList = <SourceManga>[];
-    List<String> urls = result.xpath(
+    List<String> urls = body.xpath(
       '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/@href',
     );
-    List<String> names = result.xpath(
+    List<String> names = body.xpath(
       '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h3/a/text()',
     );
-    final images = result.xpath(
+    final images = body.xpath(
       '//*[ @class="content-genres-item"  or @class="list-story-item" or @class="story-item" or @class="list-truyen-item-wrap"]/a/img/@src',
     );
 
     if (names.isEmpty) {
-      names = result.xpath('//*[@class="list-story-item"]/a/@title');
-      urls = result.xpath('//*[@class="list-story-item"]/a/@href');
+      names = body.xpath('//*[@class="list-story-item"]/a/@title');
+      urls = body.xpath('//*[@class="list-story-item"]/a/@href');
     }
 
     for (int i = 0; i < names.length; i++) {
@@ -121,6 +179,17 @@ abstract class MangaboxDatasource extends MangaDatasource {
     }
 
     return MangasPage(mangaList: mangaList, hasMore: true);
+  }
+
+  MangaStatus _parseStatus(String? statusStr) {
+    if (statusStr == null) return MangaStatus.unknown;
+    if (statusStr.contains(RegExp('Ongoing', caseSensitive: false))) {
+      return MangaStatus.ongoing;
+    } else if (statusStr.contains(RegExp('Completed', caseSensitive: false))) {
+      return MangaStatus.completed;
+    }
+
+    return MangaStatus.unknown;
   }
 
   RequestPropsRecord popularUrlPath(int page);

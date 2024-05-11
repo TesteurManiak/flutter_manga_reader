@@ -1,11 +1,12 @@
+import 'package:mangabox/mangabox.dart';
 import 'package:mangabox/src/mangabox_datasource.dart';
 
 class MangakakalotDatasource extends MangaboxDatasource {
   MangakakalotDatasource({super.client})
       : super(
           lang: 'en',
-          name: 'MangaKakalot',
-          baseUrl: 'https://mangakakalot.com',
+          name: MBConsts.mangakakalotSourceName,
+          baseUrl: MBConsts.mangakakalotBaseUrl,
         );
 
   @override
