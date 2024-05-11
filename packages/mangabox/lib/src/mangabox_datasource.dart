@@ -73,6 +73,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
 
     return result.when(
       success: (body) {
+        // TODO(Guillaume): move all parsing logic into a helper class
         final author = body.xpathFirst(
           '//*[@class="table-label" and contains(text(), "Author")]/parent::tr/td[2]/text()|//li[contains(text(), "Author")]/a/text()',
         );
