@@ -17,5 +17,8 @@ List<MangaDatasource> mangabox(MangaboxRef ref) {
     MangakakalotDatasource(
       client: ref.watch(sourceClientProvider(MBConsts.mangakakalotBaseUrl)),
     ),
+    ManganatoDatasource(
+      client: ref.watch(sourceClientProvider(MBConsts.manganatoBaseUrl)),
+    ),
   ];
 }

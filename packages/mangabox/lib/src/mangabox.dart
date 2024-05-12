@@ -11,11 +11,13 @@ abstract class MangaboxDatasource extends MangaDatasource {
   MangaboxDatasource({
     required super.name,
     required super.baseUrl,
+    required this.referer,
     RestClient? client,
     this.helper = const MangaboxHelper(),
   })  : client = client ?? RestClient(baseUri: Uri.parse(baseUrl)),
         super(lang: 'en');
 
+  final String referer;
   final RestClient client;
   final MangaboxHelper helper;
 
@@ -74,9 +76,11 @@ abstract class MangaboxDatasource extends MangaDatasource {
 
     return result.when(
       success: (body) {
-        final author = body.xpathFirst(
-          '//*[@class="table-label" and contains(text(), "Author")]/parent::tr/td[2]/text()|//li[contains(text(), "Author")]/a/text()',
-        );
+        final author = body
+            .xpathFirst(
+              '//*[@class="table-label" and contains(text(), "Author")]/parent::tr/td[2]/text()|//li[contains(text(), "Author")]/a/text()',
+            )
+            ?.trim();
         final alternative = body.xpathFirst(
           '//*[@class="table-label" and contains(text(), "Alternative")]/parent::tr/td[2]/text()',
         );
@@ -237,6 +241,9 @@ abstract class MangaboxDatasource extends MangaDatasource {
 
     return MangasPage(mangaList: mangaList, hasMore: true);
   }
+
+  @override
+  Map<String, String> getHeaders() => {'Referer': referer};
 
   RequestPropsRecord popularUrlPath(int page);
   RequestPropsRecord latestUrlPath(int page);

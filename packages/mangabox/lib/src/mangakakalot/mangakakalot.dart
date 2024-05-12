@@ -1,11 +1,12 @@
 import 'package:mangabox/mangabox.dart';
-import 'package:mangabox/src/mangabox_datasource.dart';
+import 'package:mangabox/src/mangabox.dart';
 
 class MangakakalotDatasource extends MangaboxDatasource {
   MangakakalotDatasource({super.client})
       : super(
           name: 'MangaKakalot',
           baseUrl: MBConsts.mangakakalotBaseUrl,
+          referer: 'https://chapmanganato.to/',
         );
 
   @override
@@ -32,12 +33,5 @@ class MangakakalotDatasource extends MangaboxDatasource {
         'page': page.toString(),
       },
     );
-  }
-
-  @override
-  Map<String, String>? getHeaders() {
-    return {
-      'Referer': 'https://chapmanganato.to/',
-    };
   }
 }

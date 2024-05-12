@@ -1,11 +1,12 @@
 import 'package:mangabox/mangabox.dart';
-import 'package:mangabox/src/mangabox_datasource.dart';
+import 'package:mangabox/src/mangabox.dart';
 
 class MangairoDatasource extends MangaboxDatasource {
   MangairoDatasource({super.client})
       : super(
           name: 'Mangairo',
           baseUrl: MBConsts.mangairoBaseUrl,
+          referer: 'https://chap.mangairo.com/',
         );
 
   @override
@@ -34,12 +35,5 @@ class MangairoDatasource extends MangaboxDatasource {
       ],
       queryParameters: null,
     );
-  }
-
-  @override
-  Map<String, String>? getHeaders() {
-    return {
-      'Referer': 'https://chap.mangairo.com/',
-    };
   }
 }

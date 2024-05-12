@@ -1,10 +1,11 @@
 import 'package:mangabox/mangabox.dart';
-import 'package:mangabox/src/mangabox_datasource.dart';
+import 'package:mangabox/src/mangabox.dart';
 
 class MangabatDatasource extends MangaboxDatasource {
   MangabatDatasource({super.client})
       : super(
           name: 'Mangabat',
+          referer: 'https://readmangabat.com/',
           baseUrl: MBConsts.mangabatBaseUrl,
         );
 
@@ -24,12 +25,5 @@ class MangabatDatasource extends MangaboxDatasource {
       pathSegments: ['manga-list-all', '$page'],
       queryParameters: null,
     );
-  }
-
-  @override
-  Map<String, String>? getHeaders() {
-    return {
-      'Referer': 'https://readmangabat.com/',
-    };
   }
 }
