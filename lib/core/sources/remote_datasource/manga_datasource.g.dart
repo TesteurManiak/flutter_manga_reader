@@ -187,7 +187,7 @@ class _FetchChapterPagesProviderElement
       (origin as FetchChapterPagesProvider).sourceChapter;
 }
 
-String _$mangaDatasourcesHash() => r'c7c0e364be292c23911134f9bed03fafe7058b50';
+String _$mangaDatasourcesHash() => r'd4d11d6722447d11dfafabc15d5af6de86fdd98c';
 
 /// See also [mangaDatasources].
 @ProviderFor(mangaDatasources)
@@ -333,7 +333,7 @@ class _GetSourceFromIdProviderElement
   String get sourceId => (origin as GetSourceFromIdProvider).sourceId;
 }
 
-String _$getSourceIdHash() => r'9a005ef6d48ce920fb314bdcbb5e57bbb93f711e';
+String _$getSourceIdHash() => r'44f65246755b5f112281572b901261fe55ff74db';
 
 /// See also [getSourceId].
 @ProviderFor(getSourceId)

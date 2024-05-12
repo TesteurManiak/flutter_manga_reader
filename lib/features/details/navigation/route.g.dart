@@ -63,17 +63,18 @@ bool _$boolConverter(String value) {
 }
 
 RouteBase get $coverViewerRoute => GoRouteData.$route(
-      path: '/cover/:coverUrl',
+      path: '/cover/:sourceId/:coverUrl',
       factory: $CoverViewerRouteExtension._fromState,
     );
 
 extension $CoverViewerRouteExtension on CoverViewerRoute {
   static CoverViewerRoute _fromState(GoRouterState state) => CoverViewerRoute(
+        sourceId: state.pathParameters['sourceId']!,
         coverUrl: state.pathParameters['coverUrl']!,
       );
 
   String get location => GoRouteData.$location(
-        '/cover/${Uri.encodeComponent(coverUrl)}',
+        '/cover/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(coverUrl)}',
       );
 
   void go(BuildContext context) => context.go(location);

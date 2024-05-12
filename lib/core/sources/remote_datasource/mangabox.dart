@@ -9,16 +9,13 @@ part 'mangabox.g.dart';
 List<MangaDatasource> mangabox(MangaboxRef ref) {
   return [
     MangabatDatasource(
-      client: RestClient(
-        baseUri: Uri.parse(MBConsts.mangabatBaseUrl),
-        httpClient: ref.watch(cacheClientProvider),
-      ),
+      client: ref.watch(sourceClientProvider(MBConsts.mangabatBaseUrl)),
+    ),
+    MangairoDatasource(
+      client: ref.watch(sourceClientProvider(MBConsts.mangairoBaseUrl)),
     ),
     MangakakalotDatasource(
-      client: RestClient(
-        baseUri: Uri.parse(MBConsts.mangakakalotBaseUrl),
-        httpClient: ref.watch(cacheClientProvider),
-      ),
+      client: ref.watch(sourceClientProvider(MBConsts.mangakakalotBaseUrl)),
     ),
   ];
 }

@@ -56,13 +56,10 @@ part 'mangadex.g.dart';
 
 @Riverpod(keepAlive: true)
 List<MangaDatasource> mangadex(MangadexRef ref) {
-  final mangadexClient = RestClient(
-    baseUri: Uri.parse(MDConstants.apiUrl),
-    httpClient: ref.watch(cacheClientProvider),
-  );
+  final client = ref.watch(sourceClientProvider(MDConstants.apiUrl));
 
   return [
-    MangadexDatasource(lang: 'en', client: mangadexClient),
-    MangadexDatasource(lang: 'fr', client: mangadexClient),
+    MangadexDatasource(lang: 'en', client: client),
+    MangadexDatasource(lang: 'fr', client: client),
   ];
 }

@@ -35,12 +35,14 @@ class DetailsRoute extends GoRouteData {
 @TypedGoRoute<CoverViewerRoute>(path: CoverViewerRoute.path)
 class CoverViewerRoute extends GoRouteData {
   const CoverViewerRoute({
+    required this.sourceId,
     required this.coverUrl,
   });
 
+  final String sourceId;
   final String coverUrl;
 
-  static const path = '/cover/:coverUrl';
+  static const path = '/cover/:sourceId/:coverUrl';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
@@ -48,7 +50,10 @@ class CoverViewerRoute extends GoRouteData {
       opaque: false,
       fullscreenDialog: true,
       transitionsBuilder: (_, __, ___, child) => child,
-      child: CoverViewerView(coverUrl),
+      child: SourceProviderScope(
+        sourceId: sourceId,
+        child: CoverViewerView(coverUrl),
+      ),
     );
   }
 }

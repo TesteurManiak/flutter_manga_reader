@@ -7,7 +7,7 @@ Base implementation used by multiple manga sources.
 | Source | Implemented |
 | --- | --- |
 | [MangaBat][mangabat] | :white_check_mark: |
-| [Mangairo][mangairo] | :red_circle: |
+| [Mangairo][mangairo] | :white_check_mark: |
 | [Mangakakalot][mangakakalot] | :white_check_mark: |
 | [Manganato][manganato] | :red_circle: |
 

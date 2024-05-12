@@ -24,6 +24,8 @@ _WIP_
 
 ## Supported sources
 
+_WIP_
+
 | Source | Supported |
 | --- | --- |
 | Asura Scans | :red_circle: |
@@ -32,21 +34,20 @@ _WIP_
 | MangaBat | :white_check_mark: |
 | MangaDex | :white_check_mark: |
 | Mangahere | :red_circle: |
+| Mangairo | :white_check_mark: |
 | Mangakakalot | :white_check_mark: |
+| Manganato | :white_check_mark: |
 | Webtoons.com | :red_circle: |
-
-_WIP_
 
 
 ## Features
 
+_WIP_
+
 * Webtoon and paginated manga reading
 * Download manga chapters for offline reading
-* Browse content from MangaDex
 * Language support for English and French
 * Light and dark themes
-
-_WIP_
 
 ## Run the app
 

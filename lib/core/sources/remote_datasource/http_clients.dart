@@ -9,3 +9,11 @@ part 'http_clients.g.dart';
 Client cacheClient(CacheClientRef ref) {
   return CacheClient(cacheService: ref.watch(networkCacheServiceProvider));
 }
+
+@Riverpod(keepAlive: true)
+RestClient sourceClient(SourceClientRef ref, String baseUrl) {
+  return RestClient(
+    baseUri: Uri.parse(baseUrl),
+    httpClient: ref.watch(cacheClientProvider),
+  );
+}

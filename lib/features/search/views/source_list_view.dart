@@ -41,7 +41,7 @@ class _SourceTile extends StatelessWidget {
       title: Text(source.name),
       subtitle: Text(Locale(source.lang).translatedLocaleName),
       onTap: () {
-        BrowseSourceRoute(sourceId: source.sourceId).push<void>(context);
+        BrowseSourceRoute(sourceId: source.id).push<void>(context);
       },
     );
   }

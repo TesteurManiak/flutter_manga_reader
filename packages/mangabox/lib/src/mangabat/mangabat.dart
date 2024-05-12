@@ -4,7 +4,6 @@ import 'package:mangabox/src/mangabox_datasource.dart';
 class MangabatDatasource extends MangaboxDatasource {
   MangabatDatasource({super.client})
       : super(
-          lang: 'en',
           name: 'Mangabat',
           baseUrl: MBConsts.mangabatBaseUrl,
         );

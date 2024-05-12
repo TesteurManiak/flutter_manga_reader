@@ -162,7 +162,7 @@ class _ScopedSelectionModeProviderElement
   int get mangaId => (origin as ScopedSelectionModeProvider).mangaId;
 }
 
-String _$detailsControllerHash() => r'f1ad59371fefe607f9a99ae7af88d271243882e1';
+String _$detailsControllerHash() => r'71759f0835268b11f13606feb5471e91f838832c';
 
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {

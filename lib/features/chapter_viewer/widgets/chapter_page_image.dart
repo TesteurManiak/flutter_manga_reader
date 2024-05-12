@@ -46,9 +46,6 @@ class _ChapterPageImageState extends ConsumerState<ChapterPageImage> {
       url: widget.page.imageUrl,
       fit: widget.fit,
       headers: source.getHeaders(),
-      // headers: const {
-      //   'Referer': 'https://chapmanganato.to/',
-      // },
       progressIndicatorBuilder: (_, progress) {
         return _LoadingPlaceholder(progress);
       },

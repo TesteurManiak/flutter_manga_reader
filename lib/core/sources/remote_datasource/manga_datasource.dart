@@ -27,8 +27,8 @@ Map<String, MangaDatasource> mangaDatasources(MangaDatasourcesRef ref) {
   final mangabox = ref.watch(mangaboxProvider);
 
   return {
-    for (final e in mangadex) e.sourceId: e,
-    for (final e in mangabox) e.sourceId: e,
+    for (final e in mangadex) e.id: e,
+    for (final e in mangabox) e.id: e,
   };
 }
 
@@ -46,5 +46,5 @@ MangaDatasource getSourceFromId(GetSourceFromIdRef ref, String sourceId) {
 
 @riverpod
 String getSourceId(GetSourceIdRef ref, SourceManga sourceManga) {
-  return ref.watch(getSourceFromIdProvider(sourceManga.sourceId)).sourceId;
+  return ref.watch(getSourceFromIdProvider(sourceManga.sourceId)).id;
 }

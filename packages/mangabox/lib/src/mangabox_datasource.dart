@@ -9,12 +9,12 @@ typedef RequestPropsRecord = ({
 
 abstract class MangaboxDatasource extends MangaDatasource {
   MangaboxDatasource({
-    required super.lang,
     required super.name,
     required super.baseUrl,
     RestClient? client,
     this.helper = const MangaboxHelper(),
-  }) : client = client ?? RestClient(baseUri: Uri.parse(baseUrl));
+  })  : client = client ?? RestClient(baseUri: Uri.parse(baseUrl)),
+        super(lang: 'en');
 
   final RestClient client;
   final MangaboxHelper helper;

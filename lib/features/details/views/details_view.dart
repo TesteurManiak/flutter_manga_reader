@@ -226,32 +226,13 @@ class _SliverHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: SeparatedRow(
           separator: const SizedBox(width: 8),
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: GestureDetector(
-                onTap: () {
-                  if (manga?.thumbnailUrl case final url?) {
-                    CoverViewerRoute(coverUrl: url).push<void>(context);
-                  }
-                },
-                child: Hero(
-                  tag: CoverViewerView.tag,
-                  child: AppNetworkImage(
-                    url: manga?.thumbnailUrl,
-                    width: size.width / 4,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
+            _Cover(manga?.thumbnailUrl),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -275,6 +256,40 @@ class _SliverHeader extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Cover extends ConsumerWidget {
+  const _Cover(this.thumbnailUrl);
+
+  final String? thumbnailUrl;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final size = MediaQuery.sizeOf(context);
+    final source = ref.watch(scopedMangaDatasourceProvider);
+    final headers = source.getHeaders();
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: GestureDetector(
+        onTap: () {
+          if (thumbnailUrl case final url?) {
+            CoverViewerRoute(coverUrl: url, sourceId: source.id)
+                .push<void>(context);
+          }
+        },
+        child: Hero(
+          tag: CoverViewerView.tag,
+          child: AppNetworkImage(
+            url: thumbnailUrl,
+            width: size.width / 4,
+            fit: BoxFit.cover,
+            headers: headers,
+          ),
         ),
       ),
     );
@@ -451,7 +466,7 @@ class _SliverChapterList extends ConsumerWidget {
               final chapter = chapters[index];
               return ChapterTile(
                 mangaId: mangaId,
-                sourceId: ref.read(scopedMangaDatasourceProvider).sourceId,
+                sourceId: ref.read(scopedMangaDatasourceProvider).id,
                 chapter: chapter,
               );
             },

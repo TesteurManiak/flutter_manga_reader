@@ -6,7 +6,7 @@ part of 'mangadex.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mangadexHash() => r'17df3edfe3cee860b88d95f7589607ff5ee16fc7';
+String _$mangadexHash() => r'0abf8e51f4f1fabf4ee486c9bce3e79dfcb66a4f';
 
 /// See also [mangadex].
 @ProviderFor(mangadex)
