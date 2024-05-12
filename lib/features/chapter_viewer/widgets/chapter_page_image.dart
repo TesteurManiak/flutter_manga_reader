@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/directories.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class ChapterPageImage extends StatefulWidget {
+class ChapterPageImage extends ConsumerStatefulWidget {
   const ChapterPageImage({
     required this.chapter,
     required this.page,
@@ -22,10 +23,10 @@ class ChapterPageImage extends StatefulWidget {
   final BoxFit? fit;
 
   @override
-  State<ChapterPageImage> createState() => _ChapterPageImageState();
+  ConsumerState<ChapterPageImage> createState() => _ChapterPageImageState();
 }
 
-class _ChapterPageImageState extends State<ChapterPageImage> {
+class _ChapterPageImageState extends ConsumerState<ChapterPageImage> {
   Key imageKey = UniqueKey();
 
   @override
@@ -38,10 +39,16 @@ class _ChapterPageImageState extends State<ChapterPageImage> {
       );
     }
 
+    final source = ref.watch(scopedMangaDatasourceProvider);
+
     return AppNetworkImage(
       key: imageKey,
       url: widget.page.imageUrl,
       fit: widget.fit,
+      headers: source.getHeaders(),
+      // headers: const {
+      //   'Referer': 'https://chapmanganato.to/',
+      // },
       progressIndicatorBuilder: (_, progress) {
         return _LoadingPlaceholder(progress);
       },

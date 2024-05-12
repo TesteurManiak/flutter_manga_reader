@@ -7,7 +7,6 @@ class MangakakalotDatasource extends MangaboxDatasource {
           lang: 'en',
           name: MBConsts.mangakakalotSourceName,
           baseUrl: MBConsts.mangakakalotBaseUrl,
-          hasCloudflareProtection: true,
         );
 
   @override
@@ -34,5 +33,12 @@ class MangakakalotDatasource extends MangaboxDatasource {
         'page': page.toString(),
       },
     );
+  }
+
+  @override
+  Map<String, String>? getHeaders() {
+    return {
+      'Referer': 'https://chapmanganato.to/',
+    };
   }
 }

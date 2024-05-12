@@ -13,7 +13,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
     required super.name,
     required super.baseUrl,
     RestClient? client,
-    super.hasCloudflareProtection,
     this.helper = const MangaboxHelper(),
   }) : client = client ?? RestClient(baseUri: Uri.parse(baseUrl));
 
@@ -28,6 +27,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
           method: HttpMethod.get,
           pathSegments: pathSegments,
           queryParameters: queryParameters,
+          headers: getHeaders(),
         )
         .decodeHtmlBody();
 
@@ -47,6 +47,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
           method: HttpMethod.get,
           pathSegments: pathSegments,
           queryParameters: queryParameters,
+          headers: getHeaders(),
         )
         .decodeHtmlBody();
 
@@ -68,7 +69,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
   @override
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
     final result = await client
-        .send(method: HttpMethod.get, baseUrl: manga.url)
+        .send(method: HttpMethod.get, baseUrl: manga.url, headers: getHeaders())
         .decodeHtmlBody();
 
     return result.when(
@@ -123,7 +124,11 @@ abstract class MangaboxDatasource extends MangaDatasource {
     SourceChapter chapter,
   ) async {
     final result = await client
-        .send(method: HttpMethod.get, baseUrl: chapter.url)
+        .send(
+          method: HttpMethod.get,
+          baseUrl: chapter.url,
+          headers: getHeaders(),
+        )
         .decodeHtmlBody();
 
     return result.when(
@@ -135,7 +140,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
         );
 
         for (final (i, url) in urls.indexed) {
-          // TODO: need to handle cloudflare protection
           if (url.startsWith('https://convert_image_digi.mgicdn.com')) {
             final realUrl =
                 "https://images.weserv.nl/?url=${url.substringAfter("//")}";
@@ -156,7 +160,11 @@ abstract class MangaboxDatasource extends MangaDatasource {
     SourceManga sourceManga,
   ) async {
     final result = await client
-        .send(method: HttpMethod.get, baseUrl: sourceManga.url)
+        .send(
+          method: HttpMethod.get,
+          baseUrl: sourceManga.url,
+          headers: getHeaders(),
+        )
         .decodeHtmlBody();
 
     return result.when(

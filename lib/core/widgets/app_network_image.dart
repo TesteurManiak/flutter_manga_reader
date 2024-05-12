@@ -21,6 +21,7 @@ class AppNetworkImage extends ConsumerWidget {
     this.height,
     this.width,
     this.fit,
+    this.headers,
     this.progressIndicatorBuilder,
     this.errorBuilder,
   });
@@ -29,6 +30,7 @@ class AppNetworkImage extends ConsumerWidget {
   final double? height;
   final double? width;
   final BoxFit? fit;
+  final Map<String, String>? headers;
   final ImageProgressIndicatorBuilder? progressIndicatorBuilder;
   final ImageErrorBuilder? errorBuilder;
 
@@ -46,6 +48,7 @@ class AppNetworkImage extends ConsumerWidget {
       image: CachedNetworkImageProvider(
         localUrl,
         cacheManager: ref.watch(cacheManagerProvider),
+        headers: headers,
       ),
       height: height,
       width: width,
