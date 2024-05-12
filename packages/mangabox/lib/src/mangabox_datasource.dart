@@ -120,9 +120,34 @@ abstract class MangaboxDatasource extends MangaDatasource {
   @override
   Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
     SourceChapter chapter,
-  ) {
-    // TODO(Guillaume): implement fetchChapterPages
-    throw UnimplementedError();
+  ) async {
+    final result = await client
+        .send(method: HttpMethod.get, baseUrl: chapter.url)
+        .decodeHtmlBody();
+
+    return result.when(
+      success: (body) {
+        final pages = <ChapterPage>[];
+
+        final urls = body.xpath(
+          '//div[@class="container-chapter-reader" or @class="panel-read-story"]/img/@src',
+        );
+
+        for (final (i, url) in urls.indexed) {
+          // TODO: need to handle cloudflare protection
+          if (url.startsWith('https://convert_image_digi.mgicdn.com')) {
+            final realUrl =
+                "https://images.weserv.nl/?url=${url.substringAfter("//")}";
+            pages.add(ChapterPage(index: i + 1, imageUrl: realUrl));
+          } else {
+            pages.add(ChapterPage(index: i + 1, imageUrl: url));
+          }
+        }
+
+        return Result.success(pages);
+      },
+      failure: Result.failure,
+    );
   }
 
   @override
@@ -206,4 +231,11 @@ abstract class MangaboxDatasource extends MangaDatasource {
 
   RequestPropsRecord popularUrlPath(int page);
   RequestPropsRecord latestUrlPath(int page);
+}
+
+extension on String {
+  String substringAfter(String delimiter) {
+    final index = indexOf(delimiter);
+    return index == -1 ? this : substring(index + delimiter.length);
+  }
 }
