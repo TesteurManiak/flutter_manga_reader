@@ -121,6 +121,8 @@ class _ContentState extends ConsumerState<_Content> {
       },
       body: switch (state) {
         ChapterViewerLoading() => const LoadingContent(),
+        ChapterViewerLoaded(:final pages) when pages.isEmpty =>
+          const LoadingContent(),
         ChapterViewerLoaded(:final chapter, :final pages) => _PageViewer(
             chapter: chapter,
             chapterController: chapterPageController,
