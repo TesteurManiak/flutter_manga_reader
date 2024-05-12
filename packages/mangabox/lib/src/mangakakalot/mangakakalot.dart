@@ -5,7 +5,7 @@ class MangakakalotDatasource extends MangaboxDatasource {
   MangakakalotDatasource({super.client})
       : super(
           lang: 'en',
-          name: MBConsts.mangakakalotSourceName,
+          name: 'MangaKakalot',
           baseUrl: MBConsts.mangakakalotBaseUrl,
         );
 

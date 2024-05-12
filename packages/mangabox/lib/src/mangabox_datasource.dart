@@ -4,7 +4,7 @@ import 'package:mangabox/src/mangabox_helper.dart';
 
 typedef RequestPropsRecord = ({
   List<String> pathSegments,
-  Map<String, String> queryParameters,
+  Map<String, String>? queryParameters,
 });
 
 abstract class MangaboxDatasource extends MangaDatasource {
