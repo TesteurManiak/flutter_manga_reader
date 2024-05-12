@@ -1,18 +1,20 @@
-name: manga_reader_core
-description: Core package for manga reader.
+name: mangabox
+description: Wrapper for the Mangabox's websites.
 version: 0.0.1
 homepage: https://github.com/TesteurManiak/flutter_manga_reader
+publish_to: none
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   clock: ^1.1.1
+  collection: ^1.18.0
   freezed_annotation: ^2.4.1
-  html: ^0.15.4
-  http: ^1.2.1
+  intl: ^0.18.1
   json_annotation: ^4.9.0
-  xpath_selector_html_parser: ^3.0.1
+  manga_reader_core:
+    path: ../manga_reader_core
 
 dev_dependencies:
   build_runner: ^2.4.9

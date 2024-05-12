@@ -58,4 +58,6 @@ abstract class MangaDatasource {
   Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
     SourceChapter chapter,
   );
+
+  Map<String, String>? getHeaders() => null;
 }

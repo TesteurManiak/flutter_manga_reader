@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
@@ -52,9 +53,10 @@ class ChapterTile extends ConsumerWidget {
         chapterId: chapter.id,
         initiallyDownloaded: chapter.downloaded,
         onPressed: () {
+          final source = ref.read(scopedMangaDatasourceProvider);
           ref
               .read(downloadQueueControllerProvider.notifier)
-              .queueChapterDownload(chapter);
+              .queueChapterDownload(chapter, source.getHeaders());
         },
       ),
       onTap: () {

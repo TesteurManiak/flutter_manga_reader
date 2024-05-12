@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' show parse;
 
 part 'result.freezed.dart';
 
@@ -30,9 +32,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
         }
         json = decodedJson;
       } else {
-        if (s is! Map<String, dynamic>) {
-          throw InvalidJSONException(s);
-        }
+        if (s is! Map<String, dynamic>) throw InvalidJSONException(s);
         json = s;
       }
       return decoder(json);
@@ -45,14 +45,10 @@ extension ResultDecoder<F> on Result<Object?, F> {
         final List<Object?> json;
         if (s is String) {
           final decodedJson = jsonDecode(s);
-          if (decodedJson is! List) {
-            throw InvalidJSONException(decodedJson);
-          }
+          if (decodedJson is! List) throw InvalidJSONException(decodedJson);
           json = decodedJson;
         } else {
-          if (s is! List) {
-            throw InvalidJSONException(s);
-          }
+          if (s is! List) throw InvalidJSONException(s);
           json = s;
         }
 
@@ -62,6 +58,23 @@ extension ResultDecoder<F> on Result<Object?, F> {
             .toList();
       },
     );
+  }
+
+  Result<S, F> decodeString<S>(S Function(String) decoder) {
+    return whenSuccess<S>((s) {
+      return switch (s) {
+        String() => decoder(s),
+        Object() => decoder(s.toString()),
+        null => throw const InvalidJSONException(),
+      };
+    });
+  }
+
+  Result<dom.Element, F> decodeHtmlBody() {
+    return decodeString(parse).whenSuccess((document) {
+      if (document.body case final body?) return body;
+      throw InvalidHtmlException(document.body);
+    });
   }
 }
 
@@ -77,8 +90,20 @@ extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
   ) async {
     return (await this).decodeList(decoder);
   }
+
+  Future<Result<S, F>> decodeString<S>(S Function(String) decoder) async {
+    return (await this).decodeString(decoder);
+  }
+
+  Future<Result<dom.Element, F>> decodeHtmlBody() async {
+    return (await this).decodeHtmlBody();
+  }
 }
 
 class InvalidJSONException extends FormatException {
   const InvalidJSONException([Object? source]) : super('Invalid JSON', source);
+}
+
+class InvalidHtmlException extends FormatException {
+  const InvalidHtmlException([Object? source]) : super('Invalid HTML', source);
 }

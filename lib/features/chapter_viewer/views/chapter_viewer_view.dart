@@ -97,6 +97,8 @@ class _ContentState extends ConsumerState<_Content> {
   Widget build(BuildContext context) {
     final state = ref.watch(chapterViewerControllerProvider(widget.chapterId));
 
+    // TODO(Guillaume): handle when chapter's pages are empty (pop view and show error message)
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,

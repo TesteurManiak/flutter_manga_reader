@@ -20,6 +20,7 @@ mixin _$ChapterDownloadTask {
   List<ChapterPage> get pages => throw _privateConstructorUsedError;
   DownloadTaskStatus get status => throw _privateConstructorUsedError;
   double get progress => throw _privateConstructorUsedError;
+  Map<String, String>? get headers => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChapterDownloadTaskCopyWith<ChapterDownloadTask> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $ChapterDownloadTaskCopyWith<$Res> {
       {Chapter chapter,
       List<ChapterPage> pages,
       DownloadTaskStatus status,
-      double progress});
+      double progress,
+      Map<String, String>? headers});
 
   $ChapterCopyWith<$Res> get chapter;
 }
@@ -58,6 +60,7 @@ class _$ChapterDownloadTaskCopyWithImpl<$Res, $Val extends ChapterDownloadTask>
     Object? pages = null,
     Object? status = null,
     Object? progress = null,
+    Object? headers = freezed,
   }) {
     return _then(_value.copyWith(
       chapter: null == chapter
@@ -76,6 +79,10 @@ class _$ChapterDownloadTaskCopyWithImpl<$Res, $Val extends ChapterDownloadTask>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as double,
+      headers: freezed == headers
+          ? _value.headers
+          : headers // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ) as $Val);
   }
 
@@ -100,7 +107,8 @@ abstract class _$$ChapterDownloadTaskImplCopyWith<$Res>
       {Chapter chapter,
       List<ChapterPage> pages,
       DownloadTaskStatus status,
-      double progress});
+      double progress,
+      Map<String, String>? headers});
 
   @override
   $ChapterCopyWith<$Res> get chapter;
@@ -121,6 +129,7 @@ class __$$ChapterDownloadTaskImplCopyWithImpl<$Res>
     Object? pages = null,
     Object? status = null,
     Object? progress = null,
+    Object? headers = freezed,
   }) {
     return _then(_$ChapterDownloadTaskImpl(
       chapter: null == chapter
@@ -139,6 +148,10 @@ class __$$ChapterDownloadTaskImplCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as double,
+      headers: freezed == headers
+          ? _value._headers
+          : headers // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
     ));
   }
 }
@@ -150,8 +163,10 @@ class _$ChapterDownloadTaskImpl extends _ChapterDownloadTask {
       {required this.chapter,
       required final List<ChapterPage> pages,
       this.status = DownloadTaskStatus.pending,
-      this.progress = 0})
+      this.progress = 0,
+      final Map<String, String>? headers})
       : _pages = pages,
+        _headers = headers,
         super._();
 
   @override
@@ -170,10 +185,19 @@ class _$ChapterDownloadTaskImpl extends _ChapterDownloadTask {
   @override
   @JsonKey()
   final double progress;
+  final Map<String, String>? _headers;
+  @override
+  Map<String, String>? get headers {
+    final value = _headers;
+    if (value == null) return null;
+    if (_headers is EqualUnmodifiableMapView) return _headers;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
 
   @override
   String toString() {
-    return 'ChapterDownloadTask(chapter: $chapter, pages: $pages, status: $status, progress: $progress)';
+    return 'ChapterDownloadTask(chapter: $chapter, pages: $pages, status: $status, progress: $progress, headers: $headers)';
   }
 
   @override
@@ -185,12 +209,18 @@ class _$ChapterDownloadTaskImpl extends _ChapterDownloadTask {
             const DeepCollectionEquality().equals(other._pages, _pages) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.progress, progress) ||
-                other.progress == progress));
+                other.progress == progress) &&
+            const DeepCollectionEquality().equals(other._headers, _headers));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, chapter,
-      const DeepCollectionEquality().hash(_pages), status, progress);
+  int get hashCode => Object.hash(
+      runtimeType,
+      chapter,
+      const DeepCollectionEquality().hash(_pages),
+      status,
+      progress,
+      const DeepCollectionEquality().hash(_headers));
 
   @JsonKey(ignore: true)
   @override
@@ -205,7 +235,8 @@ abstract class _ChapterDownloadTask extends ChapterDownloadTask {
       {required final Chapter chapter,
       required final List<ChapterPage> pages,
       final DownloadTaskStatus status,
-      final double progress}) = _$ChapterDownloadTaskImpl;
+      final double progress,
+      final Map<String, String>? headers}) = _$ChapterDownloadTaskImpl;
   const _ChapterDownloadTask._() : super._();
 
   @override
@@ -216,6 +247,8 @@ abstract class _ChapterDownloadTask extends ChapterDownloadTask {
   DownloadTaskStatus get status;
   @override
   double get progress;
+  @override
+  Map<String, String>? get headers;
   @override
   @JsonKey(ignore: true)
   _$$ChapterDownloadTaskImplCopyWith<_$ChapterDownloadTaskImpl> get copyWith =>

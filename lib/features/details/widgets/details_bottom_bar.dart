@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -53,7 +54,10 @@ class DetailsBottomBar extends ConsumerWidget {
             IconButton(
               tooltip: strings.download,
               onPressed: () {
-                ref.read(provider.notifier).downloadSelectedChapters();
+                final source = ref.read(scopedMangaDatasourceProvider);
+                ref
+                    .read(provider.notifier)
+                    .downloadSelectedChapters(source.getHeaders());
               },
               icon: const Icon(Icons.download),
             ),

@@ -1,6 +1,6 @@
-import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/mangabox.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/mangadex.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:mangadex/mangadex.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'manga_datasource.g.dart';
@@ -23,19 +23,12 @@ Future<Result<List<ChapterPage>, HttpError>> fetchChapterPages(
 
 @riverpod
 Map<String, MangaDatasource> mangaDatasources(MangaDatasourcesRef ref) {
-  final mangadexClient = RestClient(
-    baseUri: Uri.parse(MDConstants.apiUrl),
-    httpClient: CacheClient(
-      cacheService: ref.watch(networkCacheServiceProvider),
-    ),
-  );
-
-  final mangadexEn = MangadexDatasource(lang: 'en', client: mangadexClient);
-  final mangadexFr = MangadexDatasource(lang: 'fr', client: mangadexClient);
+  final mangadex = ref.watch(mangadexProvider);
+  final mangabox = ref.watch(mangaboxProvider);
 
   return {
-    mangadexEn.sourceId: mangadexEn,
-    mangadexFr.sourceId: mangadexFr,
+    for (final e in mangadex) e.sourceId: e,
+    for (final e in mangabox) e.sourceId: e,
   };
 }
 

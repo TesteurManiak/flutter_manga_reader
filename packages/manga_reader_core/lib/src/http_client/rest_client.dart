@@ -23,15 +23,23 @@ class RestClient {
 
   Future<Result<Object, HttpError>> send({
     required HttpMethod method,
-    required List<String> pathSegments,
+    String? baseUrl,
+    List<String> pathSegments = const [],
     Map<String, Object?>? queryParameters,
     Map<String, String>? headers,
     Map<String, String>? body,
     List<ApiMultipartFile>? files,
   }) async {
+    final baseUri = baseUrl != null ? Uri.parse(baseUrl) : this.baseUri;
     final uri = baseUri.replace(
-      pathSegments: pathSegments,
-      queryParameters: queryParameters?.normalize(),
+      pathSegments: [
+        ...baseUri.pathSegments,
+        ...pathSegments,
+      ],
+      queryParameters: {
+        ...baseUri.queryParameters,
+        if (queryParameters?.normalize() case final params?) ...params,
+      },
     );
 
     final request = files != null && files.isNotEmpty

@@ -159,14 +159,14 @@ class DetailsController extends _$DetailsController {
     state = state.copyWith(selectedChapters: [], selectionMode: false);
   }
 
-  Future<void> downloadSelectedChapters() async {
+  Future<void> downloadSelectedChapters(Map<String, String>? headers) async {
     final selectedChapters = state.selectedChapters;
     if (selectedChapters.isEmpty) return;
 
     for (final chapter in selectedChapters) {
       await ref
           .read(downloadQueueControllerProvider.notifier)
-          .queueChapterDownload(chapter);
+          .queueChapterDownload(chapter, headers);
     }
 
     state = state.copyWith(selectedChapters: [], selectionMode: false);
