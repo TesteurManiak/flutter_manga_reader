@@ -30,11 +30,18 @@ class DownloadQueueController extends _$DownloadQueueController {
     }
   }
 
-  Future<void> queueChapterDownload(Chapter chapter) async {
+  Future<void> queueChapterDownload(
+    Chapter chapter,
+    Map<String, String>? headers,
+  ) async {
     final result = await ref
         .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
     if (result case Success(success: final pages) when pages.isNotEmpty) {
-      final task = ChapterDownloadTask(chapter: chapter, pages: pages);
+      final task = ChapterDownloadTask(
+        chapter: chapter,
+        pages: pages,
+        headers: headers,
+      );
       state = {...state, chapter.id: task};
       _waiting.add(task);
       _advanceQueue();
@@ -130,6 +137,7 @@ extension on ChapterDownloadTask {
             url: page.imageUrl,
             filename: page.getFilename(),
             directory: chapter.localPath,
+            headers: headers ?? {},
           ),
     ];
   }

@@ -10,6 +10,7 @@ class ChapterDownloadTask with _$ChapterDownloadTask {
     required List<ChapterPage> pages,
     @Default(DownloadTaskStatus.pending) DownloadTaskStatus status,
     @Default(0) double progress,
+    Map<String, String>? headers,
   }) = _ChapterDownloadTask;
 
   const ChapterDownloadTask._();
