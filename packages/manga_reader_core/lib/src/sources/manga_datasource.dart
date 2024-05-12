@@ -15,6 +15,7 @@ abstract class MangaDatasource {
     required this.lang,
     required this.name,
     required this.baseUrl,
+    this.hasCloudflareProtection = false,
   }) : sourceId = '${name}_$lang';
 
   /// The language of the source.
@@ -29,6 +30,7 @@ abstract class MangaDatasource {
   final String baseUrl;
 
   final String sourceId;
+  final bool hasCloudflareProtection;
 
   /// Fetch the most popular mangas from the source.
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);

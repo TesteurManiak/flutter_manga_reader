@@ -13,6 +13,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
     required super.name,
     required super.baseUrl,
     RestClient? client,
+    super.hasCloudflareProtection,
     this.helper = const MangaboxHelper(),
   }) : client = client ?? RestClient(baseUri: Uri.parse(baseUrl));
 

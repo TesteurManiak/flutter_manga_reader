@@ -7,6 +7,7 @@ class MangakakalotDatasource extends MangaboxDatasource {
           lang: 'en',
           name: MBConsts.mangakakalotSourceName,
           baseUrl: MBConsts.mangakakalotBaseUrl,
+          hasCloudflareProtection: true,
         );
 
   @override
