@@ -40,6 +40,22 @@ extension DocumentExtension on dom.Document {
 }
 
 extension ElementExtension on dom.Element {
+  List<dom.Element>? select(String selector) {
+    try {
+      return querySelectorAll(selector);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  dom.Element? selectFirst(String selector) {
+    try {
+      return querySelector(selector);
+    } catch (e) {
+      return null;
+    }
+  }
+
   String? xpathFirst(String xpath) {
     final htmlXPath = HtmlXPath.html(outerHtml);
     final query = htmlXPath.query(xpath);
@@ -54,4 +70,18 @@ extension ElementExtension on dom.Element {
     }
     return [];
   }
+
+  String? get getHref {
+    try {
+      return regHrefMatcher(outerHtml);
+    } catch (e) {
+      return null;
+    }
+  }
+}
+
+String? regHrefMatcher(String input) {
+  final exp = RegExp('href="([^"]+)"');
+  final matches = exp.allMatches(input);
+  return matches.first.group(1);
 }

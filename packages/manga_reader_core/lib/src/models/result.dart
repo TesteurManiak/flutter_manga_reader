@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' show parse;
 
 part 'result.freezed.dart';
 
@@ -21,16 +22,6 @@ sealed class Result<S, F> with _$Result<S, F> {
 }
 
 extension ResultDecoder<F> on Result<Object?, F> {
-  Result<S, F> decodeString<S>(S Function(String) decoder) {
-    return whenSuccess<S>((s) {
-      return switch (s) {
-        String() => decoder(s),
-        Object() => decoder(s.toString()),
-        null => throw const InvalidJSONException(),
-      };
-    });
-  }
-
   Result<S, F> decode<S>(S Function(Map<String, dynamic>) decoder) {
     return whenSuccess<S>((s) {
       final Map<String, dynamic> json;
@@ -68,13 +59,26 @@ extension ResultDecoder<F> on Result<Object?, F> {
       },
     );
   }
+
+  Result<S, F> decodeString<S>(S Function(String) decoder) {
+    return whenSuccess<S>((s) {
+      return switch (s) {
+        String() => decoder(s),
+        Object() => decoder(s.toString()),
+        null => throw const InvalidJSONException(),
+      };
+    });
+  }
+
+  Result<dom.Element, F> decodeHtmlBody() {
+    return decodeString(parse).whenSuccess((document) {
+      if (document.body case final body?) return body;
+      throw InvalidHtmlException(document.body);
+    });
+  }
 }
 
 extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
-  Future<Result<S, F>> decodeString<S>(S Function(String) decoder) async {
-    return (await this).decodeString(decoder);
-  }
-
   Future<Result<S, F>> decode<S>(
     S Function(Map<String, dynamic>) decoder,
   ) async {
@@ -86,18 +90,11 @@ extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
   ) async {
     return (await this).decodeList(decoder);
   }
-}
 
-extension ResultHtmlDecoder<F> on Result<dom.Document, F> {
-  Result<dom.Element, F> decodeHtmlBody() {
-    return whenSuccess((document) {
-      if (document.body case final body?) return body;
-      throw InvalidHtmlException(document.body);
-    });
+  Future<Result<S, F>> decodeString<S>(S Function(String) decoder) async {
+    return (await this).decodeString(decoder);
   }
-}
 
-extension FutureResultHtmlDecoder<F> on Future<Result<dom.Document, F>> {
   Future<Result<dom.Element, F>> decodeHtmlBody() async {
     return (await this).decodeHtmlBody();
   }

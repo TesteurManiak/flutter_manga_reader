@@ -1,6 +1,6 @@
 import 'package:html/dom.dart' as dom;
-import 'package:html/parser.dart' show parse;
 import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:mangabox/src/mangabox_helper.dart';
 
 typedef RequestPropsRecord = ({
   List<String> pathSegments,
@@ -13,9 +13,11 @@ abstract class MangaboxDatasource extends MangaDatasource {
     required super.name,
     required super.baseUrl,
     RestClient? client,
+    this.helper = const MangaboxHelper(),
   }) : client = client ?? RestClient(baseUri: Uri.parse(baseUrl));
 
   final RestClient client;
+  final MangaboxHelper helper;
 
   @override
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page) async {
@@ -26,7 +28,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
           pathSegments: pathSegments,
           queryParameters: queryParameters,
         )
-        .decodeString(parse)
         .decodeHtmlBody();
 
     return result.when(
@@ -46,7 +47,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
           pathSegments: pathSegments,
           queryParameters: queryParameters,
         )
-        .decodeString(parse)
         .decodeHtmlBody();
 
     return result.when(
@@ -68,7 +68,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
     final result = await client
         .send(method: HttpMethod.get, baseUrl: manga.url)
-        .decodeString(parse)
         .decodeHtmlBody();
 
     return result.when(
@@ -100,7 +99,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
         final statusStr = body.xpathFirst(
           '//*[@class="table-label" and contains(text(), "Status")]/parent::tr/td[2]/text() | //li[contains(text(), "Status")]/text() | //li[contains(text(), "Status")]/a/text()',
         );
-        final status = _parseStatus(statusStr?.split(':').last.trim());
+        final status = helper.parseStatus(statusStr?.split(':').last.trim());
 
         final genres = body.xpath(
           '//*[@class="table-label" and contains(text(), "Genres")]/parent::tr/td[2]/a/text() | //li[contains(text(), "Genres")]/a/text()',
@@ -133,13 +132,37 @@ abstract class MangaboxDatasource extends MangaDatasource {
   ) async {
     final result = await client
         .send(method: HttpMethod.get, baseUrl: sourceManga.url)
-        .decodeString(parse)
         .decodeHtmlBody();
 
     return result.when(
       success: (body) {
-        // TODO(Guillaume): parse chapters
-        return const Result.success([]);
+        final chaptersList = <SourceChapter>[];
+        final chaptersElements = body.select(
+          "div.chapter-list div.row, ul.row-content-chapter li, div#chapter_list li",
+        );
+
+        if (chaptersElements != null) {
+          for (final (i, e) in chaptersElements.indexed) {
+            final a = e.selectFirst('a');
+            final name = a?.text ?? '';
+            final dates = e.select('span');
+            final dateStr = switch (dates) {
+              [..., final last] => last.attributes['title'],
+              _ => e.selectFirst('ul > li > p')?.attributes['title'],
+            };
+
+            chaptersList.add(
+              SourceChapter(
+                url: a?.getHref ?? '',
+                name: name,
+                index: i,
+                dateUpload: helper.parseDate(dateStr),
+              ),
+            );
+          }
+        }
+
+        return Result.success(chaptersList);
       },
       failure: Result.failure,
     );
@@ -180,17 +203,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
     }
 
     return MangasPage(mangaList: mangaList, hasMore: true);
-  }
-
-  MangaStatus _parseStatus(String? statusStr) {
-    if (statusStr == null) return MangaStatus.unknown;
-    if (statusStr.contains(RegExp('Ongoing', caseSensitive: false))) {
-      return MangaStatus.ongoing;
-    } else if (statusStr.contains(RegExp('Completed', caseSensitive: false))) {
-      return MangaStatus.completed;
-    }
-
-    return MangaStatus.unknown;
   }
 
   RequestPropsRecord popularUrlPath(int page);
