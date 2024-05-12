@@ -9,6 +9,7 @@ import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_rea
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_viewer_app_bar.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_viewer_bottom_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class ChapterViewerView extends ConsumerStatefulWidget {
@@ -95,19 +96,29 @@ class _ContentState extends ConsumerState<_Content> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(chapterViewerControllerProvider(widget.chapterId));
+    final provider = chapterViewerControllerProvider(widget.chapterId);
+    final state = ref.watch(provider);
 
-    // TODO(Guillaume): handle when chapter's pages are empty (pop view and show error message)
+    ref.listen(provider, (_, next) {
+      if (next case ChapterViewerLoaded(:final pages) when pages.isEmpty) {
+        // TODO(Guillaume): show error message
+        context.pop();
+      }
+    });
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: ChapterViewerAppBar(widget.chapterId),
-      bottomNavigationBar: ChapterViewerBottomBar(
-        mangaId: widget.mangaId,
-        chapterId: widget.chapterId,
-        chapterController: chapterPageController,
-      ),
+      bottomNavigationBar: switch (state) {
+        ChapterViewerLoaded(:final pages) when pages.isNotEmpty =>
+          ChapterViewerBottomBar(
+            mangaId: widget.mangaId,
+            pageNumber: pages.length,
+            chapterController: chapterPageController,
+          ),
+        _ => null,
+      },
       body: switch (state) {
         ChapterViewerLoading() => const LoadingContent(),
         ChapterViewerLoaded(:final chapter, :final pages) => _PageViewer(

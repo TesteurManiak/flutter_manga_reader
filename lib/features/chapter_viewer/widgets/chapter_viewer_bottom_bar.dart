@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_viewer_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_settings_bottom_sheet.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/reading_direction_menu.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,41 +9,31 @@ class ChapterViewerBottomBar extends ConsumerWidget {
   const ChapterViewerBottomBar({
     super.key,
     required this.mangaId,
-    required this.chapterId,
+    required this.pageNumber,
     required this.chapterController,
   });
 
   final int mangaId;
-  final int chapterId;
+  final int pageNumber;
   final ChapterPageController chapterController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageNumber = ref.watch(
-      chapterViewerControllerProvider(chapterId).select((s) {
-        return switch (s) {
-          ChapterViewerLoaded(:final pages) => pages.length,
-          _ => null,
-        };
-      }),
-    );
-
     return Slidable(
       direction: SlideDirection.down,
       child: _UnconstrainedBottomBar(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (pageNumber != null)
-              ValueListenableBuilder<int>(
-                valueListenable: chapterController,
-                builder: (_, page, __) {
-                  return _Slider(
-                    totalPages: pageNumber,
-                    chapterController: chapterController,
-                  );
-                },
-              ),
+            ValueListenableBuilder<int>(
+              valueListenable: chapterController,
+              builder: (_, page, __) {
+                return _Slider(
+                  totalPages: pageNumber,
+                  chapterController: chapterController,
+                );
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
