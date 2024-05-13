@@ -7,6 +7,7 @@ import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/history/providers/chapter_history.dart';
+import 'package:flutter_manga_reader/features/history/widgets/history_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HistoryView extends ConsumerWidget {
@@ -37,12 +38,8 @@ class _LoadedContent extends StatelessWidget {
     return ListView.builder(
       itemCount: chapters.length,
       itemBuilder: (context, index) {
-        // TODO(Guillaume): implement chapter history tile
         final history = chapters[index];
-        return ListTile(
-          title: Text(history.manga.title),
-          subtitle: Text(history.readAt.toString()),
-        );
+        return HistoryTile(history);
       },
     );
   }

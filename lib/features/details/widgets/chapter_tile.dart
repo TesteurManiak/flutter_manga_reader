@@ -84,12 +84,13 @@ class ChapterTile extends ConsumerWidget {
               ),
             );
 
-        ChapterViewerRoute(
+        ChapterViewerRoute.go(
+          context,
           mangaId: manga.id,
           chapterId: chapter.id,
           sourceId: sourceId,
           initialPage: lastPageRead,
-        ).push<void>(context);
+        );
       },
       onLongPress: () {
         final provider = detailsControllerProvider(chapter.mangaId);

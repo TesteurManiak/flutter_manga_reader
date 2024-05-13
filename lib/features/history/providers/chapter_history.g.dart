@@ -7,7 +7,7 @@ part of 'chapter_history.dart';
 // **************************************************************************
 
 String _$watchChapterHistoryHash() =>
-    r'e5777dbec346000672b92823bb66906ea0b6c3ad';
+    r'15d873842d19c7f3c7c650c75c19e77e97ecc949';
 
 /// See also [watchChapterHistory].
 @ProviderFor(watchChapterHistory)

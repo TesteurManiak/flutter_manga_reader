@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
@@ -51,12 +49,10 @@ class _MangaTileState extends ConsumerState<MangaTile>
         }
 
         if (context.mounted) {
-          unawaited(
-            DetailsRoute(
-              sourceId: ref.read(getSourceIdProvider(widget.manga)),
-              mangaId: mangaId,
-              openedFromSource: widget.displayedFromSource,
-            ).push<void>(context),
+          DetailsRoute.go(
+            context,
+            sourceId: ref.read(getSourceIdProvider(widget.manga)),
+            mangaId: mangaId,
           );
         }
       },

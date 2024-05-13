@@ -240,7 +240,7 @@ class DriftDatasource implements LocalDatasource {
 
   @override
   Future<void> saveChapterHistory(ChapterHistory chapterHistory) {
-    return _db.into(_db.dbChapterHistory).insert(
+    return _db.into(_db.dbChapterHistory).insertOnConflictUpdate(
           DbChapterHistoryCompanion.insert(
             mangaId: Value(chapterHistory.manga.id),
             chapterId: chapterHistory.chapter.id,
