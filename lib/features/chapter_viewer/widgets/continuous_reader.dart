@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/chapter_page_image.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ContinuousReader extends StatefulWidget {
   const ContinuousReader({
@@ -24,37 +25,23 @@ class ContinuousReader extends StatefulWidget {
 }
 
 class _ContinuousReaderState extends State<ContinuousReader> {
-  final scrollController = ScrollController();
+  final scrollController = ItemScrollController();
+  final positionListener = ItemPositionsListener.create();
+
+  late final initialPage = widget.controller.page;
 
   @override
   void initState() {
     super.initState();
 
-    // TODO(Guillaume): fix synchronization between slider and scroll.
-
-    // Sync page controller with scroll offset
-    widget.controller.addListener(_pageControllerListener);
-
-    // Sync scroll offset with page controller
-    scrollController.addListener(() {
-      final page = scrollController.offset / MediaQuery.sizeOf(context).height;
-      widget.controller.page = page.round();
-    });
-
-    // Set initial offset
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final page = widget.controller.page;
-      if (page == 0) return;
-
-      final offset = page * MediaQuery.sizeOf(context).height;
-      scrollController.jumpTo(offset);
-    });
+    positionListener.itemPositions.addListener(_itemPositionsListener);
+    widget.controller.addListener(_chapterControllerListener);
   }
 
   @override
   void dispose() {
-    widget.controller.removeListener(_pageControllerListener);
-    scrollController.dispose();
+    positionListener.itemPositions.removeListener(_itemPositionsListener);
+    widget.controller.removeListener(_chapterControllerListener);
     super.dispose();
   }
 
@@ -62,11 +49,17 @@ class _ContinuousReaderState extends State<ContinuousReader> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
 
-    return ListView.builder(
-      reverse: widget.reverse,
+    return ScrollablePositionedList.builder(
+      itemScrollController: scrollController,
+      itemPositionsListener: positionListener,
+      initialScrollIndex: initialPage,
       scrollDirection: widget.scrollDirection,
+      reverse: widget.reverse,
       itemCount: widget.pages.length,
-      cacheExtent: size.height * 2,
+      minCacheExtent: switch (widget.scrollDirection) {
+        Axis.horizontal => size.width * 2,
+        Axis.vertical => size.height * 2,
+      },
       itemBuilder: (context, index) {
         final page = widget.pages[index];
         return ChapterPageImage(
@@ -78,16 +71,33 @@ class _ContinuousReaderState extends State<ContinuousReader> {
     );
   }
 
-  void _pageControllerListener() {
-    final size = MediaQuery.sizeOf(context);
+  void _itemPositionsListener() {
+    final positions = positionListener.itemPositions.value;
+    if (positions.currentIndex case final index?) {
+      widget.controller.page = index;
+    }
+  }
+
+  void _chapterControllerListener() {
     final page = widget.controller.page;
-    final currentScrollPage = (scrollController.offset / size.height).round();
+    final currentIndex = positionListener.itemPositions.value.currentIndex;
+    if (currentIndex != null && page != currentIndex) {
+      scrollController.jumpTo(index: page);
+    }
+  }
+}
 
-    if (page == currentScrollPage) return;
-
-    final index = widget.reverse ? widget.pages.length - page - 1 : page;
-    final offset = index * size.height;
-
-    scrollController.jumpTo(offset);
+extension on Iterable<ItemPosition> {
+  int? get currentIndex {
+    if (length == 1) return first.index;
+    final newPositions = where(
+      (pos) => pos.itemTrailingEdge >= 0 && pos.itemLeadingEdge <= 1,
+    );
+    if (newPositions.isEmpty) return null;
+    return newPositions
+        .reduce(
+          (max, pos) => pos.itemTrailingEdge > max.itemTrailingEdge ? pos : max,
+        )
+        .index;
   }
 }
