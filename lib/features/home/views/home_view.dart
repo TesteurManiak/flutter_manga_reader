@@ -114,7 +114,7 @@ class _BottomBar extends StatelessWidget {
               label: strings.search_title,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.update),
+              icon: const Icon(Icons.history_outlined),
               label: strings.history_title,
             ),
             BottomNavigationBarItem(

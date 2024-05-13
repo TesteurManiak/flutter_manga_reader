@@ -10,14 +10,17 @@ class StatusLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final style = textTheme.bodySmall;
+
     return SeparatedRow(
       mainAxisSize: MainAxisSize.min,
       separator: const SizedBox(width: 4),
       children: [
-        Icon(status.icon, size: 14),
+        Icon(status.icon, size: style?.fontSize, color: style?.color),
         Text(
           status.toLocalizedString(context),
-          style: const TextStyle(fontWeight: FontWeight.w500),
+          style: style,
         ),
       ],
     );

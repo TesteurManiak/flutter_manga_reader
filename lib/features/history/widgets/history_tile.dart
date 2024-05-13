@@ -7,6 +7,7 @@ import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.da
 import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class HistoryTile extends ConsumerWidget {
   const HistoryTile(this.history, {super.key});
@@ -20,6 +21,7 @@ class HistoryTile extends ConsumerWidget {
     final source = ref.watch(getSourceFromIdProvider(sourceId));
     final headers = source.getHeaders();
     final size = MediaQuery.sizeOf(context);
+    final textTheme = Theme.of(context).textTheme;
 
     return InkWell(
       onTap: () {
@@ -33,6 +35,7 @@ class HistoryTile extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: SeparatedRow(
+          crossAxisAlignment: CrossAxisAlignment.center,
           separator: const SizedBox(width: 8),
           children: [
             ClipRRect(
@@ -48,22 +51,27 @@ class HistoryTile extends ConsumerWidget {
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     history.manga.title,
-                    style: const TextStyle(fontSize: 20),
+                    style: textTheme.titleLarge,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     history.manga.author ?? '',
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    style: textTheme.bodySmall,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   StatusLabel(history.manga.status),
+                  const SizedBox(height: 8),
+                  Text(history.chapter.name, style: textTheme.bodySmall),
+                  Text(
+                    DateFormat.yMMMd().format(history.readAt),
+                    style: textTheme.bodySmall,
+                  ),
                 ],
               ),
             ),

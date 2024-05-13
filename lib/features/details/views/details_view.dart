@@ -321,6 +321,7 @@ class _StatusAndSource extends StatelessWidget {
               return buffer.toString();
             }(),
             maxLines: 1,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
       ],
     );
