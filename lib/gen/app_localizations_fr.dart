@@ -181,4 +181,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get no_manga_found => 'Aucun manga trouvé';
+
+  @override
+  String get incognito_mode_enabled => 'Mode incognito activé';
+
+  @override
+  String get incognito_mode_disabled => 'Mode incognito désactivé';
 }

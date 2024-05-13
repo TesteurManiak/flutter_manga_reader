@@ -6,11 +6,11 @@ part of 'locale_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fallbackLocaleHash() => r'48a5656c6633b58c0d51ff60d8c061c17536fdba';
+String _$fallbackLocaleHash() => r'13551e7e9f376169321a98486983841d4093ca3e';
 
 /// See also [fallbackLocale].
 @ProviderFor(fallbackLocale)
-final fallbackLocaleProvider = AutoDisposeProvider<Locale>.internal(
+final fallbackLocaleProvider = Provider<Locale>.internal(
   fallbackLocale,
   name: r'fallbackLocaleProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,12 +20,12 @@ final fallbackLocaleProvider = AutoDisposeProvider<Locale>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef FallbackLocaleRef = AutoDisposeProviderRef<Locale>;
-String _$systemLocaleHash() => r'48417f412252355b26df9b5e364aa9e6a596a3f1';
+typedef FallbackLocaleRef = ProviderRef<Locale>;
+String _$systemLocaleHash() => r'10ddaceb13e3857e8ba2f7f426a670e4f5844472';
 
 /// See also [systemLocale].
 @ProviderFor(systemLocale)
-final systemLocaleProvider = AutoDisposeProvider<Locale>.internal(
+final systemLocaleProvider = Provider<Locale>.internal(
   systemLocale,
   name: r'systemLocaleProvider',
   debugGetCreateSourceHash:
@@ -34,8 +34,8 @@ final systemLocaleProvider = AutoDisposeProvider<Locale>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef SystemLocaleRef = AutoDisposeProviderRef<Locale>;
-String _$localeControllerHash() => r'2bc5e4ce5eaa682a0ee1984852e128fc934582ac';
+typedef SystemLocaleRef = ProviderRef<Locale>;
+String _$localeControllerHash() => r'f73adb84b8a4e763227e30b367a42fe0bfe2cfa2';
 
 /// See also [LocaleController].
 @ProviderFor(LocaleController)

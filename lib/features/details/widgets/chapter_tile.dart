@@ -11,6 +11,7 @@ import 'package:flutter_manga_reader/features/details/controllers/details_contro
 import 'package:flutter_manga_reader/features/details/controllers/download_queue_controller.dart';
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
+import 'package:flutter_manga_reader/features/history/providers/incognito_mode_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -75,14 +76,17 @@ class ChapterTile extends ConsumerWidget {
           return;
         }
 
-        final clock = ref.read(appClockProvider);
-        ref.read(localDatasourceProvider).saveChapterHistory(
-              ChapterHistory(
-                manga: manga,
-                chapter: chapter,
-                readAt: clock.now(),
-              ),
-            );
+        final incognitoModeEnabled = ref.read(incognitoModeControllerProvider);
+        if (!incognitoModeEnabled) {
+          final clock = ref.read(appClockProvider);
+          ref.read(localDatasourceProvider).saveChapterHistory(
+                ChapterHistory(
+                  manga: manga,
+                  chapter: chapter,
+                  readAt: clock.now(),
+                ),
+              );
+        }
 
         ChapterViewerRoute.go(
           context,

@@ -422,6 +422,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Aucun manga trouvé'**
   String get no_manga_found;
+
+  /// No description provided for @incognito_mode_enabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode incognito activé'**
+  String get incognito_mode_enabled;
+
+  /// No description provided for @incognito_mode_disabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode incognito désactivé'**
+  String get incognito_mode_disabled;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

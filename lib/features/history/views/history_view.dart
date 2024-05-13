@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/mixins/app_bar_size.dart';
 import 'package:flutter_manga_reader/core/models/chapter_history.dart';
+import 'package:flutter_manga_reader/core/services/toaster_service.dart';
+import 'package:flutter_manga_reader/core/widgets/app_asset_image.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/history/providers/chapter_history.dart';
 import 'package:flutter_manga_reader/features/history/providers/incognito_mode_controller.dart';
 import 'package:flutter_manga_reader/features/history/widgets/history_tile.dart';
+import 'package:flutter_manga_reader/gen/assets.gen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HistoryView extends ConsumerWidget {
@@ -74,9 +77,44 @@ class _AppBar extends ConsumerWidget with AppBarSizeMixin {
     final strings = context.strings;
     return AppBar(
       title: Text(strings.history_title),
-      actions: [
+      actions: const [
+        _IncognitoButton(),
+      ],
+    );
+  }
+}
+
+class _IncognitoButton extends ConsumerWidget {
+  const _IncognitoButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final toaster = ref.watch(toasterServiceProvider);
+    final incognitoEnabled = ref.watch(incognitoModeControllerProvider);
+    final strings = context.strings;
+
+    ref.listen(incognitoModeControllerProvider, (_, next) {
+      final msg = switch (next) {
+        true => strings.incognito_mode_enabled,
+        false => strings.incognito_mode_disabled,
+      };
+      toaster.showToast(Text(msg), toastDuration: const Duration(seconds: 2));
+    });
+
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        if (incognitoEnabled)
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+          ),
         IconButton(
-          icon: const Icon(Icons.lock),
+          icon: AppAssetImage(Assets.svgs.incognito),
           onPressed: () {
             ref.read(incognitoModeControllerProvider.notifier).toggle();
           },

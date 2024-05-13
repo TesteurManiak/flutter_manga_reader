@@ -68,5 +68,7 @@
     "delete": "Delete",
     "cache_cleared": "Cache cleared",
     "no_page_found": "No page found",
-    "no_manga_found": "No manga found"
+    "no_manga_found": "No manga found",
+    "incognito_mode_enabled": "Incognito mode enabled",
+    "incognito_mode_disabled": "Incognito mode disabled"
 }

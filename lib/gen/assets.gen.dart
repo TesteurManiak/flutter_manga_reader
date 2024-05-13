@@ -10,11 +10,14 @@
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/incognito.svg
+  String get incognito => 'assets/svgs/incognito.svg';
+
   /// File path: assets/svgs/tori.svg
   String get tori => 'assets/svgs/tori.svg';
 
   /// List of all assets
-  List<String> get values => [tori];
+  List<String> get values => [incognito, tori];
 }
 
 class Assets {
