@@ -172,4 +172,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cache_cleared => 'Cache cleared';
+
+  @override
+  String get no_page_found => 'No page found';
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/services/toaster_service.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
@@ -71,7 +73,6 @@ class _Content extends ConsumerStatefulWidget {
 }
 
 class _ContentState extends ConsumerState<_Content> {
-  late final ChapterViewerController controller;
   late final chapterPageController = ChapterPageController(
     initialPage: widget.initialPage,
   );
@@ -80,7 +81,7 @@ class _ContentState extends ConsumerState<_Content> {
   void initState() {
     super.initState();
 
-    controller = ref.read(
+    final controller = ref.read(
       chapterViewerControllerProvider(widget.chapterId).notifier,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -98,14 +99,15 @@ class _ContentState extends ConsumerState<_Content> {
   Widget build(BuildContext context) {
     final provider = chapterViewerControllerProvider(widget.chapterId);
     final state = ref.watch(provider);
+    final toaster = ref.watch(toasterServiceProvider);
 
-    ref.listen(provider, (_, next) {
-      if (next case ChapterViewerLoaded(:final pages) when pages.isEmpty) {
-        // TODO(#120): Show a toast
-        // await ToasterService.instance.showToast(
-        //   const Text('No pages found for this chapter'),
-        // );
-        if (context.mounted) context.pop();
+    final strings = context.strings;
+
+    ref.listen(provider.select((s) => s.pageLengthOrNull), (_, next) {
+      if (next == 0) {
+        toaster.showToast(Text(strings.no_page_found));
+        // Delay slightly the pop to avoid driving condition between the page transitions
+        Future.delayed(const Duration(milliseconds: 300), () => context.pop());
       }
     });
 
@@ -132,7 +134,9 @@ class _ContentState extends ConsumerState<_Content> {
             pages: pages,
             initialPage: widget.initialPage,
           ),
-        ChapterViewerError() => ErrorContent(onRetry: controller.fetchPages),
+        ChapterViewerError() => ErrorContent(
+            onRetry: () => ref.read(provider.notifier).fetchPages(),
+          ),
       },
     );
   }

@@ -53,8 +53,8 @@ class __$$ChapterViewerLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChapterViewerLoadingImpl implements ChapterViewerLoading {
-  const _$ChapterViewerLoadingImpl();
+class _$ChapterViewerLoadingImpl extends ChapterViewerLoading {
+  const _$ChapterViewerLoadingImpl() : super._();
 
   @override
   String toString() {
@@ -72,8 +72,9 @@ class _$ChapterViewerLoadingImpl implements ChapterViewerLoading {
   int get hashCode => runtimeType.hashCode;
 }
 
-abstract class ChapterViewerLoading implements ChapterViewerState {
+abstract class ChapterViewerLoading extends ChapterViewerState {
   const factory ChapterViewerLoading() = _$ChapterViewerLoadingImpl;
+  const ChapterViewerLoading._() : super._();
 }
 
 /// @nodoc
@@ -124,10 +125,11 @@ class __$$ChapterViewerLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChapterViewerLoadedImpl implements ChapterViewerLoaded {
+class _$ChapterViewerLoadedImpl extends ChapterViewerLoaded {
   const _$ChapterViewerLoadedImpl(
       {required this.chapter, required final List<ChapterPage> pages})
-      : _pages = pages;
+      : _pages = pages,
+        super._();
 
   @override
   final Chapter chapter;
@@ -165,10 +167,11 @@ class _$ChapterViewerLoadedImpl implements ChapterViewerLoaded {
           this, _$identity);
 }
 
-abstract class ChapterViewerLoaded implements ChapterViewerState {
+abstract class ChapterViewerLoaded extends ChapterViewerState {
   const factory ChapterViewerLoaded(
       {required final Chapter chapter,
       required final List<ChapterPage> pages}) = _$ChapterViewerLoadedImpl;
+  const ChapterViewerLoaded._() : super._();
 
   Chapter get chapter;
   List<ChapterPage> get pages;
@@ -210,8 +213,8 @@ class __$$ChapterViewerErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ChapterViewerErrorImpl implements ChapterViewerError {
-  const _$ChapterViewerErrorImpl({this.error});
+class _$ChapterViewerErrorImpl extends ChapterViewerError {
+  const _$ChapterViewerErrorImpl({this.error}) : super._();
 
   @override
   final String? error;
@@ -240,9 +243,10 @@ class _$ChapterViewerErrorImpl implements ChapterViewerError {
           this, _$identity);
 }
 
-abstract class ChapterViewerError implements ChapterViewerState {
+abstract class ChapterViewerError extends ChapterViewerState {
   const factory ChapterViewerError({final String? error}) =
       _$ChapterViewerErrorImpl;
+  const ChapterViewerError._() : super._();
 
   String? get error;
   @JsonKey(ignore: true)

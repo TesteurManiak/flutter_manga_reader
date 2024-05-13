@@ -31,7 +31,7 @@ class ToasterService {
       key: toastKey,
       toastDuration: toastDuration,
       fadeDuration: fadeDuration,
-      child: child,
+      child: ToastWidget(child: child),
     );
 
     final newEntry = OverlayEntry(

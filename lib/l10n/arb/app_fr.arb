@@ -65,5 +65,6 @@
     },
     "download": "Télécharger",
     "delete": "Supprimer",
-    "cache_cleared": "Cache vidé"
+    "cache_cleared": "Cache vidé",
+    "no_page_found": "Aucune page trouvée"
 }
