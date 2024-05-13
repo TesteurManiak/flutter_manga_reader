@@ -101,8 +101,11 @@ class _ContentState extends ConsumerState<_Content> {
 
     ref.listen(provider, (_, next) {
       if (next case ChapterViewerLoaded(:final pages) when pages.isEmpty) {
-        // TODO(Guillaume): show error message
-        context.pop();
+        // TODO(#120): Show a toast
+        // await ToasterService.instance.showToast(
+        //   const Text('No pages found for this chapter'),
+        // );
+        if (context.mounted) context.pop();
       }
     });
 

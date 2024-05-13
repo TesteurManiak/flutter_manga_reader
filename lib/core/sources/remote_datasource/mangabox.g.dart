@@ -6,7 +6,7 @@ part of 'mangabox.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$mangaboxHash() => r'cbb9ea0c4daf6e4ee2ccf8db4eb7b81f2b7aacdb';
+String _$mangaboxHash() => r'11c0f99e497987538bdb9b2f44744e0648a6145b';
 
 /// See also [mangabox].
 @ProviderFor(mangabox)
