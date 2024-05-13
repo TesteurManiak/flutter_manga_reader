@@ -29,6 +29,7 @@ class _ThemeModeSwitcher extends ConsumerWidget {
     final strings = context.strings;
 
     return ListTile(
+      leading: const Icon(Icons.dark_mode),
       title: Text(strings.settings_appearance_dark_mode),
       subtitle: Text(currentThemeMode.localized(strings)),
       onTap: () {

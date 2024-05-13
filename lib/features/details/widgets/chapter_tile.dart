@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
@@ -26,13 +27,16 @@ class ChapterTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSelected = ref.watch(scopedChapterSelectedProvider(chapter));
+    final locale = ref.watch(
+      localeControllerProvider.select((locale) => locale.languageCode),
+    );
 
     final dateUpload = chapter.dateUpload;
     final scanlator = chapter.scanlator;
     final read = chapter.read;
     final lastPageRead = chapter.lastPageRead;
     final subtitle = <String>[
-      if (dateUpload != null) DateFormat.yMd().format(dateUpload),
+      if (dateUpload != null) DateFormat.yMMMd(locale).format(dateUpload),
       if (lastPageRead > 0) context.strings.last_page(lastPageRead + 1),
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];
