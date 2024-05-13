@@ -6,7 +6,6 @@ class MangairoDatasource extends MangaboxDatasource {
       : super(
           name: 'Mangairo',
           baseUrl: MBConsts.mangairoBaseUrl,
-          supportSimpleQuery: true,
           referer: 'https://chap.mangairo.com/',
         );
 
@@ -36,5 +35,13 @@ class MangairoDatasource extends MangaboxDatasource {
       ],
       queryParameters: null,
     );
+  }
+
+  @override
+  String simpleQueryPath(int page, String query) {
+    return Uri(
+      pathSegments: ['list', 'search', normalizeSearchQuery(query)],
+      queryParameters: {'page': '$page'},
+    ).toString();
   }
 }

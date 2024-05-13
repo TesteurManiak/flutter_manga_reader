@@ -69,17 +69,64 @@ abstract class MangaboxDatasource extends MangaDatasource {
     if (simpleQueryPath(page, query) case final queryPath?
         when query.isNotEmpty) {
       url = path.join(baseUrl, queryPath);
-    } else {}
+    } else {
+      url = baseUrl;
+      if (advancedSearchQuery(page, query) case final advancedQueryPath?) {
+        url = path.join(url, advancedQueryPath);
+        // TODO(Guillaume): support more advanced filtering options
+      }
+    }
 
     final result = await client
-        .send(
-          method: HttpMethod.get,
-          baseUrl: url,
-        )
+        .send(method: HttpMethod.get, baseUrl: url)
         .decodeHtmlBody();
 
-    // TODO(Guillaume): implement searchMangaList
-    throw UnimplementedError();
+    return result.when(
+      success: (body) {
+        final mangaList = <SourceManga>[];
+        List<String> urls = body.xpath(
+          '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item" or @class="story_item_right"]/h3/a/@href',
+        );
+        List<String> names = body.xpath(
+          '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item" or @class="story_item_right"]/h3/a/text()',
+        );
+        final images = body.xpath(
+          '//*[@class="search-story-item" or @class="story_item" or @class="content-genres-item"  or @class="list-story-item" or @class="story-item" or @class="list-truyen-item-wrap"]/a/img/@src',
+        );
+
+        if (names.isEmpty) {
+          urls = body.xpath(
+            '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h2/a/@href',
+          );
+          names = body.xpath(
+            '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item"]/h2/a/text()',
+          );
+        }
+
+        if (names.isEmpty) {
+          urls = body.xpath(
+            '//*[@class="search-story-item" or @class="list-story-item"]/a/@href',
+          );
+          names = body.xpath(
+            '//*[@class="search-story-item" or @class="list-story-item"]/a/@title',
+          );
+        }
+
+        for (int i = 0; i < names.length; i++) {
+          final manga = SourceManga(
+            title: names[i],
+            url: urls[i],
+            source: name,
+            thumbnailUrl: images[i],
+            lang: lang,
+          );
+          mangaList.add(manga);
+        }
+
+        return Result.success(MangasPage(mangaList: mangaList, hasMore: true));
+      },
+      failure: Result.failure,
+    );
   }
 
   @override
@@ -225,6 +272,26 @@ abstract class MangaboxDatasource extends MangaDatasource {
     throw UnimplementedError();
   }
 
+  String normalizeSearchQuery(String query) {
+    return query
+        .toLowerCase()
+        .replaceAll(RegExp('[àáạảãâầấậẩẫăằắặẳẵ]'), 'a')
+        .replaceAll(RegExp('[èéẹẻẽêềếệểễ]'), 'e')
+        .replaceAll(RegExp('[ìíịỉĩ]'), 'i')
+        .replaceAll(RegExp('[òóọỏõôồốộổỗơờớợởỡ]'), 'o')
+        .replaceAll(RegExp('[ùúụủũưừứựửữ]'), 'u')
+        .replaceAll(RegExp('[ỳýỵỷỹ]'), 'y')
+        .replaceAll(RegExp('đ'), 'd')
+        .replaceAll(
+          RegExp(
+            r"""!|@|%|\^|\*|\(|\)|\+|=|<|>|\?|/|,|\.|:|;|'| |"|&|#|\[|]|~|-|$|_""",
+          ),
+          '_',
+        )
+        .replaceAll(RegExp('_+'), '_')
+        .replaceAll(RegExp(r'^_+|_+$'), '');
+  }
+
   MangasPage _parseBody(dom.Element body) {
     final mangaList = <SourceManga>[];
     List<String> urls = body.xpath(
@@ -262,6 +329,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
   RequestPropsRecord popularUrlPath(int page);
   RequestPropsRecord latestUrlPath(int page);
   String? simpleQueryPath(int page, String query) => null;
+  String? advancedSearchQuery(int page, String query) => null;
 }
 
 extension on String {

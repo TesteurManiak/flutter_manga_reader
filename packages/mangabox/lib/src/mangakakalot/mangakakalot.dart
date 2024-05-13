@@ -7,7 +7,6 @@ class MangakakalotDatasource extends MangaboxDatasource {
           name: 'MangaKakalot',
           baseUrl: MBConsts.mangakakalotBaseUrl,
           referer: 'https://chapmanganato.to/',
-          supportSimpleQuery: true,
         );
 
   @override
@@ -34,5 +33,13 @@ class MangakakalotDatasource extends MangaboxDatasource {
         'page': page.toString(),
       },
     );
+  }
+
+  @override
+  String simpleQueryPath(int page, String query) {
+    return Uri(
+      pathSegments: ['search', 'story', normalizeSearchQuery(query)],
+      queryParameters: {'page': '$page'},
+    ).toString();
   }
 }
