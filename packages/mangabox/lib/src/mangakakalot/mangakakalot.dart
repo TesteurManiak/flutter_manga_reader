@@ -34,4 +34,12 @@ class MangakakalotDatasource extends MangaboxDatasource {
       },
     );
   }
+
+  @override
+  String simpleQueryPath(int page, String query) {
+    return Uri(
+      pathSegments: ['search', 'story', normalizeSearchQuery(query)],
+      queryParameters: {'page': '$page'},
+    ).toString();
+  }
 }

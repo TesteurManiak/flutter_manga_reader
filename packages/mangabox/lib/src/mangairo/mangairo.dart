@@ -36,4 +36,12 @@ class MangairoDatasource extends MangaboxDatasource {
       queryParameters: null,
     );
   }
+
+  @override
+  String simpleQueryPath(int page, String query) {
+    return Uri(
+      pathSegments: ['list', 'search', normalizeSearchQuery(query)],
+      queryParameters: {'page': '$page'},
+    ).toString();
+  }
 }

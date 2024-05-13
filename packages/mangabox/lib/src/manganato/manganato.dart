@@ -1,7 +1,8 @@
 import 'package:mangabox/mangabox.dart';
 import 'package:mangabox/src/mangabox.dart';
+import 'package:mangabox/src/mixins/advanced_search.dart';
 
-class ManganatoDatasource extends MangaboxDatasource {
+class ManganatoDatasource extends MangaboxDatasource with AdvancedSearchMixin {
   ManganatoDatasource({super.client})
       : super(
           name: 'Manganato',
