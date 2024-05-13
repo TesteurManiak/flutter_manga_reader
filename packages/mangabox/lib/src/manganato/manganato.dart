@@ -1,7 +1,8 @@
 import 'package:mangabox/mangabox.dart';
 import 'package:mangabox/src/mangabox.dart';
+import 'package:mangabox/src/mixins/advanced_search.dart';
 
-class ManganatoDatasource extends MangaboxDatasource {
+class ManganatoDatasource extends MangaboxDatasource with AdvancedSearchMixin {
   ManganatoDatasource({super.client})
       : super(
           name: 'Manganato',
@@ -23,13 +24,5 @@ class ManganatoDatasource extends MangaboxDatasource {
       pathSegments: ['genre-all', '$page'],
       queryParameters: null,
     );
-  }
-
-  @override
-  String advancedSearchQuery(int page, String query) {
-    return Uri(
-      pathSegments: ['advanced_search'],
-      queryParameters: {'page': '$page', 'keyw': normalizeSearchQuery(query)},
-    ).toString();
   }
 }
