@@ -65,5 +65,6 @@
     },
     "download": "Download",
     "delete": "Delete",
-    "cache_cleared": "Cache cleared"
+    "cache_cleared": "Cache cleared",
+    "no_page_found": "No page found"
 }

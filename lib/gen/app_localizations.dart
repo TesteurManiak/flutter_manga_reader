@@ -404,6 +404,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Cache vidé'**
   String get cache_cleared;
+
+  /// No description provided for @no_page_found.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune page trouvée'**
+  String get no_page_found;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

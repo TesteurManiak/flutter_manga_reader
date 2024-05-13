@@ -60,4 +60,13 @@ sealed class ChapterViewerState with _$ChapterViewerState {
     required List<ChapterPage> pages,
   }) = ChapterViewerLoaded;
   const factory ChapterViewerState.error({String? error}) = ChapterViewerError;
+
+  const ChapterViewerState._();
+
+  int? get pageLengthOrNull {
+    return switch (this) {
+      ChapterViewerLoaded(:final pages) => pages.length,
+      _ => null,
+    };
+  }
 }
