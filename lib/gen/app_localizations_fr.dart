@@ -70,9 +70,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get search_title => 'Explorer';
 
   @override
-  String get search_empty => 'Aucun manga trouvé';
-
-  @override
   String get history_title => 'Historique';
 
   @override

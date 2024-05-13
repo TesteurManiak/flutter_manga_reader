@@ -219,12 +219,6 @@ abstract class AppLocalizations {
   /// **'Explorer'**
   String get search_title;
 
-  /// No description provided for @search_empty.
-  ///
-  /// In fr, this message translates to:
-  /// **'Aucun manga trouvé'**
-  String get search_empty;
-
   /// No description provided for @history_title.
   ///
   /// In fr, this message translates to:

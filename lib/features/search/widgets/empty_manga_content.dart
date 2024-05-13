@@ -16,7 +16,7 @@ class EmptyMangaContent extends StatelessWidget {
         children: [
           AsciiEmojiWidget.random(),
           Text(
-            context.strings.search_empty,
+            context.strings.no_manga_found,
             style: textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
