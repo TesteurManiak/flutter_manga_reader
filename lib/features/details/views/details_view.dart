@@ -72,7 +72,6 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
             }
 
             return _MangaContent(
-              mangaId: widget.mangaId,
               manga: manga,
               openedFromSource: widget.openedFromSource,
             );
@@ -87,12 +86,10 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 
 class _MangaContent extends ConsumerStatefulWidget {
   const _MangaContent({
-    required this.mangaId,
     required this.manga,
     required this.openedFromSource,
   });
 
-  final int mangaId;
   final Manga manga;
   final bool openedFromSource;
 
@@ -115,7 +112,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(scopedSelectionModeProvider(widget.mangaId), (_, enabled) {
+    final mangaId = widget.manga.id;
+
+    ref.listen(scopedSelectionModeProvider(mangaId), (_, enabled) {
       final controller = DefaultSlidableController.maybeOf(context);
       final func = enabled ? controller?.show : controller?.hide;
       func?.call();
@@ -137,19 +136,19 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
           physics: const PullToRefreshScrollPhysics(),
           slivers: [
             SliverDetailsAppBar(
-              mangaId: widget.mangaId,
+              mangaId: mangaId,
               scrollController: scrollController,
             ),
             SliverPullToRefresh(
               onRefresh: () {
-                final provider = detailsControllerProvider(widget.mangaId);
+                final provider = detailsControllerProvider(mangaId);
                 return ref
                     .read(provider.notifier)
                     .fetchDetails(forceRefresh: true);
               },
             ),
             _SliverHeader(widget.manga),
-            _SliverButtons(widget.mangaId),
+            _SliverButtons(mangaId),
             if (desc != null)
               _SliverDescription(
                 desc: desc,
@@ -166,7 +165,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                   );
                 },
               ),
-            _SliverChapterList(widget.mangaId),
+            _SliverChapterList(widget.manga),
           ],
         ),
       ],
@@ -435,14 +434,14 @@ class _SliverGenreList extends StatelessWidget {
 }
 
 class _SliverChapterList extends ConsumerWidget {
-  const _SliverChapterList(this.mangaId);
+  const _SliverChapterList(this.manga);
 
-  final int mangaId;
+  final Manga manga;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapters =
-        ref.watch(watchChaptersForMangaProvider(mangaId)).maybeWhen(
+        ref.watch(watchChaptersForMangaProvider(manga.id)).maybeWhen(
               data: (chapters) => chapters,
               orElse: () => <Chapter>[],
             );
@@ -465,9 +464,9 @@ class _SliverChapterList extends ConsumerWidget {
             itemBuilder: (_, index) {
               final chapter = chapters[index];
               return ChapterTile(
-                mangaId: mangaId,
-                sourceId: ref.read(scopedMangaDatasourceProvider).id,
+                manga: manga,
                 chapter: chapter,
+                sourceId: ref.read(scopedMangaDatasourceProvider).id,
               );
             },
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
+import 'package:flutter_manga_reader/features/history/views/history_view.dart';
 import 'package:flutter_manga_reader/features/library/views/library_view.dart';
 import 'package:flutter_manga_reader/features/search/views/source_list_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/settings_view.dart';
@@ -42,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
           LibraryView(),
           _WIPView(),
           BrowseView(),
-          _WIPView(),
+          HistoryView(),
           SettingsView(),
         ],
       ),

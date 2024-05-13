@@ -68,7 +68,7 @@ class DbCacheEntries extends Table {
 class DbChapterHistory extends Table {
   IntColumn get mangaId => integer()();
   IntColumn get chapterId => integer()();
-  DateTimeColumn get dateRead => dateTime()();
+  DateTimeColumn get readAt => dateTime()();
 
   @override
   Set<Column<Object>>? get primaryKey => {mangaId};

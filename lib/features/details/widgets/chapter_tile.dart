@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/models/chapter_history.dart';
+import 'package:flutter_manga_reader/core/providers/clock.dart';
 import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
+import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
@@ -16,12 +19,12 @@ class ChapterTile extends ConsumerWidget {
   const ChapterTile({
     super.key,
     required this.sourceId,
-    required this.mangaId,
+    required this.manga,
     required this.chapter,
   });
 
   final String sourceId;
-  final int mangaId;
+  final Manga manga;
   final Chapter chapter;
 
   @override
@@ -72,8 +75,17 @@ class ChapterTile extends ConsumerWidget {
           return;
         }
 
+        final clock = ref.read(appClockProvider);
+        ref.read(localDatasourceProvider).saveChapterHistory(
+              ChapterHistory(
+                manga: manga,
+                chapter: chapter,
+                readAt: clock.now(),
+              ),
+            );
+
         ChapterViewerRoute(
-          mangaId: mangaId,
+          mangaId: manga.id,
           chapterId: chapter.id,
           sourceId: sourceId,
           initialPage: lastPageRead,
