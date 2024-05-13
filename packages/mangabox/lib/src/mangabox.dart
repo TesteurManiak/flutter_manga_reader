@@ -1,6 +1,7 @@
 import 'package:html/dom.dart' as dom;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangabox/src/mangabox_helper.dart';
+import 'package:path/path.dart' as path;
 
 typedef RequestPropsRecord = ({
   List<String> pathSegments,
@@ -63,7 +64,20 @@ abstract class MangaboxDatasource extends MangaDatasource {
   Future<Result<MangasPage, HttpError>> searchMangaList(
     int page,
     String query,
-  ) {
+  ) async {
+    String url;
+    if (simpleQueryPath(page, query) case final queryPath?
+        when query.isNotEmpty) {
+      url = path.join(baseUrl, queryPath);
+    } else {}
+
+    final result = await client
+        .send(
+          method: HttpMethod.get,
+          baseUrl: url,
+        )
+        .decodeHtmlBody();
+
     // TODO(Guillaume): implement searchMangaList
     throw UnimplementedError();
   }
@@ -247,6 +261,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
 
   RequestPropsRecord popularUrlPath(int page);
   RequestPropsRecord latestUrlPath(int page);
+  String? simpleQueryPath(int page, String query) => null;
 }
 
 extension on String {

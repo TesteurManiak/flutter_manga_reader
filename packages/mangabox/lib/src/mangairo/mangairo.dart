@@ -6,6 +6,7 @@ class MangairoDatasource extends MangaboxDatasource {
       : super(
           name: 'Mangairo',
           baseUrl: MBConsts.mangairoBaseUrl,
+          supportSimpleQuery: true,
           referer: 'https://chap.mangairo.com/',
         );
 

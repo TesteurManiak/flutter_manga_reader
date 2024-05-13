@@ -7,6 +7,7 @@ class MangakakalotDatasource extends MangaboxDatasource {
           name: 'MangaKakalot',
           baseUrl: MBConsts.mangakakalotBaseUrl,
           referer: 'https://chapmanganato.to/',
+          supportSimpleQuery: true,
         );
 
   @override
