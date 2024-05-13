@@ -34,13 +34,14 @@ class _ContinuousReaderState extends State<ContinuousReader> {
   void initState() {
     super.initState();
 
-    // TODO(Guillaume): fix synchronization between slider and scroll.
     positionListener.itemPositions.addListener(_itemPositionsListener);
+    widget.controller.addListener(_chapterControllerListener);
   }
 
   @override
   void dispose() {
     positionListener.itemPositions.removeListener(_itemPositionsListener);
+    widget.controller.removeListener(_chapterControllerListener);
     super.dispose();
   }
 
@@ -72,18 +73,31 @@ class _ContinuousReaderState extends State<ContinuousReader> {
 
   void _itemPositionsListener() {
     final positions = positionListener.itemPositions.value;
-    if (positions.length == 1) {
-      widget.controller.page = positions.first.index;
-    } else {
-      final newPositions = positions.where(
-        (pos) => pos.itemTrailingEdge >= 0 && pos.itemLeadingEdge <= 1,
-      );
-      if (newPositions.isEmpty) return;
-      widget.controller.page = newPositions.reduce(
-        (max, pos) {
-          return pos.itemTrailingEdge > max.itemTrailingEdge ? pos : max;
-        },
-      ).index;
+    if (positions.currentIndex case final index?) {
+      widget.controller.page = index;
     }
+  }
+
+  void _chapterControllerListener() {
+    final page = widget.controller.page;
+    final currentIndex = positionListener.itemPositions.value.currentIndex;
+    if (currentIndex != null && page != currentIndex) {
+      scrollController.jumpTo(index: page);
+    }
+  }
+}
+
+extension on Iterable<ItemPosition> {
+  int? get currentIndex {
+    if (length == 1) return first.index;
+    final newPositions = where(
+      (pos) => pos.itemTrailingEdge >= 0 && pos.itemLeadingEdge <= 1,
+    );
+    if (newPositions.isEmpty) return null;
+    return newPositions
+        .reduce(
+          (max, pos) => pos.itemTrailingEdge > max.itemTrailingEdge ? pos : max,
+        )
+        .index;
   }
 }
