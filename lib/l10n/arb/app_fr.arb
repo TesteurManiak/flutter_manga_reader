@@ -68,5 +68,6 @@
     "download": "Télécharger",
     "delete": "Supprimer",
     "cache_cleared": "Cache vidé",
-    "no_page_found": "Aucune page trouvée"
+    "no_page_found": "Aucune page trouvée",
+    "no_manga_found": "Aucun manga trouvé"
 }

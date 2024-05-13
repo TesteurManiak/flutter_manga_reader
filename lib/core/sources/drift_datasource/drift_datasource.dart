@@ -253,6 +253,13 @@ class DriftDatasource implements LocalDatasource {
           ),
         );
   }
+
+  @override
+  Future<void> deleteChapterHistory(int mangaId) {
+    return (_db.delete(_db.dbChapterHistory)
+          ..where((tbl) => tbl.mangaId.equals(mangaId)))
+        .go();
+  }
 }
 
 extension on DbManga {

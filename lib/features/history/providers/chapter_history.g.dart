@@ -7,7 +7,7 @@ part of 'chapter_history.dart';
 // **************************************************************************
 
 String _$watchChapterHistoryHash() =>
-    r'15d873842d19c7f3c7c650c75c19e77e97ecc949';
+    r'b1116e43a97dc73bdbda1c19d37c3259d4bd650e';
 
 /// See also [watchChapterHistory].
 @ProviderFor(watchChapterHistory)
@@ -18,8 +18,11 @@ final watchChapterHistoryProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$watchChapterHistoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[localDatasourceProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  },
 );
 
 typedef WatchChapterHistoryRef = StreamProviderRef<List<ChapterHistory>>;

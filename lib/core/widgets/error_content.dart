@@ -19,15 +19,17 @@ class ErrorContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     final strings = context.strings;
     return Center(
       child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
         separator: const SizedBox(height: 16),
         children: [
-          const AsciiEmojiWidget(AsciiEmoji.raiseShoulders),
+          AsciiEmojiWidget.random(),
           Text(
             message ?? strings.generic_error,
+            style: textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           if (onRetry != null)

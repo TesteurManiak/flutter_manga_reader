@@ -4,7 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chapter_history.g.dart';
 
-@Riverpod(keepAlive: true)
+@Riverpod(keepAlive: true, dependencies: [localDatasource])
 Stream<List<ChapterHistory>> watchChapterHistory(WatchChapterHistoryRef ref) {
   return ref.watch(localDatasourceProvider).watchHistory();
 }

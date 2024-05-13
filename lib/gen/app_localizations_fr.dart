@@ -181,4 +181,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get no_page_found => 'Aucune page trouvée';
+
+  @override
+  String get no_manga_found => 'Aucun manga trouvé';
 }

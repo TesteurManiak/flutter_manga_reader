@@ -422,6 +422,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Aucune page trouvée'**
   String get no_page_found;
+
+  /// No description provided for @no_manga_found.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun manga trouvé'**
+  String get no_manga_found;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

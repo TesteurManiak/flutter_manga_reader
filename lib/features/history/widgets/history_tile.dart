@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/models/chapter_history.dart';
+import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
@@ -47,7 +49,6 @@ class HistoryTile extends ConsumerWidget {
                 headers: headers,
               ),
             ),
-            // TODO(Guillaume): implement chapter history tile
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -74,6 +75,22 @@ class HistoryTile extends ConsumerWidget {
                   ),
                 ],
               ),
+            ),
+            PopupMenuButton<void>(
+              icon: const Icon(Icons.more_horiz),
+              itemBuilder: (context) {
+                final strings = context.strings;
+                return [
+                  PopupMenuItem(
+                    child: Text(strings.delete),
+                    onTap: () {
+                      ref
+                          .read(localDatasourceProvider)
+                          .deleteChapterHistory(history.manga.id);
+                    },
+                  ),
+                ];
+              },
             ),
           ],
         ),

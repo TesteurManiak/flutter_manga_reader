@@ -68,5 +68,6 @@
     "download": "Download",
     "delete": "Delete",
     "cache_cleared": "Cache cleared",
-    "no_page_found": "No page found"
+    "no_page_found": "No page found",
+    "no_manga_found": "No manga found"
 }

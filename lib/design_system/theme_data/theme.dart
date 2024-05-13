@@ -13,6 +13,11 @@ class AppTheme {
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
       ),
+      popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
       extensions: [
         const AppColors.light(),
         const AppShadows.light(),
@@ -30,6 +35,11 @@ class AppTheme {
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
+      ),
+      popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
       extensions: [
         const AppColors.dark(),

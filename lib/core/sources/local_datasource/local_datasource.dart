@@ -80,6 +80,7 @@ abstract class LocalDatasource {
   Future<void> deleteChapters(List<int> chapterIds);
 
   Future<void> saveChapterHistory(ChapterHistory chapterHistory);
+  Future<void> deleteChapterHistory(int mangaId);
 }
 
 @Riverpod(keepAlive: true, dependencies: [])

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/mixins/app_bar_size.dart';
 import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/history/providers/chapter_history.dart';
+import 'package:flutter_manga_reader/features/history/providers/incognito_mode_controller.dart';
 import 'package:flutter_manga_reader/features/history/widgets/history_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,10 +37,7 @@ class _LoadedContent extends StatelessWidget {
 
     return ListView.builder(
       itemCount: chapters.length,
-      itemBuilder: (context, index) {
-        final history = chapters[index];
-        return HistoryTile(history);
-      },
+      itemBuilder: (_, index) => HistoryTile(chapters[index]),
     );
   }
 }
@@ -50,14 +47,17 @@ class _Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final strings = context.strings;
     return Center(
       child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
         separator: const SizedBox(height: 16),
         children: [
-          const AsciiEmojiWidget(AsciiEmoji.confused),
+          AsciiEmojiWidget.random(),
           Text(
-            'No history yet'.hardcoded, // TODO(Guillaume): localize this string
+            strings.no_manga_found,
+            style: textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
         ],
@@ -66,14 +66,22 @@ class _Empty extends StatelessWidget {
   }
 }
 
-class _AppBar extends StatelessWidget with AppBarSizeMixin {
+class _AppBar extends ConsumerWidget with AppBarSizeMixin {
   const _AppBar();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final strings = context.strings;
     return AppBar(
       title: Text(strings.history_title),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.lock),
+          onPressed: () {
+            ref.read(incognitoModeControllerProvider.notifier).toggle();
+          },
+        ),
+      ],
     );
   }
 }
