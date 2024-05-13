@@ -120,7 +120,12 @@ class DriftDatasource implements LocalDatasource {
     required bool read,
   }) {
     return (_db.update(_db.dbChapters)..where((t) => t.id.isIn(chapterIds)))
-        .write(DbChaptersCompanion(read: Value(read)));
+        .write(
+      DbChaptersCompanion(
+        read: Value(read),
+        lastPageRead: const Value(0),
+      ),
+    );
   }
 
   @override
