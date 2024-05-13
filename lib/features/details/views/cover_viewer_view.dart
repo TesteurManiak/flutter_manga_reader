@@ -18,15 +18,18 @@ class CoverViewerView extends ConsumerWidget {
       onTap: () => Navigator.pop(context),
       child: Scaffold(
         backgroundColor: Colors.black54,
-        body: Center(
-          child: Hero(
-            tag: tag,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: AppNetworkImage(
-                url: coverUrl,
-                fit: BoxFit.cover,
-                headers: headers,
+        body: InteractiveViewer(
+          maxScale: 4,
+          child: Center(
+            child: Hero(
+              tag: tag,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: AppNetworkImage(
+                  url: coverUrl,
+                  fit: BoxFit.cover,
+                  headers: headers,
+                ),
               ),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/library/views/library_view.dart';
 import 'package:flutter_manga_reader/features/search/views/source_list_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/settings_view.dart';
@@ -39,7 +40,9 @@ class _HomeViewState extends State<HomeView> {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           LibraryView(),
+          _WIPView(),
           BrowseView(),
+          _WIPView(),
           SettingsView(),
         ],
       ),
@@ -50,10 +53,38 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
+class _WIPView extends StatelessWidget {
+  const _WIPView();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: SeparatedColumn(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            separator: SizedBox(height: 8),
+            children: [
+              Icon(
+                Icons.build_circle_outlined,
+                size: 48,
+              ),
+              Text(
+                'Work In Progress',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _BottomBar extends StatelessWidget {
-  const _BottomBar({
-    required this.controller,
-  });
+  const _BottomBar({required this.controller});
 
   final ValueNotifier<int> controller;
 
@@ -66,18 +97,27 @@ class _BottomBar extends StatelessWidget {
       builder: (context, currentIndex, _) {
         return BottomNavigationBar(
           currentIndex: currentIndex,
+          type: BottomNavigationBarType.fixed,
           onTap: (index) => controller.value = index,
           items: [
             BottomNavigationBarItem(
-              icon: const Icon(Icons.book),
+              icon: const Icon(Icons.collections_bookmark_outlined),
               label: strings.library_title,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.new_releases_outlined),
+              label: strings.updates_title,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.explore_outlined),
               label: strings.search_title,
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.settings_outlined),
+              icon: const Icon(Icons.update),
+              label: strings.history_title,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.more_horiz_rounded),
               label: strings.settings_title,
             ),
           ],

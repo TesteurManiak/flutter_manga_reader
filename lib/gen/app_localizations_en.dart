@@ -13,7 +13,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get library_empty => 'Your library is empty';
 
   @override
-  String get settings_title => 'Settings';
+  String get updates_title => 'Updates';
+
+  @override
+  String get settings_title => 'More';
 
   @override
   String get settings_general => 'General';
@@ -68,6 +71,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_empty => 'No manga found';
+
+  @override
+  String get history_title => 'History';
 
   @override
   String get manga_status_unknown => 'Unknown';

@@ -105,10 +105,16 @@ abstract class AppLocalizations {
   /// **'Votre bibliothèque est vide'**
   String get library_empty;
 
+  /// No description provided for @updates_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mises à jour'**
+  String get updates_title;
+
   /// No description provided for @settings_title.
   ///
   /// In fr, this message translates to:
-  /// **'Paramètres'**
+  /// **'Plus'**
   String get settings_title;
 
   /// No description provided for @settings_general.
@@ -218,6 +224,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Aucun manga trouvé'**
   String get search_empty;
+
+  /// No description provided for @history_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Historique'**
+  String get history_title;
 
   /// No description provided for @manga_status_unknown.
   ///
