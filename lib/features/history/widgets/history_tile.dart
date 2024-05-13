@@ -4,6 +4,7 @@ import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_dataso
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
+import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -34,14 +35,38 @@ class HistoryTile extends ConsumerWidget {
         child: SeparatedRow(
           separator: const SizedBox(width: 8),
           children: [
-            AppNetworkImage(
-              url: history.manga.thumbnailUrl,
-              width: size.width / 4,
-              fit: BoxFit.cover,
-              headers: headers,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: AppNetworkImage(
+                url: history.manga.thumbnailUrl,
+                width: size.width / 4,
+                fit: BoxFit.cover,
+                headers: headers,
+              ),
             ),
             // TODO(Guillaume): implement chapter history tile
-            const Expanded(child: Column()),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    history.manga.title,
+                    style: const TextStyle(fontSize: 20),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    history.manga.author ?? '',
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  StatusLabel(history.manga.status),
+                ],
+              ),
+            ),
           ],
         ),
       ),
