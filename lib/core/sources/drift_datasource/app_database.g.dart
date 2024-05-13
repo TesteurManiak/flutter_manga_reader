@@ -1665,6 +1665,216 @@ class DbCacheEntriesCompanion extends UpdateCompanion<DbCacheEntry> {
   }
 }
 
+class $DbChapterHistoryTable extends DbChapterHistory
+    with TableInfo<$DbChapterHistoryTable, DbChapterHistoryData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DbChapterHistoryTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _mangaIdMeta =
+      const VerificationMeta('mangaId');
+  @override
+  late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
+      'manga_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _chapterIdMeta =
+      const VerificationMeta('chapterId');
+  @override
+  late final GeneratedColumn<int> chapterId = GeneratedColumn<int>(
+      'chapter_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _dateReadMeta =
+      const VerificationMeta('dateRead');
+  @override
+  late final GeneratedColumn<DateTime> dateRead = GeneratedColumn<DateTime>(
+      'date_read', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [mangaId, chapterId, dateRead];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'db_chapter_history';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<DbChapterHistoryData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('manga_id')) {
+      context.handle(_mangaIdMeta,
+          mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+    }
+    if (data.containsKey('chapter_id')) {
+      context.handle(_chapterIdMeta,
+          chapterId.isAcceptableOrUnknown(data['chapter_id']!, _chapterIdMeta));
+    } else if (isInserting) {
+      context.missing(_chapterIdMeta);
+    }
+    if (data.containsKey('date_read')) {
+      context.handle(_dateReadMeta,
+          dateRead.isAcceptableOrUnknown(data['date_read']!, _dateReadMeta));
+    } else if (isInserting) {
+      context.missing(_dateReadMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {mangaId};
+  @override
+  DbChapterHistoryData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DbChapterHistoryData(
+      mangaId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
+      chapterId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}chapter_id'])!,
+      dateRead: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_read'])!,
+    );
+  }
+
+  @override
+  $DbChapterHistoryTable createAlias(String alias) {
+    return $DbChapterHistoryTable(attachedDatabase, alias);
+  }
+}
+
+class DbChapterHistoryData extends DataClass
+    implements Insertable<DbChapterHistoryData> {
+  final int mangaId;
+  final int chapterId;
+  final DateTime dateRead;
+  const DbChapterHistoryData(
+      {required this.mangaId, required this.chapterId, required this.dateRead});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['manga_id'] = Variable<int>(mangaId);
+    map['chapter_id'] = Variable<int>(chapterId);
+    map['date_read'] = Variable<DateTime>(dateRead);
+    return map;
+  }
+
+  DbChapterHistoryCompanion toCompanion(bool nullToAbsent) {
+    return DbChapterHistoryCompanion(
+      mangaId: Value(mangaId),
+      chapterId: Value(chapterId),
+      dateRead: Value(dateRead),
+    );
+  }
+
+  factory DbChapterHistoryData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DbChapterHistoryData(
+      mangaId: serializer.fromJson<int>(json['mangaId']),
+      chapterId: serializer.fromJson<int>(json['chapterId']),
+      dateRead: serializer.fromJson<DateTime>(json['dateRead']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'mangaId': serializer.toJson<int>(mangaId),
+      'chapterId': serializer.toJson<int>(chapterId),
+      'dateRead': serializer.toJson<DateTime>(dateRead),
+    };
+  }
+
+  DbChapterHistoryData copyWith(
+          {int? mangaId, int? chapterId, DateTime? dateRead}) =>
+      DbChapterHistoryData(
+        mangaId: mangaId ?? this.mangaId,
+        chapterId: chapterId ?? this.chapterId,
+        dateRead: dateRead ?? this.dateRead,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('DbChapterHistoryData(')
+          ..write('mangaId: $mangaId, ')
+          ..write('chapterId: $chapterId, ')
+          ..write('dateRead: $dateRead')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(mangaId, chapterId, dateRead);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DbChapterHistoryData &&
+          other.mangaId == this.mangaId &&
+          other.chapterId == this.chapterId &&
+          other.dateRead == this.dateRead);
+}
+
+class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
+  final Value<int> mangaId;
+  final Value<int> chapterId;
+  final Value<DateTime> dateRead;
+  const DbChapterHistoryCompanion({
+    this.mangaId = const Value.absent(),
+    this.chapterId = const Value.absent(),
+    this.dateRead = const Value.absent(),
+  });
+  DbChapterHistoryCompanion.insert({
+    this.mangaId = const Value.absent(),
+    required int chapterId,
+    required DateTime dateRead,
+  })  : chapterId = Value(chapterId),
+        dateRead = Value(dateRead);
+  static Insertable<DbChapterHistoryData> custom({
+    Expression<int>? mangaId,
+    Expression<int>? chapterId,
+    Expression<DateTime>? dateRead,
+  }) {
+    return RawValuesInsertable({
+      if (mangaId != null) 'manga_id': mangaId,
+      if (chapterId != null) 'chapter_id': chapterId,
+      if (dateRead != null) 'date_read': dateRead,
+    });
+  }
+
+  DbChapterHistoryCompanion copyWith(
+      {Value<int>? mangaId, Value<int>? chapterId, Value<DateTime>? dateRead}) {
+    return DbChapterHistoryCompanion(
+      mangaId: mangaId ?? this.mangaId,
+      chapterId: chapterId ?? this.chapterId,
+      dateRead: dateRead ?? this.dateRead,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (mangaId.present) {
+      map['manga_id'] = Variable<int>(mangaId.value);
+    }
+    if (chapterId.present) {
+      map['chapter_id'] = Variable<int>(chapterId.value);
+    }
+    if (dateRead.present) {
+      map['date_read'] = Variable<DateTime>(dateRead.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DbChapterHistoryCompanion(')
+          ..write('mangaId: $mangaId, ')
+          ..write('chapterId: $chapterId, ')
+          ..write('dateRead: $dateRead')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
@@ -1673,12 +1883,19 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DbReadingDirectionTable dbReadingDirection =
       $DbReadingDirectionTable(this);
   late final $DbCacheEntriesTable dbCacheEntries = $DbCacheEntriesTable(this);
+  late final $DbChapterHistoryTable dbChapterHistory =
+      $DbChapterHistoryTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [dbMangas, dbChapters, dbReadingDirection, dbCacheEntries];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        dbMangas,
+        dbChapters,
+        dbReadingDirection,
+        dbCacheEntries,
+        dbChapterHistory
+      ];
 }
 
 typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
@@ -2430,6 +2647,113 @@ class $$DbCacheEntriesTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$DbChapterHistoryTableInsertCompanionBuilder
+    = DbChapterHistoryCompanion Function({
+  Value<int> mangaId,
+  required int chapterId,
+  required DateTime dateRead,
+});
+typedef $$DbChapterHistoryTableUpdateCompanionBuilder
+    = DbChapterHistoryCompanion Function({
+  Value<int> mangaId,
+  Value<int> chapterId,
+  Value<DateTime> dateRead,
+});
+
+class $$DbChapterHistoryTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbChapterHistoryTable,
+    DbChapterHistoryData,
+    $$DbChapterHistoryTableFilterComposer,
+    $$DbChapterHistoryTableOrderingComposer,
+    $$DbChapterHistoryTableProcessedTableManager,
+    $$DbChapterHistoryTableInsertCompanionBuilder,
+    $$DbChapterHistoryTableUpdateCompanionBuilder> {
+  $$DbChapterHistoryTableTableManager(
+      _$AppDatabase db, $DbChapterHistoryTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbChapterHistoryTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbChapterHistoryTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$DbChapterHistoryTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> mangaId = const Value.absent(),
+            Value<int> chapterId = const Value.absent(),
+            Value<DateTime> dateRead = const Value.absent(),
+          }) =>
+              DbChapterHistoryCompanion(
+            mangaId: mangaId,
+            chapterId: chapterId,
+            dateRead: dateRead,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> mangaId = const Value.absent(),
+            required int chapterId,
+            required DateTime dateRead,
+          }) =>
+              DbChapterHistoryCompanion.insert(
+            mangaId: mangaId,
+            chapterId: chapterId,
+            dateRead: dateRead,
+          ),
+        ));
+}
+
+class $$DbChapterHistoryTableProcessedTableManager
+    extends ProcessedTableManager<
+        _$AppDatabase,
+        $DbChapterHistoryTable,
+        DbChapterHistoryData,
+        $$DbChapterHistoryTableFilterComposer,
+        $$DbChapterHistoryTableOrderingComposer,
+        $$DbChapterHistoryTableProcessedTableManager,
+        $$DbChapterHistoryTableInsertCompanionBuilder,
+        $$DbChapterHistoryTableUpdateCompanionBuilder> {
+  $$DbChapterHistoryTableProcessedTableManager(super.$state);
+}
+
+class $$DbChapterHistoryTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $DbChapterHistoryTable> {
+  $$DbChapterHistoryTableFilterComposer(super.$state);
+  ColumnFilters<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get chapterId => $state.composableBuilder(
+      column: $state.table.chapterId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get dateRead => $state.composableBuilder(
+      column: $state.table.dateRead,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$DbChapterHistoryTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $DbChapterHistoryTable> {
+  $$DbChapterHistoryTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get mangaId => $state.composableBuilder(
+      column: $state.table.mangaId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get chapterId => $state.composableBuilder(
+      column: $state.table.chapterId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get dateRead => $state.composableBuilder(
+      column: $state.table.dateRead,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class _$AppDatabaseManager {
   final _$AppDatabase _db;
   _$AppDatabaseManager(this._db);
@@ -2441,6 +2765,8 @@ class _$AppDatabaseManager {
       $$DbReadingDirectionTableTableManager(_db, _db.dbReadingDirection);
   $$DbCacheEntriesTableTableManager get dbCacheEntries =>
       $$DbCacheEntriesTableTableManager(_db, _db.dbCacheEntries);
+  $$DbChapterHistoryTableTableManager get dbChapterHistory =>
+      $$DbChapterHistoryTableTableManager(_db, _db.dbChapterHistory);
 }
 
 // **************************************************************************

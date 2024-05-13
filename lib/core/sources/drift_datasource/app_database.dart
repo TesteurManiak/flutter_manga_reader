@@ -65,9 +65,24 @@ class DbCacheEntries extends Table {
   Set<Column<Object>>? get primaryKey => {key};
 }
 
+class DbChapterHistory extends Table {
+  IntColumn get mangaId => integer()();
+  IntColumn get chapterId => integer()();
+  DateTimeColumn get dateRead => dateTime()();
+
+  @override
+  Set<Column<Object>>? get primaryKey => {mangaId};
+}
+
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
 @DriftDatabase(
-  tables: [DbMangas, DbChapters, DbReadingDirection, DbCacheEntries],
+  tables: [
+    DbMangas,
+    DbChapters,
+    DbReadingDirection,
+    DbCacheEntries,
+    DbChapterHistory,
+  ],
 )
 class AppDatabase extends _$AppDatabase {
   // We tell the database where to store the data with this constructor
