@@ -70,15 +70,18 @@ class ToasterService {
     final entry = toastEntry.entry;
     _overlay?.insert(entry);
 
-    _timer = Timer(toastEntry.toastDuration, _removeCurrentToastAndShowNext);
+    _timer = Timer(
+      toastEntry.toastDuration,
+      () => _removeCurrentToastAndShowNext(animated: true),
+    );
   }
 
-  Future<void> _removeCurrentToastAndShowNext() async {
+  Future<void> _removeCurrentToastAndShowNext({bool animated = false}) async {
     if (_isDismissing) return;
 
     _timer?.cancel();
 
-    if (_toastEntry case final toastEntry?) {
+    if (_toastEntry case final toastEntry? when animated) {
       _isDismissing = true;
       toastEntry.key.currentState?.hide();
       await Future<void>.delayed(toastEntry.fadeDuration);
