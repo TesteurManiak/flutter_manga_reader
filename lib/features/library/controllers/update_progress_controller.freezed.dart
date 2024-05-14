@@ -15,13 +15,21 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UpdateProgressState {}
+mixin _$UpdateProgressState {
+  int? get progress => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UpdateProgressStateCopyWith<UpdateProgressState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
 
 /// @nodoc
 abstract class $UpdateProgressStateCopyWith<$Res> {
   factory $UpdateProgressStateCopyWith(
           UpdateProgressState value, $Res Function(UpdateProgressState) then) =
       _$UpdateProgressStateCopyWithImpl<$Res, UpdateProgressState>;
+  @useResult
+  $Res call({int progress});
 }
 
 /// @nodoc
@@ -33,14 +41,29 @@ class _$UpdateProgressStateCopyWithImpl<$Res, $Val extends UpdateProgressState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? progress = null,
+  }) {
+    return _then(_value.copyWith(
+      progress: null == progress
+          ? _value.progress!
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$UpdateProgressLoadingImplCopyWith<$Res> {
+abstract class _$$UpdateProgressLoadingImplCopyWith<$Res>
+    implements $UpdateProgressStateCopyWith<$Res> {
   factory _$$UpdateProgressLoadingImplCopyWith(
           _$UpdateProgressLoadingImpl value,
           $Res Function(_$UpdateProgressLoadingImpl) then) =
       __$$UpdateProgressLoadingImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({int progress});
 }
@@ -106,17 +129,23 @@ abstract class UpdateProgressLoading extends UpdateProgressState {
       _$UpdateProgressLoadingImpl;
   const UpdateProgressLoading._() : super._();
 
+  @override
   int get progress;
+  @override
   @JsonKey(ignore: true)
   _$$UpdateProgressLoadingImplCopyWith<_$UpdateProgressLoadingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UpdateProgressLoadedImplCopyWith<$Res> {
+abstract class _$$UpdateProgressLoadedImplCopyWith<$Res>
+    implements $UpdateProgressStateCopyWith<$Res> {
   factory _$$UpdateProgressLoadedImplCopyWith(_$UpdateProgressLoadedImpl value,
           $Res Function(_$UpdateProgressLoadedImpl) then) =
       __$$UpdateProgressLoadedImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int? progress});
 }
 
 /// @nodoc
@@ -126,30 +155,64 @@ class __$$UpdateProgressLoadedImplCopyWithImpl<$Res>
   __$$UpdateProgressLoadedImplCopyWithImpl(_$UpdateProgressLoadedImpl _value,
       $Res Function(_$UpdateProgressLoadedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? progress = freezed,
+  }) {
+    return _then(_$UpdateProgressLoadedImpl(
+      progress: freezed == progress
+          ? _value.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UpdateProgressLoadedImpl extends UpdateProgressLoaded {
-  const _$UpdateProgressLoadedImpl() : super._();
+  const _$UpdateProgressLoadedImpl({this.progress}) : super._();
+
+  @override
+  final int? progress;
 
   @override
   String toString() {
-    return 'UpdateProgressState.loaded()';
+    return 'UpdateProgressState.loaded(progress: $progress)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UpdateProgressLoadedImpl);
+            other is _$UpdateProgressLoadedImpl &&
+            (identical(other.progress, progress) ||
+                other.progress == progress));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, progress);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateProgressLoadedImplCopyWith<_$UpdateProgressLoadedImpl>
+      get copyWith =>
+          __$$UpdateProgressLoadedImplCopyWithImpl<_$UpdateProgressLoadedImpl>(
+              this, _$identity);
 }
 
 abstract class UpdateProgressLoaded extends UpdateProgressState {
-  const factory UpdateProgressLoaded() = _$UpdateProgressLoadedImpl;
+  const factory UpdateProgressLoaded({final int? progress}) =
+      _$UpdateProgressLoadedImpl;
   const UpdateProgressLoaded._() : super._();
+
+  @override
+  int? get progress;
+  @override
+  @JsonKey(ignore: true)
+  _$$UpdateProgressLoadedImplCopyWith<_$UpdateProgressLoadedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

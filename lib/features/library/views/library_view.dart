@@ -90,12 +90,7 @@ class _UpdateIndicator extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final progress = ref.watch(
-      updateProgressControllerProvider.select((s) {
-        return switch (s) {
-          UpdateProgressLoading(:final progress) => progress,
-          _ => 0,
-        };
-      }),
+      updateProgressControllerProvider.select((s) => s.progress),
     );
 
     final libraryLength = ref.read(

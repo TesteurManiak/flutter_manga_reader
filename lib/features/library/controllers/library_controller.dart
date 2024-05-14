@@ -36,7 +36,7 @@ class LibraryController extends _$LibraryController {
       _isRefreshing = true;
       ref.read(updateProgressControllerProvider.notifier).startProgress();
       final records = <MangaFetchRecord>[];
-      for (final manga in mangas) {
+      for (final (i, manga) in mangas.indexed) {
         final source = ref.read(getSourceFromIdProvider(manga.sourceId));
         final result = await source.fetchFullMangaData(manga);
 
@@ -44,7 +44,7 @@ class LibraryController extends _$LibraryController {
           records.add(record);
           ref
               .read(updateProgressControllerProvider.notifier)
-              .incrementProgress();
+              .setProgress(i + 1);
         }
       }
 

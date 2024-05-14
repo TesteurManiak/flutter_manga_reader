@@ -22,16 +22,15 @@ class UpdateProgressController extends _$UpdateProgressController {
     state = UpdateProgressState.loading(progress: value);
   }
 
-  void endProgress() => state = const UpdateProgressState.loaded();
+  void endProgress() {
+    state = UpdateProgressState.loaded(progress: state.progress);
+  }
 }
 
 @riverpod
 bool isUpdating(IsUpdatingRef ref) {
-  final state = ref.watch(updateProgressControllerProvider);
-  return switch (state) {
-    UpdateProgressLoading() => true,
-    _ => false,
-  };
+  return ref
+      .watch(updateProgressControllerProvider.select((s) => s.isUpdating));
 }
 
 @freezed
@@ -39,7 +38,16 @@ sealed class UpdateProgressState with _$UpdateProgressState {
   const factory UpdateProgressState.loading({
     @Default(0) int progress,
   }) = UpdateProgressLoading;
-  const factory UpdateProgressState.loaded() = UpdateProgressLoaded;
+  const factory UpdateProgressState.loaded({
+    int? progress,
+  }) = UpdateProgressLoaded;
 
   const UpdateProgressState._();
+
+  bool get isUpdating {
+    return switch (this) {
+      UpdateProgressLoading() => true,
+      _ => false,
+    };
+  }
 }

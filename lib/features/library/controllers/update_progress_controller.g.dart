@@ -6,7 +6,7 @@ part of 'update_progress_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isUpdatingHash() => r'18312d22ecfb5192310f3fdfa267a26dbfcb2405';
+String _$isUpdatingHash() => r'2af40aeff0d334b4c9a4af7bfd0992ce8a5360e8';
 
 /// See also [isUpdating].
 @ProviderFor(isUpdating)
@@ -21,7 +21,7 @@ final isUpdatingProvider = AutoDisposeProvider<bool>.internal(
 
 typedef IsUpdatingRef = AutoDisposeProviderRef<bool>;
 String _$updateProgressControllerHash() =>
-    r'dcf1e5f095ef671fe6c5d8f26f24bf76a14e838f';
+    r'b78a951d744d3025ab48d70b9b0cb19a7788e595';
 
 /// See also [UpdateProgressController].
 @ProviderFor(UpdateProgressController)

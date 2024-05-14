@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch development",
+            "name": "Development (Debug)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main_dev.dart",
@@ -16,6 +16,21 @@
                 "lib/main_dev.dart",
                 "--dart-define",
                 "DEV_MODE_ENABLED=true"
+            ]
+        },
+        {
+            "name": "Development (Profile)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--target",
+                "lib/main_dev.dart",
+                "--dart-define",
+                "DEV_MODE_ENABLED=true",
+                "--profile"
             ]
         },
         {
