@@ -6,7 +6,7 @@ part of 'library_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$libraryControllerHash() => r'9f66a489bf03db37bc4ea49f79b115ce1291241e';
+String _$libraryControllerHash() => r'589205c83a0ba9eecd74fa3f7405c45ac0130b99';
 
 /// See also [LibraryController].
 @ProviderFor(LibraryController)
@@ -17,10 +17,15 @@ final libraryControllerProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$libraryControllerHash,
-  dependencies: <ProviderOrFamily>[watchMangasInLibraryProvider],
+  dependencies: <ProviderOrFamily>[
+    watchMangasInLibraryProvider,
+    localDatasourceProvider
+  ],
   allTransitiveDependencies: <ProviderOrFamily>{
     watchMangasInLibraryProvider,
-    ...?watchMangasInLibraryProvider.allTransitiveDependencies
+    ...?watchMangasInLibraryProvider.allTransitiveDependencies,
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
   },
 );
 

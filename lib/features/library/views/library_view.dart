@@ -7,6 +7,7 @@ import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/library/controllers/library_controller.dart';
+import 'package:flutter_manga_reader/features/library/controllers/update_progress_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LibraryView extends ConsumerStatefulWidget {
@@ -23,9 +24,11 @@ class _LibraryViewState extends ConsumerState<LibraryView>
     super.build(context);
 
     final state = ref.watch(libraryControllerProvider);
+    final isUpdating = ref.watch(isUpdatingProvider);
 
     return Scaffold(
       appBar: _AppBar(),
+      floatingActionButton: isUpdating ? const _UpdateIndicator() : null,
       body: switch (state) {
         LibraryLoading() => const LoadingContent(),
         LibraryLoaded(:final mangas) => RefreshIndicator(
@@ -77,6 +80,40 @@ class _Empty extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _UpdateIndicator extends ConsumerWidget {
+  const _UpdateIndicator();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = ref.watch(
+      updateProgressControllerProvider.select((s) {
+        return switch (s) {
+          UpdateProgressLoading(:final progress) => progress,
+          _ => 0,
+        };
+      }),
+    );
+
+    final libraryLength = ref.read(
+      libraryControllerProvider.select((s) {
+        return switch (s) {
+          LibraryLoaded(:final mangas) => mangas.length,
+          _ => 0,
+        };
+      }),
+    );
+
+    return FloatingActionButton.extended(
+      icon: const SizedBox.square(
+        dimension: 20,
+        child: CircularProgressIndicator(),
+      ),
+      label: Text('$progress/$libraryLength'),
+      onPressed: () {},
     );
   }
 }

@@ -18,9 +18,7 @@ class HistoryTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sourceId =
-        ref.watch(getSourceIdProvider(history.manga.toSourceModel()));
-    final source = ref.watch(getSourceFromIdProvider(sourceId));
+    final source = ref.watch(getSourceFromIdProvider(history.manga.sourceId));
     final headers = source.getHeaders();
     final size = MediaQuery.sizeOf(context);
     final textTheme = Theme.of(context).textTheme;
