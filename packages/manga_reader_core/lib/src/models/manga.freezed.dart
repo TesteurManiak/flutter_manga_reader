@@ -30,7 +30,6 @@ mixin _$Manga {
   String? get genre => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
   String get sourceId => throw _privateConstructorUsedError;
-  String get lang => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   bool get initialized => throw _privateConstructorUsedError;
@@ -55,7 +54,6 @@ abstract class $MangaCopyWith<$Res> {
       String? genre,
       bool favorite,
       String sourceId,
-      String lang,
       String? artist,
       String? thumbnailUrl,
       bool initialized});
@@ -83,7 +81,6 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? genre = freezed,
     Object? favorite = null,
     Object? sourceId = null,
-    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
     Object? initialized = null,
@@ -125,10 +122,6 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
-      lang: null == lang
-          ? _value.lang
-          : lang // ignore: cast_nullable_to_non_nullable
-              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -162,7 +155,6 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
       String? genre,
       bool favorite,
       String sourceId,
-      String lang,
       String? artist,
       String? thumbnailUrl,
       bool initialized});
@@ -188,7 +180,6 @@ class __$$MangaImplCopyWithImpl<$Res>
     Object? genre = freezed,
     Object? favorite = null,
     Object? sourceId = null,
-    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
     Object? initialized = null,
@@ -230,10 +221,6 @@ class __$$MangaImplCopyWithImpl<$Res>
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
-      lang: null == lang
-          ? _value.lang
-          : lang // ignore: cast_nullable_to_non_nullable
-              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -263,7 +250,6 @@ class _$MangaImpl extends _Manga {
       this.genre,
       this.favorite = false,
       required this.sourceId,
-      required this.lang,
       this.artist,
       this.thumbnailUrl,
       this.initialized = false})
@@ -294,8 +280,6 @@ class _$MangaImpl extends _Manga {
   @override
   final String sourceId;
   @override
-  final String lang;
-  @override
   final String? artist;
   @override
   final String? thumbnailUrl;
@@ -305,7 +289,7 @@ class _$MangaImpl extends _Manga {
 
   @override
   String toString() {
-    return 'Manga(id: $id, title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, favorite: $favorite, sourceId: $sourceId, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl, initialized: $initialized)';
+    return 'Manga(id: $id, title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, favorite: $favorite, sourceId: $sourceId, artist: $artist, thumbnailUrl: $thumbnailUrl, initialized: $initialized)';
   }
 
   @override
@@ -325,7 +309,6 @@ class _$MangaImpl extends _Manga {
                 other.favorite == favorite) &&
             (identical(other.sourceId, sourceId) ||
                 other.sourceId == sourceId) &&
-            (identical(other.lang, lang) || other.lang == lang) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl) &&
@@ -346,7 +329,6 @@ class _$MangaImpl extends _Manga {
       genre,
       favorite,
       sourceId,
-      lang,
       artist,
       thumbnailUrl,
       initialized);
@@ -376,7 +358,6 @@ abstract class _Manga extends Manga {
       final String? genre,
       final bool favorite,
       required final String sourceId,
-      required final String lang,
       final String? artist,
       final String? thumbnailUrl,
       final bool initialized}) = _$MangaImpl;
@@ -403,8 +384,6 @@ abstract class _Manga extends Manga {
   bool get favorite;
   @override
   String get sourceId;
-  @override
-  String get lang;
   @override
   String? get artist;
   @override

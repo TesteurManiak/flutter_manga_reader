@@ -18,7 +18,6 @@ _$SourceMangaImpl _$$SourceMangaImplFromJson(Map<String, dynamic> json) =>
               .fromJson((json['status'] as num).toInt()),
       genre: json['genre'] as String?,
       sourceId: json['sourceId'] as String,
-      lang: json['lang'] as String,
       artist: json['artist'] as String?,
       thumbnailUrl: json['thumbnailUrl'] as String?,
     );

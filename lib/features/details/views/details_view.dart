@@ -249,7 +249,6 @@ class _SliverHeader extends StatelessWidget {
                   _StatusAndSource(
                     status: manga?.status,
                     sourceId: manga?.sourceId,
-                    lang: manga?.lang,
                   ),
                 ],
               ),
@@ -299,18 +298,15 @@ class _StatusAndSource extends ConsumerWidget {
   const _StatusAndSource({
     required this.status,
     required this.sourceId,
-    required this.lang,
   });
 
   final MangaStatus? status;
   final String? sourceId;
-  final String? lang;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final source = switch (sourceId) {
-      final sourceId? =>
-        ref.watch(getSourceFromIdProvider(sourceId).select((s) => s.name)),
+      final sourceId? => ref.watch(getSourceFromIdProvider(sourceId)),
       _ => null,
     };
 
@@ -320,12 +316,7 @@ class _StatusAndSource extends ConsumerWidget {
         if (status case final status?) StatusLabel(status),
         if (source case final source?)
           Text(
-            () {
-              final buffer = StringBuffer(source);
-              final lang = this.lang;
-              if (lang != null) buffer.write(' (${lang.toUpperCase()})');
-              return buffer.toString();
-            }(),
+            '${source.name} (${source.lang.toUpperCase()})',
             maxLines: 1,
             style: Theme.of(context).textTheme.bodySmall,
           ),

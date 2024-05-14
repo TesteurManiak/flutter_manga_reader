@@ -118,7 +118,6 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
             url: urls[i],
             sourceId: id,
             thumbnailUrl: images[i],
-            lang: lang,
           );
           mangaList.add(manga);
         }
@@ -315,7 +314,6 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         url: urls[i],
         sourceId: id,
         thumbnailUrl: images[i],
-        lang: lang,
       );
       mangaList.add(manga);
     }

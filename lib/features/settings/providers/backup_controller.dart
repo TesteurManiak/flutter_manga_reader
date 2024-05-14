@@ -1,5 +1,7 @@
 import 'dart:io' as io;
 
+import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
+import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,9 +28,10 @@ class BackupController extends _$BackupController {
       final buffer = io.gzip.decode(bytes);
       final backup = pb.Backup.fromBuffer(buffer);
 
-      // Mangadex (EN): 2499283573021220255
-      for (final source in backup.backupSources) {
-        print('Source: ${source.name} (${source.sourceId})');
+      for (final manga in backup.backupManga) {
+        final sourceManga = manga.toSource();
+        final source = ref.read(findSourceFromIdProvider(sourceManga.sourceId));
+        print('==> Found source: ${source?.name} (${source?.lang})');
       }
 
       state = const BackupState.success();

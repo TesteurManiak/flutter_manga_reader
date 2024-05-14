@@ -18,7 +18,6 @@ class SourceManga with _$SourceManga {
     @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
     String? genre,
     required String sourceId,
-    required String lang,
     String? artist,
     String? thumbnailUrl,
   }) = _SourceManga;

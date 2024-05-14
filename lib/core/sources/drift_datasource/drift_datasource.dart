@@ -50,12 +50,10 @@ class DriftDatasource extends LocalDatasource {
   Future<int?> getMangaId({
     required String title,
     required String url,
-    required String? lang,
     required String? sourceId,
   }) {
     return (_db.select(_db.dbMangas)
           ..where((t) => t.title.equals(title))
-          ..where((t) => t.lang.equalsNullable(lang))
           ..where((t) => t.sourceId.equalsNullable(sourceId))
           ..where((t) => t.url.equals(url)))
         .getSingleOrNull()
@@ -66,7 +64,6 @@ class DriftDatasource extends LocalDatasource {
   Future<int> saveSourceManga(SourceManga sourceManga) async {
     final query = (_db.delete(_db.dbMangas)
       ..where((t) => t.title.equals(sourceManga.title))
-      ..where((t) => t.lang.equalsNullable(sourceManga.lang))
       ..where(
         (t) => t.sourceId.equalsNullable(sourceManga.sourceId),
       )
@@ -327,7 +324,6 @@ extension on SourceManga {
       status: status,
       genre: Value.absentIfNull(genre),
       sourceId: sourceId,
-      lang: lang,
       artist: Value.absentIfNull(artist),
       thumbnailUrl: Value.absentIfNull(thumbnailUrl),
     );

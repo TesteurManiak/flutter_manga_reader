@@ -18,7 +18,6 @@ class Manga with _$Manga {
     String? genre,
     @Default(false) bool favorite,
     required String sourceId,
-    required String lang,
     String? artist,
     String? thumbnailUrl,
     @Default(false) bool initialized,
@@ -45,7 +44,6 @@ class Manga with _$Manga {
   bool isSameAs(SourceManga sourceManga) {
     return title == sourceManga.title &&
         url == sourceManga.url &&
-        lang == sourceManga.lang &&
         sourceId == sourceManga.sourceId;
   }
 }

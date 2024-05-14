@@ -6,7 +6,7 @@ part of 'backup_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$backupControllerHash() => r'7059f0a39ce5c39094c8fc9d591619d2b5ce923b';
+String _$backupControllerHash() => r'0c3a132f197315534b4ff2eb3f777514985c6132';
 
 /// See also [BackupController].
 @ProviderFor(BackupController)

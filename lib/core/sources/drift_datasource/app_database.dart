@@ -20,7 +20,6 @@ class DbMangas extends Table {
   TextColumn get genre => text().nullable()();
   BoolColumn get favorite => boolean().withDefault(const Constant(false))();
   TextColumn get sourceId => text()();
-  TextColumn get lang => text()();
   TextColumn get artist => text().nullable()();
   TextColumn get thumbnailUrl => text().nullable()();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();

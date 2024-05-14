@@ -82,7 +82,6 @@ class MangadexHelper {
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
             }
           : null,
-      lang: lang,
     );
   }
 

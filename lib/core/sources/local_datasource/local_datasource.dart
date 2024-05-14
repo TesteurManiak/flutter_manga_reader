@@ -48,7 +48,6 @@ abstract class LocalDatasource {
   Future<int?> getMangaId({
     required String title,
     required String url,
-    required String? lang,
     required String? sourceId,
   });
 
@@ -105,7 +104,6 @@ Future<int?> getMangaIdFromSource(
   return ref.watch(localDatasourceProvider).getMangaId(
         title: sourceManga.title,
         url: sourceManga.url,
-        lang: sourceManga.lang,
         sourceId: sourceManga.sourceId,
       );
 }

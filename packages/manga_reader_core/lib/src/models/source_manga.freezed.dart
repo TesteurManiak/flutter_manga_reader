@@ -28,7 +28,6 @@ mixin _$SourceManga {
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
   String get sourceId => throw _privateConstructorUsedError;
-  String get lang => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
 
@@ -51,7 +50,6 @@ abstract class $SourceMangaCopyWith<$Res> {
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       String sourceId,
-      String lang,
       String? artist,
       String? thumbnailUrl});
 }
@@ -76,7 +74,6 @@ class _$SourceMangaCopyWithImpl<$Res, $Val extends SourceManga>
     Object? status = null,
     Object? genre = freezed,
     Object? sourceId = null,
-    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
   }) {
@@ -109,10 +106,6 @@ class _$SourceMangaCopyWithImpl<$Res, $Val extends SourceManga>
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
-      lang: null == lang
-          ? _value.lang
-          : lang // ignore: cast_nullable_to_non_nullable
-              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -141,7 +134,6 @@ abstract class _$$SourceMangaImplCopyWith<$Res>
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       String sourceId,
-      String lang,
       String? artist,
       String? thumbnailUrl});
 }
@@ -164,7 +156,6 @@ class __$$SourceMangaImplCopyWithImpl<$Res>
     Object? status = null,
     Object? genre = freezed,
     Object? sourceId = null,
-    Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
   }) {
@@ -197,10 +188,6 @@ class __$$SourceMangaImplCopyWithImpl<$Res>
           ? _value.sourceId
           : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
-      lang: null == lang
-          ? _value.lang
-          : lang // ignore: cast_nullable_to_non_nullable
-              as String,
       artist: freezed == artist
           ? _value.artist
           : artist // ignore: cast_nullable_to_non_nullable
@@ -224,7 +211,6 @@ class _$SourceMangaImpl implements _SourceManga {
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.genre,
       required this.sourceId,
-      required this.lang,
       this.artist,
       this.thumbnailUrl});
 
@@ -248,15 +234,13 @@ class _$SourceMangaImpl implements _SourceManga {
   @override
   final String sourceId;
   @override
-  final String lang;
-  @override
   final String? artist;
   @override
   final String? thumbnailUrl;
 
   @override
   String toString() {
-    return 'SourceManga(title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, sourceId: $sourceId, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl)';
+    return 'SourceManga(title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, sourceId: $sourceId, artist: $artist, thumbnailUrl: $thumbnailUrl)';
   }
 
   @override
@@ -273,7 +257,6 @@ class _$SourceMangaImpl implements _SourceManga {
             (identical(other.genre, genre) || other.genre == genre) &&
             (identical(other.sourceId, sourceId) ||
                 other.sourceId == sourceId) &&
-            (identical(other.lang, lang) || other.lang == lang) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl));
@@ -282,7 +265,7 @@ class _$SourceMangaImpl implements _SourceManga {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, url, description, author,
-      status, genre, sourceId, lang, artist, thumbnailUrl);
+      status, genre, sourceId, artist, thumbnailUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -300,7 +283,6 @@ abstract class _SourceManga implements SourceManga {
       @MangaStatusConverter() final MangaStatus status,
       final String? genre,
       required final String sourceId,
-      required final String lang,
       final String? artist,
       final String? thumbnailUrl}) = _$SourceMangaImpl;
 
@@ -322,8 +304,6 @@ abstract class _SourceManga implements SourceManga {
   String? get genre;
   @override
   String get sourceId;
-  @override
-  String get lang;
   @override
   String? get artist;
   @override

@@ -511,7 +511,6 @@ extension on SourceManga {
       status: status,
       genre: genre,
       sourceId: sourceId,
-      lang: lang,
       artist: artist,
       thumbnailUrl: thumbnailUrl,
     );
