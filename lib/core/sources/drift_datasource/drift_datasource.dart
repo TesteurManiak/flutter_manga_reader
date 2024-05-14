@@ -6,10 +6,11 @@ import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DriftDatasource implements LocalDatasource {
+class DriftDatasource extends LocalDatasource {
   DriftDatasource({required AppDatabase appDatabase}) : _db = appDatabase;
 
   final AppDatabase _db;
@@ -73,29 +74,6 @@ class DriftDatasource implements LocalDatasource {
     await query.go();
 
     return _db.into(_db.dbMangas).insert(sourceManga.toCompanion());
-  }
-
-  @override
-  Future<void> saveSourceChapters(
-    List<SourceChapter> sourceChapters,
-    int mangaId,
-  ) async {
-    final chapters = sourceChapters.map((e) => e.toCompanion(mangaId)).toList();
-    return _db.batch((batch) {
-      batch.insertAll<$DbChaptersTable, DbChapter>(
-        _db.dbChapters,
-        chapters,
-        onConflict: DoUpdate(
-          (old) => DbChaptersCompanion.custom(
-            index: old.index,
-            read: old.read,
-            bookmark: old.bookmark,
-            lastPageRead: old.lastPageRead,
-          ),
-          target: _db.dbChapters.uniqueKeys.first.toList(),
-        ),
-      );
-    });
   }
 
   @override
@@ -259,6 +237,63 @@ class DriftDatasource implements LocalDatasource {
     return (_db.delete(_db.dbChapterHistory)
           ..where((tbl) => tbl.mangaId.equals(mangaId)))
         .go();
+  }
+
+  @override
+  Future<void> saveMangaData(MangaFetchRecord record) async {
+    return _db.batch((batch) {
+      batch
+        ..update(
+          _db.dbMangas,
+          record.manga.toDbModel(),
+          where: (t) => t.id.equals(record.manga.id),
+        )
+        ..insertAll<$DbChaptersTable, DbChapter>(
+          _db.dbChapters,
+          record.sourceChapters.map((e) => e.toCompanion(record.manga.id)),
+          onConflict: DoUpdate(
+            (old) => DbChaptersCompanion.custom(
+              index: old.index,
+              read: old.read,
+              bookmark: old.bookmark,
+              lastPageRead: old.lastPageRead,
+              downloaded: old.downloaded,
+            ),
+            target: _db.dbChapters.uniqueKeys.first.toList(),
+          ),
+        );
+    });
+  }
+
+  @override
+  Future<void> saveMangaDatas(List<MangaFetchRecord> records) {
+    return _db.batch((batch) {
+      batch
+        ..insertAllOnConflictUpdate<$DbMangasTable, DbManga>(
+          _db.dbMangas,
+          records.map((record) => record.manga.toDbModel()),
+        )
+        ..insertAll<$DbChaptersTable, DbChapter>(
+          _db.dbChapters,
+          records.expand(
+            (record) {
+              return record.sourceChapters.map((e) {
+                return e.toCompanion(record.manga.id);
+              });
+            },
+          ),
+          onConflict: DoUpdate(
+            (old) => DbChaptersCompanion.custom(
+              index: old.index,
+              read: old.read,
+              bookmark: old.bookmark,
+              lastPageRead: old.lastPageRead,
+              downloaded: old.downloaded,
+            ),
+            target: _db.dbChapters.uniqueKeys.first.toList(),
+          ),
+        );
+    });
   }
 }
 

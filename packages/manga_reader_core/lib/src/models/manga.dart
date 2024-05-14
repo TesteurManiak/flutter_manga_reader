@@ -42,6 +42,8 @@ class Manga with _$Manga {
 
   SourceManga toSourceModel() => SourceManga.fromJson(toJson());
 
+  String get sourceId => toSourceModel().sourceId;
+
   bool isSameAs(SourceManga sourceManga) {
     return title == sourceManga.title &&
         url == sourceManga.url &&

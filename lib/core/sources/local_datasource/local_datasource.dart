@@ -2,6 +2,7 @@ import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/drift_datasource.dart';
+import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -51,12 +52,6 @@ abstract class LocalDatasource {
     required String? source,
   });
 
-  /// Save a [List] of [SourceChapter] into the database.
-  Future<void> saveSourceChapters(
-    List<SourceChapter> sourceChapters,
-    int mangaId,
-  );
-
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChaptersRead({
     required List<int> chapterIds,
@@ -81,6 +76,10 @@ abstract class LocalDatasource {
 
   Future<void> saveChapterHistory(ChapterHistory chapterHistory);
   Future<void> deleteChapterHistory(int mangaId);
+
+  /// Update simultaneously the [Manga] and its [SourceChapter]s.
+  Future<void> saveMangaData(MangaFetchRecord record);
+  Future<void> saveMangaDatas(List<MangaFetchRecord> records);
 }
 
 @Riverpod(keepAlive: true, dependencies: [])
