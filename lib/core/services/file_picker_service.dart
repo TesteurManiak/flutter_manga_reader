@@ -11,11 +11,8 @@ FilePickerService filePickerService(FilePickerServiceRef ref) {
 }
 
 class FilePickerService {
-  Future<io.File?> pickFile({List<String>? allowedExtensions}) async {
-    final result = await fp.FilePicker.platform.pickFiles(
-      type: fp.FileType.custom,
-      allowedExtensions: allowedExtensions,
-    );
+  Future<io.File?> pickFile() async {
+    final result = await fp.FilePicker.platform.pickFiles();
     if (result?.files.single.path case final path?) return io.File(path);
     return null;
   }

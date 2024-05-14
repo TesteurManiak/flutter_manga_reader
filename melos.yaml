@@ -15,6 +15,6 @@ scripts:
     packageFilters:
       dependsOn: build_runner
 
-  protobuf-gen:
+  pb-gen:
     description: Generate protobuf files
     run: protoc --dart_out=lib/gen -I=protos protos/*.proto
