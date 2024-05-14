@@ -59,10 +59,11 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("favorite" IN (0, 1))'),
       defaultValue: const Constant(false));
-  static const VerificationMeta _sourceMeta = const VerificationMeta('source');
+  static const VerificationMeta _sourceIdMeta =
+      const VerificationMeta('sourceId');
   @override
-  late final GeneratedColumn<String> source = GeneratedColumn<String>(
-      'source', aliasedName, false,
+  late final GeneratedColumn<String> sourceId = GeneratedColumn<String>(
+      'source_id', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _langMeta = const VerificationMeta('lang');
   @override
@@ -100,7 +101,7 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
         status,
         genre,
         favorite,
-        source,
+        sourceId,
         lang,
         artist,
         thumbnailUrl,
@@ -150,11 +151,11 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       context.handle(_favoriteMeta,
           favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
     }
-    if (data.containsKey('source')) {
-      context.handle(_sourceMeta,
-          source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
+    if (data.containsKey('source_id')) {
+      context.handle(_sourceIdMeta,
+          sourceId.isAcceptableOrUnknown(data['source_id']!, _sourceIdMeta));
     } else if (isInserting) {
-      context.missing(_sourceMeta);
+      context.missing(_sourceIdMeta);
     }
     if (data.containsKey('lang')) {
       context.handle(
@@ -204,8 +205,8 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           .read(DriftSqlType.string, data['${effectivePrefix}genre']),
       favorite: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
-      source: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
+      sourceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
       lang: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}lang'])!,
       artist: attachedDatabase.typeMapping
@@ -235,7 +236,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final MangaStatus status;
   final String? genre;
   final bool favorite;
-  final String source;
+  final String sourceId;
   final String lang;
   final String? artist;
   final String? thumbnailUrl;
@@ -249,7 +250,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       required this.status,
       this.genre,
       required this.favorite,
-      required this.source,
+      required this.sourceId,
       required this.lang,
       this.artist,
       this.thumbnailUrl,
@@ -274,7 +275,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       map['genre'] = Variable<String>(genre);
     }
     map['favorite'] = Variable<bool>(favorite);
-    map['source'] = Variable<String>(source);
+    map['source_id'] = Variable<String>(sourceId);
     map['lang'] = Variable<String>(lang);
     if (!nullToAbsent || artist != null) {
       map['artist'] = Variable<String>(artist);
@@ -300,7 +301,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       genre:
           genre == null && nullToAbsent ? const Value.absent() : Value(genre),
       favorite: Value(favorite),
-      source: Value(source),
+      sourceId: Value(sourceId),
       lang: Value(lang),
       artist:
           artist == null && nullToAbsent ? const Value.absent() : Value(artist),
@@ -324,7 +325,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           .fromJson(serializer.fromJson<int>(json['status'])),
       genre: serializer.fromJson<String?>(json['genre']),
       favorite: serializer.fromJson<bool>(json['favorite']),
-      source: serializer.fromJson<String>(json['source']),
+      sourceId: serializer.fromJson<String>(json['sourceId']),
       lang: serializer.fromJson<String>(json['lang']),
       artist: serializer.fromJson<String?>(json['artist']),
       thumbnailUrl: serializer.fromJson<String?>(json['thumbnailUrl']),
@@ -344,7 +345,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
       'genre': serializer.toJson<String?>(genre),
       'favorite': serializer.toJson<bool>(favorite),
-      'source': serializer.toJson<String>(source),
+      'sourceId': serializer.toJson<String>(sourceId),
       'lang': serializer.toJson<String>(lang),
       'artist': serializer.toJson<String?>(artist),
       'thumbnailUrl': serializer.toJson<String?>(thumbnailUrl),
@@ -361,7 +362,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           MangaStatus? status,
           Value<String?> genre = const Value.absent(),
           bool? favorite,
-          String? source,
+          String? sourceId,
           String? lang,
           Value<String?> artist = const Value.absent(),
           Value<String?> thumbnailUrl = const Value.absent(),
@@ -375,7 +376,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         status: status ?? this.status,
         genre: genre.present ? genre.value : this.genre,
         favorite: favorite ?? this.favorite,
-        source: source ?? this.source,
+        sourceId: sourceId ?? this.sourceId,
         lang: lang ?? this.lang,
         artist: artist.present ? artist.value : this.artist,
         thumbnailUrl:
@@ -393,7 +394,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           ..write('status: $status, ')
           ..write('genre: $genre, ')
           ..write('favorite: $favorite, ')
-          ..write('source: $source, ')
+          ..write('sourceId: $sourceId, ')
           ..write('lang: $lang, ')
           ..write('artist: $artist, ')
           ..write('thumbnailUrl: $thumbnailUrl, ')
@@ -404,7 +405,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
 
   @override
   int get hashCode => Object.hash(id, title, url, description, author, status,
-      genre, favorite, source, lang, artist, thumbnailUrl, initialized);
+      genre, favorite, sourceId, lang, artist, thumbnailUrl, initialized);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -417,7 +418,7 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           other.status == this.status &&
           other.genre == this.genre &&
           other.favorite == this.favorite &&
-          other.source == this.source &&
+          other.sourceId == this.sourceId &&
           other.lang == this.lang &&
           other.artist == this.artist &&
           other.thumbnailUrl == this.thumbnailUrl &&
@@ -433,7 +434,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<MangaStatus> status;
   final Value<String?> genre;
   final Value<bool> favorite;
-  final Value<String> source;
+  final Value<String> sourceId;
   final Value<String> lang;
   final Value<String?> artist;
   final Value<String?> thumbnailUrl;
@@ -447,7 +448,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.status = const Value.absent(),
     this.genre = const Value.absent(),
     this.favorite = const Value.absent(),
-    this.source = const Value.absent(),
+    this.sourceId = const Value.absent(),
     this.lang = const Value.absent(),
     this.artist = const Value.absent(),
     this.thumbnailUrl = const Value.absent(),
@@ -462,7 +463,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     required MangaStatus status,
     this.genre = const Value.absent(),
     this.favorite = const Value.absent(),
-    required String source,
+    required String sourceId,
     required String lang,
     this.artist = const Value.absent(),
     this.thumbnailUrl = const Value.absent(),
@@ -470,7 +471,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   })  : title = Value(title),
         url = Value(url),
         status = Value(status),
-        source = Value(source),
+        sourceId = Value(sourceId),
         lang = Value(lang);
   static Insertable<DbManga> custom({
     Expression<int>? id,
@@ -481,7 +482,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     Expression<int>? status,
     Expression<String>? genre,
     Expression<bool>? favorite,
-    Expression<String>? source,
+    Expression<String>? sourceId,
     Expression<String>? lang,
     Expression<String>? artist,
     Expression<String>? thumbnailUrl,
@@ -496,7 +497,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       if (status != null) 'status': status,
       if (genre != null) 'genre': genre,
       if (favorite != null) 'favorite': favorite,
-      if (source != null) 'source': source,
+      if (sourceId != null) 'source_id': sourceId,
       if (lang != null) 'lang': lang,
       if (artist != null) 'artist': artist,
       if (thumbnailUrl != null) 'thumbnail_url': thumbnailUrl,
@@ -513,7 +514,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       Value<MangaStatus>? status,
       Value<String?>? genre,
       Value<bool>? favorite,
-      Value<String>? source,
+      Value<String>? sourceId,
       Value<String>? lang,
       Value<String?>? artist,
       Value<String?>? thumbnailUrl,
@@ -527,7 +528,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       status: status ?? this.status,
       genre: genre ?? this.genre,
       favorite: favorite ?? this.favorite,
-      source: source ?? this.source,
+      sourceId: sourceId ?? this.sourceId,
       lang: lang ?? this.lang,
       artist: artist ?? this.artist,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
@@ -563,8 +564,8 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     if (favorite.present) {
       map['favorite'] = Variable<bool>(favorite.value);
     }
-    if (source.present) {
-      map['source'] = Variable<String>(source.value);
+    if (sourceId.present) {
+      map['source_id'] = Variable<String>(sourceId.value);
     }
     if (lang.present) {
       map['lang'] = Variable<String>(lang.value);
@@ -592,7 +593,7 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
           ..write('status: $status, ')
           ..write('genre: $genre, ')
           ..write('favorite: $favorite, ')
-          ..write('source: $source, ')
+          ..write('sourceId: $sourceId, ')
           ..write('lang: $lang, ')
           ..write('artist: $artist, ')
           ..write('thumbnailUrl: $thumbnailUrl, ')
@@ -1906,7 +1907,7 @@ typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
   required MangaStatus status,
   Value<String?> genre,
   Value<bool> favorite,
-  required String source,
+  required String sourceId,
   required String lang,
   Value<String?> artist,
   Value<String?> thumbnailUrl,
@@ -1921,7 +1922,7 @@ typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
   Value<MangaStatus> status,
   Value<String?> genre,
   Value<bool> favorite,
-  Value<String> source,
+  Value<String> sourceId,
   Value<String> lang,
   Value<String?> artist,
   Value<String?> thumbnailUrl,
@@ -1956,7 +1957,7 @@ class $$DbMangasTableTableManager extends RootTableManager<
             Value<MangaStatus> status = const Value.absent(),
             Value<String?> genre = const Value.absent(),
             Value<bool> favorite = const Value.absent(),
-            Value<String> source = const Value.absent(),
+            Value<String> sourceId = const Value.absent(),
             Value<String> lang = const Value.absent(),
             Value<String?> artist = const Value.absent(),
             Value<String?> thumbnailUrl = const Value.absent(),
@@ -1971,7 +1972,7 @@ class $$DbMangasTableTableManager extends RootTableManager<
             status: status,
             genre: genre,
             favorite: favorite,
-            source: source,
+            sourceId: sourceId,
             lang: lang,
             artist: artist,
             thumbnailUrl: thumbnailUrl,
@@ -1986,7 +1987,7 @@ class $$DbMangasTableTableManager extends RootTableManager<
             required MangaStatus status,
             Value<String?> genre = const Value.absent(),
             Value<bool> favorite = const Value.absent(),
-            required String source,
+            required String sourceId,
             required String lang,
             Value<String?> artist = const Value.absent(),
             Value<String?> thumbnailUrl = const Value.absent(),
@@ -2001,7 +2002,7 @@ class $$DbMangasTableTableManager extends RootTableManager<
             status: status,
             genre: genre,
             favorite: favorite,
-            source: source,
+            sourceId: sourceId,
             lang: lang,
             artist: artist,
             thumbnailUrl: thumbnailUrl,
@@ -2067,8 +2068,8 @@ class $$DbMangasTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get source => $state.composableBuilder(
-      column: $state.table.source,
+  ColumnFilters<String> get sourceId => $state.composableBuilder(
+      column: $state.table.sourceId,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2136,8 +2137,8 @@ class $$DbMangasTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get source => $state.composableBuilder(
-      column: $state.table.source,
+  ColumnOrderings<String> get sourceId => $state.composableBuilder(
+      column: $state.table.sourceId,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

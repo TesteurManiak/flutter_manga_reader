@@ -51,12 +51,12 @@ class DriftDatasource extends LocalDatasource {
     required String title,
     required String url,
     required String? lang,
-    required String? source,
+    required String? sourceId,
   }) {
     return (_db.select(_db.dbMangas)
           ..where((t) => t.title.equals(title))
           ..where((t) => t.lang.equalsNullable(lang))
-          ..where((t) => t.source.equalsNullable(source))
+          ..where((t) => t.sourceId.equalsNullable(sourceId))
           ..where((t) => t.url.equals(url)))
         .getSingleOrNull()
         .then((manga) => manga?.id);
@@ -67,7 +67,9 @@ class DriftDatasource extends LocalDatasource {
     final query = (_db.delete(_db.dbMangas)
       ..where((t) => t.title.equals(sourceManga.title))
       ..where((t) => t.lang.equalsNullable(sourceManga.lang))
-      ..where((t) => t.source.equalsNullable(sourceManga.source))
+      ..where(
+        (t) => t.sourceId.equalsNullable(sourceManga.sourceId),
+      )
       ..where((t) => t.url.equals(sourceManga.url)));
 
     // Delete any existing source with the same title, lang, source and url
@@ -324,7 +326,7 @@ extension on SourceManga {
       author: Value.absentIfNull(author),
       status: status,
       genre: Value.absentIfNull(genre),
-      source: source,
+      sourceId: sourceId,
       lang: lang,
       artist: Value.absentIfNull(artist),
       thumbnailUrl: Value.absentIfNull(thumbnailUrl),

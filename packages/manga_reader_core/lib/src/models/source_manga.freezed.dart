@@ -27,7 +27,7 @@ mixin _$SourceManga {
   @MangaStatusConverter()
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
-  String get source => throw _privateConstructorUsedError;
+  String get sourceId => throw _privateConstructorUsedError;
   String get lang => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ abstract class $SourceMangaCopyWith<$Res> {
       String? author,
       @MangaStatusConverter() MangaStatus status,
       String? genre,
-      String source,
+      String sourceId,
       String lang,
       String? artist,
       String? thumbnailUrl});
@@ -75,7 +75,7 @@ class _$SourceMangaCopyWithImpl<$Res, $Val extends SourceManga>
     Object? author = freezed,
     Object? status = null,
     Object? genre = freezed,
-    Object? source = null,
+    Object? sourceId = null,
     Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
@@ -105,9 +105,9 @@ class _$SourceMangaCopyWithImpl<$Res, $Val extends SourceManga>
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String?,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
       lang: null == lang
           ? _value.lang
@@ -140,7 +140,7 @@ abstract class _$$SourceMangaImplCopyWith<$Res>
       String? author,
       @MangaStatusConverter() MangaStatus status,
       String? genre,
-      String source,
+      String sourceId,
       String lang,
       String? artist,
       String? thumbnailUrl});
@@ -163,7 +163,7 @@ class __$$SourceMangaImplCopyWithImpl<$Res>
     Object? author = freezed,
     Object? status = null,
     Object? genre = freezed,
-    Object? source = null,
+    Object? sourceId = null,
     Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
@@ -193,9 +193,9 @@ class __$$SourceMangaImplCopyWithImpl<$Res>
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
               as String?,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
       lang: null == lang
           ? _value.lang
@@ -215,7 +215,7 @@ class __$$SourceMangaImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable(createToJson: false)
-class _$SourceMangaImpl extends _SourceManga {
+class _$SourceMangaImpl implements _SourceManga {
   const _$SourceMangaImpl(
       {required this.title,
       required this.url,
@@ -223,11 +223,10 @@ class _$SourceMangaImpl extends _SourceManga {
       this.author,
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.genre,
-      required this.source,
+      required this.sourceId,
       required this.lang,
       this.artist,
-      this.thumbnailUrl})
-      : super._();
+      this.thumbnailUrl});
 
   factory _$SourceMangaImpl.fromJson(Map<String, dynamic> json) =>
       _$$SourceMangaImplFromJson(json);
@@ -247,7 +246,7 @@ class _$SourceMangaImpl extends _SourceManga {
   @override
   final String? genre;
   @override
-  final String source;
+  final String sourceId;
   @override
   final String lang;
   @override
@@ -257,7 +256,7 @@ class _$SourceMangaImpl extends _SourceManga {
 
   @override
   String toString() {
-    return 'SourceManga(title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, source: $source, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl)';
+    return 'SourceManga(title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, sourceId: $sourceId, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl)';
   }
 
   @override
@@ -272,7 +271,8 @@ class _$SourceMangaImpl extends _SourceManga {
             (identical(other.author, author) || other.author == author) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.genre, genre) || other.genre == genre) &&
-            (identical(other.source, source) || other.source == source) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
             (identical(other.lang, lang) || other.lang == lang) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
@@ -282,7 +282,7 @@ class _$SourceMangaImpl extends _SourceManga {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, title, url, description, author,
-      status, genre, source, lang, artist, thumbnailUrl);
+      status, genre, sourceId, lang, artist, thumbnailUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -291,7 +291,7 @@ class _$SourceMangaImpl extends _SourceManga {
       __$$SourceMangaImplCopyWithImpl<_$SourceMangaImpl>(this, _$identity);
 }
 
-abstract class _SourceManga extends SourceManga {
+abstract class _SourceManga implements SourceManga {
   const factory _SourceManga(
       {required final String title,
       required final String url,
@@ -299,11 +299,10 @@ abstract class _SourceManga extends SourceManga {
       final String? author,
       @MangaStatusConverter() final MangaStatus status,
       final String? genre,
-      required final String source,
+      required final String sourceId,
       required final String lang,
       final String? artist,
       final String? thumbnailUrl}) = _$SourceMangaImpl;
-  const _SourceManga._() : super._();
 
   factory _SourceManga.fromJson(Map<String, dynamic> json) =
       _$SourceMangaImpl.fromJson;
@@ -322,7 +321,7 @@ abstract class _SourceManga extends SourceManga {
   @override
   String? get genre;
   @override
-  String get source;
+  String get sourceId;
   @override
   String get lang;
   @override

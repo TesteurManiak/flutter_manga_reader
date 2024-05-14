@@ -29,7 +29,7 @@ mixin _$Manga {
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get genre => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
-  String get source => throw _privateConstructorUsedError;
+  String get sourceId => throw _privateConstructorUsedError;
   String get lang => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
@@ -54,7 +54,7 @@ abstract class $MangaCopyWith<$Res> {
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       bool favorite,
-      String source,
+      String sourceId,
       String lang,
       String? artist,
       String? thumbnailUrl,
@@ -82,7 +82,7 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? status = null,
     Object? genre = freezed,
     Object? favorite = null,
-    Object? source = null,
+    Object? sourceId = null,
     Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
@@ -121,9 +121,9 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
       lang: null == lang
           ? _value.lang
@@ -161,7 +161,7 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
       @MangaStatusConverter() MangaStatus status,
       String? genre,
       bool favorite,
-      String source,
+      String sourceId,
       String lang,
       String? artist,
       String? thumbnailUrl,
@@ -187,7 +187,7 @@ class __$$MangaImplCopyWithImpl<$Res>
     Object? status = null,
     Object? genre = freezed,
     Object? favorite = null,
-    Object? source = null,
+    Object? sourceId = null,
     Object? lang = null,
     Object? artist = freezed,
     Object? thumbnailUrl = freezed,
@@ -226,9 +226,9 @@ class __$$MangaImplCopyWithImpl<$Res>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      source: null == source
-          ? _value.source
-          : source // ignore: cast_nullable_to_non_nullable
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
               as String,
       lang: null == lang
           ? _value.lang
@@ -262,7 +262,7 @@ class _$MangaImpl extends _Manga {
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.genre,
       this.favorite = false,
-      required this.source,
+      required this.sourceId,
       required this.lang,
       this.artist,
       this.thumbnailUrl,
@@ -292,7 +292,7 @@ class _$MangaImpl extends _Manga {
   @JsonKey()
   final bool favorite;
   @override
-  final String source;
+  final String sourceId;
   @override
   final String lang;
   @override
@@ -305,7 +305,7 @@ class _$MangaImpl extends _Manga {
 
   @override
   String toString() {
-    return 'Manga(id: $id, title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, favorite: $favorite, source: $source, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl, initialized: $initialized)';
+    return 'Manga(id: $id, title: $title, url: $url, description: $description, author: $author, status: $status, genre: $genre, favorite: $favorite, sourceId: $sourceId, lang: $lang, artist: $artist, thumbnailUrl: $thumbnailUrl, initialized: $initialized)';
   }
 
   @override
@@ -323,7 +323,8 @@ class _$MangaImpl extends _Manga {
             (identical(other.genre, genre) || other.genre == genre) &&
             (identical(other.favorite, favorite) ||
                 other.favorite == favorite) &&
-            (identical(other.source, source) || other.source == source) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
             (identical(other.lang, lang) || other.lang == lang) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
@@ -344,7 +345,7 @@ class _$MangaImpl extends _Manga {
       status,
       genre,
       favorite,
-      source,
+      sourceId,
       lang,
       artist,
       thumbnailUrl,
@@ -374,7 +375,7 @@ abstract class _Manga extends Manga {
       @MangaStatusConverter() final MangaStatus status,
       final String? genre,
       final bool favorite,
-      required final String source,
+      required final String sourceId,
       required final String lang,
       final String? artist,
       final String? thumbnailUrl,
@@ -401,7 +402,7 @@ abstract class _Manga extends Manga {
   @override
   bool get favorite;
   @override
-  String get source;
+  String get sourceId;
   @override
   String get lang;
   @override

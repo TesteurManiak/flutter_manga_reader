@@ -49,7 +49,7 @@ abstract class LocalDatasource {
     required String title,
     required String url,
     required String? lang,
-    required String? source,
+    required String? sourceId,
   });
 
   Future<Chapter?> getChapter(int chapterId);
@@ -106,7 +106,7 @@ Future<int?> getMangaIdFromSource(
         title: sourceManga.title,
         url: sourceManga.url,
         lang: sourceManga.lang,
-        source: sourceManga.source,
+        sourceId: sourceManga.sourceId,
       );
 }
 

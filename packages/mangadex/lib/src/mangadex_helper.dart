@@ -56,6 +56,7 @@ class MangadexHelper {
   }
 
   SourceManga createBasicManga({
+    required String sourceId,
     required MangaData mangaData,
     String? coverFileName,
     String? coverSuffix,
@@ -71,7 +72,7 @@ class MangadexHelper {
 
     return SourceManga(
       url: '/manga/${mangaData.id}',
-      source: MDConstants.sourceName,
+      sourceId: sourceId,
       title: title,
       thumbnailUrl: coverFileName != null
           ? switch (coverSuffix != null && coverSuffix.isNotEmpty) {
@@ -86,6 +87,7 @@ class MangadexHelper {
   }
 
   SourceManga createManga({
+    required String sourceId,
     required MangaData mangaData,
     required Map<String, AggregateVolume> chapters,
     String? firstVolumeCover,
@@ -158,6 +160,7 @@ class MangadexHelper {
         attr.description.getDisplayName(lang)?.removeEntitiesAndMarkdown();
 
     return createBasicManga(
+      sourceId: sourceId,
       mangaData: mangaData,
       coverFileName: coverFileName,
       coverSuffix: coverSuffix,

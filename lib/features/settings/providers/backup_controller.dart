@@ -26,8 +26,10 @@ class BackupController extends _$BackupController {
       final buffer = io.gzip.decode(bytes);
       final backup = pb.Backup.fromBuffer(buffer);
 
-      // TODO(Guillaume): Implement
-      print('Picked: ${backupFile.path}');
+      // Mangadex (EN): 2499283573021220255
+      for (final source in backup.backupSources) {
+        print('Source: ${source.name} (${source.sourceId})');
+      }
 
       state = const BackupState.success();
     } catch (e) {

@@ -43,8 +43,3 @@ MangaDatasource getSourceFromId(GetSourceFromIdRef ref, String sourceId) {
 
   return source;
 }
-
-@riverpod
-String getSourceId(GetSourceIdRef ref, SourceManga sourceManga) {
-  return ref.watch(getSourceFromIdProvider(sourceManga.sourceId)).id;
-}

@@ -248,7 +248,7 @@ class _SliverHeader extends StatelessWidget {
                   ),
                   _StatusAndSource(
                     status: manga?.status,
-                    source: manga?.source,
+                    sourceId: manga?.sourceId,
                     lang: manga?.lang,
                   ),
                 ],
@@ -295,19 +295,25 @@ class _Cover extends ConsumerWidget {
   }
 }
 
-class _StatusAndSource extends StatelessWidget {
+class _StatusAndSource extends ConsumerWidget {
   const _StatusAndSource({
     required this.status,
-    required this.source,
+    required this.sourceId,
     required this.lang,
   });
 
   final MangaStatus? status;
-  final String? source;
+  final String? sourceId;
   final String? lang;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final source = switch (sourceId) {
+      final sourceId? =>
+        ref.watch(getSourceFromIdProvider(sourceId).select((s) => s.name)),
+      _ => null,
+    };
+
     return SeparatedRow(
       separator: const Text(' • '),
       children: [

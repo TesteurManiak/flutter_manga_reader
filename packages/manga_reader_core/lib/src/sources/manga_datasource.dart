@@ -11,11 +11,11 @@ import 'package:manga_reader_core/src/models/source_manga.dart';
 /// {@endtemplate}
 abstract class MangaDatasource {
   /// {@macro manga_datasource}
-  const MangaDatasource({
+  MangaDatasource({
     required this.lang,
     required this.name,
     required this.baseUrl,
-  }) : id = '${name}_$lang';
+  });
 
   /// The language of the source.
   final String lang;
@@ -28,7 +28,8 @@ abstract class MangaDatasource {
   /// Used to open webview for the source.
   final String baseUrl;
 
-  final String id;
+  /// The id of the source.
+  String get id;
 
   /// Fetch the most popular mangas from the source.
   Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page);

@@ -17,7 +17,7 @@ class Manga with _$Manga {
     @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
     String? genre,
     @Default(false) bool favorite,
-    required String source,
+    required String sourceId,
     required String lang,
     String? artist,
     String? thumbnailUrl,
@@ -42,12 +42,10 @@ class Manga with _$Manga {
 
   SourceManga toSourceModel() => SourceManga.fromJson(toJson());
 
-  String get sourceId => toSourceModel().sourceId;
-
   bool isSameAs(SourceManga sourceManga) {
     return title == sourceManga.title &&
         url == sourceManga.url &&
         lang == sourceManga.lang &&
-        source == sourceManga.source;
+        sourceId == sourceManga.sourceId;
   }
 }
