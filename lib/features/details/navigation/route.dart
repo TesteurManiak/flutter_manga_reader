@@ -3,6 +3,7 @@ import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/views/details_view.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
+import 'package:flutter_manga_reader/features/search/navigation/route.dart';
 import 'package:go_router/go_router.dart';
 
 part 'route.g.dart';
@@ -22,16 +23,15 @@ abstract class DetailsRoute extends GoRouteData {
   }) {
     final navigatorState = GoRouterState.of(context);
 
-    final sourceRoute = SourceDetailsRoute(
-      mangaId: mangaId,
-      sourceId: sourceId,
-    );
     final isOnSourceRoute = navigatorState.matchedLocation.contains(
-      sourceRoute.location,
+      BrowseSourceRoute(sourceId: sourceId).location,
     );
 
     if (isOnSourceRoute) {
-      sourceRoute.go(context);
+      SourceDetailsRoute(
+        mangaId: mangaId,
+        sourceId: sourceId,
+      ).go(context);
       return;
     }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/views/chapter_viewer_view.dart';
+import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,18 +23,17 @@ abstract class ChapterViewerRoute extends GoRouteData {
     int? initialPage,
   }) {
     final navigatorState = GoRouterState.of(context);
-    final sourceRoute = SourceChapterViewerRoute(
-      mangaId: mangaId,
-      sourceId: sourceId,
-      chapterId: chapterId,
-      initialPage: initialPage,
-    );
     final isOnSourceRoute = navigatorState.matchedLocation.contains(
-      sourceRoute.location,
+      SourceDetailsRoute(sourceId: sourceId, mangaId: mangaId).location,
     );
 
     if (isOnSourceRoute) {
-      sourceRoute.go(context);
+      SourceChapterViewerRoute(
+        mangaId: mangaId,
+        sourceId: sourceId,
+        chapterId: chapterId,
+        initialPage: initialPage,
+      ).go(context);
       return;
     }
 
