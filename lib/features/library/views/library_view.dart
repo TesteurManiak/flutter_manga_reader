@@ -63,14 +63,16 @@ class _Empty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Center(
       child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
         separator: const SizedBox(height: 16),
         children: [
-          const AsciiEmojiWidget(AsciiEmoji.confused),
+          AsciiEmojiWidget.random(),
           Text(
             context.strings.library_empty,
+            style: textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
         ],

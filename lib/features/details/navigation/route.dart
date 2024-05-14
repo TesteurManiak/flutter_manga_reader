@@ -2,23 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/views/details_view.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:go_router/go_router.dart';
 
 part 'route.g.dart';
 
-@TypedGoRoute<DetailsRoute>(path: DetailsRoute.path)
-class DetailsRoute extends GoRouteData {
-  const DetailsRoute({
-    required this.sourceId,
-    required this.mangaId,
-    this.openedFromSource,
-  });
+abstract class DetailsRoute extends GoRouteData {
+  const DetailsRoute();
 
-  static const path = '/details/:sourceId/:mangaId';
+  String get sourceId;
+  int get mangaId;
 
-  final String sourceId;
-  final int mangaId;
-  final bool? openedFromSource;
+  bool get openedFromSource => false;
+
+  static void go(
+    BuildContext context, {
+    required String sourceId,
+    required int mangaId,
+  }) {
+    final navigatorState = GoRouterState.of(context);
+
+    final sourceRoute = SourceDetailsRoute(
+      mangaId: mangaId,
+      sourceId: sourceId,
+    );
+    final isOnSourceRoute = navigatorState.matchedLocation.contains(
+      sourceRoute.location,
+    );
+
+    if (isOnSourceRoute) {
+      sourceRoute.go(context);
+      return;
+    }
+
+    LibraryDetailsRoute(mangaId: mangaId, sourceId: sourceId).go(context);
+  }
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -26,10 +44,43 @@ class DetailsRoute extends GoRouteData {
       sourceId: sourceId,
       child: DetailsView(
         mangaId: mangaId,
-        openedFromSource: openedFromSource ?? false,
+        openedFromSource: openedFromSource,
       ),
     );
   }
+}
+
+class LibraryDetailsRoute extends DetailsRoute {
+  const LibraryDetailsRoute({
+    required this.sourceId,
+    required this.mangaId,
+  });
+
+  static const path = 'details/:sourceId/:mangaId';
+
+  @override
+  final String sourceId;
+
+  @override
+  final int mangaId;
+}
+
+class SourceDetailsRoute extends DetailsRoute {
+  const SourceDetailsRoute({
+    required this.sourceId,
+    required this.mangaId,
+  });
+
+  static const path = 'source-details/:mangaId';
+
+  @override
+  final String sourceId;
+
+  @override
+  final int mangaId;
+
+  @override
+  bool get openedFromSource => true;
 }
 
 @TypedGoRoute<CoverViewerRoute>(path: CoverViewerRoute.path)

@@ -8,14 +8,16 @@ class EmptyMangaContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Center(
       child: SeparatedColumn(
         mainAxisSize: MainAxisSize.min,
         separator: const SizedBox(height: 16),
         children: [
-          const AsciiEmojiWidget(AsciiEmoji.confused),
+          AsciiEmojiWidget.random(),
           Text(
-            context.strings.search_empty,
+            context.strings.no_manga_found,
+            style: textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
         ],

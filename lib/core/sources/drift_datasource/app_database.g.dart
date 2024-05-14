@@ -1683,14 +1683,13 @@ class $DbChapterHistoryTable extends DbChapterHistory
   late final GeneratedColumn<int> chapterId = GeneratedColumn<int>(
       'chapter_id', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
-  static const VerificationMeta _dateReadMeta =
-      const VerificationMeta('dateRead');
+  static const VerificationMeta _readAtMeta = const VerificationMeta('readAt');
   @override
-  late final GeneratedColumn<DateTime> dateRead = GeneratedColumn<DateTime>(
-      'date_read', aliasedName, false,
+  late final GeneratedColumn<DateTime> readAt = GeneratedColumn<DateTime>(
+      'read_at', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [mangaId, chapterId, dateRead];
+  List<GeneratedColumn> get $columns => [mangaId, chapterId, readAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1712,11 +1711,11 @@ class $DbChapterHistoryTable extends DbChapterHistory
     } else if (isInserting) {
       context.missing(_chapterIdMeta);
     }
-    if (data.containsKey('date_read')) {
-      context.handle(_dateReadMeta,
-          dateRead.isAcceptableOrUnknown(data['date_read']!, _dateReadMeta));
+    if (data.containsKey('read_at')) {
+      context.handle(_readAtMeta,
+          readAt.isAcceptableOrUnknown(data['read_at']!, _readAtMeta));
     } else if (isInserting) {
-      context.missing(_dateReadMeta);
+      context.missing(_readAtMeta);
     }
     return context;
   }
@@ -1731,8 +1730,8 @@ class $DbChapterHistoryTable extends DbChapterHistory
           .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
       chapterId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}chapter_id'])!,
-      dateRead: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_read'])!,
+      readAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}read_at'])!,
     );
   }
 
@@ -1746,15 +1745,15 @@ class DbChapterHistoryData extends DataClass
     implements Insertable<DbChapterHistoryData> {
   final int mangaId;
   final int chapterId;
-  final DateTime dateRead;
+  final DateTime readAt;
   const DbChapterHistoryData(
-      {required this.mangaId, required this.chapterId, required this.dateRead});
+      {required this.mangaId, required this.chapterId, required this.readAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['manga_id'] = Variable<int>(mangaId);
     map['chapter_id'] = Variable<int>(chapterId);
-    map['date_read'] = Variable<DateTime>(dateRead);
+    map['read_at'] = Variable<DateTime>(readAt);
     return map;
   }
 
@@ -1762,7 +1761,7 @@ class DbChapterHistoryData extends DataClass
     return DbChapterHistoryCompanion(
       mangaId: Value(mangaId),
       chapterId: Value(chapterId),
-      dateRead: Value(dateRead),
+      readAt: Value(readAt),
     );
   }
 
@@ -1772,7 +1771,7 @@ class DbChapterHistoryData extends DataClass
     return DbChapterHistoryData(
       mangaId: serializer.fromJson<int>(json['mangaId']),
       chapterId: serializer.fromJson<int>(json['chapterId']),
-      dateRead: serializer.fromJson<DateTime>(json['dateRead']),
+      readAt: serializer.fromJson<DateTime>(json['readAt']),
     );
   }
   @override
@@ -1781,71 +1780,71 @@ class DbChapterHistoryData extends DataClass
     return <String, dynamic>{
       'mangaId': serializer.toJson<int>(mangaId),
       'chapterId': serializer.toJson<int>(chapterId),
-      'dateRead': serializer.toJson<DateTime>(dateRead),
+      'readAt': serializer.toJson<DateTime>(readAt),
     };
   }
 
   DbChapterHistoryData copyWith(
-          {int? mangaId, int? chapterId, DateTime? dateRead}) =>
+          {int? mangaId, int? chapterId, DateTime? readAt}) =>
       DbChapterHistoryData(
         mangaId: mangaId ?? this.mangaId,
         chapterId: chapterId ?? this.chapterId,
-        dateRead: dateRead ?? this.dateRead,
+        readAt: readAt ?? this.readAt,
       );
   @override
   String toString() {
     return (StringBuffer('DbChapterHistoryData(')
           ..write('mangaId: $mangaId, ')
           ..write('chapterId: $chapterId, ')
-          ..write('dateRead: $dateRead')
+          ..write('readAt: $readAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(mangaId, chapterId, dateRead);
+  int get hashCode => Object.hash(mangaId, chapterId, readAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is DbChapterHistoryData &&
           other.mangaId == this.mangaId &&
           other.chapterId == this.chapterId &&
-          other.dateRead == this.dateRead);
+          other.readAt == this.readAt);
 }
 
 class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
   final Value<int> mangaId;
   final Value<int> chapterId;
-  final Value<DateTime> dateRead;
+  final Value<DateTime> readAt;
   const DbChapterHistoryCompanion({
     this.mangaId = const Value.absent(),
     this.chapterId = const Value.absent(),
-    this.dateRead = const Value.absent(),
+    this.readAt = const Value.absent(),
   });
   DbChapterHistoryCompanion.insert({
     this.mangaId = const Value.absent(),
     required int chapterId,
-    required DateTime dateRead,
+    required DateTime readAt,
   })  : chapterId = Value(chapterId),
-        dateRead = Value(dateRead);
+        readAt = Value(readAt);
   static Insertable<DbChapterHistoryData> custom({
     Expression<int>? mangaId,
     Expression<int>? chapterId,
-    Expression<DateTime>? dateRead,
+    Expression<DateTime>? readAt,
   }) {
     return RawValuesInsertable({
       if (mangaId != null) 'manga_id': mangaId,
       if (chapterId != null) 'chapter_id': chapterId,
-      if (dateRead != null) 'date_read': dateRead,
+      if (readAt != null) 'read_at': readAt,
     });
   }
 
   DbChapterHistoryCompanion copyWith(
-      {Value<int>? mangaId, Value<int>? chapterId, Value<DateTime>? dateRead}) {
+      {Value<int>? mangaId, Value<int>? chapterId, Value<DateTime>? readAt}) {
     return DbChapterHistoryCompanion(
       mangaId: mangaId ?? this.mangaId,
       chapterId: chapterId ?? this.chapterId,
-      dateRead: dateRead ?? this.dateRead,
+      readAt: readAt ?? this.readAt,
     );
   }
 
@@ -1858,8 +1857,8 @@ class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
     if (chapterId.present) {
       map['chapter_id'] = Variable<int>(chapterId.value);
     }
-    if (dateRead.present) {
-      map['date_read'] = Variable<DateTime>(dateRead.value);
+    if (readAt.present) {
+      map['read_at'] = Variable<DateTime>(readAt.value);
     }
     return map;
   }
@@ -1869,7 +1868,7 @@ class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
     return (StringBuffer('DbChapterHistoryCompanion(')
           ..write('mangaId: $mangaId, ')
           ..write('chapterId: $chapterId, ')
-          ..write('dateRead: $dateRead')
+          ..write('readAt: $readAt')
           ..write(')'))
         .toString();
   }
@@ -2651,13 +2650,13 @@ typedef $$DbChapterHistoryTableInsertCompanionBuilder
     = DbChapterHistoryCompanion Function({
   Value<int> mangaId,
   required int chapterId,
-  required DateTime dateRead,
+  required DateTime readAt,
 });
 typedef $$DbChapterHistoryTableUpdateCompanionBuilder
     = DbChapterHistoryCompanion Function({
   Value<int> mangaId,
   Value<int> chapterId,
-  Value<DateTime> dateRead,
+  Value<DateTime> readAt,
 });
 
 class $$DbChapterHistoryTableTableManager extends RootTableManager<
@@ -2683,22 +2682,22 @@ class $$DbChapterHistoryTableTableManager extends RootTableManager<
           getUpdateCompanionBuilder: ({
             Value<int> mangaId = const Value.absent(),
             Value<int> chapterId = const Value.absent(),
-            Value<DateTime> dateRead = const Value.absent(),
+            Value<DateTime> readAt = const Value.absent(),
           }) =>
               DbChapterHistoryCompanion(
             mangaId: mangaId,
             chapterId: chapterId,
-            dateRead: dateRead,
+            readAt: readAt,
           ),
           getInsertCompanionBuilder: ({
             Value<int> mangaId = const Value.absent(),
             required int chapterId,
-            required DateTime dateRead,
+            required DateTime readAt,
           }) =>
               DbChapterHistoryCompanion.insert(
             mangaId: mangaId,
             chapterId: chapterId,
-            dateRead: dateRead,
+            readAt: readAt,
           ),
         ));
 }
@@ -2729,8 +2728,8 @@ class $$DbChapterHistoryTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<DateTime> get dateRead => $state.composableBuilder(
-      column: $state.table.dateRead,
+  ColumnFilters<DateTime> get readAt => $state.composableBuilder(
+      column: $state.table.readAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
@@ -2748,8 +2747,8 @@ class $$DbChapterHistoryTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<DateTime> get dateRead => $state.composableBuilder(
-      column: $state.table.dateRead,
+  ColumnOrderings<DateTime> get readAt => $state.composableBuilder(
+      column: $state.table.readAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

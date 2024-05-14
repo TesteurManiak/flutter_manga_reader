@@ -70,9 +70,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_title => 'Browse';
 
   @override
-  String get search_empty => 'No manga found';
-
-  @override
   String get history_title => 'History';
 
   @override
@@ -181,4 +178,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_page_found => 'No page found';
+
+  @override
+  String get no_manga_found => 'No manga found';
+
+  @override
+  String get incognito_mode_enabled => 'Incognito mode enabled';
+
+  @override
+  String get incognito_mode_disabled => 'Incognito mode disabled';
 }

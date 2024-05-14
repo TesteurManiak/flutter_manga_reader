@@ -219,12 +219,6 @@ abstract class AppLocalizations {
   /// **'Explorer'**
   String get search_title;
 
-  /// No description provided for @search_empty.
-  ///
-  /// In fr, this message translates to:
-  /// **'Aucun manga trouvé'**
-  String get search_empty;
-
   /// No description provided for @history_title.
   ///
   /// In fr, this message translates to:
@@ -422,6 +416,24 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Aucune page trouvée'**
   String get no_page_found;
+
+  /// No description provided for @no_manga_found.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun manga trouvé'**
+  String get no_manga_found;
+
+  /// No description provided for @incognito_mode_enabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode incognito activé'**
+  String get incognito_mode_enabled;
+
+  /// No description provided for @incognito_mode_disabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode incognito désactivé'**
+  String get incognito_mode_disabled;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

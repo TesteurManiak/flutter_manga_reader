@@ -159,6 +159,8 @@ class _PageViewer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
       onPopInvoked: (didPop) {
+        if (chapter.read) return;
+
         final page = chapterController.page;
 
         // If on last page of the chapter, mark it as read.

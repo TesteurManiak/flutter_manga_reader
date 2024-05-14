@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class AsciiEmojiWidget extends StatelessWidget {
@@ -6,6 +8,12 @@ class AsciiEmojiWidget extends StatelessWidget {
     super.key,
     this.size,
   });
+
+  factory AsciiEmojiWidget.random({double? size}) {
+    final index = Random().nextInt(AsciiEmoji.values.length);
+    final emoji = AsciiEmoji.values[index];
+    return AsciiEmojiWidget(emoji, size: size);
+  }
 
   final AsciiEmoji emoji;
 
@@ -26,8 +34,29 @@ class AsciiEmojiWidget extends StatelessWidget {
 }
 
 enum AsciiEmoji {
+  /// ¯\_(ツ)_/¯
   raiseShoulders('¯\\_(ツ)_/¯'),
-  confused('⊙﹏⊙');
+
+  /// ⊙﹏⊙
+  confused('⊙﹏⊙'),
+
+  /// ･o･;
+  sweat('･o･;'),
+
+  /// Σ(ಠ_ಠ)
+  surprised('Σ(ಠ_ಠ)'),
+
+  /// ಥ_ಥ
+  crying('ಥ_ಥ'),
+
+  /// (˘･_･˘)
+  shy('(˘･_･˘)'),
+
+  /// (；￣Д￣)
+  scared('(；￣Д￣)'),
+
+  /// (･Д･。
+  angry('(･Д･。');
 
   const AsciiEmoji(this.ascii);
 

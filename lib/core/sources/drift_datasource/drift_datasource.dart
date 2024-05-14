@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
+import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
@@ -9,32 +10,27 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DriftDatasource implements LocalDatasource {
-  DriftDatasource({
-    required AppDatabase appDatabase,
-  }) : _database = appDatabase;
+  DriftDatasource({required AppDatabase appDatabase}) : _db = appDatabase;
 
-  final AppDatabase _database;
+  final AppDatabase _db;
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
-    return (_database.select(_database.dbMangas)
-          ..where((tbl) => tbl.favorite.equals(true)))
+    return (_db.select(_db.dbMangas)..where((tbl) => tbl.favorite.equals(true)))
         .watch()
         .map((mangas) => mangas.map((e) => e.toModel()).toList());
   }
 
   @override
   Future<void> saveManga(Manga manga) {
-    return _database
-        .into(_database.dbMangas)
-        .insertOnConflictUpdate(manga.toDbModel());
+    return _db.into(_db.dbMangas).insertOnConflictUpdate(manga.toDbModel());
   }
 
   @override
   Future<void> saveMangas(List<Manga> mangas) {
-    return _database.batch((batch) {
+    return _db.batch((batch) {
       batch.insertAllOnConflictUpdate<$DbMangasTable, DbManga>(
-        _database.dbMangas,
+        _db.dbMangas,
         mangas.map((e) => e.toDbModel()),
       );
     });
@@ -42,7 +38,7 @@ class DriftDatasource implements LocalDatasource {
 
   @override
   Future<Manga?> getManga(int mangaId) async {
-    final manga = await (_database.select(_database.dbMangas)
+    final manga = await (_db.select(_db.dbMangas)
           ..where((tbl) => tbl.id.equals(mangaId)))
         .getSingleOrNull();
 
@@ -56,7 +52,7 @@ class DriftDatasource implements LocalDatasource {
     required String? lang,
     required String? source,
   }) {
-    return (_database.select(_database.dbMangas)
+    return (_db.select(_db.dbMangas)
           ..where((t) => t.title.equals(title))
           ..where((t) => t.lang.equalsNullable(lang))
           ..where((t) => t.source.equalsNullable(source))
@@ -67,7 +63,7 @@ class DriftDatasource implements LocalDatasource {
 
   @override
   Future<int> saveSourceManga(SourceManga sourceManga) async {
-    final query = (_database.delete(_database.dbMangas)
+    final query = (_db.delete(_db.dbMangas)
       ..where((t) => t.title.equals(sourceManga.title))
       ..where((t) => t.lang.equalsNullable(sourceManga.lang))
       ..where((t) => t.source.equalsNullable(sourceManga.source))
@@ -76,7 +72,7 @@ class DriftDatasource implements LocalDatasource {
     // Delete any existing source with the same title, lang, source and url
     await query.go();
 
-    return _database.into(_database.dbMangas).insert(sourceManga.toCompanion());
+    return _db.into(_db.dbMangas).insert(sourceManga.toCompanion());
   }
 
   @override
@@ -85,9 +81,9 @@ class DriftDatasource implements LocalDatasource {
     int mangaId,
   ) async {
     final chapters = sourceChapters.map((e) => e.toCompanion(mangaId)).toList();
-    return _database.batch((batch) {
+    return _db.batch((batch) {
       batch.insertAll<$DbChaptersTable, DbChapter>(
-        _database.dbChapters,
+        _db.dbChapters,
         chapters,
         onConflict: DoUpdate(
           (old) => DbChaptersCompanion.custom(
@@ -96,7 +92,7 @@ class DriftDatasource implements LocalDatasource {
             bookmark: old.bookmark,
             lastPageRead: old.lastPageRead,
           ),
-          target: _database.dbChapters.uniqueKeys.first.toList(),
+          target: _db.dbChapters.uniqueKeys.first.toList(),
         ),
       );
     });
@@ -104,15 +100,14 @@ class DriftDatasource implements LocalDatasource {
 
   @override
   Future<Chapter?> getChapter(int chapterId) {
-    return (_database.select(_database.dbChapters)
-          ..where((t) => t.id.equals(chapterId)))
+    return (_db.select(_db.dbChapters)..where((t) => t.id.equals(chapterId)))
         .getSingleOrNull()
         .then((chapter) => chapter?.toModel());
   }
 
   @override
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
-    return (_database.select(_database.dbChapters)
+    return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
           ..orderBy([(t) => OrderingTerm(expression: t.index)]))
         .watch()
@@ -124,9 +119,13 @@ class DriftDatasource implements LocalDatasource {
     required List<int> chapterIds,
     required bool read,
   }) {
-    return (_database.update(_database.dbChapters)
-          ..where((t) => t.id.isIn(chapterIds)))
-        .write(DbChaptersCompanion(read: Value(read)));
+    return (_db.update(_db.dbChapters)..where((t) => t.id.isIn(chapterIds)))
+        .write(
+      DbChaptersCompanion(
+        read: Value(read),
+        lastPageRead: const Value(0),
+      ),
+    );
   }
 
   @override
@@ -134,21 +133,20 @@ class DriftDatasource implements LocalDatasource {
     required int mangaId,
     required bool favorite,
   }) {
-    return (_database.update(_database.dbMangas)
-          ..where((t) => t.id.equals(mangaId)))
+    return (_db.update(_db.dbMangas)..where((t) => t.id.equals(mangaId)))
         .write(DbMangasCompanion(favorite: Value(favorite)));
   }
 
   @override
   Stream<Manga?> watchManga(int id) {
-    return (_database.select(_database.dbMangas)..where((t) => t.id.equals(id)))
+    return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
         .watchSingleOrNull()
         .map((manga) => manga?.toModel());
   }
 
   @override
   Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId) {
-    return (_database.select(_database.dbChapters)
+    return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
           ..where((t) => t.read.equals(false))
           ..orderBy([(t) => OrderingTerm(expression: t.index)]))
@@ -161,14 +159,13 @@ class DriftDatasource implements LocalDatasource {
     required int chapterId,
     required int lastPageRead,
   }) {
-    return (_database.update(_database.dbChapters)
-          ..where((t) => t.id.equals(chapterId)))
+    return (_db.update(_db.dbChapters)..where((t) => t.id.equals(chapterId)))
         .write(DbChaptersCompanion(lastPageRead: Value(lastPageRead)));
   }
 
   @override
   Stream<ReadingDirection> watchReadingDirection(int mangaId) {
-    return (_database.select(_database.dbReadingDirection)
+    return (_db.select(_db.dbReadingDirection)
           ..where((t) => t.mangaId.equals(mangaId)))
         .watchSingleOrNull()
         .map((data) => data?.direction ?? ReadingDirection.leftToRight);
@@ -179,7 +176,7 @@ class DriftDatasource implements LocalDatasource {
     required int mangaId,
     required ReadingDirection direction,
   }) {
-    return _database.into(_database.dbReadingDirection).insertOnConflictUpdate(
+    return _db.into(_db.dbReadingDirection).insertOnConflictUpdate(
           DbReadingDirectionData(mangaId: mangaId, direction: direction),
         );
   }
@@ -189,8 +186,7 @@ class DriftDatasource implements LocalDatasource {
     required List<int> chapterIds,
     required bool downloaded,
   }) {
-    return (_database.update(_database.dbChapters)
-          ..where((tbl) => tbl.id.isIn(chapterIds)))
+    return (_db.update(_db.dbChapters)..where((tbl) => tbl.id.isIn(chapterIds)))
         .write(DbChaptersCompanion(downloaded: Value(downloaded)));
   }
 
@@ -198,7 +194,7 @@ class DriftDatasource implements LocalDatasource {
   Future<void> deleteChapters(List<int> chapterIds) async {
     try {
       final localDir = await getApplicationDocumentsDirectory();
-      final localChapters = await (_database.select(_database.dbChapters)
+      final localChapters = await (_db.select(_db.dbChapters)
             ..where((tbl) => tbl.id.isIn(chapterIds)))
           .get();
 
@@ -215,10 +211,54 @@ class DriftDatasource implements LocalDatasource {
       await Future.wait(futures);
     } finally {
       // Update database
-      await (_database.update(_database.dbChapters)
+      await (_db.update(_db.dbChapters)
             ..where((tbl) => tbl.id.isIn(chapterIds)))
           .write(const DbChaptersCompanion(downloaded: Value(false)));
     }
+  }
+
+  @override
+  Stream<List<ChapterHistory>> watchHistory() {
+    final query = (_db.select(_db.dbChapterHistory)
+          ..orderBy([(t) => OrderingTerm.desc(t.readAt)]))
+        .join([
+      leftOuterJoin(
+        _db.dbMangas,
+        _db.dbMangas.id.equalsExp(_db.dbChapterHistory.mangaId),
+      ),
+      leftOuterJoin(
+        _db.dbChapters,
+        _db.dbChapters.id.equalsExp(_db.dbChapterHistory.chapterId),
+      ),
+    ]);
+
+    return query.watch().map((rows) {
+      return rows.map((row) {
+        return ChapterHistory(
+          manga: row.readTable(_db.dbMangas).toModel(),
+          chapter: row.readTable(_db.dbChapters).toModel(),
+          readAt: row.readTable(_db.dbChapterHistory).readAt,
+        );
+      }).toList();
+    });
+  }
+
+  @override
+  Future<void> saveChapterHistory(ChapterHistory chapterHistory) {
+    return _db.into(_db.dbChapterHistory).insertOnConflictUpdate(
+          DbChapterHistoryCompanion.insert(
+            mangaId: Value(chapterHistory.manga.id),
+            chapterId: chapterHistory.chapter.id,
+            readAt: chapterHistory.readAt,
+          ),
+        );
+  }
+
+  @override
+  Future<void> deleteChapterHistory(int mangaId) {
+    return (_db.delete(_db.dbChapterHistory)
+          ..where((tbl) => tbl.mangaId.equals(mangaId)))
+        .go();
   }
 }
 

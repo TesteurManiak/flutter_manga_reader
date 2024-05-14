@@ -1,3 +1,4 @@
+import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/drift_datasource.dart';
@@ -23,6 +24,8 @@ abstract class LocalDatasource {
   /// Return a [Stream] for the [ReadingDirection] of the manga with the given
   /// [mangaId].
   Stream<ReadingDirection> watchReadingDirection(int mangaId);
+
+  Stream<List<ChapterHistory>> watchHistory();
 
   Future<void> setReadingDirection({
     required int mangaId,
@@ -75,6 +78,9 @@ abstract class LocalDatasource {
   /// Delete downloaded chapters from the filesystem and set their `downloaded`
   /// property to false in the database.
   Future<void> deleteChapters(List<int> chapterIds);
+
+  Future<void> saveChapterHistory(ChapterHistory chapterHistory);
+  Future<void> deleteChapterHistory(int mangaId);
 }
 
 @Riverpod(keepAlive: true, dependencies: [])

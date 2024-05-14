@@ -21,6 +21,13 @@ class ToasterService {
   Timer? _timer;
   bool _isDismissing = false;
 
+  /// Show a toast with the given [child] wrapped in a [ToastWidget].
+  ///
+  /// The [toastDuration] is the duration the toast will be displayed, default
+  /// is 5 seconds.
+  ///
+  /// The [fadeDuration] is the duration of the fade in and fade out animation,
+  /// default is 350 milliseconds.
   Future<void> showToast(
     Widget child, {
     Duration toastDuration = _kDefaultToastDuration,

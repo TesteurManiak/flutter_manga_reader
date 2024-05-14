@@ -1,25 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/views/chapter_viewer_view.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:go_router/go_router.dart';
 
-part 'route.g.dart';
+abstract class ChapterViewerRoute extends GoRouteData {
+  const ChapterViewerRoute();
 
-@TypedGoRoute<ChapterViewerRoute>(path: ChapterViewerRoute.path)
-class ChapterViewerRoute extends GoRouteData {
-  const ChapterViewerRoute({
-    required this.sourceId,
-    required this.mangaId,
-    required this.chapterId,
-    this.initialPage,
-  });
+  static const path = 'chapter/:chapterId';
 
-  static const path = '/chapter/:sourceId/:mangaId/:chapterId';
+  String get sourceId;
+  int get mangaId;
+  int get chapterId;
+  int? get initialPage;
 
-  final String sourceId;
-  final int mangaId;
-  final int chapterId;
-  final int? initialPage;
+  static void go(
+    BuildContext context, {
+    required String sourceId,
+    required int mangaId,
+    required int chapterId,
+    int? initialPage,
+  }) {
+    final navigatorState = GoRouterState.of(context);
+    final sourceRoute = SourceChapterViewerRoute(
+      mangaId: mangaId,
+      sourceId: sourceId,
+      chapterId: chapterId,
+      initialPage: initialPage,
+    );
+    final isOnSourceRoute = navigatorState.matchedLocation.contains(
+      sourceRoute.location,
+    );
+
+    if (isOnSourceRoute) {
+      sourceRoute.go(context);
+      return;
+    }
+
+    LibraryChapterViewerRoute(
+      mangaId: mangaId,
+      sourceId: sourceId,
+      chapterId: chapterId,
+      initialPage: initialPage,
+    ).go(context);
+  }
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -32,4 +56,46 @@ class ChapterViewerRoute extends GoRouteData {
       ),
     );
   }
+}
+
+class LibraryChapterViewerRoute extends ChapterViewerRoute {
+  const LibraryChapterViewerRoute({
+    required this.sourceId,
+    required this.mangaId,
+    required this.chapterId,
+    this.initialPage,
+  });
+
+  @override
+  final String sourceId;
+
+  @override
+  final int mangaId;
+
+  @override
+  final int chapterId;
+
+  @override
+  final int? initialPage;
+}
+
+class SourceChapterViewerRoute extends ChapterViewerRoute {
+  const SourceChapterViewerRoute({
+    required this.sourceId,
+    required this.mangaId,
+    required this.chapterId,
+    this.initialPage,
+  });
+
+  @override
+  final String sourceId;
+
+  @override
+  final int mangaId;
+
+  @override
+  final int chapterId;
+
+  @override
+  final int? initialPage;
 }

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/extensions/manga_status_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
@@ -23,6 +22,7 @@ import 'package:flutter_manga_reader/features/details/widgets/details_button.dar
 import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
+import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -72,7 +72,6 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
             }
 
             return _MangaContent(
-              mangaId: widget.mangaId,
               manga: manga,
               openedFromSource: widget.openedFromSource,
             );
@@ -87,12 +86,10 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 
 class _MangaContent extends ConsumerStatefulWidget {
   const _MangaContent({
-    required this.mangaId,
     required this.manga,
     required this.openedFromSource,
   });
 
-  final int mangaId;
   final Manga manga;
   final bool openedFromSource;
 
@@ -115,7 +112,9 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(scopedSelectionModeProvider(widget.mangaId), (_, enabled) {
+    final mangaId = widget.manga.id;
+
+    ref.listen(scopedSelectionModeProvider(mangaId), (_, enabled) {
       final controller = DefaultSlidableController.maybeOf(context);
       final func = enabled ? controller?.show : controller?.hide;
       func?.call();
@@ -137,19 +136,19 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
           physics: const PullToRefreshScrollPhysics(),
           slivers: [
             SliverDetailsAppBar(
-              mangaId: widget.mangaId,
+              mangaId: mangaId,
               scrollController: scrollController,
             ),
             SliverPullToRefresh(
               onRefresh: () {
-                final provider = detailsControllerProvider(widget.mangaId);
+                final provider = detailsControllerProvider(mangaId);
                 return ref
                     .read(provider.notifier)
                     .fetchDetails(forceRefresh: true);
               },
             ),
             _SliverHeader(widget.manga),
-            _SliverButtons(widget.mangaId),
+            _SliverButtons(mangaId),
             if (desc != null)
               _SliverDescription(
                 desc: desc,
@@ -166,7 +165,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                   );
                 },
               ),
-            _SliverChapterList(widget.mangaId),
+            _SliverChapterList(widget.manga),
           ],
         ),
       ],
@@ -309,29 +308,20 @@ class _StatusAndSource extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localStatus = status;
-    final localSource = source;
-
-    return Row(
+    return SeparatedRow(
+      separator: const Text(' • '),
       children: [
-        if (localStatus != null) ...[
-          Icon(localStatus.icon, size: 14),
-          const SizedBox(width: 4),
-          Text(
-            localStatus.toLocalizedString(context),
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
-          const Text(' • '),
-        ],
-        if (localSource != null)
+        if (status case final status?) StatusLabel(status),
+        if (source case final source?)
           Text(
             () {
-              final buffer = StringBuffer(localSource);
+              final buffer = StringBuffer(source);
               final lang = this.lang;
               if (lang != null) buffer.write(' (${lang.toUpperCase()})');
               return buffer.toString();
             }(),
             maxLines: 1,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
       ],
     );
@@ -435,14 +425,14 @@ class _SliverGenreList extends StatelessWidget {
 }
 
 class _SliverChapterList extends ConsumerWidget {
-  const _SliverChapterList(this.mangaId);
+  const _SliverChapterList(this.manga);
 
-  final int mangaId;
+  final Manga manga;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final chapters =
-        ref.watch(watchChaptersForMangaProvider(mangaId)).maybeWhen(
+        ref.watch(watchChaptersForMangaProvider(manga.id)).maybeWhen(
               data: (chapters) => chapters,
               orElse: () => <Chapter>[],
             );
@@ -465,9 +455,9 @@ class _SliverChapterList extends ConsumerWidget {
             itemBuilder: (_, index) {
               final chapter = chapters[index];
               return ChapterTile(
-                mangaId: mangaId,
-                sourceId: ref.read(scopedMangaDatasourceProvider).id,
+                manga: manga,
                 chapter: chapter,
+                sourceId: ref.read(scopedMangaDatasourceProvider).id,
               );
             },
           ),

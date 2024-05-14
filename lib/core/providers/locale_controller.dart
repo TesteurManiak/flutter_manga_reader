@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
@@ -9,19 +9,19 @@ part 'locale_controller.g.dart';
 
 typedef _DidChangeLocalesCallback = void Function(List<Locale>? locales);
 
-@riverpod
+@Riverpod(keepAlive: true)
 Locale fallbackLocale(FallbackLocaleRef ref) {
   return AppLocalizations.supportedLocales.first;
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Locale systemLocale(SystemLocaleRef ref) {
   final fallback = ref.watch(fallbackLocaleProvider);
 
-  ref.state = _resolveLocale(PlatformDispatcher.instance.locale, fallback);
+  ref.state = _resolveLocale(ui.PlatformDispatcher.instance.locale, fallback);
 
   final observer = _LocaleObserver((locales) {
-    ref.state = _resolveLocale(PlatformDispatcher.instance.locale, fallback);
+    ref.state = _resolveLocale(ui.PlatformDispatcher.instance.locale, fallback);
   });
 
   final binding = WidgetsBinding.instance..addObserver(observer);
@@ -47,8 +47,8 @@ class LocaleController extends _$LocaleController {
 
   @override
   Locale build() {
-    final system = ref.read(systemLocaleProvider);
-    final fallback = ref.read(fallbackLocaleProvider);
+    final system = ref.watch(systemLocaleProvider);
+    final fallback = ref.watch(fallbackLocaleProvider);
 
     return _resolveLocale(system, fallback);
   }
