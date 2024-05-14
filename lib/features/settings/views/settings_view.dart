@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/platform/app_info.dart';
 import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
@@ -37,8 +36,7 @@ class SettingsView extends ConsumerWidget {
         onTap: () => const AppearanceSettingsRoute().go(context),
       ),
       _SettingData(
-        // TODO(Guillaume): localize
-        titleFetcher: (strings) => 'Backup & Restore'.hardcoded,
+        titleFetcher: (strings) => strings.settings_backup,
         icon: Icons.settings_backup_restore_outlined,
         onTap: () => const BackupSettingsRoute().go(context),
       ),

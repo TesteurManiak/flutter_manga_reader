@@ -183,6 +183,24 @@ abstract class AppLocalizations {
   /// **'Activé'**
   String get settings_appearance_enabled;
 
+  /// No description provided for @settings_backup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauvegarde et restauration'**
+  String get settings_backup;
+
+  /// No description provided for @settings_backup_tachiyomi_import_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer la sauvegarde Tachiyomi'**
+  String get settings_backup_tachiyomi_import_title;
+
+  /// No description provided for @settings_backup_tachiyomi_import_subtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi'**
+  String get settings_backup_tachiyomi_import_subtitle;
+
   /// No description provided for @settings_library.
   ///
   /// In fr, this message translates to:

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/services/file_picker_service.dart';
 import 'package:flutter_manga_reader/core/services/toaster_service.dart';
@@ -13,9 +14,9 @@ class BackupSettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.strings;
     return GenericSettingsView(
-      // TODO(Guillaume): localize
-      title: 'Backup & Restore'.hardcoded,
+      title: strings.settings_backup,
       children: const [
         _ImportTachiyomiBackupTile(),
       ],
@@ -29,6 +30,7 @@ class _ImportTachiyomiBackupTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final toaster = ref.watch(toasterServiceProvider);
+    final strings = context.strings;
 
     ref.listen(backupControllerProvider, (_, next) {
       if (next case BackupStateError(type: BackupErrorType.invalidBackup)) {
@@ -39,9 +41,8 @@ class _ImportTachiyomiBackupTile extends ConsumerWidget {
 
     return ListTile(
       leading: const Icon(Icons.add_circle_outline),
-      // TODO(Guillaume): localize
-      title: Text('Import Tachiyomi/Mihon Backup'.hardcoded),
-      subtitle: Text('Import library from Tachiyomi backup file'.hardcoded),
+      title: Text(strings.settings_backup_tachiyomi_import_title),
+      subtitle: Text(strings.settings_backup_tachiyomi_import_subtitle),
       onTap: () async {
         final file = await ref.read(filePickerServiceProvider).pickFile();
 
