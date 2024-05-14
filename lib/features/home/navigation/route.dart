@@ -34,6 +34,7 @@ part 'route.g.dart';
     ),
     TypedGoRoute<GeneralSettingsRoute>(path: GeneralSettingsRoute.path),
     TypedGoRoute<AppearanceSettingsRoute>(path: AppearanceSettingsRoute.path),
+    TypedGoRoute<BackupSettingsRoute>(path: BackupSettingsRoute.path),
     TypedGoRoute<AboutSettingsRoute>(path: AboutSettingsRoute.path),
   ],
 )

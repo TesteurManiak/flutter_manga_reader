@@ -26,6 +26,18 @@ class AppearanceSettingsRoute extends GoRouteData {
   }
 }
 
+class BackupSettingsRoute extends GoRouteData {
+  const BackupSettingsRoute();
+
+  static const path = 'settings/backup';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    // TODO(Guillaume): implement backup settings view
+    return Scaffold(appBar: AppBar());
+  }
+}
+
 class AboutSettingsRoute extends GoRouteData {
   const AboutSettingsRoute();
 

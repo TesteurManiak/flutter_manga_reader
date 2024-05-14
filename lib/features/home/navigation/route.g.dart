@@ -49,6 +49,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $AppearanceSettingsRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: 'settings/backup',
+          factory: $BackupSettingsRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: 'settings/about',
           factory: $AboutSettingsRouteExtension._fromState,
         ),
@@ -211,6 +215,24 @@ extension $AppearanceSettingsRouteExtension on AppearanceSettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings/appearance',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $BackupSettingsRouteExtension on BackupSettingsRoute {
+  static BackupSettingsRoute _fromState(GoRouterState state) =>
+      const BackupSettingsRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings/backup',
       );
 
   void go(BuildContext context) => context.go(location);
