@@ -114,7 +114,15 @@ class _IncognitoButton extends ConsumerWidget {
             ),
           ),
         IconButton(
-          icon: AppAssetImage(Assets.svgs.incognito),
+          icon: Builder(
+            builder: (context) {
+              final iconTheme = IconTheme.of(context);
+              return AppAssetImage(
+                Assets.svgs.incognito,
+                color: iconTheme.color,
+              );
+            },
+          ),
           onPressed: () {
             ref.read(incognitoModeControllerProvider.notifier).toggle();
           },
