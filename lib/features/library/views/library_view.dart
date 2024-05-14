@@ -29,8 +29,8 @@ class _LibraryViewState extends ConsumerState<LibraryView>
       body: switch (state) {
         LibraryLoading() => const LoadingContent(),
         LibraryLoaded(:final mangas) => RefreshIndicator(
-            onRefresh: () async {
-              // TODO(Guillaume): refresh library chapters
+            onRefresh: () {
+              return ref.read(libraryControllerProvider.notifier).refresh();
             },
             child: MangaGridView(
               mangas: mangas.map((e) => e.toSourceModel()).toList(),

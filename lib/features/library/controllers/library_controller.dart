@@ -24,6 +24,16 @@ class LibraryController extends _$LibraryController {
 
     return const LibraryState.loading();
   }
+
+  Future<void> refresh() async {
+    if (state case LibraryLoaded(:final mangas)) {
+      for (final manga in mangas) {
+        // TODO(Guillaume): refresh library chapters
+        await Future<void>.delayed(const Duration(milliseconds: 500));
+        print('Refreshing ${manga.title}');
+      }
+    }
+  }
 }
 
 @freezed
