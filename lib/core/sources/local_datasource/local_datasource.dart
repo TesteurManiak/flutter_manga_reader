@@ -42,14 +42,14 @@ abstract class LocalDatasource {
   /// Insert a [SourceManga] into the database and return its id.
   Future<int> saveSourceManga(SourceManga sourceManga);
 
+  /// Clear the local manga and chapters and insert the given list of
+  /// [SourceManga]s.
+  Future<void> synchronizeLibrary(List<SourceManga> sourceMangas);
+
   /// Read a manga from the database.
   Future<Manga?> getManga(int mangaId);
 
-  Future<int?> getMangaId({
-    required String title,
-    required String url,
-    required String? sourceId,
-  });
+  Future<int?> getMangaIdFromSource(SourceManga sourceManga);
 
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChaptersRead({
@@ -101,11 +101,7 @@ Future<int?> getMangaIdFromSource(
   GetMangaIdFromSourceRef ref,
   SourceManga sourceManga,
 ) async {
-  return ref.watch(localDatasourceProvider).getMangaId(
-        title: sourceManga.title,
-        url: sourceManga.url,
-        sourceId: sourceManga.sourceId,
-      );
+  return ref.watch(localDatasourceProvider).getMangaIdFromSource(sourceManga);
 }
 
 @Riverpod(dependencies: [localDatasource])

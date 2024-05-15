@@ -36,6 +36,9 @@ class _ImportTachiyomiBackupTile extends ConsumerWidget {
       if (next case BackupStateError(type: BackupErrorType.invalidBackup)) {
         // TODO(Guillaume): localize
         toaster.showToast(Text('Invalid backup file'.hardcoded));
+      } else if (next case BackupStateSuccess()) {
+        // TODO(Guillaume): localize
+        toaster.showToast(Text('Backup imported'.hardcoded));
       }
     });
 

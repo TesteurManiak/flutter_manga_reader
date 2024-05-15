@@ -47,32 +47,46 @@ class DriftDatasource extends LocalDatasource {
   }
 
   @override
-  Future<int?> getMangaId({
-    required String title,
-    required String url,
-    required String? sourceId,
-  }) {
-    return (_db.select(_db.dbMangas)
-          ..where((t) => t.title.equals(title))
-          ..where((t) => t.sourceId.equalsNullable(sourceId))
-          ..where((t) => t.url.equals(url)))
-        .getSingleOrNull()
-        .then((manga) => manga?.id);
+  Future<int?> getMangaIdFromSource(SourceManga sourceManga) async {
+    final result = await (_db.select(_db.dbMangas)
+          ..where(
+            (t) =>
+                t.title.equals(sourceManga.title) &
+                t.sourceId.equals(sourceManga.sourceId) &
+                t.url.equals(sourceManga.url),
+          ))
+        .getSingleOrNull();
+
+    return result?.id;
   }
 
   @override
   Future<int> saveSourceManga(SourceManga sourceManga) async {
-    final query = (_db.delete(_db.dbMangas)
-      ..where((t) => t.title.equals(sourceManga.title))
-      ..where(
-        (t) => t.sourceId.equalsNullable(sourceManga.sourceId),
-      )
-      ..where((t) => t.url.equals(sourceManga.url)));
-
     // Delete any existing source with the same title, lang, source and url
-    await query.go();
+    await (_db.delete(_db.dbMangas)
+          ..where(
+            (t) =>
+                t.title.equals(sourceManga.title) &
+                t.sourceId.equals(sourceManga.sourceId) &
+                t.url.equals(sourceManga.url),
+          ))
+        .go();
 
     return _db.into(_db.dbMangas).insert(sourceManga.toCompanion());
+  }
+
+  @override
+  Future<void> synchronizeLibrary(List<SourceManga> sourceMangas) {
+    return _db.batch((batch) {
+      batch
+        ..deleteAll(_db.dbMangas)
+        ..deleteAll(_db.dbChapters)
+        ..deleteAll(_db.dbChapterHistory)
+        ..insertAll(
+          _db.dbMangas,
+          sourceMangas.map((e) => e.toCompanion(favorite: true)),
+        );
+    });
   }
 
   @override
@@ -124,8 +138,7 @@ class DriftDatasource extends LocalDatasource {
   @override
   Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
-          ..where((t) => t.mangaId.equals(mangaId))
-          ..where((t) => t.read.equals(false))
+          ..where((t) => t.mangaId.equals(mangaId) & t.read.equals(false))
           ..orderBy([(t) => OrderingTerm(expression: t.index)]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
@@ -315,7 +328,7 @@ extension on Manga {
 }
 
 extension on SourceManga {
-  DbMangasCompanion toCompanion() {
+  DbMangasCompanion toCompanion({bool? favorite}) {
     return DbMangasCompanion.insert(
       title: title,
       url: url,
@@ -326,6 +339,7 @@ extension on SourceManga {
       sourceId: sourceId,
       artist: Value.absentIfNull(artist),
       thumbnailUrl: Value.absentIfNull(thumbnailUrl),
+      favorite: Value.absentIfNull(favorite),
     );
   }
 }

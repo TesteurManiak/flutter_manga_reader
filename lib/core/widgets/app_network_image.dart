@@ -64,11 +64,16 @@ class AppNetworkImage extends ConsumerWidget {
 
         if (progress == null || progress == 1) return child;
 
-        if (progressIndicatorBuilder case final builder?) {
-          return builder(context, progress);
-        }
+        final loader = switch (progressIndicatorBuilder) {
+          final builder? => builder(context, progress),
+          null => Center(child: CircularProgressIndicator(value: progress)),
+        };
 
-        return Center(child: CircularProgressIndicator(value: progress));
+        return SizedBox(
+          height: height,
+          width: width,
+          child: loader,
+        );
       },
       errorBuilder: errorBuilder ??
           (_, __, ___) => _ErrorWidget(height: height, width: width),
