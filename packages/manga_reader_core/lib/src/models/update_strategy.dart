@@ -1,4 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-@JsonEnum()
-enum UpdateStrategy { alwaysUpdate, onlyFetchOnce }
+enum UpdateStrategy {
+  @JsonValue(0)
+  alwaysUpdate,
+  @JsonValue(1)
+  onlyFetchOnce,
+}

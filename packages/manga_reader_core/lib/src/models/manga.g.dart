@@ -62,16 +62,16 @@ Map<String, dynamic> _$$MangaImplToJson(_$MangaImpl instance) =>
     };
 
 const _$MangaStatusEnumMap = {
-  MangaStatus.unknown: 'unknown',
-  MangaStatus.ongoing: 'ongoing',
-  MangaStatus.completed: 'completed',
-  MangaStatus.licensed: 'licensed',
-  MangaStatus.publishingFinished: 'publishingFinished',
-  MangaStatus.cancelled: 'cancelled',
-  MangaStatus.onHiatus: 'onHiatus',
+  MangaStatus.unknown: 0,
+  MangaStatus.ongoing: 1,
+  MangaStatus.completed: 2,
+  MangaStatus.licensed: 3,
+  MangaStatus.publishingFinished: 4,
+  MangaStatus.cancelled: 5,
+  MangaStatus.onHiatus: 6,
 };
 
 const _$UpdateStrategyEnumMap = {
-  UpdateStrategy.alwaysUpdate: 'alwaysUpdate',
-  UpdateStrategy.onlyFetchOnce: 'onlyFetchOnce',
+  UpdateStrategy.alwaysUpdate: 0,
+  UpdateStrategy.onlyFetchOnce: 1,
 };
