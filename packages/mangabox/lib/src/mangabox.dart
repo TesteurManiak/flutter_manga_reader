@@ -175,7 +175,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
             author: author,
             description: description,
             status: status,
-            genre: genres.isNotEmpty ? genres.join(', ') : null,
+            genre: genres.isNotEmpty ? genres : null,
           ),
         );
       },

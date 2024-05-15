@@ -128,7 +128,6 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
     });
 
     final desc = widget.manga.description;
-    final genres = widget.manga.getGenres();
     final thumbnailUrl = widget.manga.thumbnailUrl;
 
     return Stack(
@@ -162,7 +161,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                 initiallyExpanded: widget.openedFromSource,
                 onExpansionChanged: (v) => compactNotifier.value = !v,
               ),
-            if (genres != null)
+            if (widget.manga.genre case final genres?)
               ValueListenableBuilder(
                 valueListenable: compactNotifier,
                 builder: (context, isCompact, _) {

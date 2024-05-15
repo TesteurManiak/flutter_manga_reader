@@ -28,11 +28,20 @@ class SourceManga with _$SourceManga {
   factory SourceManga.fromJson(Map<String, dynamic> json) =>
       _$SourceMangaFromJson(json);
 
-  factory SourceManga.fromModel(Manga manga) {
-    return SourceManga.fromJson(manga.toJson());
-  }
-
   const SourceManga._();
+
+  Manga toDomainManga(int id) {
+    return Manga(
+      id: id,
+      url: url,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genre: getGenres(),
+      sourceId: sourceId,
+    );
+  }
 
   List<String>? getGenres() {
     if (genre case final genre? when genre.isNotEmpty) {

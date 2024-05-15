@@ -4,15 +4,26 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 extension BackupMangaExtensions on pb.BackupManga {
   SourceManga toSource() {
     return SourceManga(
-      title: title,
       url: url,
-      description: description,
-      author: author,
-      // TODO(Guillaume): handle status, genre
-      status: MangaStatus.values[status],
+      title: title,
       artist: artist,
+      author: author,
+      description: description,
+      genre: genre.isNotEmpty ? genre.join(', ') : null,
+      status: MangaStatus.values[status],
       thumbnailUrl: thumbnailUrl,
+      updateStrategy: updateStrategy.toUpdateStrategy(),
       sourceId: source.toString(),
     );
+  }
+}
+
+extension on pb.UpdateStrategy {
+  UpdateStrategy toUpdateStrategy() {
+    return switch (this) {
+      pb.UpdateStrategy.ALWAYS_UPDATE => UpdateStrategy.alwaysUpdate,
+      pb.UpdateStrategy.ONLY_FETCH_ONCE => UpdateStrategy.onlyFetchOnce,
+      _ => throw ArgumentError.value(this, 'UpdateStrategy', 'Unknown value')
+    };
   }
 }

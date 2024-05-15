@@ -8,7 +8,7 @@ extension MangaDatasourceExtensions on MangaDatasource {
     try {
       final (detailsResult, chaptersResult) = await (
         fetchMangaDetails(baseManga),
-        fetchChapters(baseManga.toSourceModel()),
+        fetchChapters(baseManga.toSourceManga()),
       ).wait;
 
       return detailsResult.when(

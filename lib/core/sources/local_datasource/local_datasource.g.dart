@@ -40,7 +40,7 @@ final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
 );
 
 typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
-String _$watchMangaHash() => r'9b59ee664e348ac46a82ba7ab7051fce57e11bc5';
+String _$watchMangaHash() => r'73da289195920183f6e472812a635057144e9bc5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -112,7 +112,7 @@ class WatchMangaFamily extends Family<AsyncValue<Manga?>> {
 }
 
 /// See also [watchManga].
-class WatchMangaProvider extends StreamProvider<Manga?> {
+class WatchMangaProvider extends AutoDisposeStreamProvider<Manga?> {
   /// See also [watchManga].
   WatchMangaProvider(
     int id,
@@ -164,7 +164,7 @@ class WatchMangaProvider extends StreamProvider<Manga?> {
   }
 
   @override
-  StreamProviderElement<Manga?> createElement() {
+  AutoDisposeStreamProviderElement<Manga?> createElement() {
     return _WatchMangaProviderElement(this);
   }
 
@@ -182,13 +182,13 @@ class WatchMangaProvider extends StreamProvider<Manga?> {
   }
 }
 
-mixin WatchMangaRef on StreamProviderRef<Manga?> {
+mixin WatchMangaRef on AutoDisposeStreamProviderRef<Manga?> {
   /// The parameter `id` of this provider.
   int get id;
 }
 
-class _WatchMangaProviderElement extends StreamProviderElement<Manga?>
-    with WatchMangaRef {
+class _WatchMangaProviderElement
+    extends AutoDisposeStreamProviderElement<Manga?> with WatchMangaRef {
   _WatchMangaProviderElement(super.provider);
 
   @override

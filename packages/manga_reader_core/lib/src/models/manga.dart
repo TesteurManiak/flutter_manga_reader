@@ -16,7 +16,7 @@ class Manga with _$Manga {
     String? artist,
     String? author,
     String? description,
-    String? genre,
+    List<String>? genre,
     @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
     String? thumbnailUrl,
     @Default(false) bool initialized,
@@ -25,30 +25,18 @@ class Manga with _$Manga {
     required String sourceId,
   }) = _Manga;
 
-  /// Used to create model from the database entity.
   factory Manga.fromJson(Map<String, dynamic> json) => _$MangaFromJson(json);
 
   const Manga._();
 
-  List<String>? getGenres() {
-    if (genre case final genre? when genre.isNotEmpty) {
-      return genre
-          .split(', ')
-          .map((e) => e.trim())
-          .where((e) => e.isNotEmpty)
-          .toList();
-    }
-    return null;
-  }
-
-  SourceManga toSourceModel() {
+  SourceManga toSourceManga() {
     return SourceManga(
       url: url,
       title: title,
       artist: artist,
       author: author,
       description: description,
-      genre: genre,
+      genre: genre?.join(', '),
       status: status,
       thumbnailUrl: thumbnailUrl,
       initialized: initialized,
@@ -61,7 +49,7 @@ class Manga with _$Manga {
       author: other.author,
       artist: other.artist,
       description: other.description,
-      genre: other.genre,
+      genre: other.getGenres(),
       thumbnailUrl: other.thumbnailUrl,
       status: other.status,
       updateStrategy: other.updateStrategy,

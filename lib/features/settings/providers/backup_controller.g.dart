@@ -6,7 +6,7 @@ part of 'backup_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$backupControllerHash() => r'23aa9d4602235c42ee868137231f7d8986086b25';
+String _$backupControllerHash() => r'f969f90b53791a5d580b09f5449876e912aca37b';
 
 /// See also [BackupController].
 @ProviderFor(BackupController)
@@ -17,8 +17,11 @@ final backupControllerProvider =
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
       : _$backupControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: <ProviderOrFamily>[localDatasourceProvider],
+  allTransitiveDependencies: <ProviderOrFamily>{
+    localDatasourceProvider,
+    ...?localDatasourceProvider.allTransitiveDependencies
+  },
 );
 
 typedef _$BackupController = AutoDisposeNotifier<BackupState>;

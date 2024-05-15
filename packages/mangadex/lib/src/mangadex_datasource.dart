@@ -324,7 +324,7 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
                 firstVolumeCover: firstVolumeCover,
                 lang: _dexLang,
               )
-              .toModel(manga),
+              .toDomainManga(manga.id),
         );
       },
       failure: Result.failure,
@@ -498,21 +498,5 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
 extension on Manga {
   List<String> get pathSegments {
     return url.split('/').where((e) => e.trim().isNotEmpty).toList();
-  }
-}
-
-extension on SourceManga {
-  Manga toModel(Manga base) {
-    return base.copyWith(
-      title: title,
-      url: url,
-      description: description,
-      author: author,
-      status: status,
-      genre: genre,
-      sourceId: sourceId,
-      artist: artist,
-      thumbnailUrl: thumbnailUrl,
-    );
   }
 }

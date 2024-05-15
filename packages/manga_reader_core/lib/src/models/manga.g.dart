@@ -13,7 +13,8 @@ _$MangaImpl _$$MangaImplFromJson(Map<String, dynamic> json) => _$MangaImpl(
       artist: json['artist'] as String?,
       author: json['author'] as String?,
       description: json['description'] as String?,
-      genre: json['genre'] as String?,
+      genre:
+          (json['genre'] as List<dynamic>?)?.map((e) => e as String).toList(),
       status: json['status'] == null
           ? MangaStatus.unknown
           : const MangaStatusConverter()

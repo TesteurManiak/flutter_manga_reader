@@ -26,7 +26,7 @@ mixin _$Manga {
   String? get artist => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get genre => throw _privateConstructorUsedError;
+  List<String>? get genre => throw _privateConstructorUsedError;
   @MangaStatusConverter()
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $MangaCopyWith<$Res> {
       String? artist,
       String? author,
       String? description,
-      String? genre,
+      List<String>? genre,
       @MangaStatusConverter() MangaStatus status,
       String? thumbnailUrl,
       bool initialized,
@@ -116,7 +116,7 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
       genre: freezed == genre
           ? _value.genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
       String? artist,
       String? author,
       String? description,
-      String? genre,
+      List<String>? genre,
       @MangaStatusConverter() MangaStatus status,
       String? thumbnailUrl,
       bool initialized,
@@ -219,9 +219,9 @@ class __$$MangaImplCopyWithImpl<$Res>
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
       genre: freezed == genre
-          ? _value.genre
+          ? _value._genre
           : genre // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<String>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -260,14 +260,15 @@ class _$MangaImpl extends _Manga {
       this.artist,
       this.author,
       this.description,
-      this.genre,
+      final List<String>? genre,
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.thumbnailUrl,
       this.initialized = false,
       this.updateStrategy = UpdateStrategy.alwaysUpdate,
       this.favorite = false,
       required this.sourceId})
-      : super._();
+      : _genre = genre,
+        super._();
 
   factory _$MangaImpl.fromJson(Map<String, dynamic> json) =>
       _$$MangaImplFromJson(json);
@@ -284,8 +285,16 @@ class _$MangaImpl extends _Manga {
   final String? author;
   @override
   final String? description;
+  final List<String>? _genre;
   @override
-  final String? genre;
+  List<String>? get genre {
+    final value = _genre;
+    if (value == null) return null;
+    if (_genre is EqualUnmodifiableListView) return _genre;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   @MangaStatusConverter()
@@ -321,7 +330,7 @@ class _$MangaImpl extends _Manga {
             (identical(other.author, author) || other.author == author) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.genre, genre) || other.genre == genre) &&
+            const DeepCollectionEquality().equals(other._genre, _genre) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl) &&
@@ -345,7 +354,7 @@ class _$MangaImpl extends _Manga {
       artist,
       author,
       description,
-      genre,
+      const DeepCollectionEquality().hash(_genre),
       status,
       thumbnailUrl,
       initialized,
@@ -375,7 +384,7 @@ abstract class _Manga extends Manga {
       final String? artist,
       final String? author,
       final String? description,
-      final String? genre,
+      final List<String>? genre,
       @MangaStatusConverter() final MangaStatus status,
       final String? thumbnailUrl,
       final bool initialized,
@@ -399,7 +408,7 @@ abstract class _Manga extends Manga {
   @override
   String? get description;
   @override
-  String? get genre;
+  List<String>? get genre;
   @override
   @MangaStatusConverter()
   MangaStatus get status;
