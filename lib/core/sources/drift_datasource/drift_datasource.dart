@@ -25,10 +25,10 @@ class DriftDatasource extends LocalDatasource {
   }
 
   @override
-  Stream<Manga?> watchMangaById(int id) {
+  Stream<Manga> watchMangaById(int id) {
     return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
-        .watchSingleOrNull()
-        .map((manga) => manga?.toModel());
+        .watchSingle()
+        .map((manga) => manga.toModel());
   }
 
   @override

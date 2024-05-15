@@ -63,10 +63,4 @@ class Manga with _$Manga {
       initialized: other.initialized && initialized,
     );
   }
-
-  bool isSameAs(SourceManga sourceManga) {
-    return title == sourceManga.title &&
-        url == sourceManga.url &&
-        sourceId == sourceManga.sourceId;
-  }
 }

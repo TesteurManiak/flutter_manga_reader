@@ -41,6 +41,7 @@ class BackupController extends _$BackupController {
 
       if (mangaToSync.isNotEmpty) {
         await ref.read(localDatasourceProvider).synchronizeLibrary(mangaToSync);
+        ref.invalidate(getMangaByUrlAndSourceIdProvider);
       }
 
       state = const BackupState.success();

@@ -13,7 +13,7 @@ abstract class LocalDatasource {
   Future<Manga> getMangaById(int mangaId);
 
   /// Return a [Stream] for the [Manga] with the given [id].
-  Stream<Manga?> watchMangaById(int id);
+  Stream<Manga> watchMangaById(int id);
 
   Future<Manga?> getMangaByUrlAndSourceId({
     required String url,
@@ -95,7 +95,7 @@ Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
 }
 
 @Riverpod(dependencies: [localDatasource])
-Stream<Manga?> watchMangaById(WatchMangaByIdRef ref, int id) {
+Stream<Manga> watchMangaById(WatchMangaByIdRef ref, int id) {
   return ref.watch(localDatasourceProvider).watchMangaById(id);
 }
 
