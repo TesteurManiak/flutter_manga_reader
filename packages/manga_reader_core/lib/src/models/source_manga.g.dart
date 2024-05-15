@@ -8,16 +8,25 @@ part of 'source_manga.dart';
 
 _$SourceMangaImpl _$$SourceMangaImplFromJson(Map<String, dynamic> json) =>
     _$SourceMangaImpl(
-      title: json['title'] as String,
       url: json['url'] as String,
-      description: json['description'] as String?,
+      title: json['title'] as String,
+      artist: json['artist'] as String?,
       author: json['author'] as String?,
+      description: json['description'] as String?,
+      genre: json['genre'] as String?,
       status: json['status'] == null
           ? MangaStatus.unknown
           : const MangaStatusConverter()
               .fromJson((json['status'] as num).toInt()),
-      genre: json['genre'] as String?,
-      sourceId: json['sourceId'] as String,
-      artist: json['artist'] as String?,
       thumbnailUrl: json['thumbnailUrl'] as String?,
+      initialized: json['initialized'] as bool? ?? false,
+      updateStrategy: $enumDecodeNullable(
+              _$UpdateStrategyEnumMap, json['updateStrategy']) ??
+          UpdateStrategy.alwaysUpdate,
+      sourceId: json['sourceId'] as String,
     );
+
+const _$UpdateStrategyEnumMap = {
+  UpdateStrategy.alwaysUpdate: 'alwaysUpdate',
+  UpdateStrategy.onlyFetchOnce: 'onlyFetchOnce',
+};

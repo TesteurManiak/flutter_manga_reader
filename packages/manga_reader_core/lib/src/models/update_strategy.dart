@@ -1,0 +1,1 @@
+enum UpdateStrategy { alwaysUpdate, onlyFetchOnce }

@@ -8,34 +8,43 @@ part of 'manga.dart';
 
 _$MangaImpl _$$MangaImplFromJson(Map<String, dynamic> json) => _$MangaImpl(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
       url: json['url'] as String,
-      description: json['description'] as String?,
+      title: json['title'] as String,
+      artist: json['artist'] as String?,
       author: json['author'] as String?,
+      description: json['description'] as String?,
+      genre: json['genre'] as String?,
       status: json['status'] == null
           ? MangaStatus.unknown
           : const MangaStatusConverter()
               .fromJson((json['status'] as num).toInt()),
-      genre: json['genre'] as String?,
-      favorite: json['favorite'] as bool? ?? false,
-      sourceId: json['sourceId'] as String,
-      artist: json['artist'] as String?,
       thumbnailUrl: json['thumbnailUrl'] as String?,
       initialized: json['initialized'] as bool? ?? false,
+      updateStrategy: $enumDecodeNullable(
+              _$UpdateStrategyEnumMap, json['updateStrategy']) ??
+          UpdateStrategy.alwaysUpdate,
+      favorite: json['favorite'] as bool? ?? false,
+      sourceId: json['sourceId'] as String,
     );
 
 Map<String, dynamic> _$$MangaImplToJson(_$MangaImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
       'url': instance.url,
-      'description': instance.description,
-      'author': instance.author,
-      'status': const MangaStatusConverter().toJson(instance.status),
-      'genre': instance.genre,
-      'favorite': instance.favorite,
-      'sourceId': instance.sourceId,
+      'title': instance.title,
       'artist': instance.artist,
+      'author': instance.author,
+      'description': instance.description,
+      'genre': instance.genre,
+      'status': const MangaStatusConverter().toJson(instance.status),
       'thumbnailUrl': instance.thumbnailUrl,
       'initialized': instance.initialized,
+      'updateStrategy': _$UpdateStrategyEnumMap[instance.updateStrategy]!,
+      'favorite': instance.favorite,
+      'sourceId': instance.sourceId,
     };
+
+const _$UpdateStrategyEnumMap = {
+  UpdateStrategy.alwaysUpdate: 'alwaysUpdate',
+  UpdateStrategy.onlyFetchOnce: 'onlyFetchOnce',
+};
