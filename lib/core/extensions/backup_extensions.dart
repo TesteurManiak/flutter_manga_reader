@@ -9,7 +9,7 @@ extension BackupMangaExtensions on pb.BackupManga {
       description: description,
       author: author,
       // TODO(Guillaume): handle status, genre
-      // status: MangaStatus.values[status],
+      status: MangaStatus.values[status],
       artist: artist,
       thumbnailUrl: thumbnailUrl,
       sourceId: source.toString(),

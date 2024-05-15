@@ -91,7 +91,7 @@ Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
 }
 
-@Riverpod(keepAlive: true, dependencies: [localDatasource])
+@Riverpod(dependencies: [localDatasource])
 Stream<Manga?> watchManga(WatchMangaRef ref, int id) {
   return ref.watch(localDatasourceProvider).watchManga(id);
 }

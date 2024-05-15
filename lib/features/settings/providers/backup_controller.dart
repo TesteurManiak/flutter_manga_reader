@@ -11,7 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'backup_controller.freezed.dart';
 part 'backup_controller.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [localDatasource])
 class BackupController extends _$BackupController {
   @override
   BackupState build() => const BackupStateInitial();

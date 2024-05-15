@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
@@ -24,6 +25,7 @@ import 'package:flutter_manga_reader/features/details/widgets/manga_description.
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
 class DetailsView extends ConsumerStatefulWidget {
@@ -68,7 +70,12 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
         body: state.when(
           data: (manga) {
             if (manga == null) {
-              return ErrorContent(message: context.strings.manga_not_found);
+              return ErrorContent(
+                message: context.strings.manga_not_found,
+                // TODO(Guillaume): localize
+                retryMessage: 'Go back'.hardcoded,
+                onRetry: () => context.pop(),
+              );
             }
 
             return _MangaContent(
