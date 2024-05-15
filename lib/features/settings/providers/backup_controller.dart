@@ -33,7 +33,8 @@ class BackupController extends _$BackupController {
       final mangaToSync = <SourceManga>[];
 
       for (final manga in backup.backupManga) {
-        // TODO(Guillaume): sync chapters
+        // TODO(Guillaume): sync chapters, history
+
         final sourceManga = manga.toSource();
         final source = ref.read(findSourceFromIdProvider(sourceManga.sourceId));
         if (source != null) mangaToSync.add(sourceManga);
@@ -41,6 +42,7 @@ class BackupController extends _$BackupController {
 
       if (mangaToSync.isNotEmpty) {
         await ref.read(localDatasourceProvider).synchronizeLibrary(mangaToSync);
+        // Needed to avoid relying on old ids
         ref.invalidate(getMangaByUrlAndSourceIdProvider);
       }
 
