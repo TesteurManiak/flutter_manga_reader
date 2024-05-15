@@ -3,6 +3,7 @@ import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/drift_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -50,9 +51,9 @@ abstract class LocalDatasource {
   /// Insert a [SourceManga] into the database and return its id.
   Future<int> saveSourceManga(SourceManga sourceManga);
 
-  /// Clear the local manga and chapters and insert the given list of
-  /// [SourceManga]s.
-  Future<void> synchronizeLibrary(List<SourceManga> sourceMangas);
+  Future<void> applyTachiyomiBackup({
+    required List<pb.BackupManga> mangas,
+  });
 
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChaptersRead({

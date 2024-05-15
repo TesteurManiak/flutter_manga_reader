@@ -1,11 +1,9 @@
 import 'dart:io' as io;
 
-import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'backup_controller.freezed.dart';
@@ -30,18 +28,20 @@ class BackupController extends _$BackupController {
       final buffer = io.gzip.decode(bytes);
       final backup = pb.Backup.fromBuffer(buffer);
 
-      final mangaToSync = <SourceManga>[];
+      final mangaToSync = <pb.BackupManga>[];
 
       for (final manga in backup.backupManga) {
-        // TODO(Guillaume): sync chapters, history
-
-        final sourceManga = manga.toSource();
-        final source = ref.read(findSourceFromIdProvider(sourceManga.sourceId));
-        if (source != null) mangaToSync.add(sourceManga);
+        // TODO(Guillaume): sync  history
+        final source =
+            ref.read(findSourceFromIdProvider(manga.source.toString()));
+        if (source != null) mangaToSync.add(manga);
       }
 
       if (mangaToSync.isNotEmpty) {
-        await ref.read(localDatasourceProvider).synchronizeLibrary(mangaToSync);
+        await ref
+            .read(localDatasourceProvider)
+            .applyTachiyomiBackup(mangas: mangaToSync);
+
         // Needed to avoid relying on old ids
         ref.invalidate(getMangaByUrlAndSourceIdProvider);
       }

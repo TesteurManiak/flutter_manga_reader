@@ -23,8 +23,6 @@ mixin _$Manga {
   int get id => throw _privateConstructorUsedError;
   String get sourceId => throw _privateConstructorUsedError;
   bool get favorite => throw _privateConstructorUsedError;
-  DateTime? get lastUpdate => throw _privateConstructorUsedError;
-  DateTime? get nextUpdate => throw _privateConstructorUsedError;
   int get fetchInterval => throw _privateConstructorUsedError;
   DateTime? get dateAdded => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
@@ -53,8 +51,6 @@ abstract class $MangaCopyWith<$Res> {
       {int id,
       String sourceId,
       bool favorite,
-      DateTime? lastUpdate,
-      DateTime? nextUpdate,
       int fetchInterval,
       DateTime? dateAdded,
       String url,
@@ -86,8 +82,6 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
     Object? id = null,
     Object? sourceId = null,
     Object? favorite = null,
-    Object? lastUpdate = freezed,
-    Object? nextUpdate = freezed,
     Object? fetchInterval = null,
     Object? dateAdded = freezed,
     Object? url = null,
@@ -115,14 +109,6 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      lastUpdate: freezed == lastUpdate
-          ? _value.lastUpdate
-          : lastUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      nextUpdate: freezed == nextUpdate
-          ? _value.nextUpdate
-          : nextUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       fetchInterval: null == fetchInterval
           ? _value.fetchInterval
           : fetchInterval // ignore: cast_nullable_to_non_nullable
@@ -190,8 +176,6 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
       {int id,
       String sourceId,
       bool favorite,
-      DateTime? lastUpdate,
-      DateTime? nextUpdate,
       int fetchInterval,
       DateTime? dateAdded,
       String url,
@@ -221,8 +205,6 @@ class __$$MangaImplCopyWithImpl<$Res>
     Object? id = null,
     Object? sourceId = null,
     Object? favorite = null,
-    Object? lastUpdate = freezed,
-    Object? nextUpdate = freezed,
     Object? fetchInterval = null,
     Object? dateAdded = freezed,
     Object? url = null,
@@ -250,14 +232,6 @@ class __$$MangaImplCopyWithImpl<$Res>
           ? _value.favorite
           : favorite // ignore: cast_nullable_to_non_nullable
               as bool,
-      lastUpdate: freezed == lastUpdate
-          ? _value.lastUpdate
-          : lastUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      nextUpdate: freezed == nextUpdate
-          ? _value.nextUpdate
-          : nextUpdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       fetchInterval: null == fetchInterval
           ? _value.fetchInterval
           : fetchInterval // ignore: cast_nullable_to_non_nullable
@@ -321,8 +295,6 @@ class _$MangaImpl extends _Manga {
       {required this.id,
       required this.sourceId,
       this.favorite = false,
-      this.lastUpdate,
-      this.nextUpdate,
       this.fetchInterval = 0,
       this.dateAdded,
       this.url = '',
@@ -349,10 +321,6 @@ class _$MangaImpl extends _Manga {
   @override
   @JsonKey()
   final bool favorite;
-  @override
-  final DateTime? lastUpdate;
-  @override
-  final DateTime? nextUpdate;
   @override
   @JsonKey()
   final int fetchInterval;
@@ -396,7 +364,7 @@ class _$MangaImpl extends _Manga {
 
   @override
   String toString() {
-    return 'Manga(id: $id, sourceId: $sourceId, favorite: $favorite, lastUpdate: $lastUpdate, nextUpdate: $nextUpdate, fetchInterval: $fetchInterval, dateAdded: $dateAdded, url: $url, title: $title, artist: $artist, author: $author, description: $description, genres: $genres, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized, lastModifiedAt: $lastModifiedAt)';
+    return 'Manga(id: $id, sourceId: $sourceId, favorite: $favorite, fetchInterval: $fetchInterval, dateAdded: $dateAdded, url: $url, title: $title, artist: $artist, author: $author, description: $description, genres: $genres, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized, lastModifiedAt: $lastModifiedAt)';
   }
 
   @override
@@ -409,10 +377,6 @@ class _$MangaImpl extends _Manga {
                 other.sourceId == sourceId) &&
             (identical(other.favorite, favorite) ||
                 other.favorite == favorite) &&
-            (identical(other.lastUpdate, lastUpdate) ||
-                other.lastUpdate == lastUpdate) &&
-            (identical(other.nextUpdate, nextUpdate) ||
-                other.nextUpdate == nextUpdate) &&
             (identical(other.fetchInterval, fetchInterval) ||
                 other.fetchInterval == fetchInterval) &&
             (identical(other.dateAdded, dateAdded) ||
@@ -442,8 +406,6 @@ class _$MangaImpl extends _Manga {
       id,
       sourceId,
       favorite,
-      lastUpdate,
-      nextUpdate,
       fetchInterval,
       dateAdded,
       url,
@@ -477,8 +439,6 @@ abstract class _Manga extends Manga {
       {required final int id,
       required final String sourceId,
       final bool favorite,
-      final DateTime? lastUpdate,
-      final DateTime? nextUpdate,
       final int fetchInterval,
       final DateTime? dateAdded,
       final String url,
@@ -502,10 +462,6 @@ abstract class _Manga extends Manga {
   String get sourceId;
   @override
   bool get favorite;
-  @override
-  DateTime? get lastUpdate;
-  @override
-  DateTime? get nextUpdate;
   @override
   int get fetchInterval;
   @override

@@ -13,8 +13,6 @@ class Manga with _$Manga {
     required int id,
     required String sourceId,
     @Default(false) bool favorite,
-    DateTime? lastUpdate,
-    DateTime? nextUpdate,
     @Default(0) int fetchInterval,
     DateTime? dateAdded,
     @Default('') String url,
@@ -34,7 +32,7 @@ class Manga with _$Manga {
 
   const Manga._();
 
-  String? getGenre() => genres?.join(', ');
+  String? getGenre() => genres?.join(',');
 
   SourceManga toSourceManga() {
     return SourceManga(

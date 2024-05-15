@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:drift/drift.dart';
+import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -77,20 +79,6 @@ class DriftDatasource extends LocalDatasource {
         .go();
 
     return _db.into(_db.dbMangas).insert(sourceManga.insert());
-  }
-
-  @override
-  Future<void> synchronizeLibrary(List<SourceManga> sourceMangas) {
-    return _db.batch((batch) {
-      batch
-        ..deleteAll(_db.dbMangas)
-        ..deleteAll(_db.dbChapters)
-        ..deleteAll(_db.dbChapterHistory)
-        ..insertAll(
-          _db.dbMangas,
-          sourceMangas.map((e) => e.insert(favorite: true)),
-        );
-    });
   }
 
   @override
@@ -304,6 +292,18 @@ class DriftDatasource extends LocalDatasource {
         );
     });
   }
+
+  @override
+  Future<void> applyTachiyomiBackup({
+    required List<pb.BackupManga> mangas,
+  }) {
+    return _db.batch((batch) {
+      batch.insertAll(
+        _db.dbMangas,
+        mangas.map((e) => e.insert()),
+      );
+    });
+  }
 }
 
 extension on DbChapter {
@@ -322,8 +322,6 @@ extension on Manga {
       id: id,
       sourceId: sourceId,
       favorite: favorite,
-      lastUpdate: lastUpdate,
-      nextUpdate: nextUpdate,
       fetchInterval: fetchInterval,
       dateAdded: dateAdded,
       url: url,
@@ -370,6 +368,33 @@ extension on SourceChapter {
       dateUpload: Value(dateUpload),
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(scanlator),
+    );
+  }
+}
+
+extension on pb.BackupManga {
+  DbMangasCompanion insert() {
+    final dbArtist = artist.isNotEmpty ? artist : null;
+    final dbAuthor = author.isNotEmpty ? author : null;
+    final dbDesc = description.isNotEmpty ? description : null;
+    final dbGenre = genre.isNotEmpty ? genre.join(',') : null;
+    final dbStatus = MangaStatus.tryFromIndex(status);
+    final dbThumbnail = thumbnailUrl.isNotEmpty ? thumbnailUrl : null;
+
+    return DbMangasCompanion.insert(
+      sourceId: source.toString(),
+      url: Value(url),
+      title: Value(title),
+      artist: Value.absentIfNull(dbArtist),
+      author: Value.absentIfNull(dbAuthor),
+      description: Value.absentIfNull(dbDesc),
+      genre: Value.absentIfNull(dbGenre),
+      status: Value.absentIfNull(dbStatus),
+      thumbnailUrl: Value.absentIfNull(dbThumbnail),
+      dateAdded: Value(dateAdded.toDateTime()),
+      favorite: const Value(true),
+      updateStrategy: Value(updateStrategy.toUpdateStrategy()),
+      lastModifiedAt: Value(lastModifiedAt.toDateTime()),
     );
   }
 }

@@ -33,18 +33,6 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("favorite" IN (0, 1))'),
       defaultValue: const Constant(false));
-  static const VerificationMeta _lastUpdateMeta =
-      const VerificationMeta('lastUpdate');
-  @override
-  late final GeneratedColumn<DateTime> lastUpdate = GeneratedColumn<DateTime>(
-      'last_update', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _nextUpdateMeta =
-      const VerificationMeta('nextUpdate');
-  @override
-  late final GeneratedColumn<DateTime> nextUpdate = GeneratedColumn<DateTime>(
-      'next_update', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   static const VerificationMeta _fetchIntervalMeta =
       const VerificationMeta('fetchInterval');
   @override
@@ -140,8 +128,6 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
         id,
         sourceId,
         favorite,
-        lastUpdate,
-        nextUpdate,
         fetchInterval,
         dateAdded,
         url,
@@ -178,18 +164,6 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     if (data.containsKey('favorite')) {
       context.handle(_favoriteMeta,
           favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
-    }
-    if (data.containsKey('last_update')) {
-      context.handle(
-          _lastUpdateMeta,
-          lastUpdate.isAcceptableOrUnknown(
-              data['last_update']!, _lastUpdateMeta));
-    }
-    if (data.containsKey('next_update')) {
-      context.handle(
-          _nextUpdateMeta,
-          nextUpdate.isAcceptableOrUnknown(
-              data['next_update']!, _nextUpdateMeta));
     }
     if (data.containsKey('fetch_interval')) {
       context.handle(
@@ -262,10 +236,6 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
       favorite: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
-      lastUpdate: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_update']),
-      nextUpdate: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}next_update']),
       fetchInterval: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}fetch_interval'])!,
       dateAdded: attachedDatabase.typeMapping
@@ -312,8 +282,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final int id;
   final String sourceId;
   final bool favorite;
-  final DateTime? lastUpdate;
-  final DateTime? nextUpdate;
   final int fetchInterval;
   final DateTime? dateAdded;
   final String url;
@@ -331,8 +299,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       {required this.id,
       required this.sourceId,
       required this.favorite,
-      this.lastUpdate,
-      this.nextUpdate,
       required this.fetchInterval,
       this.dateAdded,
       required this.url,
@@ -352,12 +318,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
     map['id'] = Variable<int>(id);
     map['source_id'] = Variable<String>(sourceId);
     map['favorite'] = Variable<bool>(favorite);
-    if (!nullToAbsent || lastUpdate != null) {
-      map['last_update'] = Variable<DateTime>(lastUpdate);
-    }
-    if (!nullToAbsent || nextUpdate != null) {
-      map['next_update'] = Variable<DateTime>(nextUpdate);
-    }
     map['fetch_interval'] = Variable<int>(fetchInterval);
     if (!nullToAbsent || dateAdded != null) {
       map['date_added'] = Variable<DateTime>(dateAdded);
@@ -399,12 +359,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       id: Value(id),
       sourceId: Value(sourceId),
       favorite: Value(favorite),
-      lastUpdate: lastUpdate == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastUpdate),
-      nextUpdate: nextUpdate == null && nullToAbsent
-          ? const Value.absent()
-          : Value(nextUpdate),
       fetchInterval: Value(fetchInterval),
       dateAdded: dateAdded == null && nullToAbsent
           ? const Value.absent()
@@ -439,8 +393,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       id: serializer.fromJson<int>(json['id']),
       sourceId: serializer.fromJson<String>(json['sourceId']),
       favorite: serializer.fromJson<bool>(json['favorite']),
-      lastUpdate: serializer.fromJson<DateTime?>(json['lastUpdate']),
-      nextUpdate: serializer.fromJson<DateTime?>(json['nextUpdate']),
       fetchInterval: serializer.fromJson<int>(json['fetchInterval']),
       dateAdded: serializer.fromJson<DateTime?>(json['dateAdded']),
       url: serializer.fromJson<String>(json['url']),
@@ -465,8 +417,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       'id': serializer.toJson<int>(id),
       'sourceId': serializer.toJson<String>(sourceId),
       'favorite': serializer.toJson<bool>(favorite),
-      'lastUpdate': serializer.toJson<DateTime?>(lastUpdate),
-      'nextUpdate': serializer.toJson<DateTime?>(nextUpdate),
       'fetchInterval': serializer.toJson<int>(fetchInterval),
       'dateAdded': serializer.toJson<DateTime?>(dateAdded),
       'url': serializer.toJson<String>(url),
@@ -489,8 +439,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           {int? id,
           String? sourceId,
           bool? favorite,
-          Value<DateTime?> lastUpdate = const Value.absent(),
-          Value<DateTime?> nextUpdate = const Value.absent(),
           int? fetchInterval,
           Value<DateTime?> dateAdded = const Value.absent(),
           String? url,
@@ -508,8 +456,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         id: id ?? this.id,
         sourceId: sourceId ?? this.sourceId,
         favorite: favorite ?? this.favorite,
-        lastUpdate: lastUpdate.present ? lastUpdate.value : this.lastUpdate,
-        nextUpdate: nextUpdate.present ? nextUpdate.value : this.nextUpdate,
         fetchInterval: fetchInterval ?? this.fetchInterval,
         dateAdded: dateAdded.present ? dateAdded.value : this.dateAdded,
         url: url ?? this.url,
@@ -532,8 +478,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           ..write('id: $id, ')
           ..write('sourceId: $sourceId, ')
           ..write('favorite: $favorite, ')
-          ..write('lastUpdate: $lastUpdate, ')
-          ..write('nextUpdate: $nextUpdate, ')
           ..write('fetchInterval: $fetchInterval, ')
           ..write('dateAdded: $dateAdded, ')
           ..write('url: $url, ')
@@ -556,8 +500,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       id,
       sourceId,
       favorite,
-      lastUpdate,
-      nextUpdate,
       fetchInterval,
       dateAdded,
       url,
@@ -578,8 +520,6 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           other.id == this.id &&
           other.sourceId == this.sourceId &&
           other.favorite == this.favorite &&
-          other.lastUpdate == this.lastUpdate &&
-          other.nextUpdate == this.nextUpdate &&
           other.fetchInterval == this.fetchInterval &&
           other.dateAdded == this.dateAdded &&
           other.url == this.url &&
@@ -599,8 +539,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<int> id;
   final Value<String> sourceId;
   final Value<bool> favorite;
-  final Value<DateTime?> lastUpdate;
-  final Value<DateTime?> nextUpdate;
   final Value<int> fetchInterval;
   final Value<DateTime?> dateAdded;
   final Value<String> url;
@@ -618,8 +556,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.id = const Value.absent(),
     this.sourceId = const Value.absent(),
     this.favorite = const Value.absent(),
-    this.lastUpdate = const Value.absent(),
-    this.nextUpdate = const Value.absent(),
     this.fetchInterval = const Value.absent(),
     this.dateAdded = const Value.absent(),
     this.url = const Value.absent(),
@@ -638,8 +574,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     this.id = const Value.absent(),
     required String sourceId,
     this.favorite = const Value.absent(),
-    this.lastUpdate = const Value.absent(),
-    this.nextUpdate = const Value.absent(),
     this.fetchInterval = const Value.absent(),
     this.dateAdded = const Value.absent(),
     this.url = const Value.absent(),
@@ -658,8 +592,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     Expression<int>? id,
     Expression<String>? sourceId,
     Expression<bool>? favorite,
-    Expression<DateTime>? lastUpdate,
-    Expression<DateTime>? nextUpdate,
     Expression<int>? fetchInterval,
     Expression<DateTime>? dateAdded,
     Expression<String>? url,
@@ -678,8 +610,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       if (id != null) 'id': id,
       if (sourceId != null) 'source_id': sourceId,
       if (favorite != null) 'favorite': favorite,
-      if (lastUpdate != null) 'last_update': lastUpdate,
-      if (nextUpdate != null) 'next_update': nextUpdate,
       if (fetchInterval != null) 'fetch_interval': fetchInterval,
       if (dateAdded != null) 'date_added': dateAdded,
       if (url != null) 'url': url,
@@ -700,8 +630,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       {Value<int>? id,
       Value<String>? sourceId,
       Value<bool>? favorite,
-      Value<DateTime?>? lastUpdate,
-      Value<DateTime?>? nextUpdate,
       Value<int>? fetchInterval,
       Value<DateTime?>? dateAdded,
       Value<String>? url,
@@ -719,8 +647,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       id: id ?? this.id,
       sourceId: sourceId ?? this.sourceId,
       favorite: favorite ?? this.favorite,
-      lastUpdate: lastUpdate ?? this.lastUpdate,
-      nextUpdate: nextUpdate ?? this.nextUpdate,
       fetchInterval: fetchInterval ?? this.fetchInterval,
       dateAdded: dateAdded ?? this.dateAdded,
       url: url ?? this.url,
@@ -748,12 +674,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     }
     if (favorite.present) {
       map['favorite'] = Variable<bool>(favorite.value);
-    }
-    if (lastUpdate.present) {
-      map['last_update'] = Variable<DateTime>(lastUpdate.value);
-    }
-    if (nextUpdate.present) {
-      map['next_update'] = Variable<DateTime>(nextUpdate.value);
     }
     if (fetchInterval.present) {
       map['fetch_interval'] = Variable<int>(fetchInterval.value);
@@ -805,8 +725,6 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
           ..write('id: $id, ')
           ..write('sourceId: $sourceId, ')
           ..write('favorite: $favorite, ')
-          ..write('lastUpdate: $lastUpdate, ')
-          ..write('nextUpdate: $nextUpdate, ')
           ..write('fetchInterval: $fetchInterval, ')
           ..write('dateAdded: $dateAdded, ')
           ..write('url: $url, ')
@@ -2124,8 +2042,6 @@ typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
   Value<int> id,
   required String sourceId,
   Value<bool> favorite,
-  Value<DateTime?> lastUpdate,
-  Value<DateTime?> nextUpdate,
   Value<int> fetchInterval,
   Value<DateTime?> dateAdded,
   Value<String> url,
@@ -2144,8 +2060,6 @@ typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
   Value<int> id,
   Value<String> sourceId,
   Value<bool> favorite,
-  Value<DateTime?> lastUpdate,
-  Value<DateTime?> nextUpdate,
   Value<int> fetchInterval,
   Value<DateTime?> dateAdded,
   Value<String> url,
@@ -2184,8 +2098,6 @@ class $$DbMangasTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> sourceId = const Value.absent(),
             Value<bool> favorite = const Value.absent(),
-            Value<DateTime?> lastUpdate = const Value.absent(),
-            Value<DateTime?> nextUpdate = const Value.absent(),
             Value<int> fetchInterval = const Value.absent(),
             Value<DateTime?> dateAdded = const Value.absent(),
             Value<String> url = const Value.absent(),
@@ -2204,8 +2116,6 @@ class $$DbMangasTableTableManager extends RootTableManager<
             id: id,
             sourceId: sourceId,
             favorite: favorite,
-            lastUpdate: lastUpdate,
-            nextUpdate: nextUpdate,
             fetchInterval: fetchInterval,
             dateAdded: dateAdded,
             url: url,
@@ -2224,8 +2134,6 @@ class $$DbMangasTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             required String sourceId,
             Value<bool> favorite = const Value.absent(),
-            Value<DateTime?> lastUpdate = const Value.absent(),
-            Value<DateTime?> nextUpdate = const Value.absent(),
             Value<int> fetchInterval = const Value.absent(),
             Value<DateTime?> dateAdded = const Value.absent(),
             Value<String> url = const Value.absent(),
@@ -2244,8 +2152,6 @@ class $$DbMangasTableTableManager extends RootTableManager<
             id: id,
             sourceId: sourceId,
             favorite: favorite,
-            lastUpdate: lastUpdate,
-            nextUpdate: nextUpdate,
             fetchInterval: fetchInterval,
             dateAdded: dateAdded,
             url: url,
@@ -2290,16 +2196,6 @@ class $$DbMangasTableFilterComposer
 
   ColumnFilters<bool> get favorite => $state.composableBuilder(
       column: $state.table.favorite,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get lastUpdate => $state.composableBuilder(
-      column: $state.table.lastUpdate,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<DateTime> get nextUpdate => $state.composableBuilder(
-      column: $state.table.nextUpdate,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2388,16 +2284,6 @@ class $$DbMangasTableOrderingComposer
 
   ColumnOrderings<bool> get favorite => $state.composableBuilder(
       column: $state.table.favorite,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get lastUpdate => $state.composableBuilder(
-      column: $state.table.lastUpdate,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<DateTime> get nextUpdate => $state.composableBuilder(
-      column: $state.table.nextUpdate,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 

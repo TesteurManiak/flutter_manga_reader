@@ -10,12 +10,6 @@ _$MangaImpl _$$MangaImplFromJson(Map<String, dynamic> json) => _$MangaImpl(
       id: (json['id'] as num).toInt(),
       sourceId: json['sourceId'] as String,
       favorite: json['favorite'] as bool? ?? false,
-      lastUpdate: json['lastUpdate'] == null
-          ? null
-          : DateTime.parse(json['lastUpdate'] as String),
-      nextUpdate: json['nextUpdate'] == null
-          ? null
-          : DateTime.parse(json['nextUpdate'] as String),
       fetchInterval: (json['fetchInterval'] as num?)?.toInt() ?? 0,
       dateAdded: json['dateAdded'] == null
           ? null
@@ -44,8 +38,6 @@ Map<String, dynamic> _$$MangaImplToJson(_$MangaImpl instance) =>
       'id': instance.id,
       'sourceId': instance.sourceId,
       'favorite': instance.favorite,
-      'lastUpdate': instance.lastUpdate?.toIso8601String(),
-      'nextUpdate': instance.nextUpdate?.toIso8601String(),
       'fetchInterval': instance.fetchInterval,
       'dateAdded': instance.dateAdded?.toIso8601String(),
       'url': instance.url,

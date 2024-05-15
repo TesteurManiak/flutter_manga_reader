@@ -14,8 +14,6 @@ class DbMangas extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get sourceId => text()();
   BoolColumn get favorite => boolean().withDefault(const Constant(false))();
-  DateTimeColumn get lastUpdate => dateTime().nullable()();
-  DateTimeColumn get nextUpdate => dateTime().nullable()();
   IntColumn get fetchInterval => integer().withDefault(const Constant(0))();
   DateTimeColumn get dateAdded => dateTime().nullable()();
   TextColumn get url => text().withDefault(const Constant(''))();
@@ -113,7 +111,26 @@ class AppDatabase extends _$AppDatabase {
 }
 
 extension DbMangaExtensions on DbManga {
-  Manga toModel() => Manga.fromJson(toJson());
+  Manga toModel() {
+    return Manga(
+      id: id,
+      sourceId: sourceId,
+      favorite: favorite,
+      fetchInterval: fetchInterval,
+      dateAdded: dateAdded,
+      url: url,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genres: genre?.split(','),
+      status: status,
+      thumbnailUrl: thumbnailUrl,
+      updateStrategy: updateStrategy,
+      initialized: initialized,
+      lastModifiedAt: lastModifiedAt,
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)
