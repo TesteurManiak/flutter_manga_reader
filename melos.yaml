@@ -9,6 +9,10 @@ packages:
   - ./
 
 scripts:
+  gen-all:
+    description: Run all code generation scripts
+    run: melos run gen --no-select
+
   gen:
     description: Run build_runner to generate files
     run: dart run build_runner build --delete-conflicting-outputs

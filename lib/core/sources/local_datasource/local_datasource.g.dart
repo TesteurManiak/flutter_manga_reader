@@ -196,7 +196,7 @@ class _WatchMangaProviderElement extends StreamProviderElement<Manga?>
 }
 
 String _$getMangaIdFromSourceHash() =>
-    r'46643cfd24e3a58528a2700bc16a5815d2715b04';
+    r'5d2b3fcec507912862ccc90571a171ab19fd61be';
 
 /// See also [getMangaIdFromSource].
 @ProviderFor(getMangaIdFromSource)
