@@ -296,8 +296,15 @@ class DriftDatasource extends LocalDatasource {
   @override
   Future<void> applyTachiyomiBackup({
     required List<pb.BackupManga> mangas,
+    required bool keepPreviousData,
   }) {
     return _db.batch((batch) {
+      if (!keepPreviousData) {
+        batch
+          ..deleteAll(_db.dbMangas)
+          ..deleteAll(_db.dbChapters)
+          ..deleteAll(_db.dbChapterHistory);
+      }
       batch.insertAll(
         _db.dbMangas,
         mangas.map((e) => e.insert()),

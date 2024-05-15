@@ -53,6 +53,7 @@ abstract class LocalDatasource {
 
   Future<void> applyTachiyomiBackup({
     required List<pb.BackupManga> mangas,
+    required bool keepPreviousData,
   });
 
   Future<Chapter?> getChapter(int chapterId);

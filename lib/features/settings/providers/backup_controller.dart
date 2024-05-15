@@ -40,7 +40,7 @@ class BackupController extends _$BackupController {
       if (mangaToSync.isNotEmpty) {
         await ref
             .read(localDatasourceProvider)
-            .applyTachiyomiBackup(mangas: mangaToSync);
+            .applyTachiyomiBackup(mangas: mangaToSync, keepPreviousData: false);
 
         // Needed to avoid relying on old ids
         ref.invalidate(getMangaByUrlAndSourceIdProvider);
