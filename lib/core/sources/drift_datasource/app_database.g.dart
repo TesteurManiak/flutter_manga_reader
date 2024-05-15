@@ -17,38 +17,12 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  static const VerificationMeta _sourceIdMeta =
+      const VerificationMeta('sourceId');
   @override
-  late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, false,
+  late final GeneratedColumn<String> sourceId = GeneratedColumn<String>(
+      'source_id', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _urlMeta = const VerificationMeta('url');
-  @override
-  late final GeneratedColumn<String> url = GeneratedColumn<String>(
-      'url', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _descriptionMeta =
-      const VerificationMeta('description');
-  @override
-  late final GeneratedColumn<String> description = GeneratedColumn<String>(
-      'description', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _authorMeta = const VerificationMeta('author');
-  @override
-  late final GeneratedColumn<String> author = GeneratedColumn<String>(
-      'author', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _statusMeta = const VerificationMeta('status');
-  @override
-  late final GeneratedColumnWithTypeConverter<MangaStatus, int> status =
-      GeneratedColumn<int>('status', aliasedName, false,
-              type: DriftSqlType.int, requiredDuringInsert: true)
-          .withConverter<MangaStatus>($DbMangasTable.$converterstatus);
-  static const VerificationMeta _genreMeta = const VerificationMeta('genre');
-  @override
-  late final GeneratedColumn<String> genre = GeneratedColumn<String>(
-      'genre', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _favoriteMeta =
       const VerificationMeta('favorite');
   @override
@@ -59,23 +33,92 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("favorite" IN (0, 1))'),
       defaultValue: const Constant(false));
-  static const VerificationMeta _sourceIdMeta =
-      const VerificationMeta('sourceId');
+  static const VerificationMeta _lastUpdateMeta =
+      const VerificationMeta('lastUpdate');
   @override
-  late final GeneratedColumn<String> sourceId = GeneratedColumn<String>(
-      'source_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumn<DateTime> lastUpdate = GeneratedColumn<DateTime>(
+      'last_update', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _nextUpdateMeta =
+      const VerificationMeta('nextUpdate');
+  @override
+  late final GeneratedColumn<DateTime> nextUpdate = GeneratedColumn<DateTime>(
+      'next_update', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _fetchIntervalMeta =
+      const VerificationMeta('fetchInterval');
+  @override
+  late final GeneratedColumn<int> fetchInterval = GeneratedColumn<int>(
+      'fetch_interval', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _dateAddedMeta =
+      const VerificationMeta('dateAdded');
+  @override
+  late final GeneratedColumn<DateTime> dateAdded = GeneratedColumn<DateTime>(
+      'date_added', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  @override
+  late final GeneratedColumn<String> url = GeneratedColumn<String>(
+      'url', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(''));
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  @override
+  late final GeneratedColumn<String> title = GeneratedColumn<String>(
+      'title', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(''));
   static const VerificationMeta _artistMeta = const VerificationMeta('artist');
   @override
   late final GeneratedColumn<String> artist = GeneratedColumn<String>(
       'artist', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _authorMeta = const VerificationMeta('author');
+  @override
+  late final GeneratedColumn<String> author = GeneratedColumn<String>(
+      'author', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _descriptionMeta =
+      const VerificationMeta('description');
+  @override
+  late final GeneratedColumn<String> description = GeneratedColumn<String>(
+      'description', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _genreMeta = const VerificationMeta('genre');
+  @override
+  late final GeneratedColumn<String> genre = GeneratedColumn<String>(
+      'genre', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumnWithTypeConverter<MangaStatus, int> status =
+      GeneratedColumn<int>('status', aliasedName, false,
+              type: DriftSqlType.int,
+              requiredDuringInsert: false,
+              defaultValue: const Constant(0))
+          .withConverter<MangaStatus>($DbMangasTable.$converterstatus);
   static const VerificationMeta _thumbnailUrlMeta =
       const VerificationMeta('thumbnailUrl');
   @override
   late final GeneratedColumn<String> thumbnailUrl = GeneratedColumn<String>(
       'thumbnail_url', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _updateStrategyMeta =
+      const VerificationMeta('updateStrategy');
+  @override
+  late final GeneratedColumnWithTypeConverter<UpdateStrategy, int>
+      updateStrategy = GeneratedColumn<int>(
+              'update_strategy', aliasedName, false,
+              type: DriftSqlType.int,
+              requiredDuringInsert: false,
+              defaultValue: const Constant(0))
+          .withConverter<UpdateStrategy>(
+              $DbMangasTable.$converterupdateStrategy);
   static const VerificationMeta _initializedMeta =
       const VerificationMeta('initialized');
   @override
@@ -86,20 +129,32 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("initialized" IN (0, 1))'),
       defaultValue: const Constant(false));
+  static const VerificationMeta _lastModifiedAtMeta =
+      const VerificationMeta('lastModifiedAt');
+  @override
+  late final GeneratedColumn<DateTime> lastModifiedAt =
+      GeneratedColumn<DateTime>('last_modified_at', aliasedName, true,
+          type: DriftSqlType.dateTime, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
-        title,
-        url,
-        description,
-        author,
-        status,
-        genre,
-        favorite,
         sourceId,
+        favorite,
+        lastUpdate,
+        nextUpdate,
+        fetchInterval,
+        dateAdded,
+        url,
+        title,
         artist,
+        author,
+        description,
+        genre,
+        status,
         thumbnailUrl,
-        initialized
+        updateStrategy,
+        initialized,
+        lastModifiedAt
       ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -114,17 +169,53 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('title')) {
-      context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    if (data.containsKey('source_id')) {
+      context.handle(_sourceIdMeta,
+          sourceId.isAcceptableOrUnknown(data['source_id']!, _sourceIdMeta));
     } else if (isInserting) {
-      context.missing(_titleMeta);
+      context.missing(_sourceIdMeta);
+    }
+    if (data.containsKey('favorite')) {
+      context.handle(_favoriteMeta,
+          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+    }
+    if (data.containsKey('last_update')) {
+      context.handle(
+          _lastUpdateMeta,
+          lastUpdate.isAcceptableOrUnknown(
+              data['last_update']!, _lastUpdateMeta));
+    }
+    if (data.containsKey('next_update')) {
+      context.handle(
+          _nextUpdateMeta,
+          nextUpdate.isAcceptableOrUnknown(
+              data['next_update']!, _nextUpdateMeta));
+    }
+    if (data.containsKey('fetch_interval')) {
+      context.handle(
+          _fetchIntervalMeta,
+          fetchInterval.isAcceptableOrUnknown(
+              data['fetch_interval']!, _fetchIntervalMeta));
+    }
+    if (data.containsKey('date_added')) {
+      context.handle(_dateAddedMeta,
+          dateAdded.isAcceptableOrUnknown(data['date_added']!, _dateAddedMeta));
     }
     if (data.containsKey('url')) {
       context.handle(
           _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
-    } else if (isInserting) {
-      context.missing(_urlMeta);
+    }
+    if (data.containsKey('title')) {
+      context.handle(
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+    }
+    if (data.containsKey('artist')) {
+      context.handle(_artistMeta,
+          artist.isAcceptableOrUnknown(data['artist']!, _artistMeta));
+    }
+    if (data.containsKey('author')) {
+      context.handle(_authorMeta,
+          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
     }
     if (data.containsKey('description')) {
       context.handle(
@@ -132,40 +223,29 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           description.isAcceptableOrUnknown(
               data['description']!, _descriptionMeta));
     }
-    if (data.containsKey('author')) {
-      context.handle(_authorMeta,
-          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
-    }
-    context.handle(_statusMeta, const VerificationResult.success());
     if (data.containsKey('genre')) {
       context.handle(
           _genreMeta, genre.isAcceptableOrUnknown(data['genre']!, _genreMeta));
     }
-    if (data.containsKey('favorite')) {
-      context.handle(_favoriteMeta,
-          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
-    }
-    if (data.containsKey('source_id')) {
-      context.handle(_sourceIdMeta,
-          sourceId.isAcceptableOrUnknown(data['source_id']!, _sourceIdMeta));
-    } else if (isInserting) {
-      context.missing(_sourceIdMeta);
-    }
-    if (data.containsKey('artist')) {
-      context.handle(_artistMeta,
-          artist.isAcceptableOrUnknown(data['artist']!, _artistMeta));
-    }
+    context.handle(_statusMeta, const VerificationResult.success());
     if (data.containsKey('thumbnail_url')) {
       context.handle(
           _thumbnailUrlMeta,
           thumbnailUrl.isAcceptableOrUnknown(
               data['thumbnail_url']!, _thumbnailUrlMeta));
     }
+    context.handle(_updateStrategyMeta, const VerificationResult.success());
     if (data.containsKey('initialized')) {
       context.handle(
           _initializedMeta,
           initialized.isAcceptableOrUnknown(
               data['initialized']!, _initializedMeta));
+    }
+    if (data.containsKey('last_modified_at')) {
+      context.handle(
+          _lastModifiedAtMeta,
+          lastModifiedAt.isAcceptableOrUnknown(
+              data['last_modified_at']!, _lastModifiedAtMeta));
     }
     return context;
   }
@@ -178,29 +258,42 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
     return DbManga(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      sourceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
+      favorite: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
+      lastUpdate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_update']),
+      nextUpdate: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}next_update']),
+      fetchInterval: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}fetch_interval'])!,
+      dateAdded: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_added']),
       url: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
-      description: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}description']),
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      artist: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}artist']),
       author: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}author']),
+      description: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}description']),
+      genre: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}genre']),
       status: $DbMangasTable.$converterstatus.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}status'])!),
-      genre: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}genre']),
-      favorite: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
-      sourceId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
-      artist: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}artist']),
       thumbnailUrl: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}thumbnail_url']),
+      updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
+          attachedDatabase.typeMapping.read(
+              DriftSqlType.int, data['${effectivePrefix}update_strategy'])!),
       initialized: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}initialized'])!,
+      lastModifiedAt: attachedDatabase.typeMapping.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}last_modified_at']),
     );
   }
 
@@ -211,86 +304,131 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
 
   static JsonTypeConverter2<MangaStatus, int, int> $converterstatus =
       const EnumIndexConverter<MangaStatus>(MangaStatus.values);
+  static JsonTypeConverter2<UpdateStrategy, int, int> $converterupdateStrategy =
+      const EnumIndexConverter<UpdateStrategy>(UpdateStrategy.values);
 }
 
 class DbManga extends DataClass implements Insertable<DbManga> {
   final int id;
-  final String title;
-  final String url;
-  final String? description;
-  final String? author;
-  final MangaStatus status;
-  final String? genre;
-  final bool favorite;
   final String sourceId;
+  final bool favorite;
+  final DateTime? lastUpdate;
+  final DateTime? nextUpdate;
+  final int fetchInterval;
+  final DateTime? dateAdded;
+  final String url;
+  final String title;
   final String? artist;
+  final String? author;
+  final String? description;
+  final String? genre;
+  final MangaStatus status;
   final String? thumbnailUrl;
+  final UpdateStrategy updateStrategy;
   final bool initialized;
+  final DateTime? lastModifiedAt;
   const DbManga(
       {required this.id,
-      required this.title,
-      required this.url,
-      this.description,
-      this.author,
-      required this.status,
-      this.genre,
-      required this.favorite,
       required this.sourceId,
+      required this.favorite,
+      this.lastUpdate,
+      this.nextUpdate,
+      required this.fetchInterval,
+      this.dateAdded,
+      required this.url,
+      required this.title,
       this.artist,
+      this.author,
+      this.description,
+      this.genre,
+      required this.status,
       this.thumbnailUrl,
-      required this.initialized});
+      required this.updateStrategy,
+      required this.initialized,
+      this.lastModifiedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['title'] = Variable<String>(title);
+    map['source_id'] = Variable<String>(sourceId);
+    map['favorite'] = Variable<bool>(favorite);
+    if (!nullToAbsent || lastUpdate != null) {
+      map['last_update'] = Variable<DateTime>(lastUpdate);
+    }
+    if (!nullToAbsent || nextUpdate != null) {
+      map['next_update'] = Variable<DateTime>(nextUpdate);
+    }
+    map['fetch_interval'] = Variable<int>(fetchInterval);
+    if (!nullToAbsent || dateAdded != null) {
+      map['date_added'] = Variable<DateTime>(dateAdded);
+    }
     map['url'] = Variable<String>(url);
-    if (!nullToAbsent || description != null) {
-      map['description'] = Variable<String>(description);
+    map['title'] = Variable<String>(title);
+    if (!nullToAbsent || artist != null) {
+      map['artist'] = Variable<String>(artist);
     }
     if (!nullToAbsent || author != null) {
       map['author'] = Variable<String>(author);
+    }
+    if (!nullToAbsent || description != null) {
+      map['description'] = Variable<String>(description);
+    }
+    if (!nullToAbsent || genre != null) {
+      map['genre'] = Variable<String>(genre);
     }
     {
       map['status'] =
           Variable<int>($DbMangasTable.$converterstatus.toSql(status));
     }
-    if (!nullToAbsent || genre != null) {
-      map['genre'] = Variable<String>(genre);
-    }
-    map['favorite'] = Variable<bool>(favorite);
-    map['source_id'] = Variable<String>(sourceId);
-    if (!nullToAbsent || artist != null) {
-      map['artist'] = Variable<String>(artist);
-    }
     if (!nullToAbsent || thumbnailUrl != null) {
       map['thumbnail_url'] = Variable<String>(thumbnailUrl);
     }
+    {
+      map['update_strategy'] = Variable<int>(
+          $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy));
+    }
     map['initialized'] = Variable<bool>(initialized);
+    if (!nullToAbsent || lastModifiedAt != null) {
+      map['last_modified_at'] = Variable<DateTime>(lastModifiedAt);
+    }
     return map;
   }
 
   DbMangasCompanion toCompanion(bool nullToAbsent) {
     return DbMangasCompanion(
       id: Value(id),
-      title: Value(title),
+      sourceId: Value(sourceId),
+      favorite: Value(favorite),
+      lastUpdate: lastUpdate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastUpdate),
+      nextUpdate: nextUpdate == null && nullToAbsent
+          ? const Value.absent()
+          : Value(nextUpdate),
+      fetchInterval: Value(fetchInterval),
+      dateAdded: dateAdded == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateAdded),
       url: Value(url),
+      title: Value(title),
+      artist:
+          artist == null && nullToAbsent ? const Value.absent() : Value(artist),
+      author:
+          author == null && nullToAbsent ? const Value.absent() : Value(author),
       description: description == null && nullToAbsent
           ? const Value.absent()
           : Value(description),
-      author:
-          author == null && nullToAbsent ? const Value.absent() : Value(author),
-      status: Value(status),
       genre:
           genre == null && nullToAbsent ? const Value.absent() : Value(genre),
-      favorite: Value(favorite),
-      sourceId: Value(sourceId),
-      artist:
-          artist == null && nullToAbsent ? const Value.absent() : Value(artist),
+      status: Value(status),
       thumbnailUrl: thumbnailUrl == null && nullToAbsent
           ? const Value.absent()
           : Value(thumbnailUrl),
+      updateStrategy: Value(updateStrategy),
       initialized: Value(initialized),
+      lastModifiedAt: lastModifiedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastModifiedAt),
     );
   }
 
@@ -299,18 +437,25 @@ class DbManga extends DataClass implements Insertable<DbManga> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbManga(
       id: serializer.fromJson<int>(json['id']),
-      title: serializer.fromJson<String>(json['title']),
+      sourceId: serializer.fromJson<String>(json['sourceId']),
+      favorite: serializer.fromJson<bool>(json['favorite']),
+      lastUpdate: serializer.fromJson<DateTime?>(json['lastUpdate']),
+      nextUpdate: serializer.fromJson<DateTime?>(json['nextUpdate']),
+      fetchInterval: serializer.fromJson<int>(json['fetchInterval']),
+      dateAdded: serializer.fromJson<DateTime?>(json['dateAdded']),
       url: serializer.fromJson<String>(json['url']),
-      description: serializer.fromJson<String?>(json['description']),
+      title: serializer.fromJson<String>(json['title']),
+      artist: serializer.fromJson<String?>(json['artist']),
       author: serializer.fromJson<String?>(json['author']),
+      description: serializer.fromJson<String?>(json['description']),
+      genre: serializer.fromJson<String?>(json['genre']),
       status: $DbMangasTable.$converterstatus
           .fromJson(serializer.fromJson<int>(json['status'])),
-      genre: serializer.fromJson<String?>(json['genre']),
-      favorite: serializer.fromJson<bool>(json['favorite']),
-      sourceId: serializer.fromJson<String>(json['sourceId']),
-      artist: serializer.fromJson<String?>(json['artist']),
       thumbnailUrl: serializer.fromJson<String?>(json['thumbnailUrl']),
+      updateStrategy: $DbMangasTable.$converterupdateStrategy
+          .fromJson(serializer.fromJson<int>(json['updateStrategy'])),
       initialized: serializer.fromJson<bool>(json['initialized']),
+      lastModifiedAt: serializer.fromJson<DateTime?>(json['lastModifiedAt']),
     );
   }
   @override
@@ -318,189 +463,277 @@ class DbManga extends DataClass implements Insertable<DbManga> {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'title': serializer.toJson<String>(title),
+      'sourceId': serializer.toJson<String>(sourceId),
+      'favorite': serializer.toJson<bool>(favorite),
+      'lastUpdate': serializer.toJson<DateTime?>(lastUpdate),
+      'nextUpdate': serializer.toJson<DateTime?>(nextUpdate),
+      'fetchInterval': serializer.toJson<int>(fetchInterval),
+      'dateAdded': serializer.toJson<DateTime?>(dateAdded),
       'url': serializer.toJson<String>(url),
-      'description': serializer.toJson<String?>(description),
+      'title': serializer.toJson<String>(title),
+      'artist': serializer.toJson<String?>(artist),
       'author': serializer.toJson<String?>(author),
+      'description': serializer.toJson<String?>(description),
+      'genre': serializer.toJson<String?>(genre),
       'status': serializer
           .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
-      'genre': serializer.toJson<String?>(genre),
-      'favorite': serializer.toJson<bool>(favorite),
-      'sourceId': serializer.toJson<String>(sourceId),
-      'artist': serializer.toJson<String?>(artist),
       'thumbnailUrl': serializer.toJson<String?>(thumbnailUrl),
+      'updateStrategy': serializer.toJson<int>(
+          $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy)),
       'initialized': serializer.toJson<bool>(initialized),
+      'lastModifiedAt': serializer.toJson<DateTime?>(lastModifiedAt),
     };
   }
 
   DbManga copyWith(
           {int? id,
-          String? title,
-          String? url,
-          Value<String?> description = const Value.absent(),
-          Value<String?> author = const Value.absent(),
-          MangaStatus? status,
-          Value<String?> genre = const Value.absent(),
-          bool? favorite,
           String? sourceId,
+          bool? favorite,
+          Value<DateTime?> lastUpdate = const Value.absent(),
+          Value<DateTime?> nextUpdate = const Value.absent(),
+          int? fetchInterval,
+          Value<DateTime?> dateAdded = const Value.absent(),
+          String? url,
+          String? title,
           Value<String?> artist = const Value.absent(),
+          Value<String?> author = const Value.absent(),
+          Value<String?> description = const Value.absent(),
+          Value<String?> genre = const Value.absent(),
+          MangaStatus? status,
           Value<String?> thumbnailUrl = const Value.absent(),
-          bool? initialized}) =>
+          UpdateStrategy? updateStrategy,
+          bool? initialized,
+          Value<DateTime?> lastModifiedAt = const Value.absent()}) =>
       DbManga(
         id: id ?? this.id,
-        title: title ?? this.title,
-        url: url ?? this.url,
-        description: description.present ? description.value : this.description,
-        author: author.present ? author.value : this.author,
-        status: status ?? this.status,
-        genre: genre.present ? genre.value : this.genre,
-        favorite: favorite ?? this.favorite,
         sourceId: sourceId ?? this.sourceId,
+        favorite: favorite ?? this.favorite,
+        lastUpdate: lastUpdate.present ? lastUpdate.value : this.lastUpdate,
+        nextUpdate: nextUpdate.present ? nextUpdate.value : this.nextUpdate,
+        fetchInterval: fetchInterval ?? this.fetchInterval,
+        dateAdded: dateAdded.present ? dateAdded.value : this.dateAdded,
+        url: url ?? this.url,
+        title: title ?? this.title,
         artist: artist.present ? artist.value : this.artist,
+        author: author.present ? author.value : this.author,
+        description: description.present ? description.value : this.description,
+        genre: genre.present ? genre.value : this.genre,
+        status: status ?? this.status,
         thumbnailUrl:
             thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
+        updateStrategy: updateStrategy ?? this.updateStrategy,
         initialized: initialized ?? this.initialized,
+        lastModifiedAt:
+            lastModifiedAt.present ? lastModifiedAt.value : this.lastModifiedAt,
       );
   @override
   String toString() {
     return (StringBuffer('DbManga(')
           ..write('id: $id, ')
-          ..write('title: $title, ')
-          ..write('url: $url, ')
-          ..write('description: $description, ')
-          ..write('author: $author, ')
-          ..write('status: $status, ')
-          ..write('genre: $genre, ')
-          ..write('favorite: $favorite, ')
           ..write('sourceId: $sourceId, ')
+          ..write('favorite: $favorite, ')
+          ..write('lastUpdate: $lastUpdate, ')
+          ..write('nextUpdate: $nextUpdate, ')
+          ..write('fetchInterval: $fetchInterval, ')
+          ..write('dateAdded: $dateAdded, ')
+          ..write('url: $url, ')
+          ..write('title: $title, ')
           ..write('artist: $artist, ')
+          ..write('author: $author, ')
+          ..write('description: $description, ')
+          ..write('genre: $genre, ')
+          ..write('status: $status, ')
           ..write('thumbnailUrl: $thumbnailUrl, ')
-          ..write('initialized: $initialized')
+          ..write('updateStrategy: $updateStrategy, ')
+          ..write('initialized: $initialized, ')
+          ..write('lastModifiedAt: $lastModifiedAt')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, title, url, description, author, status,
-      genre, favorite, sourceId, artist, thumbnailUrl, initialized);
+  int get hashCode => Object.hash(
+      id,
+      sourceId,
+      favorite,
+      lastUpdate,
+      nextUpdate,
+      fetchInterval,
+      dateAdded,
+      url,
+      title,
+      artist,
+      author,
+      description,
+      genre,
+      status,
+      thumbnailUrl,
+      updateStrategy,
+      initialized,
+      lastModifiedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is DbManga &&
           other.id == this.id &&
-          other.title == this.title &&
-          other.url == this.url &&
-          other.description == this.description &&
-          other.author == this.author &&
-          other.status == this.status &&
-          other.genre == this.genre &&
-          other.favorite == this.favorite &&
           other.sourceId == this.sourceId &&
+          other.favorite == this.favorite &&
+          other.lastUpdate == this.lastUpdate &&
+          other.nextUpdate == this.nextUpdate &&
+          other.fetchInterval == this.fetchInterval &&
+          other.dateAdded == this.dateAdded &&
+          other.url == this.url &&
+          other.title == this.title &&
           other.artist == this.artist &&
+          other.author == this.author &&
+          other.description == this.description &&
+          other.genre == this.genre &&
+          other.status == this.status &&
           other.thumbnailUrl == this.thumbnailUrl &&
-          other.initialized == this.initialized);
+          other.updateStrategy == this.updateStrategy &&
+          other.initialized == this.initialized &&
+          other.lastModifiedAt == this.lastModifiedAt);
 }
 
 class DbMangasCompanion extends UpdateCompanion<DbManga> {
   final Value<int> id;
-  final Value<String> title;
-  final Value<String> url;
-  final Value<String?> description;
-  final Value<String?> author;
-  final Value<MangaStatus> status;
-  final Value<String?> genre;
-  final Value<bool> favorite;
   final Value<String> sourceId;
+  final Value<bool> favorite;
+  final Value<DateTime?> lastUpdate;
+  final Value<DateTime?> nextUpdate;
+  final Value<int> fetchInterval;
+  final Value<DateTime?> dateAdded;
+  final Value<String> url;
+  final Value<String> title;
   final Value<String?> artist;
+  final Value<String?> author;
+  final Value<String?> description;
+  final Value<String?> genre;
+  final Value<MangaStatus> status;
   final Value<String?> thumbnailUrl;
+  final Value<UpdateStrategy> updateStrategy;
   final Value<bool> initialized;
+  final Value<DateTime?> lastModifiedAt;
   const DbMangasCompanion({
     this.id = const Value.absent(),
-    this.title = const Value.absent(),
-    this.url = const Value.absent(),
-    this.description = const Value.absent(),
-    this.author = const Value.absent(),
-    this.status = const Value.absent(),
-    this.genre = const Value.absent(),
-    this.favorite = const Value.absent(),
     this.sourceId = const Value.absent(),
+    this.favorite = const Value.absent(),
+    this.lastUpdate = const Value.absent(),
+    this.nextUpdate = const Value.absent(),
+    this.fetchInterval = const Value.absent(),
+    this.dateAdded = const Value.absent(),
+    this.url = const Value.absent(),
+    this.title = const Value.absent(),
     this.artist = const Value.absent(),
+    this.author = const Value.absent(),
+    this.description = const Value.absent(),
+    this.genre = const Value.absent(),
+    this.status = const Value.absent(),
     this.thumbnailUrl = const Value.absent(),
+    this.updateStrategy = const Value.absent(),
     this.initialized = const Value.absent(),
+    this.lastModifiedAt = const Value.absent(),
   });
   DbMangasCompanion.insert({
     this.id = const Value.absent(),
-    required String title,
-    required String url,
-    this.description = const Value.absent(),
-    this.author = const Value.absent(),
-    required MangaStatus status,
-    this.genre = const Value.absent(),
-    this.favorite = const Value.absent(),
     required String sourceId,
+    this.favorite = const Value.absent(),
+    this.lastUpdate = const Value.absent(),
+    this.nextUpdate = const Value.absent(),
+    this.fetchInterval = const Value.absent(),
+    this.dateAdded = const Value.absent(),
+    this.url = const Value.absent(),
+    this.title = const Value.absent(),
     this.artist = const Value.absent(),
+    this.author = const Value.absent(),
+    this.description = const Value.absent(),
+    this.genre = const Value.absent(),
+    this.status = const Value.absent(),
     this.thumbnailUrl = const Value.absent(),
+    this.updateStrategy = const Value.absent(),
     this.initialized = const Value.absent(),
-  })  : title = Value(title),
-        url = Value(url),
-        status = Value(status),
-        sourceId = Value(sourceId);
+    this.lastModifiedAt = const Value.absent(),
+  }) : sourceId = Value(sourceId);
   static Insertable<DbManga> custom({
     Expression<int>? id,
-    Expression<String>? title,
-    Expression<String>? url,
-    Expression<String>? description,
-    Expression<String>? author,
-    Expression<int>? status,
-    Expression<String>? genre,
-    Expression<bool>? favorite,
     Expression<String>? sourceId,
+    Expression<bool>? favorite,
+    Expression<DateTime>? lastUpdate,
+    Expression<DateTime>? nextUpdate,
+    Expression<int>? fetchInterval,
+    Expression<DateTime>? dateAdded,
+    Expression<String>? url,
+    Expression<String>? title,
     Expression<String>? artist,
+    Expression<String>? author,
+    Expression<String>? description,
+    Expression<String>? genre,
+    Expression<int>? status,
     Expression<String>? thumbnailUrl,
+    Expression<int>? updateStrategy,
     Expression<bool>? initialized,
+    Expression<DateTime>? lastModifiedAt,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (title != null) 'title': title,
-      if (url != null) 'url': url,
-      if (description != null) 'description': description,
-      if (author != null) 'author': author,
-      if (status != null) 'status': status,
-      if (genre != null) 'genre': genre,
-      if (favorite != null) 'favorite': favorite,
       if (sourceId != null) 'source_id': sourceId,
+      if (favorite != null) 'favorite': favorite,
+      if (lastUpdate != null) 'last_update': lastUpdate,
+      if (nextUpdate != null) 'next_update': nextUpdate,
+      if (fetchInterval != null) 'fetch_interval': fetchInterval,
+      if (dateAdded != null) 'date_added': dateAdded,
+      if (url != null) 'url': url,
+      if (title != null) 'title': title,
       if (artist != null) 'artist': artist,
+      if (author != null) 'author': author,
+      if (description != null) 'description': description,
+      if (genre != null) 'genre': genre,
+      if (status != null) 'status': status,
       if (thumbnailUrl != null) 'thumbnail_url': thumbnailUrl,
+      if (updateStrategy != null) 'update_strategy': updateStrategy,
       if (initialized != null) 'initialized': initialized,
+      if (lastModifiedAt != null) 'last_modified_at': lastModifiedAt,
     });
   }
 
   DbMangasCompanion copyWith(
       {Value<int>? id,
-      Value<String>? title,
-      Value<String>? url,
-      Value<String?>? description,
-      Value<String?>? author,
-      Value<MangaStatus>? status,
-      Value<String?>? genre,
-      Value<bool>? favorite,
       Value<String>? sourceId,
+      Value<bool>? favorite,
+      Value<DateTime?>? lastUpdate,
+      Value<DateTime?>? nextUpdate,
+      Value<int>? fetchInterval,
+      Value<DateTime?>? dateAdded,
+      Value<String>? url,
+      Value<String>? title,
       Value<String?>? artist,
+      Value<String?>? author,
+      Value<String?>? description,
+      Value<String?>? genre,
+      Value<MangaStatus>? status,
       Value<String?>? thumbnailUrl,
-      Value<bool>? initialized}) {
+      Value<UpdateStrategy>? updateStrategy,
+      Value<bool>? initialized,
+      Value<DateTime?>? lastModifiedAt}) {
     return DbMangasCompanion(
       id: id ?? this.id,
-      title: title ?? this.title,
-      url: url ?? this.url,
-      description: description ?? this.description,
-      author: author ?? this.author,
-      status: status ?? this.status,
-      genre: genre ?? this.genre,
-      favorite: favorite ?? this.favorite,
       sourceId: sourceId ?? this.sourceId,
+      favorite: favorite ?? this.favorite,
+      lastUpdate: lastUpdate ?? this.lastUpdate,
+      nextUpdate: nextUpdate ?? this.nextUpdate,
+      fetchInterval: fetchInterval ?? this.fetchInterval,
+      dateAdded: dateAdded ?? this.dateAdded,
+      url: url ?? this.url,
+      title: title ?? this.title,
       artist: artist ?? this.artist,
+      author: author ?? this.author,
+      description: description ?? this.description,
+      genre: genre ?? this.genre,
+      status: status ?? this.status,
       thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
+      updateStrategy: updateStrategy ?? this.updateStrategy,
       initialized: initialized ?? this.initialized,
+      lastModifiedAt: lastModifiedAt ?? this.lastModifiedAt,
     );
   }
 
@@ -510,39 +743,58 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (title.present) {
-      map['title'] = Variable<String>(title.value);
+    if (sourceId.present) {
+      map['source_id'] = Variable<String>(sourceId.value);
+    }
+    if (favorite.present) {
+      map['favorite'] = Variable<bool>(favorite.value);
+    }
+    if (lastUpdate.present) {
+      map['last_update'] = Variable<DateTime>(lastUpdate.value);
+    }
+    if (nextUpdate.present) {
+      map['next_update'] = Variable<DateTime>(nextUpdate.value);
+    }
+    if (fetchInterval.present) {
+      map['fetch_interval'] = Variable<int>(fetchInterval.value);
+    }
+    if (dateAdded.present) {
+      map['date_added'] = Variable<DateTime>(dateAdded.value);
     }
     if (url.present) {
       map['url'] = Variable<String>(url.value);
     }
-    if (description.present) {
-      map['description'] = Variable<String>(description.value);
+    if (title.present) {
+      map['title'] = Variable<String>(title.value);
+    }
+    if (artist.present) {
+      map['artist'] = Variable<String>(artist.value);
     }
     if (author.present) {
       map['author'] = Variable<String>(author.value);
+    }
+    if (description.present) {
+      map['description'] = Variable<String>(description.value);
+    }
+    if (genre.present) {
+      map['genre'] = Variable<String>(genre.value);
     }
     if (status.present) {
       map['status'] =
           Variable<int>($DbMangasTable.$converterstatus.toSql(status.value));
     }
-    if (genre.present) {
-      map['genre'] = Variable<String>(genre.value);
-    }
-    if (favorite.present) {
-      map['favorite'] = Variable<bool>(favorite.value);
-    }
-    if (sourceId.present) {
-      map['source_id'] = Variable<String>(sourceId.value);
-    }
-    if (artist.present) {
-      map['artist'] = Variable<String>(artist.value);
-    }
     if (thumbnailUrl.present) {
       map['thumbnail_url'] = Variable<String>(thumbnailUrl.value);
     }
+    if (updateStrategy.present) {
+      map['update_strategy'] = Variable<int>(
+          $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy.value));
+    }
     if (initialized.present) {
       map['initialized'] = Variable<bool>(initialized.value);
+    }
+    if (lastModifiedAt.present) {
+      map['last_modified_at'] = Variable<DateTime>(lastModifiedAt.value);
     }
     return map;
   }
@@ -551,17 +803,23 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
   String toString() {
     return (StringBuffer('DbMangasCompanion(')
           ..write('id: $id, ')
-          ..write('title: $title, ')
-          ..write('url: $url, ')
-          ..write('description: $description, ')
-          ..write('author: $author, ')
-          ..write('status: $status, ')
-          ..write('genre: $genre, ')
-          ..write('favorite: $favorite, ')
           ..write('sourceId: $sourceId, ')
+          ..write('favorite: $favorite, ')
+          ..write('lastUpdate: $lastUpdate, ')
+          ..write('nextUpdate: $nextUpdate, ')
+          ..write('fetchInterval: $fetchInterval, ')
+          ..write('dateAdded: $dateAdded, ')
+          ..write('url: $url, ')
+          ..write('title: $title, ')
           ..write('artist: $artist, ')
+          ..write('author: $author, ')
+          ..write('description: $description, ')
+          ..write('genre: $genre, ')
+          ..write('status: $status, ')
           ..write('thumbnailUrl: $thumbnailUrl, ')
-          ..write('initialized: $initialized')
+          ..write('updateStrategy: $updateStrategy, ')
+          ..write('initialized: $initialized, ')
+          ..write('lastModifiedAt: $lastModifiedAt')
           ..write(')'))
         .toString();
   }
@@ -1864,31 +2122,43 @@ abstract class _$AppDatabase extends GeneratedDatabase {
 
 typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
   Value<int> id,
-  required String title,
-  required String url,
-  Value<String?> description,
-  Value<String?> author,
-  required MangaStatus status,
-  Value<String?> genre,
-  Value<bool> favorite,
   required String sourceId,
+  Value<bool> favorite,
+  Value<DateTime?> lastUpdate,
+  Value<DateTime?> nextUpdate,
+  Value<int> fetchInterval,
+  Value<DateTime?> dateAdded,
+  Value<String> url,
+  Value<String> title,
   Value<String?> artist,
+  Value<String?> author,
+  Value<String?> description,
+  Value<String?> genre,
+  Value<MangaStatus> status,
   Value<String?> thumbnailUrl,
+  Value<UpdateStrategy> updateStrategy,
   Value<bool> initialized,
+  Value<DateTime?> lastModifiedAt,
 });
 typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
   Value<int> id,
-  Value<String> title,
-  Value<String> url,
-  Value<String?> description,
-  Value<String?> author,
-  Value<MangaStatus> status,
-  Value<String?> genre,
-  Value<bool> favorite,
   Value<String> sourceId,
+  Value<bool> favorite,
+  Value<DateTime?> lastUpdate,
+  Value<DateTime?> nextUpdate,
+  Value<int> fetchInterval,
+  Value<DateTime?> dateAdded,
+  Value<String> url,
+  Value<String> title,
   Value<String?> artist,
+  Value<String?> author,
+  Value<String?> description,
+  Value<String?> genre,
+  Value<MangaStatus> status,
   Value<String?> thumbnailUrl,
+  Value<UpdateStrategy> updateStrategy,
   Value<bool> initialized,
+  Value<DateTime?> lastModifiedAt,
 });
 
 class $$DbMangasTableTableManager extends RootTableManager<
@@ -1912,59 +2182,83 @@ class $$DbMangasTableTableManager extends RootTableManager<
               $$DbMangasTableProcessedTableManager(p),
           getUpdateCompanionBuilder: ({
             Value<int> id = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            Value<MangaStatus> status = const Value.absent(),
-            Value<String?> genre = const Value.absent(),
-            Value<bool> favorite = const Value.absent(),
             Value<String> sourceId = const Value.absent(),
+            Value<bool> favorite = const Value.absent(),
+            Value<DateTime?> lastUpdate = const Value.absent(),
+            Value<DateTime?> nextUpdate = const Value.absent(),
+            Value<int> fetchInterval = const Value.absent(),
+            Value<DateTime?> dateAdded = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> title = const Value.absent(),
             Value<String?> artist = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> genre = const Value.absent(),
+            Value<MangaStatus> status = const Value.absent(),
             Value<String?> thumbnailUrl = const Value.absent(),
+            Value<UpdateStrategy> updateStrategy = const Value.absent(),
             Value<bool> initialized = const Value.absent(),
+            Value<DateTime?> lastModifiedAt = const Value.absent(),
           }) =>
               DbMangasCompanion(
             id: id,
-            title: title,
-            url: url,
-            description: description,
-            author: author,
-            status: status,
-            genre: genre,
-            favorite: favorite,
             sourceId: sourceId,
+            favorite: favorite,
+            lastUpdate: lastUpdate,
+            nextUpdate: nextUpdate,
+            fetchInterval: fetchInterval,
+            dateAdded: dateAdded,
+            url: url,
+            title: title,
             artist: artist,
+            author: author,
+            description: description,
+            genre: genre,
+            status: status,
             thumbnailUrl: thumbnailUrl,
+            updateStrategy: updateStrategy,
             initialized: initialized,
+            lastModifiedAt: lastModifiedAt,
           ),
           getInsertCompanionBuilder: ({
             Value<int> id = const Value.absent(),
-            required String title,
-            required String url,
-            Value<String?> description = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            required MangaStatus status,
-            Value<String?> genre = const Value.absent(),
-            Value<bool> favorite = const Value.absent(),
             required String sourceId,
+            Value<bool> favorite = const Value.absent(),
+            Value<DateTime?> lastUpdate = const Value.absent(),
+            Value<DateTime?> nextUpdate = const Value.absent(),
+            Value<int> fetchInterval = const Value.absent(),
+            Value<DateTime?> dateAdded = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> title = const Value.absent(),
             Value<String?> artist = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> genre = const Value.absent(),
+            Value<MangaStatus> status = const Value.absent(),
             Value<String?> thumbnailUrl = const Value.absent(),
+            Value<UpdateStrategy> updateStrategy = const Value.absent(),
             Value<bool> initialized = const Value.absent(),
+            Value<DateTime?> lastModifiedAt = const Value.absent(),
           }) =>
               DbMangasCompanion.insert(
             id: id,
-            title: title,
-            url: url,
-            description: description,
-            author: author,
-            status: status,
-            genre: genre,
-            favorite: favorite,
             sourceId: sourceId,
+            favorite: favorite,
+            lastUpdate: lastUpdate,
+            nextUpdate: nextUpdate,
+            fetchInterval: fetchInterval,
+            dateAdded: dateAdded,
+            url: url,
+            title: title,
             artist: artist,
+            author: author,
+            description: description,
+            genre: genre,
+            status: status,
             thumbnailUrl: thumbnailUrl,
+            updateStrategy: updateStrategy,
             initialized: initialized,
+            lastModifiedAt: lastModifiedAt,
           ),
         ));
 }
@@ -1989,8 +2283,33 @@ class $$DbMangasTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get title => $state.composableBuilder(
-      column: $state.table.title,
+  ColumnFilters<String> get sourceId => $state.composableBuilder(
+      column: $state.table.sourceId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get favorite => $state.composableBuilder(
+      column: $state.table.favorite,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get lastUpdate => $state.composableBuilder(
+      column: $state.table.lastUpdate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get nextUpdate => $state.composableBuilder(
+      column: $state.table.nextUpdate,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get fetchInterval => $state.composableBuilder(
+      column: $state.table.fetchInterval,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get dateAdded => $state.composableBuilder(
+      column: $state.table.dateAdded,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1999,13 +2318,28 @@ class $$DbMangasTableFilterComposer
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get description => $state.composableBuilder(
-      column: $state.table.description,
+  ColumnFilters<String> get title => $state.composableBuilder(
+      column: $state.table.title,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get artist => $state.composableBuilder(
+      column: $state.table.artist,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
   ColumnFilters<String> get author => $state.composableBuilder(
       column: $state.table.author,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get genre => $state.composableBuilder(
+      column: $state.table.genre,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -2016,33 +2350,25 @@ class $$DbMangasTableFilterComposer
               column,
               joinBuilders: joinBuilders));
 
-  ColumnFilters<String> get genre => $state.composableBuilder(
-      column: $state.table.genre,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<bool> get favorite => $state.composableBuilder(
-      column: $state.table.favorite,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get sourceId => $state.composableBuilder(
-      column: $state.table.sourceId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get artist => $state.composableBuilder(
-      column: $state.table.artist,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
   ColumnFilters<String> get thumbnailUrl => $state.composableBuilder(
       column: $state.table.thumbnailUrl,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
+  ColumnWithTypeConverterFilters<UpdateStrategy, UpdateStrategy, int>
+      get updateStrategy => $state.composableBuilder(
+          column: $state.table.updateStrategy,
+          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
+              column,
+              joinBuilders: joinBuilders));
+
   ColumnFilters<bool> get initialized => $state.composableBuilder(
       column: $state.table.initialized,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get lastModifiedAt => $state.composableBuilder(
+      column: $state.table.lastModifiedAt,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 }
@@ -2055,33 +2381,8 @@ class $$DbMangasTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get url => $state.composableBuilder(
-      column: $state.table.url,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get author => $state.composableBuilder(
-      column: $state.table.author,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<int> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get genre => $state.composableBuilder(
-      column: $state.table.genre,
+  ColumnOrderings<String> get sourceId => $state.composableBuilder(
+      column: $state.table.sourceId,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -2090,8 +2391,33 @@ class $$DbMangasTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
-  ColumnOrderings<String> get sourceId => $state.composableBuilder(
-      column: $state.table.sourceId,
+  ColumnOrderings<DateTime> get lastUpdate => $state.composableBuilder(
+      column: $state.table.lastUpdate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get nextUpdate => $state.composableBuilder(
+      column: $state.table.nextUpdate,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get fetchInterval => $state.composableBuilder(
+      column: $state.table.fetchInterval,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get dateAdded => $state.composableBuilder(
+      column: $state.table.dateAdded,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get url => $state.composableBuilder(
+      column: $state.table.url,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get title => $state.composableBuilder(
+      column: $state.table.title,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -2100,13 +2426,43 @@ class $$DbMangasTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
+  ColumnOrderings<String> get author => $state.composableBuilder(
+      column: $state.table.author,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get description => $state.composableBuilder(
+      column: $state.table.description,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get genre => $state.composableBuilder(
+      column: $state.table.genre,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get status => $state.composableBuilder(
+      column: $state.table.status,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
   ColumnOrderings<String> get thumbnailUrl => $state.composableBuilder(
       column: $state.table.thumbnailUrl,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
+  ColumnOrderings<int> get updateStrategy => $state.composableBuilder(
+      column: $state.table.updateStrategy,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
   ColumnOrderings<bool> get initialized => $state.composableBuilder(
       column: $state.table.initialized,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get lastModifiedAt => $state.composableBuilder(
+      column: $state.table.lastModifiedAt,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }

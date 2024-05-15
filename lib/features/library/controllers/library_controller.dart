@@ -15,6 +15,9 @@ class LibraryController extends _$LibraryController {
   @override
   LibraryState build() {
     ref.listen(watchMangasInLibraryProvider, (_, next) {
+      print(
+        '[LibraryController] Received new library state: ${next.runtimeType}',
+      );
       state = next.when(
         data: (mangas) {
           return mangas.isEmpty

@@ -11,23 +11,30 @@ part 'manga.g.dart';
 class Manga with _$Manga {
   const factory Manga({
     required int id,
-    required String url,
-    required String title,
+    required String sourceId,
+    @Default(false) bool favorite,
+    DateTime? lastUpdate,
+    DateTime? nextUpdate,
+    @Default(0) int fetchInterval,
+    DateTime? dateAdded,
+    @Default('') String url,
+    @Default('') String title,
     String? artist,
     String? author,
     String? description,
-    List<String>? genre,
+    List<String>? genres,
     @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
     String? thumbnailUrl,
-    @Default(false) bool initialized,
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
-    @Default(false) bool favorite,
-    required String sourceId,
+    @Default(false) bool initialized,
+    DateTime? lastModifiedAt,
   }) = _Manga;
 
   factory Manga.fromJson(Map<String, dynamic> json) => _$MangaFromJson(json);
 
   const Manga._();
+
+  String? getGenre() => genres?.join(', ');
 
   SourceManga toSourceManga() {
     return SourceManga(
@@ -36,7 +43,7 @@ class Manga with _$Manga {
       artist: artist,
       author: author,
       description: description,
-      genre: genre?.join(', '),
+      genre: getGenre(),
       status: status,
       thumbnailUrl: thumbnailUrl,
       initialized: initialized,
@@ -49,7 +56,7 @@ class Manga with _$Manga {
       author: other.author,
       artist: other.artist,
       description: other.description,
-      genre: other.getGenres(),
+      genres: other.getGenres(),
       thumbnailUrl: other.thumbnailUrl,
       status: other.status,
       updateStrategy: other.updateStrategy,

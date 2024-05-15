@@ -12,17 +12,25 @@ part 'app_database.g.dart';
 
 class DbMangas extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get title => text()();
-  TextColumn get url => text()();
-  TextColumn get description => text().nullable()();
-  TextColumn get author => text().nullable()();
-  IntColumn get status => intEnum<MangaStatus>()();
-  TextColumn get genre => text().nullable()();
-  BoolColumn get favorite => boolean().withDefault(const Constant(false))();
   TextColumn get sourceId => text()();
+  BoolColumn get favorite => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get lastUpdate => dateTime().nullable()();
+  DateTimeColumn get nextUpdate => dateTime().nullable()();
+  IntColumn get fetchInterval => integer().withDefault(const Constant(0))();
+  DateTimeColumn get dateAdded => dateTime().nullable()();
+  TextColumn get url => text().withDefault(const Constant(''))();
+  TextColumn get title => text().withDefault(const Constant(''))();
   TextColumn get artist => text().nullable()();
+  TextColumn get author => text().nullable()();
+  TextColumn get description => text().nullable()();
+  TextColumn get genre => text().nullable()();
+  IntColumn get status =>
+      intEnum<MangaStatus>().withDefault(const Constant(0))();
   TextColumn get thumbnailUrl => text().nullable()();
+  IntColumn get updateStrategy =>
+      intEnum<UpdateStrategy>().withDefault(const Constant(0))();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get lastModifiedAt => dateTime().nullable()();
 }
 
 class DbChapters extends Table {

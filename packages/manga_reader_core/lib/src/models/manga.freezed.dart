@@ -21,19 +21,24 @@ Manga _$MangaFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Manga {
   int get id => throw _privateConstructorUsedError;
+  String get sourceId => throw _privateConstructorUsedError;
+  bool get favorite => throw _privateConstructorUsedError;
+  DateTime? get lastUpdate => throw _privateConstructorUsedError;
+  DateTime? get nextUpdate => throw _privateConstructorUsedError;
+  int get fetchInterval => throw _privateConstructorUsedError;
+  DateTime? get dateAdded => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get artist => throw _privateConstructorUsedError;
   String? get author => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  List<String>? get genre => throw _privateConstructorUsedError;
+  List<String>? get genres => throw _privateConstructorUsedError;
   @MangaStatusConverter()
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
-  bool get initialized => throw _privateConstructorUsedError;
   UpdateStrategy get updateStrategy => throw _privateConstructorUsedError;
-  bool get favorite => throw _privateConstructorUsedError;
-  String get sourceId => throw _privateConstructorUsedError;
+  bool get initialized => throw _privateConstructorUsedError;
+  DateTime? get lastModifiedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,18 +52,23 @@ abstract class $MangaCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      String sourceId,
+      bool favorite,
+      DateTime? lastUpdate,
+      DateTime? nextUpdate,
+      int fetchInterval,
+      DateTime? dateAdded,
       String url,
       String title,
       String? artist,
       String? author,
       String? description,
-      List<String>? genre,
+      List<String>? genres,
       @MangaStatusConverter() MangaStatus status,
       String? thumbnailUrl,
-      bool initialized,
       UpdateStrategy updateStrategy,
-      bool favorite,
-      String sourceId});
+      bool initialized,
+      DateTime? lastModifiedAt});
 }
 
 /// @nodoc
@@ -75,24 +85,53 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
   @override
   $Res call({
     Object? id = null,
+    Object? sourceId = null,
+    Object? favorite = null,
+    Object? lastUpdate = freezed,
+    Object? nextUpdate = freezed,
+    Object? fetchInterval = null,
+    Object? dateAdded = freezed,
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
     Object? author = freezed,
     Object? description = freezed,
-    Object? genre = freezed,
+    Object? genres = freezed,
     Object? status = null,
     Object? thumbnailUrl = freezed,
-    Object? initialized = null,
     Object? updateStrategy = null,
-    Object? favorite = null,
-    Object? sourceId = null,
+    Object? initialized = null,
+    Object? lastModifiedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastUpdate: freezed == lastUpdate
+          ? _value.lastUpdate
+          : lastUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      nextUpdate: freezed == nextUpdate
+          ? _value.nextUpdate
+          : nextUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      fetchInterval: null == fetchInterval
+          ? _value.fetchInterval
+          : fetchInterval // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateAdded: freezed == dateAdded
+          ? _value.dateAdded
+          : dateAdded // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -113,9 +152,9 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      genre: freezed == genre
-          ? _value.genre
-          : genre // ignore: cast_nullable_to_non_nullable
+      genres: freezed == genres
+          ? _value.genres
+          : genres // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       status: null == status
           ? _value.status
@@ -125,22 +164,18 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      initialized: null == initialized
-          ? _value.initialized
-          : initialized // ignore: cast_nullable_to_non_nullable
-              as bool,
       updateStrategy: null == updateStrategy
           ? _value.updateStrategy
           : updateStrategy // ignore: cast_nullable_to_non_nullable
               as UpdateStrategy,
-      favorite: null == favorite
-          ? _value.favorite
-          : favorite // ignore: cast_nullable_to_non_nullable
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
               as bool,
-      sourceId: null == sourceId
-          ? _value.sourceId
-          : sourceId // ignore: cast_nullable_to_non_nullable
-              as String,
+      lastModifiedAt: freezed == lastModifiedAt
+          ? _value.lastModifiedAt
+          : lastModifiedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -154,18 +189,23 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      String sourceId,
+      bool favorite,
+      DateTime? lastUpdate,
+      DateTime? nextUpdate,
+      int fetchInterval,
+      DateTime? dateAdded,
       String url,
       String title,
       String? artist,
       String? author,
       String? description,
-      List<String>? genre,
+      List<String>? genres,
       @MangaStatusConverter() MangaStatus status,
       String? thumbnailUrl,
-      bool initialized,
       UpdateStrategy updateStrategy,
-      bool favorite,
-      String sourceId});
+      bool initialized,
+      DateTime? lastModifiedAt});
 }
 
 /// @nodoc
@@ -180,24 +220,53 @@ class __$$MangaImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? sourceId = null,
+    Object? favorite = null,
+    Object? lastUpdate = freezed,
+    Object? nextUpdate = freezed,
+    Object? fetchInterval = null,
+    Object? dateAdded = freezed,
     Object? url = null,
     Object? title = null,
     Object? artist = freezed,
     Object? author = freezed,
     Object? description = freezed,
-    Object? genre = freezed,
+    Object? genres = freezed,
     Object? status = null,
     Object? thumbnailUrl = freezed,
-    Object? initialized = null,
     Object? updateStrategy = null,
-    Object? favorite = null,
-    Object? sourceId = null,
+    Object? initialized = null,
+    Object? lastModifiedAt = freezed,
   }) {
     return _then(_$MangaImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      sourceId: null == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String,
+      favorite: null == favorite
+          ? _value.favorite
+          : favorite // ignore: cast_nullable_to_non_nullable
+              as bool,
+      lastUpdate: freezed == lastUpdate
+          ? _value.lastUpdate
+          : lastUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      nextUpdate: freezed == nextUpdate
+          ? _value.nextUpdate
+          : nextUpdate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      fetchInterval: null == fetchInterval
+          ? _value.fetchInterval
+          : fetchInterval // ignore: cast_nullable_to_non_nullable
+              as int,
+      dateAdded: freezed == dateAdded
+          ? _value.dateAdded
+          : dateAdded // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -218,9 +287,9 @@ class __$$MangaImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      genre: freezed == genre
-          ? _value._genre
-          : genre // ignore: cast_nullable_to_non_nullable
+      genres: freezed == genres
+          ? _value._genres
+          : genres // ignore: cast_nullable_to_non_nullable
               as List<String>?,
       status: null == status
           ? _value.status
@@ -230,22 +299,18 @@ class __$$MangaImplCopyWithImpl<$Res>
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      initialized: null == initialized
-          ? _value.initialized
-          : initialized // ignore: cast_nullable_to_non_nullable
-              as bool,
       updateStrategy: null == updateStrategy
           ? _value.updateStrategy
           : updateStrategy // ignore: cast_nullable_to_non_nullable
               as UpdateStrategy,
-      favorite: null == favorite
-          ? _value.favorite
-          : favorite // ignore: cast_nullable_to_non_nullable
+      initialized: null == initialized
+          ? _value.initialized
+          : initialized // ignore: cast_nullable_to_non_nullable
               as bool,
-      sourceId: null == sourceId
-          ? _value.sourceId
-          : sourceId // ignore: cast_nullable_to_non_nullable
-              as String,
+      lastModifiedAt: freezed == lastModifiedAt
+          ? _value.lastModifiedAt
+          : lastModifiedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -255,19 +320,24 @@ class __$$MangaImplCopyWithImpl<$Res>
 class _$MangaImpl extends _Manga {
   const _$MangaImpl(
       {required this.id,
-      required this.url,
-      required this.title,
+      required this.sourceId,
+      this.favorite = false,
+      this.lastUpdate,
+      this.nextUpdate,
+      this.fetchInterval = 0,
+      this.dateAdded,
+      this.url = '',
+      this.title = '',
       this.artist,
       this.author,
       this.description,
-      final List<String>? genre,
+      final List<String>? genres,
       @MangaStatusConverter() this.status = MangaStatus.unknown,
       this.thumbnailUrl,
-      this.initialized = false,
       this.updateStrategy = UpdateStrategy.alwaysUpdate,
-      this.favorite = false,
-      required this.sourceId})
-      : _genre = genre,
+      this.initialized = false,
+      this.lastModifiedAt})
+      : _genres = genres,
         super._();
 
   factory _$MangaImpl.fromJson(Map<String, dynamic> json) =>
@@ -276,8 +346,24 @@ class _$MangaImpl extends _Manga {
   @override
   final int id;
   @override
+  final String sourceId;
+  @override
+  @JsonKey()
+  final bool favorite;
+  @override
+  final DateTime? lastUpdate;
+  @override
+  final DateTime? nextUpdate;
+  @override
+  @JsonKey()
+  final int fetchInterval;
+  @override
+  final DateTime? dateAdded;
+  @override
+  @JsonKey()
   final String url;
   @override
+  @JsonKey()
   final String title;
   @override
   final String? artist;
@@ -285,12 +371,12 @@ class _$MangaImpl extends _Manga {
   final String? author;
   @override
   final String? description;
-  final List<String>? _genre;
+  final List<String>? _genres;
   @override
-  List<String>? get genre {
-    final value = _genre;
+  List<String>? get genres {
+    final value = _genres;
     if (value == null) return null;
-    if (_genre is EqualUnmodifiableListView) return _genre;
+    if (_genres is EqualUnmodifiableListView) return _genres;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -303,19 +389,16 @@ class _$MangaImpl extends _Manga {
   final String? thumbnailUrl;
   @override
   @JsonKey()
-  final bool initialized;
-  @override
-  @JsonKey()
   final UpdateStrategy updateStrategy;
   @override
   @JsonKey()
-  final bool favorite;
+  final bool initialized;
   @override
-  final String sourceId;
+  final DateTime? lastModifiedAt;
 
   @override
   String toString() {
-    return 'Manga(id: $id, url: $url, title: $title, artist: $artist, author: $author, description: $description, genre: $genre, status: $status, thumbnailUrl: $thumbnailUrl, initialized: $initialized, updateStrategy: $updateStrategy, favorite: $favorite, sourceId: $sourceId)';
+    return 'Manga(id: $id, sourceId: $sourceId, favorite: $favorite, lastUpdate: $lastUpdate, nextUpdate: $nextUpdate, fetchInterval: $fetchInterval, dateAdded: $dateAdded, url: $url, title: $title, artist: $artist, author: $author, description: $description, genres: $genres, status: $status, thumbnailUrl: $thumbnailUrl, updateStrategy: $updateStrategy, initialized: $initialized, lastModifiedAt: $lastModifiedAt)';
   }
 
   @override
@@ -324,24 +407,34 @@ class _$MangaImpl extends _Manga {
         (other.runtimeType == runtimeType &&
             other is _$MangaImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.favorite, favorite) ||
+                other.favorite == favorite) &&
+            (identical(other.lastUpdate, lastUpdate) ||
+                other.lastUpdate == lastUpdate) &&
+            (identical(other.nextUpdate, nextUpdate) ||
+                other.nextUpdate == nextUpdate) &&
+            (identical(other.fetchInterval, fetchInterval) ||
+                other.fetchInterval == fetchInterval) &&
+            (identical(other.dateAdded, dateAdded) ||
+                other.dateAdded == dateAdded) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.artist, artist) || other.artist == artist) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            const DeepCollectionEquality().equals(other._genre, _genre) &&
+            const DeepCollectionEquality().equals(other._genres, _genres) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
                 other.thumbnailUrl == thumbnailUrl) &&
-            (identical(other.initialized, initialized) ||
-                other.initialized == initialized) &&
             (identical(other.updateStrategy, updateStrategy) ||
                 other.updateStrategy == updateStrategy) &&
-            (identical(other.favorite, favorite) ||
-                other.favorite == favorite) &&
-            (identical(other.sourceId, sourceId) ||
-                other.sourceId == sourceId));
+            (identical(other.initialized, initialized) ||
+                other.initialized == initialized) &&
+            (identical(other.lastModifiedAt, lastModifiedAt) ||
+                other.lastModifiedAt == lastModifiedAt));
   }
 
   @JsonKey(ignore: true)
@@ -349,18 +442,23 @@ class _$MangaImpl extends _Manga {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      sourceId,
+      favorite,
+      lastUpdate,
+      nextUpdate,
+      fetchInterval,
+      dateAdded,
       url,
       title,
       artist,
       author,
       description,
-      const DeepCollectionEquality().hash(_genre),
+      const DeepCollectionEquality().hash(_genres),
       status,
       thumbnailUrl,
-      initialized,
       updateStrategy,
-      favorite,
-      sourceId);
+      initialized,
+      lastModifiedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -379,24 +477,41 @@ class _$MangaImpl extends _Manga {
 abstract class _Manga extends Manga {
   const factory _Manga(
       {required final int id,
-      required final String url,
-      required final String title,
+      required final String sourceId,
+      final bool favorite,
+      final DateTime? lastUpdate,
+      final DateTime? nextUpdate,
+      final int fetchInterval,
+      final DateTime? dateAdded,
+      final String url,
+      final String title,
       final String? artist,
       final String? author,
       final String? description,
-      final List<String>? genre,
+      final List<String>? genres,
       @MangaStatusConverter() final MangaStatus status,
       final String? thumbnailUrl,
-      final bool initialized,
       final UpdateStrategy updateStrategy,
-      final bool favorite,
-      required final String sourceId}) = _$MangaImpl;
+      final bool initialized,
+      final DateTime? lastModifiedAt}) = _$MangaImpl;
   const _Manga._() : super._();
 
   factory _Manga.fromJson(Map<String, dynamic> json) = _$MangaImpl.fromJson;
 
   @override
   int get id;
+  @override
+  String get sourceId;
+  @override
+  bool get favorite;
+  @override
+  DateTime? get lastUpdate;
+  @override
+  DateTime? get nextUpdate;
+  @override
+  int get fetchInterval;
+  @override
+  DateTime? get dateAdded;
   @override
   String get url;
   @override
@@ -408,20 +523,18 @@ abstract class _Manga extends Manga {
   @override
   String? get description;
   @override
-  List<String>? get genre;
+  List<String>? get genres;
   @override
   @MangaStatusConverter()
   MangaStatus get status;
   @override
   String? get thumbnailUrl;
   @override
-  bool get initialized;
-  @override
   UpdateStrategy get updateStrategy;
   @override
-  bool get favorite;
+  bool get initialized;
   @override
-  String get sourceId;
+  DateTime? get lastModifiedAt;
   @override
   @JsonKey(ignore: true)
   _$$MangaImplCopyWith<_$MangaImpl> get copyWith =>

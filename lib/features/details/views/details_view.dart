@@ -161,7 +161,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                 initiallyExpanded: widget.openedFromSource,
                 onExpansionChanged: (v) => compactNotifier.value = !v,
               ),
-            if (widget.manga.genre case final genres?)
+            if (widget.manga.genres case final genres?)
               ValueListenableBuilder(
                 valueListenable: compactNotifier,
                 builder: (context, isCompact, _) {

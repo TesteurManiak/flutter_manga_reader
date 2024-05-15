@@ -72,7 +72,7 @@ class DriftDatasource extends LocalDatasource {
           ))
         .go();
 
-    return _db.into(_db.dbMangas).insert(sourceManga.toCompanion());
+    return _db.into(_db.dbMangas).insert(sourceManga.insert());
   }
 
   @override
@@ -84,7 +84,7 @@ class DriftDatasource extends LocalDatasource {
         ..deleteAll(_db.dbChapterHistory)
         ..insertAll(
           _db.dbMangas,
-          sourceMangas.map((e) => e.toCompanion(favorite: true)),
+          sourceMangas.map((e) => e.insert(favorite: true)),
         );
     });
   }
@@ -262,7 +262,7 @@ class DriftDatasource extends LocalDatasource {
         )
         ..insertAll<$DbChaptersTable, DbChapter>(
           _db.dbChapters,
-          record.sourceChapters.map((e) => e.toCompanion(record.manga.id)),
+          record.sourceChapters.map((e) => e.insert(record.manga.id)),
           onConflict: DoUpdate(
             (old) => DbChaptersCompanion.custom(
               index: old.index,
@@ -290,7 +290,7 @@ class DriftDatasource extends LocalDatasource {
           records.expand(
             (record) {
               return record.sourceChapters.map((e) {
-                return e.toCompanion(record.manga.id);
+                return e.insert(record.manga.id);
               });
             },
           ),
@@ -324,28 +324,51 @@ extension on DbChapter {
 }
 
 extension on Manga {
-  DbManga toDbModel() => DbManga.fromJson(toJson());
+  DbManga toDbModel() {
+    return DbManga(
+      id: id,
+      sourceId: sourceId,
+      favorite: favorite,
+      lastUpdate: lastUpdate,
+      nextUpdate: nextUpdate,
+      fetchInterval: fetchInterval,
+      dateAdded: dateAdded,
+      url: url,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genre: getGenre(),
+      status: status,
+      thumbnailUrl: thumbnailUrl,
+      updateStrategy: updateStrategy,
+      initialized: initialized,
+      lastModifiedAt: lastModifiedAt,
+    );
+  }
 }
 
 extension on SourceManga {
-  DbMangasCompanion toCompanion({bool? favorite}) {
+  DbMangasCompanion insert({bool? favorite}) {
     return DbMangasCompanion.insert(
-      title: title,
-      url: url,
-      description: Value.absentIfNull(description),
-      author: Value.absentIfNull(author),
-      status: status,
-      genre: Value.absentIfNull(genre),
-      sourceId: sourceId,
+      url: Value(url),
+      title: Value(title),
       artist: Value.absentIfNull(artist),
+      author: Value.absentIfNull(author),
+      description: Value.absentIfNull(description),
+      genre: Value.absentIfNull(genre),
+      status: Value(status),
       thumbnailUrl: Value.absentIfNull(thumbnailUrl),
+      initialized: Value(initialized),
+      updateStrategy: Value(updateStrategy),
+      sourceId: sourceId,
       favorite: Value.absentIfNull(favorite),
     );
   }
 }
 
 extension on SourceChapter {
-  DbChaptersCompanion toCompanion(int mangaId) {
+  DbChaptersCompanion insert(int mangaId) {
     return DbChaptersCompanion.insert(
       mangaId: mangaId,
       url: url,
