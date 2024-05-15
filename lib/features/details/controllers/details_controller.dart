@@ -32,13 +32,7 @@ class DetailsController extends _$DetailsController {
   DetailsState build(int mangaId) {
     ref.listen(watchMangaByIdProvider(mangaId), (_, next) {
       state = next.when(
-        data: (manga) {
-          if (manga == null) {
-            return const DetailsState.error(error: 'Manga not found');
-          }
-
-          return const DetailsState.loaded();
-        },
+        data: (manga) => const DetailsState.loaded(),
         error: (e, _) => DetailsState.error(error: e.toString()),
         loading: () => const DetailsState.loading(),
       );
@@ -49,10 +43,6 @@ class DetailsController extends _$DetailsController {
 
   Future<void> fetchDetails({bool forceRefresh = false}) async {
     final currentManga = await ref.read(watchMangaByIdProvider(mangaId).future);
-    if (currentManga == null) {
-      state = const DetailsState.error(error: 'Manga not found');
-      return;
-    }
 
     if (!forceRefresh && currentManga.initialized) return;
 
@@ -63,7 +53,9 @@ class DetailsController extends _$DetailsController {
 
     state = await result.when(
       success: (record) async {
-        final mangaToSave = record.manga.copyWith(initialized: true);
+        final mangaToSave = currentManga
+            .copyFrom(record.manga.toSourceManga())
+            .copyWith(initialized: true);
         await ref.read(localDatasourceProvider).saveMangaData(
           (manga: mangaToSave, sourceChapters: record.sourceChapters),
         );

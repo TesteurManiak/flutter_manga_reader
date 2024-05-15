@@ -40,7 +40,7 @@ final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
 );
 
 typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
-String _$watchMangaByIdHash() => r'72e506803990dbe6e0bf11a662ab4b35dcd8a9ec';
+String _$watchMangaByIdHash() => r'ce88fa362f09e9fd18921d3d0622480be0ef9c64';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -68,7 +68,7 @@ class _SystemHash {
 const watchMangaByIdProvider = WatchMangaByIdFamily();
 
 /// See also [watchMangaById].
-class WatchMangaByIdFamily extends Family<AsyncValue<Manga?>> {
+class WatchMangaByIdFamily extends Family<AsyncValue<Manga>> {
   /// See also [watchMangaById].
   const WatchMangaByIdFamily();
 
@@ -112,7 +112,7 @@ class WatchMangaByIdFamily extends Family<AsyncValue<Manga?>> {
 }
 
 /// See also [watchMangaById].
-class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga?> {
+class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga> {
   /// See also [watchMangaById].
   WatchMangaByIdProvider(
     int id,
@@ -147,7 +147,7 @@ class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga?> {
 
   @override
   Override overrideWith(
-    Stream<Manga?> Function(WatchMangaByIdRef provider) create,
+    Stream<Manga> Function(WatchMangaByIdRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -164,7 +164,7 @@ class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga?> {
   }
 
   @override
-  AutoDisposeStreamProviderElement<Manga?> createElement() {
+  AutoDisposeStreamProviderElement<Manga> createElement() {
     return _WatchMangaByIdProviderElement(this);
   }
 
@@ -182,13 +182,13 @@ class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga?> {
   }
 }
 
-mixin WatchMangaByIdRef on AutoDisposeStreamProviderRef<Manga?> {
+mixin WatchMangaByIdRef on AutoDisposeStreamProviderRef<Manga> {
   /// The parameter `id` of this provider.
   int get id;
 }
 
 class _WatchMangaByIdProviderElement
-    extends AutoDisposeStreamProviderElement<Manga?> with WatchMangaByIdRef {
+    extends AutoDisposeStreamProviderElement<Manga> with WatchMangaByIdRef {
   _WatchMangaByIdProviderElement(super.provider);
 
   @override
