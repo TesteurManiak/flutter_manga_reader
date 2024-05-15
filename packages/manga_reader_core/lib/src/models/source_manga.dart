@@ -18,7 +18,7 @@ class SourceManga with _$SourceManga {
     String? author,
     String? description,
     String? genre,
-    @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
+    @Default(MangaStatus.unknown) MangaStatus status,
     String? thumbnailUrl,
     @Default(false) bool initialized,
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,

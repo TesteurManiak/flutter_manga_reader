@@ -112,5 +112,9 @@ class AppDatabase extends _$AppDatabase {
   }
 }
 
+extension DbMangaExtensions on DbManga {
+  Manga toModel() => Manga.fromJson(toJson());
+}
+
 @Riverpod(keepAlive: true)
 AppDatabase appDatabase(AppDatabaseRef ref) => AppDatabase();

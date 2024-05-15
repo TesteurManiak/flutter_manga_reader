@@ -9,6 +9,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'local_datasource.g.dart';
 
 abstract class LocalDatasource {
+  /// Read a manga from the database.
+  Future<Manga> getMangaById(int mangaId);
+
+  /// Return a [Stream] for the [Manga] with the given [id].
+  Stream<Manga?> watchMangaById(int id);
+
+  Future<Manga?> getMangaByUrlAndSourceId({
+    required String url,
+    required String sourceId,
+  });
+
   /// Return a [Stream] of [Manga] in the library.
   Stream<List<Manga>> watchMangasInLibrary();
 
@@ -18,9 +29,6 @@ abstract class LocalDatasource {
   /// Return a [Stream] of [Chapter] with their read value at false for a given
   /// [mangaId] and ordered by index.
   Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId);
-
-  /// Return a [Stream] for the [Manga] with the given [id].
-  Stream<Manga?> watchManga(int id);
 
   /// Return a [Stream] for the [ReadingDirection] of the manga with the given
   /// [mangaId].
@@ -45,11 +53,6 @@ abstract class LocalDatasource {
   /// Clear the local manga and chapters and insert the given list of
   /// [SourceManga]s.
   Future<void> synchronizeLibrary(List<SourceManga> sourceMangas);
-
-  /// Read a manga from the database.
-  Future<Manga?> getManga(int mangaId);
-
-  Future<int?> getMangaIdFromSource(SourceManga sourceManga);
 
   Future<Chapter?> getChapter(int chapterId);
   Future<void> setChaptersRead({
@@ -92,16 +95,19 @@ Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
 }
 
 @Riverpod(dependencies: [localDatasource])
-Stream<Manga?> watchManga(WatchMangaRef ref, int id) {
-  return ref.watch(localDatasourceProvider).watchManga(id);
+Stream<Manga?> watchMangaById(WatchMangaByIdRef ref, int id) {
+  return ref.watch(localDatasourceProvider).watchMangaById(id);
 }
 
 @Riverpod(dependencies: [localDatasource])
-Future<int?> getMangaIdFromSource(
-  GetMangaIdFromSourceRef ref,
-  SourceManga sourceManga,
-) async {
-  return ref.watch(localDatasourceProvider).getMangaIdFromSource(sourceManga);
+Future<Manga?> getMangaByUrlAndSourceId(
+  GetMangaByUrlAndSourceIdRef ref, {
+  required String url,
+  required String sourceId,
+}) {
+  return ref
+      .watch(localDatasourceProvider)
+      .getMangaByUrlAndSourceId(url: url, sourceId: sourceId);
 }
 
 @Riverpod(dependencies: [localDatasource])

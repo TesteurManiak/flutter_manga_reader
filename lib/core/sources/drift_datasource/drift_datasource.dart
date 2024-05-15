@@ -16,6 +16,33 @@ class DriftDatasource extends LocalDatasource {
   final AppDatabase _db;
 
   @override
+  Future<Manga> getMangaById(int mangaId) async {
+    final manga = await (_db.select(_db.dbMangas)
+          ..where((tbl) => tbl.id.equals(mangaId)))
+        .getSingle();
+
+    return manga.toModel();
+  }
+
+  @override
+  Stream<Manga?> watchMangaById(int id) {
+    return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
+        .watchSingleOrNull()
+        .map((manga) => manga?.toModel());
+  }
+
+  @override
+  Future<Manga?> getMangaByUrlAndSourceId({
+    required String url,
+    required String sourceId,
+  }) {
+    return (_db.select(_db.dbMangas)
+          ..where((t) => t.url.equals(url) & t.sourceId.equals(sourceId)))
+        .getSingleOrNull()
+        .then((value) => value?.toModel());
+  }
+
+  @override
   Stream<List<Manga>> watchMangasInLibrary() {
     return (_db.select(_db.dbMangas)..where((tbl) => tbl.favorite.equals(true)))
         .watch()
@@ -35,29 +62,6 @@ class DriftDatasource extends LocalDatasource {
         mangas.map((e) => e.toDbModel()),
       );
     });
-  }
-
-  @override
-  Future<Manga?> getManga(int mangaId) async {
-    final manga = await (_db.select(_db.dbMangas)
-          ..where((tbl) => tbl.id.equals(mangaId)))
-        .getSingleOrNull();
-
-    return manga?.toModel();
-  }
-
-  @override
-  Future<int?> getMangaIdFromSource(SourceManga sourceManga) async {
-    final result = await (_db.select(_db.dbMangas)
-          ..where(
-            (t) =>
-                t.title.equals(sourceManga.title) &
-                t.sourceId.equals(sourceManga.sourceId) &
-                t.url.equals(sourceManga.url),
-          ))
-        .getSingleOrNull();
-
-    return result?.id;
   }
 
   @override
@@ -126,13 +130,6 @@ class DriftDatasource extends LocalDatasource {
   }) {
     return (_db.update(_db.dbMangas)..where((t) => t.id.equals(mangaId)))
         .write(DbMangasCompanion(favorite: Value(favorite)));
-  }
-
-  @override
-  Stream<Manga?> watchManga(int id) {
-    return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
-        .watchSingleOrNull()
-        .map((manga) => manga?.toModel());
   }
 
   @override
@@ -307,10 +304,6 @@ class DriftDatasource extends LocalDatasource {
         );
     });
   }
-}
-
-extension on DbManga {
-  Manga toModel() => Manga.fromJson(toJson());
 }
 
 extension on DbChapter {

@@ -6,5 +6,5 @@ part 'get_manga_from_id.g.dart';
 
 @Riverpod(dependencies: [localDatasource])
 Future<Manga?> getMangaFromId(GetMangaFromIdRef ref, int id) {
-  return ref.watch(localDatasourceProvider).getManga(id);
+  return ref.watch(localDatasourceProvider).getMangaById(id);
 }

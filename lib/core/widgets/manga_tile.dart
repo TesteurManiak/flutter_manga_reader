@@ -37,7 +37,10 @@ class _MangaTileState extends ConsumerState<MangaTile>
       onTap: () async {
         late final int mangaId;
         final localId = await ref.read(
-          getMangaIdFromSourceProvider(widget.manga).future,
+          getMangaByUrlAndSourceIdProvider(
+            url: widget.manga.url,
+            sourceId: widget.manga.sourceId,
+          ).selectAsync((manga) => manga?.id),
         );
         if (localId == null) {
           mangaId = await ref

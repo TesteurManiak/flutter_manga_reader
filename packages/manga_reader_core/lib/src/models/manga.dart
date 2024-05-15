@@ -23,7 +23,7 @@ class Manga with _$Manga {
     String? author,
     String? description,
     List<String>? genres,
-    @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
+    @Default(MangaStatus.unknown) MangaStatus status,
     String? thumbnailUrl,
     @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,

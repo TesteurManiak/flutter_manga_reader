@@ -40,7 +40,7 @@ final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
 );
 
 typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
-String _$watchMangaHash() => r'73da289195920183f6e472812a635057144e9bc5';
+String _$watchMangaByIdHash() => r'72e506803990dbe6e0bf11a662ab4b35dcd8a9ec';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -63,27 +63,27 @@ class _SystemHash {
   }
 }
 
-/// See also [watchManga].
-@ProviderFor(watchManga)
-const watchMangaProvider = WatchMangaFamily();
+/// See also [watchMangaById].
+@ProviderFor(watchMangaById)
+const watchMangaByIdProvider = WatchMangaByIdFamily();
 
-/// See also [watchManga].
-class WatchMangaFamily extends Family<AsyncValue<Manga?>> {
-  /// See also [watchManga].
-  const WatchMangaFamily();
+/// See also [watchMangaById].
+class WatchMangaByIdFamily extends Family<AsyncValue<Manga?>> {
+  /// See also [watchMangaById].
+  const WatchMangaByIdFamily();
 
-  /// See also [watchManga].
-  WatchMangaProvider call(
+  /// See also [watchMangaById].
+  WatchMangaByIdProvider call(
     int id,
   ) {
-    return WatchMangaProvider(
+    return WatchMangaByIdProvider(
       id,
     );
   }
 
   @override
-  WatchMangaProvider getProviderOverride(
-    covariant WatchMangaProvider provider,
+  WatchMangaByIdProvider getProviderOverride(
+    covariant WatchMangaByIdProvider provider,
   ) {
     return call(
       provider.id,
@@ -108,32 +108,32 @@ class WatchMangaFamily extends Family<AsyncValue<Manga?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'watchMangaProvider';
+  String? get name => r'watchMangaByIdProvider';
 }
 
-/// See also [watchManga].
-class WatchMangaProvider extends AutoDisposeStreamProvider<Manga?> {
-  /// See also [watchManga].
-  WatchMangaProvider(
+/// See also [watchMangaById].
+class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga?> {
+  /// See also [watchMangaById].
+  WatchMangaByIdProvider(
     int id,
   ) : this._internal(
-          (ref) => watchManga(
-            ref as WatchMangaRef,
+          (ref) => watchMangaById(
+            ref as WatchMangaByIdRef,
             id,
           ),
-          from: watchMangaProvider,
-          name: r'watchMangaProvider',
+          from: watchMangaByIdProvider,
+          name: r'watchMangaByIdProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$watchMangaHash,
-          dependencies: WatchMangaFamily._dependencies,
+                  : _$watchMangaByIdHash,
+          dependencies: WatchMangaByIdFamily._dependencies,
           allTransitiveDependencies:
-              WatchMangaFamily._allTransitiveDependencies,
+              WatchMangaByIdFamily._allTransitiveDependencies,
           id: id,
         );
 
-  WatchMangaProvider._internal(
+  WatchMangaByIdProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -147,12 +147,12 @@ class WatchMangaProvider extends AutoDisposeStreamProvider<Manga?> {
 
   @override
   Override overrideWith(
-    Stream<Manga?> Function(WatchMangaRef provider) create,
+    Stream<Manga?> Function(WatchMangaByIdRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: WatchMangaProvider._internal(
-        (ref) => create(ref as WatchMangaRef),
+      override: WatchMangaByIdProvider._internal(
+        (ref) => create(ref as WatchMangaByIdRef),
         from: from,
         name: null,
         dependencies: null,
@@ -165,12 +165,12 @@ class WatchMangaProvider extends AutoDisposeStreamProvider<Manga?> {
 
   @override
   AutoDisposeStreamProviderElement<Manga?> createElement() {
-    return _WatchMangaProviderElement(this);
+    return _WatchMangaByIdProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is WatchMangaProvider && other.id == id;
+    return other is WatchMangaByIdProvider && other.id == id;
   }
 
   @override
@@ -182,46 +182,49 @@ class WatchMangaProvider extends AutoDisposeStreamProvider<Manga?> {
   }
 }
 
-mixin WatchMangaRef on AutoDisposeStreamProviderRef<Manga?> {
+mixin WatchMangaByIdRef on AutoDisposeStreamProviderRef<Manga?> {
   /// The parameter `id` of this provider.
   int get id;
 }
 
-class _WatchMangaProviderElement
-    extends AutoDisposeStreamProviderElement<Manga?> with WatchMangaRef {
-  _WatchMangaProviderElement(super.provider);
+class _WatchMangaByIdProviderElement
+    extends AutoDisposeStreamProviderElement<Manga?> with WatchMangaByIdRef {
+  _WatchMangaByIdProviderElement(super.provider);
 
   @override
-  int get id => (origin as WatchMangaProvider).id;
+  int get id => (origin as WatchMangaByIdProvider).id;
 }
 
-String _$getMangaIdFromSourceHash() =>
-    r'5d2b3fcec507912862ccc90571a171ab19fd61be';
+String _$getMangaByUrlAndSourceIdHash() =>
+    r'72bdf3fda4e37634c6e1cae7be0f13ceecf30366';
 
-/// See also [getMangaIdFromSource].
-@ProviderFor(getMangaIdFromSource)
-const getMangaIdFromSourceProvider = GetMangaIdFromSourceFamily();
+/// See also [getMangaByUrlAndSourceId].
+@ProviderFor(getMangaByUrlAndSourceId)
+const getMangaByUrlAndSourceIdProvider = GetMangaByUrlAndSourceIdFamily();
 
-/// See also [getMangaIdFromSource].
-class GetMangaIdFromSourceFamily extends Family<AsyncValue<int?>> {
-  /// See also [getMangaIdFromSource].
-  const GetMangaIdFromSourceFamily();
+/// See also [getMangaByUrlAndSourceId].
+class GetMangaByUrlAndSourceIdFamily extends Family<AsyncValue<Manga?>> {
+  /// See also [getMangaByUrlAndSourceId].
+  const GetMangaByUrlAndSourceIdFamily();
 
-  /// See also [getMangaIdFromSource].
-  GetMangaIdFromSourceProvider call(
-    SourceManga sourceManga,
-  ) {
-    return GetMangaIdFromSourceProvider(
-      sourceManga,
+  /// See also [getMangaByUrlAndSourceId].
+  GetMangaByUrlAndSourceIdProvider call({
+    required String url,
+    required String sourceId,
+  }) {
+    return GetMangaByUrlAndSourceIdProvider(
+      url: url,
+      sourceId: sourceId,
     );
   }
 
   @override
-  GetMangaIdFromSourceProvider getProviderOverride(
-    covariant GetMangaIdFromSourceProvider provider,
+  GetMangaByUrlAndSourceIdProvider getProviderOverride(
+    covariant GetMangaByUrlAndSourceIdProvider provider,
   ) {
     return call(
-      provider.sourceManga,
+      url: provider.url,
+      sourceId: provider.sourceId,
     );
   }
 
@@ -243,94 +246,107 @@ class GetMangaIdFromSourceFamily extends Family<AsyncValue<int?>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'getMangaIdFromSourceProvider';
+  String? get name => r'getMangaByUrlAndSourceIdProvider';
 }
 
-/// See also [getMangaIdFromSource].
-class GetMangaIdFromSourceProvider extends AutoDisposeFutureProvider<int?> {
-  /// See also [getMangaIdFromSource].
-  GetMangaIdFromSourceProvider(
-    SourceManga sourceManga,
-  ) : this._internal(
-          (ref) => getMangaIdFromSource(
-            ref as GetMangaIdFromSourceRef,
-            sourceManga,
+/// See also [getMangaByUrlAndSourceId].
+class GetMangaByUrlAndSourceIdProvider
+    extends AutoDisposeFutureProvider<Manga?> {
+  /// See also [getMangaByUrlAndSourceId].
+  GetMangaByUrlAndSourceIdProvider({
+    required String url,
+    required String sourceId,
+  }) : this._internal(
+          (ref) => getMangaByUrlAndSourceId(
+            ref as GetMangaByUrlAndSourceIdRef,
+            url: url,
+            sourceId: sourceId,
           ),
-          from: getMangaIdFromSourceProvider,
-          name: r'getMangaIdFromSourceProvider',
+          from: getMangaByUrlAndSourceIdProvider,
+          name: r'getMangaByUrlAndSourceIdProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$getMangaIdFromSourceHash,
-          dependencies: GetMangaIdFromSourceFamily._dependencies,
+                  : _$getMangaByUrlAndSourceIdHash,
+          dependencies: GetMangaByUrlAndSourceIdFamily._dependencies,
           allTransitiveDependencies:
-              GetMangaIdFromSourceFamily._allTransitiveDependencies,
-          sourceManga: sourceManga,
+              GetMangaByUrlAndSourceIdFamily._allTransitiveDependencies,
+          url: url,
+          sourceId: sourceId,
         );
 
-  GetMangaIdFromSourceProvider._internal(
+  GetMangaByUrlAndSourceIdProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.sourceManga,
+    required this.url,
+    required this.sourceId,
   }) : super.internal();
 
-  final SourceManga sourceManga;
+  final String url;
+  final String sourceId;
 
   @override
   Override overrideWith(
-    FutureOr<int?> Function(GetMangaIdFromSourceRef provider) create,
+    FutureOr<Manga?> Function(GetMangaByUrlAndSourceIdRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: GetMangaIdFromSourceProvider._internal(
-        (ref) => create(ref as GetMangaIdFromSourceRef),
+      override: GetMangaByUrlAndSourceIdProvider._internal(
+        (ref) => create(ref as GetMangaByUrlAndSourceIdRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        sourceManga: sourceManga,
+        url: url,
+        sourceId: sourceId,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<int?> createElement() {
-    return _GetMangaIdFromSourceProviderElement(this);
+  AutoDisposeFutureProviderElement<Manga?> createElement() {
+    return _GetMangaByUrlAndSourceIdProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is GetMangaIdFromSourceProvider &&
-        other.sourceManga == sourceManga;
+    return other is GetMangaByUrlAndSourceIdProvider &&
+        other.url == url &&
+        other.sourceId == sourceId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, sourceManga.hashCode);
+    hash = _SystemHash.combine(hash, url.hashCode);
+    hash = _SystemHash.combine(hash, sourceId.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin GetMangaIdFromSourceRef on AutoDisposeFutureProviderRef<int?> {
-  /// The parameter `sourceManga` of this provider.
-  SourceManga get sourceManga;
+mixin GetMangaByUrlAndSourceIdRef on AutoDisposeFutureProviderRef<Manga?> {
+  /// The parameter `url` of this provider.
+  String get url;
+
+  /// The parameter `sourceId` of this provider.
+  String get sourceId;
 }
 
-class _GetMangaIdFromSourceProviderElement
-    extends AutoDisposeFutureProviderElement<int?>
-    with GetMangaIdFromSourceRef {
-  _GetMangaIdFromSourceProviderElement(super.provider);
+class _GetMangaByUrlAndSourceIdProviderElement
+    extends AutoDisposeFutureProviderElement<Manga?>
+    with GetMangaByUrlAndSourceIdRef {
+  _GetMangaByUrlAndSourceIdProviderElement(super.provider);
 
   @override
-  SourceManga get sourceManga =>
-      (origin as GetMangaIdFromSourceProvider).sourceManga;
+  String get url => (origin as GetMangaByUrlAndSourceIdProvider).url;
+  @override
+  String get sourceId => (origin as GetMangaByUrlAndSourceIdProvider).sourceId;
 }
 
 String _$getChapterHash() => r'4672c29091fa9608cd2cc9428f0ce51b341000c4';

@@ -57,7 +57,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(watchMangaProvider(widget.mangaId));
+    final state = ref.watch(watchMangaByIdProvider(widget.mangaId));
 
     return DefaultSlidableController(
       initiallyShown: false,

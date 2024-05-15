@@ -33,7 +33,6 @@ mixin _$Manga {
   String? get author => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   List<String>? get genres => throw _privateConstructorUsedError;
-  @MangaStatusConverter()
   MangaStatus get status => throw _privateConstructorUsedError;
   String? get thumbnailUrl => throw _privateConstructorUsedError;
   UpdateStrategy get updateStrategy => throw _privateConstructorUsedError;
@@ -64,7 +63,7 @@ abstract class $MangaCopyWith<$Res> {
       String? author,
       String? description,
       List<String>? genres,
-      @MangaStatusConverter() MangaStatus status,
+      MangaStatus status,
       String? thumbnailUrl,
       UpdateStrategy updateStrategy,
       bool initialized,
@@ -201,7 +200,7 @@ abstract class _$$MangaImplCopyWith<$Res> implements $MangaCopyWith<$Res> {
       String? author,
       String? description,
       List<String>? genres,
-      @MangaStatusConverter() MangaStatus status,
+      MangaStatus status,
       String? thumbnailUrl,
       UpdateStrategy updateStrategy,
       bool initialized,
@@ -332,7 +331,7 @@ class _$MangaImpl extends _Manga {
       this.author,
       this.description,
       final List<String>? genres,
-      @MangaStatusConverter() this.status = MangaStatus.unknown,
+      this.status = MangaStatus.unknown,
       this.thumbnailUrl,
       this.updateStrategy = UpdateStrategy.alwaysUpdate,
       this.initialized = false,
@@ -383,7 +382,6 @@ class _$MangaImpl extends _Manga {
 
   @override
   @JsonKey()
-  @MangaStatusConverter()
   final MangaStatus status;
   @override
   final String? thumbnailUrl;
@@ -489,7 +487,7 @@ abstract class _Manga extends Manga {
       final String? author,
       final String? description,
       final List<String>? genres,
-      @MangaStatusConverter() final MangaStatus status,
+      final MangaStatus status,
       final String? thumbnailUrl,
       final UpdateStrategy updateStrategy,
       final bool initialized,
@@ -525,7 +523,6 @@ abstract class _Manga extends Manga {
   @override
   List<String>? get genres;
   @override
-  @MangaStatusConverter()
   MangaStatus get status;
   @override
   String? get thumbnailUrl;

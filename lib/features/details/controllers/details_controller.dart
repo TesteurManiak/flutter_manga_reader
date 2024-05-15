@@ -14,8 +14,8 @@ typedef MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 
 @Riverpod(
   dependencies: [
-    watchManga,
-    watchManga,
+    watchMangaById,
+    watchMangaById,
     scopedMangaDatasource,
     localDatasource,
     isMangaFavorite,
@@ -30,7 +30,7 @@ typedef MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId) {
-    ref.listen(watchMangaProvider(mangaId), (prev, next) {
+    ref.listen(watchMangaByIdProvider(mangaId), (_, next) {
       state = next.when(
         data: (manga) {
           if (manga == null) {
@@ -48,7 +48,7 @@ class DetailsController extends _$DetailsController {
   }
 
   Future<void> fetchDetails({bool forceRefresh = false}) async {
-    final currentManga = await ref.read(watchMangaProvider(mangaId).future);
+    final currentManga = await ref.read(watchMangaByIdProvider(mangaId).future);
     if (currentManga == null) {
       state = const DetailsState.error(error: 'Manga not found');
       return;
