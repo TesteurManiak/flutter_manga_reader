@@ -452,6 +452,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Mode incognito désactivé'**
   String get incognito_mode_disabled;
+
+  /// No description provided for @invalid_backup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier de sauvegarde invalide'**
+  String get invalid_backup;
+
+  /// No description provided for @backup_restored.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauvegarde restaurée'**
+  String get backup_restored;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -196,4 +196,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get incognito_mode_disabled => 'Mode incognito désactivé';
+
+  @override
+  String get invalid_backup => 'Fichier de sauvegarde invalide';
+
+  @override
+  String get backup_restored => 'Sauvegarde restaurée';
 }
