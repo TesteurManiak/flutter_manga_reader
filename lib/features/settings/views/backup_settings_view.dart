@@ -7,21 +7,36 @@ import 'package:flutter_manga_reader/core/services/toaster_service.dart';
 import 'package:flutter_manga_reader/features/settings/providers/backup_controller.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
-class BackupSettingsView extends ConsumerWidget {
+class BackupSettingsView extends ConsumerStatefulWidget {
   const BackupSettingsView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BackupSettingsView> createState() => _BackupSettingsViewState();
+}
+
+class _BackupSettingsViewState extends ConsumerState<BackupSettingsView> {
+  @override
+  Widget build(BuildContext context) {
     final strings = context.strings;
 
-    // TODO(Guillaume): display a full page loader when loading
+    ref.listen(backupControllerProvider, (prev, next) {
+      if (next is BackupStateLoading) {
+        context.loaderOverlay.show();
+      }
+      if (prev is BackupStateLoading && next is! BackupStateLoading) {
+        context.loaderOverlay.hide();
+      }
+    });
 
-    return GenericSettingsView(
-      title: strings.settings_backup,
-      children: const [
-        _ImportTachiyomiBackupTile(),
-      ],
+    return LoaderOverlay(
+      child: GenericSettingsView(
+        title: strings.settings_backup,
+        children: const [
+          _ImportTachiyomiBackupTile(),
+        ],
+      ),
     );
   }
 }
