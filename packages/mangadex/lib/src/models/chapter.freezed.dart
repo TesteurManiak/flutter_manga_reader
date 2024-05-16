@@ -434,7 +434,14 @@ mixin _$ChapterAttributes {
   String? get volume => throw _privateConstructorUsedError;
   String? get chapter => throw _privateConstructorUsedError;
   int get pages => throw _privateConstructorUsedError;
-  String? get publishAt => throw _privateConstructorUsedError;
+  @DtConverter()
+  DateTime? get publishAt => throw _privateConstructorUsedError;
+  @DtConverter()
+  DateTime? get readableAt => throw _privateConstructorUsedError;
+  @DtConverter()
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  @DtConverter()
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get externalUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -454,7 +461,10 @@ abstract class $ChapterAttributesCopyWith<$Res> {
       String? volume,
       String? chapter,
       int pages,
-      String? publishAt,
+      @DtConverter() DateTime? publishAt,
+      @DtConverter() DateTime? readableAt,
+      @DtConverter() DateTime? createdAt,
+      @DtConverter() DateTime? updatedAt,
       String? externalUrl});
 }
 
@@ -476,6 +486,9 @@ class _$ChapterAttributesCopyWithImpl<$Res, $Val extends ChapterAttributes>
     Object? chapter = freezed,
     Object? pages = null,
     Object? publishAt = freezed,
+    Object? readableAt = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? externalUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -498,7 +511,19 @@ class _$ChapterAttributesCopyWithImpl<$Res, $Val extends ChapterAttributes>
       publishAt: freezed == publishAt
           ? _value.publishAt
           : publishAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
+      readableAt: freezed == readableAt
+          ? _value.readableAt
+          : readableAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       externalUrl: freezed == externalUrl
           ? _value.externalUrl
           : externalUrl // ignore: cast_nullable_to_non_nullable
@@ -520,7 +545,10 @@ abstract class _$$ChapterAttributesImplCopyWith<$Res>
       String? volume,
       String? chapter,
       int pages,
-      String? publishAt,
+      @DtConverter() DateTime? publishAt,
+      @DtConverter() DateTime? readableAt,
+      @DtConverter() DateTime? createdAt,
+      @DtConverter() DateTime? updatedAt,
       String? externalUrl});
 }
 
@@ -540,6 +568,9 @@ class __$$ChapterAttributesImplCopyWithImpl<$Res>
     Object? chapter = freezed,
     Object? pages = null,
     Object? publishAt = freezed,
+    Object? readableAt = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? externalUrl = freezed,
   }) {
     return _then(_$ChapterAttributesImpl(
@@ -562,7 +593,19 @@ class __$$ChapterAttributesImplCopyWithImpl<$Res>
       publishAt: freezed == publishAt
           ? _value.publishAt
           : publishAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as DateTime?,
+      readableAt: freezed == readableAt
+          ? _value.readableAt
+          : readableAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       externalUrl: freezed == externalUrl
           ? _value.externalUrl
           : externalUrl // ignore: cast_nullable_to_non_nullable
@@ -579,7 +622,10 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
       this.volume,
       this.chapter,
       this.pages = 0,
-      this.publishAt,
+      @DtConverter() this.publishAt,
+      @DtConverter() this.readableAt,
+      @DtConverter() this.createdAt,
+      @DtConverter() this.updatedAt,
       this.externalUrl})
       : super._();
 
@@ -596,13 +642,23 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
   @JsonKey()
   final int pages;
   @override
-  final String? publishAt;
+  @DtConverter()
+  final DateTime? publishAt;
+  @override
+  @DtConverter()
+  final DateTime? readableAt;
+  @override
+  @DtConverter()
+  final DateTime? createdAt;
+  @override
+  @DtConverter()
+  final DateTime? updatedAt;
   @override
   final String? externalUrl;
 
   @override
   String toString() {
-    return 'ChapterAttributes(title: $title, volume: $volume, chapter: $chapter, pages: $pages, publishAt: $publishAt, externalUrl: $externalUrl)';
+    return 'ChapterAttributes(title: $title, volume: $volume, chapter: $chapter, pages: $pages, publishAt: $publishAt, readableAt: $readableAt, createdAt: $createdAt, updatedAt: $updatedAt, externalUrl: $externalUrl)';
   }
 
   @override
@@ -616,14 +672,20 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
             (identical(other.pages, pages) || other.pages == pages) &&
             (identical(other.publishAt, publishAt) ||
                 other.publishAt == publishAt) &&
+            (identical(other.readableAt, readableAt) ||
+                other.readableAt == readableAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
             (identical(other.externalUrl, externalUrl) ||
                 other.externalUrl == externalUrl));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, title, volume, chapter, pages, publishAt, externalUrl);
+  int get hashCode => Object.hash(runtimeType, title, volume, chapter, pages,
+      publishAt, readableAt, createdAt, updatedAt, externalUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -646,7 +708,10 @@ abstract class _ChapterAttributes extends ChapterAttributes {
       final String? volume,
       final String? chapter,
       final int pages,
-      final String? publishAt,
+      @DtConverter() final DateTime? publishAt,
+      @DtConverter() final DateTime? readableAt,
+      @DtConverter() final DateTime? createdAt,
+      @DtConverter() final DateTime? updatedAt,
       final String? externalUrl}) = _$ChapterAttributesImpl;
   const _ChapterAttributes._() : super._();
 
@@ -662,7 +727,17 @@ abstract class _ChapterAttributes extends ChapterAttributes {
   @override
   int get pages;
   @override
-  String? get publishAt;
+  @DtConverter()
+  DateTime? get publishAt;
+  @override
+  @DtConverter()
+  DateTime? get readableAt;
+  @override
+  @DtConverter()
+  DateTime? get createdAt;
+  @override
+  @DtConverter()
+  DateTime? get updatedAt;
   @override
   String? get externalUrl;
   @override

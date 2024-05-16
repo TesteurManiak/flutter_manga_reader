@@ -248,11 +248,18 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
               _ => e.selectFirst('ul > li > p')?.attributes['title'],
             };
 
+            // Parse chapter number from chapter name
+            final regex = RegExp(r'Chapter\s*([\d.]+)', caseSensitive: false);
+            final chapter = regex.firstMatch(name)?.group(1);
+            final chapterNumber =
+                chapter != null ? double.tryParse(chapter) ?? -1 : -1.0;
+
             chaptersList.add(
               SourceChapter(
                 url: a?.getHref ?? '',
                 name: name,
                 dateUpload: helper.parseDate(dateStr),
+                chapterNumber: chapterNumber,
               ),
             );
           }

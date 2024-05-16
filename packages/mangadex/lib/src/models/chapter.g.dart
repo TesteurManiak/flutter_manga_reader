@@ -52,7 +52,10 @@ _$ChapterAttributesImpl _$$ChapterAttributesImplFromJson(
       volume: json['volume'] as String?,
       chapter: json['chapter'] as String?,
       pages: (json['pages'] as num?)?.toInt() ?? 0,
-      publishAt: json['publishAt'] as String?,
+      publishAt: const DtConverter().fromJson(json['publishAt'] as String?),
+      readableAt: const DtConverter().fromJson(json['readableAt'] as String?),
+      createdAt: const DtConverter().fromJson(json['createdAt'] as String?),
+      updatedAt: const DtConverter().fromJson(json['updatedAt'] as String?),
       externalUrl: json['externalUrl'] as String?,
     );
 
@@ -63,6 +66,9 @@ Map<String, dynamic> _$$ChapterAttributesImplToJson(
       'volume': instance.volume,
       'chapter': instance.chapter,
       'pages': instance.pages,
-      'publishAt': instance.publishAt,
+      'publishAt': const DtConverter().toJson(instance.publishAt),
+      'readableAt': const DtConverter().toJson(instance.readableAt),
+      'createdAt': const DtConverter().toJson(instance.createdAt),
+      'updatedAt': const DtConverter().toJson(instance.updatedAt),
       'externalUrl': instance.externalUrl,
     };
