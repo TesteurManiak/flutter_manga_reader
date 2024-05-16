@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/services/toaster_service.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/utils/scroll_physics.dart';
@@ -55,7 +56,14 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    final toaster = ref.watch(toasterServiceProvider);
     final state = ref.watch(watchMangaByIdProvider(widget.mangaId));
+
+    ref.listen(detailsControllerProvider(widget.mangaId), (_, next) {
+      if (next case DetailsError(:final error?)) {
+        toaster.showToast(Text(error));
+      }
+    });
 
     return DefaultSlidableController(
       initiallyShown: false,
