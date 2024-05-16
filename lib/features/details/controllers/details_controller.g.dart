@@ -162,7 +162,7 @@ class _ScopedSelectionModeProviderElement
   int get mangaId => (origin as ScopedSelectionModeProvider).mangaId;
 }
 
-String _$detailsControllerHash() => r'77818f2e8eddb78dd1a789cf982c18a7203db11f';
+String _$detailsControllerHash() => r'a6ade6d4db3e0916efdb60d16ce954c48f9c5007';
 
 abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
@@ -201,7 +201,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>{
-    watchMangaProvider,
+    watchMangaByIdProvider,
     scopedMangaDatasourceProvider,
     localDatasourceProvider,
     isMangaFavoriteProvider,
@@ -214,8 +214,8 @@ class DetailsControllerFamily extends Family<DetailsState> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    watchMangaProvider,
-    ...?watchMangaProvider.allTransitiveDependencies,
+    watchMangaByIdProvider,
+    ...?watchMangaByIdProvider.allTransitiveDependencies,
     scopedMangaDatasourceProvider,
     ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
     localDatasourceProvider,

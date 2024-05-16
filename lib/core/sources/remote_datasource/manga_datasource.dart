@@ -33,18 +33,16 @@ Map<String, MangaDatasource> mangaDatasources(MangaDatasourcesRef ref) {
 }
 
 @riverpod
-MangaDatasource getSourceFromId(GetSourceFromIdRef ref, String sourceId) {
+MangaDatasource? findSourceFromId(FindSourceFromIdRef ref, String sourceId) {
   final sources = ref.watch(mangaDatasourcesProvider);
-  final source = sources[sourceId];
-
-  if (source == null) {
-    throw ArgumentError.value(sourceId, 'sourceId', 'Unknown source');
-  }
-
-  return source;
+  return sources[sourceId];
 }
 
 @riverpod
-String getSourceId(GetSourceIdRef ref, SourceManga sourceManga) {
-  return ref.watch(getSourceFromIdProvider(sourceManga.sourceId)).id;
+MangaDatasource getSourceFromId(GetSourceFromIdRef ref, String sourceId) {
+  final source = ref.watch(findSourceFromIdProvider(sourceId));
+  if (source == null) {
+    throw ArgumentError.value(sourceId, 'sourceId', 'Unknown source');
+  }
+  return source;
 }

@@ -36,7 +36,7 @@ class _LibraryViewState extends ConsumerState<LibraryView>
               return ref.read(libraryControllerProvider.notifier).refresh();
             },
             child: MangaGridView(
-              mangas: mangas.map((e) => e.toSourceModel()).toList(),
+              mangas: mangas.map((e) => e.toSourceManga()).toList(),
               displayedFromSource: false,
             ),
           ),

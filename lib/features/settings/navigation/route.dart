@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/features/settings/views/about_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/appearance_settings_view.dart';
+import 'package:flutter_manga_reader/features/settings/views/backup_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/views/general_settings_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,8 +34,7 @@ class BackupSettingsRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    // TODO(Guillaume): implement backup settings view
-    return Scaffold(appBar: AppBar());
+    return const BackupSettingsView();
   }
 }
 

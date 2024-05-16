@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   clock: ^1.1.1
+  crypto: ^3.0.3
   freezed_annotation: ^2.4.1
   html: ^0.15.4
   http: ^1.2.1

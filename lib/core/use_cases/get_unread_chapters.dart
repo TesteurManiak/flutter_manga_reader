@@ -6,14 +6,19 @@ part 'get_unread_chapters.g.dart';
 
 @Riverpod(
   dependencies: [
-    getMangaIdFromSource,
+    getMangaByUrlAndSourceId,
     watchUnreadChaptersCountForManga,
   ],
 )
 int? getUnreadChapters(GetUnreadChaptersRef ref, SourceManga sourceManga) {
   final mangaId = ref
-      .watch(getMangaIdFromSourceProvider(sourceManga))
-      .whenOrNull(data: (id) => id);
+      .watch(
+        getMangaByUrlAndSourceIdProvider(
+          url: sourceManga.url,
+          sourceId: sourceManga.sourceId,
+        ),
+      )
+      .whenOrNull(data: (manga) => manga?.id);
 
   if (mangaId == null) return null;
 

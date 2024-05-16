@@ -6,7 +6,7 @@ part of 'get_unread_chapters.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getUnreadChaptersHash() => r'3f714d6ea9f8b271d6b3898116e540c5c9be414c';
+String _$getUnreadChaptersHash() => r'dd5bf9aa7c931b3c37fabd9c8d3d47b55266d7b0';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -57,7 +57,7 @@ class GetUnreadChaptersFamily extends Family<int?> {
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    getMangaIdFromSourceProvider,
+    getMangaByUrlAndSourceIdProvider,
     watchUnreadChaptersCountForMangaProvider
   ];
 
@@ -66,8 +66,8 @@ class GetUnreadChaptersFamily extends Family<int?> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    getMangaIdFromSourceProvider,
-    ...?getMangaIdFromSourceProvider.allTransitiveDependencies,
+    getMangaByUrlAndSourceIdProvider,
+    ...?getMangaByUrlAndSourceIdProvider.allTransitiveDependencies,
     watchUnreadChaptersCountForMangaProvider,
     ...?watchUnreadChaptersCountForMangaProvider.allTransitiveDependencies
   };

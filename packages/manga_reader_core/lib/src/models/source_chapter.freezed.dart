@@ -22,8 +22,7 @@ SourceChapter _$SourceChapterFromJson(Map<String, dynamic> json) {
 mixin _$SourceChapter {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get index => throw _privateConstructorUsedError;
-  DateTime? get dateUpload => throw _privateConstructorUsedError;
+  DateTime get dateUpload => throw _privateConstructorUsedError;
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError;
 
@@ -41,8 +40,7 @@ abstract class $SourceChapterCopyWith<$Res> {
   $Res call(
       {String url,
       String name,
-      int index,
-      DateTime? dateUpload,
+      DateTime dateUpload,
       double chapterNumber,
       String? scanlator});
 }
@@ -62,8 +60,7 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
   $Res call({
     Object? url = null,
     Object? name = null,
-    Object? index = null,
-    Object? dateUpload = freezed,
+    Object? dateUpload = null,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
   }) {
@@ -76,14 +73,10 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      dateUpload: freezed == dateUpload
+      dateUpload: null == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -107,8 +100,7 @@ abstract class _$$SourceChapterImplCopyWith<$Res>
   $Res call(
       {String url,
       String name,
-      int index,
-      DateTime? dateUpload,
+      DateTime dateUpload,
       double chapterNumber,
       String? scanlator});
 }
@@ -126,8 +118,7 @@ class __$$SourceChapterImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? name = null,
-    Object? index = null,
-    Object? dateUpload = freezed,
+    Object? dateUpload = null,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
   }) {
@@ -140,14 +131,10 @@ class __$$SourceChapterImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
-      dateUpload: freezed == dateUpload
+      dateUpload: null == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -166,8 +153,7 @@ class _$SourceChapterImpl implements _SourceChapter {
   const _$SourceChapterImpl(
       {required this.url,
       required this.name,
-      required this.index,
-      this.dateUpload,
+      required this.dateUpload,
       this.chapterNumber = -1.0,
       this.scanlator});
 
@@ -179,9 +165,7 @@ class _$SourceChapterImpl implements _SourceChapter {
   @override
   final String name;
   @override
-  final int index;
-  @override
-  final DateTime? dateUpload;
+  final DateTime dateUpload;
   @override
   @JsonKey()
   final double chapterNumber;
@@ -190,7 +174,7 @@ class _$SourceChapterImpl implements _SourceChapter {
 
   @override
   String toString() {
-    return 'SourceChapter(url: $url, name: $name, index: $index, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator)';
+    return 'SourceChapter(url: $url, name: $name, dateUpload: $dateUpload, chapterNumber: $chapterNumber, scanlator: $scanlator)';
   }
 
   @override
@@ -200,7 +184,6 @@ class _$SourceChapterImpl implements _SourceChapter {
             other is _$SourceChapterImpl &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.index, index) || other.index == index) &&
             (identical(other.dateUpload, dateUpload) ||
                 other.dateUpload == dateUpload) &&
             (identical(other.chapterNumber, chapterNumber) ||
@@ -211,8 +194,8 @@ class _$SourceChapterImpl implements _SourceChapter {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, url, name, index, dateUpload, chapterNumber, scanlator);
+  int get hashCode =>
+      Object.hash(runtimeType, url, name, dateUpload, chapterNumber, scanlator);
 
   @JsonKey(ignore: true)
   @override
@@ -225,8 +208,7 @@ abstract class _SourceChapter implements SourceChapter {
   const factory _SourceChapter(
       {required final String url,
       required final String name,
-      required final int index,
-      final DateTime? dateUpload,
+      required final DateTime dateUpload,
       final double chapterNumber,
       final String? scanlator}) = _$SourceChapterImpl;
 
@@ -238,9 +220,7 @@ abstract class _SourceChapter implements SourceChapter {
   @override
   String get name;
   @override
-  int get index;
-  @override
-  DateTime? get dateUpload;
+  DateTime get dateUpload;
   @override
   double get chapterNumber;
   @override

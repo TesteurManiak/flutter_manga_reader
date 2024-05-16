@@ -19,7 +19,7 @@ import 'package:mangadex/src/models/relationship.dart';
 /// Credits to the contributors to the Tachiyomi project for their work on the
 /// [original implementation](https://github.com/tachiyomiorg/tachiyomi-extensions/tree/master/src/all/mangadex).
 /// {@endtemplate}
-class MangadexDatasource extends MangaDatasource {
+class MangadexDatasource extends MangaDatasource with HttpSource {
   /// {@macro mangadex_datasource}
   MangadexDatasource({
     required super.lang,
@@ -76,6 +76,7 @@ class MangadexDatasource extends MangaDatasource {
     return data.map((manga) {
       final fileName = firstVolumeCovers?[manga.id];
       return _helper.createBasicManga(
+        sourceId: id,
         mangaData: manga,
         coverFileName: fileName,
         lang: _dexLang,
@@ -243,6 +244,7 @@ class MangadexDatasource extends MangaDatasource {
           final fileName = firstVolumeCovers?[manga.id];
           mangaList.add(
             _helper.createBasicManga(
+              sourceId: this.id,
               mangaData: manga,
               coverFileName: fileName,
               lang: _dexLang,
@@ -316,12 +318,13 @@ class MangadexDatasource extends MangaDatasource {
         return Result.success(
           _helper
               .createManga(
+                sourceId: id,
                 mangaData: response.data,
                 chapters: chapters,
                 firstVolumeCover: firstVolumeCover,
                 lang: _dexLang,
               )
-              .toModel(manga),
+              .toDomainManga(manga.id),
         );
       },
       failure: Result.failure,
@@ -375,7 +378,7 @@ class MangadexDatasource extends MangaDatasource {
       offset: 0,
     ).then((value) {
       return Result.success(
-        value.data.mapIndexed<SourceChapter>(_helper.createChapter).toList(),
+        value.data.map<SourceChapter>(_helper.createChapter).toList(),
       );
     });
   }
@@ -495,22 +498,5 @@ class MangadexDatasource extends MangaDatasource {
 extension on Manga {
   List<String> get pathSegments {
     return url.split('/').where((e) => e.trim().isNotEmpty).toList();
-  }
-}
-
-extension on SourceManga {
-  Manga toModel(Manga base) {
-    return base.copyWith(
-      title: title,
-      url: url,
-      description: description,
-      author: author,
-      status: status,
-      genre: genre,
-      source: source,
-      lang: lang,
-      artist: artist,
-      thumbnailUrl: thumbnailUrl,
-    );
   }
 }

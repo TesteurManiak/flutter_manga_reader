@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:drift/drift.dart';
+import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
+import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,6 +16,33 @@ class DriftDatasource extends LocalDatasource {
   DriftDatasource({required AppDatabase appDatabase}) : _db = appDatabase;
 
   final AppDatabase _db;
+
+  @override
+  Future<Manga> getMangaById(int mangaId) async {
+    final manga = await (_db.select(_db.dbMangas)
+          ..where((tbl) => tbl.id.equals(mangaId)))
+        .getSingle();
+
+    return manga.toModel();
+  }
+
+  @override
+  Stream<Manga> watchMangaById(int id) {
+    return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
+        .watchSingle()
+        .map((manga) => manga.toModel());
+  }
+
+  @override
+  Future<Manga?> getMangaByUrlAndSourceId({
+    required String url,
+    required String sourceId,
+  }) {
+    return (_db.select(_db.dbMangas)
+          ..where((t) => t.url.equals(url) & t.sourceId.equals(sourceId)))
+        .getSingleOrNull()
+        .then((value) => value?.toModel());
+  }
 
   @override
   Stream<List<Manga>> watchMangasInLibrary() {
@@ -38,42 +67,18 @@ class DriftDatasource extends LocalDatasource {
   }
 
   @override
-  Future<Manga?> getManga(int mangaId) async {
-    final manga = await (_db.select(_db.dbMangas)
-          ..where((tbl) => tbl.id.equals(mangaId)))
-        .getSingleOrNull();
-
-    return manga?.toModel();
-  }
-
-  @override
-  Future<int?> getMangaId({
-    required String title,
-    required String url,
-    required String? lang,
-    required String? source,
-  }) {
-    return (_db.select(_db.dbMangas)
-          ..where((t) => t.title.equals(title))
-          ..where((t) => t.lang.equalsNullable(lang))
-          ..where((t) => t.source.equalsNullable(source))
-          ..where((t) => t.url.equals(url)))
-        .getSingleOrNull()
-        .then((manga) => manga?.id);
-  }
-
-  @override
   Future<int> saveSourceManga(SourceManga sourceManga) async {
-    final query = (_db.delete(_db.dbMangas)
-      ..where((t) => t.title.equals(sourceManga.title))
-      ..where((t) => t.lang.equalsNullable(sourceManga.lang))
-      ..where((t) => t.source.equalsNullable(sourceManga.source))
-      ..where((t) => t.url.equals(sourceManga.url)));
-
     // Delete any existing source with the same title, lang, source and url
-    await query.go();
+    await (_db.delete(_db.dbMangas)
+          ..where(
+            (t) =>
+                t.title.equals(sourceManga.title) &
+                t.sourceId.equals(sourceManga.sourceId) &
+                t.url.equals(sourceManga.url),
+          ))
+        .go();
 
-    return _db.into(_db.dbMangas).insert(sourceManga.toCompanion());
+    return _db.into(_db.dbMangas).insert(sourceManga.insert());
   }
 
   @override
@@ -87,7 +92,10 @@ class DriftDatasource extends LocalDatasource {
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
-          ..orderBy([(t) => OrderingTerm(expression: t.index)]))
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.dateUpload, mode: OrderingMode.desc),
+          ]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -116,18 +124,9 @@ class DriftDatasource extends LocalDatasource {
   }
 
   @override
-  Stream<Manga?> watchManga(int id) {
-    return (_db.select(_db.dbMangas)..where((t) => t.id.equals(id)))
-        .watchSingleOrNull()
-        .map((manga) => manga?.toModel());
-  }
-
-  @override
   Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
-          ..where((t) => t.mangaId.equals(mangaId))
-          ..where((t) => t.read.equals(false))
-          ..orderBy([(t) => OrderingTerm(expression: t.index)]))
+          ..where((t) => t.mangaId.equals(mangaId) & t.read.equals(false)))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -250,10 +249,9 @@ class DriftDatasource extends LocalDatasource {
         )
         ..insertAll<$DbChaptersTable, DbChapter>(
           _db.dbChapters,
-          record.sourceChapters.map((e) => e.toCompanion(record.manga.id)),
+          record.sourceChapters.map((e) => e.insert(record.manga.id)),
           onConflict: DoUpdate(
             (old) => DbChaptersCompanion.custom(
-              index: old.index,
               read: old.read,
               bookmark: old.bookmark,
               lastPageRead: old.lastPageRead,
@@ -278,13 +276,12 @@ class DriftDatasource extends LocalDatasource {
           records.expand(
             (record) {
               return record.sourceChapters.map((e) {
-                return e.toCompanion(record.manga.id);
+                return e.insert(record.manga.id);
               });
             },
           ),
           onConflict: DoUpdate(
             (old) => DbChaptersCompanion.custom(
-              index: old.index,
               read: old.read,
               bookmark: old.bookmark,
               lastPageRead: old.lastPageRead,
@@ -295,10 +292,34 @@ class DriftDatasource extends LocalDatasource {
         );
     });
   }
-}
 
-extension on DbManga {
-  Manga toModel() => Manga.fromJson(toJson());
+  @override
+  Future<void> applyTachiyomiBackup({
+    required List<pb.BackupManga> mangas,
+    required bool keepPreviousData,
+  }) async {
+    if (!keepPreviousData) {
+      await _db.batch((batch) {
+        batch
+          ..deleteAll(_db.dbMangas)
+          ..deleteAll(_db.dbChapters)
+          ..deleteAll(_db.dbChapterHistory);
+      });
+    }
+
+    for (final manga in mangas) {
+      // Insert manga
+      final id = await _db.into(_db.dbMangas).insert(manga.insert());
+
+      await _db.batch((batch) {
+        // Insert chapters
+        batch.insertAll(
+          _db.dbChapters,
+          manga.chapters.map((e) => e.insert(id)),
+        );
+      });
+    }
+  }
 }
 
 extension on DbChapter {
@@ -312,36 +333,103 @@ extension on DbChapter {
 }
 
 extension on Manga {
-  DbManga toDbModel() => DbManga.fromJson(toJson());
+  DbManga toDbModel() {
+    return DbManga(
+      id: id,
+      sourceId: sourceId,
+      favorite: favorite,
+      fetchInterval: fetchInterval,
+      dateAdded: dateAdded,
+      url: url,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genre: getGenre(),
+      status: status,
+      thumbnailUrl: thumbnailUrl,
+      updateStrategy: updateStrategy,
+      initialized: initialized,
+      lastModifiedAt: lastModifiedAt,
+    );
+  }
 }
 
 extension on SourceManga {
-  DbMangasCompanion toCompanion() {
+  DbMangasCompanion insert({bool? favorite}) {
     return DbMangasCompanion.insert(
-      title: title,
-      url: url,
-      description: Value.absentIfNull(description),
-      author: Value.absentIfNull(author),
-      status: status,
-      genre: Value.absentIfNull(genre),
-      source: source,
-      lang: lang,
+      url: Value(url),
+      title: Value(title),
       artist: Value.absentIfNull(artist),
+      author: Value.absentIfNull(author),
+      description: Value.absentIfNull(description),
+      genre: Value.absentIfNull(genre),
+      status: Value(status),
       thumbnailUrl: Value.absentIfNull(thumbnailUrl),
+      initialized: Value(initialized),
+      updateStrategy: Value(updateStrategy),
+      sourceId: sourceId,
+      favorite: Value.absentIfNull(favorite),
     );
   }
 }
 
 extension on SourceChapter {
-  DbChaptersCompanion toCompanion(int mangaId) {
+  DbChaptersCompanion insert(int mangaId) {
     return DbChaptersCompanion.insert(
       mangaId: mangaId,
       url: url,
       name: name,
-      index: index,
-      dateUpload: Value(dateUpload),
+      dateUpload: dateUpload,
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(scanlator),
+    );
+  }
+}
+
+extension on pb.BackupManga {
+  DbMangasCompanion insert() {
+    final dbArtist = artist.isNotEmpty ? artist : null;
+    final dbAuthor = author.isNotEmpty ? author : null;
+    final dbDesc = description.isNotEmpty ? description : null;
+    final dbGenre = genre.isNotEmpty ? genre.join(',') : null;
+    final dbStatus = MangaStatus.tryFromIndex(status);
+    final dbThumbnail = thumbnailUrl.isNotEmpty ? thumbnailUrl : null;
+
+    return DbMangasCompanion.insert(
+      sourceId: source.toString(),
+      url: Value(url),
+      title: Value(title),
+      artist: Value.absentIfNull(dbArtist),
+      author: Value.absentIfNull(dbAuthor),
+      description: Value.absentIfNull(dbDesc),
+      genre: Value.absentIfNull(dbGenre),
+      status: Value.absentIfNull(dbStatus),
+      thumbnailUrl: Value.absentIfNull(dbThumbnail),
+      dateAdded: Value(dateAdded.toDateTime()),
+      favorite: const Value(true),
+      updateStrategy: Value(updateStrategy.toUpdateStrategy()),
+      lastModifiedAt: Value(lastModifiedAt.toDateTime()),
+    );
+  }
+}
+
+extension on pb.BackupChapter {
+  DbChaptersCompanion insert(int mangaId) {
+    final dbScanlator = scanlator.isNotEmpty ? scanlator : null;
+    final dbLastPageRead = lastPageRead > 0 ? lastPageRead.toInt() : null;
+    return DbChaptersCompanion.insert(
+      mangaId: mangaId,
+      url: url,
+      name: name,
+      dateUpload: dateUpload.toDateTime(),
+      chapterNumber: Value(chapterNumber),
+      scanlator: Value.absentIfNull(dbScanlator),
+      read: Value(read),
+      bookmark: Value(bookmark),
+      lastPageRead: Value.absentIfNull(dbLastPageRead),
+      dateFetch: Value(dateFetch.toDateTime()),
+      lastModified: Value(lastModifiedAt.toDateTime()),
     );
   }
 }

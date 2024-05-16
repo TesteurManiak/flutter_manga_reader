@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/src/models/manga_status.dart';
 import 'package:manga_reader_core/src/models/source_manga.dart';
+import 'package:manga_reader_core/src/models/update_strategy.dart';
 
 part 'manga.freezed.dart';
 part 'manga.g.dart';
@@ -10,44 +11,54 @@ part 'manga.g.dart';
 class Manga with _$Manga {
   const factory Manga({
     required int id,
-    required String title,
-    required String url,
-    String? description,
-    String? author,
-    @Default(MangaStatus.unknown) @MangaStatusConverter() MangaStatus status,
-    String? genre,
+    required String sourceId,
     @Default(false) bool favorite,
-    required String source,
-    required String lang,
+    @Default(0) int fetchInterval,
+    DateTime? dateAdded,
+    @Default('') String url,
+    @Default('') String title,
     String? artist,
+    String? author,
+    String? description,
+    List<String>? genres,
+    @Default(MangaStatus.unknown) MangaStatus status,
     String? thumbnailUrl,
+    @Default(UpdateStrategy.alwaysUpdate) UpdateStrategy updateStrategy,
     @Default(false) bool initialized,
+    DateTime? lastModifiedAt,
   }) = _Manga;
 
-  /// Used to create model from the database entity.
   factory Manga.fromJson(Map<String, dynamic> json) => _$MangaFromJson(json);
 
   const Manga._();
 
-  List<String>? getGenres() {
-    final localGenre = genre;
-    if (localGenre == null || localGenre.isEmpty) return null;
+  String? getGenre() => genres?.join(',');
 
-    return localGenre
-        .split(', ')
-        .map((e) => e.trim())
-        .where((e) => e.isNotEmpty)
-        .toList();
+  SourceManga toSourceManga() {
+    return SourceManga(
+      url: url,
+      title: title,
+      artist: artist,
+      author: author,
+      description: description,
+      genre: getGenre(),
+      status: status,
+      thumbnailUrl: thumbnailUrl,
+      initialized: initialized,
+      sourceId: sourceId,
+    );
   }
 
-  SourceManga toSourceModel() => SourceManga.fromJson(toJson());
-
-  String get sourceId => toSourceModel().sourceId;
-
-  bool isSameAs(SourceManga sourceManga) {
-    return title == sourceManga.title &&
-        url == sourceManga.url &&
-        lang == sourceManga.lang &&
-        source == sourceManga.source;
+  Manga copyFrom(SourceManga other) {
+    return copyWith(
+      author: other.author,
+      artist: other.artist,
+      description: other.description,
+      genres: other.getGenres(),
+      thumbnailUrl: other.thumbnailUrl,
+      status: other.status,
+      updateStrategy: other.updateStrategy,
+      initialized: other.initialized && initialized,
+    );
   }
 }

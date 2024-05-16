@@ -183,6 +183,24 @@ abstract class AppLocalizations {
   /// **'Activé'**
   String get settings_appearance_enabled;
 
+  /// No description provided for @settings_backup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauvegarde et restauration'**
+  String get settings_backup;
+
+  /// No description provided for @settings_backup_tachiyomi_import_title.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer la sauvegarde Tachiyomi'**
+  String get settings_backup_tachiyomi_import_title;
+
+  /// No description provided for @settings_backup_tachiyomi_import_subtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi'**
+  String get settings_backup_tachiyomi_import_subtitle;
+
   /// No description provided for @settings_library.
   ///
   /// In fr, this message translates to:
@@ -434,6 +452,18 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Mode incognito désactivé'**
   String get incognito_mode_disabled;
+
+  /// No description provided for @invalid_backup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fichier de sauvegarde invalide'**
+  String get invalid_backup;
+
+  /// No description provided for @backup_restored.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauvegarde restaurée'**
+  String get backup_restored;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

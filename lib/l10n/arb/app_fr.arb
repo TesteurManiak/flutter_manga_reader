@@ -15,6 +15,9 @@
     "settings_appearance_system_default": "Par défaut du système",
     "settings_appearance_disabled": "Désactivé",
     "settings_appearance_enabled": "Activé",
+    "settings_backup": "Sauvegarde et restauration",
+    "settings_backup_tachiyomi_import_title": "Importer la sauvegarde Tachiyomi",
+    "settings_backup_tachiyomi_import_subtitle": "Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi",
     "settings_library": "Bibliothèque",
     "settings_library_subtitle": "Catégories, mise à jour globale",
     "settings_about": "À propos",
@@ -70,5 +73,7 @@
     "no_page_found": "Aucune page trouvée",
     "no_manga_found": "Aucun manga trouvé",
     "incognito_mode_enabled": "Mode incognito activé",
-    "incognito_mode_disabled": "Mode incognito désactivé"
+    "incognito_mode_disabled": "Mode incognito désactivé",
+    "invalid_backup": "Fichier de sauvegarde invalide",
+    "backup_restored": "Sauvegarde restaurée"
 }

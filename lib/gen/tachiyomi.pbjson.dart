@@ -116,15 +116,13 @@ final $typed_data.Uint8List backupCategoryDescriptor = $convert.base64Decode(
 const BrokenBackupSource$json = {
   '1': 'BrokenBackupSource',
   '2': [
-    {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
-    {'1': 'sourceId', '3': 2, '4': 2, '5': 3, '10': 'sourceId'},
+    {'1': 'sourceId', '3': 1, '4': 2, '5': 3, '10': 'sourceId'},
   ],
 };
 
 /// Descriptor for `BrokenBackupSource`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List brokenBackupSourceDescriptor = $convert.base64Decode(
-    'ChJCcm9rZW5CYWNrdXBTb3VyY2USEgoEbmFtZRgBIAEoCVIEbmFtZRIaCghzb3VyY2VJZBgCIA'
-    'IoA1IIc291cmNlSWQ=');
+    'ChJCcm9rZW5CYWNrdXBTb3VyY2USGgoIc291cmNlSWQYASACKANSCHNvdXJjZUlk');
 
 @$core.Deprecated('Use backupSourceDescriptor instead')
 const BackupSource$json = {
@@ -230,16 +228,15 @@ final $typed_data.Uint8List backupTrackingDescriptor = $convert.base64Decode(
 const BrokenBackupHistory$json = {
   '1': 'BrokenBackupHistory',
   '2': [
-    {'1': 'url', '3': 1, '4': 2, '5': 9, '10': 'url'},
-    {'1': 'lastRead', '3': 2, '4': 2, '5': 3, '10': 'lastRead'},
-    {'1': 'readDuration', '3': 3, '4': 1, '5': 3, '10': 'readDuration'},
+    {'1': 'lastRead', '3': 1, '4': 2, '5': 3, '10': 'lastRead'},
+    {'1': 'readDuration', '3': 2, '4': 1, '5': 3, '10': 'readDuration'},
   ],
 };
 
 /// Descriptor for `BrokenBackupHistory`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List brokenBackupHistoryDescriptor = $convert.base64Decode(
-    'ChNCcm9rZW5CYWNrdXBIaXN0b3J5EhAKA3VybBgBIAIoCVIDdXJsEhoKCGxhc3RSZWFkGAIgAi'
-    'gDUghsYXN0UmVhZBIiCgxyZWFkRHVyYXRpb24YAyABKANSDHJlYWREdXJhdGlvbg==');
+    'ChNCcm9rZW5CYWNrdXBIaXN0b3J5EhoKCGxhc3RSZWFkGAEgAigDUghsYXN0UmVhZBIiCgxyZW'
+    'FkRHVyYXRpb24YAiABKANSDHJlYWREdXJhdGlvbg==');
 
 @$core.Deprecated('Use backupHistoryDescriptor instead')
 const BackupHistory$json = {

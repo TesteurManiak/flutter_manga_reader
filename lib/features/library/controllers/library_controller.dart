@@ -18,11 +18,11 @@ class LibraryController extends _$LibraryController {
       state = next.when(
         data: (mangas) {
           return mangas.isEmpty
-              ? const LibraryState.empty()
-              : LibraryState.loaded(mangas: mangas);
+              ? const LibraryEmpty()
+              : LibraryLoaded(mangas: mangas);
         },
-        error: (e, s) => LibraryState.error(message: e.toString()),
-        loading: () => const LibraryState.loading(),
+        error: (e, s) => LibraryError(message: e.toString()),
+        loading: () => const LibraryLoading(),
       );
     });
 

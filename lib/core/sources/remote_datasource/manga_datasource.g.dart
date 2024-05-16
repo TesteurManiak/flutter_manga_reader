@@ -204,7 +204,136 @@ final mangaDatasourcesProvider =
 
 typedef MangaDatasourcesRef
     = AutoDisposeProviderRef<Map<String, MangaDatasource>>;
-String _$getSourceFromIdHash() => r'0704196c0d899ecec4f2e8dd9d5168339fbc2390';
+String _$findSourceFromIdHash() => r'55038b8b7acd106e3f84123fe84421ab5c021c23';
+
+/// See also [findSourceFromId].
+@ProviderFor(findSourceFromId)
+const findSourceFromIdProvider = FindSourceFromIdFamily();
+
+/// See also [findSourceFromId].
+class FindSourceFromIdFamily extends Family<MangaDatasource?> {
+  /// See also [findSourceFromId].
+  const FindSourceFromIdFamily();
+
+  /// See also [findSourceFromId].
+  FindSourceFromIdProvider call(
+    String sourceId,
+  ) {
+    return FindSourceFromIdProvider(
+      sourceId,
+    );
+  }
+
+  @override
+  FindSourceFromIdProvider getProviderOverride(
+    covariant FindSourceFromIdProvider provider,
+  ) {
+    return call(
+      provider.sourceId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'findSourceFromIdProvider';
+}
+
+/// See also [findSourceFromId].
+class FindSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource?> {
+  /// See also [findSourceFromId].
+  FindSourceFromIdProvider(
+    String sourceId,
+  ) : this._internal(
+          (ref) => findSourceFromId(
+            ref as FindSourceFromIdRef,
+            sourceId,
+          ),
+          from: findSourceFromIdProvider,
+          name: r'findSourceFromIdProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$findSourceFromIdHash,
+          dependencies: FindSourceFromIdFamily._dependencies,
+          allTransitiveDependencies:
+              FindSourceFromIdFamily._allTransitiveDependencies,
+          sourceId: sourceId,
+        );
+
+  FindSourceFromIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.sourceId,
+  }) : super.internal();
+
+  final String sourceId;
+
+  @override
+  Override overrideWith(
+    MangaDatasource? Function(FindSourceFromIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FindSourceFromIdProvider._internal(
+        (ref) => create(ref as FindSourceFromIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        sourceId: sourceId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeProviderElement<MangaDatasource?> createElement() {
+    return _FindSourceFromIdProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FindSourceFromIdProvider && other.sourceId == sourceId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, sourceId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin FindSourceFromIdRef on AutoDisposeProviderRef<MangaDatasource?> {
+  /// The parameter `sourceId` of this provider.
+  String get sourceId;
+}
+
+class _FindSourceFromIdProviderElement
+    extends AutoDisposeProviderElement<MangaDatasource?>
+    with FindSourceFromIdRef {
+  _FindSourceFromIdProviderElement(super.provider);
+
+  @override
+  String get sourceId => (origin as FindSourceFromIdProvider).sourceId;
+}
+
+String _$getSourceFromIdHash() => r'f2ff5fde03cf67c003233a7b21a545daebd25ef1';
 
 /// See also [getSourceFromId].
 @ProviderFor(getSourceFromId)
@@ -331,134 +460,6 @@ class _GetSourceFromIdProviderElement
 
   @override
   String get sourceId => (origin as GetSourceFromIdProvider).sourceId;
-}
-
-String _$getSourceIdHash() => r'44f65246755b5f112281572b901261fe55ff74db';
-
-/// See also [getSourceId].
-@ProviderFor(getSourceId)
-const getSourceIdProvider = GetSourceIdFamily();
-
-/// See also [getSourceId].
-class GetSourceIdFamily extends Family<String> {
-  /// See also [getSourceId].
-  const GetSourceIdFamily();
-
-  /// See also [getSourceId].
-  GetSourceIdProvider call(
-    SourceManga sourceManga,
-  ) {
-    return GetSourceIdProvider(
-      sourceManga,
-    );
-  }
-
-  @override
-  GetSourceIdProvider getProviderOverride(
-    covariant GetSourceIdProvider provider,
-  ) {
-    return call(
-      provider.sourceManga,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'getSourceIdProvider';
-}
-
-/// See also [getSourceId].
-class GetSourceIdProvider extends AutoDisposeProvider<String> {
-  /// See also [getSourceId].
-  GetSourceIdProvider(
-    SourceManga sourceManga,
-  ) : this._internal(
-          (ref) => getSourceId(
-            ref as GetSourceIdRef,
-            sourceManga,
-          ),
-          from: getSourceIdProvider,
-          name: r'getSourceIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getSourceIdHash,
-          dependencies: GetSourceIdFamily._dependencies,
-          allTransitiveDependencies:
-              GetSourceIdFamily._allTransitiveDependencies,
-          sourceManga: sourceManga,
-        );
-
-  GetSourceIdProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.sourceManga,
-  }) : super.internal();
-
-  final SourceManga sourceManga;
-
-  @override
-  Override overrideWith(
-    String Function(GetSourceIdRef provider) create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: GetSourceIdProvider._internal(
-        (ref) => create(ref as GetSourceIdRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        sourceManga: sourceManga,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeProviderElement<String> createElement() {
-    return _GetSourceIdProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is GetSourceIdProvider && other.sourceManga == sourceManga;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, sourceManga.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
-
-mixin GetSourceIdRef on AutoDisposeProviderRef<String> {
-  /// The parameter `sourceManga` of this provider.
-  SourceManga get sourceManga;
-}
-
-class _GetSourceIdProviderElement extends AutoDisposeProviderElement<String>
-    with GetSourceIdRef {
-  _GetSourceIdProviderElement(super.provider);
-
-  @override
-  SourceManga get sourceManga => (origin as GetSourceIdProvider).sourceManga;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

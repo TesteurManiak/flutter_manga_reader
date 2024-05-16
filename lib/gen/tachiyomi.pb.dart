@@ -518,13 +518,9 @@ class BackupCategory extends $pb.GeneratedMessage {
 /// serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupSource'
 class BrokenBackupSource extends $pb.GeneratedMessage {
   factory BrokenBackupSource({
-    $core.String? name,
     $fixnum.Int64? sourceId,
   }) {
     final $result = create();
-    if (name != null) {
-      $result.name = name;
-    }
     if (sourceId != null) {
       $result.sourceId = sourceId;
     }
@@ -535,8 +531,7 @@ class BrokenBackupSource extends $pb.GeneratedMessage {
   factory BrokenBackupSource.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BrokenBackupSource', createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'name')
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'sourceId', $pb.PbFieldType.Q6, protoName: 'sourceId', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'sourceId', $pb.PbFieldType.Q6, protoName: 'sourceId', defaultOrMaker: $fixnum.Int64.ZERO)
   ;
 
   @$core.Deprecated(
@@ -561,23 +556,15 @@ class BrokenBackupSource extends $pb.GeneratedMessage {
   static BrokenBackupSource? _defaultInstance;
 
   /// WARNING: a default value decoded when value is missing
+  /// optional string name = 0;
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $fixnum.Int64 get sourceId => $_getI64(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set sourceId($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasSourceId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get sourceId => $_getI64(1);
-  @$pb.TagNumber(2)
-  set sourceId($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasSourceId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearSourceId() => clearField(2);
+  void clearSourceId() => clearField(1);
 }
 
 /// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupSource'
@@ -1185,14 +1172,10 @@ class BackupTracking extends $pb.GeneratedMessage {
 /// serial name 'eu.kanade.tachiyomi.data.backup.models.BrokenBackupHistory'
 class BrokenBackupHistory extends $pb.GeneratedMessage {
   factory BrokenBackupHistory({
-    $core.String? url,
     $fixnum.Int64? lastRead,
     $fixnum.Int64? readDuration,
   }) {
     final $result = create();
-    if (url != null) {
-      $result.url = url;
-    }
     if (lastRead != null) {
       $result.lastRead = lastRead;
     }
@@ -1206,9 +1189,8 @@ class BrokenBackupHistory extends $pb.GeneratedMessage {
   factory BrokenBackupHistory.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'BrokenBackupHistory', createEmptyInstance: create)
-    ..aQS(1, _omitFieldNames ? '' : 'url')
-    ..a<$fixnum.Int64>(2, _omitFieldNames ? '' : 'lastRead', $pb.PbFieldType.Q6, protoName: 'lastRead', defaultOrMaker: $fixnum.Int64.ZERO)
-    ..aInt64(3, _omitFieldNames ? '' : 'readDuration', protoName: 'readDuration')
+    ..a<$fixnum.Int64>(1, _omitFieldNames ? '' : 'lastRead', $pb.PbFieldType.Q6, protoName: 'lastRead', defaultOrMaker: $fixnum.Int64.ZERO)
+    ..aInt64(2, _omitFieldNames ? '' : 'readDuration', protoName: 'readDuration')
   ;
 
   @$core.Deprecated(
@@ -1232,33 +1214,25 @@ class BrokenBackupHistory extends $pb.GeneratedMessage {
   static BrokenBackupHistory getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<BrokenBackupHistory>(create);
   static BrokenBackupHistory? _defaultInstance;
 
+  /// required string url = 0;
   @$pb.TagNumber(1)
-  $core.String get url => $_getSZ(0);
+  $fixnum.Int64 get lastRead => $_getI64(0);
   @$pb.TagNumber(1)
-  set url($core.String v) { $_setString(0, v); }
+  set lastRead($fixnum.Int64 v) { $_setInt64(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUrl() => $_has(0);
+  $core.bool hasLastRead() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUrl() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get lastRead => $_getI64(1);
-  @$pb.TagNumber(2)
-  set lastRead($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasLastRead() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLastRead() => clearField(2);
+  void clearLastRead() => clearField(1);
 
   /// WARNING: a default value decoded when value is missing
-  @$pb.TagNumber(3)
-  $fixnum.Int64 get readDuration => $_getI64(2);
-  @$pb.TagNumber(3)
-  set readDuration($fixnum.Int64 v) { $_setInt64(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasReadDuration() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearReadDuration() => clearField(3);
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get readDuration => $_getI64(1);
+  @$pb.TagNumber(2)
+  set readDuration($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasReadDuration() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearReadDuration() => clearField(2);
 }
 
 /// serial name 'eu.kanade.tachiyomi.data.backup.models.BackupHistory'

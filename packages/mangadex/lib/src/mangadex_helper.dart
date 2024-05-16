@@ -56,6 +56,7 @@ class MangadexHelper {
   }
 
   SourceManga createBasicManga({
+    required String sourceId,
     required MangaData mangaData,
     String? coverFileName,
     String? coverSuffix,
@@ -71,7 +72,7 @@ class MangadexHelper {
 
     return SourceManga(
       url: '/manga/${mangaData.id}',
-      source: MDConstants.sourceName,
+      sourceId: sourceId,
       title: title,
       thumbnailUrl: coverFileName != null
           ? switch (coverSuffix != null && coverSuffix.isNotEmpty) {
@@ -81,11 +82,11 @@ class MangadexHelper {
                 '${MDConstants.cdnUrl}/covers/${mangaData.id}/$coverFileName',
             }
           : null,
-      lang: lang,
     );
   }
 
   SourceManga createManga({
+    required String sourceId,
     required MangaData mangaData,
     required Map<String, AggregateVolume> chapters,
     String? firstVolumeCover,
@@ -158,6 +159,7 @@ class MangadexHelper {
         attr.description.getDisplayName(lang)?.removeEntitiesAndMarkdown();
 
     return createBasicManga(
+      sourceId: sourceId,
       mangaData: mangaData,
       coverFileName: coverFileName,
       coverSuffix: coverSuffix,
@@ -200,7 +202,7 @@ class MangadexHelper {
     };
   }
 
-  SourceChapter createChapter(int index, ChapterData chapterData) {
+  SourceChapter createChapter(ChapterData chapterData) {
     final attr = chapterData.attributes;
     final groups = chapterData.relationships
         .whereType<ScanlationGroupRelationship>()
@@ -238,7 +240,6 @@ class MangadexHelper {
     }
 
     return SourceChapter(
-      index: index,
       url: '/chapter/${chapterData.id}',
       name: chapterName.join(' ').removeEntitiesAndMarkdown(),
       dateUpload: _parseDate(attr.publishAt),
@@ -246,11 +247,11 @@ class MangadexHelper {
     );
   }
 
-  DateTime? _parseDate(String dateAsString) {
+  DateTime _parseDate(String dateAsString) {
     try {
       return MDConstants.dateFormatter.parse(dateAsString).toUtc();
     } catch (_) {
-      return null;
+      return DateTime.now().toUtc();
     }
   }
 

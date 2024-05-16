@@ -55,7 +55,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(watchMangaProvider(widget.mangaId));
+    final state = ref.watch(watchMangaByIdProvider(widget.mangaId));
 
     return DefaultSlidableController(
       initiallyShown: false,
@@ -67,10 +67,6 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
         ),
         body: state.when(
           data: (manga) {
-            if (manga == null) {
-              return ErrorContent(message: context.strings.manga_not_found);
-            }
-
             return _MangaContent(
               manga: manga,
               openedFromSource: widget.openedFromSource,
@@ -121,7 +117,6 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
     });
 
     final desc = widget.manga.description;
-    final genres = widget.manga.getGenres();
     final thumbnailUrl = widget.manga.thumbnailUrl;
 
     return Stack(
@@ -155,7 +150,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
                 initiallyExpanded: widget.openedFromSource,
                 onExpansionChanged: (v) => compactNotifier.value = !v,
               ),
-            if (genres != null)
+            if (widget.manga.genres case final genres?)
               ValueListenableBuilder(
                 valueListenable: compactNotifier,
                 builder: (context, isCompact, _) {
@@ -248,8 +243,7 @@ class _SliverHeader extends StatelessWidget {
                   ),
                   _StatusAndSource(
                     status: manga?.status,
-                    source: manga?.source,
-                    lang: manga?.lang,
+                    sourceId: manga?.sourceId,
                   ),
                 ],
               ),
@@ -295,31 +289,29 @@ class _Cover extends ConsumerWidget {
   }
 }
 
-class _StatusAndSource extends StatelessWidget {
+class _StatusAndSource extends ConsumerWidget {
   const _StatusAndSource({
     required this.status,
-    required this.source,
-    required this.lang,
+    required this.sourceId,
   });
 
   final MangaStatus? status;
-  final String? source;
-  final String? lang;
+  final String? sourceId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final source = switch (sourceId) {
+      final sourceId? => ref.watch(getSourceFromIdProvider(sourceId)),
+      _ => null,
+    };
+
     return SeparatedRow(
       separator: const Text(' • '),
       children: [
         if (status case final status?) StatusLabel(status),
         if (source case final source?)
           Text(
-            () {
-              final buffer = StringBuffer(source);
-              final lang = this.lang;
-              if (lang != null) buffer.write(' (${lang.toUpperCase()})');
-              return buffer.toString();
-            }(),
+            '${source.name} (${source.lang.toUpperCase()})',
             maxLines: 1,
             style: Theme.of(context).textTheme.bodySmall,
           ),

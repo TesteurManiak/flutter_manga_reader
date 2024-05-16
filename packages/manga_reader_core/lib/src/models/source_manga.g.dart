@@ -8,17 +8,33 @@ part of 'source_manga.dart';
 
 _$SourceMangaImpl _$$SourceMangaImplFromJson(Map<String, dynamic> json) =>
     _$SourceMangaImpl(
-      title: json['title'] as String,
       url: json['url'] as String,
-      description: json['description'] as String?,
-      author: json['author'] as String?,
-      status: json['status'] == null
-          ? MangaStatus.unknown
-          : const MangaStatusConverter()
-              .fromJson((json['status'] as num).toInt()),
-      genre: json['genre'] as String?,
-      source: json['source'] as String,
-      lang: json['lang'] as String,
+      title: json['title'] as String,
       artist: json['artist'] as String?,
+      author: json['author'] as String?,
+      description: json['description'] as String?,
+      genre: json['genre'] as String?,
+      status: $enumDecodeNullable(_$MangaStatusEnumMap, json['status']) ??
+          MangaStatus.unknown,
       thumbnailUrl: json['thumbnailUrl'] as String?,
+      initialized: json['initialized'] as bool? ?? false,
+      updateStrategy: $enumDecodeNullable(
+              _$UpdateStrategyEnumMap, json['updateStrategy']) ??
+          UpdateStrategy.alwaysUpdate,
+      sourceId: json['sourceId'] as String,
     );
+
+const _$MangaStatusEnumMap = {
+  MangaStatus.unknown: 0,
+  MangaStatus.ongoing: 1,
+  MangaStatus.completed: 2,
+  MangaStatus.licensed: 3,
+  MangaStatus.publishingFinished: 4,
+  MangaStatus.cancelled: 5,
+  MangaStatus.onHiatus: 6,
+};
+
+const _$UpdateStrategyEnumMap = {
+  UpdateStrategy.alwaysUpdate: 0,
+  UpdateStrategy.onlyFetchOnce: 1,
+};

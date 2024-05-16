@@ -11,10 +11,12 @@ class ErrorContent extends StatelessWidget {
   const ErrorContent({
     super.key,
     this.message,
+    this.retryMessage,
     this.onRetry,
   });
 
   final String? message;
+  final String? retryMessage;
   final VoidCallback? onRetry;
 
   @override
@@ -33,9 +35,9 @@ class ErrorContent extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           if (onRetry != null)
-            ElevatedButton(
+            TextButton(
               onPressed: onRetry,
-              child: Text(strings.generic_retry),
+              child: Text(retryMessage ?? strings.generic_retry),
             ),
         ],
       ),

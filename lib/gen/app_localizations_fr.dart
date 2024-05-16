@@ -52,6 +52,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_appearance_enabled => 'Activé';
 
   @override
+  String get settings_backup => 'Sauvegarde et restauration';
+
+  @override
+  String get settings_backup_tachiyomi_import_title => 'Importer la sauvegarde Tachiyomi';
+
+  @override
+  String get settings_backup_tachiyomi_import_subtitle => 'Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi';
+
+  @override
   String get settings_library => 'Bibliothèque';
 
   @override
@@ -187,4 +196,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get incognito_mode_disabled => 'Mode incognito désactivé';
+
+  @override
+  String get invalid_backup => 'Fichier de sauvegarde invalide';
+
+  @override
+  String get backup_restored => 'Sauvegarde restaurée';
 }

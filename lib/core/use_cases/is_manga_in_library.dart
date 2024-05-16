@@ -9,7 +9,11 @@ bool isMangaInLibrary(IsMangaInLibraryRef ref, SourceManga sourceManga) {
   return ref.watch(
     watchMangasInLibraryProvider.select((value) {
       return value.maybeWhen(
-        data: (mangas) => mangas.any((manga) => manga.isSameAs(sourceManga)),
+        data: (mangas) => mangas.any(
+          (manga) =>
+              manga.sourceId == sourceManga.sourceId &&
+              manga.url == sourceManga.url,
+        ),
         orElse: () => false,
       );
     }),

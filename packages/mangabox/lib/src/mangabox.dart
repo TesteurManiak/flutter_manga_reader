@@ -8,7 +8,7 @@ typedef RequestPropsRecord = ({
   Map<String, String>? queryParameters,
 });
 
-abstract class MangaboxDatasource extends MangaDatasource {
+abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
   MangaboxDatasource({
     required super.name,
     required super.baseUrl,
@@ -116,9 +116,8 @@ abstract class MangaboxDatasource extends MangaDatasource {
           final manga = SourceManga(
             title: names[i],
             url: urls[i],
-            source: name,
+            sourceId: id,
             thumbnailUrl: images[i],
-            lang: lang,
           );
           mangaList.add(manga);
         }
@@ -176,7 +175,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
             author: author,
             description: description,
             status: status,
-            genre: genres.isNotEmpty ? genres.join(', ') : null,
+            genres: genres.isNotEmpty ? genres : null,
           ),
         );
       },
@@ -240,7 +239,7 @@ abstract class MangaboxDatasource extends MangaDatasource {
         );
 
         if (chaptersElements != null) {
-          for (final (i, e) in chaptersElements.indexed) {
+          for (final e in chaptersElements) {
             final a = e.selectFirst('a');
             final name = a?.text ?? '';
             final dates = e.select('span');
@@ -253,7 +252,6 @@ abstract class MangaboxDatasource extends MangaDatasource {
               SourceChapter(
                 url: a?.getHref ?? '',
                 name: name,
-                index: i,
                 dateUpload: helper.parseDate(dateStr),
               ),
             );
@@ -313,9 +311,8 @@ abstract class MangaboxDatasource extends MangaDatasource {
       final manga = SourceManga(
         title: names[i],
         url: urls[i],
-        source: name,
+        sourceId: id,
         thumbnailUrl: images[i],
-        lang: lang,
       );
       mangaList.add(manga);
     }
