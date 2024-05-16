@@ -242,17 +242,10 @@ class MangadexHelper {
     return SourceChapter(
       url: '/chapter/${chapterData.id}',
       name: chapterName.join(' ').removeEntitiesAndMarkdown(),
-      dateUpload: _parseDate(attr.publishAt),
+      dateUpload: attr.publishAt,
       scanlator: groups,
+      chapterNumber: double.tryParse(attr.chapter ?? '') ?? -1,
     );
-  }
-
-  DateTime _parseDate(String dateAsString) {
-    try {
-      return MDConstants.dateFormatter.parse(dateAsString).toUtc();
-    } catch (_) {
-      return DateTime.now().toUtc();
-    }
   }
 
   String titleToSlug(String title) {

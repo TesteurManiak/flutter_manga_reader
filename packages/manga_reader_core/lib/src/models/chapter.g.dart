@@ -12,7 +12,9 @@ _$ChapterImpl _$$ChapterImplFromJson(Map<String, dynamic> json) =>
       mangaId: (json['mangaId'] as num).toInt(),
       url: json['url'] as String,
       name: json['name'] as String,
-      dateUpload: DateTime.parse(json['dateUpload'] as String),
+      dateUpload: json['dateUpload'] == null
+          ? null
+          : DateTime.parse(json['dateUpload'] as String),
       chapterNumber: (json['chapterNumber'] as num?)?.toDouble() ?? 0.0,
       scanlator: json['scanlator'] as String?,
       read: json['read'] as bool? ?? false,
@@ -33,7 +35,7 @@ Map<String, dynamic> _$$ChapterImplToJson(_$ChapterImpl instance) =>
       'mangaId': instance.mangaId,
       'url': instance.url,
       'name': instance.name,
-      'dateUpload': instance.dateUpload.toIso8601String(),
+      'dateUpload': instance.dateUpload?.toIso8601String(),
       'chapterNumber': instance.chapterNumber,
       'scanlator': instance.scanlator,
       'read': instance.read,

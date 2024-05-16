@@ -36,7 +36,7 @@ class DbChapters extends Table {
   IntColumn get mangaId => integer()();
   TextColumn get url => text()();
   TextColumn get name => text()();
-  DateTimeColumn get dateUpload => dateTime()();
+  DateTimeColumn get dateUpload => dateTime().nullable()();
   RealColumn get chapterNumber => real().withDefault(const Constant(-1))();
   TextColumn get scanlator => text().nullable()();
   BoolColumn get read => boolean().withDefault(const Constant(false))();

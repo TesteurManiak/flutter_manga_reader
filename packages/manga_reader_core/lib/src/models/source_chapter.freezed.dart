@@ -22,7 +22,7 @@ SourceChapter _$SourceChapterFromJson(Map<String, dynamic> json) {
 mixin _$SourceChapter {
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get dateUpload => throw _privateConstructorUsedError;
+  DateTime? get dateUpload => throw _privateConstructorUsedError;
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError;
 
@@ -40,7 +40,7 @@ abstract class $SourceChapterCopyWith<$Res> {
   $Res call(
       {String url,
       String name,
-      DateTime dateUpload,
+      DateTime? dateUpload,
       double chapterNumber,
       String? scanlator});
 }
@@ -60,7 +60,7 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
   $Res call({
     Object? url = null,
     Object? name = null,
-    Object? dateUpload = null,
+    Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
   }) {
@@ -73,10 +73,10 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      dateUpload: null == dateUpload
+      dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -100,7 +100,7 @@ abstract class _$$SourceChapterImplCopyWith<$Res>
   $Res call(
       {String url,
       String name,
-      DateTime dateUpload,
+      DateTime? dateUpload,
       double chapterNumber,
       String? scanlator});
 }
@@ -118,7 +118,7 @@ class __$$SourceChapterImplCopyWithImpl<$Res>
   $Res call({
     Object? url = null,
     Object? name = null,
-    Object? dateUpload = null,
+    Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
   }) {
@@ -131,10 +131,10 @@ class __$$SourceChapterImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      dateUpload: null == dateUpload
+      dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -153,7 +153,7 @@ class _$SourceChapterImpl implements _SourceChapter {
   const _$SourceChapterImpl(
       {required this.url,
       required this.name,
-      required this.dateUpload,
+      this.dateUpload,
       this.chapterNumber = -1.0,
       this.scanlator});
 
@@ -165,7 +165,7 @@ class _$SourceChapterImpl implements _SourceChapter {
   @override
   final String name;
   @override
-  final DateTime dateUpload;
+  final DateTime? dateUpload;
   @override
   @JsonKey()
   final double chapterNumber;
@@ -208,7 +208,7 @@ abstract class _SourceChapter implements SourceChapter {
   const factory _SourceChapter(
       {required final String url,
       required final String name,
-      required final DateTime dateUpload,
+      final DateTime? dateUpload,
       final double chapterNumber,
       final String? scanlator}) = _$SourceChapterImpl;
 
@@ -220,7 +220,7 @@ abstract class _SourceChapter implements SourceChapter {
   @override
   String get name;
   @override
-  DateTime get dateUpload;
+  DateTime? get dateUpload;
   @override
   double get chapterNumber;
   @override

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:mangadex/src/models/relationship.dart';
 
 part 'chapter.freezed.dart';
@@ -40,7 +41,10 @@ class ChapterAttributes with _$ChapterAttributes {
     String? volume,
     String? chapter,
     @Default(0) int pages,
-    required String publishAt,
+    @DtConverter() DateTime? publishAt,
+    @DtConverter() DateTime? readableAt,
+    @DtConverter() DateTime? createdAt,
+    @DtConverter() DateTime? updatedAt,
     String? externalUrl,
   }) = _ChapterAttributes;
 
@@ -50,4 +54,22 @@ class ChapterAttributes with _$ChapterAttributes {
   const ChapterAttributes._();
 
   bool get isInvalid => externalUrl != null && pages == 0;
+}
+
+class DtConverter extends JsonConverter<DateTime?, String?> {
+  const DtConverter();
+
+  static final formatter = DateFormat("yyyy-MM-dd'T'HH:mm:ss+SSS", 'en_US');
+
+  @override
+  DateTime? fromJson(String? json) {
+    if (json == null) return null;
+    return formatter.tryParse(json)?.toUtc();
+  }
+
+  @override
+  String? toJson(DateTime? object) {
+    if (object == null) return null;
+    return formatter.format(object);
+  }
 }

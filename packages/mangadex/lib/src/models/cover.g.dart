@@ -13,9 +13,9 @@ _$CoverListResponseImpl _$$CoverListResponseImplFromJson(
               ?.map((e) => CoverArt.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <CoverArt>[],
-      limit: json['limit'] as int? ?? 0,
-      offset: json['offset'] as int? ?? 0,
-      total: json['total'] as int? ?? 0,
+      limit: (json['limit'] as num?)?.toInt() ?? 0,
+      offset: (json['offset'] as num?)?.toInt() ?? 0,
+      total: (json['total'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$CoverListResponseImplToJson(
