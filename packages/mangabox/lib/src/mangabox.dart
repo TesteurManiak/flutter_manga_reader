@@ -130,8 +130,13 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
 
   @override
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
+    final url = switch (manga.url) {
+      final url when url.startsWith('https') => url,
+      _ => '$baseUrl${manga.url}',
+    };
+
     final result = await client
-        .send(method: HttpMethod.get, baseUrl: manga.url, headers: getHeaders())
+        .send(method: HttpMethod.get, baseUrl: url, headers: getHeaders())
         .decodeHtmlBody();
 
     return result.when(
@@ -223,10 +228,15 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
   Future<Result<List<SourceChapter>, HttpError>> fetchChapters(
     SourceManga sourceManga,
   ) async {
+    final url = switch (sourceManga.url) {
+      final url when url.startsWith('https') => url,
+      _ => '$baseUrl${sourceManga.url}',
+    };
+
     final result = await client
         .send(
           method: HttpMethod.get,
-          baseUrl: sourceManga.url,
+          baseUrl: url,
           headers: getHeaders(),
         )
         .decodeHtmlBody();
