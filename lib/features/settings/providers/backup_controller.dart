@@ -31,7 +31,6 @@ class BackupController extends _$BackupController {
       final mangaToSync = <pb.BackupManga>[];
 
       for (final manga in backup.backupManga) {
-        // TODO(Guillaume): sync  history
         final source =
             ref.read(findSourceFromIdProvider(manga.source.toString()));
         if (source != null) mangaToSync.add(manga);

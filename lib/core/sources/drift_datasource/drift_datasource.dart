@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
@@ -297,19 +298,28 @@ class DriftDatasource extends LocalDatasource {
   Future<void> applyTachiyomiBackup({
     required List<pb.BackupManga> mangas,
     required bool keepPreviousData,
-  }) {
-    return _db.batch((batch) {
-      if (!keepPreviousData) {
+  }) async {
+    if (!keepPreviousData) {
+      await _db.batch((batch) {
         batch
           ..deleteAll(_db.dbMangas)
           ..deleteAll(_db.dbChapters)
           ..deleteAll(_db.dbChapterHistory);
-      }
-      batch.insertAll(
-        _db.dbMangas,
-        mangas.map((e) => e.insert()),
-      );
-    });
+      });
+    }
+
+    for (final manga in mangas) {
+      // Insert manga
+      final id = await _db.into(_db.dbMangas).insert(manga.insert());
+
+      await _db.batch((batch) {
+        // Insert chapters
+        batch.insertAll(
+          _db.dbChapters,
+          manga.chapters.mapIndexed((i, e) => e.insert(i, id)),
+        );
+      });
+    }
   }
 }
 
@@ -402,6 +412,27 @@ extension on pb.BackupManga {
       favorite: const Value(true),
       updateStrategy: Value(updateStrategy.toUpdateStrategy()),
       lastModifiedAt: Value(lastModifiedAt.toDateTime()),
+    );
+  }
+}
+
+extension on pb.BackupChapter {
+  DbChaptersCompanion insert(int index, int mangaId) {
+    final dbScanlator = scanlator.isNotEmpty ? scanlator : null;
+    final dbLastPageRead = lastPageRead > 0 ? lastPageRead.toInt() : null;
+    return DbChaptersCompanion.insert(
+      mangaId: mangaId,
+      url: url,
+      name: name,
+      index: index,
+      dateUpload: Value(dateUpload.toDateTime()),
+      chapterNumber: Value(chapterNumber),
+      scanlator: Value.absentIfNull(dbScanlator),
+      read: Value(read),
+      bookmark: Value(bookmark),
+      lastPageRead: Value.absentIfNull(dbLastPageRead),
+      dateFetch: Value(dateFetch.toDateTime()),
+      lastModified: Value(lastModifiedAt.toDateTime()),
     );
   }
 }
