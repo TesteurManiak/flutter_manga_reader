@@ -124,8 +124,7 @@ class DriftDatasource extends LocalDatasource {
   @override
   Stream<List<Chapter>> watchUnreadChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
-          ..where((t) => t.mangaId.equals(mangaId) & t.read.equals(false))
-          ..orderBy([(t) => OrderingTerm(expression: t.index)]))
+          ..where((t) => t.mangaId.equals(mangaId) & t.read.equals(false)))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
