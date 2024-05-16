@@ -241,18 +241,19 @@ class DriftDatasource extends LocalDatasource {
   @override
   Future<void> saveMangaData(MangaFetchRecord record) async {
     return _db.batch((batch) {
-      batch.update(
+      final mangaData = record.manga.toDbModel();
+      batch.insert(
         _db.dbMangas,
-        record.manga.toDbModel(),
-        where: (t) => t.id.equals(record.manga.id),
+        mangaData,
+        onConflict: DoUpdate((_) => mangaData),
       );
       for (final chapter in record.sourceChapters) {
-        final data = chapter.insert(record.manga.id);
-        batch.insert<$DbChaptersTable, DbChapter>(
+        final chapterData = chapter.insert(record.manga.id);
+        batch.insert(
           _db.dbChapters,
-          data,
+          chapterData,
           onConflict: DoUpdate(
-            (_) => data,
+            (_) => chapterData,
             target: _db.dbChapters.uniqueKeys.first.toList(),
           ),
         );
