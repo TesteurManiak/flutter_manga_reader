@@ -943,7 +943,7 @@ class $DbChaptersTable extends DbChapters
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {mangaId, url, name},
+        {mangaId, url},
       ];
   @override
   DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {
