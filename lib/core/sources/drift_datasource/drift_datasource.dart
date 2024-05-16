@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:collection/collection.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter_manga_reader/core/extensions/backup_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
@@ -93,7 +92,10 @@ class DriftDatasource extends LocalDatasource {
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
-          ..orderBy([(t) => OrderingTerm(expression: t.index)]))
+          ..orderBy([
+            (t) =>
+                OrderingTerm(expression: t.dateUpload, mode: OrderingMode.desc),
+          ]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -250,7 +252,6 @@ class DriftDatasource extends LocalDatasource {
           record.sourceChapters.map((e) => e.insert(record.manga.id)),
           onConflict: DoUpdate(
             (old) => DbChaptersCompanion.custom(
-              index: old.index,
               read: old.read,
               bookmark: old.bookmark,
               lastPageRead: old.lastPageRead,
@@ -281,7 +282,6 @@ class DriftDatasource extends LocalDatasource {
           ),
           onConflict: DoUpdate(
             (old) => DbChaptersCompanion.custom(
-              index: old.index,
               read: old.read,
               bookmark: old.bookmark,
               lastPageRead: old.lastPageRead,
@@ -315,7 +315,7 @@ class DriftDatasource extends LocalDatasource {
         // Insert chapters
         batch.insertAll(
           _db.dbChapters,
-          manga.chapters.mapIndexed((i, e) => e.insert(i, id)),
+          manga.chapters.map((e) => e.insert(id)),
         );
       });
     }
@@ -380,8 +380,7 @@ extension on SourceChapter {
       mangaId: mangaId,
       url: url,
       name: name,
-      index: index,
-      dateUpload: Value(dateUpload),
+      dateUpload: dateUpload,
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(scanlator),
     );
@@ -416,15 +415,14 @@ extension on pb.BackupManga {
 }
 
 extension on pb.BackupChapter {
-  DbChaptersCompanion insert(int index, int mangaId) {
+  DbChaptersCompanion insert(int mangaId) {
     final dbScanlator = scanlator.isNotEmpty ? scanlator : null;
     final dbLastPageRead = lastPageRead > 0 ? lastPageRead.toInt() : null;
     return DbChaptersCompanion.insert(
       mangaId: mangaId,
       url: url,
       name: name,
-      index: index,
-      dateUpload: Value(dateUpload.toDateTime()),
+      dateUpload: dateUpload.toDateTime(),
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(dbScanlator),
       read: Value(read),

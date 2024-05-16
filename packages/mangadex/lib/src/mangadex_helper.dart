@@ -202,7 +202,7 @@ class MangadexHelper {
     };
   }
 
-  SourceChapter createChapter(int index, ChapterData chapterData) {
+  SourceChapter createChapter(ChapterData chapterData) {
     final attr = chapterData.attributes;
     final groups = chapterData.relationships
         .whereType<ScanlationGroupRelationship>()
@@ -240,7 +240,6 @@ class MangadexHelper {
     }
 
     return SourceChapter(
-      index: index,
       url: '/chapter/${chapterData.id}',
       name: chapterName.join(' ').removeEntitiesAndMarkdown(),
       dateUpload: _parseDate(attr.publishAt),
@@ -248,11 +247,11 @@ class MangadexHelper {
     );
   }
 
-  DateTime? _parseDate(String dateAsString) {
+  DateTime _parseDate(String dateAsString) {
     try {
       return MDConstants.dateFormatter.parse(dateAsString).toUtc();
     } catch (_) {
-      return null;
+      return DateTime.now().toUtc();
     }
   }
 

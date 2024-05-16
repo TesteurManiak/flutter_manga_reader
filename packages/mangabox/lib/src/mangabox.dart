@@ -239,7 +239,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         );
 
         if (chaptersElements != null) {
-          for (final (i, e) in chaptersElements.indexed) {
+          for (final e in chaptersElements) {
             final a = e.selectFirst('a');
             final name = a?.text ?? '';
             final dates = e.select('span');
@@ -252,7 +252,6 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
               SourceChapter(
                 url: a?.getHref ?? '',
                 name: name,
-                index: i,
                 dateUpload: helper.parseDate(dateStr),
               ),
             );
