@@ -92,7 +92,10 @@ class DriftDatasource extends LocalDatasource {
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
-          ..orderBy([(t) => OrderingTerm.desc(t.chapterNumber)]))
+          ..orderBy([
+            (t) => OrderingTerm.desc(t.chapterNumber),
+            (t) => OrderingTerm.desc(t.dateUpload),
+          ]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -238,55 +241,48 @@ class DriftDatasource extends LocalDatasource {
   @override
   Future<void> saveMangaData(MangaFetchRecord record) async {
     return _db.batch((batch) {
-      batch
-        ..update(
-          _db.dbMangas,
-          record.manga.toDbModel(),
-          where: (t) => t.id.equals(record.manga.id),
-        )
-        ..insertAll<$DbChaptersTable, DbChapter>(
+      batch.update(
+        _db.dbMangas,
+        record.manga.toDbModel(),
+        where: (t) => t.id.equals(record.manga.id),
+      );
+      for (final chapter in record.sourceChapters) {
+        final data = chapter.insert(record.manga.id);
+        batch.insert<$DbChaptersTable, DbChapter>(
           _db.dbChapters,
-          record.sourceChapters.map((e) => e.insert(record.manga.id)),
+          data,
           onConflict: DoUpdate(
-            (old) => DbChaptersCompanion.custom(
-              read: old.read,
-              bookmark: old.bookmark,
-              lastPageRead: old.lastPageRead,
-              downloaded: old.downloaded,
-            ),
+            (_) => data,
             target: _db.dbChapters.uniqueKeys.first.toList(),
           ),
         );
+      }
     });
   }
 
   @override
   Future<void> saveMangaDatas(List<MangaFetchRecord> records) {
     return _db.batch((batch) {
-      batch
-        ..insertAllOnConflictUpdate<$DbMangasTable, DbManga>(
+      for (final record in records) {
+        final mangaData = record.manga.toDbModel();
+        batch.insert(
           _db.dbMangas,
-          records.map((record) => record.manga.toDbModel()),
-        )
-        ..insertAll<$DbChaptersTable, DbChapter>(
-          _db.dbChapters,
-          records.expand(
-            (record) {
-              return record.sourceChapters.map((e) {
-                return e.insert(record.manga.id);
-              });
-            },
-          ),
-          onConflict: DoUpdate(
-            (old) => DbChaptersCompanion.custom(
-              read: old.read,
-              bookmark: old.bookmark,
-              lastPageRead: old.lastPageRead,
-              downloaded: old.downloaded,
-            ),
-            target: _db.dbChapters.uniqueKeys.first.toList(),
-          ),
+          mangaData,
+          onConflict: DoUpdate((_) => mangaData),
         );
+
+        for (final chapter in record.sourceChapters) {
+          final chapterData = chapter.insert(record.manga.id);
+          batch.insert(
+            _db.dbChapters,
+            chapterData,
+            onConflict: DoUpdate(
+              (_) => chapterData,
+              target: _db.dbChapters.uniqueKeys.first.toList(),
+            ),
+          );
+        }
+      }
     });
   }
 
@@ -424,7 +420,8 @@ extension on pb.BackupChapter {
       scanlator: Value.absentIfNull(dbScanlator),
       read: Value(read),
       bookmark: Value(bookmark),
-      lastPageRead: Value.absentIfNull(dbLastPageRead),
+      lastPageRead:
+          read ? const Value.absent() : Value.absentIfNull(dbLastPageRead),
       dateFetch: Value(dateFetch.toDateTime()),
       lastModified: Value(lastModifiedAt.toDateTime()),
     );
