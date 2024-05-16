@@ -12,7 +12,7 @@ class Chapter with _$Chapter {
     // Source data
     required String url,
     required String name,
-    required DateTime dateUpload,
+    DateTime? dateUpload,
     @Default(0.0) double chapterNumber,
     String? scanlator,
     // Model data

@@ -40,7 +40,7 @@ class ChapterTile extends ConsumerWidget {
     final read = chapter.read;
     final lastPageRead = chapter.lastPageRead;
     final subtitle = <String>[
-      DateFormat.yMMMd(locale).format(dateUpload),
+      if (dateUpload != null) DateFormat.yMMMd(locale).format(dateUpload),
       if (lastPageRead > 0) context.strings.last_page(lastPageRead + 1),
       if (scanlator != null && scanlator.isNotEmpty) scanlator,
     ];

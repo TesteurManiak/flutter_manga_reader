@@ -13,9 +13,9 @@ _$ChapterResponseImpl _$$ChapterResponseImplFromJson(
               ?.map((e) => ChapterData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <ChapterData>[],
-      limit: json['limit'] as int? ?? 0,
-      offset: json['offset'] as int? ?? 0,
-      total: json['total'] as int? ?? 0,
+      limit: (json['limit'] as num?)?.toInt() ?? 0,
+      offset: (json['offset'] as num?)?.toInt() ?? 0,
+      total: (json['total'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$ChapterResponseImplToJson(
@@ -51,8 +51,8 @@ _$ChapterAttributesImpl _$$ChapterAttributesImplFromJson(
       title: json['title'] as String?,
       volume: json['volume'] as String?,
       chapter: json['chapter'] as String?,
-      pages: json['pages'] as int? ?? 0,
-      publishAt: json['publishAt'] as String,
+      pages: (json['pages'] as num?)?.toInt() ?? 0,
+      publishAt: json['publishAt'] as String?,
       externalUrl: json['externalUrl'] as String?,
     );
 

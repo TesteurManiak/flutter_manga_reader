@@ -92,10 +92,7 @@ class DriftDatasource extends LocalDatasource {
   Stream<List<Chapter>> watchChaptersForManga(int mangaId) {
     return (_db.select(_db.dbChapters)
           ..where((t) => t.mangaId.equals(mangaId))
-          ..orderBy([
-            (t) =>
-                OrderingTerm(expression: t.dateUpload, mode: OrderingMode.desc),
-          ]))
+          ..orderBy([(t) => OrderingTerm.desc(t.chapterNumber)]))
         .watch()
         .map((chapters) => chapters.map((e) => e.toModel()).toList());
   }
@@ -380,7 +377,7 @@ extension on SourceChapter {
       mangaId: mangaId,
       url: url,
       name: name,
-      dateUpload: dateUpload,
+      dateUpload: Value.absentIfNull(dateUpload),
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(scanlator),
     );
@@ -422,7 +419,7 @@ extension on pb.BackupChapter {
       mangaId: mangaId,
       url: url,
       name: name,
-      dateUpload: dateUpload.toDateTime(),
+      dateUpload: Value(dateUpload.toDateTime()),
       chapterNumber: Value(chapterNumber),
       scanlator: Value.absentIfNull(dbScanlator),
       read: Value(read),

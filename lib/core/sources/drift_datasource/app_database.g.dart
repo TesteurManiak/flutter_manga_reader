@@ -778,8 +778,8 @@ class $DbChaptersTable extends DbChapters
       const VerificationMeta('dateUpload');
   @override
   late final GeneratedColumn<DateTime> dateUpload = GeneratedColumn<DateTime>(
-      'date_upload', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+      'date_upload', aliasedName, true,
+      type: DriftSqlType.dateTime, requiredDuringInsert: false);
   static const VerificationMeta _chapterNumberMeta =
       const VerificationMeta('chapterNumber');
   @override
@@ -895,8 +895,6 @@ class $DbChaptersTable extends DbChapters
           _dateUploadMeta,
           dateUpload.isAcceptableOrUnknown(
               data['date_upload']!, _dateUploadMeta));
-    } else if (isInserting) {
-      context.missing(_dateUploadMeta);
     }
     if (data.containsKey('chapter_number')) {
       context.handle(
@@ -960,7 +958,7 @@ class $DbChaptersTable extends DbChapters
       name: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       dateUpload: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_upload'])!,
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_upload']),
       chapterNumber: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}chapter_number'])!,
       scanlator: attachedDatabase.typeMapping
@@ -991,7 +989,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int mangaId;
   final String url;
   final String name;
-  final DateTime dateUpload;
+  final DateTime? dateUpload;
   final double chapterNumber;
   final String? scanlator;
   final bool read;
@@ -1005,7 +1003,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       required this.mangaId,
       required this.url,
       required this.name,
-      required this.dateUpload,
+      this.dateUpload,
       required this.chapterNumber,
       this.scanlator,
       required this.read,
@@ -1021,7 +1019,9 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     map['manga_id'] = Variable<int>(mangaId);
     map['url'] = Variable<String>(url);
     map['name'] = Variable<String>(name);
-    map['date_upload'] = Variable<DateTime>(dateUpload);
+    if (!nullToAbsent || dateUpload != null) {
+      map['date_upload'] = Variable<DateTime>(dateUpload);
+    }
     map['chapter_number'] = Variable<double>(chapterNumber);
     if (!nullToAbsent || scanlator != null) {
       map['scanlator'] = Variable<String>(scanlator);
@@ -1045,7 +1045,9 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
-      dateUpload: Value(dateUpload),
+      dateUpload: dateUpload == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateUpload),
       chapterNumber: Value(chapterNumber),
       scanlator: scanlator == null && nullToAbsent
           ? const Value.absent()
@@ -1071,7 +1073,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: serializer.fromJson<int>(json['mangaId']),
       url: serializer.fromJson<String>(json['url']),
       name: serializer.fromJson<String>(json['name']),
-      dateUpload: serializer.fromJson<DateTime>(json['dateUpload']),
+      dateUpload: serializer.fromJson<DateTime?>(json['dateUpload']),
       chapterNumber: serializer.fromJson<double>(json['chapterNumber']),
       scanlator: serializer.fromJson<String?>(json['scanlator']),
       read: serializer.fromJson<bool>(json['read']),
@@ -1090,7 +1092,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       'mangaId': serializer.toJson<int>(mangaId),
       'url': serializer.toJson<String>(url),
       'name': serializer.toJson<String>(name),
-      'dateUpload': serializer.toJson<DateTime>(dateUpload),
+      'dateUpload': serializer.toJson<DateTime?>(dateUpload),
       'chapterNumber': serializer.toJson<double>(chapterNumber),
       'scanlator': serializer.toJson<String?>(scanlator),
       'read': serializer.toJson<bool>(read),
@@ -1107,7 +1109,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
           int? mangaId,
           String? url,
           String? name,
-          DateTime? dateUpload,
+          Value<DateTime?> dateUpload = const Value.absent(),
           double? chapterNumber,
           Value<String?> scanlator = const Value.absent(),
           bool? read,
@@ -1121,7 +1123,7 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
         mangaId: mangaId ?? this.mangaId,
         url: url ?? this.url,
         name: name ?? this.name,
-        dateUpload: dateUpload ?? this.dateUpload,
+        dateUpload: dateUpload.present ? dateUpload.value : this.dateUpload,
         chapterNumber: chapterNumber ?? this.chapterNumber,
         scanlator: scanlator.present ? scanlator.value : this.scanlator,
         read: read ?? this.read,
@@ -1191,7 +1193,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
   final Value<int> mangaId;
   final Value<String> url;
   final Value<String> name;
-  final Value<DateTime> dateUpload;
+  final Value<DateTime?> dateUpload;
   final Value<double> chapterNumber;
   final Value<String?> scanlator;
   final Value<bool> read;
@@ -1220,7 +1222,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     required int mangaId,
     required String url,
     required String name,
-    required DateTime dateUpload,
+    this.dateUpload = const Value.absent(),
     this.chapterNumber = const Value.absent(),
     this.scanlator = const Value.absent(),
     this.read = const Value.absent(),
@@ -1231,8 +1233,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.lastModified = const Value.absent(),
   })  : mangaId = Value(mangaId),
         url = Value(url),
-        name = Value(name),
-        dateUpload = Value(dateUpload);
+        name = Value(name);
   static Insertable<DbChapter> custom({
     Expression<int>? id,
     Expression<int>? mangaId,
@@ -1270,7 +1271,7 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
       Value<int>? mangaId,
       Value<String>? url,
       Value<String>? name,
-      Value<DateTime>? dateUpload,
+      Value<DateTime?>? dateUpload,
       Value<double>? chapterNumber,
       Value<String?>? scanlator,
       Value<bool>? read,
@@ -2320,7 +2321,7 @@ typedef $$DbChaptersTableInsertCompanionBuilder = DbChaptersCompanion Function({
   required int mangaId,
   required String url,
   required String name,
-  required DateTime dateUpload,
+  Value<DateTime?> dateUpload,
   Value<double> chapterNumber,
   Value<String?> scanlator,
   Value<bool> read,
@@ -2335,7 +2336,7 @@ typedef $$DbChaptersTableUpdateCompanionBuilder = DbChaptersCompanion Function({
   Value<int> mangaId,
   Value<String> url,
   Value<String> name,
-  Value<DateTime> dateUpload,
+  Value<DateTime?> dateUpload,
   Value<double> chapterNumber,
   Value<String?> scanlator,
   Value<bool> read,
@@ -2370,7 +2371,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             Value<int> mangaId = const Value.absent(),
             Value<String> url = const Value.absent(),
             Value<String> name = const Value.absent(),
-            Value<DateTime> dateUpload = const Value.absent(),
+            Value<DateTime?> dateUpload = const Value.absent(),
             Value<double> chapterNumber = const Value.absent(),
             Value<String?> scanlator = const Value.absent(),
             Value<bool> read = const Value.absent(),
@@ -2400,7 +2401,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
             required int mangaId,
             required String url,
             required String name,
-            required DateTime dateUpload,
+            Value<DateTime?> dateUpload = const Value.absent(),
             Value<double> chapterNumber = const Value.absent(),
             Value<String?> scanlator = const Value.absent(),
             Value<bool> read = const Value.absent(),

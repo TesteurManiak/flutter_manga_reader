@@ -12,7 +12,7 @@ part of 'chapter.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ChapterResponse _$ChapterResponseFromJson(Map<String, dynamic> json) {
   return _ChapterResponse.fromJson(json);
@@ -166,7 +166,7 @@ class _$ChapterResponseImpl extends _ChapterResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChapterResponseImpl &&
@@ -373,7 +373,7 @@ class _$ChapterDataImpl implements _ChapterData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChapterDataImpl &&
@@ -434,7 +434,7 @@ mixin _$ChapterAttributes {
   String? get volume => throw _privateConstructorUsedError;
   String? get chapter => throw _privateConstructorUsedError;
   int get pages => throw _privateConstructorUsedError;
-  String get publishAt => throw _privateConstructorUsedError;
+  String? get publishAt => throw _privateConstructorUsedError;
   String? get externalUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -454,7 +454,7 @@ abstract class $ChapterAttributesCopyWith<$Res> {
       String? volume,
       String? chapter,
       int pages,
-      String publishAt,
+      String? publishAt,
       String? externalUrl});
 }
 
@@ -475,7 +475,7 @@ class _$ChapterAttributesCopyWithImpl<$Res, $Val extends ChapterAttributes>
     Object? volume = freezed,
     Object? chapter = freezed,
     Object? pages = null,
-    Object? publishAt = null,
+    Object? publishAt = freezed,
     Object? externalUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -495,10 +495,10 @@ class _$ChapterAttributesCopyWithImpl<$Res, $Val extends ChapterAttributes>
           ? _value.pages
           : pages // ignore: cast_nullable_to_non_nullable
               as int,
-      publishAt: null == publishAt
+      publishAt: freezed == publishAt
           ? _value.publishAt
           : publishAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       externalUrl: freezed == externalUrl
           ? _value.externalUrl
           : externalUrl // ignore: cast_nullable_to_non_nullable
@@ -520,7 +520,7 @@ abstract class _$$ChapterAttributesImplCopyWith<$Res>
       String? volume,
       String? chapter,
       int pages,
-      String publishAt,
+      String? publishAt,
       String? externalUrl});
 }
 
@@ -539,7 +539,7 @@ class __$$ChapterAttributesImplCopyWithImpl<$Res>
     Object? volume = freezed,
     Object? chapter = freezed,
     Object? pages = null,
-    Object? publishAt = null,
+    Object? publishAt = freezed,
     Object? externalUrl = freezed,
   }) {
     return _then(_$ChapterAttributesImpl(
@@ -559,10 +559,10 @@ class __$$ChapterAttributesImplCopyWithImpl<$Res>
           ? _value.pages
           : pages // ignore: cast_nullable_to_non_nullable
               as int,
-      publishAt: null == publishAt
+      publishAt: freezed == publishAt
           ? _value.publishAt
           : publishAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       externalUrl: freezed == externalUrl
           ? _value.externalUrl
           : externalUrl // ignore: cast_nullable_to_non_nullable
@@ -579,7 +579,7 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
       this.volume,
       this.chapter,
       this.pages = 0,
-      required this.publishAt,
+      this.publishAt,
       this.externalUrl})
       : super._();
 
@@ -596,7 +596,7 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
   @JsonKey()
   final int pages;
   @override
-  final String publishAt;
+  final String? publishAt;
   @override
   final String? externalUrl;
 
@@ -606,7 +606,7 @@ class _$ChapterAttributesImpl extends _ChapterAttributes {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChapterAttributesImpl &&
@@ -646,7 +646,7 @@ abstract class _ChapterAttributes extends ChapterAttributes {
       final String? volume,
       final String? chapter,
       final int pages,
-      required final String publishAt,
+      final String? publishAt,
       final String? externalUrl}) = _$ChapterAttributesImpl;
   const _ChapterAttributes._() : super._();
 
@@ -662,7 +662,7 @@ abstract class _ChapterAttributes extends ChapterAttributes {
   @override
   int get pages;
   @override
-  String get publishAt;
+  String? get publishAt;
   @override
   String? get externalUrl;
   @override

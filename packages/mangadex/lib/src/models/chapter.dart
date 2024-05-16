@@ -40,7 +40,7 @@ class ChapterAttributes with _$ChapterAttributes {
     String? volume,
     String? chapter,
     @Default(0) int pages,
-    required String publishAt,
+    String? publishAt,
     String? externalUrl,
   }) = _ChapterAttributes;
 

@@ -12,7 +12,7 @@ part of 'manga.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MangaListResponse _$MangaListResponseFromJson(Map<String, dynamic> json) {
   return _MangaListResponse.fromJson(json);
@@ -166,7 +166,7 @@ class _$MangaListResponseImpl extends _MangaListResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MangaListResponseImpl &&
@@ -331,7 +331,7 @@ class _$MangaResponseImpl implements _MangaResponse {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MangaResponseImpl &&
@@ -522,7 +522,7 @@ class _$MangaDataImpl implements _MangaData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MangaDataImpl &&
@@ -845,7 +845,7 @@ class _$MangaAttributesImpl implements _MangaAttributes {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MangaAttributesImpl &&
@@ -1057,7 +1057,7 @@ class _$TagImpl implements _Tag {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TagImpl &&
@@ -1218,7 +1218,7 @@ class _$TagAttributesImpl implements _TagAttributes {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TagAttributesImpl &&

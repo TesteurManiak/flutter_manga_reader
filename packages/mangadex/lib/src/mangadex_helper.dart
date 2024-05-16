@@ -244,14 +244,16 @@ class MangadexHelper {
       name: chapterName.join(' ').removeEntitiesAndMarkdown(),
       dateUpload: _parseDate(attr.publishAt),
       scanlator: groups,
+      chapterNumber: double.tryParse(attr.chapter ?? '') ?? -1,
     );
   }
 
-  DateTime _parseDate(String dateAsString) {
+  DateTime? _parseDate(String? dateAsString) {
+    if (dateAsString == null) return null;
     try {
       return MDConstants.dateFormatter.parse(dateAsString).toUtc();
     } catch (_) {
-      return DateTime.now().toUtc();
+      return null;
     }
   }
 

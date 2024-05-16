@@ -12,9 +12,16 @@ class MDConstants {
   static const mangaLimit = 20;
   static const latestChapterLimit = 100;
 
+  /// "chapter"
   static const chapter = 'chapter';
+
+  /// "manga"
   static const manga = 'manga';
+
+  /// "cover_art"
   static const coverArt = 'cover_art';
+
+  /// "scanlation_group"
   static const scanlationGroup = 'scanlation_group';
   static const user = 'user';
   static const author = 'author';

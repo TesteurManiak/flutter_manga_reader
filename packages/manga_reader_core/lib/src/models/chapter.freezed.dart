@@ -24,7 +24,7 @@ mixin _$Chapter {
   int get mangaId => throw _privateConstructorUsedError; // Source data
   String get url => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  DateTime get dateUpload => throw _privateConstructorUsedError;
+  DateTime? get dateUpload => throw _privateConstructorUsedError;
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError; // Model data
   bool get read => throw _privateConstructorUsedError;
@@ -49,7 +49,7 @@ abstract class $ChapterCopyWith<$Res> {
       int mangaId,
       String url,
       String name,
-      DateTime dateUpload,
+      DateTime? dateUpload,
       double chapterNumber,
       String? scanlator,
       bool read,
@@ -77,7 +77,7 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
     Object? mangaId = null,
     Object? url = null,
     Object? name = null,
-    Object? dateUpload = null,
+    Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
@@ -104,10 +104,10 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      dateUpload: null == dateUpload
+      dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ abstract class _$$ChapterImplCopyWith<$Res> implements $ChapterCopyWith<$Res> {
       int mangaId,
       String url,
       String name,
-      DateTime dateUpload,
+      DateTime? dateUpload,
       double chapterNumber,
       String? scanlator,
       bool read,
@@ -182,7 +182,7 @@ class __$$ChapterImplCopyWithImpl<$Res>
     Object? mangaId = null,
     Object? url = null,
     Object? name = null,
-    Object? dateUpload = null,
+    Object? dateUpload = freezed,
     Object? chapterNumber = null,
     Object? scanlator = freezed,
     Object? read = null,
@@ -209,10 +209,10 @@ class __$$ChapterImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      dateUpload: null == dateUpload
+      dateUpload: freezed == dateUpload
           ? _value.dateUpload
           : dateUpload // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       chapterNumber: null == chapterNumber
           ? _value.chapterNumber
           : chapterNumber // ignore: cast_nullable_to_non_nullable
@@ -257,7 +257,7 @@ class _$ChapterImpl extends _Chapter {
       required this.mangaId,
       required this.url,
       required this.name,
-      required this.dateUpload,
+      this.dateUpload,
       this.chapterNumber = 0.0,
       this.scanlator,
       this.read = false,
@@ -281,7 +281,7 @@ class _$ChapterImpl extends _Chapter {
   @override
   final String name;
   @override
-  final DateTime dateUpload;
+  final DateTime? dateUpload;
   @override
   @JsonKey()
   final double chapterNumber;
@@ -376,7 +376,7 @@ abstract class _Chapter extends Chapter {
       required final int mangaId,
       required final String url,
       required final String name,
-      required final DateTime dateUpload,
+      final DateTime? dateUpload,
       final double chapterNumber,
       final String? scanlator,
       final bool read,
@@ -398,7 +398,7 @@ abstract class _Chapter extends Chapter {
   @override
   String get name;
   @override
-  DateTime get dateUpload;
+  DateTime? get dateUpload;
   @override
   double get chapterNumber;
   @override
