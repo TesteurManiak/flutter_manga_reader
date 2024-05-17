@@ -35,7 +35,7 @@ final lightThemeProvider = AutoDisposeProvider<ThemeData>.internal(
 );
 
 typedef LightThemeRef = AutoDisposeProviderRef<ThemeData>;
-String _$darkThemeHash() => r'a4c3f7a694df58a579a2441cb6a2a7e7027e704f';
+String _$darkThemeHash() => r'b46811e5afa305b34100711c940c505600373313';
 
 /// See also [darkTheme].
 @ProviderFor(darkTheme)
@@ -65,12 +65,55 @@ final platformBrightnessProvider = AutoDisposeProvider<Brightness>.internal(
 );
 
 typedef PlatformBrightnessRef = AutoDisposeProviderRef<Brightness>;
-String _$themeControllerHash() => r'138fd68a74bf8a1830d7ff14fa9cb6c6674c0ca9';
+String _$appThemeModeHash() => r'c0759b3cbe721d1a4d339309faead690b203610f';
+
+/// See also [appThemeMode].
+@ProviderFor(appThemeMode)
+final appThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
+  appThemeMode,
+  name: r'appThemeModeProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$appThemeModeHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AppThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
+String _$pureDarkModeStateHash() => r'96c9ab4cd4811b7b59ff3b1715d4d56beb43387d';
+
+/// See also [pureDarkModeState].
+@ProviderFor(pureDarkModeState)
+final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
+  pureDarkModeState,
+  name: r'pureDarkModeStateProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$pureDarkModeStateHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef PureDarkModeStateRef = AutoDisposeProviderRef<bool>;
+String _$isDarkHash() => r'4294cf44bf6745f5d9831fd8fad9c31c118bac3d';
+
+/// See also [isDark].
+@ProviderFor(isDark)
+final isDarkProvider = AutoDisposeProvider<bool>.internal(
+  isDark,
+  name: r'isDarkProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$isDarkHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef IsDarkRef = AutoDisposeProviderRef<bool>;
+String _$themeControllerHash() => r'5b18abece4d0ab9c88ed802576571347ad883f6c';
 
 /// See also [ThemeController].
 @ProviderFor(ThemeController)
 final themeControllerProvider =
-    NotifierProvider<ThemeController, ThemeMode>.internal(
+    NotifierProvider<ThemeController, ThemeState>.internal(
   ThemeController.new,
   name: r'themeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -80,6 +123,6 @@ final themeControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$ThemeController = Notifier<ThemeMode>;
+typedef _$ThemeController = Notifier<ThemeState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

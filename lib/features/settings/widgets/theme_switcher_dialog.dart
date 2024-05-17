@@ -38,7 +38,7 @@ class _ThemeRadioTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final groupValue = ref.watch(themeControllerProvider);
+    final groupValue = ref.watch(appThemeModeProvider);
 
     return RadioListTile<ThemeMode>(
       title: Text(mode.localized(context.strings)),

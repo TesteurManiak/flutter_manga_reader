@@ -28,10 +28,12 @@ class AppTheme {
   }
 
   /// The dark theme for this app.
-  static ThemeData dark() {
+  static ThemeData dark({required bool pureDark}) {
     final baseTheme = ThemeData.dark();
 
     return baseTheme.copyWith(
+      scaffoldBackgroundColor:
+          pureDark ? Colors.black : baseTheme.scaffoldBackgroundColor,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
         surfaceTintColor: Colors.transparent,
