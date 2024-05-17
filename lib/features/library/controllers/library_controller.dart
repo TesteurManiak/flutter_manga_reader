@@ -41,11 +41,16 @@ class LibraryController extends _$LibraryController {
         final result = await source.fetchFullMangaData(manga);
 
         if (result case Success(success: final record)) {
-          records.add(record);
-          ref
-              .read(updateProgressControllerProvider.notifier)
-              .setProgress(i + 1);
+          records.add(
+            (
+              manga: manga
+                  .copyFrom(record.manga.toSourceManga())
+                  .copyWith(initialized: true),
+              sourceChapters: record.sourceChapters,
+            ),
+          );
         }
+        ref.read(updateProgressControllerProvider.notifier).setProgress(i + 1);
       }
 
       if (records.isEmpty) return;

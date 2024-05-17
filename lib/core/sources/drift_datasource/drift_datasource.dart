@@ -303,14 +303,13 @@ class DriftDatasource extends LocalDatasource {
 
     for (final manga in mangas) {
       // Insert manga
-      final id = await _db.into(_db.dbMangas).insert(manga.insert());
+      final mangaData = manga.insert();
+      final id = await _db.into(_db.dbMangas).insert(mangaData);
 
       await _db.batch((batch) {
         // Insert chapters
-        batch.insertAll(
-          _db.dbChapters,
-          manga.chapters.map((e) => e.insert(id)),
-        );
+        final chapterDatas = manga.chapters.map((e) => e.insert(id));
+        batch.insertAll(_db.dbChapters, chapterDatas);
       });
     }
   }

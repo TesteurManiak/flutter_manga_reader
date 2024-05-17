@@ -29,6 +29,11 @@ class DbMangas extends Table {
       intEnum<UpdateStrategy>().withDefault(const Constant(0))();
   BoolColumn get initialized => boolean().withDefault(const Constant(false))();
   DateTimeColumn get lastModifiedAt => dateTime().nullable()();
+
+  @override
+  List<Set<Column<Object>>>? get uniqueKeys => [
+        {sourceId, url},
+      ];
 }
 
 class DbChapters extends Table {
