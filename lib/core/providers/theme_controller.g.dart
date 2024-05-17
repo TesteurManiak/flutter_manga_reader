@@ -35,7 +35,7 @@ final lightThemeProvider = AutoDisposeProvider<ThemeData>.internal(
 );
 
 typedef LightThemeRef = AutoDisposeProviderRef<ThemeData>;
-String _$darkThemeHash() => r'0b6874308d908b5751a79b828ce80bce5ee9585f';
+String _$darkThemeHash() => r'b46811e5afa305b34100711c940c505600373313';
 
 /// See also [darkTheme].
 @ProviderFor(darkTheme)
@@ -79,7 +79,7 @@ final appThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
 );
 
 typedef AppThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
-String _$pureDarkModeStateHash() => r'8f94c4bf92df75eb76b6c59490f061fa46a9a7a6';
+String _$pureDarkModeStateHash() => r'96c9ab4cd4811b7b59ff3b1715d4d56beb43387d';
 
 /// See also [pureDarkModeState].
 @ProviderFor(pureDarkModeState)
@@ -94,6 +94,20 @@ final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef PureDarkModeStateRef = AutoDisposeProviderRef<bool>;
+String _$isDarkHash() => r'4294cf44bf6745f5d9831fd8fad9c31c118bac3d';
+
+/// See also [isDark].
+@ProviderFor(isDark)
+final isDarkProvider = AutoDisposeProvider<bool>.internal(
+  isDark,
+  name: r'isDarkProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$isDarkHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef IsDarkRef = AutoDisposeProviderRef<bool>;
 String _$themeControllerHash() => r'5b18abece4d0ab9c88ed802576571347ad883f6c';
 
 /// See also [ThemeController].

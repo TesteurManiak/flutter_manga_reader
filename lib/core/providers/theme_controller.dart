@@ -35,6 +35,14 @@ bool pureDarkModeState(PureDarkModeStateRef ref) {
   return ref.watch(themeControllerProvider.select((s) => s.pureDarkMode));
 }
 
+@riverpod
+bool isDark(IsDarkRef ref) {
+  final platformBrightness = ref.watch(platformBrightnessProvider);
+  return ref.watch(
+    appThemeModeProvider.select((mode) => mode.isDark(platformBrightness)),
+  );
+}
+
 @Riverpod(keepAlive: true)
 class ThemeController extends _$ThemeController {
   static const themeKey = 'theme_mode';

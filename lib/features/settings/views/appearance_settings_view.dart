@@ -50,14 +50,17 @@ class _PureDarkModeSwitcher extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pureDarkMode = ref.watch(pureDarkModeStateProvider);
+    final enabled = ref.watch(isDarkProvider);
     final strings = context.strings;
 
     return SwitchListTile(
       title: Text(strings.settings_appearance_pure_dark_mode),
-      value: pureDarkMode,
-      onChanged: (_) {
-        ref.read(themeControllerProvider.notifier).togglePureDarkMode();
-      },
+      value: enabled && pureDarkMode,
+      onChanged: enabled
+          ? (_) {
+              ref.read(themeControllerProvider.notifier).togglePureDarkMode();
+            }
+          : null,
     );
   }
 }
