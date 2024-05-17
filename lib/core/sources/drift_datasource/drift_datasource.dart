@@ -383,6 +383,7 @@ extension on SourceChapter {
 
 extension on pb.BackupManga {
   DbMangasCompanion insert() {
+    final dbUrl = Uri.parse(url).path;
     final dbArtist = artist.isNotEmpty ? artist : null;
     final dbAuthor = author.isNotEmpty ? author : null;
     final dbDesc = description.isNotEmpty ? description : null;
@@ -392,7 +393,7 @@ extension on pb.BackupManga {
 
     return DbMangasCompanion.insert(
       sourceId: source.toString(),
-      url: Value(url),
+      url: Value(dbUrl),
       title: Value(title),
       artist: Value.absentIfNull(dbArtist),
       author: Value.absentIfNull(dbAuthor),
@@ -410,11 +411,13 @@ extension on pb.BackupManga {
 
 extension on pb.BackupChapter {
   DbChaptersCompanion insert(int mangaId) {
+    final dbUrl = Uri.parse(url).path;
     final dbScanlator = scanlator.isNotEmpty ? scanlator : null;
     final dbLastPageRead = lastPageRead > 0 ? lastPageRead.toInt() : null;
+
     return DbChaptersCompanion.insert(
       mangaId: mangaId,
-      url: url,
+      url: dbUrl,
       name: name,
       dateUpload: Value(dateUpload.toDateTime()),
       chapterNumber: Value(chapterNumber),

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/services/file_picker_service.dart';
 import 'package:flutter_manga_reader/core/services/toaster_service.dart';
+import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/features/settings/providers/backup_controller.dart';
+import 'package:flutter_manga_reader/features/settings/widgets/delete_all_data_tile.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -35,6 +37,10 @@ class _BackupSettingsViewState extends ConsumerState<BackupSettingsView> {
         title: strings.settings_backup,
         children: const [
           _ImportTachiyomiBackupTile(),
+          if (Consts.isDev) ...[
+            _SectionTitle('Dev options'),
+            DeleteAllDataTile(),
+          ],
         ],
       ),
     );
@@ -71,6 +77,21 @@ class _ImportTachiyomiBackupTile extends ConsumerWidget {
               .importTachiyomiBackup(file),
         );
       },
+    );
+  }
+}
+
+class _SectionTitle extends StatelessWidget {
+  const _SectionTitle(this.title);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 16, bottom: 8),
+      child: Text(title, style: textTheme.titleSmall),
     );
   }
 }
