@@ -28,7 +28,7 @@ class AppTheme {
   }
 
   /// The dark theme for this app.
-  static ThemeData dark() {
+  static ThemeData dark({required bool pureDark}) {
     final baseTheme = ThemeData.dark();
 
     return baseTheme.copyWith(

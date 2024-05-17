@@ -29,7 +29,7 @@ class _AppState extends ConsumerState<App> {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: ref.watch(localeControllerProvider),
-      themeMode: ref.watch(themeControllerProvider),
+      themeMode: ref.watch(appThemeModeProvider),
       theme: ref.watch(lightThemeProvider),
       darkTheme: ref.watch(darkThemeProvider),
       routerConfig: router,
