@@ -39,6 +39,8 @@ class SourceManga with _$SourceManga {
       author: author,
       description: description,
       genres: getGenres(),
+      status: status,
+      thumbnailUrl: thumbnailUrl,
       sourceId: sourceId,
     );
   }
