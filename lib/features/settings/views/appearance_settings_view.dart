@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/extensions/string_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/theme_controller.dart';
 import 'package:flutter_manga_reader/features/settings/extensions/theme_mode_extensions.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
@@ -51,8 +50,10 @@ class _PureDarkModeSwitcher extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pureDarkMode = ref.watch(pureDarkModeStateProvider);
+    final strings = context.strings;
+
     return SwitchListTile(
-      title: Text('Pure Dark Mode'.hardcoded),
+      title: Text(strings.settings_appearance_pure_dark_mode),
       value: pureDarkMode,
       onChanged: (_) {
         ref.read(themeControllerProvider.notifier).togglePureDarkMode();

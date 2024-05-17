@@ -183,6 +183,12 @@ abstract class AppLocalizations {
   /// **'Activé'**
   String get settings_appearance_enabled;
 
+  /// No description provided for @settings_appearance_pure_dark_mode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode sombre pur noir'**
+  String get settings_appearance_pure_dark_mode;
+
   /// No description provided for @settings_backup.
   ///
   /// In fr, this message translates to:

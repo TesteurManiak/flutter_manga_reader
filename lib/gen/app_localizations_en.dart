@@ -52,6 +52,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_appearance_enabled => 'Enabled';
 
   @override
+  String get settings_appearance_pure_dark_mode => 'Pure black dark mode';
+
+  @override
   String get settings_backup => 'Backup & Restore';
 
   @override

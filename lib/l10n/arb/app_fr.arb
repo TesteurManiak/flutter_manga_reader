@@ -15,6 +15,7 @@
     "settings_appearance_system_default": "Par défaut du système",
     "settings_appearance_disabled": "Désactivé",
     "settings_appearance_enabled": "Activé",
+    "settings_appearance_pure_dark_mode": "Mode sombre pur noir",
     "settings_backup": "Sauvegarde et restauration",
     "settings_backup_tachiyomi_import_title": "Importer la sauvegarde Tachiyomi",
     "settings_backup_tachiyomi_import_subtitle": "Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi",
