@@ -44,10 +44,14 @@ _WIP_
 
 _WIP_
 
+* Import manga & chapters from a Tachiyomi/Mihon backup
+* Global update of chapters
 * Webtoon and paginated manga reading
 * Download manga chapters for offline reading
+* Reading history
 * Language support for English and French
 * Light and dark themes
+* Pure Dark theme
 
 ## Run the app
 
