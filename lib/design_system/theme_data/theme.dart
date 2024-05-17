@@ -36,12 +36,19 @@ class AppTheme {
           pureDark ? Colors.black : baseTheme.scaffoldBackgroundColor,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
+        backgroundColor:
+            pureDark ? Colors.black : baseTheme.appBarTheme.backgroundColor,
         surfaceTintColor: Colors.transparent,
       ),
       popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
+      ),
+      bottomNavigationBarTheme: baseTheme.bottomNavigationBarTheme.copyWith(
+        backgroundColor: pureDark
+            ? Colors.black
+            : baseTheme.bottomNavigationBarTheme.backgroundColor,
       ),
       extensions: [
         const AppColors.dark(),
