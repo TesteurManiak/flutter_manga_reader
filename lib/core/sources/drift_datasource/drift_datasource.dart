@@ -410,13 +410,12 @@ extension on pb.BackupManga {
 
 extension on pb.BackupChapter {
   DbChaptersCompanion insert(int mangaId) {
-    final dbUrl = Uri.parse(url).path;
     final dbScanlator = scanlator.isNotEmpty ? scanlator : null;
     final dbLastPageRead = lastPageRead > 0 ? lastPageRead.toInt() : null;
 
     return DbChaptersCompanion.insert(
       mangaId: mangaId,
-      url: dbUrl,
+      url: url,
       name: name,
       dateUpload: Value(dateUpload.toDateTime()),
       chapterNumber: Value(chapterNumber),

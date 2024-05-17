@@ -44,7 +44,7 @@ class SourceManga with _$SourceManga {
   }
 
   List<String>? getGenres() {
-    if (genre case final genre? when genre.isNotEmpty) {
+    if (genre?.trim() case final genre? when genre.isNotEmpty) {
       return genre
           .split(',')
           .map((e) => e.trim())

@@ -32,7 +32,10 @@ class Manga with _$Manga {
 
   const Manga._();
 
-  String? getGenre() => genres?.join(',');
+  String? getGenre() {
+    final genre = genres?.join(',');
+    return genre?.isEmpty ?? true ? null : genre;
+  }
 
   SourceManga toSourceManga() {
     return SourceManga(

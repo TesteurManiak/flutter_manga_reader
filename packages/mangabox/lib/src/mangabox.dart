@@ -262,7 +262,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
 
             chaptersList.add(
               SourceChapter(
-                url: Uri.parse(urlHref).path,
+                url: urlHref,
                 name: name,
                 dateUpload: helper.parseDate(dateStr),
                 chapterNumber: chapterNumber ?? -1,
