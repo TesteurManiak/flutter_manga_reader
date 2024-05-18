@@ -279,7 +279,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
 
   @override
   String getMangaUrl(SourceManga sourceManga) {
-    return p.join(referer, sourceManga.url);
+    return p.join(baseUrl, sourceManga.url);
   }
 
   String normalizeSearchQuery(String query) {

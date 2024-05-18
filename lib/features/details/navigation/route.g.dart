@@ -8,6 +8,7 @@ part of 'route.dart';
 
 List<RouteBase> get $appRoutes => [
       $coverViewerRoute,
+      $mangaWebviewRoute,
     ];
 
 RouteBase get $coverViewerRoute => GoRouteData.$route(
@@ -23,6 +24,31 @@ extension $CoverViewerRouteExtension on CoverViewerRoute {
 
   String get location => GoRouteData.$location(
         '/cover/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(coverUrl)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $mangaWebviewRoute => GoRouteData.$route(
+      path: '/webview/:sourceId/:mangaId',
+      factory: $MangaWebviewRouteExtension._fromState,
+    );
+
+extension $MangaWebviewRouteExtension on MangaWebviewRoute {
+  static MangaWebviewRoute _fromState(GoRouterState state) => MangaWebviewRoute(
+        sourceId: state.pathParameters['sourceId']!,
+        mangaId: int.parse(state.pathParameters['mangaId']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/webview/${Uri.encodeComponent(sourceId)}/${Uri.encodeComponent(mangaId.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);
