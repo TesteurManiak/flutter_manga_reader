@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/platform/app_info.dart';
 import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/core/widgets/app_asset_image.dart';
 import 'package:flutter_manga_reader/design_system/icons/manga_reader_icons.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_manga_reader/gen/assets.gen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_manga_reader/src/version.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AboutSettingsView extends StatelessWidget {
@@ -36,25 +35,14 @@ class AboutSettingsView extends StatelessWidget {
   }
 }
 
-class _VersionTile extends ConsumerWidget {
+class _VersionTile extends StatelessWidget {
   const _VersionTile();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final appVersion = ref.watch(
-      getAppVersionProvider.select(
-        (v) {
-          return v.maybeWhen(
-            data: (version) => version,
-            orElse: () => '?',
-          );
-        },
-      ),
-    );
-
+  Widget build(BuildContext context) {
     return ListTile(
       title: Text(context.strings.settings_about_version),
-      subtitle: Text(appVersion),
+      subtitle: const Text(packageVersion),
     );
   }
 }

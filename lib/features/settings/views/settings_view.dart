@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
-import 'package:flutter_manga_reader/core/platform/app_info.dart';
 import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_manga_reader/features/settings/navigation/route.dart';
+import 'package:flutter_manga_reader/src/version.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsView extends ConsumerWidget {
@@ -11,17 +11,6 @@ class SettingsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appVersion = ref.watch(
-      getAppVersionProvider.select(
-        (v) {
-          return v.maybeWhen(
-            data: (version) => version,
-            orElse: () => '?',
-          );
-        },
-      ),
-    );
-
     final settings = <_SettingData>[
       _SettingData(
         titleFetcher: (strings) => strings.settings_general,
@@ -42,7 +31,7 @@ class SettingsView extends ConsumerWidget {
       ),
       _SettingData(
         titleFetcher: (strings) => strings.settings_about,
-        subtitleFetcher: (_) => '${Consts.appName} $appVersion',
+        subtitleFetcher: (_) => '${Consts.appName} $packageVersion',
         icon: Icons.info_outline,
         onTap: () => const AboutSettingsRoute().go(context),
       ),
