@@ -10,6 +10,7 @@ import 'package:mangadex/src/models/chapter.dart';
 import 'package:mangadex/src/models/cover.dart';
 import 'package:mangadex/src/models/manga.dart';
 import 'package:mangadex/src/models/relationship.dart';
+import 'package:path/path.dart' as p;
 
 /// {@template mangadex_datasource}
 /// Mangadex datasource.
@@ -490,7 +491,7 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
   String getMangaUrl(SourceManga sourceManga) {
     final title = sourceManga.title;
     final url = sourceManga.url.replaceFirst('manga', 'title');
-    return '$baseUrl$url/${_helper.titleToSlug(title)}';
+    return p.normalize([baseUrl, url, _helper.titleToSlug(title)].join('/'));
   }
 }
 

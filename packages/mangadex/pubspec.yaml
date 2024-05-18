@@ -15,6 +15,7 @@ dependencies:
   json_annotation: ^4.9.0
   manga_reader_core:
     path: ../manga_reader_core
+  path: ^1.9.0
 
 dev_dependencies:
   build_runner: ^2.4.9

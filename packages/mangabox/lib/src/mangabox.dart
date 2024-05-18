@@ -68,11 +68,11 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
     String url;
     if (simpleQueryPath(page, query) case final queryPath?
         when query.isNotEmpty) {
-      url = p.join(baseUrl, queryPath);
+      url = p.normalize([baseUrl, queryPath].join('/'));
     } else {
       url = baseUrl;
       if (advancedSearchQuery(page, query) case final advancedQueryPath?) {
-        url = p.join(url, advancedQueryPath);
+        url = p.normalize([url, advancedQueryPath].join('/'));
         // TODO(Guillaume): support more advanced filtering options
       }
     }
@@ -279,7 +279,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
 
   @override
   String getMangaUrl(SourceManga sourceManga) {
-    return '$referer${sourceManga.url}';
+    return p.normalize([referer, sourceManga.url].join('/'));
   }
 
   String normalizeSearchQuery(String query) {
