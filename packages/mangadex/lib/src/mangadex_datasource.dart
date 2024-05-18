@@ -490,8 +490,7 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
   String getMangaUrl(SourceManga sourceManga) {
     final title = sourceManga.title;
     final url = sourceManga.url.replaceFirst('manga', 'title');
-
-    return '$url/${_helper.titleToSlug(title)}';
+    return '$baseUrl$url/${_helper.titleToSlug(title)}';
   }
 }
 

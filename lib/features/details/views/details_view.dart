@@ -352,9 +352,9 @@ class _SliverDescription extends StatelessWidget {
 }
 
 class _SliverButtons extends ConsumerWidget {
-  const _SliverButtons(this.id);
+  const _SliverButtons(this.mangaId);
 
-  final int id;
+  final int mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -362,8 +362,8 @@ class _SliverButtons extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _AddToLibraryButton(id),
-          const _OpenWebViewButton(),
+          _AddToLibraryButton(mangaId),
+          _OpenWebViewButton(mangaId),
         ],
       ),
     );
@@ -371,18 +371,18 @@ class _SliverButtons extends ConsumerWidget {
 }
 
 class _AddToLibraryButton extends ConsumerWidget {
-  const _AddToLibraryButton(this.id);
+  const _AddToLibraryButton(this.mangaId);
 
-  final int id;
+  final int mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorite = ref.watch(isMangaFavoriteProvider(id));
+    final isFavorite = ref.watch(isMangaFavoriteProvider(mangaId));
     final strings = context.strings;
 
     return DetailsButton(
       onPressed: () {
-        final provider = detailsControllerProvider(id);
+        final provider = detailsControllerProvider(mangaId);
         ref.read(provider.notifier).toggleFavorite();
       },
       icon: isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -392,14 +392,22 @@ class _AddToLibraryButton extends ConsumerWidget {
 }
 
 class _OpenWebViewButton extends ConsumerWidget {
-  const _OpenWebViewButton();
+  const _OpenWebViewButton(this.mangaId);
+
+  final int mangaId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final source = ref.watch(scopedMangaDatasourceProvider);
     return DetailsButton(
       icon: Icons.public,
       label: context.strings.details_webview,
-      onPressed: null,
+      onPressed: () {
+        MangaWebviewRoute(
+          sourceId: source.id,
+          mangaId: mangaId,
+        ).push<void>(context);
+      },
     );
   }
 }

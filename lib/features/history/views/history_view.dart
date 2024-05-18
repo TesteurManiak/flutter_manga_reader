@@ -6,6 +6,7 @@ import 'package:flutter_manga_reader/core/services/toaster_service.dart';
 import 'package:flutter_manga_reader/core/widgets/app_asset_image.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
+import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/history/providers/chapter_history.dart';
 import 'package:flutter_manga_reader/features/history/providers/incognito_mode_controller.dart';
@@ -22,7 +23,7 @@ class HistoryView extends ConsumerWidget {
       appBar: const _AppBar(),
       body: ref.watch(watchChapterHistoryProvider).when(
             data: _LoadedContent.new,
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: LoadingContent.new,
             error: (e, _) => const ErrorContent(),
           ),
     );

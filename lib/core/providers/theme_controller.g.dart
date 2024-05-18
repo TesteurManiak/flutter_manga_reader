@@ -94,7 +94,7 @@ final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
 );
 
 typedef PureDarkModeStateRef = AutoDisposeProviderRef<bool>;
-String _$isDarkHash() => r'4294cf44bf6745f5d9831fd8fad9c31c118bac3d';
+String _$isDarkHash() => r'28ad2230d66a2232eeb022504037ce118a301e6e';
 
 /// See also [isDark].
 @ProviderFor(isDark)

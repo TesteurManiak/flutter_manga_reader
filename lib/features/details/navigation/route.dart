@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
 import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/views/details_view.dart';
+import 'package:flutter_manga_reader/features/details/views/manga_webview.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_manga_reader/features/search/navigation/route.dart';
 import 'package:go_router/go_router.dart';
@@ -104,6 +105,29 @@ class CoverViewerRoute extends GoRouteData {
       child: SourceProviderScope(
         sourceId: sourceId,
         child: CoverViewerView(coverUrl),
+      ),
+    );
+  }
+}
+
+@TypedGoRoute<MangaWebviewRoute>(path: MangaWebviewRoute.path)
+class MangaWebviewRoute extends GoRouteData {
+  const MangaWebviewRoute({
+    required this.sourceId,
+    required this.mangaId,
+  });
+
+  final String sourceId;
+  final int mangaId;
+
+  static const path = '/webview/:sourceId/:mangaId';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CupertinoPage(
+      child: SourceProviderScope(
+        sourceId: sourceId,
+        child: MangaWebview(mangaId),
       ),
     );
   }

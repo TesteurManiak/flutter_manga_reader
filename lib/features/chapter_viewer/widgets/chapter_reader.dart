@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_manga_reader/core/widgets/error_content.dart';
+import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/chapter_page_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/controllers/reading_direction_controller.dart';
 import 'package:flutter_manga_reader/features/chapter_viewer/widgets/continuous_reader.dart';
@@ -42,8 +44,8 @@ class ChapterReader extends ConsumerWidget {
             ),
         };
       },
-      error: (error, stack) => Center(child: Text(error.toString())),
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: LoadingContent.new,
+      error: (e, _) => ErrorContent(message: e.toString()),
     );
   }
 }
