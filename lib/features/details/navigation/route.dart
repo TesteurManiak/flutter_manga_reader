@@ -127,7 +127,7 @@ class MangaWebviewRoute extends GoRouteData {
     return CupertinoPage(
       child: SourceProviderScope(
         sourceId: sourceId,
-        child: const MangaWebview(),
+        child: MangaWebview(mangaId),
       ),
     );
   }
