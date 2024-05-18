@@ -68,11 +68,11 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
     String url;
     if (simpleQueryPath(page, query) case final queryPath?
         when query.isNotEmpty) {
-      url = p.normalize([baseUrl, queryPath].join('/'));
+      url = p.join(baseUrl, queryPath);
     } else {
       url = baseUrl;
       if (advancedSearchQuery(page, query) case final advancedQueryPath?) {
-        url = p.normalize([url, advancedQueryPath].join('/'));
+        url = p.join(url, advancedQueryPath);
         // TODO(Guillaume): support more advanced filtering options
       }
     }
