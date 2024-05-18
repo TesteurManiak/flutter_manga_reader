@@ -28,18 +28,27 @@ class AppTheme {
   }
 
   /// The dark theme for this app.
-  static ThemeData dark() {
+  static ThemeData dark({required bool pureDark}) {
     final baseTheme = ThemeData.dark();
 
     return baseTheme.copyWith(
+      scaffoldBackgroundColor:
+          pureDark ? Colors.black : baseTheme.scaffoldBackgroundColor,
       appBarTheme: baseTheme.appBarTheme.copyWith(
         centerTitle: false,
+        backgroundColor:
+            pureDark ? Colors.black : baseTheme.appBarTheme.backgroundColor,
         surfaceTintColor: Colors.transparent,
       ),
       popupMenuTheme: baseTheme.popupMenuTheme.copyWith(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
+      ),
+      bottomNavigationBarTheme: baseTheme.bottomNavigationBarTheme.copyWith(
+        backgroundColor: pureDark
+            ? Colors.black
+            : baseTheme.bottomNavigationBarTheme.backgroundColor,
       ),
       extensions: [
         const AppColors.dark(),

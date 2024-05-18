@@ -52,6 +52,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_appearance_enabled => 'Activé';
 
   @override
+  String get settings_appearance_pure_dark_mode => 'Mode sombre pur noir';
+
+  @override
   String get settings_backup => 'Sauvegarde et restauration';
 
   @override

@@ -15,6 +15,7 @@ class AppearanceSettingsView extends StatelessWidget {
       title: context.strings.settings_appearance,
       children: const [
         _ThemeModeSwitcher(),
+        _PureDarkModeSwitcher(),
       ],
     );
   }
@@ -25,7 +26,7 @@ class _ThemeModeSwitcher extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentThemeMode = ref.watch(themeControllerProvider);
+    final currentThemeMode = ref.watch(appThemeModeProvider);
     final strings = context.strings;
 
     return ListTile(
@@ -39,6 +40,27 @@ class _ThemeModeSwitcher extends ConsumerWidget {
           }
         });
       },
+    );
+  }
+}
+
+class _PureDarkModeSwitcher extends ConsumerWidget {
+  const _PureDarkModeSwitcher();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pureDarkMode = ref.watch(pureDarkModeStateProvider);
+    final enabled = ref.watch(isDarkProvider);
+    final strings = context.strings;
+
+    return SwitchListTile(
+      title: Text(strings.settings_appearance_pure_dark_mode),
+      value: enabled && pureDarkMode,
+      onChanged: enabled
+          ? (_) {
+              ref.read(themeControllerProvider.notifier).togglePureDarkMode();
+            }
+          : null,
     );
   }
 }

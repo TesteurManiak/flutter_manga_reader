@@ -1,7 +1,7 @@
 import 'package:html/dom.dart' as dom;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangabox/src/mangabox_helper.dart';
-import 'package:path/path.dart' as path;
+import 'package:path/path.dart' as p;
 
 typedef RequestPropsRecord = ({
   List<String> pathSegments,
@@ -68,11 +68,11 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
     String url;
     if (simpleQueryPath(page, query) case final queryPath?
         when query.isNotEmpty) {
-      url = path.join(baseUrl, queryPath);
+      url = p.join(baseUrl, queryPath);
     } else {
       url = baseUrl;
       if (advancedSearchQuery(page, query) case final advancedQueryPath?) {
-        url = path.join(url, advancedQueryPath);
+        url = p.join(url, advancedQueryPath);
         // TODO(Guillaume): support more advanced filtering options
       }
     }
@@ -131,7 +131,12 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
   @override
   Future<Result<Manga, HttpError>> fetchMangaDetails(Manga manga) async {
     final result = await client
-        .send(method: HttpMethod.get, baseUrl: manga.url, headers: getHeaders())
+        .send(
+          method: HttpMethod.get,
+          baseUrl: referer,
+          pathSegments: Uri.parse(manga.url).pathSegments,
+          headers: getHeaders(),
+        )
         .decodeHtmlBody();
 
     return result.when(
@@ -190,7 +195,8 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
     final result = await client
         .send(
           method: HttpMethod.get,
-          baseUrl: chapter.url,
+          baseUrl: referer,
+          pathSegments: Uri.parse(chapter.url).pathSegments,
           headers: getHeaders(),
         )
         .decodeHtmlBody();
@@ -226,7 +232,8 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
     final result = await client
         .send(
           method: HttpMethod.get,
-          baseUrl: sourceManga.url,
+          baseUrl: referer,
+          pathSegments: Uri.parse(sourceManga.url).pathSegments,
           headers: getHeaders(),
         )
         .decodeHtmlBody();
@@ -247,19 +254,18 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
               [..., final last] => last.attributes['title'],
               _ => e.selectFirst('ul > li > p')?.attributes['title'],
             };
-
-            // Parse chapter number from chapter name
-            final regex = RegExp(r'Chapter\s*([\d.]+)', caseSensitive: false);
-            final chapter = regex.firstMatch(name)?.group(1);
-            final chapterNumber =
-                chapter != null ? double.tryParse(chapter) ?? -1 : -1.0;
+            final urlHref = a?.getHref ?? '';
+            final chapterNumber = switch (urlHref.split('-').lastOrNull) {
+              final last? => double.tryParse(last),
+              _ => null,
+            };
 
             chaptersList.add(
               SourceChapter(
-                url: a?.getHref ?? '',
+                url: urlHref,
                 name: name,
                 dateUpload: helper.parseDate(dateStr),
-                chapterNumber: chapterNumber,
+                chapterNumber: chapterNumber ?? -1,
               ),
             );
           }
@@ -273,8 +279,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
 
   @override
   String getMangaUrl(SourceManga sourceManga) {
-    // TODO(Guillaume): implement getMangaUrl
-    throw UnimplementedError();
+    return p.join(referer, sourceManga.url);
   }
 
   String normalizeSearchQuery(String query) {

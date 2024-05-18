@@ -8,9 +8,9 @@ class ThemeModeDropdown extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeControllerProvider);
+    final themeMode = ref.watch(appThemeModeProvider);
 
-    return DropdownButton(
+    return DropdownButton<ThemeMode>(
       value: themeMode,
       items: [
         for (final mode in ThemeMode.values)

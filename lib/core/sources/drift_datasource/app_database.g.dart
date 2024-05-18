@@ -227,6 +227,10 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
+  List<Set<GeneratedColumn>> get uniqueKeys => [
+        {sourceId, url},
+      ];
+  @override
   DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbManga(
@@ -943,7 +947,7 @@ class $DbChaptersTable extends DbChapters
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {mangaId, url, name},
+        {mangaId, url},
       ];
   @override
   DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {

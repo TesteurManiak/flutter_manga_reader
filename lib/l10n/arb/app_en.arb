@@ -15,6 +15,7 @@
     "settings_appearance_system_default": "System default",
     "settings_appearance_disabled": "Disabled",
     "settings_appearance_enabled": "Enabled",
+    "settings_appearance_pure_dark_mode": "Pure black dark mode",
     "settings_backup": "Backup & Restore",
     "settings_backup_tachiyomi_import_title": "Import Tachiyomi/Mihon Backup",
     "settings_backup_tachiyomi_import_subtitle": "Import library from Tachiyomi backup file",
