@@ -53,7 +53,7 @@ dev_dependencies:
   custom_lint: ^0.6.4
   drift_dev: ^2.18.0
   fd_lints: ^2.2.1
-  flutter_gen: ^5.4.0
+  flutter_gen: ^5.5.0+1
   flutter_gen_runner: ^5.4.0
   flutter_inappwebview: ^6.0.0
   flutter_launcher_icons: ^0.13.1
