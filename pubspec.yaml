@@ -8,7 +8,7 @@ environment:
   sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
-  background_downloader: ^8.5.0
+  background_downloader: ^8.5.2
   cached_network_image: ^3.3.1
   clock: ^1.1.1
   collection: ^1.18.0
