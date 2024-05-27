@@ -1992,6 +1992,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DbCacheEntriesTable dbCacheEntries = $DbCacheEntriesTable(this);
   late final $DbChapterHistoryTable dbChapterHistory =
       $DbChapterHistoryTable(this);
+  late final Index mangaFavorite = Index(
+      'manga_favorite', 'CREATE INDEX manga_favorite ON db_mangas (favorite)');
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2001,7 +2003,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         dbChapters,
         dbReadingDirection,
         dbCacheEntries,
-        dbChapterHistory
+        dbChapterHistory,
+        mangaFavorite
       ];
 }
 

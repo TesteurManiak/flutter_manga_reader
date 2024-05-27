@@ -10,6 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_database.g.dart';
 
+@TableIndex(name: 'manga_favorite', columns: {#favorite})
 class DbMangas extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get sourceId => text()();
@@ -55,6 +56,11 @@ class DbChapters extends Table {
   List<Set<Column<Object>>>? get uniqueKeys => [
         {mangaId, url},
       ];
+
+  @override
+  List<String> get customConstraints => [
+        'FOREIGN KEY(manga_id) REFERENCES db_mangas(id) ON DELETE CASCADE',
+      ];
 }
 
 class DbReadingDirection extends Table {
@@ -63,6 +69,11 @@ class DbReadingDirection extends Table {
 
   @override
   Set<Column<Object>>? get primaryKey => {mangaId};
+
+  @override
+  List<String> get customConstraints => [
+        'FOREIGN KEY(manga_id) REFERENCES db_mangas(id) ON DELETE CASCADE',
+      ];
 }
 
 class DbCacheEntries extends Table {
@@ -81,6 +92,12 @@ class DbChapterHistory extends Table {
 
   @override
   Set<Column<Object>>? get primaryKey => {mangaId};
+
+  @override
+  List<String> get customConstraints => [
+        'FOREIGN KEY(manga_id) REFERENCES db_mangas(id) ON DELETE CASCADE',
+        'FOREIGN KEY(chapter_id) REFERENCES db_chapters(id) ON DELETE CASCADE',
+      ];
 }
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
