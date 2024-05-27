@@ -41,7 +41,7 @@ dependencies:
   riverpod_annotation: ^2.3.5
   scrollable_positioned_list: ^0.3.8
   shared_preferences: ^2.2.3
-  sqlite3_flutter_libs: ^0.5.21
+  sqlite3_flutter_libs: ^0.5.22
   theme_tailor_annotation: ^3.0.1
   url_launcher: ^6.2.6
 
