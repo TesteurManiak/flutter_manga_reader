@@ -421,10 +421,10 @@ packages:
     dependency: "direct dev"
     description:
       name: fd_lints
-      sha256: "2584f719487e4e5c5faedb1ec95ec6beb1c9c0ab7d53b9d55b2ace2021cd4275"
+      sha256: "509ef9a204656b7074c3702cccf6504c8b1ecf752a1b59b792c7b078b8499371"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1"
+    version: "2.3.0"
   ffi:
     dependency: transitive
     description:
