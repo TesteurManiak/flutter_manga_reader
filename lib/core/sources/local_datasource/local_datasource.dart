@@ -83,7 +83,7 @@ abstract class LocalDatasource {
 
   /// Update simultaneously the [Manga] and its [SourceChapter]s.
   Future<void> saveMangaData(MangaFetchRecord record);
-  Future<void> saveMangaDatas(List<MangaFetchRecord> records);
+  Future<void> saveMangaChapters(List<MangaFetchRecord> records);
 }
 
 @Riverpod(keepAlive: true, dependencies: [])

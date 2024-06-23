@@ -262,16 +262,9 @@ class DriftDatasource extends LocalDatasource {
   }
 
   @override
-  Future<void> saveMangaDatas(List<MangaFetchRecord> records) {
+  Future<void> saveMangaChapters(List<MangaFetchRecord> records) {
     return _db.batch((batch) {
       for (final record in records) {
-        final mangaData = record.manga.toDbModel();
-        batch.insert(
-          _db.dbMangas,
-          mangaData,
-          onConflict: DoUpdate((_) => mangaData),
-        );
-
         for (final chapter in record.sourceChapters) {
           final chapterData = chapter.insert(record.manga.id);
           batch.insert(
