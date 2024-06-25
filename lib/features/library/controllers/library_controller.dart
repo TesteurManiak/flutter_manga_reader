@@ -38,23 +38,16 @@ class LibraryController extends _$LibraryController {
       final records = <MangaFetchRecord>[];
       for (final (i, manga) in mangas.indexed) {
         final source = ref.read(getSourceFromIdProvider(manga.sourceId));
-        final result = await source.fetchFullMangaData(manga);
+        final result = await source.fetchMangaChapters(manga);
 
-        if (result case Success(success: final record)) {
-          records.add(
-            (
-              manga: manga
-                  .copyFrom(record.manga.toSourceManga())
-                  .copyWith(initialized: true),
-              sourceChapters: record.sourceChapters,
-            ),
-          );
+        if (result case Success(success: final chapters)) {
+          records.add((manga: manga, sourceChapters: chapters));
         }
         ref.read(updateProgressControllerProvider.notifier).setProgress(i + 1);
       }
 
       if (records.isEmpty) return;
-      await ref.read(localDatasourceProvider).saveMangaDatas(records);
+      await ref.read(localDatasourceProvider).saveMangaChapters(records);
       ref.read(updateProgressControllerProvider.notifier).endProgress();
       _isRefreshing = false;
     }
