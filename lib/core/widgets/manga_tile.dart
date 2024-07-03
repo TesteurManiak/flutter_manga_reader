@@ -34,6 +34,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
     final strings = context.strings;
 
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () async {
         late final int mangaId;
         final localId = await ref.read(
