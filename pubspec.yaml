@@ -57,7 +57,7 @@ dev_dependencies:
   flutter_gen_runner: ^5.6.0
   flutter_inappwebview: ^6.0.0
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.4.0
+  flutter_native_splash: ^2.4.1
   flutter_test:
     sdk: flutter
   freezed: ^2.5.2
