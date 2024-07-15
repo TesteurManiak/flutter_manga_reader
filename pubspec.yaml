@@ -51,7 +51,7 @@ dev_dependencies:
   build_verify: ^3.1.0
   build_version: ^2.1.1
   custom_lint: ^0.6.4
-  drift_dev: ^2.18.0
+  drift_dev: ^2.19.0
   fd_lints: ^2.3.0
   flutter_gen: ^5.5.0+1
   flutter_gen_runner: ^5.6.0
