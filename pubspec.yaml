@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   background_downloader: ^8.5.2
-  cached_network_image: ^3.3.1
+  cached_network_image: ^3.4.0
   clock: ^1.1.1
   collection: ^1.18.0
   drift: ^2.19.1
