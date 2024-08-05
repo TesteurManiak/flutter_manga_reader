@@ -16,7 +16,7 @@ dependencies:
   file_picker: ^8.0.6
   flutter:
     sdk: flutter
-  flutter_cache_manager: ^3.3.3
+  flutter_cache_manager: ^3.4.0
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.5.1
