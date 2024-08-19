@@ -13,7 +13,7 @@ dependencies:
   clock: ^1.1.1
   collection: ^1.18.0
   drift: ^2.19.1
-  file_picker: ^8.0.7
+  file_picker: ^8.1.2
   flutter:
     sdk: flutter
   flutter_cache_manager: ^3.4.0
