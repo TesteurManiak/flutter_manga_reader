@@ -19,7 +19,9 @@ mixin _$DetailsState {
   List<Chapter> get selectedChapters => throw _privateConstructorUsedError;
   bool get selectionMode => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DetailsStateCopyWith<DetailsState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$DetailsLoadingImplCopyWithImpl<$Res>
       _$DetailsLoadingImpl _value, $Res Function(_$DetailsLoadingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -143,7 +149,9 @@ class _$DetailsLoadingImpl extends DetailsLoading {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
@@ -161,8 +169,11 @@ abstract class DetailsLoading extends DetailsState {
   List<Chapter> get selectedChapters;
   @override
   bool get selectionMode;
+
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -186,6 +197,8 @@ class __$$DetailsLoadedImplCopyWithImpl<$Res>
       _$DetailsLoadedImpl _value, $Res Function(_$DetailsLoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -248,7 +261,9 @@ class _$DetailsLoadedImpl extends DetailsLoaded {
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
@@ -265,8 +280,11 @@ abstract class DetailsLoaded extends DetailsState {
   List<Chapter> get selectedChapters;
   @override
   bool get selectionMode;
+
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -291,6 +309,8 @@ class __$$DetailsErrorImplCopyWithImpl<$Res>
       _$DetailsErrorImpl _value, $Res Function(_$DetailsErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -365,7 +385,9 @@ class _$DetailsErrorImpl extends DetailsError {
       error,
       selectionMode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
@@ -384,8 +406,11 @@ abstract class DetailsError extends DetailsState {
   String? get error;
   @override
   bool get selectionMode;
+
+  /// Create a copy of DetailsState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

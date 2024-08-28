@@ -107,7 +107,11 @@ class _ContentState extends ConsumerState<_Content> {
       if (next == 0) {
         toaster.showToast(Text(strings.no_page_found));
         // Delay slightly the pop to avoid driving condition between the page transitions
-        Future.delayed(const Duration(milliseconds: 300), () => context.pop());
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (context.mounted) {
+            context.pop();
+          }
+        });
       }
     });
 

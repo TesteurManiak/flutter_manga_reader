@@ -33,6 +33,9 @@ class _$BackupStateCopyWithImpl<$Res, $Val extends BackupState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -49,6 +52,9 @@ class __$$BackupStateInitialImplCopyWithImpl<$Res>
   __$$BackupStateInitialImplCopyWithImpl(_$BackupStateInitialImpl _value,
       $Res Function(_$BackupStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -89,6 +95,9 @@ class __$$BackupStateLoadingImplCopyWithImpl<$Res>
   __$$BackupStateLoadingImplCopyWithImpl(_$BackupStateLoadingImpl _value,
       $Res Function(_$BackupStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -129,6 +138,9 @@ class __$$BackupStateSuccessImplCopyWithImpl<$Res>
   __$$BackupStateSuccessImplCopyWithImpl(_$BackupStateSuccessImpl _value,
       $Res Function(_$BackupStateSuccessImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -172,6 +184,8 @@ class __$$BackupStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$BackupStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -210,7 +224,9 @@ class _$BackupStateErrorImpl implements BackupStateError {
   @override
   int get hashCode => Object.hash(runtimeType, type);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BackupStateErrorImplCopyWith<_$BackupStateErrorImpl> get copyWith =>
@@ -223,7 +239,10 @@ abstract class BackupStateError implements BackupState {
       _$BackupStateErrorImpl;
 
   BackupErrorType get type;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BackupStateErrorImplCopyWith<_$BackupStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

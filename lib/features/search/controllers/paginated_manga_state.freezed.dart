@@ -19,7 +19,9 @@ mixin _$PaginatedMangaState {
   int get page => throw _privateConstructorUsedError;
   bool get hasMore => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PaginatedMangaStateCopyWith<PaginatedMangaState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$PaginatedMangaStateCopyWithImpl<$Res, $Val extends PaginatedMangaState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -82,6 +86,8 @@ class __$$PaginatedMangaLoadingImplCopyWithImpl<$Res>
       $Res Function(_$PaginatedMangaLoadingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,7 +136,9 @@ class _$PaginatedMangaLoadingImpl extends PaginatedMangaLoading {
   @override
   int get hashCode => Object.hash(runtimeType, page, hasMore);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedMangaLoadingImplCopyWith<_$PaginatedMangaLoadingImpl>
@@ -148,8 +156,11 @@ abstract class PaginatedMangaLoading extends PaginatedMangaState {
   int get page;
   @override
   bool get hasMore;
+
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedMangaLoadingImplCopyWith<_$PaginatedMangaLoadingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -173,6 +184,8 @@ class __$$PaginatedMangaLoadedImplCopyWithImpl<$Res>
       $Res Function(_$PaginatedMangaLoadedImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -238,7 +251,9 @@ class _$PaginatedMangaLoadedImpl extends PaginatedMangaLoaded {
   int get hashCode => Object.hash(
       runtimeType, page, hasMore, const DeepCollectionEquality().hash(_mangas));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedMangaLoadedImplCopyWith<_$PaginatedMangaLoadedImpl>
@@ -259,8 +274,11 @@ abstract class PaginatedMangaLoaded extends PaginatedMangaState {
   @override
   bool get hasMore;
   List<SourceManga> get mangas;
+
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedMangaLoadedImplCopyWith<_$PaginatedMangaLoadedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -284,6 +302,8 @@ class __$$PaginatedMangaEmptyImplCopyWithImpl<$Res>
       $Res Function(_$PaginatedMangaEmptyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -332,7 +352,9 @@ class _$PaginatedMangaEmptyImpl extends PaginatedMangaEmpty {
   @override
   int get hashCode => Object.hash(runtimeType, page, hasMore);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedMangaEmptyImplCopyWith<_$PaginatedMangaEmptyImpl> get copyWith =>
@@ -350,8 +372,11 @@ abstract class PaginatedMangaEmpty extends PaginatedMangaState {
   int get page;
   @override
   bool get hasMore;
+
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedMangaEmptyImplCopyWith<_$PaginatedMangaEmptyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -375,6 +400,8 @@ class __$$PaginatedMangaErrorImplCopyWithImpl<$Res>
       $Res Function(_$PaginatedMangaErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -431,7 +458,9 @@ class _$PaginatedMangaErrorImpl extends PaginatedMangaError {
   @override
   int get hashCode => Object.hash(runtimeType, page, hasMore, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedMangaErrorImplCopyWith<_$PaginatedMangaErrorImpl> get copyWith =>
@@ -451,8 +480,11 @@ abstract class PaginatedMangaError extends PaginatedMangaState {
   @override
   bool get hasMore;
   String? get message;
+
+  /// Create a copy of PaginatedMangaState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedMangaErrorImplCopyWith<_$PaginatedMangaErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -476,6 +476,37 @@ class DbManga extends DataClass implements Insertable<DbManga> {
         lastModifiedAt:
             lastModifiedAt.present ? lastModifiedAt.value : this.lastModifiedAt,
       );
+  DbManga copyWithCompanion(DbMangasCompanion data) {
+    return DbManga(
+      id: data.id.present ? data.id.value : this.id,
+      sourceId: data.sourceId.present ? data.sourceId.value : this.sourceId,
+      favorite: data.favorite.present ? data.favorite.value : this.favorite,
+      fetchInterval: data.fetchInterval.present
+          ? data.fetchInterval.value
+          : this.fetchInterval,
+      dateAdded: data.dateAdded.present ? data.dateAdded.value : this.dateAdded,
+      url: data.url.present ? data.url.value : this.url,
+      title: data.title.present ? data.title.value : this.title,
+      artist: data.artist.present ? data.artist.value : this.artist,
+      author: data.author.present ? data.author.value : this.author,
+      description:
+          data.description.present ? data.description.value : this.description,
+      genre: data.genre.present ? data.genre.value : this.genre,
+      status: data.status.present ? data.status.value : this.status,
+      thumbnailUrl: data.thumbnailUrl.present
+          ? data.thumbnailUrl.value
+          : this.thumbnailUrl,
+      updateStrategy: data.updateStrategy.present
+          ? data.updateStrategy.value
+          : this.updateStrategy,
+      initialized:
+          data.initialized.present ? data.initialized.value : this.initialized,
+      lastModifiedAt: data.lastModifiedAt.present
+          ? data.lastModifiedAt.value
+          : this.lastModifiedAt,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DbManga(')
@@ -1138,6 +1169,32 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
         lastModified:
             lastModified.present ? lastModified.value : this.lastModified,
       );
+  DbChapter copyWithCompanion(DbChaptersCompanion data) {
+    return DbChapter(
+      id: data.id.present ? data.id.value : this.id,
+      mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
+      url: data.url.present ? data.url.value : this.url,
+      name: data.name.present ? data.name.value : this.name,
+      dateUpload:
+          data.dateUpload.present ? data.dateUpload.value : this.dateUpload,
+      chapterNumber: data.chapterNumber.present
+          ? data.chapterNumber.value
+          : this.chapterNumber,
+      scanlator: data.scanlator.present ? data.scanlator.value : this.scanlator,
+      read: data.read.present ? data.read.value : this.read,
+      downloaded:
+          data.downloaded.present ? data.downloaded.value : this.downloaded,
+      bookmark: data.bookmark.present ? data.bookmark.value : this.bookmark,
+      lastPageRead: data.lastPageRead.present
+          ? data.lastPageRead.value
+          : this.lastPageRead,
+      dateFetch: data.dateFetch.present ? data.dateFetch.value : this.dateFetch,
+      lastModified: data.lastModified.present
+          ? data.lastModified.value
+          : this.lastModified,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DbChapter(')
@@ -1480,6 +1537,13 @@ class DbReadingDirectionData extends DataClass
         mangaId: mangaId ?? this.mangaId,
         direction: direction ?? this.direction,
       );
+  DbReadingDirectionData copyWithCompanion(DbReadingDirectionCompanion data) {
+    return DbReadingDirectionData(
+      mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
+      direction: data.direction.present ? data.direction.value : this.direction,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DbReadingDirectionData(')
@@ -1676,6 +1740,14 @@ class DbCacheEntry extends DataClass implements Insertable<DbCacheEntry> {
         response: response ?? this.response,
         expiry: expiry ?? this.expiry,
       );
+  DbCacheEntry copyWithCompanion(DbCacheEntriesCompanion data) {
+    return DbCacheEntry(
+      key: data.key.present ? data.key.value : this.key,
+      response: data.response.present ? data.response.value : this.response,
+      expiry: data.expiry.present ? data.expiry.value : this.expiry,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DbCacheEntry(')
@@ -1899,6 +1971,14 @@ class DbChapterHistoryData extends DataClass
         chapterId: chapterId ?? this.chapterId,
         readAt: readAt ?? this.readAt,
       );
+  DbChapterHistoryData copyWithCompanion(DbChapterHistoryCompanion data) {
+    return DbChapterHistoryData(
+      mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
+      chapterId: data.chapterId.present ? data.chapterId.value : this.chapterId,
+      readAt: data.readAt.present ? data.readAt.value : this.readAt,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('DbChapterHistoryData(')
@@ -1984,7 +2064,7 @@ class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
-  _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
+  $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $DbMangasTable dbMangas = $DbMangasTable(this);
   late final $DbChaptersTable dbChapters = $DbChaptersTable(this);
   late final $DbReadingDirectionTable dbReadingDirection =
@@ -2008,7 +2088,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       ];
 }
 
-typedef $$DbMangasTableInsertCompanionBuilder = DbMangasCompanion Function({
+typedef $$DbMangasTableCreateCompanionBuilder = DbMangasCompanion Function({
   Value<int> id,
   required String sourceId,
   Value<bool> favorite,
@@ -2044,112 +2124,6 @@ typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
   Value<bool> initialized,
   Value<DateTime?> lastModifiedAt,
 });
-
-class $$DbMangasTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbMangasTable,
-    DbManga,
-    $$DbMangasTableFilterComposer,
-    $$DbMangasTableOrderingComposer,
-    $$DbMangasTableProcessedTableManager,
-    $$DbMangasTableInsertCompanionBuilder,
-    $$DbMangasTableUpdateCompanionBuilder> {
-  $$DbMangasTableTableManager(_$AppDatabase db, $DbMangasTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DbMangasTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbMangasTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DbMangasTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> id = const Value.absent(),
-            Value<String> sourceId = const Value.absent(),
-            Value<bool> favorite = const Value.absent(),
-            Value<int> fetchInterval = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String?> artist = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> genre = const Value.absent(),
-            Value<MangaStatus> status = const Value.absent(),
-            Value<String?> thumbnailUrl = const Value.absent(),
-            Value<UpdateStrategy> updateStrategy = const Value.absent(),
-            Value<bool> initialized = const Value.absent(),
-            Value<DateTime?> lastModifiedAt = const Value.absent(),
-          }) =>
-              DbMangasCompanion(
-            id: id,
-            sourceId: sourceId,
-            favorite: favorite,
-            fetchInterval: fetchInterval,
-            dateAdded: dateAdded,
-            url: url,
-            title: title,
-            artist: artist,
-            author: author,
-            description: description,
-            genre: genre,
-            status: status,
-            thumbnailUrl: thumbnailUrl,
-            updateStrategy: updateStrategy,
-            initialized: initialized,
-            lastModifiedAt: lastModifiedAt,
-          ),
-          getInsertCompanionBuilder: ({
-            Value<int> id = const Value.absent(),
-            required String sourceId,
-            Value<bool> favorite = const Value.absent(),
-            Value<int> fetchInterval = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String?> artist = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> genre = const Value.absent(),
-            Value<MangaStatus> status = const Value.absent(),
-            Value<String?> thumbnailUrl = const Value.absent(),
-            Value<UpdateStrategy> updateStrategy = const Value.absent(),
-            Value<bool> initialized = const Value.absent(),
-            Value<DateTime?> lastModifiedAt = const Value.absent(),
-          }) =>
-              DbMangasCompanion.insert(
-            id: id,
-            sourceId: sourceId,
-            favorite: favorite,
-            fetchInterval: fetchInterval,
-            dateAdded: dateAdded,
-            url: url,
-            title: title,
-            artist: artist,
-            author: author,
-            description: description,
-            genre: genre,
-            status: status,
-            thumbnailUrl: thumbnailUrl,
-            updateStrategy: updateStrategy,
-            initialized: initialized,
-            lastModifiedAt: lastModifiedAt,
-          ),
-        ));
-}
-
-class $$DbMangasTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $DbMangasTable,
-    DbManga,
-    $$DbMangasTableFilterComposer,
-    $$DbMangasTableOrderingComposer,
-    $$DbMangasTableProcessedTableManager,
-    $$DbMangasTableInsertCompanionBuilder,
-    $$DbMangasTableUpdateCompanionBuilder> {
-  $$DbMangasTableProcessedTableManager(super.$state);
-}
 
 class $$DbMangasTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DbMangasTable> {
@@ -2323,7 +2297,116 @@ class $$DbMangasTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$DbChaptersTableInsertCompanionBuilder = DbChaptersCompanion Function({
+class $$DbMangasTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbMangasTable,
+    DbManga,
+    $$DbMangasTableFilterComposer,
+    $$DbMangasTableOrderingComposer,
+    $$DbMangasTableCreateCompanionBuilder,
+    $$DbMangasTableUpdateCompanionBuilder,
+    (DbManga, BaseReferences<_$AppDatabase, $DbMangasTable, DbManga>),
+    DbManga,
+    PrefetchHooks Function()> {
+  $$DbMangasTableTableManager(_$AppDatabase db, $DbMangasTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbMangasTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbMangasTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> sourceId = const Value.absent(),
+            Value<bool> favorite = const Value.absent(),
+            Value<int> fetchInterval = const Value.absent(),
+            Value<DateTime?> dateAdded = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String?> artist = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> genre = const Value.absent(),
+            Value<MangaStatus> status = const Value.absent(),
+            Value<String?> thumbnailUrl = const Value.absent(),
+            Value<UpdateStrategy> updateStrategy = const Value.absent(),
+            Value<bool> initialized = const Value.absent(),
+            Value<DateTime?> lastModifiedAt = const Value.absent(),
+          }) =>
+              DbMangasCompanion(
+            id: id,
+            sourceId: sourceId,
+            favorite: favorite,
+            fetchInterval: fetchInterval,
+            dateAdded: dateAdded,
+            url: url,
+            title: title,
+            artist: artist,
+            author: author,
+            description: description,
+            genre: genre,
+            status: status,
+            thumbnailUrl: thumbnailUrl,
+            updateStrategy: updateStrategy,
+            initialized: initialized,
+            lastModifiedAt: lastModifiedAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String sourceId,
+            Value<bool> favorite = const Value.absent(),
+            Value<int> fetchInterval = const Value.absent(),
+            Value<DateTime?> dateAdded = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String?> artist = const Value.absent(),
+            Value<String?> author = const Value.absent(),
+            Value<String?> description = const Value.absent(),
+            Value<String?> genre = const Value.absent(),
+            Value<MangaStatus> status = const Value.absent(),
+            Value<String?> thumbnailUrl = const Value.absent(),
+            Value<UpdateStrategy> updateStrategy = const Value.absent(),
+            Value<bool> initialized = const Value.absent(),
+            Value<DateTime?> lastModifiedAt = const Value.absent(),
+          }) =>
+              DbMangasCompanion.insert(
+            id: id,
+            sourceId: sourceId,
+            favorite: favorite,
+            fetchInterval: fetchInterval,
+            dateAdded: dateAdded,
+            url: url,
+            title: title,
+            artist: artist,
+            author: author,
+            description: description,
+            genre: genre,
+            status: status,
+            thumbnailUrl: thumbnailUrl,
+            updateStrategy: updateStrategy,
+            initialized: initialized,
+            lastModifiedAt: lastModifiedAt,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DbMangasTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DbMangasTable,
+    DbManga,
+    $$DbMangasTableFilterComposer,
+    $$DbMangasTableOrderingComposer,
+    $$DbMangasTableCreateCompanionBuilder,
+    $$DbMangasTableUpdateCompanionBuilder,
+    (DbManga, BaseReferences<_$AppDatabase, $DbMangasTable, DbManga>),
+    DbManga,
+    PrefetchHooks Function()>;
+typedef $$DbChaptersTableCreateCompanionBuilder = DbChaptersCompanion Function({
   Value<int> id,
   required int mangaId,
   required String url,
@@ -2353,100 +2436,6 @@ typedef $$DbChaptersTableUpdateCompanionBuilder = DbChaptersCompanion Function({
   Value<DateTime?> dateFetch,
   Value<DateTime?> lastModified,
 });
-
-class $$DbChaptersTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbChaptersTable,
-    DbChapter,
-    $$DbChaptersTableFilterComposer,
-    $$DbChaptersTableOrderingComposer,
-    $$DbChaptersTableProcessedTableManager,
-    $$DbChaptersTableInsertCompanionBuilder,
-    $$DbChaptersTableUpdateCompanionBuilder> {
-  $$DbChaptersTableTableManager(_$AppDatabase db, $DbChaptersTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DbChaptersTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbChaptersTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DbChaptersTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> id = const Value.absent(),
-            Value<int> mangaId = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<DateTime?> dateUpload = const Value.absent(),
-            Value<double> chapterNumber = const Value.absent(),
-            Value<String?> scanlator = const Value.absent(),
-            Value<bool> read = const Value.absent(),
-            Value<bool> downloaded = const Value.absent(),
-            Value<bool> bookmark = const Value.absent(),
-            Value<int> lastPageRead = const Value.absent(),
-            Value<DateTime?> dateFetch = const Value.absent(),
-            Value<DateTime?> lastModified = const Value.absent(),
-          }) =>
-              DbChaptersCompanion(
-            id: id,
-            mangaId: mangaId,
-            url: url,
-            name: name,
-            dateUpload: dateUpload,
-            chapterNumber: chapterNumber,
-            scanlator: scanlator,
-            read: read,
-            downloaded: downloaded,
-            bookmark: bookmark,
-            lastPageRead: lastPageRead,
-            dateFetch: dateFetch,
-            lastModified: lastModified,
-          ),
-          getInsertCompanionBuilder: ({
-            Value<int> id = const Value.absent(),
-            required int mangaId,
-            required String url,
-            required String name,
-            Value<DateTime?> dateUpload = const Value.absent(),
-            Value<double> chapterNumber = const Value.absent(),
-            Value<String?> scanlator = const Value.absent(),
-            Value<bool> read = const Value.absent(),
-            Value<bool> downloaded = const Value.absent(),
-            Value<bool> bookmark = const Value.absent(),
-            Value<int> lastPageRead = const Value.absent(),
-            Value<DateTime?> dateFetch = const Value.absent(),
-            Value<DateTime?> lastModified = const Value.absent(),
-          }) =>
-              DbChaptersCompanion.insert(
-            id: id,
-            mangaId: mangaId,
-            url: url,
-            name: name,
-            dateUpload: dateUpload,
-            chapterNumber: chapterNumber,
-            scanlator: scanlator,
-            read: read,
-            downloaded: downloaded,
-            bookmark: bookmark,
-            lastPageRead: lastPageRead,
-            dateFetch: dateFetch,
-            lastModified: lastModified,
-          ),
-        ));
-}
-
-class $$DbChaptersTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $DbChaptersTable,
-    DbChapter,
-    $$DbChaptersTableFilterComposer,
-    $$DbChaptersTableOrderingComposer,
-    $$DbChaptersTableProcessedTableManager,
-    $$DbChaptersTableInsertCompanionBuilder,
-    $$DbChaptersTableUpdateCompanionBuilder> {
-  $$DbChaptersTableProcessedTableManager(super.$state);
-}
 
 class $$DbChaptersTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DbChaptersTable> {
@@ -2586,7 +2575,104 @@ class $$DbChaptersTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$DbReadingDirectionTableInsertCompanionBuilder
+class $$DbChaptersTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbChaptersTable,
+    DbChapter,
+    $$DbChaptersTableFilterComposer,
+    $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableCreateCompanionBuilder,
+    $$DbChaptersTableUpdateCompanionBuilder,
+    (DbChapter, BaseReferences<_$AppDatabase, $DbChaptersTable, DbChapter>),
+    DbChapter,
+    PrefetchHooks Function()> {
+  $$DbChaptersTableTableManager(_$AppDatabase db, $DbChaptersTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbChaptersTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbChaptersTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> mangaId = const Value.absent(),
+            Value<String> url = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<DateTime?> dateUpload = const Value.absent(),
+            Value<double> chapterNumber = const Value.absent(),
+            Value<String?> scanlator = const Value.absent(),
+            Value<bool> read = const Value.absent(),
+            Value<bool> downloaded = const Value.absent(),
+            Value<bool> bookmark = const Value.absent(),
+            Value<int> lastPageRead = const Value.absent(),
+            Value<DateTime?> dateFetch = const Value.absent(),
+            Value<DateTime?> lastModified = const Value.absent(),
+          }) =>
+              DbChaptersCompanion(
+            id: id,
+            mangaId: mangaId,
+            url: url,
+            name: name,
+            dateUpload: dateUpload,
+            chapterNumber: chapterNumber,
+            scanlator: scanlator,
+            read: read,
+            downloaded: downloaded,
+            bookmark: bookmark,
+            lastPageRead: lastPageRead,
+            dateFetch: dateFetch,
+            lastModified: lastModified,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int mangaId,
+            required String url,
+            required String name,
+            Value<DateTime?> dateUpload = const Value.absent(),
+            Value<double> chapterNumber = const Value.absent(),
+            Value<String?> scanlator = const Value.absent(),
+            Value<bool> read = const Value.absent(),
+            Value<bool> downloaded = const Value.absent(),
+            Value<bool> bookmark = const Value.absent(),
+            Value<int> lastPageRead = const Value.absent(),
+            Value<DateTime?> dateFetch = const Value.absent(),
+            Value<DateTime?> lastModified = const Value.absent(),
+          }) =>
+              DbChaptersCompanion.insert(
+            id: id,
+            mangaId: mangaId,
+            url: url,
+            name: name,
+            dateUpload: dateUpload,
+            chapterNumber: chapterNumber,
+            scanlator: scanlator,
+            read: read,
+            downloaded: downloaded,
+            bookmark: bookmark,
+            lastPageRead: lastPageRead,
+            dateFetch: dateFetch,
+            lastModified: lastModified,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DbChaptersTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DbChaptersTable,
+    DbChapter,
+    $$DbChaptersTableFilterComposer,
+    $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableCreateCompanionBuilder,
+    $$DbChaptersTableUpdateCompanionBuilder,
+    (DbChapter, BaseReferences<_$AppDatabase, $DbChaptersTable, DbChapter>),
+    DbChapter,
+    PrefetchHooks Function()>;
+typedef $$DbReadingDirectionTableCreateCompanionBuilder
     = DbReadingDirectionCompanion Function({
   Value<int> mangaId,
   required ReadingDirection direction,
@@ -2596,58 +2682,6 @@ typedef $$DbReadingDirectionTableUpdateCompanionBuilder
   Value<int> mangaId,
   Value<ReadingDirection> direction,
 });
-
-class $$DbReadingDirectionTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbReadingDirectionTable,
-    DbReadingDirectionData,
-    $$DbReadingDirectionTableFilterComposer,
-    $$DbReadingDirectionTableOrderingComposer,
-    $$DbReadingDirectionTableProcessedTableManager,
-    $$DbReadingDirectionTableInsertCompanionBuilder,
-    $$DbReadingDirectionTableUpdateCompanionBuilder> {
-  $$DbReadingDirectionTableTableManager(
-      _$AppDatabase db, $DbReadingDirectionTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DbReadingDirectionTableFilterComposer(ComposerState(db, table)),
-          orderingComposer: $$DbReadingDirectionTableOrderingComposer(
-              ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DbReadingDirectionTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> mangaId = const Value.absent(),
-            Value<ReadingDirection> direction = const Value.absent(),
-          }) =>
-              DbReadingDirectionCompanion(
-            mangaId: mangaId,
-            direction: direction,
-          ),
-          getInsertCompanionBuilder: ({
-            Value<int> mangaId = const Value.absent(),
-            required ReadingDirection direction,
-          }) =>
-              DbReadingDirectionCompanion.insert(
-            mangaId: mangaId,
-            direction: direction,
-          ),
-        ));
-}
-
-class $$DbReadingDirectionTableProcessedTableManager
-    extends ProcessedTableManager<
-        _$AppDatabase,
-        $DbReadingDirectionTable,
-        DbReadingDirectionData,
-        $$DbReadingDirectionTableFilterComposer,
-        $$DbReadingDirectionTableOrderingComposer,
-        $$DbReadingDirectionTableProcessedTableManager,
-        $$DbReadingDirectionTableInsertCompanionBuilder,
-        $$DbReadingDirectionTableUpdateCompanionBuilder> {
-  $$DbReadingDirectionTableProcessedTableManager(super.$state);
-}
 
 class $$DbReadingDirectionTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DbReadingDirectionTable> {
@@ -2679,7 +2713,69 @@ class $$DbReadingDirectionTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$DbCacheEntriesTableInsertCompanionBuilder = DbCacheEntriesCompanion
+class $$DbReadingDirectionTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbReadingDirectionTable,
+    DbReadingDirectionData,
+    $$DbReadingDirectionTableFilterComposer,
+    $$DbReadingDirectionTableOrderingComposer,
+    $$DbReadingDirectionTableCreateCompanionBuilder,
+    $$DbReadingDirectionTableUpdateCompanionBuilder,
+    (
+      DbReadingDirectionData,
+      BaseReferences<_$AppDatabase, $DbReadingDirectionTable,
+          DbReadingDirectionData>
+    ),
+    DbReadingDirectionData,
+    PrefetchHooks Function()> {
+  $$DbReadingDirectionTableTableManager(
+      _$AppDatabase db, $DbReadingDirectionTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbReadingDirectionTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$DbReadingDirectionTableOrderingComposer(
+              ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> mangaId = const Value.absent(),
+            Value<ReadingDirection> direction = const Value.absent(),
+          }) =>
+              DbReadingDirectionCompanion(
+            mangaId: mangaId,
+            direction: direction,
+          ),
+          createCompanionCallback: ({
+            Value<int> mangaId = const Value.absent(),
+            required ReadingDirection direction,
+          }) =>
+              DbReadingDirectionCompanion.insert(
+            mangaId: mangaId,
+            direction: direction,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DbReadingDirectionTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DbReadingDirectionTable,
+    DbReadingDirectionData,
+    $$DbReadingDirectionTableFilterComposer,
+    $$DbReadingDirectionTableOrderingComposer,
+    $$DbReadingDirectionTableCreateCompanionBuilder,
+    $$DbReadingDirectionTableUpdateCompanionBuilder,
+    (
+      DbReadingDirectionData,
+      BaseReferences<_$AppDatabase, $DbReadingDirectionTable,
+          DbReadingDirectionData>
+    ),
+    DbReadingDirectionData,
+    PrefetchHooks Function()>;
+typedef $$DbCacheEntriesTableCreateCompanionBuilder = DbCacheEntriesCompanion
     Function({
   required String key,
   required String response,
@@ -2693,65 +2789,6 @@ typedef $$DbCacheEntriesTableUpdateCompanionBuilder = DbCacheEntriesCompanion
   Value<DateTime> expiry,
   Value<int> rowid,
 });
-
-class $$DbCacheEntriesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbCacheEntriesTable,
-    DbCacheEntry,
-    $$DbCacheEntriesTableFilterComposer,
-    $$DbCacheEntriesTableOrderingComposer,
-    $$DbCacheEntriesTableProcessedTableManager,
-    $$DbCacheEntriesTableInsertCompanionBuilder,
-    $$DbCacheEntriesTableUpdateCompanionBuilder> {
-  $$DbCacheEntriesTableTableManager(
-      _$AppDatabase db, $DbCacheEntriesTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DbCacheEntriesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbCacheEntriesTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DbCacheEntriesTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<String> key = const Value.absent(),
-            Value<String> response = const Value.absent(),
-            Value<DateTime> expiry = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DbCacheEntriesCompanion(
-            key: key,
-            response: response,
-            expiry: expiry,
-            rowid: rowid,
-          ),
-          getInsertCompanionBuilder: ({
-            required String key,
-            required String response,
-            required DateTime expiry,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DbCacheEntriesCompanion.insert(
-            key: key,
-            response: response,
-            expiry: expiry,
-            rowid: rowid,
-          ),
-        ));
-}
-
-class $$DbCacheEntriesTableProcessedTableManager extends ProcessedTableManager<
-    _$AppDatabase,
-    $DbCacheEntriesTable,
-    DbCacheEntry,
-    $$DbCacheEntriesTableFilterComposer,
-    $$DbCacheEntriesTableOrderingComposer,
-    $$DbCacheEntriesTableProcessedTableManager,
-    $$DbCacheEntriesTableInsertCompanionBuilder,
-    $$DbCacheEntriesTableUpdateCompanionBuilder> {
-  $$DbCacheEntriesTableProcessedTableManager(super.$state);
-}
 
 class $$DbCacheEntriesTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DbCacheEntriesTable> {
@@ -2791,7 +2828,75 @@ class $$DbCacheEntriesTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-typedef $$DbChapterHistoryTableInsertCompanionBuilder
+class $$DbCacheEntriesTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbCacheEntriesTable,
+    DbCacheEntry,
+    $$DbCacheEntriesTableFilterComposer,
+    $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableCreateCompanionBuilder,
+    $$DbCacheEntriesTableUpdateCompanionBuilder,
+    (
+      DbCacheEntry,
+      BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>
+    ),
+    DbCacheEntry,
+    PrefetchHooks Function()> {
+  $$DbCacheEntriesTableTableManager(
+      _$AppDatabase db, $DbCacheEntriesTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbCacheEntriesTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbCacheEntriesTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<String> key = const Value.absent(),
+            Value<String> response = const Value.absent(),
+            Value<DateTime> expiry = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DbCacheEntriesCompanion(
+            key: key,
+            response: response,
+            expiry: expiry,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String key,
+            required String response,
+            required DateTime expiry,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              DbCacheEntriesCompanion.insert(
+            key: key,
+            response: response,
+            expiry: expiry,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DbCacheEntriesTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DbCacheEntriesTable,
+    DbCacheEntry,
+    $$DbCacheEntriesTableFilterComposer,
+    $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableCreateCompanionBuilder,
+    $$DbCacheEntriesTableUpdateCompanionBuilder,
+    (
+      DbCacheEntry,
+      BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>
+    ),
+    DbCacheEntry,
+    PrefetchHooks Function()>;
+typedef $$DbChapterHistoryTableCreateCompanionBuilder
     = DbChapterHistoryCompanion Function({
   Value<int> mangaId,
   required int chapterId,
@@ -2803,62 +2908,6 @@ typedef $$DbChapterHistoryTableUpdateCompanionBuilder
   Value<int> chapterId,
   Value<DateTime> readAt,
 });
-
-class $$DbChapterHistoryTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbChapterHistoryTable,
-    DbChapterHistoryData,
-    $$DbChapterHistoryTableFilterComposer,
-    $$DbChapterHistoryTableOrderingComposer,
-    $$DbChapterHistoryTableProcessedTableManager,
-    $$DbChapterHistoryTableInsertCompanionBuilder,
-    $$DbChapterHistoryTableUpdateCompanionBuilder> {
-  $$DbChapterHistoryTableTableManager(
-      _$AppDatabase db, $DbChapterHistoryTable table)
-      : super(TableManagerState(
-          db: db,
-          table: table,
-          filteringComposer:
-              $$DbChapterHistoryTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbChapterHistoryTableOrderingComposer(ComposerState(db, table)),
-          getChildManagerBuilder: (p) =>
-              $$DbChapterHistoryTableProcessedTableManager(p),
-          getUpdateCompanionBuilder: ({
-            Value<int> mangaId = const Value.absent(),
-            Value<int> chapterId = const Value.absent(),
-            Value<DateTime> readAt = const Value.absent(),
-          }) =>
-              DbChapterHistoryCompanion(
-            mangaId: mangaId,
-            chapterId: chapterId,
-            readAt: readAt,
-          ),
-          getInsertCompanionBuilder: ({
-            Value<int> mangaId = const Value.absent(),
-            required int chapterId,
-            required DateTime readAt,
-          }) =>
-              DbChapterHistoryCompanion.insert(
-            mangaId: mangaId,
-            chapterId: chapterId,
-            readAt: readAt,
-          ),
-        ));
-}
-
-class $$DbChapterHistoryTableProcessedTableManager
-    extends ProcessedTableManager<
-        _$AppDatabase,
-        $DbChapterHistoryTable,
-        DbChapterHistoryData,
-        $$DbChapterHistoryTableFilterComposer,
-        $$DbChapterHistoryTableOrderingComposer,
-        $$DbChapterHistoryTableProcessedTableManager,
-        $$DbChapterHistoryTableInsertCompanionBuilder,
-        $$DbChapterHistoryTableUpdateCompanionBuilder> {
-  $$DbChapterHistoryTableProcessedTableManager(super.$state);
-}
 
 class $$DbChapterHistoryTableFilterComposer
     extends FilterComposer<_$AppDatabase, $DbChapterHistoryTable> {
@@ -2898,9 +2947,76 @@ class $$DbChapterHistoryTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-class _$AppDatabaseManager {
+class $$DbChapterHistoryTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $DbChapterHistoryTable,
+    DbChapterHistoryData,
+    $$DbChapterHistoryTableFilterComposer,
+    $$DbChapterHistoryTableOrderingComposer,
+    $$DbChapterHistoryTableCreateCompanionBuilder,
+    $$DbChapterHistoryTableUpdateCompanionBuilder,
+    (
+      DbChapterHistoryData,
+      BaseReferences<_$AppDatabase, $DbChapterHistoryTable,
+          DbChapterHistoryData>
+    ),
+    DbChapterHistoryData,
+    PrefetchHooks Function()> {
+  $$DbChapterHistoryTableTableManager(
+      _$AppDatabase db, $DbChapterHistoryTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$DbChapterHistoryTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$DbChapterHistoryTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> mangaId = const Value.absent(),
+            Value<int> chapterId = const Value.absent(),
+            Value<DateTime> readAt = const Value.absent(),
+          }) =>
+              DbChapterHistoryCompanion(
+            mangaId: mangaId,
+            chapterId: chapterId,
+            readAt: readAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> mangaId = const Value.absent(),
+            required int chapterId,
+            required DateTime readAt,
+          }) =>
+              DbChapterHistoryCompanion.insert(
+            mangaId: mangaId,
+            chapterId: chapterId,
+            readAt: readAt,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$DbChapterHistoryTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $DbChapterHistoryTable,
+    DbChapterHistoryData,
+    $$DbChapterHistoryTableFilterComposer,
+    $$DbChapterHistoryTableOrderingComposer,
+    $$DbChapterHistoryTableCreateCompanionBuilder,
+    $$DbChapterHistoryTableUpdateCompanionBuilder,
+    (
+      DbChapterHistoryData,
+      BaseReferences<_$AppDatabase, $DbChapterHistoryTable,
+          DbChapterHistoryData>
+    ),
+    DbChapterHistoryData,
+    PrefetchHooks Function()>;
+
+class $AppDatabaseManager {
   final _$AppDatabase _db;
-  _$AppDatabaseManager(this._db);
+  $AppDatabaseManager(this._db);
   $$DbMangasTableTableManager get dbMangas =>
       $$DbMangasTableTableManager(_db, _db.dbMangas);
   $$DbChaptersTableTableManager get dbChapters =>
