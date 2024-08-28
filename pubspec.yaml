@@ -18,6 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_cache_manager: ^3.4.1
+  flutter_gen: ^5.7.0
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.5.1
@@ -54,8 +55,7 @@ dev_dependencies:
   custom_lint: ^0.6.4
   drift_dev: ^2.20.1
   fd_lints: ^2.3.0
-  flutter_gen: ^5.5.0+1
-  flutter_gen_runner: ^5.6.0
+  flutter_gen_runner: ^5.7.0
   flutter_inappwebview: ^6.0.0
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.1

@@ -476,7 +476,7 @@ packages:
     source: hosted
     version: "3.4.1"
   flutter_gen:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_gen
       sha256: "7a5f9e14a151664422d37498daa0b63cda8e1068ae2c95d32d46515cb69cd227"
