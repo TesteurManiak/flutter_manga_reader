@@ -9,7 +9,7 @@ environment:
   flutter: ">=3.24.0 <4.0.0"
 
 dependencies:
-  background_downloader: ^8.5.3
+  background_downloader: ^8.5.5
   cached_network_image: ^3.4.1
   clock: ^1.1.1
   collection: ^1.18.0
