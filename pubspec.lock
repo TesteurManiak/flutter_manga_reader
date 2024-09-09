@@ -389,10 +389,10 @@ packages:
     dependency: "direct dev"
     description:
       name: drift_dev
-      sha256: b9ec6159a731288e805a44225ccbebad507dd84d52ab71352c52584f13199d2d
+      sha256: "2db55faba578a2068ea69df17114bef0fb267c19d60671d7dc826937e36abe79"
       url: "https://pub.dev"
     source: hosted
-    version: "2.20.1"
+    version: "2.20.2"
   equatable:
     dependency: transitive
     description:
@@ -1363,10 +1363,10 @@ packages:
     dependency: transitive
     description:
       name: sqlparser
-      sha256: "3be52b4968fc2f098ba735863404756d2fe3ea0729cf006a5b5612618f74ca04"
+      sha256: "249377442a813888f387827914238f28ee99385cff3b1ab3b219d5c25ca40b38"
       url: "https://pub.dev"
     source: hosted
-    version: "0.37.1"
+    version: "0.38.0"
   stack_trace:
     dependency: transitive
     description:
