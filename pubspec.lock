@@ -405,10 +405,10 @@ packages:
     dependency: transitive
     description:
       name: expressions
-      sha256: "0a3a207dc4697bbb0e17c731c7f10f2df6f88d9dbb99ac83c4168a10b57e7a20"
+      sha256: "308a621b602923dd8a0cf3072793b24850d06453eb49c6b698cbda41a282e904"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.5+1"
+    version: "0.2.5+2"
   fake_async:
     dependency: transitive
     description:
