@@ -1688,20 +1688,18 @@ packages:
     source: hosted
     version: "6.5.0"
   xpath_selector:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: xpath_selector
-      sha256: "6d8295565a34a6e2821a0721592e584c70421e52a0f54955e0c8e41963db7c90"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/xpath_selector"
+      relative: true
+    source: path
     version: "3.0.2"
   xpath_selector_html_parser:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: xpath_selector_html_parser
-      sha256: ebc562a07832a4062a2bc1c238fd59a81d31d841f15460caeed412ce078af9e0
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/xpath_selector_html_parser"
+      relative: true
+    source: path
     version: "3.0.1"
   yaml:
     dependency: transitive

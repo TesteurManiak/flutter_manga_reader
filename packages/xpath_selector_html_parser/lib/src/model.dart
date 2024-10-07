@@ -3,7 +3,7 @@ import 'package:xpath_selector/xpath_selector.dart';
 
 /// Built-in html model.
 class HtmlNodeTree extends XPathNode<Node> {
-  HtmlNodeTree(Node node) : super(node);
+  HtmlNodeTree(super.node);
 
   static HtmlNodeTree? from(Node? node) {
     if (node == null) return null;

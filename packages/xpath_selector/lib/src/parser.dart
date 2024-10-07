@@ -8,8 +8,8 @@ List<List<Selector>> parseSelectGroup(String xpath) {
   final combine = xpath.split('|');
   final selectorList = <List<Selector>>[];
 
-  for (final _path in combine) {
-    final path = _path.trim();
+  for (final p in combine) {
+    final path = p.trim();
     final xpathItem =
         xpathGroup.allMatches(path).map((e) => e.group(0)!.trim());
     selectorList.add(xpathItem.map(_parseSelector).toList());

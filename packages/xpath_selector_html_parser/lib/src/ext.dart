@@ -10,7 +10,7 @@ extension HtmlElementHelper on Element {
 }
 
 class HtmlXPath extends XPath<Node> {
-  HtmlXPath(XPathNode<Node> root) : super(root);
+  HtmlXPath(super.root);
 
   /// Create query by html string
   static HtmlXPath html(String html) {
