@@ -162,7 +162,7 @@ class _PageViewer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PopScope(
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, _) {
         if (chapter.read) return;
 
         final page = chapterController.page;

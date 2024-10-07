@@ -1,0 +1,14 @@
+name: xpath_selector
+description: XPath package for HTML and XML, basic XPath syntax are supported.
+version: 3.0.2
+homepage: https://github.com/simonkimi/xpath_selector
+publish_to: "none"
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  expressions: ^0.2.5+2
+
+dev_dependencies:
+  lints: ^4.0.0
