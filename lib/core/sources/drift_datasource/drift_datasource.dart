@@ -283,11 +283,8 @@ class DriftDatasource extends LocalDatasource {
     required bool keepPreviousData,
   }) async {
     if (!keepPreviousData) {
-      await _db.batch((batch) {
-        batch
-          ..deleteAll(_db.dbMangas)
-          ..deleteAll(_db.dbChapters)
-          ..deleteAll(_db.dbChapterHistory);
+      await _db.batch((b) {
+        b.deleteAll(_db.dbMangas);
       });
     }
 
