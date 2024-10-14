@@ -19,31 +19,28 @@ class DriftNetworkQueryCacheService extends NetworkQueryCacheService {
   @override
   Future<void> clearExpiredEntries() {
     return (_database.delete(_database.dbCacheEntries)
-          ..where((tbl) => tbl.expiry.isSmallerThanValue(_clock.now())))
+          ..where((t) => t.expiry.isSmallerThanValue(_clock.now())))
         .go();
   }
 
   @override
   Future<void> delete(String key) {
     return (_database.delete(_database.dbCacheEntries)
-          ..where((tbl) => tbl.key.equals(key)))
+          ..where((t) => t.key.equals(key)))
         .go();
   }
 
   @override
   Future<NetworkCacheEntry?> get(String key) {
-    return (_database.select(_database.dbCacheEntries)
-          ..where((tbl) => tbl.key.equals(key)))
-        .getSingleOrNull()
-        .then((entry) {
-      if (entry == null) return null;
-
+    final query = _database.select(_database.dbCacheEntries)
+      ..where((t) => t.key.equals(key));
+    return query.map((r) {
       return NetworkCacheEntry(
-        key: entry.key,
-        response: entry.response,
-        expiry: entry.expiry,
+        key: r.key,
+        response: r.response,
+        expiry: r.expiry,
       );
-    });
+    }).getSingleOrNull();
   }
 
   @override
