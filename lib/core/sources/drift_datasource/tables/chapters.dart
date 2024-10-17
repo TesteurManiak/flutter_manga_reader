@@ -1,5 +1,9 @@
 part of '../app_database.dart';
 
+@TableIndex(name: 'chapter_manga_id', columns: {#mangaId})
+@TableIndex(name: 'chapter_date_upload', columns: {#dateUpload})
+@TableIndex(name: 'chapter_number', columns: {#chapterNumber})
+@TableIndex(name: 'chapter_read', columns: {#read})
 class DbChapters extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get mangaId =>

@@ -1,6 +1,9 @@
 part of '../app_database.dart';
 
+@TableIndex(name: 'manga_source_id', columns: {#sourceId})
 @TableIndex(name: 'manga_favorite', columns: {#favorite})
+@TableIndex(name: 'manga_url', columns: {#url})
+@TableIndex(name: 'manga_title', columns: {#title})
 class DbMangas extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get sourceId => text()();

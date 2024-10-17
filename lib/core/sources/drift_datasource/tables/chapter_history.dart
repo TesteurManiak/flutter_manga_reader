@@ -1,5 +1,6 @@
 part of '../app_database.dart';
 
+@TableIndex(name: 'chapter_history_read_at', columns: {#readAt})
 class DbChapterHistory extends Table {
   IntColumn get mangaId =>
       integer().references(DbMangas, #id, onDelete: KeyAction.cascade)();
