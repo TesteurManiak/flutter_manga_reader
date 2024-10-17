@@ -2085,8 +2085,24 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DbCacheEntriesTable dbCacheEntries = $DbCacheEntriesTable(this);
   late final $DbChapterHistoryTable dbChapterHistory =
       $DbChapterHistoryTable(this);
+  late final Index mangaSourceId = Index('manga_source_id',
+      'CREATE INDEX manga_source_id ON db_mangas (source_id)');
   late final Index mangaFavorite = Index(
       'manga_favorite', 'CREATE INDEX manga_favorite ON db_mangas (favorite)');
+  late final Index mangaUrl =
+      Index('manga_url', 'CREATE INDEX manga_url ON db_mangas (url)');
+  late final Index mangaTitle =
+      Index('manga_title', 'CREATE INDEX manga_title ON db_mangas (title)');
+  late final Index chapterMangaId = Index('chapter_manga_id',
+      'CREATE INDEX chapter_manga_id ON db_chapters (manga_id)');
+  late final Index chapterDateUpload = Index('chapter_date_upload',
+      'CREATE INDEX chapter_date_upload ON db_chapters (date_upload)');
+  late final Index chapterNumber = Index('chapter_number',
+      'CREATE INDEX chapter_number ON db_chapters (chapter_number)');
+  late final Index chapterRead =
+      Index('chapter_read', 'CREATE INDEX chapter_read ON db_chapters (read)');
+  late final Index chapterHistoryReadAt = Index('chapter_history_read_at',
+      'CREATE INDEX chapter_history_read_at ON db_chapter_history (read_at)');
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2097,7 +2113,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         dbReadingDirection,
         dbCacheEntries,
         dbChapterHistory,
-        mangaFavorite
+        mangaSourceId,
+        mangaFavorite,
+        mangaUrl,
+        mangaTitle,
+        chapterMangaId,
+        chapterDateUpload,
+        chapterNumber,
+        chapterRead,
+        chapterHistoryReadAt
       ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules(
