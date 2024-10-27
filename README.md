@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="assets/splash/splash.png" alt="Flutter Manga Reader icon" height="200">
+    <img src="assets/splash/splash.png" alt="Flutter Manga Reader icon" height="200" style="border-radius:16px">
 </p>
 
 <h1 align="center">Flutter Manga Reader</h1>
