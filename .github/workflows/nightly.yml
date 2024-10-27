@@ -1,0 +1,36 @@
+name: Nightly Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-android-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - uses: subosito/flutter-action@v2.14.0
+        with:
+          cache: true
+      - uses: bluefireteam/melos-action@v3
+
+      - name: Perform Code Generation
+        run: |
+          melos run gen-all
+          flutter gen-l10n
+
+      - name: Generate SplashScreen
+        run: dart run flutter_native_splash:create
+
+      - name: Generate Launcher Icons
+        run: dart run flutter_launcher_icons:generate
+
+      - name: Build Android Release
+        run: flutter build apk --flavor prod --target lib/main_prod.dart --release
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter_manga_reader_android_${{ github.sha }}
+          path: build/app/outputs/flutter-apk/app-prod-release.apk
