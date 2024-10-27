@@ -202,6 +202,10 @@ This project uses [flutter_native_splash][flutter_native_splash_link] to generat
 $ dart run flutter_native_splash:create
 ```
 
+## Download
+
+You can download the nightly build from [here](https://github.com/TesteurManiak/flutter_manga_reader/actions/workflows/nightly.yml).
+
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
