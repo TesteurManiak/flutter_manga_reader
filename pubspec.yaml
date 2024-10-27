@@ -83,11 +83,12 @@ flutter:
 # Check the package's documentation to setup the launcher icons
 # https://pub.dev/packages/flutter_native_splash#1-setting-the-splash-screen
 flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
   image_path: "assets/launcher_icons/icon.png"
+  android: "launcher_icon"
   min_sdk_android: 22
   adaptive_icon_background: "#0075ff"
+  ios: true
+  image_path_ios_dark_transparent: "assets/launcher_icons/icon-transparent.png"
   remove_alpha_ios: true
   windows:
     generate: true
