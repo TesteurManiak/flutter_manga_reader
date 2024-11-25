@@ -67,7 +67,7 @@ dev_dependencies:
   melos: ^6.2.0
   mocktail: ^1.0.4
   riverpod_generator: ^2.6.1
-  riverpod_lint: ^2.3.13
+  riverpod_lint: ^2.6.1
   theme_tailor: ^3.0.1
 
 flutter:
