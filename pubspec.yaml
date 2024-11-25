@@ -66,7 +66,7 @@ dev_dependencies:
   json_serializable: ^6.8.0
   melos: ^6.2.0
   mocktail: ^1.0.4
-  riverpod_generator: ^2.4.3
+  riverpod_generator: ^2.6.1
   riverpod_lint: ^2.3.13
   theme_tailor: ^3.0.1
 
