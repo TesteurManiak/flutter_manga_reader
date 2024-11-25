@@ -806,10 +806,10 @@ packages:
     dependency: "direct main"
     description:
       name: loader_overlay
-      sha256: b87bd0c5f4a0c8249613b1c1666344469177535a6b7782b620a4ff1b8f52efa1
+      sha256: bde643b0d3b5c9d9ea9010948d11cb3d17cdcb3f29576b9c47e0047a5b52ae75
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.2+1"
+    version: "4.0.3"
   logging:
     dependency: "direct main"
     description:
