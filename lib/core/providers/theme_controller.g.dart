@@ -20,6 +20,8 @@ final defaultThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef DefaultThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
 String _$lightThemeHash() => r'7ac4cc0518f9ab4ef609ebca51fa838f0e162d95';
 
@@ -34,6 +36,8 @@ final lightThemeProvider = AutoDisposeProvider<ThemeData>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef LightThemeRef = AutoDisposeProviderRef<ThemeData>;
 String _$darkThemeHash() => r'b46811e5afa305b34100711c940c505600373313';
 
@@ -48,6 +52,8 @@ final darkThemeProvider = AutoDisposeProvider<ThemeData>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef DarkThemeRef = AutoDisposeProviderRef<ThemeData>;
 String _$platformBrightnessHash() =>
     r'd216448d440fab4a6896f853ce1af0c9f7918b34';
@@ -64,6 +70,8 @@ final platformBrightnessProvider = AutoDisposeProvider<Brightness>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef PlatformBrightnessRef = AutoDisposeProviderRef<Brightness>;
 String _$appThemeModeHash() => r'c0759b3cbe721d1a4d339309faead690b203610f';
 
@@ -78,6 +86,8 @@ final appThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AppThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
 String _$pureDarkModeStateHash() => r'96c9ab4cd4811b7b59ff3b1715d4d56beb43387d';
 
@@ -93,6 +103,8 @@ final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef PureDarkModeStateRef = AutoDisposeProviderRef<bool>;
 String _$isDarkHash() => r'28ad2230d66a2232eeb022504037ce118a301e6e';
 
@@ -107,6 +119,8 @@ final isDarkProvider = AutoDisposeProvider<bool>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef IsDarkRef = AutoDisposeProviderRef<bool>;
 String _$themeControllerHash() => r'5b18abece4d0ab9c88ed802576571347ad883f6c';
 
@@ -125,4 +139,4 @@ final themeControllerProvider =
 
 typedef _$ThemeController = Notifier<ThemeState>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

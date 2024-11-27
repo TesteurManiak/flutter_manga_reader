@@ -22,6 +22,8 @@ final scopedMangaDatasourceProvider =
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef ScopedMangaDatasourceRef = AutoDisposeProviderRef<MangaDatasource>;
 String _$fetchChapterPagesHash() => r'107df8ce05c5f4e05b5a580ff7320d156cb6a0f1';
 
@@ -171,6 +173,8 @@ class FetchChapterPagesProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FetchChapterPagesRef
     on AutoDisposeFutureProviderRef<Result<List<ChapterPage>, HttpError>> {
   /// The parameter `sourceChapter` of this provider.
@@ -202,6 +206,8 @@ final mangaDatasourcesProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef MangaDatasourcesRef
     = AutoDisposeProviderRef<Map<String, MangaDatasource>>;
 String _$findSourceFromIdHash() => r'55038b8b7acd106e3f84123fe84421ab5c021c23';
@@ -319,6 +325,8 @@ class FindSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin FindSourceFromIdRef on AutoDisposeProviderRef<MangaDatasource?> {
   /// The parameter `sourceId` of this provider.
   String get sourceId;
@@ -448,6 +456,8 @@ class GetSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GetSourceFromIdRef on AutoDisposeProviderRef<MangaDatasource> {
   /// The parameter `sourceId` of this provider.
   String get sourceId;
@@ -462,4 +472,4 @@ class _GetSourceFromIdProviderElement
   String get sourceId => (origin as GetSourceFromIdProvider).sourceId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

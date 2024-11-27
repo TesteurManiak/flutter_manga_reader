@@ -20,6 +20,8 @@ final localDatasourceProvider = Provider<LocalDatasource>.internal(
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef LocalDatasourceRef = ProviderRef<LocalDatasource>;
 String _$watchMangasInLibraryHash() =>
     r'7609a9322afb2e2910b2ee3edbec1ceac84bc34e';
@@ -39,6 +41,8 @@ final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
   },
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
 String _$watchMangaByIdHash() => r'ce88fa362f09e9fd18921d3d0622480be0ef9c64';
 
@@ -182,6 +186,8 @@ class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin WatchMangaByIdRef on AutoDisposeStreamProviderRef<Manga> {
   /// The parameter `id` of this provider.
   int get id;
@@ -330,6 +336,8 @@ class GetMangaByUrlAndSourceIdProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GetMangaByUrlAndSourceIdRef on AutoDisposeFutureProviderRef<Manga?> {
   /// The parameter `url` of this provider.
   String get url;
@@ -470,6 +478,8 @@ class GetChapterProvider extends AutoDisposeFutureProvider<Chapter?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin GetChapterRef on AutoDisposeFutureProviderRef<Chapter?> {
   /// The parameter `chapterId` of this provider.
   int get chapterId;
@@ -605,6 +615,8 @@ class WatchChaptersForMangaProvider extends StreamProvider<List<Chapter>> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin WatchChaptersForMangaRef on StreamProviderRef<List<Chapter>> {
   /// The parameter `mangaId` of this provider.
   int get mangaId;
@@ -743,6 +755,8 @@ class WatchUnreadChaptersCountForMangaProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin WatchUnreadChaptersCountForMangaRef on AutoDisposeStreamProviderRef<int> {
   /// The parameter `mangaId` of this provider.
   int get mangaId;
@@ -758,4 +772,4 @@ class _WatchUnreadChaptersCountForMangaProviderElement
       (origin as WatchUnreadChaptersCountForMangaProvider).mangaId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

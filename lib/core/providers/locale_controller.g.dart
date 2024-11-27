@@ -20,6 +20,8 @@ final fallbackLocaleProvider = Provider<Locale>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef FallbackLocaleRef = ProviderRef<Locale>;
 String _$systemLocaleHash() => r'10ddaceb13e3857e8ba2f7f426a670e4f5844472';
 
@@ -34,6 +36,8 @@ final systemLocaleProvider = Provider<Locale>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef SystemLocaleRef = ProviderRef<Locale>;
 String _$localeControllerHash() => r'f73adb84b8a4e763227e30b367a42fe0bfe2cfa2';
 
@@ -52,4 +56,4 @@ final localeControllerProvider =
 
 typedef _$LocaleController = Notifier<Locale>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

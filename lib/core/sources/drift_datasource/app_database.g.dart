@@ -2251,219 +2251,314 @@ final class $$DbMangasTableReferences
 }
 
 class $$DbMangasTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $DbMangasTable> {
-  $$DbMangasTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbMangasTable> {
+  $$DbMangasTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get sourceId => $state.composableBuilder(
-      column: $state.table.sourceId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get sourceId => $composableBuilder(
+      column: $table.sourceId, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<bool> get favorite => $state.composableBuilder(
-      column: $state.table.favorite,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<bool> get favorite => $composableBuilder(
+      column: $table.favorite, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<int> get fetchInterval => $state.composableBuilder(
-      column: $state.table.fetchInterval,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<int> get fetchInterval => $composableBuilder(
+      column: $table.fetchInterval, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get dateAdded => $state.composableBuilder(
-      column: $state.table.dateAdded,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get dateAdded => $composableBuilder(
+      column: $table.dateAdded, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get url => $state.composableBuilder(
-      column: $state.table.url,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get artist => $state.composableBuilder(
-      column: $state.table.artist,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get artist => $composableBuilder(
+      column: $table.artist, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get author => $state.composableBuilder(
-      column: $state.table.author,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get author => $composableBuilder(
+      column: $table.author, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get genre => $state.composableBuilder(
-      column: $state.table.genre,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get genre => $composableBuilder(
+      column: $table.genre, builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<MangaStatus, MangaStatus, int> get status =>
-      $state.composableBuilder(
-          column: $state.table.status,
-          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
-              column,
-              joinBuilders: joinBuilders));
+      $composableBuilder(
+          column: $table.status,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<String> get thumbnailUrl => $state.composableBuilder(
-      column: $state.table.thumbnailUrl,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get thumbnailUrl => $composableBuilder(
+      column: $table.thumbnailUrl, builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<UpdateStrategy, UpdateStrategy, int>
-      get updateStrategy => $state.composableBuilder(
-          column: $state.table.updateStrategy,
-          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
-              column,
-              joinBuilders: joinBuilders));
+      get updateStrategy => $composableBuilder(
+          column: $table.updateStrategy,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
-  ColumnFilters<bool> get initialized => $state.composableBuilder(
-      column: $state.table.initialized,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<bool> get initialized => $composableBuilder(
+      column: $table.initialized, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get lastModifiedAt => $state.composableBuilder(
-      column: $state.table.lastModifiedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get lastModifiedAt => $composableBuilder(
+      column: $table.lastModifiedAt,
+      builder: (column) => ColumnFilters(column));
 
-  ComposableFilter dbChaptersRefs(
-      ComposableFilter Function($$DbChaptersTableFilterComposer f) f) {
-    final $$DbChaptersTableFilterComposer composer = $state.composerBuilder(
+  Expression<bool> dbChaptersRefs(
+      Expression<bool> Function($$DbChaptersTableFilterComposer f) f) {
+    final $$DbChaptersTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.id,
-        referencedTable: $state.db.dbChapters,
+        referencedTable: $db.dbChapters,
         getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbChaptersTableFilterComposer(ComposerState($state.db,
-                $state.db.dbChapters, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChaptersTableFilterComposer(
+              $db: $db,
+              $table: $db.dbChapters,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
-  ComposableFilter dbReadingDirectionRefs(
-      ComposableFilter Function($$DbReadingDirectionTableFilterComposer f) f) {
-    final $$DbReadingDirectionTableFilterComposer composer = $state
-        .composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.dbReadingDirection,
-            getReferencedColumn: (t) => t.mangaId,
-            builder: (joinBuilder, parentComposers) =>
-                $$DbReadingDirectionTableFilterComposer(ComposerState(
-                    $state.db,
-                    $state.db.dbReadingDirection,
-                    joinBuilder,
-                    parentComposers)));
+  Expression<bool> dbReadingDirectionRefs(
+      Expression<bool> Function($$DbReadingDirectionTableFilterComposer f) f) {
+    final $$DbReadingDirectionTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbReadingDirection,
+        getReferencedColumn: (t) => t.mangaId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbReadingDirectionTableFilterComposer(
+              $db: $db,
+              $table: $db.dbReadingDirection,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
-  ComposableFilter dbChapterHistoryRefs(
-      ComposableFilter Function($$DbChapterHistoryTableFilterComposer f) f) {
-    final $$DbChapterHistoryTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.dbChapterHistory,
-            getReferencedColumn: (t) => t.mangaId,
-            builder: (joinBuilder, parentComposers) =>
-                $$DbChapterHistoryTableFilterComposer(ComposerState($state.db,
-                    $state.db.dbChapterHistory, joinBuilder, parentComposers)));
+  Expression<bool> dbChapterHistoryRefs(
+      Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f) {
+    final $$DbChapterHistoryTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbChapterHistory,
+        getReferencedColumn: (t) => t.mangaId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChapterHistoryTableFilterComposer(
+              $db: $db,
+              $table: $db.dbChapterHistory,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
 
 class $$DbMangasTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $DbMangasTable> {
-  $$DbMangasTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbMangasTable> {
+  $$DbMangasTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get sourceId => $state.composableBuilder(
-      column: $state.table.sourceId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get sourceId => $composableBuilder(
+      column: $table.sourceId, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get favorite => $state.composableBuilder(
-      column: $state.table.favorite,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<bool> get favorite => $composableBuilder(
+      column: $table.favorite, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get fetchInterval => $state.composableBuilder(
-      column: $state.table.fetchInterval,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get fetchInterval => $composableBuilder(
+      column: $table.fetchInterval,
+      builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get dateAdded => $state.composableBuilder(
-      column: $state.table.dateAdded,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get dateAdded => $composableBuilder(
+      column: $table.dateAdded, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get url => $state.composableBuilder(
-      column: $state.table.url,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get artist => $state.composableBuilder(
-      column: $state.table.artist,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get artist => $composableBuilder(
+      column: $table.artist, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get author => $state.composableBuilder(
-      column: $state.table.author,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get author => $composableBuilder(
+      column: $table.author, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get description => $state.composableBuilder(
-      column: $state.table.description,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get genre => $state.composableBuilder(
-      column: $state.table.genre,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get genre => $composableBuilder(
+      column: $table.genre, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get status => $state.composableBuilder(
-      column: $state.table.status,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get status => $composableBuilder(
+      column: $table.status, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get thumbnailUrl => $state.composableBuilder(
-      column: $state.table.thumbnailUrl,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get thumbnailUrl => $composableBuilder(
+      column: $table.thumbnailUrl,
+      builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get updateStrategy => $state.composableBuilder(
-      column: $state.table.updateStrategy,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get updateStrategy => $composableBuilder(
+      column: $table.updateStrategy,
+      builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get initialized => $state.composableBuilder(
-      column: $state.table.initialized,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<bool> get initialized => $composableBuilder(
+      column: $table.initialized, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get lastModifiedAt => $state.composableBuilder(
-      column: $state.table.lastModifiedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get lastModifiedAt => $composableBuilder(
+      column: $table.lastModifiedAt,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$DbMangasTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DbMangasTable> {
+  $$DbMangasTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get sourceId =>
+      $composableBuilder(column: $table.sourceId, builder: (column) => column);
+
+  GeneratedColumn<bool> get favorite =>
+      $composableBuilder(column: $table.favorite, builder: (column) => column);
+
+  GeneratedColumn<int> get fetchInterval => $composableBuilder(
+      column: $table.fetchInterval, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dateAdded =>
+      $composableBuilder(column: $table.dateAdded, builder: (column) => column);
+
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get artist =>
+      $composableBuilder(column: $table.artist, builder: (column) => column);
+
+  GeneratedColumn<String> get author =>
+      $composableBuilder(column: $table.author, builder: (column) => column);
+
+  GeneratedColumn<String> get description => $composableBuilder(
+      column: $table.description, builder: (column) => column);
+
+  GeneratedColumn<String> get genre =>
+      $composableBuilder(column: $table.genre, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<MangaStatus, int> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<String> get thumbnailUrl => $composableBuilder(
+      column: $table.thumbnailUrl, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<UpdateStrategy, int> get updateStrategy =>
+      $composableBuilder(
+          column: $table.updateStrategy, builder: (column) => column);
+
+  GeneratedColumn<bool> get initialized => $composableBuilder(
+      column: $table.initialized, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastModifiedAt => $composableBuilder(
+      column: $table.lastModifiedAt, builder: (column) => column);
+
+  Expression<T> dbChaptersRefs<T extends Object>(
+      Expression<T> Function($$DbChaptersTableAnnotationComposer a) f) {
+    final $$DbChaptersTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbChapters,
+        getReferencedColumn: (t) => t.mangaId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChaptersTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbChapters,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
+
+  Expression<T> dbReadingDirectionRefs<T extends Object>(
+      Expression<T> Function($$DbReadingDirectionTableAnnotationComposer a) f) {
+    final $$DbReadingDirectionTableAnnotationComposer composer =
+        $composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.dbReadingDirection,
+            getReferencedColumn: (t) => t.mangaId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$DbReadingDirectionTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.dbReadingDirection,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
+    return f(composer);
+  }
+
+  Expression<T> dbChapterHistoryRefs<T extends Object>(
+      Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f) {
+    final $$DbChapterHistoryTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbChapterHistory,
+        getReferencedColumn: (t) => t.mangaId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChapterHistoryTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbChapterHistory,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
 }
 
 class $$DbMangasTableTableManager extends RootTableManager<
@@ -2472,6 +2567,7 @@ class $$DbMangasTableTableManager extends RootTableManager<
     DbManga,
     $$DbMangasTableFilterComposer,
     $$DbMangasTableOrderingComposer,
+    $$DbMangasTableAnnotationComposer,
     $$DbMangasTableCreateCompanionBuilder,
     $$DbMangasTableUpdateCompanionBuilder,
     (DbManga, $$DbMangasTableReferences),
@@ -2484,10 +2580,12 @@ class $$DbMangasTableTableManager extends RootTableManager<
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DbMangasTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbMangasTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DbMangasTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbMangasTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbMangasTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<String> sourceId = const Value.absent(),
@@ -2627,6 +2725,7 @@ typedef $$DbMangasTableProcessedTableManager = ProcessedTableManager<
     DbManga,
     $$DbMangasTableFilterComposer,
     $$DbMangasTableOrderingComposer,
+    $$DbMangasTableAnnotationComposer,
     $$DbMangasTableCreateCompanionBuilder,
     $$DbMangasTableUpdateCompanionBuilder,
     (DbManga, $$DbMangasTableReferences),
@@ -2702,168 +2801,245 @@ final class $$DbChaptersTableReferences
 }
 
 class $$DbChaptersTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $DbChaptersTable> {
-  $$DbChaptersTableFilterComposer(super.$state);
-  ColumnFilters<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbChaptersTable> {
+  $$DbChaptersTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get url => $state.composableBuilder(
-      column: $state.table.url,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get dateUpload => $state.composableBuilder(
-      column: $state.table.dateUpload,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get dateUpload => $composableBuilder(
+      column: $table.dateUpload, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<double> get chapterNumber => $state.composableBuilder(
-      column: $state.table.chapterNumber,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<double> get chapterNumber => $composableBuilder(
+      column: $table.chapterNumber, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get scanlator => $state.composableBuilder(
-      column: $state.table.scanlator,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get scanlator => $composableBuilder(
+      column: $table.scanlator, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<bool> get read => $state.composableBuilder(
-      column: $state.table.read,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<bool> get read => $composableBuilder(
+      column: $table.read, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<bool> get downloaded => $state.composableBuilder(
-      column: $state.table.downloaded,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<bool> get downloaded => $composableBuilder(
+      column: $table.downloaded, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<bool> get bookmark => $state.composableBuilder(
-      column: $state.table.bookmark,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<bool> get bookmark => $composableBuilder(
+      column: $table.bookmark, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<int> get lastPageRead => $state.composableBuilder(
-      column: $state.table.lastPageRead,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<int> get lastPageRead => $composableBuilder(
+      column: $table.lastPageRead, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get dateFetch => $state.composableBuilder(
-      column: $state.table.dateFetch,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get dateFetch => $composableBuilder(
+      column: $table.dateFetch, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get lastModified => $state.composableBuilder(
-      column: $state.table.lastModified,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get lastModified => $composableBuilder(
+      column: $table.lastModified, builder: (column) => ColumnFilters(column));
 
   $$DbMangasTableFilterComposer get mangaId {
-    final $$DbMangasTableFilterComposer composer = $state.composerBuilder(
+    final $$DbMangasTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableFilterComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableFilterComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
-  ComposableFilter dbChapterHistoryRefs(
-      ComposableFilter Function($$DbChapterHistoryTableFilterComposer f) f) {
-    final $$DbChapterHistoryTableFilterComposer composer =
-        $state.composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $state.db.dbChapterHistory,
-            getReferencedColumn: (t) => t.chapterId,
-            builder: (joinBuilder, parentComposers) =>
-                $$DbChapterHistoryTableFilterComposer(ComposerState($state.db,
-                    $state.db.dbChapterHistory, joinBuilder, parentComposers)));
+  Expression<bool> dbChapterHistoryRefs(
+      Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f) {
+    final $$DbChapterHistoryTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbChapterHistory,
+        getReferencedColumn: (t) => t.chapterId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChapterHistoryTableFilterComposer(
+              $db: $db,
+              $table: $db.dbChapterHistory,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
 
 class $$DbChaptersTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $DbChaptersTable> {
-  $$DbChaptersTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbChaptersTable> {
+  $$DbChaptersTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get url => $state.composableBuilder(
-      column: $state.table.url,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get url => $composableBuilder(
+      column: $table.url, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get name => $state.composableBuilder(
-      column: $state.table.name,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get dateUpload => $state.composableBuilder(
-      column: $state.table.dateUpload,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get dateUpload => $composableBuilder(
+      column: $table.dateUpload, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<double> get chapterNumber => $state.composableBuilder(
-      column: $state.table.chapterNumber,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<double> get chapterNumber => $composableBuilder(
+      column: $table.chapterNumber,
+      builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get scanlator => $state.composableBuilder(
-      column: $state.table.scanlator,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get scanlator => $composableBuilder(
+      column: $table.scanlator, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get read => $state.composableBuilder(
-      column: $state.table.read,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<bool> get read => $composableBuilder(
+      column: $table.read, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get downloaded => $state.composableBuilder(
-      column: $state.table.downloaded,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<bool> get downloaded => $composableBuilder(
+      column: $table.downloaded, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<bool> get bookmark => $state.composableBuilder(
-      column: $state.table.bookmark,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<bool> get bookmark => $composableBuilder(
+      column: $table.bookmark, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get lastPageRead => $state.composableBuilder(
-      column: $state.table.lastPageRead,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<int> get lastPageRead => $composableBuilder(
+      column: $table.lastPageRead,
+      builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get dateFetch => $state.composableBuilder(
-      column: $state.table.dateFetch,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get dateFetch => $composableBuilder(
+      column: $table.dateFetch, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get lastModified => $state.composableBuilder(
-      column: $state.table.lastModified,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get lastModified => $composableBuilder(
+      column: $table.lastModified,
+      builder: (column) => ColumnOrderings(column));
 
   $$DbMangasTableOrderingComposer get mangaId {
-    final $$DbMangasTableOrderingComposer composer = $state.composerBuilder(
+    final $$DbMangasTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableOrderingComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableOrderingComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
+  }
+}
+
+class $$DbChaptersTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DbChaptersTable> {
+  $$DbChaptersTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get url =>
+      $composableBuilder(column: $table.url, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dateUpload => $composableBuilder(
+      column: $table.dateUpload, builder: (column) => column);
+
+  GeneratedColumn<double> get chapterNumber => $composableBuilder(
+      column: $table.chapterNumber, builder: (column) => column);
+
+  GeneratedColumn<String> get scanlator =>
+      $composableBuilder(column: $table.scanlator, builder: (column) => column);
+
+  GeneratedColumn<bool> get read =>
+      $composableBuilder(column: $table.read, builder: (column) => column);
+
+  GeneratedColumn<bool> get downloaded => $composableBuilder(
+      column: $table.downloaded, builder: (column) => column);
+
+  GeneratedColumn<bool> get bookmark =>
+      $composableBuilder(column: $table.bookmark, builder: (column) => column);
+
+  GeneratedColumn<int> get lastPageRead => $composableBuilder(
+      column: $table.lastPageRead, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get dateFetch =>
+      $composableBuilder(column: $table.dateFetch, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastModified => $composableBuilder(
+      column: $table.lastModified, builder: (column) => column);
+
+  $$DbMangasTableAnnotationComposer get mangaId {
+    final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.mangaId,
+        referencedTable: $db.dbMangas,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  Expression<T> dbChapterHistoryRefs<T extends Object>(
+      Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f) {
+    final $$DbChapterHistoryTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.dbChapterHistory,
+        getReferencedColumn: (t) => t.chapterId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChapterHistoryTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbChapterHistory,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
   }
 }
 
@@ -2873,6 +3049,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
     DbChapter,
     $$DbChaptersTableFilterComposer,
     $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableAnnotationComposer,
     $$DbChaptersTableCreateCompanionBuilder,
     $$DbChaptersTableUpdateCompanionBuilder,
     (DbChapter, $$DbChaptersTableReferences),
@@ -2882,10 +3059,12 @@ class $$DbChaptersTableTableManager extends RootTableManager<
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DbChaptersTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbChaptersTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DbChaptersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbChaptersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbChaptersTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<int> mangaId = const Value.absent(),
@@ -2970,6 +3149,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
                       dynamic,
                       dynamic,
                       dynamic,
+                      dynamic,
                       dynamic>>(state) {
                 if (mangaId) {
                   state = state.withJoin(
@@ -3011,6 +3191,7 @@ typedef $$DbChaptersTableProcessedTableManager = ProcessedTableManager<
     DbChapter,
     $$DbChaptersTableFilterComposer,
     $$DbChaptersTableOrderingComposer,
+    $$DbChaptersTableAnnotationComposer,
     $$DbChaptersTableCreateCompanionBuilder,
     $$DbChaptersTableUpdateCompanionBuilder,
     (DbChapter, $$DbChaptersTableReferences),
@@ -3048,45 +3229,102 @@ final class $$DbReadingDirectionTableReferences extends BaseReferences<
 }
 
 class $$DbReadingDirectionTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $DbReadingDirectionTable> {
-  $$DbReadingDirectionTableFilterComposer(super.$state);
+    extends Composer<_$AppDatabase, $DbReadingDirectionTable> {
+  $$DbReadingDirectionTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
   ColumnWithTypeConverterFilters<ReadingDirection, ReadingDirection, int>
-      get direction => $state.composableBuilder(
-          column: $state.table.direction,
-          builder: (column, joinBuilders) => ColumnWithTypeConverterFilters(
-              column,
-              joinBuilders: joinBuilders));
+      get direction => $composableBuilder(
+          column: $table.direction,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
 
   $$DbMangasTableFilterComposer get mangaId {
-    final $$DbMangasTableFilterComposer composer = $state.composerBuilder(
+    final $$DbMangasTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableFilterComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableFilterComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
 
 class $$DbReadingDirectionTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $DbReadingDirectionTable> {
-  $$DbReadingDirectionTableOrderingComposer(super.$state);
-  ColumnOrderings<int> get direction => $state.composableBuilder(
-      column: $state.table.direction,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbReadingDirectionTable> {
+  $$DbReadingDirectionTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get direction => $composableBuilder(
+      column: $table.direction, builder: (column) => ColumnOrderings(column));
 
   $$DbMangasTableOrderingComposer get mangaId {
-    final $$DbMangasTableOrderingComposer composer = $state.composerBuilder(
+    final $$DbMangasTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableOrderingComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableOrderingComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DbReadingDirectionTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DbReadingDirectionTable> {
+  $$DbReadingDirectionTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumnWithTypeConverter<ReadingDirection, int> get direction =>
+      $composableBuilder(column: $table.direction, builder: (column) => column);
+
+  $$DbMangasTableAnnotationComposer get mangaId {
+    final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.mangaId,
+        referencedTable: $db.dbMangas,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -3097,6 +3335,7 @@ class $$DbReadingDirectionTableTableManager extends RootTableManager<
     DbReadingDirectionData,
     $$DbReadingDirectionTableFilterComposer,
     $$DbReadingDirectionTableOrderingComposer,
+    $$DbReadingDirectionTableAnnotationComposer,
     $$DbReadingDirectionTableCreateCompanionBuilder,
     $$DbReadingDirectionTableUpdateCompanionBuilder,
     (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
@@ -3107,10 +3346,13 @@ class $$DbReadingDirectionTableTableManager extends RootTableManager<
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DbReadingDirectionTableFilterComposer(ComposerState(db, table)),
-          orderingComposer: $$DbReadingDirectionTableOrderingComposer(
-              ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DbReadingDirectionTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbReadingDirectionTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbReadingDirectionTableAnnotationComposer(
+                  $db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> mangaId = const Value.absent(),
             Value<ReadingDirection> direction = const Value.absent(),
@@ -3139,6 +3381,7 @@ class $$DbReadingDirectionTableTableManager extends RootTableManager<
               explicitlyWatchedTables: [],
               addJoins: <
                   T extends TableManagerState<
+                      dynamic,
                       dynamic,
                       dynamic,
                       dynamic,
@@ -3177,6 +3420,7 @@ typedef $$DbReadingDirectionTableProcessedTableManager = ProcessedTableManager<
     DbReadingDirectionData,
     $$DbReadingDirectionTableFilterComposer,
     $$DbReadingDirectionTableOrderingComposer,
+    $$DbReadingDirectionTableAnnotationComposer,
     $$DbReadingDirectionTableCreateCompanionBuilder,
     $$DbReadingDirectionTableUpdateCompanionBuilder,
     (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
@@ -3198,41 +3442,60 @@ typedef $$DbCacheEntriesTableUpdateCompanionBuilder = DbCacheEntriesCompanion
 });
 
 class $$DbCacheEntriesTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $DbCacheEntriesTable> {
-  $$DbCacheEntriesTableFilterComposer(super.$state);
-  ColumnFilters<String> get key => $state.composableBuilder(
-      column: $state.table.key,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbCacheEntriesTable> {
+  $$DbCacheEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get key => $composableBuilder(
+      column: $table.key, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get response => $state.composableBuilder(
-      column: $state.table.response,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<String> get response => $composableBuilder(
+      column: $table.response, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get expiry => $state.composableBuilder(
-      column: $state.table.expiry,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+  ColumnFilters<DateTime> get expiry => $composableBuilder(
+      column: $table.expiry, builder: (column) => ColumnFilters(column));
 }
 
 class $$DbCacheEntriesTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $DbCacheEntriesTable> {
-  $$DbCacheEntriesTableOrderingComposer(super.$state);
-  ColumnOrderings<String> get key => $state.composableBuilder(
-      column: $state.table.key,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbCacheEntriesTable> {
+  $$DbCacheEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get key => $composableBuilder(
+      column: $table.key, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get response => $state.composableBuilder(
-      column: $state.table.response,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<String> get response => $composableBuilder(
+      column: $table.response, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get expiry => $state.composableBuilder(
-      column: $state.table.expiry,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+  ColumnOrderings<DateTime> get expiry => $composableBuilder(
+      column: $table.expiry, builder: (column) => ColumnOrderings(column));
+}
+
+class $$DbCacheEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DbCacheEntriesTable> {
+  $$DbCacheEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get key =>
+      $composableBuilder(column: $table.key, builder: (column) => column);
+
+  GeneratedColumn<String> get response =>
+      $composableBuilder(column: $table.response, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get expiry =>
+      $composableBuilder(column: $table.expiry, builder: (column) => column);
 }
 
 class $$DbCacheEntriesTableTableManager extends RootTableManager<
@@ -3241,6 +3504,7 @@ class $$DbCacheEntriesTableTableManager extends RootTableManager<
     DbCacheEntry,
     $$DbCacheEntriesTableFilterComposer,
     $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableAnnotationComposer,
     $$DbCacheEntriesTableCreateCompanionBuilder,
     $$DbCacheEntriesTableUpdateCompanionBuilder,
     (
@@ -3254,10 +3518,12 @@ class $$DbCacheEntriesTableTableManager extends RootTableManager<
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DbCacheEntriesTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbCacheEntriesTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DbCacheEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbCacheEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbCacheEntriesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> key = const Value.absent(),
             Value<String> response = const Value.absent(),
@@ -3295,6 +3561,7 @@ typedef $$DbCacheEntriesTableProcessedTableManager = ProcessedTableManager<
     DbCacheEntry,
     $$DbCacheEntriesTableFilterComposer,
     $$DbCacheEntriesTableOrderingComposer,
+    $$DbCacheEntriesTableAnnotationComposer,
     $$DbCacheEntriesTableCreateCompanionBuilder,
     $$DbCacheEntriesTableUpdateCompanionBuilder,
     (
@@ -3351,67 +3618,160 @@ final class $$DbChapterHistoryTableReferences extends BaseReferences<
 }
 
 class $$DbChapterHistoryTableFilterComposer
-    extends FilterComposer<_$AppDatabase, $DbChapterHistoryTable> {
-  $$DbChapterHistoryTableFilterComposer(super.$state);
-  ColumnFilters<DateTime> get readAt => $state.composableBuilder(
-      column: $state.table.readAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbChapterHistoryTable> {
+  $$DbChapterHistoryTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<DateTime> get readAt => $composableBuilder(
+      column: $table.readAt, builder: (column) => ColumnFilters(column));
 
   $$DbMangasTableFilterComposer get mangaId {
-    final $$DbMangasTableFilterComposer composer = $state.composerBuilder(
+    final $$DbMangasTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableFilterComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableFilterComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$DbChaptersTableFilterComposer get chapterId {
-    final $$DbChaptersTableFilterComposer composer = $state.composerBuilder(
+    final $$DbChaptersTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.chapterId,
-        referencedTable: $state.db.dbChapters,
+        referencedTable: $db.dbChapters,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbChaptersTableFilterComposer(ComposerState($state.db,
-                $state.db.dbChapters, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChaptersTableFilterComposer(
+              $db: $db,
+              $table: $db.dbChapters,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
 
 class $$DbChapterHistoryTableOrderingComposer
-    extends OrderingComposer<_$AppDatabase, $DbChapterHistoryTable> {
-  $$DbChapterHistoryTableOrderingComposer(super.$state);
-  ColumnOrderings<DateTime> get readAt => $state.composableBuilder(
-      column: $state.table.readAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
+    extends Composer<_$AppDatabase, $DbChapterHistoryTable> {
+  $$DbChapterHistoryTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<DateTime> get readAt => $composableBuilder(
+      column: $table.readAt, builder: (column) => ColumnOrderings(column));
 
   $$DbMangasTableOrderingComposer get mangaId {
-    final $$DbMangasTableOrderingComposer composer = $state.composerBuilder(
+    final $$DbMangasTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $state.db.dbMangas,
+        referencedTable: $db.dbMangas,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbMangasTableOrderingComposer(ComposerState(
-                $state.db, $state.db.dbMangas, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableOrderingComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$DbChaptersTableOrderingComposer get chapterId {
-    final $$DbChaptersTableOrderingComposer composer = $state.composerBuilder(
+    final $$DbChaptersTableOrderingComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.chapterId,
-        referencedTable: $state.db.dbChapters,
+        referencedTable: $db.dbChapters,
         getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder, parentComposers) =>
-            $$DbChaptersTableOrderingComposer(ComposerState($state.db,
-                $state.db.dbChapters, joinBuilder, parentComposers)));
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChaptersTableOrderingComposer(
+              $db: $db,
+              $table: $db.dbChapters,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$DbChapterHistoryTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DbChapterHistoryTable> {
+  $$DbChapterHistoryTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<DateTime> get readAt =>
+      $composableBuilder(column: $table.readAt, builder: (column) => column);
+
+  $$DbMangasTableAnnotationComposer get mangaId {
+    final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.mangaId,
+        referencedTable: $db.dbMangas,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbMangasTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbMangas,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+
+  $$DbChaptersTableAnnotationComposer get chapterId {
+    final $$DbChaptersTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.chapterId,
+        referencedTable: $db.dbChapters,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$DbChaptersTableAnnotationComposer(
+              $db: $db,
+              $table: $db.dbChapters,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -3422,6 +3782,7 @@ class $$DbChapterHistoryTableTableManager extends RootTableManager<
     DbChapterHistoryData,
     $$DbChapterHistoryTableFilterComposer,
     $$DbChapterHistoryTableOrderingComposer,
+    $$DbChapterHistoryTableAnnotationComposer,
     $$DbChapterHistoryTableCreateCompanionBuilder,
     $$DbChapterHistoryTableUpdateCompanionBuilder,
     (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
@@ -3432,10 +3793,12 @@ class $$DbChapterHistoryTableTableManager extends RootTableManager<
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $$DbChapterHistoryTableFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $$DbChapterHistoryTableOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $$DbChapterHistoryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbChapterHistoryTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbChapterHistoryTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> mangaId = const Value.absent(),
             Value<int> chapterId = const Value.absent(),
@@ -3468,6 +3831,7 @@ class $$DbChapterHistoryTableTableManager extends RootTableManager<
               explicitlyWatchedTables: [],
               addJoins: <
                   T extends TableManagerState<
+                      dynamic,
                       dynamic,
                       dynamic,
                       dynamic,
@@ -3516,6 +3880,7 @@ typedef $$DbChapterHistoryTableProcessedTableManager = ProcessedTableManager<
     DbChapterHistoryData,
     $$DbChapterHistoryTableFilterComposer,
     $$DbChapterHistoryTableOrderingComposer,
+    $$DbChapterHistoryTableAnnotationComposer,
     $$DbChapterHistoryTableCreateCompanionBuilder,
     $$DbChapterHistoryTableUpdateCompanionBuilder,
     (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
@@ -3554,6 +3919,8 @@ final appDatabaseProvider = Provider<AppDatabase>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AppDatabaseRef = ProviderRef<AppDatabase>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -19,6 +19,8 @@ final cacheClientProvider = Provider<Client>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CacheClientRef = ProviderRef<Client>;
 String _$sourceClientHash() => r'185712dd7fc6cc2a59218ef8e5e03b17e015a795';
 
@@ -156,6 +158,8 @@ class SourceClientProvider extends Provider<RestClient> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin SourceClientRef on ProviderRef<RestClient> {
   /// The parameter `baseUrl` of this provider.
   String get baseUrl;
@@ -169,4 +173,4 @@ class _SourceClientProviderElement extends ProviderElement<RestClient>
   String get baseUrl => (origin as SourceClientProvider).baseUrl;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

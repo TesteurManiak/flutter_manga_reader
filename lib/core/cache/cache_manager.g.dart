@@ -21,6 +21,8 @@ final networkCacheServiceProvider = Provider<NetworkQueryCacheService>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef NetworkCacheServiceRef = ProviderRef<NetworkQueryCacheService>;
 String _$cacheManagerHash() => r'56930418845ed444505f4ba0bf81d704f8fbbbfa';
 
@@ -35,6 +37,8 @@ final cacheManagerProvider = Provider<CacheManager>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef CacheManagerRef = ProviderRef<CacheManager>;
 String _$appCacheManagerHash() => r'ab646cb19b75d8f7612172eb61a5a6301b7af441';
 
@@ -50,6 +54,8 @@ final appCacheManagerProvider = Provider<AppCacheManager>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef AppCacheManagerRef = ProviderRef<AppCacheManager>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
