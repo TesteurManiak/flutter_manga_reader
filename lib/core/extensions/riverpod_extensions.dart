@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-extension AutoDisposeRefExtension<T> on AutoDisposeRef<T> {
+extension AutoDisposeRefExtension on Ref {
   // When invoked keeps your provider alive for [duration]
   void cacheFor(Duration duration) {
     final link = keepAlive();
