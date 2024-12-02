@@ -7,7 +7,7 @@ part of 'directories.dart';
 // **************************************************************************
 
 String _$applicationDocumentsDirectoryHash() =>
-    r'e1fa0df3a13273605f36b8d02ccc473c25220bc5';
+    r'ccaa6dbea5408dc64725d81cbdd6cd10213ad83e';
 
 /// See also [applicationDocumentsDirectory].
 @ProviderFor(applicationDocumentsDirectory)

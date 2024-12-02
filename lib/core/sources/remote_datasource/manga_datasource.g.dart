@@ -7,7 +7,7 @@ part of 'manga_datasource.dart';
 // **************************************************************************
 
 String _$scopedMangaDatasourceHash() =>
-    r'5eeea64a6292d207248d6e9d67ef191942e25fe4';
+    r'9b55811c3fd5896e2b064bb052c3ac57d8859c05';
 
 /// See also [scopedMangaDatasource].
 @ProviderFor(scopedMangaDatasource)
@@ -25,7 +25,7 @@ final scopedMangaDatasourceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ScopedMangaDatasourceRef = AutoDisposeProviderRef<MangaDatasource>;
-String _$fetchChapterPagesHash() => r'107df8ce05c5f4e05b5a580ff7320d156cb6a0f1';
+String _$fetchChapterPagesHash() => r'e123edd7170491b2ea0253dc0e61042444135dea';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -191,7 +191,7 @@ class _FetchChapterPagesProviderElement
       (origin as FetchChapterPagesProvider).sourceChapter;
 }
 
-String _$mangaDatasourcesHash() => r'd4d11d6722447d11dfafabc15d5af6de86fdd98c';
+String _$mangaDatasourcesHash() => r'1d91e24d4ecaa88ec3542d512033cb4d8ae3259b';
 
 /// See also [mangaDatasources].
 @ProviderFor(mangaDatasources)
@@ -210,7 +210,7 @@ final mangaDatasourcesProvider =
 // ignore: unused_element
 typedef MangaDatasourcesRef
     = AutoDisposeProviderRef<Map<String, MangaDatasource>>;
-String _$findSourceFromIdHash() => r'55038b8b7acd106e3f84123fe84421ab5c021c23';
+String _$findSourceFromIdHash() => r'b28730c5f5798059ae284a3bab819d202b96316e';
 
 /// See also [findSourceFromId].
 @ProviderFor(findSourceFromId)
@@ -341,7 +341,7 @@ class _FindSourceFromIdProviderElement
   String get sourceId => (origin as FindSourceFromIdProvider).sourceId;
 }
 
-String _$getSourceFromIdHash() => r'f2ff5fde03cf67c003233a7b21a545daebd25ef1';
+String _$getSourceFromIdHash() => r'588ab5be332882bc90d9cac3c2e6e4b64156ab32';
 
 /// See also [getSourceFromId].
 @ProviderFor(getSourceFromId)

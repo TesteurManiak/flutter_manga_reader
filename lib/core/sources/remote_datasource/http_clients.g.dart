@@ -6,7 +6,7 @@ part of 'http_clients.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$cacheClientHash() => r'402efd28fe8f74a350c24f654c5c71b5be43bdd1';
+String _$cacheClientHash() => r'3c8969f096929acd22ef1afdbb4b88a3d9fc06ea';
 
 /// See also [cacheClient].
 @ProviderFor(cacheClient)
@@ -22,7 +22,7 @@ final cacheClientProvider = Provider<Client>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CacheClientRef = ProviderRef<Client>;
-String _$sourceClientHash() => r'185712dd7fc6cc2a59218ef8e5e03b17e015a795';
+String _$sourceClientHash() => r'eb7fbab69e41a1071f8476842baae8d8883467b6';
 
 /// Copied from Dart SDK
 class _SystemHash {

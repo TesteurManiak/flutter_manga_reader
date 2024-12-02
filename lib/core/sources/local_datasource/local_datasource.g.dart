@@ -6,7 +6,7 @@ part of 'local_datasource.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$localDatasourceHash() => r'f403c6a17f6977c8109bf9a712e8b874a486b232';
+String _$localDatasourceHash() => r'9c102b9d533f58de48515a9de4de698c843b2bb0';
 
 /// See also [localDatasource].
 @ProviderFor(localDatasource)
@@ -24,7 +24,7 @@ final localDatasourceProvider = Provider<LocalDatasource>.internal(
 // ignore: unused_element
 typedef LocalDatasourceRef = ProviderRef<LocalDatasource>;
 String _$watchMangasInLibraryHash() =>
-    r'7609a9322afb2e2910b2ee3edbec1ceac84bc34e';
+    r'b0a62e00fd513912c23153aee062294cec0bb9c2';
 
 /// See also [watchMangasInLibrary].
 @ProviderFor(watchMangasInLibrary)
@@ -44,7 +44,7 @@ final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef WatchMangasInLibraryRef = StreamProviderRef<List<Manga>>;
-String _$watchMangaByIdHash() => r'ce88fa362f09e9fd18921d3d0622480be0ef9c64';
+String _$watchMangaByIdHash() => r'41b4bfc7dda0e18507761ff50560fd2ea7f1bcc5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -202,7 +202,7 @@ class _WatchMangaByIdProviderElement
 }
 
 String _$getMangaByUrlAndSourceIdHash() =>
-    r'72bdf3fda4e37634c6e1cae7be0f13ceecf30366';
+    r'38a4318e415f7d0d875ea2f03c5e9b68e834d277';
 
 /// See also [getMangaByUrlAndSourceId].
 @ProviderFor(getMangaByUrlAndSourceId)
@@ -357,7 +357,7 @@ class _GetMangaByUrlAndSourceIdProviderElement
   String get sourceId => (origin as GetMangaByUrlAndSourceIdProvider).sourceId;
 }
 
-String _$getChapterHash() => r'4672c29091fa9608cd2cc9428f0ce51b341000c4';
+String _$getChapterHash() => r'0c61de1f022ab9e9ba9ab3b8f1f31440ff297914';
 
 /// See also [getChapter].
 @ProviderFor(getChapter)
@@ -494,7 +494,7 @@ class _GetChapterProviderElement
 }
 
 String _$watchChaptersForMangaHash() =>
-    r'7ca21d7a80527ec656ab38d30e2fbf58962bd766';
+    r'9a6fb855cfceec9dd538b6283ef899f4da2c146f';
 
 /// See also [watchChaptersForManga].
 @ProviderFor(watchChaptersForManga)
@@ -631,7 +631,7 @@ class _WatchChaptersForMangaProviderElement
 }
 
 String _$watchUnreadChaptersCountForMangaHash() =>
-    r'54c2aee35357a308697f52f76c7a2f826513a101';
+    r'd6301531c4e0e803e7d6e509d1cd63b1dea75e82';
 
 /// See also [watchUnreadChaptersCountForManga].
 @ProviderFor(watchUnreadChaptersCountForManga)

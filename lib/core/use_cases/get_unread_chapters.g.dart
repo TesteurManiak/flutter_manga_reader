@@ -6,7 +6,7 @@ part of 'get_unread_chapters.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getUnreadChaptersHash() => r'dd5bf9aa7c931b3c37fabd9c8d3d47b55266d7b0';
+String _$getUnreadChaptersHash() => r'94be348b9bc8b2bcfe34dd2e104ad5895a800ba4';
 
 /// Copied from Dart SDK
 class _SystemHash {

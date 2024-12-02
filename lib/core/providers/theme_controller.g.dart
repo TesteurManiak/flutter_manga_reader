@@ -6,7 +6,7 @@ part of 'theme_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$defaultThemeModeHash() => r'385d218e2016e96468ed29baba17066367d66853';
+String _$defaultThemeModeHash() => r'1daddb75d74d61c6b93940947b810ecd285357c9';
 
 /// See also [defaultThemeMode].
 @ProviderFor(defaultThemeMode)
@@ -23,7 +23,7 @@ final defaultThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DefaultThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
-String _$lightThemeHash() => r'7ac4cc0518f9ab4ef609ebca51fa838f0e162d95';
+String _$lightThemeHash() => r'23c1a1795646329e9dbd698755900fcbe882d8c4';
 
 /// See also [lightTheme].
 @ProviderFor(lightTheme)
@@ -39,7 +39,7 @@ final lightThemeProvider = AutoDisposeProvider<ThemeData>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef LightThemeRef = AutoDisposeProviderRef<ThemeData>;
-String _$darkThemeHash() => r'b46811e5afa305b34100711c940c505600373313';
+String _$darkThemeHash() => r'8e9865a9f106d34803ddf6aa28e3ae749f8fe637';
 
 /// See also [darkTheme].
 @ProviderFor(darkTheme)
@@ -56,7 +56,7 @@ final darkThemeProvider = AutoDisposeProvider<ThemeData>.internal(
 // ignore: unused_element
 typedef DarkThemeRef = AutoDisposeProviderRef<ThemeData>;
 String _$platformBrightnessHash() =>
-    r'd216448d440fab4a6896f853ce1af0c9f7918b34';
+    r'aea97bde9ba35e040555b036a1fdd35036fdf9e5';
 
 /// See also [platformBrightness].
 @ProviderFor(platformBrightness)
@@ -73,7 +73,7 @@ final platformBrightnessProvider = AutoDisposeProvider<Brightness>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PlatformBrightnessRef = AutoDisposeProviderRef<Brightness>;
-String _$appThemeModeHash() => r'c0759b3cbe721d1a4d339309faead690b203610f';
+String _$appThemeModeHash() => r'e4c1a4cc552d83d96de8ce7fa34f1cd25d3042dc';
 
 /// See also [appThemeMode].
 @ProviderFor(appThemeMode)
@@ -89,7 +89,7 @@ final appThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppThemeModeRef = AutoDisposeProviderRef<ThemeMode>;
-String _$pureDarkModeStateHash() => r'96c9ab4cd4811b7b59ff3b1715d4d56beb43387d';
+String _$pureDarkModeStateHash() => r'9d4dbeb45d9a29e30f68ec5b6339a769bf65047a';
 
 /// See also [pureDarkModeState].
 @ProviderFor(pureDarkModeState)
@@ -106,7 +106,7 @@ final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PureDarkModeStateRef = AutoDisposeProviderRef<bool>;
-String _$isDarkHash() => r'28ad2230d66a2232eeb022504037ce118a301e6e';
+String _$isDarkHash() => r'f459b0f5757876ffdb176cef98178ab1e879d898';
 
 /// See also [isDark].
 @ProviderFor(isDark)

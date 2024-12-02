@@ -6,7 +6,7 @@ part of 'is_manga_favorite.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isMangaFavoriteHash() => r'bd1e3acd5d9ef1874f14a6178ccbaecf49048b6a';
+String _$isMangaFavoriteHash() => r'46169a8b16f011a80352751ff0fa0afcd6f75355';
 
 /// Copied from Dart SDK
 class _SystemHash {

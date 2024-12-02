@@ -7,7 +7,7 @@ part of 'reading_direction_controller.dart';
 // **************************************************************************
 
 String _$watchReadingDirectionHash() =>
-    r'14bbf689edbf77f66dbfe9f589c0847970a26bb8';
+    r'14be4a07498644d3925f6ddea3ec581974d53a8d';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -6,7 +6,7 @@ part of 'toaster_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$toasterServiceHash() => r'02dfd19deaad8016e1ce8fa36d11d6372b9c54bd';
+String _$toasterServiceHash() => r'0d7e555e414aee0629a2f0ef5c5d30f4ee4c7b52';
 
 /// See also [toasterService].
 @ProviderFor(toasterService)

@@ -6,7 +6,7 @@ part of 'locale_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fallbackLocaleHash() => r'13551e7e9f376169321a98486983841d4093ca3e';
+String _$fallbackLocaleHash() => r'12e24bb4410adeef193b21b0ff3448cd027c9dd6';
 
 /// See also [fallbackLocale].
 @ProviderFor(fallbackLocale)
@@ -23,7 +23,7 @@ final fallbackLocaleProvider = Provider<Locale>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FallbackLocaleRef = ProviderRef<Locale>;
-String _$systemLocaleHash() => r'10ddaceb13e3857e8ba2f7f426a670e4f5844472';
+String _$systemLocaleHash() => r'000f79e944cfabc529668f53fde80d6b61112fe7';
 
 /// See also [systemLocale].
 @ProviderFor(systemLocale)

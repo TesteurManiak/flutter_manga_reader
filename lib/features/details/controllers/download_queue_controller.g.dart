@@ -7,7 +7,7 @@ part of 'download_queue_controller.dart';
 // **************************************************************************
 
 String _$chapterDownloadTaskHash() =>
-    r'21630f511b2221a8ad07e7399e12b7ffb29f4967';
+    r'6a712cfecb9475a7ce2024590b9eb53f85e73e08';
 
 /// Copied from Dart SDK
 class _SystemHash {

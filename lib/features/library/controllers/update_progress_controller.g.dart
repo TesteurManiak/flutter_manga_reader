@@ -6,7 +6,7 @@ part of 'update_progress_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isUpdatingHash() => r'2af40aeff0d334b4c9a4af7bfd0992ce8a5360e8';
+String _$isUpdatingHash() => r'10f7f75396cbf94290851f3100c89001c8cad934';
 
 /// See also [isUpdating].
 @ProviderFor(isUpdating)

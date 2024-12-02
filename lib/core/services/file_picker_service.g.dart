@@ -6,7 +6,7 @@ part of 'file_picker_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$filePickerServiceHash() => r'a7092c58f72fe5b0a0ac6a4c48c8fde3563f3212';
+String _$filePickerServiceHash() => r'661dcef0dfe988f58af906c0a8c49ce8ce061d98';
 
 /// See also [filePickerService].
 @ProviderFor(filePickerService)

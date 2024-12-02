@@ -7,7 +7,7 @@ part of 'cache_manager.dart';
 // **************************************************************************
 
 String _$networkCacheServiceHash() =>
-    r'1a5eaf29c7b7a60784566ae1e5aad68020ad698b';
+    r'da1b5d272620008ecfc2d16eb620babedc17dfb3';
 
 /// See also [networkCacheService].
 @ProviderFor(networkCacheService)
@@ -24,7 +24,7 @@ final networkCacheServiceProvider = Provider<NetworkQueryCacheService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef NetworkCacheServiceRef = ProviderRef<NetworkQueryCacheService>;
-String _$cacheManagerHash() => r'56930418845ed444505f4ba0bf81d704f8fbbbfa';
+String _$cacheManagerHash() => r'9ec2b22d576f03234280cdddf997287dd0b50e5f';
 
 /// See also [cacheManager].
 @ProviderFor(cacheManager)
@@ -40,7 +40,7 @@ final cacheManagerProvider = Provider<CacheManager>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CacheManagerRef = ProviderRef<CacheManager>;
-String _$appCacheManagerHash() => r'ab646cb19b75d8f7612172eb61a5a6301b7af441';
+String _$appCacheManagerHash() => r'c451126f7f6ddc8636654dd2c4fe35596717afd0';
 
 /// See also [appCacheManager].
 @ProviderFor(appCacheManager)

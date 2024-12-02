@@ -7,7 +7,7 @@ part of 'is_chapter_selected.dart';
 // **************************************************************************
 
 String _$scopedChapterSelectedHash() =>
-    r'd2ffe5e23d6646758acc26fdfe452ad7027bd421';
+    r'cde6fc0e8098e2cf2abd8f396e14e4e15b8ceec6';
 
 /// Copied from Dart SDK
 class _SystemHash {
