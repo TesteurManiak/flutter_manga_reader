@@ -1,4 +1,5 @@
 import 'package:flutter_manga_reader/core/sources/remote_datasource/http_clients.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangadex/mangadex.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -55,7 +56,7 @@ part 'mangadex.g.dart';
 // ];
 
 @Riverpod(keepAlive: true)
-List<MangaDatasource> mangadex(MangadexRef ref) {
+List<MangaDatasource> mangadex(Ref ref) {
   final client = ref.watch(sourceClientProvider(MDConstants.apiUrl));
 
   return [

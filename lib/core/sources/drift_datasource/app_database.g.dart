@@ -2772,8 +2772,7 @@ final class $$DbChaptersTableReferences
   static $DbMangasTable _mangaIdTable(_$AppDatabase db) => db.dbMangas
       .createAlias($_aliasNameGenerator(db.dbChapters.mangaId, db.dbMangas.id));
 
-  $$DbMangasTableProcessedTableManager? get mangaId {
-    if ($_item.mangaId == null) return null;
+  $$DbMangasTableProcessedTableManager get mangaId {
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
         .filter((f) => f.id($_item.mangaId!));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
@@ -3217,8 +3216,7 @@ final class $$DbReadingDirectionTableReferences extends BaseReferences<
       db.dbMangas.createAlias(
           $_aliasNameGenerator(db.dbReadingDirection.mangaId, db.dbMangas.id));
 
-  $$DbMangasTableProcessedTableManager? get mangaId {
-    if ($_item.mangaId == null) return null;
+  $$DbMangasTableProcessedTableManager get mangaId {
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
         .filter((f) => f.id($_item.mangaId!));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
@@ -3592,8 +3590,7 @@ final class $$DbChapterHistoryTableReferences extends BaseReferences<
       db.dbMangas.createAlias(
           $_aliasNameGenerator(db.dbChapterHistory.mangaId, db.dbMangas.id));
 
-  $$DbMangasTableProcessedTableManager? get mangaId {
-    if ($_item.mangaId == null) return null;
+  $$DbMangasTableProcessedTableManager get mangaId {
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
         .filter((f) => f.id($_item.mangaId!));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
@@ -3606,8 +3603,7 @@ final class $$DbChapterHistoryTableReferences extends BaseReferences<
       db.dbChapters.createAlias($_aliasNameGenerator(
           db.dbChapterHistory.chapterId, db.dbChapters.id));
 
-  $$DbChaptersTableProcessedTableManager? get chapterId {
-    if ($_item.chapterId == null) return null;
+  $$DbChaptersTableProcessedTableManager get chapterId {
     final manager = $$DbChaptersTableTableManager($_db, $_db.dbChapters)
         .filter((f) => f.id($_item.chapterId!));
     final item = $_typedResult.readTableOrNull(_chapterIdTable($_db));

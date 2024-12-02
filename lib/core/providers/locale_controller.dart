@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'locale_controller.g.dart';
@@ -10,24 +11,21 @@ part 'locale_controller.g.dart';
 typedef _DidChangeLocalesCallback = void Function(List<Locale>? locales);
 
 @Riverpod(keepAlive: true)
-Locale fallbackLocale(FallbackLocaleRef ref) {
+Locale fallbackLocale(Ref ref) {
   return AppLocalizations.supportedLocales.first;
 }
 
 @Riverpod(keepAlive: true)
-Locale systemLocale(SystemLocaleRef ref) {
+Locale systemLocale(Ref ref) {
   final fallback = ref.watch(fallbackLocaleProvider);
+  final locale =
+      _resolveLocale(ui.PlatformDispatcher.instance.locale, fallback);
 
-  ref.state = _resolveLocale(ui.PlatformDispatcher.instance.locale, fallback);
-
-  final observer = _LocaleObserver((locales) {
-    ref.state = _resolveLocale(ui.PlatformDispatcher.instance.locale, fallback);
-  });
-
+  final observer = _LocaleObserver((_) => ref.invalidateSelf());
   final binding = WidgetsBinding.instance..addObserver(observer);
   ref.onDispose(() => binding.removeObserver(observer));
 
-  return ref.state;
+  return locale;
 }
 
 class _LocaleObserver extends WidgetsBindingObserver {

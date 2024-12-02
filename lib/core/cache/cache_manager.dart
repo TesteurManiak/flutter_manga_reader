@@ -2,6 +2,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_manga_reader/core/cache/drift_cache_service.dart';
 import 'package:flutter_manga_reader/core/providers/clock.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -26,7 +27,7 @@ class AppCacheManager {
 }
 
 @Riverpod(keepAlive: true)
-NetworkQueryCacheService networkCacheService(NetworkCacheServiceRef ref) {
+NetworkQueryCacheService networkCacheService(Ref ref) {
   return DriftNetworkQueryCacheService(
     clock: ref.watch(appClockProvider),
     database: ref.watch(appDatabaseProvider),
@@ -34,10 +35,10 @@ NetworkQueryCacheService networkCacheService(NetworkCacheServiceRef ref) {
 }
 
 @Riverpod(keepAlive: true)
-CacheManager cacheManager(CacheManagerRef ref) => DefaultCacheManager();
+CacheManager cacheManager(Ref ref) => DefaultCacheManager();
 
 @Riverpod(keepAlive: true)
-AppCacheManager appCacheManager(AppCacheManagerRef ref) {
+AppCacheManager appCacheManager(Ref ref) {
   return AppCacheManager(
     networkQueryCacheService: ref.watch(networkCacheServiceProvider),
     cacheManager: ref.watch(cacheManagerProvider),

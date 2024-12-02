@@ -4,6 +4,7 @@ import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.
 import 'package:flutter_manga_reader/core/sources/drift_datasource/drift_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -87,23 +88,23 @@ abstract class LocalDatasource {
 }
 
 @Riverpod(keepAlive: true, dependencies: [])
-LocalDatasource localDatasource(LocalDatasourceRef ref) {
+LocalDatasource localDatasource(Ref ref) {
   return DriftDatasource(appDatabase: ref.watch(appDatabaseProvider));
 }
 
 @Riverpod(keepAlive: true, dependencies: [localDatasource])
-Stream<List<Manga>> watchMangasInLibrary(WatchMangasInLibraryRef ref) {
+Stream<List<Manga>> watchMangasInLibrary(Ref ref) {
   return ref.watch(localDatasourceProvider).watchMangasInLibrary();
 }
 
 @Riverpod(dependencies: [localDatasource])
-Stream<Manga> watchMangaById(WatchMangaByIdRef ref, int id) {
+Stream<Manga> watchMangaById(Ref ref, int id) {
   return ref.watch(localDatasourceProvider).watchMangaById(id);
 }
 
 @Riverpod(dependencies: [localDatasource])
 Future<Manga?> getMangaByUrlAndSourceId(
-  GetMangaByUrlAndSourceIdRef ref, {
+  Ref ref, {
   required String url,
   required String sourceId,
 }) {
@@ -113,23 +114,17 @@ Future<Manga?> getMangaByUrlAndSourceId(
 }
 
 @Riverpod(dependencies: [localDatasource])
-Future<Chapter?> getChapter(GetChapterRef ref, int chapterId) {
+Future<Chapter?> getChapter(Ref ref, int chapterId) {
   return ref.watch(localDatasourceProvider).getChapter(chapterId);
 }
 
 @Riverpod(keepAlive: true, dependencies: [localDatasource])
-Stream<List<Chapter>> watchChaptersForManga(
-  WatchChaptersForMangaRef ref,
-  int mangaId,
-) {
+Stream<List<Chapter>> watchChaptersForManga(Ref ref, int mangaId) {
   return ref.watch(localDatasourceProvider).watchChaptersForManga(mangaId);
 }
 
 @Riverpod(dependencies: [localDatasource])
-Stream<int> watchUnreadChaptersCountForManga(
-  WatchUnreadChaptersCountForMangaRef ref,
-  int mangaId,
-) {
+Stream<int> watchUnreadChaptersCountForManga(Ref ref, int mangaId) {
   return ref
       .watch(localDatasourceProvider)
       .watchUnreadChaptersForManga(mangaId)

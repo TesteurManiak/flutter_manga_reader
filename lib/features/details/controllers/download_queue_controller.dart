@@ -7,6 +7,7 @@ import 'package:flutter_manga_reader/core/extensions/iterable_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -117,10 +118,7 @@ class DownloadQueueController extends _$DownloadQueueController {
 }
 
 @Riverpod(dependencies: [DownloadQueueController])
-ChapterDownloadTask? chapterDownloadTask(
-  ChapterDownloadTaskRef ref,
-  int chapterId,
-) {
+ChapterDownloadTask? chapterDownloadTask(Ref ref, int chapterId) {
   final task = ref.watch(
     downloadQueueControllerProvider.select((value) => value[chapterId]),
   );

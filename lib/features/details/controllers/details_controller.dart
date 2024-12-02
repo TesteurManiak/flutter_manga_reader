@@ -3,6 +3,7 @@ import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasou
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/download_queue_controller.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -162,7 +163,7 @@ class DetailsController extends _$DetailsController {
 }
 
 @Riverpod(dependencies: [DetailsController])
-bool scopedSelectionMode(ScopedSelectionModeRef ref, int mangaId) {
+bool scopedSelectionMode(Ref ref, int mangaId) {
   return ref.watch(
     detailsControllerProvider(mangaId).select((s) => s.selectionMode),
   );

@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -28,7 +29,7 @@ class UpdateProgressController extends _$UpdateProgressController {
 }
 
 @riverpod
-bool isUpdating(IsUpdatingRef ref) {
+bool isUpdating(Ref ref) {
   return ref
       .watch(updateProgressControllerProvider.select((s) => s.isUpdating));
 }

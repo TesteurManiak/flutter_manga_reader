@@ -1,14 +1,12 @@
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'reading_direction_controller.g.dart';
 
 @Riverpod(dependencies: [localDatasource])
-Stream<ReadingDirection> watchReadingDirection(
-  WatchReadingDirectionRef ref,
-  int mangaId,
-) {
+Stream<ReadingDirection> watchReadingDirection(Ref ref, int mangaId) {
   return ref.watch(localDatasourceProvider).watchReadingDirection(mangaId);
 }
 

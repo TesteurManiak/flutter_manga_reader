@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/theme_mode_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
 import 'package:flutter_manga_reader/design_system/theme_data/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,33 +11,29 @@ part 'theme_controller.freezed.dart';
 part 'theme_controller.g.dart';
 
 @riverpod
-ThemeMode defaultThemeMode(DefaultThemeModeRef ref) => ThemeMode.system;
+ThemeMode defaultThemeMode(Ref ref) => ThemeMode.system;
 
 @riverpod
-ThemeData lightTheme(LightThemeRef ref) => AppTheme.light();
+ThemeData lightTheme(Ref ref) => AppTheme.light();
 
 @riverpod
-ThemeData darkTheme(DarkThemeRef ref) {
-  return AppTheme.dark(pureDark: ref.watch(pureDarkModeStateProvider));
-}
+ThemeData darkTheme(Ref ref) =>
+    AppTheme.dark(pureDark: ref.watch(pureDarkModeStateProvider));
 
 @riverpod
-Brightness platformBrightness(PlatformBrightnessRef ref) {
-  return PlatformDispatcher.instance.platformBrightness;
-}
+Brightness platformBrightness(Ref ref) =>
+    PlatformDispatcher.instance.platformBrightness;
 
 @riverpod
-ThemeMode appThemeMode(AppThemeModeRef ref) {
-  return ref.watch(themeControllerProvider.select((s) => s.mode));
-}
+ThemeMode appThemeMode(Ref ref) =>
+    ref.watch(themeControllerProvider.select((s) => s.mode));
 
 @riverpod
-bool pureDarkModeState(PureDarkModeStateRef ref) {
-  return ref.watch(themeControllerProvider.select((s) => s.pureDarkMode));
-}
+bool pureDarkModeState(Ref ref) =>
+    ref.watch(themeControllerProvider.select((s) => s.pureDarkMode));
 
 @riverpod
-bool isDark(IsDarkRef ref) {
+bool isDark(Ref ref) {
   final platformBrightness = ref.watch(platformBrightnessProvider);
   return ref.watch(
     appThemeModeProvider.select((mode) => mode.isDark(platformBrightness)),
