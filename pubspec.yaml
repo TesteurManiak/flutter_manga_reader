@@ -57,7 +57,7 @@ dev_dependencies:
   fd_lints: ^2.3.0
   flutter_gen_runner: ^5.8.0
   flutter_inappwebview: ^6.1.5
-  flutter_launcher_icons: ^0.14.1
+  flutter_launcher_icons: ^0.14.2
   flutter_native_splash: ^2.4.3
   flutter_test:
     sdk: flutter
