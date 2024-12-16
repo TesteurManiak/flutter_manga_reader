@@ -199,7 +199,7 @@ class _FilterChip extends StatelessWidget {
       onPressed: onTap,
       selected: selected,
       isEnabled: type.enabled,
-      selectedColor: theme.colorScheme.primary.withOpacity(.2),
+      selectedColor: theme.colorScheme.primary.withValues(alpha: .2),
       side: const BorderSide(style: BorderStyle.none),
       showCheckmark: false,
     );

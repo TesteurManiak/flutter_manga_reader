@@ -50,7 +50,7 @@ class ChapterTile extends ConsumerWidget {
 
     return ListTile(
       selected: isSelected,
-      textColor: read ? baseColor?.withOpacity(isDark ? .3 : .4) : null,
+      textColor: read ? baseColor?.withValues(alpha: isDark ? .3 : .4) : null,
       title: Text(chapter.name),
       subtitle: Text(
         subtitle.join(' • '),

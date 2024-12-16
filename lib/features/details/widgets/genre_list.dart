@@ -51,7 +51,7 @@ class _GenreChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      backgroundColor: Colors.grey.withOpacity(0.2),
+      backgroundColor: Colors.grey.withValues(alpha: .2),
       side: const BorderSide(style: BorderStyle.none),
       label: Text(
         genre,

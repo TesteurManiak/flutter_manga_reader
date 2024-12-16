@@ -62,7 +62,7 @@ class _SliverDetailsAppBarState extends ConsumerState<SliverDetailsAppBar>
             final opacity = (offset / 350).clamp(0, 1).toDouble();
 
             final colorTween = ColorTween(
-              begin: appBarColor.withOpacity(opacity),
+              begin: appBarColor.withValues(alpha: opacity),
               end: appBarColor,
             ).animate(animationController);
 

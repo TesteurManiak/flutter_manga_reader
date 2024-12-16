@@ -211,7 +211,7 @@ class _BackgroundCover extends ConsumerWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            theme.scaffoldBackgroundColor.withOpacity(0.05),
+            theme.scaffoldBackgroundColor.withValues(alpha: .05),
             theme.scaffoldBackgroundColor,
           ],
           stops: const [0, .3],

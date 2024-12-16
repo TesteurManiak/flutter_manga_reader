@@ -73,7 +73,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(.7),
+                    color: Colors.black.withValues(alpha: .7),
                   ),
                 ),
               ),

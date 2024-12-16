@@ -59,7 +59,7 @@ class _MangaDescriptionState extends State<MangaDescription> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          theme.scaffoldBackgroundColor.withOpacity(0.2),
+                          theme.scaffoldBackgroundColor.withValues(alpha: .2),
                           theme.scaffoldBackgroundColor,
                         ],
                         stops: const [0, .9],
