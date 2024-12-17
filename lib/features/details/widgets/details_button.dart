@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 
 class DetailsButton extends StatelessWidget {
   const DetailsButton({
@@ -17,9 +16,9 @@ class DetailsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: SeparatedColumn(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        separator: const SizedBox(height: 4),
+        spacing: 4,
         children: [
           Icon(icon, size: 20),
           Text(

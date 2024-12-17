@@ -6,7 +6,6 @@ import 'package:flutter_manga_reader/core/extensions/chapter_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/directories.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -122,10 +121,10 @@ class _Error extends StatelessWidget {
       width: size.width,
       alignment: Alignment.center,
       padding: const EdgeInsets.all(16),
-      child: SeparatedColumn(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        separator: const SizedBox(height: 32),
+        spacing: 32,
         children: [
           const Icon(
             Icons.broken_image_rounded,

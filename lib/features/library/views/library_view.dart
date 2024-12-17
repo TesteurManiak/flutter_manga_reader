@@ -5,7 +5,6 @@ import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/manga_grid_view.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 import 'package:flutter_manga_reader/features/library/controllers/library_controller.dart';
 import 'package:flutter_manga_reader/features/library/controllers/update_progress_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,9 +67,9 @@ class _Empty extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Center(
-      child: SeparatedColumn(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        separator: const SizedBox(height: 16),
+        spacing: 16,
         children: [
           AsciiEmojiWidget.random(),
           Text(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
+import 'package:flutter_manga_reader/core/extensions/iterable_extensions.dart';
 import 'package:flutter_manga_reader/core/services/toaster_service.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_manga_reader/core/widgets/error_content.dart';
 import 'package:flutter_manga_reader/core/widgets/gradient_image.dart';
 import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
@@ -231,8 +231,8 @@ class _SliverHeader extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-        child: SeparatedRow(
-          separator: const SizedBox(width: 8),
+        child: Row(
+          spacing: 8,
           children: [
             _Cover(manga?.thumbnailUrl),
             Expanded(
@@ -313,8 +313,7 @@ class _StatusAndSource extends ConsumerWidget {
       _ => null,
     };
 
-    return SeparatedRow(
-      separator: const Text(' • '),
+    return Row(
       children: [
         if (status case final status?) StatusLabel(status),
         if (source case final source?)
@@ -323,7 +322,7 @@ class _StatusAndSource extends ConsumerWidget {
             maxLines: 1,
             style: Theme.of(context).textTheme.bodySmall,
           ),
-      ],
+      ].separatedWith(const Text(' • ')).toList(),
     );
   }
 }

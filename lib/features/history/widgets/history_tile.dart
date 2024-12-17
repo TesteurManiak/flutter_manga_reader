@@ -4,7 +4,6 @@ import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
 import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
@@ -32,9 +31,8 @@ class HistoryTile extends ConsumerWidget {
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: SeparatedRow(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          separator: const SizedBox(width: 8),
+        child: Row(
+          spacing: 8,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(6),

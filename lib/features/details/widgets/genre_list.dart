@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_row.dart';
 
 class GenreList extends StatelessWidget {
   const GenreList({
@@ -20,8 +19,8 @@ class GenreList extends StatelessWidget {
       return SingleChildScrollView(
         padding: padding,
         scrollDirection: Axis.horizontal,
-        child: SeparatedRow(
-          separator: const SizedBox(width: spacing),
+        child: Row(
+          spacing: spacing,
           children: [
             for (final genre in genres) _GenreChip(genre),
           ],

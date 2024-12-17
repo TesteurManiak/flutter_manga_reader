@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/widgets/ascii_emoji.dart';
-import 'package:flutter_manga_reader/core/widgets/separated_column.dart';
 
 /// {@template error_content}
 /// Display an ascii art error emoji centered on the screen.
@@ -24,9 +23,9 @@ class ErrorContent extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final strings = context.strings;
     return Center(
-      child: SeparatedColumn(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
-        separator: const SizedBox(height: 16),
+        spacing: 16,
         children: [
           AsciiEmojiWidget.random(),
           Text(
