@@ -5,7 +5,9 @@ homepage: https://github.com/simonkimi/xpath_selector
 publish_to: "none"
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.6.0 <4.0.0"
+
+resolution: workspace
 
 dependencies:
   xpath_selector:

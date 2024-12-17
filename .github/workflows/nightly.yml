@@ -16,9 +16,12 @@ jobs:
         with:
           cache: true
       - uses: bluefireteam/melos-action@v3
+        with:
+          run-bootstrap: false
 
       - name: Perform Code Generation
         run: |
+          flutter pub get
           melos run gen-all
           flutter gen-l10n
 

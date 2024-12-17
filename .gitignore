@@ -50,5 +50,3 @@ test/**/failures/**/*.*
 
 # Ignore mason files
 **/.mason/
-
-pubspec_overrides.yaml
