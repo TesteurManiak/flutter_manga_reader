@@ -52,19 +52,19 @@ class DetailsController extends _$DetailsController {
     final source = ref.read(scopedMangaDatasourceProvider);
     final result = await source.fetchFullMangaData(currentManga);
 
-    state = await result.when(
-      success: (record) async {
-        final mangaToSave = currentManga
-            .copyFrom(record.manga.toSourceManga())
-            .copyWith(initialized: true);
-        await ref.read(localDatasourceProvider).saveMangaData(
-          (manga: mangaToSave, sourceChapters: record.sourceChapters),
-        );
+    state = switch (result) {
+      Success(success: final record) => await () async {
+          final mangaToSave = currentManga
+              .copyFrom(record.manga.toSourceManga())
+              .copyWith(initialized: true);
+          await ref.read(localDatasourceProvider).saveMangaData(
+            (manga: mangaToSave, sourceChapters: record.sourceChapters),
+          );
 
-        return const DetailsState.loaded();
-      },
-      failure: (e) => DetailsState.error(error: e),
-    );
+          return const DetailsState.loaded();
+        }(),
+      Failure(failure: final e) => DetailsState.error(error: e),
+    };
   }
 
   Future<void> toggleFavorite() {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -6,24 +7,33 @@ import 'package:html/parser.dart' show parse;
 
 part 'result.freezed.dart';
 
-@freezed
+@Freezed(copyWith: false)
 sealed class Result<S, F> with _$Result<S, F> {
   const factory Result.success(S success) = Success<S, F>;
   const factory Result.failure(F failure) = Failure<S, F>;
 
   const Result._();
 
-  Result<TResult, F> whenSuccess<TResult>(TResult Function(S) onSuccess) {
+  Result<TResult, F> onSuccess<TResult>(TResult Function(S) onSuccess) {
     return switch (this) {
-      Success(:final success) => Result.success(onSuccess(success)),
-      Failure(:final failure) => Result.failure(failure),
+      Success(:final success) => Success(onSuccess(success)),
+      Failure(:final failure) => Failure(failure),
+    };
+  }
+
+  FutureOr<Result<TResult, F>> onSuccessAsync<TResult>(
+    Future<TResult> Function(S) onSuccess,
+  ) {
+    return switch (this) {
+      Success(:final success) => onSuccess(success).then(Success.new),
+      Failure(:final failure) => Failure(failure),
     };
   }
 }
 
 extension ResultDecoder<F> on Result<Object?, F> {
   Result<S, F> decode<S>(S Function(Map<String, dynamic>) decoder) {
-    return whenSuccess<S>((s) {
+    return onSuccess<S>((s) {
       final Map<String, dynamic> json;
       if (s is String) {
         final decodedJson = jsonDecode(s);
@@ -40,7 +50,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<List<S>, F> decodeList<S>(S Function(Map<String, dynamic>) decoder) {
-    return whenSuccess(
+    return onSuccess(
       (s) {
         final List<Object?> json;
         if (s is String) {
@@ -61,7 +71,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<S, F> decodeString<S>(S Function(String) decoder) {
-    return whenSuccess<S>((s) {
+    return onSuccess<S>((s) {
       return switch (s) {
         String() => decoder(s),
         Object() => decoder(s.toString()),
@@ -71,7 +81,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<dom.Element, F> decodeHtmlBody() {
-    return decodeString(parse).whenSuccess((document) {
+    return decodeString(parse).onSuccess((document) {
       if (document.body case final body?) return body;
       throw InvalidHtmlException(document.body);
     });

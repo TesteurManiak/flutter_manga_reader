@@ -37,8 +37,12 @@ mixin _$Manga {
   bool get initialized => throw _privateConstructorUsedError;
   DateTime? get lastModifiedAt => throw _privateConstructorUsedError;
 
+  /// Serializes this Manga to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Manga
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MangaCopyWith<Manga> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -76,6 +80,8 @@ class _$MangaCopyWithImpl<$Res, $Val extends Manga>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Manga
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -199,6 +205,8 @@ class __$$MangaImplCopyWithImpl<$Res>
       _$MangaImpl _value, $Res Function(_$MangaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Manga
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -399,7 +407,7 @@ class _$MangaImpl extends _Manga {
                 other.lastModifiedAt == lastModifiedAt));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -420,7 +428,9 @@ class _$MangaImpl extends _Manga {
       initialized,
       lastModifiedAt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Manga
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MangaImplCopyWith<_$MangaImpl> get copyWith =>
@@ -488,8 +498,11 @@ abstract class _Manga extends Manga {
   bool get initialized;
   @override
   DateTime? get lastModifiedAt;
+
+  /// Create a copy of Manga
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MangaImplCopyWith<_$MangaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

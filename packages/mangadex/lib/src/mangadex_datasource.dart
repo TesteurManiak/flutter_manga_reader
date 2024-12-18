@@ -59,16 +59,10 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(MangaListResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        final mangaList = await _parseMangas(response.data);
-
-        return Result.success(
-          MangasPage(mangaList: mangaList, hasMore: response.hasMore),
-        );
-      },
-      failure: Result.failure,
-    );
+    return result.onSuccessAsync((response) async {
+      final mangaList = await _parseMangas(response.data);
+      return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
+    });
   }
 
   Future<List<SourceManga>> _parseMangas(List<MangaData> data) async {
@@ -120,52 +114,52 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(CoverListResponse.fromJson);
 
-    return result.when(
-      success: (response) {
-        final covers = response.data;
+    return switch (result) {
+      Success(success: final response) => () {
+          final covers = response.data;
 
-        final coverMap = groupBy(
-          covers,
-          (cover) {
-            return cover.relationships
-                .whereType<MangaRelationship>()
-                .firstOrNull
-                ?.id;
-          },
-        ).whereKeyType<String>();
+          final coverMap = groupBy(
+            covers,
+            (cover) {
+              return cover.relationships
+                  .whereType<MangaRelationship>()
+                  .firstOrNull
+                  ?.id;
+            },
+          ).whereKeyType<String>();
 
-        final filteredCoverMap = coverMap.map(
-          (k, v) {
-            return MapEntry(
-              k,
-              v.firstWhereOrNull((cover) {
-                final id = v.first.relationships
-                    .whereType<MangaRelationship>()
-                    .firstOrNull
-                    ?.id;
+          final filteredCoverMap = coverMap.map(
+            (k, v) {
+              return MapEntry(
+                k,
+                v.firstWhereOrNull((cover) {
+                  final id = v.first.relationships
+                      .whereType<MangaRelationship>()
+                      .firstOrNull
+                      ?.id;
 
-                if (id == null) return false;
+                  if (id == null) return false;
 
-                return cover.attributes?.locale ==
-                    mangaMap[id]?.originalLanguage;
-              }),
-            );
-          },
-        ).whereValueType<CoverArt>();
+                  return cover.attributes?.locale ==
+                      mangaMap[id]?.originalLanguage;
+                }),
+              );
+            },
+          ).whereValueType<CoverArt>();
 
-        final fileNameMap = filteredCoverMap.map((k, v) {
-          final fileName = v.attributes?.fileName;
+          final fileNameMap = filteredCoverMap.map((k, v) {
+            final fileName = v.attributes?.fileName;
 
-          if (fileName != null && fileName.isEmpty) return MapEntry(k, null);
-          return MapEntry(k, v.attributes?.fileName);
-        }).whereValueType<String>();
+            if (fileName != null && fileName.isEmpty) return MapEntry(k, null);
+            return MapEntry(k, v.attributes?.fileName);
+          }).whereValueType<String>();
 
-        if (fileNameMap.isEmpty) return null;
+          if (fileNameMap.isEmpty) return null;
 
-        return fileNameMap;
-      },
-      failure: (_) => null,
-    );
+          return fileNameMap;
+        }(),
+      Failure() => null,
+    };
   }
 
   @override
@@ -189,19 +183,10 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(ChapterResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        final mangaList = await _parseLatestUpdate(response.data);
-
-        return Result.success(
-          MangasPage(
-            mangaList: mangaList,
-            hasMore: response.hasMore,
-          ),
-        );
-      },
-      failure: Result.failure,
-    );
+    return result.onSuccessAsync((response) async {
+      final mangaList = await _parseLatestUpdate(response.data);
+      return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
+    });
   }
 
   Future<List<SourceManga>> _parseLatestUpdate(List<ChapterData> data) async {
@@ -230,33 +215,34 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(MangaListResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        final firstVolumeCovers = await _fetchFirstVolumeCovers(response.data);
-        final mangaMap = Map<String, MangaData>.fromEntries(
-          response.data.map((manga) => MapEntry(manga.id, manga)),
-        );
-
-        final mangaList = <SourceManga>[];
-        for (final id in mangaIds) {
-          final manga = mangaMap[id];
-          if (manga == null) continue;
-
-          final fileName = firstVolumeCovers?[manga.id];
-          mangaList.add(
-            _helper.createBasicManga(
-              sourceId: this.id,
-              mangaData: manga,
-              coverFileName: fileName,
-              lang: _dexLang,
-            ),
+    return switch (result) {
+      Success(success: final response) => () async {
+          final firstVolumeCovers =
+              await _fetchFirstVolumeCovers(response.data);
+          final mangaMap = Map<String, MangaData>.fromEntries(
+            response.data.map((manga) => MapEntry(manga.id, manga)),
           );
-        }
 
-        return mangaList;
-      },
-      failure: (_) => [],
-    );
+          final mangaList = <SourceManga>[];
+          for (final id in mangaIds) {
+            final manga = mangaMap[id];
+            if (manga == null) continue;
+
+            final fileName = firstVolumeCovers?[manga.id];
+            mangaList.add(
+              _helper.createBasicManga(
+                sourceId: this.id,
+                mangaData: manga,
+                coverFileName: fileName,
+                lang: _dexLang,
+              ),
+            );
+          }
+
+          return mangaList;
+        }(),
+      Failure() => [],
+    };
   }
 
   @override
@@ -278,16 +264,10 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(MangaListResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        final mangaList = await _parseMangas(response.data);
-
-        return Result.success(
-          MangasPage(mangaList: mangaList, hasMore: response.hasMore),
-        );
-      },
-      failure: Result.failure,
-    );
+    return result.onSuccessAsync((response) async {
+      final mangaList = await _parseMangas(response.data);
+      return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
+    });
   }
 
   /// Fetch the chapters for a manga.
@@ -310,26 +290,21 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
       },
     ).decode(MangaResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        final mangaData = response.data;
-        final chapters = await _fetchSimpleChapterList(mangaData, _dexLang);
-        final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
+    return result.onSuccessAsync((response) async {
+      final mangaData = response.data;
+      final chapters = await _fetchSimpleChapterList(mangaData, _dexLang);
+      final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
 
-        return Result.success(
-          _helper
-              .createManga(
-                sourceId: id,
-                mangaData: response.data,
-                chapters: chapters,
-                firstVolumeCover: firstVolumeCover,
-                lang: _dexLang,
-              )
-              .toDomainManga(manga.id),
-        );
-      },
-      failure: Result.failure,
-    );
+      return _helper
+          .createManga(
+            sourceId: id,
+            mangaData: response.data,
+            chapters: chapters,
+            firstVolumeCover: firstVolumeCover,
+            lang: _dexLang,
+          )
+          .toDomainManga(manga.id);
+    });
   }
 
   /// Get a quick-n-dirty list of the chapters to be used in determining the
@@ -343,19 +318,16 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
     final result = await _client
         .send(
           method: HttpMethod.get,
-          pathSegments: [
-            mangaData.id,
-            'aggregate',
-          ],
+          pathSegments: [mangaData.id, 'aggregate'],
           headers: _headersBuilder(),
           queryParameters: {'translatedLanguage[]': langCode},
         )
         .decode(AggregateResponse.fromJson);
 
-    return result.when(
-      success: (response) => response.volumes ?? {},
-      failure: (_) => {},
-    );
+    return switch (result) {
+      Success(success: final response) => response.volumes ?? {},
+      Failure() => {},
+    };
   }
 
   /// Attempt to get the first volume cover if the setting is enabled.
@@ -413,33 +385,33 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(ChapterResponse.fromJson);
 
-    return result.when(
-      success: (response) async {
-        int newOffset = response.offset;
-        bool hasNextPage = response.hasMore;
+    return switch (result) {
+      Success(success: final response) => await () async {
+          int newOffset = response.offset;
+          bool hasNextPage = response.hasMore;
 
-        final fullChapterList = List<ChapterData>.from(response.data);
+          final fullChapterList = List<ChapterData>.from(response.data);
 
-        while (hasNextPage) {
-          newOffset += response.limit;
+          while (hasNextPage) {
+            newOffset += response.limit;
 
-          final newResult = await _fetchPaginatedChapterList(
-            mangaId: mangaId,
+            final newResult = await _fetchPaginatedChapterList(
+              mangaId: mangaId,
+              offset: newOffset,
+            );
+            fullChapterList.addAll(newResult.data);
+
+            hasNextPage = newResult.hasMore;
+          }
+
+          return ChapterResponse(
+            data: fullChapterList,
             offset: newOffset,
+            total: fullChapterList.length,
           );
-          fullChapterList.addAll(newResult.data);
-
-          hasNextPage = newResult.hasMore;
-        }
-
-        return ChapterResponse(
-          data: fullChapterList,
-          offset: newOffset,
-          total: fullChapterList.length,
-        );
-      },
-      failure: (_) => ChapterResponse(offset: offset),
-    );
+        }(),
+      Failure() => ChapterResponse(offset: offset),
+    };
   }
 
   @override
@@ -462,29 +434,31 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
         )
         .decode(AtHome.fromJson);
 
-    return result.when(
-      success: (atHome) {
-        final atHomeRequestUrl = requestUri.toString();
-        final host = atHome.baseUrl;
-        final now = clock.now();
-        final hash = atHome.chapter.hash;
-        final pageSuffix =
-            atHome.chapter.data.map((e) => '$host/data/$hash/$e');
+    return switch (result) {
+      Success(success: final atHome) => () {
+          final atHomeRequestUrl = requestUri.toString();
+          final host = atHome.baseUrl;
+          final now = clock.now();
+          final hash = atHome.chapter.hash;
+          final pageSuffix =
+              atHome.chapter.data.map((e) => '$host/data/$hash/$e');
 
-        return Result.success(
-          pageSuffix.mapIndexed((index, imgUrl) {
-            final mdAtHomeMetadataUrl = '$host,$atHomeRequestUrl,$now';
+          return Success<List<ChapterPage>, HttpError>(
+            pageSuffix.mapIndexed((index, imgUrl) {
+              final mdAtHomeMetadataUrl = '$host,$atHomeRequestUrl,$now';
 
-            return ChapterPage(
-              index: index,
-              url: mdAtHomeMetadataUrl,
-              imageUrl: imgUrl,
-            );
-          }).toList(),
-        );
-      },
-      failure: Result.failure,
-    );
+              return ChapterPage(
+                index: index,
+                url: mdAtHomeMetadataUrl,
+                imageUrl: imgUrl,
+              );
+            }).toList(),
+          );
+        }(),
+      Failure() => const Failure<List<ChapterPage>, HttpError>(
+          HttpError(message: 'Failed to fetch chapter pages'),
+        ),
+    };
   }
 
   @override

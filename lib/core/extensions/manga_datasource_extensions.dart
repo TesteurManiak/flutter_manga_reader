@@ -11,17 +11,15 @@ extension MangaDatasourceExtensions on MangaDatasource {
         fetchChapters(baseManga.toSourceManga()),
       ).wait;
 
-      return detailsResult.when(
-        success: (manga) {
-          return chaptersResult.when(
-            success: (chapters) {
-              return Success((manga: manga, sourceChapters: chapters));
-            },
-            failure: (e) => Failure(e.message),
-          );
-        },
-        failure: (e) => Failure(e.message),
-      );
+      return switch (detailsResult) {
+        Success(success: final manga) => switch (chaptersResult) {
+            Success(success: final chapters) => Success(
+                (manga: manga, sourceChapters: chapters),
+              ),
+            Failure(:final failure) => Failure(failure.message),
+          },
+        Failure(:final failure) => Failure(failure.message),
+      };
     } catch (e) {
       return Failure(e.toString());
     }
@@ -32,10 +30,10 @@ extension MangaDatasourceExtensions on MangaDatasource {
   ) async {
     try {
       final chaptersResult = await fetchChapters(baseManga.toSourceManga());
-      return chaptersResult.when(
-        success: Success.new,
-        failure: (e) => Failure(e.message),
-      );
+      return switch (chaptersResult) {
+        Success(:final success) => Success(success),
+        Failure(:final failure) => Failure(failure.message),
+      };
     } catch (e) {
       return Failure(e.toString());
     }

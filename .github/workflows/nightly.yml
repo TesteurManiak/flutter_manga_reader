@@ -22,7 +22,6 @@ jobs:
       - name: Perform Code Generation
         run: |
           flutter pub get
-          melos run gen-all
           flutter gen-l10n
 
       - name: Generate SplashScreen

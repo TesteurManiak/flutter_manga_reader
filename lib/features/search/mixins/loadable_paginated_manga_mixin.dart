@@ -8,28 +8,26 @@ mixin PaginatedMangaConverterMixin {
     required List<SourceManga> currentMangas,
     required int nextPage,
   }) {
-    return result.when(
-      success: (page) {
-        if (currentMangas.isEmpty && page.mangaList.isEmpty) {
-          return PaginatedMangaState.empty(page: nextPage);
-        }
+    return switch (result) {
+      Success(success: final page) => () {
+          if (currentMangas.isEmpty && page.mangaList.isEmpty) {
+            return PaginatedMangaState.empty(page: nextPage);
+          }
 
-        final mangas = currentMangas + page.mangaList;
+          final mangas = currentMangas + page.mangaList;
 
-        return PaginatedMangaState.loaded(
-          page: nextPage,
-          mangas: mangas,
-          hasMore: page.hasMore,
-        );
-      },
-      failure: (e) {
-        return PaginatedMangaState.error(
+          return PaginatedMangaState.loaded(
+            page: nextPage,
+            mangas: mangas,
+            hasMore: page.hasMore,
+          );
+        }(),
+      Failure(failure: final e) => PaginatedMangaState.error(
           message: e.message,
           page: nextPage,
           hasMore: false,
-        );
-      },
-    );
+        ),
+    };
   }
 }
 

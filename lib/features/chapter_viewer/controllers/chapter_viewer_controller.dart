@@ -27,15 +27,13 @@ class ChapterViewerController extends _$ChapterViewerController {
     final result = await ref
         .read(fetchChapterPagesProvider(localChapter.toSourceModel()).future);
 
-    state = result.when(
-      success: (pages) {
-        return ChapterViewerState.loaded(
+    state = switch (result) {
+      Success(success: final pages) => ChapterViewerState.loaded(
           pages: pages,
           chapter: localChapter,
-        );
-      },
-      failure: (e) => ChapterViewerState.error(error: e.message),
-    );
+        ),
+      Failure(failure: final e) => ChapterViewerState.error(error: e.message),
+    };
   }
 
   Future<void> markChapterAsRead() {

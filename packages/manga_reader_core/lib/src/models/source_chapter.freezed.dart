@@ -26,7 +26,9 @@ mixin _$SourceChapter {
   double get chapterNumber => throw _privateConstructorUsedError;
   String? get scanlator => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceChapter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SourceChapterCopyWith<SourceChapter> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$SourceChapterCopyWithImpl<$Res, $Val extends SourceChapter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SourceChapter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +117,8 @@ class __$$SourceChapterImplCopyWithImpl<$Res>
       _$SourceChapterImpl _value, $Res Function(_$SourceChapterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceChapter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,12 +198,14 @@ class _$SourceChapterImpl implements _SourceChapter {
                 other.scanlator == scanlator));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, url, name, dateUpload, chapterNumber, scanlator);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceChapter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceChapterImplCopyWith<_$SourceChapterImpl> get copyWith =>
@@ -225,8 +233,11 @@ abstract class _SourceChapter implements SourceChapter {
   double get chapterNumber;
   @override
   String? get scanlator;
+
+  /// Create a copy of SourceChapter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceChapterImplCopyWith<_$SourceChapterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -34,8 +34,12 @@ mixin _$Chapter {
   DateTime? get dateFetch => throw _privateConstructorUsedError;
   DateTime? get lastModified => throw _privateConstructorUsedError;
 
+  /// Serializes this Chapter to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Chapter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChapterCopyWith<Chapter> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -70,6 +74,8 @@ class _$ChapterCopyWithImpl<$Res, $Val extends Chapter>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Chapter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -175,6 +181,8 @@ class __$$ChapterImplCopyWithImpl<$Res>
       _$ChapterImpl _value, $Res Function(_$ChapterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Chapter
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -338,7 +346,7 @@ class _$ChapterImpl extends _Chapter {
                 other.lastModified == lastModified));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -356,7 +364,9 @@ class _$ChapterImpl extends _Chapter {
       dateFetch,
       lastModified);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Chapter
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChapterImplCopyWith<_$ChapterImpl> get copyWith =>
@@ -392,8 +402,8 @@ abstract class _Chapter extends Chapter {
   @override
   int get id;
   @override
-  int get mangaId;
-  @override // Source data
+  int get mangaId; // Source data
+  @override
   String get url;
   @override
   String get name;
@@ -402,8 +412,8 @@ abstract class _Chapter extends Chapter {
   @override
   double get chapterNumber;
   @override
-  String? get scanlator;
-  @override // Model data
+  String? get scanlator; // Model data
+  @override
   bool get read;
   @override
   bool get downloaded;
@@ -415,8 +425,11 @@ abstract class _Chapter extends Chapter {
   DateTime? get dateFetch;
   @override
   DateTime? get lastModified;
+
+  /// Create a copy of Chapter
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChapterImplCopyWith<_$ChapterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

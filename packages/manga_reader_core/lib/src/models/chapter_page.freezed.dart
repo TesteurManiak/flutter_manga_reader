@@ -20,7 +20,9 @@ mixin _$ChapterPage {
   String get url => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChapterPage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChapterPageCopyWith<ChapterPage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$ChapterPageCopyWithImpl<$Res, $Val extends ChapterPage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChapterPage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$ChapterPageImplCopyWithImpl<$Res>
       _$ChapterPageImpl _value, $Res Function(_$ChapterPageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChapterPage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,7 +152,9 @@ class _$ChapterPageImpl extends _ChapterPage {
   @override
   int get hashCode => Object.hash(runtimeType, index, url, imageUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChapterPage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChapterPageImplCopyWith<_$ChapterPageImpl> get copyWith =>
@@ -166,8 +174,11 @@ abstract class _ChapterPage extends ChapterPage {
   String get url;
   @override
   String get imageUrl;
+
+  /// Create a copy of ChapterPage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChapterPageImplCopyWith<_$ChapterPageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
