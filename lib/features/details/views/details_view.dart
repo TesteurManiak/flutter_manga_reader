@@ -45,6 +45,8 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
   @override
   Widget build(BuildContext context) {
     final toaster = ref.watch(toasterServiceProvider);
+
+    // TODO(Guillaume): If the manga is not initialized, should display a loading spinner for the first fetch.
     final state = ref.watch(watchMangaByIdProvider(widget.mangaId));
 
     ref.listen(detailsControllerProvider(widget.mangaId), (_, next) {
