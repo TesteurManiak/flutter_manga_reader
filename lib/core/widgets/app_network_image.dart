@@ -29,8 +29,6 @@ class AppNetworkImage extends ConsumerStatefulWidget {
     this.errorBuilder,
     this.decodeWidth,
     this.decodeHeight,
-    this.maxDecodeWidth,
-    this.maxDecodeHeight,
   });
 
   final String? url;
@@ -47,10 +45,6 @@ class AppNetworkImage extends ConsumerStatefulWidget {
 
   /// Will resize the image in memory to have a certain height using [ResizeImage]
   final int? decodeHeight;
-
-  /// decode pixels limit
-  final double? maxDecodeWidth;
-  final double? maxDecodeHeight;
 
   @override
   ConsumerState<AppNetworkImage> createState() => _AppNetworkImageState();
