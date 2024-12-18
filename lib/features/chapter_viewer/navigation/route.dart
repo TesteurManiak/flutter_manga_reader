@@ -28,16 +28,15 @@ abstract class ChapterViewerRoute extends GoRouteData {
     );
 
     if (isOnSourceRoute) {
-      SourceChapterViewerRoute(
+      return SourceChapterViewerRoute(
         mangaId: mangaId,
         sourceId: sourceId,
         chapterId: chapterId,
         initialPage: initialPage,
       ).go(context);
-      return;
     }
 
-    LibraryChapterViewerRoute(
+    return LibraryChapterViewerRoute(
       mangaId: mangaId,
       sourceId: sourceId,
       chapterId: chapterId,

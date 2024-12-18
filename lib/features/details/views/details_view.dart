@@ -43,18 +43,6 @@ class DetailsView extends ConsumerStatefulWidget {
 
 class _DetailsContentState extends ConsumerState<DetailsView> {
   @override
-  void initState() {
-    super.initState();
-
-    // TODO(Guillaume): refactor this to use an initialize async provider
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(detailsControllerProvider(widget.mangaId).notifier)
-          .fetchDetails();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final toaster = ref.watch(toasterServiceProvider);
     final state = ref.watch(watchMangaByIdProvider(widget.mangaId));

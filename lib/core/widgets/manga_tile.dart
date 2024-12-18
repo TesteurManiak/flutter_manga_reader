@@ -8,7 +8,7 @@ import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class MangaTile extends ConsumerStatefulWidget {
+class MangaTile extends ConsumerWidget {
   const MangaTile({
     super.key,
     required this.manga,
@@ -19,42 +19,30 @@ class MangaTile extends ConsumerStatefulWidget {
   final bool displayedFromSource;
 
   @override
-  ConsumerState<MangaTile> createState() => _MangaTileState();
-}
-
-class _MangaTileState extends ConsumerState<MangaTile>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-
-    final isFavorite = ref.watch(isMangaInLibraryProvider(widget.manga));
-    final alreadyInLibrary = isFavorite && widget.displayedFromSource;
-    final showRemainingChapters = isFavorite && !widget.displayedFromSource;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isFavorite = ref.watch(isMangaInLibraryProvider(manga));
+    final alreadyInLibrary = isFavorite && displayedFromSource;
+    final showRemainingChapters = isFavorite && !displayedFromSource;
     final strings = context.strings;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () async {
-        late final int mangaId;
         final localId = await ref.read(
           getMangaByUrlAndSourceIdProvider(
-            url: widget.manga.url,
-            sourceId: widget.manga.sourceId,
+            url: manga.url,
+            sourceId: manga.sourceId,
           ).selectAsync((manga) => manga?.id),
         );
-        if (localId == null) {
-          mangaId = await ref
-              .read(localDatasourceProvider)
-              .saveSourceManga(widget.manga);
-        } else {
-          mangaId = localId;
-        }
+        final int mangaId = await switch (localId) {
+          final localId? => localId,
+          null => ref.read(localDatasourceProvider).saveSourceManga(manga),
+        };
 
         if (context.mounted) {
           DetailsRoute.go(
             context,
-            sourceId: widget.manga.sourceId,
+            sourceId: manga.sourceId,
             mangaId: mangaId,
           );
         }
@@ -64,7 +52,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
         child: Stack(
           children: [
             AppNetworkImage(
-              url: widget.manga.thumbnailUrl,
+              url: manga.thumbnailUrl,
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -96,7 +84,7 @@ class _MangaTileState extends ConsumerState<MangaTile>
                   ),
                 ),
                 child: Text(
-                  widget.manga.title,
+                  manga.title,
                   textAlign: TextAlign.start,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -118,16 +106,13 @@ class _MangaTileState extends ConsumerState<MangaTile>
               Positioned(
                 top: 4,
                 left: 4,
-                child: _ChaptersLeftToRead(widget.manga),
+                child: _ChaptersLeftToRead(manga),
               ),
           ],
         ),
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class _ChaptersLeftToRead extends ConsumerWidget {

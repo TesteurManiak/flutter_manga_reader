@@ -31,6 +31,8 @@ typedef MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 class DetailsController extends _$DetailsController {
   @override
   DetailsState build(int mangaId) {
+    fetchDetails();
+
     ref.listen(watchMangaByIdProvider(mangaId), (_, next) {
       state = next.when(
         data: (manga) => const DetailsState.loaded(),
@@ -42,7 +44,12 @@ class DetailsController extends _$DetailsController {
     return const DetailsState.loading();
   }
 
+  bool _isFetching = false;
+
   Future<void> fetchDetails({bool forceRefresh = false}) async {
+    if (_isFetching) return;
+
+    _isFetching = true;
     final currentManga = await ref.read(watchMangaByIdProvider(mangaId).future);
 
     if (!forceRefresh && currentManga.initialized) return;
@@ -65,6 +72,7 @@ class DetailsController extends _$DetailsController {
         }(),
       Failure(failure: final e) => DetailsState.error(error: e),
     };
+    _isFetching = false;
   }
 
   Future<void> toggleFavorite() {
