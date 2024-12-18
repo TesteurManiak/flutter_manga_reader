@@ -22,3 +22,9 @@ scripts:
   pb-gen:
     description: Generate protobuf files
     run: protoc --dart_out=lib/gen -I=protos protos/*.proto
+
+  clean-ios:
+    run: rm -rf ios/Pods ios/Podfile.lock && flutter clean && flutter pub get
+    packageFilters:
+      scope:
+        - flutter_manga_reader
