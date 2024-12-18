@@ -16,8 +16,10 @@ class MangaGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
     return GridView.builder(
       controller: controller,
+      cacheExtent: screenHeight * 2,
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         crossAxisSpacing: 8,
