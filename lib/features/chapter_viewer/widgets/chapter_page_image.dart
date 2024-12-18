@@ -9,7 +9,7 @@ import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
-class ChapterPageImage extends ConsumerStatefulWidget {
+class ChapterPageImage extends ConsumerWidget {
   const ChapterPageImage({
     required this.chapter,
     required this.page,
@@ -22,38 +22,23 @@ class ChapterPageImage extends ConsumerStatefulWidget {
   final BoxFit? fit;
 
   @override
-  ConsumerState<ChapterPageImage> createState() => _ChapterPageImageState();
-}
-
-class _ChapterPageImageState extends ConsumerState<ChapterPageImage> {
-  Key imageKey = UniqueKey();
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.chapter.downloaded) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (chapter.downloaded) {
       return _LocaleImage(
-        chapter: widget.chapter,
-        page: widget.page,
-        fit: widget.fit,
+        chapter: chapter,
+        page: page,
+        fit: fit,
       );
     }
 
     final source = ref.watch(scopedMangaDatasourceProvider);
 
     return AppNetworkImage(
-      key: imageKey,
-      url: widget.page.imageUrl,
-      fit: widget.fit,
+      url: page.imageUrl,
+      fit: fit,
       headers: source.getHeaders(),
-      progressIndicatorBuilder: (_, progress) {
-        return _LoadingPlaceholder(progress);
-      },
-      errorBuilder: (_, e, __) {
-        return _Error(
-          error: e,
-          onRetry: () => setState(() => imageKey = UniqueKey()),
-        );
-      },
+      progressIndicatorBuilder: (_, progress) => _LoadingPlaceholder(progress),
+      errorBuilder: (_, __, e, onRetry) => _Error(error: e, onRetry: onRetry),
     );
   }
 }
@@ -106,9 +91,9 @@ class _LoadingPlaceholder extends StatelessWidget {
 }
 
 class _Error extends StatelessWidget {
-  const _Error({this.error, this.onRetry});
+  const _Error({required this.error, this.onRetry});
 
-  final Object? error;
+  final Object error;
   final VoidCallback? onRetry;
 
   @override
@@ -130,12 +115,11 @@ class _Error extends StatelessWidget {
             Icons.broken_image_rounded,
             color: Colors.grey,
           ),
-          if (error case final error?)
-            Text(
-              error.toString(),
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.grey),
-            ),
+          Text(
+            error.toString(),
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.grey),
+          ),
           if (onRetry != null)
             TextButton(
               onPressed: onRetry,

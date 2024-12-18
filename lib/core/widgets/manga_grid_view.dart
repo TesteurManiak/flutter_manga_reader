@@ -16,22 +16,25 @@ class MangaGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.sizeOf(context).height;
+    const maxCrossAxisExtent = 160.0;
+
+    final size = MediaQuery.sizeOf(context);
+    final screenHeight = size.height;
+
     return GridView.builder(
       controller: controller,
       cacheExtent: screenHeight * 2,
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
         childAspectRatio: 0.69,
-        maxCrossAxisExtent: 160,
+        maxCrossAxisExtent: maxCrossAxisExtent,
       ),
       itemCount: mangas.length,
       itemBuilder: (_, index) {
         return MangaTile(
           manga: mangas[index],
           displayedFromSource: displayedFromSource,
+          decodeWidth: maxCrossAxisExtent.ceil(),
         );
       },
     );

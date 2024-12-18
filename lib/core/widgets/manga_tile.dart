@@ -13,103 +13,111 @@ class MangaTile extends ConsumerWidget {
     super.key,
     required this.manga,
     required this.displayedFromSource,
+    this.decodeWidth,
   });
 
   final SourceManga manga;
   final bool displayedFromSource;
+  final int? decodeWidth;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorite = ref.watch(isMangaInLibraryProvider(manga));
     final alreadyInLibrary = isFavorite && displayedFromSource;
     final showRemainingChapters = isFavorite && !displayedFromSource;
-    final strings = context.strings;
+    final theme = Theme.of(context);
+    final canvasColor = theme.canvasColor;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () async {
-        final localId = await ref.read(
-          getMangaByUrlAndSourceIdProvider(
-            url: manga.url,
-            sourceId: manga.sourceId,
-          ).selectAsync((manga) => manga?.id),
-        );
-        final int mangaId = await switch (localId) {
-          final localId? => localId,
-          null => ref.read(localDatasourceProvider).saveSourceManga(manga),
-        };
-
-        if (context.mounted) {
-          DetailsRoute.go(
-            context,
-            sourceId: manga.sourceId,
-            mangaId: mangaId,
-          );
-        }
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(6),
-        child: Stack(
-          children: [
-            AppNetworkImage(
-              url: manga.thumbnailUrl,
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-            ),
-            if (alreadyInLibrary)
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: .7),
-                  ),
-                ),
-              ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.only(
-                  left: 8,
-                  right: 8,
-                  bottom: 8,
-                  top: 16,
-                ),
-                decoration: const BoxDecoration(
+      onTap: () => _handleOnTap(context, ref),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        child: GridTile(
+          header: alreadyInLibrary || showRemainingChapters
+              ? _Header(alreadyInLibrary: alreadyInLibrary, sourceManga: manga)
+              : null,
+          footer: _Footer(manga.title),
+          child: switch (manga.thumbnailUrl) {
+            final url? => Container(
+                foregroundDecoration: BoxDecoration(
+                  boxShadow: switch (alreadyInLibrary) {
+                    true => [
+                        BoxShadow(
+                          color: canvasColor.withValues(alpha: .2),
+                        ),
+                      ],
+                    false => null,
+                  },
                   gradient: LinearGradient(
-                    begin: Alignment.topCenter,
+                    begin: Alignment.center,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.transparent, Colors.black],
+                    colors: [
+                      canvasColor.withValues(alpha: 0),
+                      canvasColor.withValues(alpha: .4),
+                      canvasColor.withValues(alpha: .9),
+                    ],
                   ),
                 ),
-                child: Text(
-                  manga.title,
-                  textAlign: TextAlign.start,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: AppNetworkImage(
+                  url: url,
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
+                  decodeWidth: decodeWidth,
                 ),
               ),
-            ),
-            if (alreadyInLibrary)
-              Positioned(
-                top: 4,
-                left: 4,
-                right: 4,
-                child: _LabelContainer(strings.in_library),
-              ),
-            if (showRemainingChapters)
-              Positioned(
-                top: 4,
-                left: 4,
-                child: _ChaptersLeftToRead(manga),
-              ),
-          ],
+            null => const SizedBox.shrink(),
+          },
         ),
+      ),
+    );
+  }
+
+  Future<void> _handleOnTap(BuildContext context, WidgetRef ref) async {
+    final localId = await ref.read(
+      getMangaByUrlAndSourceIdProvider(
+        url: manga.url,
+        sourceId: manga.sourceId,
+      ).selectAsync((manga) => manga?.id),
+    );
+    final int mangaId = await switch (localId) {
+      final localId? => localId,
+      null => ref.read(localDatasourceProvider).saveSourceManga(manga),
+    };
+
+    if (context.mounted) {
+      DetailsRoute.go(
+        context,
+        sourceId: manga.sourceId,
+        mangaId: mangaId,
+      );
+    }
+  }
+}
+
+class _Header extends StatelessWidget {
+  const _Header({
+    required this.alreadyInLibrary,
+    required this.sourceManga,
+  });
+
+  final bool alreadyInLibrary;
+  final SourceManga sourceManga;
+
+  @override
+  Widget build(BuildContext context) {
+    final strings = context.strings;
+
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Row(
+        children: [
+          if (alreadyInLibrary)
+            Flexible(child: _MangaBadge(strings.in_library)),
+          if (!alreadyInLibrary) _ChaptersLeftToRead(sourceManga),
+        ],
       ),
     );
   }
@@ -127,12 +135,12 @@ class _ChaptersLeftToRead extends ConsumerWidget {
 
     if (unreadChaptersCount == null) return const SizedBox.shrink();
 
-    return _LabelContainer(unreadChaptersCount.toString());
+    return _MangaBadge(unreadChaptersCount.toString());
   }
 }
 
-class _LabelContainer extends StatelessWidget {
-  const _LabelContainer(this.label);
+class _MangaBadge extends StatelessWidget {
+  const _MangaBadge(this.label);
 
   final String label;
 
@@ -153,6 +161,27 @@ class _LabelContainer extends StatelessWidget {
           fontSize: 12,
           color: colorScheme.onPrimary,
         ),
+      ),
+    );
+  }
+}
+
+class _Footer extends StatelessWidget {
+  const _Footer(this.title);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = TextTheme.of(context);
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        title,
+        textAlign: TextAlign.start,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: textTheme.titleSmall?.copyWith(color: Colors.white),
       ),
     );
   }
