@@ -122,17 +122,17 @@ class RestClient {
             );
           }
 
-          return Result.success(json);
+          return Success(json);
         }
       }
-      return Result.success(body);
+      return Success(body);
     } on TimeoutException {
-      return const Result.failure(HttpError(message: 'Timeout'));
+      return const Failure(HttpError(message: 'Timeout'));
     } on SocketException catch (e) {
       if (e.message.contains('timed out')) {
-        return const Result.failure(HttpError(message: 'Timeout'));
+        return const Failure(HttpError(message: 'Timeout'));
       }
-      return Result.failure(HttpError(message: e.message));
+      return Failure(HttpError(message: e.message));
     }
   }
 }

@@ -14,6 +14,10 @@ sealed class Result<S, F> with _$Result<S, F> {
 
   const Result._();
 
+  /// {@template result.combine}
+  /// Combine this [Result]s with the same failure type into a single one using
+  /// the provided [combiner] function.
+  /// {@endtemplate}
   Result<TResult, F> combine<TResult, BSuccess>(
     Result<BSuccess, F> other,
     TResult Function(S resultA, BSuccess resultB) combiner,
@@ -143,6 +147,7 @@ extension ResultRecord2Extensions<ASuccess, BSuccess, F> on (
   Result<ASuccess, F>,
   Result<BSuccess, F>
 ) {
+  /// {@macro result.combine}
   Result<TResult, F> combine<TResult>(
     TResult Function(ASuccess resultA, BSuccess resultB) combiner,
   ) {

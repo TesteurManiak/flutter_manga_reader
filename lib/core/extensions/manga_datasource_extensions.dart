@@ -24,10 +24,7 @@ extension MangaDatasourceExtensions on MangaDatasource {
   ) async {
     try {
       final chaptersResult = await fetchChapters(baseManga.toSourceManga());
-      return switch (chaptersResult) {
-        Success(:final success) => Success(success),
-        Failure(:final failure) => Failure(failure.message),
-      };
+      return chaptersResult.onFailure((f) => f.message);
     } catch (e) {
       return Failure(e.toString());
     }
