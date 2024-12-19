@@ -14,6 +14,20 @@ sealed class Result<S, F> with _$Result<S, F> {
 
   const Result._();
 
+  Result<TResult, F> combine<TResult, BSuccess>(
+    Result<BSuccess, F> other,
+    TResult Function(S resultA, BSuccess resultB) combiner,
+  ) {
+    return switch (this) {
+      Success(success: final successA) => switch (other) {
+          Success(success: final successB) =>
+            Success(combiner(successA, successB)),
+          Failure(failure: final failureB) => Failure(failureB),
+        },
+      Failure(failure: final failureA) => Failure(failureA),
+    };
+  }
+
   Result<TResult, F> onSuccess<TResult>(TResult Function(S) onSuccess) {
     return switch (this) {
       Success(:final success) => Success(onSuccess(success)),
@@ -27,6 +41,13 @@ sealed class Result<S, F> with _$Result<S, F> {
     return switch (this) {
       Success(:final success) => onSuccess(success).then(Success.new),
       Failure(:final failure) => Failure(failure),
+    };
+  }
+
+  Result<S, TFailure> onFailure<TFailure>(TFailure Function(F) onFailure) {
+    return switch (this) {
+      Success(:final success) => Success(success),
+      Failure(:final failure) => Failure(onFailure(failure)),
     };
   }
 }
@@ -116,4 +137,15 @@ class InvalidJSONException extends FormatException {
 
 class InvalidHtmlException extends FormatException {
   const InvalidHtmlException([Object? source]) : super('Invalid HTML', source);
+}
+
+extension ResultRecord2Extensions<ASuccess, BSuccess, F> on (
+  Result<ASuccess, F>,
+  Result<BSuccess, F>
+) {
+  Result<TResult, F> combine<TResult>(
+    TResult Function(ASuccess resultA, BSuccess resultB) combiner,
+  ) {
+    return $1.combine($2, combiner);
+  }
 }
