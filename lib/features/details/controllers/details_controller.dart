@@ -194,18 +194,4 @@ sealed class DetailsState with _$DetailsState {
   }) = DetailsError;
 
   const DetailsState._();
-
-  bool get isLoaded {
-    return switch (this) {
-      DetailsLoaded() => true,
-      _ => false,
-    };
-  }
-
-  bool get isLoading {
-    return switch (this) {
-      DetailsLoading() => true,
-      _ => false,
-    };
-  }
 }

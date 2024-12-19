@@ -44,7 +44,7 @@ class ChapterReader extends ConsumerWidget {
             ),
         };
       },
-      loading: LoadingContent.new,
+      loading: () => const LoadingContent(),
       error: (e, _) => ErrorContent(message: e.toString()),
     );
   }

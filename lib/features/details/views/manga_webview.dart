@@ -28,7 +28,7 @@ class MangaWebview extends ConsumerWidget {
             initialUrlRequest: URLRequest(url: WebUri(url)),
           );
         },
-        loading: LoadingContent.new,
+        loading: () => const LoadingContent(),
         error: (e, __) => ErrorContent(message: e.toString()),
       ),
     );

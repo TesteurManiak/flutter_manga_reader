@@ -71,7 +71,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
             );
           },
           error: (e, __) => ErrorContent(message: e.toString()),
-          loading: LoadingContent.new,
+          loading: () => const LoadingContent(),
         ),
       ),
     );

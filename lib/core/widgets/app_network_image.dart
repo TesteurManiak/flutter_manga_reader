@@ -119,10 +119,26 @@ class _AppNetworkImageState extends ConsumerState<AppNetworkImage> {
     if (widget.progressIndicatorBuilder case final builder?) {
       return builder(context, progress.progress);
     }
-    return Center(child: CircularProgressIndicator(value: progress.progress));
+    return _Loading(progress.progress);
   }
 
   void handleOnRetry() => setState(() => imageKey = UniqueKey());
+}
+
+class _Loading extends StatelessWidget {
+  const _Loading(this.progress);
+
+  final double? progress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: CircularProgressIndicator(value: progress),
+      ),
+    );
+  }
 }
 
 class _Error extends StatelessWidget {

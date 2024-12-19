@@ -91,22 +91,22 @@ extension ResultDecoder<F> on Result<Object?, F> {
 extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
   Future<Result<S, F>> decode<S>(
     S Function(Map<String, dynamic>) decoder,
-  ) async {
-    return (await this).decode(decoder);
+  ) {
+    return then((value) => value.decode(decoder));
   }
 
   Future<Result<List<S>, F>> decodeList<S>(
     S Function(Map<String, dynamic>) decoder,
-  ) async {
-    return (await this).decodeList(decoder);
+  ) {
+    return then((value) => value.decodeList(decoder));
   }
 
-  Future<Result<S, F>> decodeString<S>(S Function(String) decoder) async {
-    return (await this).decodeString(decoder);
+  Future<Result<S, F>> decodeString<S>(S Function(String) decoder) {
+    return then((value) => value.decodeString(decoder));
   }
 
-  Future<Result<dom.Element, F>> decodeHtmlBody() async {
-    return (await this).decodeHtmlBody();
+  Future<Result<dom.Element, F>> decodeHtmlBody() {
+    return then((value) => value.decodeHtmlBody());
   }
 }
 

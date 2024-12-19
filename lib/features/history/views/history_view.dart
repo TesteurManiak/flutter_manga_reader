@@ -22,7 +22,7 @@ class HistoryView extends ConsumerWidget {
       appBar: const _AppBar(),
       body: ref.watch(watchChapterHistoryProvider).when(
             data: _LoadedContent.new,
-            loading: LoadingContent.new,
+            loading: () => const LoadingContent(),
             error: (e, _) => const ErrorContent(),
           ),
     );
