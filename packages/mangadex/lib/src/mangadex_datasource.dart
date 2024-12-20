@@ -43,8 +43,8 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
   }
 
   @override
-  Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page) async {
-    final result = await _client
+  Future<Result<MangasPage, HttpError>> fetchPopularMangas(int page) {
+    return _client
         .send(
           method: HttpMethod.get,
           pathSegments: [MDConstants.manga],
@@ -57,9 +57,8 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
             'includes[]': MDConstants.coverArt,
           },
         )
-        .decode(MangaListResponse.fromJson);
-
-    return result.onSuccessAsync((response) async {
+        .decode(MangaListResponse.fromJson)
+        .whenSuccess((response) async {
       final mangaList = await _parseMangas(response.data);
       return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
     });
@@ -166,7 +165,7 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
   Future<Result<MangasPage, HttpError>> fetchLatestUpdatedMangas(
     int page,
   ) async {
-    final result = await _client
+    return _client
         .send(
           method: HttpMethod.get,
           pathSegments: [MDConstants.chapter],
@@ -181,9 +180,8 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
             'includeEmptyPages': '0',
           },
         )
-        .decode(ChapterResponse.fromJson);
-
-    return result.onSuccessAsync((response) async {
+        .decode(ChapterResponse.fromJson)
+        .whenSuccess((response) async {
       final mangaList = await _parseLatestUpdate(response.data);
       return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
     });
@@ -250,7 +248,7 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
     int page,
     String query,
   ) async {
-    final result = await _client
+    return _client
         .send(
           method: HttpMethod.get,
           pathSegments: [MDConstants.manga],
@@ -262,9 +260,8 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
             'includes[]': MDConstants.coverArt,
           },
         )
-        .decode(MangaListResponse.fromJson);
-
-    return result.onSuccessAsync((response) async {
+        .decode(MangaListResponse.fromJson)
+        .whenSuccess((response) async {
       final mangaList = await _parseMangas(response.data);
       return MangasPage(mangaList: mangaList, hasMore: response.hasMore);
     });
@@ -277,34 +274,35 @@ class MangadexDatasource extends MangaDatasource with HttpSource {
       return const Result.failure(HttpError(message: 'Invalid manga format'));
     }
 
-    final result = await _client.send(
-      method: HttpMethod.get,
-      pathSegments: manga.pathSegments,
-      headers: _headersBuilder(),
-      queryParameters: {
-        'includes[]': [
-          MDConstants.coverArt,
-          MDConstants.author,
-          MDConstants.artist,
-        ],
-      },
-    ).decode(MangaResponse.fromJson);
+    return _client
+        .send(
+          method: HttpMethod.get,
+          pathSegments: manga.pathSegments,
+          headers: _headersBuilder(),
+          queryParameters: {
+            'includes[]': [
+              MDConstants.coverArt,
+              MDConstants.author,
+              MDConstants.artist,
+            ],
+          },
+        )
+        .decode(MangaResponse.fromJson)
+        .whenSuccess((response) async {
+          final mangaData = response.data;
+          final chapters = await _fetchSimpleChapterList(mangaData, _dexLang);
+          final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
 
-    return result.onSuccessAsync((response) async {
-      final mangaData = response.data;
-      final chapters = await _fetchSimpleChapterList(mangaData, _dexLang);
-      final firstVolumeCover = await _fetchFirstVolumeCover(mangaData);
-
-      return _helper
-          .createManga(
-            sourceId: id,
-            mangaData: response.data,
-            chapters: chapters,
-            firstVolumeCover: firstVolumeCover,
-            lang: _dexLang,
-          )
-          .toDomainManga(manga.id);
-    });
+          return _helper
+              .createManga(
+                sourceId: id,
+                mangaData: response.data,
+                chapters: chapters,
+                firstVolumeCover: firstVolumeCover,
+                lang: _dexLang,
+              )
+              .toDomainManga(manga.id);
+        });
   }
 
   /// Get a quick-n-dirty list of the chapters to be used in determining the

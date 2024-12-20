@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' show parse;
+import 'package:manga_reader_core/src/exceptions/format_exceptions.dart';
 
 part 'result.freezed.dart';
 
@@ -14,41 +15,14 @@ sealed class Result<S, F> with _$Result<S, F> {
 
   const Result._();
 
-  /// {@template result.combine}
-  /// Combine this [Result]s with the same failure type into a single one using
-  /// the provided [combiner] function.
-  /// {@endtemplate}
-  Result<TResult, F> combine<TResult, BSuccess>(
-    Result<BSuccess, F> other,
-    TResult Function(S resultA, BSuccess resultB) combiner,
-  ) {
-    return switch (this) {
-      Success(success: final successA) => switch (other) {
-          Success(success: final successB) =>
-            Success(combiner(successA, successB)),
-          Failure(failure: final failureB) => Failure(failureB),
-        },
-      Failure(failure: final failureA) => Failure(failureA),
-    };
-  }
-
-  Result<TResult, F> onSuccess<TResult>(TResult Function(S) onSuccess) {
+  Result<TResult, F> whenSuccess<TResult>(TResult Function(S value) onSuccess) {
     return switch (this) {
       Success(:final success) => Success(onSuccess(success)),
       Failure(:final failure) => Failure(failure),
     };
   }
 
-  FutureOr<Result<TResult, F>> onSuccessAsync<TResult>(
-    Future<TResult> Function(S) onSuccess,
-  ) {
-    return switch (this) {
-      Success(:final success) => onSuccess(success).then(Success.new),
-      Failure(:final failure) => Failure(failure),
-    };
-  }
-
-  Result<S, TFailure> onFailure<TFailure>(TFailure Function(F) onFailure) {
+  Result<S, TFailure> whenFailure<TFailure>(TFailure Function(F) onFailure) {
     return switch (this) {
       Success(:final success) => Success(success),
       Failure(:final failure) => Failure(onFailure(failure)),
@@ -56,9 +30,9 @@ sealed class Result<S, F> with _$Result<S, F> {
   }
 }
 
-extension ResultDecoder<F> on Result<Object?, F> {
+extension ResultDecoderX<F> on Result<Object?, F> {
   Result<S, F> decode<S>(S Function(Map<String, dynamic>) decoder) {
-    return onSuccess<S>((s) {
+    return whenSuccess<S>((s) {
       final Map<String, dynamic> json;
       if (s is String) {
         final decodedJson = jsonDecode(s);
@@ -75,7 +49,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<List<S>, F> decodeList<S>(S Function(Map<String, dynamic>) decoder) {
-    return onSuccess(
+    return whenSuccess(
       (s) {
         final List<Object?> json;
         if (s is String) {
@@ -96,7 +70,7 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<S, F> decodeString<S>(S Function(String) decoder) {
-    return onSuccess<S>((s) {
+    return whenSuccess<S>((s) {
       return switch (s) {
         String() => decoder(s),
         Object() => decoder(s.toString()),
@@ -106,14 +80,34 @@ extension ResultDecoder<F> on Result<Object?, F> {
   }
 
   Result<dom.Element, F> decodeHtmlBody() {
-    return decodeString(parse).onSuccess((document) {
+    return decodeString(parse).whenSuccess((document) {
       if (document.body case final body?) return body;
       throw InvalidHtmlException(document.body);
     });
   }
 }
 
-extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
+extension ResultX<S, F> on Result<S, F> {
+  /// {@template result.combine}
+  /// Combine two [Result]s with the same failure type into a single one using
+  /// the provided [combiner] function.
+  /// {@endtemplate}
+  Result<TResult, F> combine<TResult, BSuccess>(
+    Result<BSuccess, F> other,
+    TResult Function(S resultA, BSuccess resultB) combiner,
+  ) {
+    return switch (this) {
+      Success(success: final successA) => switch (other) {
+          Success(success: final successB) =>
+            Success(combiner(successA, successB)),
+          Failure(failure: final failureB) => Failure(failureB),
+        },
+      Failure(failure: final failureA) => Failure(failureA),
+    };
+  }
+}
+
+extension FutureResultDecoderX<F> on Future<Result<Object?, F>> {
   Future<Result<S, F>> decode<S>(
     S Function(Map<String, dynamic>) decoder,
   ) {
@@ -135,15 +129,31 @@ extension FutureResultDecoder<F> on Future<Result<Object?, F>> {
   }
 }
 
-class InvalidJSONException extends FormatException {
-  const InvalidJSONException([Object? source]) : super('Invalid JSON', source);
+extension FutureResultX<S, F> on Future<Result<S, F>> {
+  Future<Result<TResult, F>> whenSuccess<TResult>(
+    FutureOr<TResult> Function(S value) onSuccess,
+  ) {
+    return then((result) async {
+      return switch (result) {
+        Success(success: final success) => Success(await onSuccess(success)),
+        Failure(failure: final failure) => Failure(failure),
+      };
+    });
+  }
+
+  Future<Result<S, TFailure>> whenFailure<TFailure>(
+    TFailure Function(F value) onFailure,
+  ) {
+    return then((result) {
+      return switch (result) {
+        Success(success: final success) => Success(success),
+        Failure(failure: final failure) => Failure(onFailure(failure)),
+      };
+    });
+  }
 }
 
-class InvalidHtmlException extends FormatException {
-  const InvalidHtmlException([Object? source]) : super('Invalid HTML', source);
-}
-
-extension ResultRecord2Extensions<ASuccess, BSuccess, F> on (
+extension ResultRecord2X<ASuccess, BSuccess, F> on (
   Result<ASuccess, F>,
   Result<BSuccess, F>
 ) {

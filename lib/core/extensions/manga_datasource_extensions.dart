@@ -13,7 +13,7 @@ extension MangaDatasourceExtensions on MangaDatasource {
 
       return (detailsResult, chaptersResult)
           .combine((m, c) => (manga: m, sourceChapters: c))
-          .onFailure((f) => f.message);
+          .whenFailure((f) => f.message);
     } catch (e) {
       return Failure(e.toString());
     }
@@ -24,7 +24,7 @@ extension MangaDatasourceExtensions on MangaDatasource {
   ) async {
     try {
       final chaptersResult = await fetchChapters(baseManga.toSourceManga());
-      return chaptersResult.onFailure((f) => f.message);
+      return chaptersResult.whenFailure((f) => f.message);
     } catch (e) {
       return Failure(e.toString());
     }

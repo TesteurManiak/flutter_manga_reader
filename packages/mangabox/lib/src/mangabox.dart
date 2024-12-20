@@ -34,7 +34,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         )
         .decodeHtmlBody();
 
-    return result.onSuccess(_parseBody);
+    return result.whenSuccess(_parseBody);
   }
 
   @override
@@ -51,7 +51,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         )
         .decodeHtmlBody();
 
-    return result.onSuccess(_parseBody);
+    return result.whenSuccess(_parseBody);
   }
 
   @override
@@ -75,7 +75,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         .send(method: HttpMethod.get, baseUrl: url)
         .decodeHtmlBody();
 
-    return result.onSuccess((body) {
+    return result.whenSuccess((body) {
       final mangaList = <SourceManga>[];
       List<String> urls = body.xpath(
         '//*[ @class^="genres-item"  or @class="list-truyen-item-wrap" or @class="story-item" or @class="story_item_right"]/h3/a/@href',
@@ -130,7 +130,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         )
         .decodeHtmlBody();
 
-    return result.onSuccess((body) {
+    return result.whenSuccess((body) {
       final author = body
           .xpathFirst(
             '//*[@class="table-label" and contains(text(), "Author")]/parent::tr/td[2]/text()|//li[contains(text(), "Author")]/a/text()',
@@ -187,7 +187,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         )
         .decodeHtmlBody();
 
-    return result.onSuccess((body) {
+    return result.whenSuccess((body) {
       final pages = <ChapterPage>[];
       final urls = body.xpath(
         '//div[@class="container-chapter-reader" or @class="panel-read-story"]/img/@src',
@@ -220,7 +220,7 @@ abstract class MangaboxDatasource extends MangaDatasource with HttpSource {
         )
         .decodeHtmlBody();
 
-    return result.onSuccess((body) {
+    return result.whenSuccess((body) {
       final chaptersList = <SourceChapter>[];
       final chaptersElements = body.select(
         "div.chapter-list div.row, ul.row-content-chapter li, div#chapter_list li",
