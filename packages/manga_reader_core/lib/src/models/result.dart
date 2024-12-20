@@ -15,17 +15,23 @@ sealed class Result<S, F> with _$Result<S, F> {
 
   const Result._();
 
-  Result<TResult, F> whenSuccess<TResult>(TResult Function(S value) onSuccess) {
+  /// {@template result.when_success}
+  /// Used to convert a [Success]'s value to another type.
+  /// {@endtemplate}
+  Result<TResult, F> whenSuccess<TResult>(TResult Function(S value) cb) {
     return switch (this) {
-      Success(:final success) => Success(onSuccess(success)),
+      Success(:final success) => Success(cb(success)),
       Failure(:final failure) => Failure(failure),
     };
   }
 
-  Result<S, TFailure> whenFailure<TFailure>(TFailure Function(F) onFailure) {
+  /// {@template result.when_failure}
+  /// Used to convert a [Failure]'s value to another type.
+  /// {@endtemplate}
+  Result<S, TFailure> whenFailure<TFailure>(TFailure Function(F) cb) {
     return switch (this) {
       Success(:final success) => Success(success),
-      Failure(:final failure) => Failure(onFailure(failure)),
+      Failure(:final failure) => Failure(cb(failure)),
     };
   }
 }
@@ -128,24 +134,26 @@ extension FutureResultDecoderX<F> on Future<Result<Object?, F>> {
 }
 
 extension FutureResultX<S, F> on Future<Result<S, F>> {
+  /// {@macro result.when_success}
   Future<Result<TResult, F>> whenSuccess<TResult>(
-    FutureOr<TResult> Function(S value) onSuccess,
+    FutureOr<TResult> Function(S value) cb,
   ) {
     return then((result) async {
       return switch (result) {
-        Success(success: final success) => Success(await onSuccess(success)),
+        Success(success: final success) => Success(await cb(success)),
         Failure(failure: final failure) => Failure(failure),
       };
     });
   }
 
+  /// {@macro result.when_failure}
   Future<Result<S, TFailure>> whenFailure<TFailure>(
-    TFailure Function(F value) onFailure,
+    TFailure Function(F value) cb,
   ) {
     return then((result) {
       return switch (result) {
         Success(success: final success) => Success(success),
-        Failure(failure: final failure) => Failure(onFailure(failure)),
+        Failure(failure: final failure) => Failure(cb(failure)),
       };
     });
   }
