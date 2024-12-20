@@ -96,13 +96,11 @@ extension ResultX<S, F> on Result<S, F> {
     Result<BSuccess, F> other,
     TResult Function(S resultA, BSuccess resultB) combiner,
   ) {
-    return switch (this) {
-      Success(success: final successA) => switch (other) {
-          Success(success: final successB) =>
-            Success(combiner(successA, successB)),
-          Failure(failure: final failureB) => Failure(failureB),
-        },
-      Failure(failure: final failureA) => Failure(failureA),
+    return switch ((this, other)) {
+      (Success(success: final successA), Success(success: final successB)) =>
+        Success(combiner(successA, successB)),
+      (Failure(failure: final failure), _) => Failure(failure),
+      (_, Failure(failure: final failure)) => Failure(failure),
     };
   }
 }
