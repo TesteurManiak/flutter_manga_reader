@@ -822,10 +822,10 @@ packages:
     dependency: "direct main"
     description:
       name: loader_overlay
-      sha256: "6d228f8707db427d2eab3f6463dadb6b9fb28c8e92c62f70f49e28e3f632c853"
+      sha256: "285c9ccab9a42a392ba948bd0b14376fd0ee9ddd7b63e3018bcd54460fd3e021"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.4"
+    version: "5.0.0"
   logging:
     dependency: "direct main"
     description:
