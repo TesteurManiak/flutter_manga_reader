@@ -71,7 +71,7 @@ dev_dependencies:
   freezed: ^2.5.7
   go_router_builder: ^2.7.3
   json_serializable: ^6.9.0
-  melos: ^6.3.1
+  melos: ^6.3.2
   mocktail: ^1.0.4
   riverpod_generator: ^2.6.3
   riverpod_lint: ^2.6.3
