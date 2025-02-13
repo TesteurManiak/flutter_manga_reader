@@ -1,4 +1,4 @@
-library xpath_selector_html_parser;
+library;
 
-export 'src/model.dart';
 export 'src/ext.dart';
+export 'src/model.dart';

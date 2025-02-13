@@ -5,8 +5,8 @@ homepage: https://github.com/TesteurManiak/flutter_manga_reader
 version: 0.2.0+1
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
-  flutter: ">=3.27.0 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
+  flutter: ">=3.29.0 <4.0.0"
 
 workspace:
   - packages/manga_reader_core
@@ -18,14 +18,14 @@ workspace:
 dependencies:
   background_downloader: ^8.9.4
   cached_network_image: ^3.4.1
-  clock: ^1.1.1
+  clock: ^1.1.2
   collection: ^1.19.0
   drift: ^2.25.0
-  file_picker: ^8.3.3
+  file_picker: ^8.3.5
   flutter:
     sdk: flutter
   flutter_cache_manager: ^3.4.1
-  flutter_gen: ^5.8.0
+  flutter_gen: ^5.9.0
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.6.1
@@ -49,18 +49,18 @@ dependencies:
   protobuf: ^3.1.0
   riverpod_annotation: ^2.6.1
   scrollable_positioned_list: ^0.3.8
-  shared_preferences: ^2.5.1
+  shared_preferences: ^2.5.2
   sqlite3_flutter_libs: ^0.5.30
   theme_tailor_annotation: ^3.0.1
   url_launcher: ^6.3.1
 
 dev_dependencies:
   alchemist: ^0.11.0
-  build_runner: ^2.4.14
+  build_runner: ^2.4.15
   build_verify: ^3.1.0
   build_version: ^2.1.1
   custom_lint: ^0.7.0
-  drift_dev: ^2.24.0
+  drift_dev: ^2.25.1
   fd_lints: ^2.3.1
   flutter_gen_runner: ^5.9.0
   flutter_inappwebview: ^6.1.5
