@@ -70,7 +70,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
               openedFromSource: widget.openedFromSource,
             );
           },
-          error: (e, __) => ErrorContent(message: e.toString()),
+          error: (e, _) => ErrorContent(message: e.toString()),
           loading: () => const LoadingContent(),
         ),
       ),
@@ -79,10 +79,7 @@ class _DetailsContentState extends ConsumerState<DetailsView> {
 }
 
 class _MangaContent extends ConsumerStatefulWidget {
-  const _MangaContent({
-    required this.manga,
-    required this.openedFromSource,
-  });
+  const _MangaContent({required this.manga, required this.openedFromSource});
 
   final Manga manga;
   final bool openedFromSource;
@@ -152,10 +149,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
               ValueListenableBuilder(
                 valueListenable: compactNotifier,
                 builder: (context, isCompact, _) {
-                  return _SliverGenreList(
-                    genres: genres,
-                    compact: isCompact,
-                  );
+                  return _SliverGenreList(genres: genres, compact: isCompact);
                 },
               ),
             _SliverChapterList(widget.manga),
@@ -186,10 +180,7 @@ class _BackgroundCover extends ConsumerWidget {
             scrollController.hasClients ? scrollController.offset : 0;
         final opacity = 1 - (offset / 200).clamp(0, 1).toDouble();
 
-        return Opacity(
-          opacity: opacity,
-          child: child,
-        );
+        return Opacity(opacity: opacity, child: child);
       },
       child: GradientImage(
         height: 480,
@@ -269,8 +260,10 @@ class _Cover extends ConsumerWidget {
       child: GestureDetector(
         onTap: () {
           if (thumbnailUrl case final url?) {
-            CoverViewerRoute(coverUrl: url, sourceId: source.id)
-                .push<void>(context);
+            CoverViewerRoute(
+              coverUrl: url,
+              sourceId: source.id,
+            ).push<void>(context);
           }
         },
         child: Hero(
@@ -288,10 +281,7 @@ class _Cover extends ConsumerWidget {
 }
 
 class _StatusAndSource extends ConsumerWidget {
-  const _StatusAndSource({
-    required this.status,
-    required this.sourceId,
-  });
+  const _StatusAndSource({required this.status, required this.sourceId});
 
   final MangaStatus? status;
   final String? sourceId;
@@ -304,15 +294,16 @@ class _StatusAndSource extends ConsumerWidget {
     };
 
     return Row(
-      children: [
-        if (status case final status?) StatusLabel(status),
-        if (source case final source?)
-          Text(
-            '${source.name} (${source.lang.toUpperCase()})',
-            maxLines: 1,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-      ].separatedWith(const Text(' • ')).toList(),
+      children:
+          [
+            if (status case final status?) StatusLabel(status),
+            if (source case final source?)
+              Text(
+                '${source.name} (${source.lang.toUpperCase()})',
+                maxLines: 1,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+          ].separatedWith(const Text(' • ')).toList(),
     );
   }
 }
@@ -350,10 +341,7 @@ class _SliverButtons extends ConsumerWidget {
     return SliverToBoxAdapter(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _AddToLibraryButton(mangaId),
-          _OpenWebViewButton(mangaId),
-        ],
+        children: [_AddToLibraryButton(mangaId), _OpenWebViewButton(mangaId)],
       ),
     );
   }
@@ -402,10 +390,7 @@ class _OpenWebViewButton extends ConsumerWidget {
 }
 
 class _SliverGenreList extends StatelessWidget {
-  const _SliverGenreList({
-    required this.genres,
-    required this.compact,
-  });
+  const _SliverGenreList({required this.genres, required this.compact});
 
   final bool compact;
   final List<String> genres;
@@ -413,10 +398,7 @@ class _SliverGenreList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: GenreList(
-        compact: compact,
-        genres: genres,
-      ),
+      child: GenreList(compact: compact, genres: genres),
     );
   }
 }
@@ -428,11 +410,9 @@ class _SliverChapterList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final chapters =
-        ref.watch(watchChaptersForMangaProvider(manga.id)).maybeWhen(
-              data: (chapters) => chapters,
-              orElse: () => <Chapter>[],
-            );
+    final chapters = ref
+        .watch(watchChaptersForMangaProvider(manga.id))
+        .maybeWhen(data: (chapters) => chapters, orElse: () => <Chapter>[]);
 
     return SliverPadding(
       padding: const EdgeInsets.symmetric(vertical: 16),

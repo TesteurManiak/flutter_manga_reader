@@ -1,3 +1,4 @@
+// isRunningInCi is actually not define so it might not be enabled in PlatformGoldensConfig
 // ignore_for_file: avoid_redundant_argument_values
 
 import 'dart:async';

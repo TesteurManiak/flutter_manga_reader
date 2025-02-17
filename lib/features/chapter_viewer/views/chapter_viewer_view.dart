@@ -131,14 +131,14 @@ class _ContentState extends ConsumerState<_Content> {
         ChapterViewerLoaded(:final pages) when pages.isEmpty =>
           const LoadingContent(),
         ChapterViewerLoaded(:final chapter, :final pages) => _PageViewer(
-            chapter: chapter,
-            chapterController: chapterPageController,
-            pages: pages,
-            initialPage: widget.initialPage,
-          ),
+          chapter: chapter,
+          chapterController: chapterPageController,
+          pages: pages,
+          initialPage: widget.initialPage,
+        ),
         ChapterViewerError() => ErrorContent(
-            onRetry: () => ref.read(provider.notifier).fetchPages(),
-          ),
+          onRetry: () => ref.read(provider.notifier).fetchPages(),
+        ),
       },
     );
   }
@@ -189,7 +189,7 @@ class _PageViewer extends ConsumerWidget {
               alignment: Alignment.bottomCenter,
               child: ValueListenableBuilder<int>(
                 valueListenable: chapterController,
-                builder: (_, page, __) {
+                builder: (_, page, _) {
                   return Text('${page + 1}/${pages.length}');
                 },
               ),

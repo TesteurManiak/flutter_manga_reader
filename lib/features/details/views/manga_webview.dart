@@ -15,8 +15,9 @@ class MangaWebview extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final source = ref.watch(scopedMangaDatasourceProvider);
     final manga = ref.watch(
-      watchMangaByIdProvider(mangaId)
-          .select((s) => s.whenData((m) => m.toSourceManga())),
+      watchMangaByIdProvider(
+        mangaId,
+      ).select((s) => s.whenData((m) => m.toSourceManga())),
     );
 
     return Scaffold(
@@ -24,12 +25,10 @@ class MangaWebview extends ConsumerWidget {
       body: manga.when(
         data: (sourceManga) {
           final url = source.getMangaUrl(sourceManga);
-          return InAppWebView(
-            initialUrlRequest: URLRequest(url: WebUri(url)),
-          );
+          return InAppWebView(initialUrlRequest: URLRequest(url: WebUri(url)));
         },
         loading: () => const LoadingContent(),
-        error: (e, __) => ErrorContent(message: e.toString()),
+        error: (e, _) => ErrorContent(message: e.toString()),
       ),
     );
   }

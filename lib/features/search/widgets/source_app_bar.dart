@@ -9,10 +9,7 @@ const _kBottomHeight = 48.0;
 
 class SourceAppBar extends ConsumerStatefulWidget
     implements PreferredSizeWidget {
-  const SourceAppBar({
-    super.key,
-    required this.onFilterChanged,
-  });
+  const SourceAppBar({super.key, required this.onFilterChanged});
 
   final ValueChanged<FilterType> onFilterChanged;
 
@@ -48,27 +45,23 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    final title =
-        ref.watch(scopedMangaDatasourceProvider.select((v) => v.name));
+    final title = ref.watch(
+      scopedMangaDatasourceProvider.select((v) => v.name),
+    );
 
     return AppBar(
-      title: searchMode
-          ? _SearchField(controller: selectedFilterNotifier)
-          : Text(title),
+      title:
+          searchMode
+              ? _SearchField(controller: selectedFilterNotifier)
+              : Text(title),
       actions: [
         if (!searchMode)
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () => setState(() => searchMode = true),
           ),
-        const IconButton(
-          icon: Icon(Icons.view_module),
-          onPressed: null,
-        ),
-        const IconButton(
-          icon: Icon(Icons.public),
-          onPressed: null,
-        ),
+        const IconButton(icon: Icon(Icons.view_module), onPressed: null),
+        const IconButton(icon: Icon(Icons.public), onPressed: null),
       ],
       bottom: _FilterChipList(controller: selectedFilterNotifier),
     );
@@ -76,9 +69,7 @@ class _SourceAppBarState extends ConsumerState<SourceAppBar> {
 }
 
 class _SearchField extends ConsumerStatefulWidget {
-  const _SearchField({
-    required this.controller,
-  });
+  const _SearchField({required this.controller});
 
   final ValueNotifier<FilterType> controller;
 
@@ -125,12 +116,13 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
       },
       decoration: InputDecoration(
         hintText: context.strings.generic_search,
-        suffixIcon: showClearButton
-            ? IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: textController.clear,
-              )
-            : null,
+        suffixIcon:
+            showClearButton
+                ? IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: textController.clear,
+                )
+                : null,
       ),
     );
   }
@@ -168,7 +160,7 @@ class _FilterChipListState extends State<_FilterChipList> {
                 onTap: () => widget.controller.value = filterType,
               );
             },
-            separatorBuilder: (_, __) => const SizedBox(width: 6),
+            separatorBuilder: (_, _) => const SizedBox(width: 6),
             itemCount: FilterType.values.length,
           );
         },

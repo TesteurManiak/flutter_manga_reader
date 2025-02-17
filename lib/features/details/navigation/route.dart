@@ -29,10 +29,7 @@ abstract class DetailsRoute extends GoRouteData {
     );
 
     if (isOnSourceRoute) {
-      SourceDetailsRoute(
-        mangaId: mangaId,
-        sourceId: sourceId,
-      ).go(context);
+      SourceDetailsRoute(mangaId: mangaId, sourceId: sourceId).go(context);
       return;
     }
 
@@ -43,19 +40,13 @@ abstract class DetailsRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return SourceProviderScope(
       sourceId: sourceId,
-      child: DetailsView(
-        mangaId: mangaId,
-        openedFromSource: openedFromSource,
-      ),
+      child: DetailsView(mangaId: mangaId, openedFromSource: openedFromSource),
     );
   }
 }
 
 class LibraryDetailsRoute extends DetailsRoute {
-  const LibraryDetailsRoute({
-    required this.sourceId,
-    required this.mangaId,
-  });
+  const LibraryDetailsRoute({required this.sourceId, required this.mangaId});
 
   static const path = 'details/:sourceId/:mangaId';
 
@@ -67,10 +58,7 @@ class LibraryDetailsRoute extends DetailsRoute {
 }
 
 class SourceDetailsRoute extends DetailsRoute {
-  const SourceDetailsRoute({
-    required this.sourceId,
-    required this.mangaId,
-  });
+  const SourceDetailsRoute({required this.sourceId, required this.mangaId});
 
   static const path = 'source-details/:mangaId';
 
@@ -86,10 +74,7 @@ class SourceDetailsRoute extends DetailsRoute {
 
 @TypedGoRoute<CoverViewerRoute>(path: CoverViewerRoute.path)
 class CoverViewerRoute extends GoRouteData {
-  const CoverViewerRoute({
-    required this.sourceId,
-    required this.coverUrl,
-  });
+  const CoverViewerRoute({required this.sourceId, required this.coverUrl});
 
   final String sourceId;
   final String coverUrl;
@@ -101,7 +86,7 @@ class CoverViewerRoute extends GoRouteData {
     return CustomTransitionPage(
       opaque: false,
       fullscreenDialog: true,
-      transitionsBuilder: (_, __, ___, child) => child,
+      transitionsBuilder: (_, _, _, child) => child,
       child: SourceProviderScope(
         sourceId: sourceId,
         child: CoverViewerView(coverUrl),
@@ -112,10 +97,7 @@ class CoverViewerRoute extends GoRouteData {
 
 @TypedGoRoute<MangaWebviewRoute>(path: MangaWebviewRoute.path)
 class MangaWebviewRoute extends GoRouteData {
-  const MangaWebviewRoute({
-    required this.sourceId,
-    required this.mangaId,
-  });
+  const MangaWebviewRoute({required this.sourceId, required this.mangaId});
 
   final String sourceId;
   final int mangaId;

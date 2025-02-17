@@ -24,11 +24,7 @@ class ChapterPageImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (chapter.downloaded) {
-      return _LocaleImage(
-        chapter: chapter,
-        page: page,
-        fit: fit,
-      );
+      return _LocaleImage(chapter: chapter, page: page, fit: fit);
     }
 
     final source = ref.watch(scopedMangaDatasourceProvider);
@@ -38,7 +34,7 @@ class ChapterPageImage extends ConsumerWidget {
       fit: fit,
       headers: source.getHeaders(),
       progressIndicatorBuilder: (_, progress) => _LoadingPlaceholder(progress),
-      errorBuilder: (_, __, e, onRetry) => _Error(error: e, onRetry: onRetry),
+      errorBuilder: (_, _, e, onRetry) => _Error(error: e, onRetry: onRetry),
     );
   }
 }
@@ -59,15 +55,16 @@ class _LocaleImage extends ConsumerWidget {
     final documentsDir = ref.watch(applicationDocumentsDirectoryProvider);
     return documentsDir.when(
       data: (baseDir) {
-        final file =
-            File(page.getFullLocalPath(chapter.getFullLocalPath(baseDir)));
+        final file = File(
+          page.getFullLocalPath(chapter.getFullLocalPath(baseDir)),
+        );
         return Image.file(
           file,
           fit: fit,
-          errorBuilder: (_, e, __) => _Error(error: e),
+          errorBuilder: (_, e, _) => _Error(error: e),
         );
       },
-      error: (e, __) => _Error(error: e),
+      error: (e, _) => _Error(error: e),
       loading: () => const _LoadingPlaceholder(null),
     );
   }
@@ -111,20 +108,14 @@ class _Error extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 32,
         children: [
-          const Icon(
-            Icons.broken_image_rounded,
-            color: Colors.grey,
-          ),
+          const Icon(Icons.broken_image_rounded, color: Colors.grey),
           Text(
             error.toString(),
             textAlign: TextAlign.center,
             style: const TextStyle(color: Colors.grey),
           ),
           if (onRetry != null)
-            TextButton(
-              onPressed: onRetry,
-              child: Text(strings.generic_retry),
-            ),
+            TextButton(onPressed: onRetry, child: Text(strings.generic_retry)),
         ],
       ),
     );

@@ -26,10 +26,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   GoRouter.optionURLReflectsImperativeAPIs = true;
 
   runApp(
-    UncontrolledProviderScope(
-      container: container,
-      child: await builder(),
-    ),
+    UncontrolledProviderScope(container: container, child: await builder()),
   );
 }
 
@@ -37,6 +34,6 @@ class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (_, __, ___) => true;
+      ..badCertificateCallback = (_, _, _) => true;
   }
 }

@@ -31,9 +31,9 @@ class SliverPullToRefresh extends StatelessWidget {
       refreshIndicatorExtent: 48,
       refreshTriggerPullDistance: 64,
       onRefresh: _handleRefresh,
-      builder: (_, refreshState, pulledExtent, refreshTriggerPullDistance, __) {
-        final percentageComplete =
-            (pulledExtent / refreshTriggerPullDistance).clamp(0.0, 1.0);
+      builder: (_, refreshState, pulledExtent, refreshTriggerPullDistance, _) {
+        final percentageComplete = (pulledExtent / refreshTriggerPullDistance)
+            .clamp(0.0, 1.0);
 
         return Center(
           child: Stack(
@@ -81,14 +81,11 @@ class _ActivityIndicator extends StatelessWidget {
 
     return switch (refreshState) {
       RefreshIndicatorMode.inactive ||
-      RefreshIndicatorMode.drag =>
-        const SizedBox.shrink(),
+      RefreshIndicatorMode.drag => const SizedBox.shrink(),
       _ => Opacity(
-          opacity: opacityCurve.transform(progress),
-          child: const UnconstrainedBox(
-            child: RefreshProgressIndicator(),
-          ),
-        ),
+        opacity: opacityCurve.transform(progress),
+        child: const UnconstrainedBox(child: RefreshProgressIndicator()),
+      ),
     };
   }
 }

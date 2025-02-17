@@ -27,7 +27,7 @@ class ChapterViewerBottomBar extends ConsumerWidget {
           children: [
             ValueListenableBuilder<int>(
               valueListenable: chapterController,
-              builder: (_, page, __) {
+              builder: (_, page, _) {
                 return _Slider(
                   totalPages: pageNumber,
                   chapterController: chapterController,
@@ -41,10 +41,9 @@ class ChapterViewerBottomBar extends ConsumerWidget {
                 IconButton(
                   icon: const Icon(Icons.settings_outlined),
                   onPressed: () {
-                    ChapterSettingsBottomSheet(mangaId).show(
-                      context,
-                      isScrollControlled: true,
-                    );
+                    ChapterSettingsBottomSheet(
+                      mangaId,
+                    ).show(context, isScrollControlled: true);
                   },
                 ),
               ],
@@ -57,9 +56,7 @@ class ChapterViewerBottomBar extends ConsumerWidget {
 }
 
 class _UnconstrainedBottomBar extends StatelessWidget {
-  const _UnconstrainedBottomBar({
-    required this.child,
-  });
+  const _UnconstrainedBottomBar({required this.child});
 
   final Widget child;
 
@@ -74,11 +71,9 @@ class _UnconstrainedBottomBar extends StatelessWidget {
       color: bottomBarTheme.color ?? theme.colorScheme.surface,
       child: SafeArea(
         child: Padding(
-          padding: bottomBarTheme.padding ??
-              const EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 16,
-              ),
+          padding:
+              bottomBarTheme.padding ??
+              const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
           child: child,
         ),
       ),
@@ -87,10 +82,7 @@ class _UnconstrainedBottomBar extends StatelessWidget {
 }
 
 class _Slider extends StatelessWidget {
-  const _Slider({
-    required this.totalPages,
-    required this.chapterController,
-  });
+  const _Slider({required this.totalPages, required this.chapterController});
 
   final int totalPages;
   final ChapterPageController chapterController;
