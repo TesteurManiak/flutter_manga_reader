@@ -21,7 +21,7 @@ class $AssetsSvgsGen {
 }
 
 class Assets {
-  Assets._();
+  const Assets._();
 
   static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
 }

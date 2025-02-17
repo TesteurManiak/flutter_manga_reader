@@ -2207,7 +2207,7 @@ final class $$DbMangasTableReferences
 
   $$DbChaptersTableProcessedTableManager get dbChaptersRefs {
     final manager = $$DbChaptersTableTableManager($_db, $_db.dbChapters)
-        .filter((f) => f.mangaId.id($_item.id));
+        .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_dbChaptersRefsTable($_db));
     return ProcessedTableManager(
@@ -2224,7 +2224,7 @@ final class $$DbMangasTableReferences
   $$DbReadingDirectionTableProcessedTableManager get dbReadingDirectionRefs {
     final manager =
         $$DbReadingDirectionTableTableManager($_db, $_db.dbReadingDirection)
-            .filter((f) => f.mangaId.id($_item.id));
+            .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache =
         $_typedResult.readTableOrNull(_dbReadingDirectionRefsTable($_db));
@@ -2241,7 +2241,7 @@ final class $$DbMangasTableReferences
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
     final manager =
         $$DbChapterHistoryTableTableManager($_db, $_db.dbChapterHistory)
-            .filter((f) => f.mangaId.id($_item.id));
+            .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache =
         $_typedResult.readTableOrNull(_dbChapterHistoryRefsTable($_db));
@@ -2677,7 +2677,8 @@ class $$DbMangasTableTableManager extends RootTableManager<
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dbChaptersRefs)
-                    await $_getPrefetchedData(
+                    await $_getPrefetchedData<DbManga, $DbMangasTable,
+                            DbChapter>(
                         currentTable: table,
                         referencedTable:
                             $$DbMangasTableReferences._dbChaptersRefsTable(db),
@@ -2689,7 +2690,8 @@ class $$DbMangasTableTableManager extends RootTableManager<
                             referencedItems.where((e) => e.mangaId == item.id),
                         typedResults: items),
                   if (dbReadingDirectionRefs)
-                    await $_getPrefetchedData(
+                    await $_getPrefetchedData<DbManga, $DbMangasTable,
+                            DbReadingDirectionData>(
                         currentTable: table,
                         referencedTable: $$DbMangasTableReferences
                             ._dbReadingDirectionRefsTable(db),
@@ -2701,7 +2703,8 @@ class $$DbMangasTableTableManager extends RootTableManager<
                             referencedItems.where((e) => e.mangaId == item.id),
                         typedResults: items),
                   if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData(
+                    await $_getPrefetchedData<DbManga, $DbMangasTable,
+                            DbChapterHistoryData>(
                         currentTable: table,
                         referencedTable: $$DbMangasTableReferences
                             ._dbChapterHistoryRefsTable(db),
@@ -2773,8 +2776,10 @@ final class $$DbChaptersTableReferences
       .createAlias($_aliasNameGenerator(db.dbChapters.mangaId, db.dbMangas.id));
 
   $$DbMangasTableProcessedTableManager get mangaId {
+    final $_column = $_itemColumn<int>('manga_id')!;
+
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id($_item.mangaId!));
+        .filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
@@ -2790,7 +2795,7 @@ final class $$DbChaptersTableReferences
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
     final manager =
         $$DbChapterHistoryTableTableManager($_db, $_db.dbChapterHistory)
-            .filter((f) => f.chapterId.id($_item.id));
+            .filter((f) => f.chapterId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache =
         $_typedResult.readTableOrNull(_dbChapterHistoryRefsTable($_db));
@@ -3166,7 +3171,7 @@ class $$DbChaptersTableTableManager extends RootTableManager<
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData(
+                    await $_getPrefetchedData<DbChapter, $DbChaptersTable, DbChapterHistoryData>(
                         currentTable: table,
                         referencedTable: $$DbChaptersTableReferences
                             ._dbChapterHistoryRefsTable(db),
@@ -3217,8 +3222,10 @@ final class $$DbReadingDirectionTableReferences extends BaseReferences<
           $_aliasNameGenerator(db.dbReadingDirection.mangaId, db.dbMangas.id));
 
   $$DbMangasTableProcessedTableManager get mangaId {
+    final $_column = $_itemColumn<int>('manga_id')!;
+
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id($_item.mangaId!));
+        .filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
@@ -3591,8 +3598,10 @@ final class $$DbChapterHistoryTableReferences extends BaseReferences<
           $_aliasNameGenerator(db.dbChapterHistory.mangaId, db.dbMangas.id));
 
   $$DbMangasTableProcessedTableManager get mangaId {
+    final $_column = $_itemColumn<int>('manga_id')!;
+
     final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id($_item.mangaId!));
+        .filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
@@ -3604,8 +3613,10 @@ final class $$DbChapterHistoryTableReferences extends BaseReferences<
           db.dbChapterHistory.chapterId, db.dbChapters.id));
 
   $$DbChaptersTableProcessedTableManager get chapterId {
+    final $_column = $_itemColumn<int>('chapter_id')!;
+
     final manager = $$DbChaptersTableTableManager($_db, $_db.dbChapters)
-        .filter((f) => f.id($_item.chapterId!));
+        .filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_chapterIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
