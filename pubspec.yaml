@@ -16,7 +16,7 @@ workspace:
   - packages/xpath_selector_html_parser
 
 dependencies:
-  background_downloader: ^9.1.0
+  background_downloader: ^9.1.1
   cached_network_image: ^3.4.1
   clock: ^1.1.2
   collection: ^1.19.0
