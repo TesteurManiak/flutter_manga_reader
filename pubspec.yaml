@@ -68,7 +68,7 @@ dev_dependencies:
   flutter_native_splash: ^2.4.5
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.7
+  freezed: ^2.5.8
   go_router_builder: ^2.8.2
   json_serializable: ^6.9.0
   melos: ^6.3.2
