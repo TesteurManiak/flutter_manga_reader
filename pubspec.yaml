@@ -70,7 +70,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.5.7
   go_router_builder: ^2.8.2
-  json_serializable: ^6.9.4
+  json_serializable: ^6.9.5
   melos: ^6.3.2
   mocktail: ^1.0.4
   riverpod_generator: ^2.6.4
