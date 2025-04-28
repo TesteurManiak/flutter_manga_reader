@@ -12,7 +12,7 @@ resolution: workspace
 dependencies:
   xpath_selector:
     path: ../xpath_selector
-  html: ^0.15.5
+  html: ^0.15.6
 
 dev_dependencies:
   lints: ^5.1.1
