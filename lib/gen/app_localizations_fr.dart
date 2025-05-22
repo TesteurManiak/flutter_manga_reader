@@ -24,7 +24,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_general => 'Général';
 
   @override
-  String get settings_general_subtitle => 'Langue de l\'application, notifications';
+  String get settings_general_subtitle =>
+      'Langue de l\'application, notifications';
 
   @override
   String get settings_general_language => 'Langue de l\'application';
@@ -39,7 +40,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_appearance => 'Apparence';
 
   @override
-  String get settings_appearance_subtitle => 'Thème, format de la date et de l\'heure';
+  String get settings_appearance_subtitle =>
+      'Thème, format de la date et de l\'heure';
 
   @override
   String get settings_appearance_dark_mode => 'Mode sombre';
@@ -60,10 +62,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_backup => 'Sauvegarde et restauration';
 
   @override
-  String get settings_backup_tachiyomi_import_title => 'Importer la sauvegarde Tachiyomi';
+  String get settings_backup_tachiyomi_import_title =>
+      'Importer la sauvegarde Tachiyomi';
 
   @override
-  String get settings_backup_tachiyomi_import_subtitle => 'Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi';
+  String get settings_backup_tachiyomi_import_subtitle =>
+      'Importer la bibliothèque depuis le fichier de sauvegarde Tachiyomi';
 
   @override
   String get settings_library => 'Bibliothèque';
@@ -78,7 +82,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings_about_version => 'Version';
 
   @override
-  String get settings_about_open_source_licenses => 'Licences à code source ouvert';
+  String get settings_about_open_source_licenses =>
+      'Licences à code source ouvert';
 
   @override
   String get search_title => 'Explorer';

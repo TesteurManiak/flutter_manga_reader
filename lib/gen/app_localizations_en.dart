@@ -60,10 +60,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settings_backup => 'Backup & Restore';
 
   @override
-  String get settings_backup_tachiyomi_import_title => 'Import Tachiyomi/Mihon Backup';
+  String get settings_backup_tachiyomi_import_title =>
+      'Import Tachiyomi/Mihon Backup';
 
   @override
-  String get settings_backup_tachiyomi_import_subtitle => 'Import library from Tachiyomi backup file';
+  String get settings_backup_tachiyomi_import_subtitle =>
+      'Import library from Tachiyomi backup file';
 
   @override
   String get settings_library => 'Library';
