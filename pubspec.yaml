@@ -31,7 +31,7 @@ dependencies:
   flutter_riverpod: ^2.6.1
   flutter_svg: ^2.1.0
   freezed_annotation: ^3.0.0
-  go_router: ^15.1.2
+  go_router: ^15.1.3
   http: ^1.4.0
   intl: ^0.20.0
   json_annotation: ^4.9.0
