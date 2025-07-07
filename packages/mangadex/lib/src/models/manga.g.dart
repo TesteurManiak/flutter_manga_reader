@@ -6,10 +6,10 @@ part of 'manga.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MangaListResponseImpl _$$MangaListResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MangaListResponseImpl(
-      data: (json['data'] as List<dynamic>?)
+_MangaListResponse _$MangaListResponseFromJson(Map<String, dynamic> json) =>
+    _MangaListResponse(
+      data:
+          (json['data'] as List<dynamic>?)
               ?.map((e) => MangaData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <MangaData>[],
@@ -18,8 +18,7 @@ _$MangaListResponseImpl _$$MangaListResponseImplFromJson(
       total: (json['total'] as num?)?.toInt() ?? 0,
     );
 
-Map<String, dynamic> _$$MangaListResponseImplToJson(
-        _$MangaListResponseImpl instance) =>
+Map<String, dynamic> _$MangaListResponseToJson(_MangaListResponse instance) =>
     <String, dynamic>{
       'data': instance.data,
       'limit': instance.limit,
@@ -27,57 +26,60 @@ Map<String, dynamic> _$$MangaListResponseImplToJson(
       'total': instance.total,
     };
 
-_$MangaResponseImpl _$$MangaResponseImplFromJson(Map<String, dynamic> json) =>
-    _$MangaResponseImpl(
+_MangaResponse _$MangaResponseFromJson(Map<String, dynamic> json) =>
+    _MangaResponse(
       data: MangaData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$MangaResponseImplToJson(_$MangaResponseImpl instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-    };
+Map<String, dynamic> _$MangaResponseToJson(_MangaResponse instance) =>
+    <String, dynamic>{'data': instance.data};
 
-_$MangaDataImpl _$$MangaDataImplFromJson(Map<String, dynamic> json) =>
-    _$MangaDataImpl(
-      id: json['id'] as String,
-      attributes:
-          MangaAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
-      relationships: (json['relationships'] as List<dynamic>?)
-              ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const <Relationship>[],
-    );
+_MangaData _$MangaDataFromJson(Map<String, dynamic> json) => _MangaData(
+  id: json['id'] as String,
+  attributes: MangaAttributes.fromJson(
+    json['attributes'] as Map<String, dynamic>,
+  ),
+  relationships:
+      (json['relationships'] as List<dynamic>?)
+          ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <Relationship>[],
+);
 
-Map<String, dynamic> _$$MangaDataImplToJson(_$MangaDataImpl instance) =>
+Map<String, dynamic> _$MangaDataToJson(_MangaData instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
       'relationships': instance.relationships,
     };
 
-_$MangaAttributesImpl _$$MangaAttributesImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MangaAttributesImpl(
+_MangaAttributes _$MangaAttributesFromJson(Map<String, dynamic> json) =>
+    _MangaAttributes(
       title: Map<String, String>.from(json['title'] as Map),
-      altTitles: (json['altTitles'] as List<dynamic>)
-          .map((e) => Map<String, String>.from(e as Map))
-          .toList(),
+      altTitles:
+          (json['altTitles'] as List<dynamic>)
+              .map((e) => Map<String, String>.from(e as Map))
+              .toList(),
       description: Map<String, String>.from(json['description'] as Map),
       originalLanguage: json['originalLanguage'] as String?,
       lastVolume: json['lastVolume'] as String?,
       lastChapter: json['lastChapter'] as String?,
-      contentRating:
-          $enumDecodeNullable(_$ContentRatingEnumMap, json['contentRating']),
+      contentRating: $enumDecodeNullable(
+        _$ContentRatingEnumMap,
+        json['contentRating'],
+      ),
       publicationDemographic: $enumDecodeNullable(
-          _$PublicationDemographicEnumMap, json['publicationDemographic']),
+        _$PublicationDemographicEnumMap,
+        json['publicationDemographic'],
+      ),
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
-      tags: (json['tags'] as List<dynamic>)
-          .map((e) => Tag.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      tags:
+          (json['tags'] as List<dynamic>)
+              .map((e) => Tag.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
-Map<String, dynamic> _$$MangaAttributesImplToJson(
-        _$MangaAttributesImpl instance) =>
+Map<String, dynamic> _$MangaAttributesToJson(_MangaAttributes instance) =>
     <String, dynamic>{
       'title': instance.title,
       'altTitles': instance.altTitles,
@@ -114,25 +116,23 @@ const _$StatusEnumMap = {
   Status.cancelled: 'cancelled',
 };
 
-_$TagImpl _$$TagImplFromJson(Map<String, dynamic> json) => _$TagImpl(
-      id: json['id'] as String? ?? '',
-      attributes:
-          TagAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
-    );
+_Tag _$TagFromJson(Map<String, dynamic> json) => _Tag(
+  id: json['id'] as String? ?? '',
+  attributes: TagAttributes.fromJson(
+    json['attributes'] as Map<String, dynamic>,
+  ),
+);
 
-Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes,
-    };
+Map<String, dynamic> _$TagToJson(_Tag instance) => <String, dynamic>{
+  'id': instance.id,
+  'attributes': instance.attributes,
+};
 
-_$TagAttributesImpl _$$TagAttributesImplFromJson(Map<String, dynamic> json) =>
-    _$TagAttributesImpl(
+_TagAttributes _$TagAttributesFromJson(Map<String, dynamic> json) =>
+    _TagAttributes(
       name: Map<String, String>.from(json['name'] as Map),
       group: json['group'] as String,
     );
 
-Map<String, dynamic> _$$TagAttributesImplToJson(_$TagAttributesImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'group': instance.group,
-    };
+Map<String, dynamic> _$TagAttributesToJson(_TagAttributes instance) =>
+    <String, dynamic>{'name': instance.name, 'group': instance.group};

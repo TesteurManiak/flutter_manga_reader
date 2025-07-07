@@ -6,9 +6,8 @@ part of 'aggregate.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$AggregateResponseImpl _$$AggregateResponseImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AggregateResponseImpl(
+_AggregateResponse _$AggregateResponseFromJson(Map<String, dynamic> json) =>
+    _AggregateResponse(
       result: json['result'] as String,
       volumes: (json['volumes'] as Map<String, dynamic>?)?.map(
         (k, e) =>
@@ -16,16 +15,11 @@ _$AggregateResponseImpl _$$AggregateResponseImplFromJson(
       ),
     );
 
-Map<String, dynamic> _$$AggregateResponseImplToJson(
-        _$AggregateResponseImpl instance) =>
-    <String, dynamic>{
-      'result': instance.result,
-      'volumes': instance.volumes,
-    };
+Map<String, dynamic> _$AggregateResponseToJson(_AggregateResponse instance) =>
+    <String, dynamic>{'result': instance.result, 'volumes': instance.volumes};
 
-_$AggregateVolumeImpl _$$AggregateVolumeImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AggregateVolumeImpl(
+_AggregateVolume _$AggregateVolumeFromJson(Map<String, dynamic> json) =>
+    _AggregateVolume(
       volume: json['volume'] as String,
       count: json['count'] as String,
       chapters: (json['chapters'] as Map<String, dynamic>).map(
@@ -34,24 +28,18 @@ _$AggregateVolumeImpl _$$AggregateVolumeImplFromJson(
       ),
     );
 
-Map<String, dynamic> _$$AggregateVolumeImplToJson(
-        _$AggregateVolumeImpl instance) =>
+Map<String, dynamic> _$AggregateVolumeToJson(_AggregateVolume instance) =>
     <String, dynamic>{
       'volume': instance.volume,
       'count': instance.count,
       'chapters': instance.chapters,
     };
 
-_$AggregateChapterImpl _$$AggregateChapterImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AggregateChapterImpl(
+_AggregateChapter _$AggregateChapterFromJson(Map<String, dynamic> json) =>
+    _AggregateChapter(
       chapter: json['chapter'] as String,
       count: json['count'] as String,
     );
 
-Map<String, dynamic> _$$AggregateChapterImplToJson(
-        _$AggregateChapterImpl instance) =>
-    <String, dynamic>{
-      'chapter': instance.chapter,
-      'count': instance.count,
-    };
+Map<String, dynamic> _$AggregateChapterToJson(_AggregateChapter instance) =>
+    <String, dynamic>{'chapter': instance.chapter, 'count': instance.count};

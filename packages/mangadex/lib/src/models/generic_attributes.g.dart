@@ -6,14 +6,8 @@ part of 'generic_attributes.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GenericAttributesImpl _$$GenericAttributesImplFromJson(
-        Map<String, dynamic> json) =>
-    _$GenericAttributesImpl(
-      name: json['name'] as String,
-    );
+_GenericAttributes _$GenericAttributesFromJson(Map<String, dynamic> json) =>
+    _GenericAttributes(name: json['name'] as String);
 
-Map<String, dynamic> _$$GenericAttributesImplToJson(
-        _$GenericAttributesImpl instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-    };
+Map<String, dynamic> _$GenericAttributesToJson(_GenericAttributes instance) =>
+    <String, dynamic>{'name': instance.name};

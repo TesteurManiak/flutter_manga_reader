@@ -6,129 +6,132 @@ part of 'relationship.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$MangaRelationshipImpl _$$MangaRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$MangaRelationshipImpl(
+MangaRelationship _$MangaRelationshipFromJson(Map<String, dynamic> json) =>
+    MangaRelationship(
       id: json['id'] as String,
-      attributes: json['attributes'] == null
-          ? null
-          : MangaAttributes.fromJson(
-              json['attributes'] as Map<String, dynamic>),
+      attributes:
+          json['attributes'] == null
+              ? null
+              : MangaAttributes.fromJson(
+                json['attributes'] as Map<String, dynamic>,
+              ),
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$MangaRelationshipImplToJson(
-        _$MangaRelationshipImpl instance) =>
+Map<String, dynamic> _$MangaRelationshipToJson(MangaRelationship instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
       'type': instance.$type,
     };
 
-_$AuthorRelationshipImpl _$$AuthorRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$AuthorRelationshipImpl(
+AuthorRelationship _$AuthorRelationshipFromJson(Map<String, dynamic> json) =>
+    AuthorRelationship(
       id: json['id'] as String,
-      attributes: json['attributes'] == null
-          ? null
-          : GenericAttributes.fromJson(
-              json['attributes'] as Map<String, dynamic>),
+      attributes:
+          json['attributes'] == null
+              ? null
+              : GenericAttributes.fromJson(
+                json['attributes'] as Map<String, dynamic>,
+              ),
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$AuthorRelationshipImplToJson(
-        _$AuthorRelationshipImpl instance) =>
+Map<String, dynamic> _$AuthorRelationshipToJson(AuthorRelationship instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
       'type': instance.$type,
     };
 
-_$ArtistRelationshipImpl _$$ArtistRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ArtistRelationshipImpl(
+ArtistRelationship _$ArtistRelationshipFromJson(Map<String, dynamic> json) =>
+    ArtistRelationship(
       id: json['id'] as String,
-      attributes: json['attributes'] == null
-          ? null
-          : GenericAttributes.fromJson(
-              json['attributes'] as Map<String, dynamic>),
+      attributes:
+          json['attributes'] == null
+              ? null
+              : GenericAttributes.fromJson(
+                json['attributes'] as Map<String, dynamic>,
+              ),
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$ArtistRelationshipImplToJson(
-        _$ArtistRelationshipImpl instance) =>
+Map<String, dynamic> _$ArtistRelationshipToJson(ArtistRelationship instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
       'type': instance.$type,
     };
 
-_$CoverArtRelationshipImpl _$$CoverArtRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$CoverArtRelationshipImpl(
-      id: json['id'] as String,
-      attributes: json['attributes'] == null
+CoverArtRelationship _$CoverArtRelationshipFromJson(
+  Map<String, dynamic> json,
+) => CoverArtRelationship(
+  id: json['id'] as String,
+  attributes:
+      json['attributes'] == null
           ? null
           : CoverArtAttributes.fromJson(
-              json['attributes'] as Map<String, dynamic>),
-      $type: json['type'] as String?,
-    );
+            json['attributes'] as Map<String, dynamic>,
+          ),
+  $type: json['type'] as String?,
+);
 
-Map<String, dynamic> _$$CoverArtRelationshipImplToJson(
-        _$CoverArtRelationshipImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes,
-      'type': instance.$type,
-    };
+Map<String, dynamic> _$CoverArtRelationshipToJson(
+  CoverArtRelationship instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'attributes': instance.attributes,
+  'type': instance.$type,
+};
 
-_$ScanlationGroupRelationshipImpl _$$ScanlationGroupRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ScanlationGroupRelationshipImpl(
-      id: json['id'] as String,
-      attributes: json['attributes'] == null
+ScanlationGroupRelationship _$ScanlationGroupRelationshipFromJson(
+  Map<String, dynamic> json,
+) => ScanlationGroupRelationship(
+  id: json['id'] as String,
+  attributes:
+      json['attributes'] == null
           ? null
           : ScanlationGroupAttributes.fromJson(
-              json['attributes'] as Map<String, dynamic>),
-      $type: json['type'] as String?,
-    );
+            json['attributes'] as Map<String, dynamic>,
+          ),
+  $type: json['type'] as String?,
+);
 
-Map<String, dynamic> _$$ScanlationGroupRelationshipImplToJson(
-        _$ScanlationGroupRelationshipImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'attributes': instance.attributes,
-      'type': instance.$type,
-    };
+Map<String, dynamic> _$ScanlationGroupRelationshipToJson(
+  ScanlationGroupRelationship instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'attributes': instance.attributes,
+  'type': instance.$type,
+};
 
-_$UserRelationshipImpl _$$UserRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$UserRelationshipImpl(
+UserRelationship _$UserRelationshipFromJson(Map<String, dynamic> json) =>
+    UserRelationship(
       id: json['id'] as String,
-      attributes: json['attributes'] == null
-          ? null
-          : UserAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
+      attributes:
+          json['attributes'] == null
+              ? null
+              : UserAttributes.fromJson(
+                json['attributes'] as Map<String, dynamic>,
+              ),
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$UserRelationshipImplToJson(
-        _$UserRelationshipImpl instance) =>
+Map<String, dynamic> _$UserRelationshipToJson(UserRelationship instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
       'type': instance.$type,
     };
 
-_$OtherRelationshipImpl _$$OtherRelationshipImplFromJson(
-        Map<String, dynamic> json) =>
-    _$OtherRelationshipImpl(
+OtherRelationship _$OtherRelationshipFromJson(Map<String, dynamic> json) =>
+    OtherRelationship(
       id: json['id'] as String,
       attributes: json['attributes'] as Map<String, dynamic>?,
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$OtherRelationshipImplToJson(
-        _$OtherRelationshipImpl instance) =>
+Map<String, dynamic> _$OtherRelationshipToJson(OtherRelationship instance) =>
     <String, dynamic>{
       'id': instance.id,
       'attributes': instance.attributes,
