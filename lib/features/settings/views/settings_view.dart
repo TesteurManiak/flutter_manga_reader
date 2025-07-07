@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/utils/consts.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
-import 'package:flutter_manga_reader/features/settings/navigation/route.dart';
 import 'package:flutter_manga_reader/src/version.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,9 +37,7 @@ class SettingsView extends ConsumerWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.strings.settings_title),
-      ),
+      appBar: AppBar(title: Text(context.strings.settings_title)),
       body: ListView.builder(
         itemCount: settings.length,
         itemBuilder: (context, index) => _SettingTile(settings[index]),

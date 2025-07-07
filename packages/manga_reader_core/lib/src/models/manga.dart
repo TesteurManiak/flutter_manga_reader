@@ -8,7 +8,7 @@ part 'manga.g.dart';
 
 /// Model used to handle manga data fetched from the database.
 @freezed
-class Manga with _$Manga {
+abstract class Manga with _$Manga {
   const factory Manga({
     required int id,
     required String sourceId,

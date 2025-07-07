@@ -4,7 +4,7 @@ import 'package:manga_reader_core/manga_reader_core.dart';
 part 'chapter_download_task.freezed.dart';
 
 @freezed
-class ChapterDownloadTask with _$ChapterDownloadTask {
+abstract class ChapterDownloadTask with _$ChapterDownloadTask {
   const factory ChapterDownloadTask({
     required Chapter chapter,
     required List<ChapterPage> pages,
@@ -23,9 +23,4 @@ class ChapterDownloadTask with _$ChapterDownloadTask {
   }
 }
 
-enum DownloadTaskStatus {
-  pending,
-  downloading,
-  completed,
-  failed,
-}
+enum DownloadTaskStatus { pending, downloading, completed, failed }

@@ -5,16 +5,16 @@ homepage: https://github.com/TesteurManiak/flutter_manga_reader
 publish_to: "none"
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 resolution: workspace
 
 dependencies:
   clock:
   crypto: ^3.0.6
-  freezed_annotation: ^3.1.0
+  freezed_annotation:
   html: ^0.15.6
-  http: ^1.4.0
+  http:
   json_annotation:
   xpath_selector_html_parser:
     path: ../xpath_selector_html_parser

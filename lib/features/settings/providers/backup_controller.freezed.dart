@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,240 +10,198 @@ part of 'backup_controller.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$BackupState {}
+mixin _$BackupState {
 
-/// @nodoc
-abstract class $BackupStateCopyWith<$Res> {
-  factory $BackupStateCopyWith(
-          BackupState value, $Res Function(BackupState) then) =
-      _$BackupStateCopyWithImpl<$Res, BackupState>;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BackupState);
 }
 
-/// @nodoc
-class _$BackupStateCopyWithImpl<$Res, $Val extends BackupState>
-    implements $BackupStateCopyWith<$Res> {
-  _$BackupStateCopyWithImpl(this._value, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+@override
+int get hashCode => runtimeType.hashCode;
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
+@override
+String toString() {
+  return 'BackupState()';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$BackupStateInitialImplCopyWith<$Res> {
-  factory _$$BackupStateInitialImplCopyWith(_$BackupStateInitialImpl value,
-          $Res Function(_$BackupStateInitialImpl) then) =
-      __$$BackupStateInitialImplCopyWithImpl<$Res>;
+class $BackupStateCopyWith<$Res>  {
+$BackupStateCopyWith(BackupState _, $Res Function(BackupState) __);
 }
 
-/// @nodoc
-class __$$BackupStateInitialImplCopyWithImpl<$Res>
-    extends _$BackupStateCopyWithImpl<$Res, _$BackupStateInitialImpl>
-    implements _$$BackupStateInitialImplCopyWith<$Res> {
-  __$$BackupStateInitialImplCopyWithImpl(_$BackupStateInitialImpl _value,
-      $Res Function(_$BackupStateInitialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-}
 
 /// @nodoc
 
-class _$BackupStateInitialImpl implements BackupStateInitial {
-  const _$BackupStateInitialImpl();
 
-  @override
-  String toString() {
-    return 'BackupState.initial()';
-  }
+class BackupStateInitial implements BackupState {
+  const BackupStateInitial();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BackupStateInitialImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BackupStateInitial);
 }
 
-abstract class BackupStateInitial implements BackupState {
-  const factory BackupStateInitial() = _$BackupStateInitialImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'BackupState.initial()';
 }
 
-/// @nodoc
-abstract class _$$BackupStateLoadingImplCopyWith<$Res> {
-  factory _$$BackupStateLoadingImplCopyWith(_$BackupStateLoadingImpl value,
-          $Res Function(_$BackupStateLoadingImpl) then) =
-      __$$BackupStateLoadingImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$BackupStateLoadingImplCopyWithImpl<$Res>
-    extends _$BackupStateCopyWithImpl<$Res, _$BackupStateLoadingImpl>
-    implements _$$BackupStateLoadingImplCopyWith<$Res> {
-  __$$BackupStateLoadingImplCopyWithImpl(_$BackupStateLoadingImpl _value,
-      $Res Function(_$BackupStateLoadingImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$BackupStateLoadingImpl implements BackupStateLoading {
-  const _$BackupStateLoadingImpl();
 
-  @override
-  String toString() {
-    return 'BackupState.loading()';
-  }
+class BackupStateLoading implements BackupState {
+  const BackupStateLoading();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BackupStateLoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BackupStateLoading);
 }
 
-abstract class BackupStateLoading implements BackupState {
-  const factory BackupStateLoading() = _$BackupStateLoadingImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'BackupState.loading()';
 }
 
-/// @nodoc
-abstract class _$$BackupStateSuccessImplCopyWith<$Res> {
-  factory _$$BackupStateSuccessImplCopyWith(_$BackupStateSuccessImpl value,
-          $Res Function(_$BackupStateSuccessImpl) then) =
-      __$$BackupStateSuccessImplCopyWithImpl<$Res>;
+
 }
 
-/// @nodoc
-class __$$BackupStateSuccessImplCopyWithImpl<$Res>
-    extends _$BackupStateCopyWithImpl<$Res, _$BackupStateSuccessImpl>
-    implements _$$BackupStateSuccessImplCopyWith<$Res> {
-  __$$BackupStateSuccessImplCopyWithImpl(_$BackupStateSuccessImpl _value,
-      $Res Function(_$BackupStateSuccessImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-}
+
 
 /// @nodoc
 
-class _$BackupStateSuccessImpl implements BackupStateSuccess {
-  const _$BackupStateSuccessImpl();
 
-  @override
-  String toString() {
-    return 'BackupState.success()';
-  }
+class BackupStateSuccess implements BackupState {
+  const BackupStateSuccess();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BackupStateSuccessImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BackupStateSuccess);
 }
 
-abstract class BackupStateSuccess implements BackupState {
-  const factory BackupStateSuccess() = _$BackupStateSuccessImpl;
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'BackupState.success()';
 }
 
-/// @nodoc
-abstract class _$$BackupStateErrorImplCopyWith<$Res> {
-  factory _$$BackupStateErrorImplCopyWith(_$BackupStateErrorImpl value,
-          $Res Function(_$BackupStateErrorImpl) then) =
-      __$$BackupStateErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({BackupErrorType type});
+
 }
 
-/// @nodoc
-class __$$BackupStateErrorImplCopyWithImpl<$Res>
-    extends _$BackupStateCopyWithImpl<$Res, _$BackupStateErrorImpl>
-    implements _$$BackupStateErrorImplCopyWith<$Res> {
-  __$$BackupStateErrorImplCopyWithImpl(_$BackupStateErrorImpl _value,
-      $Res Function(_$BackupStateErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = null,
-  }) {
-    return _then(_$BackupStateErrorImpl(
-      null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as BackupErrorType,
-    ));
-  }
-}
+
 
 /// @nodoc
 
-class _$BackupStateErrorImpl implements BackupStateError {
-  const _$BackupStateErrorImpl(this.type);
 
-  @override
-  final BackupErrorType type;
+class BackupStateError implements BackupState {
+  const BackupStateError(this.type);
+  
 
-  @override
-  String toString() {
-    return 'BackupState.error(type: $type)';
-  }
+ final  BackupErrorType type;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BackupStateErrorImpl &&
-            (identical(other.type, type) || other.type == type));
-  }
+/// Create a copy of BackupState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BackupStateErrorCopyWith<BackupStateError> get copyWith => _$BackupStateErrorCopyWithImpl<BackupStateError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, type);
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BackupStateErrorImplCopyWith<_$BackupStateErrorImpl> get copyWith =>
-      __$$BackupStateErrorImplCopyWithImpl<_$BackupStateErrorImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BackupStateError&&(identical(other.type, type) || other.type == type));
 }
 
-abstract class BackupStateError implements BackupState {
-  const factory BackupStateError(final BackupErrorType type) =
-      _$BackupStateErrorImpl;
 
-  BackupErrorType get type;
+@override
+int get hashCode => Object.hash(runtimeType,type);
 
-  /// Create a copy of BackupState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BackupStateErrorImplCopyWith<_$BackupStateErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'BackupState.error(type: $type)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class $BackupStateErrorCopyWith<$Res> implements $BackupStateCopyWith<$Res> {
+  factory $BackupStateErrorCopyWith(BackupStateError value, $Res Function(BackupStateError) _then) = _$BackupStateErrorCopyWithImpl;
+@useResult
+$Res call({
+ BackupErrorType type
+});
+
+
+
+
+}
+/// @nodoc
+class _$BackupStateErrorCopyWithImpl<$Res>
+    implements $BackupStateErrorCopyWith<$Res> {
+  _$BackupStateErrorCopyWithImpl(this._self, this._then);
+
+  final BackupStateError _self;
+  final $Res Function(BackupStateError) _then;
+
+/// Create a copy of BackupState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? type = null,}) {
+  return _then(BackupStateError(
+null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as BackupErrorType,
+  ));
+}
+
+
+}
+
+// dart format on

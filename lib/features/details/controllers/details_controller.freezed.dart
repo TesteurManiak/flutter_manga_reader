@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,408 +10,292 @@ part of 'details_controller.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$DetailsState {
-  List<Chapter> get selectedChapters => throw _privateConstructorUsedError;
-  bool get selectionMode => throw _privateConstructorUsedError;
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $DetailsStateCopyWith<DetailsState> get copyWith =>
-      throw _privateConstructorUsedError;
+ List<Chapter> get selectedChapters; bool get selectionMode;
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DetailsStateCopyWith<DetailsState> get copyWith => _$DetailsStateCopyWithImpl<DetailsState>(this as DetailsState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsState&&const DeepCollectionEquality().equals(other.selectedChapters, selectedChapters)&&(identical(other.selectionMode, selectionMode) || other.selectionMode == selectionMode));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(selectedChapters),selectionMode);
+
+@override
+String toString() {
+  return 'DetailsState(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $DetailsStateCopyWith<$Res> {
-  factory $DetailsStateCopyWith(
-          DetailsState value, $Res Function(DetailsState) then) =
-      _$DetailsStateCopyWithImpl<$Res, DetailsState>;
-  @useResult
-  $Res call({List<Chapter> selectedChapters, bool selectionMode});
-}
+abstract mixin class $DetailsStateCopyWith<$Res>  {
+  factory $DetailsStateCopyWith(DetailsState value, $Res Function(DetailsState) _then) = _$DetailsStateCopyWithImpl;
+@useResult
+$Res call({
+ List<Chapter> selectedChapters, bool selectionMode
+});
 
+
+
+
+}
 /// @nodoc
-class _$DetailsStateCopyWithImpl<$Res, $Val extends DetailsState>
+class _$DetailsStateCopyWithImpl<$Res>
     implements $DetailsStateCopyWith<$Res> {
-  _$DetailsStateCopyWithImpl(this._value, this._then);
+  _$DetailsStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final DetailsState _self;
+  final $Res Function(DetailsState) _then;
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedChapters = null,
-    Object? selectionMode = null,
-  }) {
-    return _then(_value.copyWith(
-      selectedChapters: null == selectedChapters
-          ? _value.selectedChapters
-          : selectedChapters // ignore: cast_nullable_to_non_nullable
-              as List<Chapter>,
-      selectionMode: null == selectionMode
-          ? _value.selectionMode
-          : selectionMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedChapters = null,Object? selectionMode = null,}) {
+  return _then(_self.copyWith(
+selectedChapters: null == selectedChapters ? _self.selectedChapters : selectedChapters // ignore: cast_nullable_to_non_nullable
+as List<Chapter>,selectionMode: null == selectionMode ? _self.selectionMode : selectionMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$DetailsLoadingImplCopyWith<$Res>
-    implements $DetailsStateCopyWith<$Res> {
-  factory _$$DetailsLoadingImplCopyWith(_$DetailsLoadingImpl value,
-          $Res Function(_$DetailsLoadingImpl) then) =
-      __$$DetailsLoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Chapter> selectedChapters, bool selectionMode});
 }
 
-/// @nodoc
-class __$$DetailsLoadingImplCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsLoadingImpl>
-    implements _$$DetailsLoadingImplCopyWith<$Res> {
-  __$$DetailsLoadingImplCopyWithImpl(
-      _$DetailsLoadingImpl _value, $Res Function(_$DetailsLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedChapters = null,
-    Object? selectionMode = null,
-  }) {
-    return _then(_$DetailsLoadingImpl(
-      selectedChapters: null == selectedChapters
-          ? _value._selectedChapters
-          : selectedChapters // ignore: cast_nullable_to_non_nullable
-              as List<Chapter>,
-      selectionMode: null == selectionMode
-          ? _value.selectionMode
-          : selectionMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$DetailsLoadingImpl extends DetailsLoading {
-  const _$DetailsLoadingImpl(
-      {final List<Chapter> selectedChapters = const <Chapter>[],
-      this.selectionMode = false})
-      : _selectedChapters = selectedChapters,
-        super._();
 
-  final List<Chapter> _selectedChapters;
-  @override
-  @JsonKey()
-  List<Chapter> get selectedChapters {
-    if (_selectedChapters is EqualUnmodifiableListView)
-      return _selectedChapters;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedChapters);
-  }
+class DetailsLoading extends DetailsState {
+  const DetailsLoading({final  List<Chapter> selectedChapters = const <Chapter>[], this.selectionMode = false}): _selectedChapters = selectedChapters,super._();
+  
 
-  @override
-  @JsonKey()
-  final bool selectionMode;
-
-  @override
-  String toString() {
-    return 'DetailsState.loading(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DetailsLoadingImpl &&
-            const DeepCollectionEquality()
-                .equals(other._selectedChapters, _selectedChapters) &&
-            (identical(other.selectionMode, selectionMode) ||
-                other.selectionMode == selectionMode));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
-
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
-      __$$DetailsLoadingImplCopyWithImpl<_$DetailsLoadingImpl>(
-          this, _$identity);
+ final  List<Chapter> _selectedChapters;
+@override@JsonKey() List<Chapter> get selectedChapters {
+  if (_selectedChapters is EqualUnmodifiableListView) return _selectedChapters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_selectedChapters);
 }
 
-abstract class DetailsLoading extends DetailsState {
-  const factory DetailsLoading(
-      {final List<Chapter> selectedChapters,
-      final bool selectionMode}) = _$DetailsLoadingImpl;
-  const DetailsLoading._() : super._();
+@override@JsonKey() final  bool selectionMode;
 
-  @override
-  List<Chapter> get selectedChapters;
-  @override
-  bool get selectionMode;
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DetailsLoadingCopyWith<DetailsLoading> get copyWith => _$DetailsLoadingCopyWithImpl<DetailsLoading>(this, _$identity);
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DetailsLoadingImplCopyWith<_$DetailsLoadingImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsLoading&&const DeepCollectionEquality().equals(other._selectedChapters, _selectedChapters)&&(identical(other.selectionMode, selectionMode) || other.selectionMode == selectionMode));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedChapters),selectionMode);
+
+@override
+String toString() {
+  return 'DetailsState.loading(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$DetailsLoadedImplCopyWith<$Res>
-    implements $DetailsStateCopyWith<$Res> {
-  factory _$$DetailsLoadedImplCopyWith(
-          _$DetailsLoadedImpl value, $Res Function(_$DetailsLoadedImpl) then) =
-      __$$DetailsLoadedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({List<Chapter> selectedChapters, bool selectionMode});
+abstract mixin class $DetailsLoadingCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
+  factory $DetailsLoadingCopyWith(DetailsLoading value, $Res Function(DetailsLoading) _then) = _$DetailsLoadingCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Chapter> selectedChapters, bool selectionMode
+});
+
+
+
+
+}
+/// @nodoc
+class _$DetailsLoadingCopyWithImpl<$Res>
+    implements $DetailsLoadingCopyWith<$Res> {
+  _$DetailsLoadingCopyWithImpl(this._self, this._then);
+
+  final DetailsLoading _self;
+  final $Res Function(DetailsLoading) _then;
+
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedChapters = null,Object? selectionMode = null,}) {
+  return _then(DetailsLoading(
+selectedChapters: null == selectedChapters ? _self._selectedChapters : selectedChapters // ignore: cast_nullable_to_non_nullable
+as List<Chapter>,selectionMode: null == selectionMode ? _self.selectionMode : selectionMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$DetailsLoadedImplCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsLoadedImpl>
-    implements _$$DetailsLoadedImplCopyWith<$Res> {
-  __$$DetailsLoadedImplCopyWithImpl(
-      _$DetailsLoadedImpl _value, $Res Function(_$DetailsLoadedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedChapters = null,
-    Object? selectionMode = null,
-  }) {
-    return _then(_$DetailsLoadedImpl(
-      selectedChapters: null == selectedChapters
-          ? _value._selectedChapters
-          : selectedChapters // ignore: cast_nullable_to_non_nullable
-              as List<Chapter>,
-      selectionMode: null == selectionMode
-          ? _value.selectionMode
-          : selectionMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$DetailsLoadedImpl extends DetailsLoaded {
-  const _$DetailsLoadedImpl(
-      {final List<Chapter> selectedChapters = const <Chapter>[],
-      this.selectionMode = false})
-      : _selectedChapters = selectedChapters,
-        super._();
 
-  final List<Chapter> _selectedChapters;
-  @override
-  @JsonKey()
-  List<Chapter> get selectedChapters {
-    if (_selectedChapters is EqualUnmodifiableListView)
-      return _selectedChapters;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedChapters);
-  }
+class DetailsLoaded extends DetailsState {
+  const DetailsLoaded({final  List<Chapter> selectedChapters = const <Chapter>[], this.selectionMode = false}): _selectedChapters = selectedChapters,super._();
+  
 
-  @override
-  @JsonKey()
-  final bool selectionMode;
-
-  @override
-  String toString() {
-    return 'DetailsState.loaded(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DetailsLoadedImpl &&
-            const DeepCollectionEquality()
-                .equals(other._selectedChapters, _selectedChapters) &&
-            (identical(other.selectionMode, selectionMode) ||
-                other.selectionMode == selectionMode));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_selectedChapters), selectionMode);
-
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
-      __$$DetailsLoadedImplCopyWithImpl<_$DetailsLoadedImpl>(this, _$identity);
+ final  List<Chapter> _selectedChapters;
+@override@JsonKey() List<Chapter> get selectedChapters {
+  if (_selectedChapters is EqualUnmodifiableListView) return _selectedChapters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_selectedChapters);
 }
 
-abstract class DetailsLoaded extends DetailsState {
-  const factory DetailsLoaded(
-      {final List<Chapter> selectedChapters,
-      final bool selectionMode}) = _$DetailsLoadedImpl;
-  const DetailsLoaded._() : super._();
+@override@JsonKey() final  bool selectionMode;
 
-  @override
-  List<Chapter> get selectedChapters;
-  @override
-  bool get selectionMode;
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DetailsLoadedCopyWith<DetailsLoaded> get copyWith => _$DetailsLoadedCopyWithImpl<DetailsLoaded>(this, _$identity);
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DetailsLoadedImplCopyWith<_$DetailsLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsLoaded&&const DeepCollectionEquality().equals(other._selectedChapters, _selectedChapters)&&(identical(other.selectionMode, selectionMode) || other.selectionMode == selectionMode));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedChapters),selectionMode);
+
+@override
+String toString() {
+  return 'DetailsState.loaded(selectedChapters: $selectedChapters, selectionMode: $selectionMode)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$DetailsErrorImplCopyWith<$Res>
-    implements $DetailsStateCopyWith<$Res> {
-  factory _$$DetailsErrorImplCopyWith(
-          _$DetailsErrorImpl value, $Res Function(_$DetailsErrorImpl) then) =
-      __$$DetailsErrorImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {List<Chapter> selectedChapters, String? error, bool selectionMode});
+abstract mixin class $DetailsLoadedCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
+  factory $DetailsLoadedCopyWith(DetailsLoaded value, $Res Function(DetailsLoaded) _then) = _$DetailsLoadedCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Chapter> selectedChapters, bool selectionMode
+});
+
+
+
+
+}
+/// @nodoc
+class _$DetailsLoadedCopyWithImpl<$Res>
+    implements $DetailsLoadedCopyWith<$Res> {
+  _$DetailsLoadedCopyWithImpl(this._self, this._then);
+
+  final DetailsLoaded _self;
+  final $Res Function(DetailsLoaded) _then;
+
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedChapters = null,Object? selectionMode = null,}) {
+  return _then(DetailsLoaded(
+selectedChapters: null == selectedChapters ? _self._selectedChapters : selectedChapters // ignore: cast_nullable_to_non_nullable
+as List<Chapter>,selectionMode: null == selectionMode ? _self.selectionMode : selectionMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$DetailsErrorImplCopyWithImpl<$Res>
-    extends _$DetailsStateCopyWithImpl<$Res, _$DetailsErrorImpl>
-    implements _$$DetailsErrorImplCopyWith<$Res> {
-  __$$DetailsErrorImplCopyWithImpl(
-      _$DetailsErrorImpl _value, $Res Function(_$DetailsErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedChapters = null,
-    Object? error = freezed,
-    Object? selectionMode = null,
-  }) {
-    return _then(_$DetailsErrorImpl(
-      selectedChapters: null == selectedChapters
-          ? _value._selectedChapters
-          : selectedChapters // ignore: cast_nullable_to_non_nullable
-              as List<Chapter>,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-      selectionMode: null == selectionMode
-          ? _value.selectionMode
-          : selectionMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$DetailsErrorImpl extends DetailsError {
-  const _$DetailsErrorImpl(
-      {final List<Chapter> selectedChapters = const <Chapter>[],
-      this.error,
-      this.selectionMode = false})
-      : _selectedChapters = selectedChapters,
-        super._();
 
-  final List<Chapter> _selectedChapters;
-  @override
-  @JsonKey()
-  List<Chapter> get selectedChapters {
-    if (_selectedChapters is EqualUnmodifiableListView)
-      return _selectedChapters;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedChapters);
-  }
+class DetailsError extends DetailsState {
+  const DetailsError({final  List<Chapter> selectedChapters = const <Chapter>[], this.error, this.selectionMode = false}): _selectedChapters = selectedChapters,super._();
+  
 
-  @override
-  final String? error;
-  @override
-  @JsonKey()
-  final bool selectionMode;
-
-  @override
-  String toString() {
-    return 'DetailsState.error(selectedChapters: $selectedChapters, error: $error, selectionMode: $selectionMode)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DetailsErrorImpl &&
-            const DeepCollectionEquality()
-                .equals(other._selectedChapters, _selectedChapters) &&
-            (identical(other.error, error) || other.error == error) &&
-            (identical(other.selectionMode, selectionMode) ||
-                other.selectionMode == selectionMode));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_selectedChapters),
-      error,
-      selectionMode);
-
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
-      __$$DetailsErrorImplCopyWithImpl<_$DetailsErrorImpl>(this, _$identity);
+ final  List<Chapter> _selectedChapters;
+@override@JsonKey() List<Chapter> get selectedChapters {
+  if (_selectedChapters is EqualUnmodifiableListView) return _selectedChapters;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_selectedChapters);
 }
 
-abstract class DetailsError extends DetailsState {
-  const factory DetailsError(
-      {final List<Chapter> selectedChapters,
-      final String? error,
-      final bool selectionMode}) = _$DetailsErrorImpl;
-  const DetailsError._() : super._();
+ final  String? error;
+@override@JsonKey() final  bool selectionMode;
 
-  @override
-  List<Chapter> get selectedChapters;
-  String? get error;
-  @override
-  bool get selectionMode;
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DetailsErrorCopyWith<DetailsError> get copyWith => _$DetailsErrorCopyWithImpl<DetailsError>(this, _$identity);
 
-  /// Create a copy of DetailsState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DetailsErrorImplCopyWith<_$DetailsErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailsError&&const DeepCollectionEquality().equals(other._selectedChapters, _selectedChapters)&&(identical(other.error, error) || other.error == error)&&(identical(other.selectionMode, selectionMode) || other.selectionMode == selectionMode));
 }
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedChapters),error,selectionMode);
+
+@override
+String toString() {
+  return 'DetailsState.error(selectedChapters: $selectedChapters, error: $error, selectionMode: $selectionMode)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DetailsErrorCopyWith<$Res> implements $DetailsStateCopyWith<$Res> {
+  factory $DetailsErrorCopyWith(DetailsError value, $Res Function(DetailsError) _then) = _$DetailsErrorCopyWithImpl;
+@override @useResult
+$Res call({
+ List<Chapter> selectedChapters, String? error, bool selectionMode
+});
+
+
+
+
+}
+/// @nodoc
+class _$DetailsErrorCopyWithImpl<$Res>
+    implements $DetailsErrorCopyWith<$Res> {
+  _$DetailsErrorCopyWithImpl(this._self, this._then);
+
+  final DetailsError _self;
+  final $Res Function(DetailsError) _then;
+
+/// Create a copy of DetailsState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedChapters = null,Object? error = freezed,Object? selectionMode = null,}) {
+  return _then(DetailsError(
+selectedChapters: null == selectedChapters ? _self._selectedChapters : selectedChapters // ignore: cast_nullable_to_non_nullable
+as List<Chapter>,error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,selectionMode: null == selectionMode ? _self.selectionMode : selectionMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

@@ -4,7 +4,7 @@ part 'at_home.freezed.dart';
 part 'at_home.g.dart';
 
 @freezed
-class AtHome with _$AtHome {
+abstract class AtHome with _$AtHome {
   const factory AtHome({
     required String baseUrl,
     required AtHomeChapter chapter,
@@ -14,7 +14,7 @@ class AtHome with _$AtHome {
 }
 
 @freezed
-class AtHomeChapter with _$AtHomeChapter {
+abstract class AtHomeChapter with _$AtHomeChapter {
   const factory AtHomeChapter({
     required String hash,
     required List<String> data,
@@ -26,7 +26,7 @@ class AtHomeChapter with _$AtHomeChapter {
 }
 
 @freezed
-class ImageReport with _$ImageReport {
+abstract class ImageReport with _$ImageReport {
   const factory ImageReport({
     required String url,
     required bool success,

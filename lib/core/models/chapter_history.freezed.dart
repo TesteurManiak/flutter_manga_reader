@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,200 +10,175 @@ part of 'chapter_history.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$ChapterHistory {
-  Manga get manga => throw _privateConstructorUsedError;
-  Chapter get chapter => throw _privateConstructorUsedError;
-  DateTime get readAt => throw _privateConstructorUsedError;
 
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChapterHistoryCopyWith<ChapterHistory> get copyWith =>
-      throw _privateConstructorUsedError;
+ Manga get manga; Chapter get chapter; DateTime get readAt;
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChapterHistoryCopyWith<ChapterHistory> get copyWith => _$ChapterHistoryCopyWithImpl<ChapterHistory>(this as ChapterHistory, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChapterHistory&&(identical(other.manga, manga) || other.manga == manga)&&(identical(other.chapter, chapter) || other.chapter == chapter)&&(identical(other.readAt, readAt) || other.readAt == readAt));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,manga,chapter,readAt);
+
+@override
+String toString() {
+  return 'ChapterHistory(manga: $manga, chapter: $chapter, readAt: $readAt)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ChapterHistoryCopyWith<$Res> {
-  factory $ChapterHistoryCopyWith(
-          ChapterHistory value, $Res Function(ChapterHistory) then) =
-      _$ChapterHistoryCopyWithImpl<$Res, ChapterHistory>;
-  @useResult
-  $Res call({Manga manga, Chapter chapter, DateTime readAt});
+abstract mixin class $ChapterHistoryCopyWith<$Res>  {
+  factory $ChapterHistoryCopyWith(ChapterHistory value, $Res Function(ChapterHistory) _then) = _$ChapterHistoryCopyWithImpl;
+@useResult
+$Res call({
+ Manga manga, Chapter chapter, DateTime readAt
+});
 
-  $MangaCopyWith<$Res> get manga;
-  $ChapterCopyWith<$Res> get chapter;
+
+$MangaCopyWith<$Res> get manga;$ChapterCopyWith<$Res> get chapter;
+
 }
-
 /// @nodoc
-class _$ChapterHistoryCopyWithImpl<$Res, $Val extends ChapterHistory>
+class _$ChapterHistoryCopyWithImpl<$Res>
     implements $ChapterHistoryCopyWith<$Res> {
-  _$ChapterHistoryCopyWithImpl(this._value, this._then);
+  _$ChapterHistoryCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChapterHistory _self;
+  final $Res Function(ChapterHistory) _then;
 
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? manga = null,
-    Object? chapter = null,
-    Object? readAt = null,
-  }) {
-    return _then(_value.copyWith(
-      manga: null == manga
-          ? _value.manga
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga,
-      chapter: null == chapter
-          ? _value.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
-              as Chapter,
-      readAt: null == readAt
-          ? _value.readAt
-          : readAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ) as $Val);
-  }
-
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $MangaCopyWith<$Res> get manga {
-    return $MangaCopyWith<$Res>(_value.manga, (value) {
-      return _then(_value.copyWith(manga: value) as $Val);
-    });
-  }
-
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChapterCopyWith<$Res> get chapter {
-    return $ChapterCopyWith<$Res>(_value.chapter, (value) {
-      return _then(_value.copyWith(chapter: value) as $Val);
-    });
-  }
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? manga = null,Object? chapter = null,Object? readAt = null,}) {
+  return _then(_self.copyWith(
+manga: null == manga ? _self.manga : manga // ignore: cast_nullable_to_non_nullable
+as Manga,chapter: null == chapter ? _self.chapter : chapter // ignore: cast_nullable_to_non_nullable
+as Chapter,readAt: null == readAt ? _self.readAt : readAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MangaCopyWith<$Res> get manga {
+  
+  return $MangaCopyWith<$Res>(_self.manga, (value) {
+    return _then(_self.copyWith(manga: value));
+  });
+}/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChapterCopyWith<$Res> get chapter {
+  
+  return $ChapterCopyWith<$Res>(_self.chapter, (value) {
+    return _then(_self.copyWith(chapter: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$ChapterHistoryImplCopyWith<$Res>
-    implements $ChapterHistoryCopyWith<$Res> {
-  factory _$$ChapterHistoryImplCopyWith(_$ChapterHistoryImpl value,
-          $Res Function(_$ChapterHistoryImpl) then) =
-      __$$ChapterHistoryImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({Manga manga, Chapter chapter, DateTime readAt});
-
-  @override
-  $MangaCopyWith<$Res> get manga;
-  @override
-  $ChapterCopyWith<$Res> get chapter;
-}
-
-/// @nodoc
-class __$$ChapterHistoryImplCopyWithImpl<$Res>
-    extends _$ChapterHistoryCopyWithImpl<$Res, _$ChapterHistoryImpl>
-    implements _$$ChapterHistoryImplCopyWith<$Res> {
-  __$$ChapterHistoryImplCopyWithImpl(
-      _$ChapterHistoryImpl _value, $Res Function(_$ChapterHistoryImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? manga = null,
-    Object? chapter = null,
-    Object? readAt = null,
-  }) {
-    return _then(_$ChapterHistoryImpl(
-      manga: null == manga
-          ? _value.manga
-          : manga // ignore: cast_nullable_to_non_nullable
-              as Manga,
-      chapter: null == chapter
-          ? _value.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
-              as Chapter,
-      readAt: null == readAt
-          ? _value.readAt
-          : readAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$ChapterHistoryImpl implements _ChapterHistory {
-  const _$ChapterHistoryImpl(
-      {required this.manga, required this.chapter, required this.readAt});
 
-  @override
-  final Manga manga;
-  @override
-  final Chapter chapter;
-  @override
-  final DateTime readAt;
+class _ChapterHistory implements ChapterHistory {
+  const _ChapterHistory({required this.manga, required this.chapter, required this.readAt});
+  
 
-  @override
-  String toString() {
-    return 'ChapterHistory(manga: $manga, chapter: $chapter, readAt: $readAt)';
-  }
+@override final  Manga manga;
+@override final  Chapter chapter;
+@override final  DateTime readAt;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChapterHistoryImpl &&
-            (identical(other.manga, manga) || other.manga == manga) &&
-            (identical(other.chapter, chapter) || other.chapter == chapter) &&
-            (identical(other.readAt, readAt) || other.readAt == readAt));
-  }
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChapterHistoryCopyWith<_ChapterHistory> get copyWith => __$ChapterHistoryCopyWithImpl<_ChapterHistory>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, manga, chapter, readAt);
 
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChapterHistoryImplCopyWith<_$ChapterHistoryImpl> get copyWith =>
-      __$$ChapterHistoryImplCopyWithImpl<_$ChapterHistoryImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChapterHistory&&(identical(other.manga, manga) || other.manga == manga)&&(identical(other.chapter, chapter) || other.chapter == chapter)&&(identical(other.readAt, readAt) || other.readAt == readAt));
 }
 
-abstract class _ChapterHistory implements ChapterHistory {
-  const factory _ChapterHistory(
-      {required final Manga manga,
-      required final Chapter chapter,
-      required final DateTime readAt}) = _$ChapterHistoryImpl;
 
-  @override
-  Manga get manga;
-  @override
-  Chapter get chapter;
-  @override
-  DateTime get readAt;
+@override
+int get hashCode => Object.hash(runtimeType,manga,chapter,readAt);
 
-  /// Create a copy of ChapterHistory
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChapterHistoryImplCopyWith<_$ChapterHistoryImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'ChapterHistory(manga: $manga, chapter: $chapter, readAt: $readAt)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChapterHistoryCopyWith<$Res> implements $ChapterHistoryCopyWith<$Res> {
+  factory _$ChapterHistoryCopyWith(_ChapterHistory value, $Res Function(_ChapterHistory) _then) = __$ChapterHistoryCopyWithImpl;
+@override @useResult
+$Res call({
+ Manga manga, Chapter chapter, DateTime readAt
+});
+
+
+@override $MangaCopyWith<$Res> get manga;@override $ChapterCopyWith<$Res> get chapter;
+
+}
+/// @nodoc
+class __$ChapterHistoryCopyWithImpl<$Res>
+    implements _$ChapterHistoryCopyWith<$Res> {
+  __$ChapterHistoryCopyWithImpl(this._self, this._then);
+
+  final _ChapterHistory _self;
+  final $Res Function(_ChapterHistory) _then;
+
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? manga = null,Object? chapter = null,Object? readAt = null,}) {
+  return _then(_ChapterHistory(
+manga: null == manga ? _self.manga : manga // ignore: cast_nullable_to_non_nullable
+as Manga,chapter: null == chapter ? _self.chapter : chapter // ignore: cast_nullable_to_non_nullable
+as Chapter,readAt: null == readAt ? _self.readAt : readAt // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+
+/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$MangaCopyWith<$Res> get manga {
+  
+  return $MangaCopyWith<$Res>(_self.manga, (value) {
+    return _then(_self.copyWith(manga: value));
+  });
+}/// Create a copy of ChapterHistory
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChapterCopyWith<$Res> get chapter {
+  
+  return $ChapterCopyWith<$Res>(_self.chapter, (value) {
+    return _then(_self.copyWith(chapter: value));
+  });
+}
+}
+
+// dart format on

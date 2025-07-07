@@ -34,9 +34,7 @@ abstract class _$ChapterViewerController
     extends BuildlessAutoDisposeNotifier<ChapterViewerState> {
   late final int chapterId;
 
-  ChapterViewerState build(
-    int chapterId,
-  );
+  ChapterViewerState build(int chapterId);
 }
 
 /// See also [ChapterViewerController].
@@ -49,26 +47,20 @@ class ChapterViewerControllerFamily extends Family<ChapterViewerState> {
   const ChapterViewerControllerFamily();
 
   /// See also [ChapterViewerController].
-  ChapterViewerControllerProvider call(
-    int chapterId,
-  ) {
-    return ChapterViewerControllerProvider(
-      chapterId,
-    );
+  ChapterViewerControllerProvider call(int chapterId) {
+    return ChapterViewerControllerProvider(chapterId);
   }
 
   @override
   ChapterViewerControllerProvider getProviderOverride(
     covariant ChapterViewerControllerProvider provider,
   ) {
-    return call(
-      provider.chapterId,
-    );
+    return call(provider.chapterId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
     localDatasourceProvider,
-    fetchChapterPagesProvider
+    fetchChapterPagesProvider,
   ];
 
   @override
@@ -76,11 +68,11 @@ class ChapterViewerControllerFamily extends Family<ChapterViewerState> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies,
-    fetchChapterPagesProvider,
-    ...?fetchChapterPagesProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+        fetchChapterPagesProvider,
+        ...?fetchChapterPagesProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -91,24 +83,27 @@ class ChapterViewerControllerFamily extends Family<ChapterViewerState> {
 }
 
 /// See also [ChapterViewerController].
-class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
-    ChapterViewerController, ChapterViewerState> {
+class ChapterViewerControllerProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          ChapterViewerController,
+          ChapterViewerState
+        > {
   /// See also [ChapterViewerController].
-  ChapterViewerControllerProvider(
-    int chapterId,
-  ) : this._internal(
-          () => ChapterViewerController()..chapterId = chapterId,
-          from: chapterViewerControllerProvider,
-          name: r'chapterViewerControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$chapterViewerControllerHash,
-          dependencies: ChapterViewerControllerFamily._dependencies,
-          allTransitiveDependencies:
-              ChapterViewerControllerFamily._allTransitiveDependencies,
-          chapterId: chapterId,
-        );
+  ChapterViewerControllerProvider(int chapterId)
+    : this._internal(
+        () => ChapterViewerController()..chapterId = chapterId,
+        from: chapterViewerControllerProvider,
+        name: r'chapterViewerControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$chapterViewerControllerHash,
+        dependencies: ChapterViewerControllerFamily._dependencies,
+        allTransitiveDependencies:
+            ChapterViewerControllerFamily._allTransitiveDependencies,
+        chapterId: chapterId,
+      );
 
   ChapterViewerControllerProvider._internal(
     super._createNotifier, {
@@ -126,9 +121,7 @@ class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
   ChapterViewerState runNotifierBuild(
     covariant ChapterViewerController notifier,
   ) {
-    return notifier.build(
-      chapterId,
-    );
+    return notifier.build(chapterId);
   }
 
   @override
@@ -148,8 +141,11 @@ class ChapterViewerControllerProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ChapterViewerController,
-      ChapterViewerState> createElement() {
+  AutoDisposeNotifierProviderElement<
+    ChapterViewerController,
+    ChapterViewerState
+  >
+  createElement() {
     return _ChapterViewerControllerProviderElement(this);
   }
 
@@ -177,12 +173,17 @@ mixin ChapterViewerControllerRef
 }
 
 class _ChapterViewerControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<ChapterViewerController,
-        ChapterViewerState> with ChapterViewerControllerRef {
+    extends
+        AutoDisposeNotifierProviderElement<
+          ChapterViewerController,
+          ChapterViewerState
+        >
+    with ChapterViewerControllerRef {
   _ChapterViewerControllerProviderElement(super.provider);
 
   @override
   int get chapterId => (origin as ChapterViewerControllerProvider).chapterId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

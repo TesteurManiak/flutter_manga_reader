@@ -34,9 +34,7 @@ abstract class _$PopularMangaController
     extends BuildlessAutoDisposeNotifier<PaginatedMangaState> {
   late final MangaDatasource datasource;
 
-  PaginatedMangaState build(
-    MangaDatasource datasource,
-  );
+  PaginatedMangaState build(MangaDatasource datasource);
 }
 
 /// See also [PopularMangaController].
@@ -49,21 +47,15 @@ class PopularMangaControllerFamily extends Family<PaginatedMangaState> {
   const PopularMangaControllerFamily();
 
   /// See also [PopularMangaController].
-  PopularMangaControllerProvider call(
-    MangaDatasource datasource,
-  ) {
-    return PopularMangaControllerProvider(
-      datasource,
-    );
+  PopularMangaControllerProvider call(MangaDatasource datasource) {
+    return PopularMangaControllerProvider(datasource);
   }
 
   @override
   PopularMangaControllerProvider getProviderOverride(
     covariant PopularMangaControllerProvider provider,
   ) {
-    return call(
-      provider.datasource,
-    );
+    return call(provider.datasource);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -82,24 +74,27 @@ class PopularMangaControllerFamily extends Family<PaginatedMangaState> {
 }
 
 /// See also [PopularMangaController].
-class PopularMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
-    PopularMangaController, PaginatedMangaState> {
+class PopularMangaControllerProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          PopularMangaController,
+          PaginatedMangaState
+        > {
   /// See also [PopularMangaController].
-  PopularMangaControllerProvider(
-    MangaDatasource datasource,
-  ) : this._internal(
-          () => PopularMangaController()..datasource = datasource,
-          from: popularMangaControllerProvider,
-          name: r'popularMangaControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$popularMangaControllerHash,
-          dependencies: PopularMangaControllerFamily._dependencies,
-          allTransitiveDependencies:
-              PopularMangaControllerFamily._allTransitiveDependencies,
-          datasource: datasource,
-        );
+  PopularMangaControllerProvider(MangaDatasource datasource)
+    : this._internal(
+        () => PopularMangaController()..datasource = datasource,
+        from: popularMangaControllerProvider,
+        name: r'popularMangaControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$popularMangaControllerHash,
+        dependencies: PopularMangaControllerFamily._dependencies,
+        allTransitiveDependencies:
+            PopularMangaControllerFamily._allTransitiveDependencies,
+        datasource: datasource,
+      );
 
   PopularMangaControllerProvider._internal(
     super._createNotifier, {
@@ -117,9 +112,7 @@ class PopularMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
   PaginatedMangaState runNotifierBuild(
     covariant PopularMangaController notifier,
   ) {
-    return notifier.build(
-      datasource,
-    );
+    return notifier.build(datasource);
   }
 
   @override
@@ -139,8 +132,11 @@ class PopularMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeNotifierProviderElement<PopularMangaController,
-      PaginatedMangaState> createElement() {
+  AutoDisposeNotifierProviderElement<
+    PopularMangaController,
+    PaginatedMangaState
+  >
+  createElement() {
     return _PopularMangaControllerProviderElement(this);
   }
 
@@ -168,13 +164,18 @@ mixin PopularMangaControllerRef
 }
 
 class _PopularMangaControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<PopularMangaController,
-        PaginatedMangaState> with PopularMangaControllerRef {
+    extends
+        AutoDisposeNotifierProviderElement<
+          PopularMangaController,
+          PaginatedMangaState
+        >
+    with PopularMangaControllerRef {
   _PopularMangaControllerProviderElement(super.provider);
 
   @override
   MangaDatasource get datasource =>
       (origin as PopularMangaControllerProvider).datasource;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

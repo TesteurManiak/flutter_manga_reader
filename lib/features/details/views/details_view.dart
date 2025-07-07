@@ -14,7 +14,6 @@ import 'package:flutter_manga_reader/core/widgets/loading_content.dart';
 import 'package:flutter_manga_reader/core/widgets/slidable.dart';
 import 'package:flutter_manga_reader/core/widgets/sliver_pull_to_refresh.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
-import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorite.dart';
 import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
 import 'package:flutter_manga_reader/features/details/widgets/chapter_tile.dart';
@@ -24,6 +23,7 @@ import 'package:flutter_manga_reader/features/details/widgets/genre_list.dart';
 import 'package:flutter_manga_reader/features/details/widgets/manga_description.dart';
 import 'package:flutter_manga_reader/features/details/widgets/sliver_details_app_bar.dart';
 import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 

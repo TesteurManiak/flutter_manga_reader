@@ -40,25 +40,19 @@ class ScopedSelectionModeFamily extends Family<bool> {
   const ScopedSelectionModeFamily();
 
   /// See also [scopedSelectionMode].
-  ScopedSelectionModeProvider call(
-    int mangaId,
-  ) {
-    return ScopedSelectionModeProvider(
-      mangaId,
-    );
+  ScopedSelectionModeProvider call(int mangaId) {
+    return ScopedSelectionModeProvider(mangaId);
   }
 
   @override
   ScopedSelectionModeProvider getProviderOverride(
     covariant ScopedSelectionModeProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    detailsControllerProvider
+    detailsControllerProvider,
   ];
 
   @override
@@ -66,9 +60,9 @@ class ScopedSelectionModeFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    detailsControllerProvider,
-    ...?detailsControllerProvider.allTransitiveDependencies
-  };
+        detailsControllerProvider,
+        ...?detailsControllerProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -81,24 +75,20 @@ class ScopedSelectionModeFamily extends Family<bool> {
 /// See also [scopedSelectionMode].
 class ScopedSelectionModeProvider extends AutoDisposeProvider<bool> {
   /// See also [scopedSelectionMode].
-  ScopedSelectionModeProvider(
-    int mangaId,
-  ) : this._internal(
-          (ref) => scopedSelectionMode(
-            ref as ScopedSelectionModeRef,
-            mangaId,
-          ),
-          from: scopedSelectionModeProvider,
-          name: r'scopedSelectionModeProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$scopedSelectionModeHash,
-          dependencies: ScopedSelectionModeFamily._dependencies,
-          allTransitiveDependencies:
-              ScopedSelectionModeFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  ScopedSelectionModeProvider(int mangaId)
+    : this._internal(
+        (ref) => scopedSelectionMode(ref as ScopedSelectionModeRef, mangaId),
+        from: scopedSelectionModeProvider,
+        name: r'scopedSelectionModeProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$scopedSelectionModeHash,
+        dependencies: ScopedSelectionModeFamily._dependencies,
+        allTransitiveDependencies:
+            ScopedSelectionModeFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   ScopedSelectionModeProvider._internal(
     super._createNotifier, {
@@ -113,9 +103,7 @@ class ScopedSelectionModeProvider extends AutoDisposeProvider<bool> {
   final int mangaId;
 
   @override
-  Override overrideWith(
-    bool Function(ScopedSelectionModeRef provider) create,
-  ) {
+  Override overrideWith(bool Function(ScopedSelectionModeRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: ScopedSelectionModeProvider._internal(
@@ -157,7 +145,8 @@ mixin ScopedSelectionModeRef on AutoDisposeProviderRef<bool> {
 }
 
 class _ScopedSelectionModeProviderElement
-    extends AutoDisposeProviderElement<bool> with ScopedSelectionModeRef {
+    extends AutoDisposeProviderElement<bool>
+    with ScopedSelectionModeRef {
   _ScopedSelectionModeProviderElement(super.provider);
 
   @override
@@ -170,9 +159,7 @@ abstract class _$DetailsController
     extends BuildlessAutoDisposeNotifier<DetailsState> {
   late final int mangaId;
 
-  DetailsState build(
-    int mangaId,
-  );
+  DetailsState build(int mangaId);
 }
 
 /// See also [DetailsController].
@@ -185,21 +172,15 @@ class DetailsControllerFamily extends Family<DetailsState> {
   const DetailsControllerFamily();
 
   /// See also [DetailsController].
-  DetailsControllerProvider call(
-    int mangaId,
-  ) {
-    return DetailsControllerProvider(
-      mangaId,
-    );
+  DetailsControllerProvider call(int mangaId) {
+    return DetailsControllerProvider(mangaId);
   }
 
   @override
   DetailsControllerProvider getProviderOverride(
     covariant DetailsControllerProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>{
@@ -208,7 +189,7 @@ class DetailsControllerFamily extends Family<DetailsState> {
     localDatasourceProvider,
     isMangaFavoriteProvider,
     downloadQueueControllerProvider,
-    watchChaptersForMangaProvider
+    watchChaptersForMangaProvider,
   };
 
   @override
@@ -216,19 +197,19 @@ class DetailsControllerFamily extends Family<DetailsState> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    watchMangaByIdProvider,
-    ...?watchMangaByIdProvider.allTransitiveDependencies,
-    scopedMangaDatasourceProvider,
-    ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies,
-    isMangaFavoriteProvider,
-    ...?isMangaFavoriteProvider.allTransitiveDependencies,
-    downloadQueueControllerProvider,
-    ...?downloadQueueControllerProvider.allTransitiveDependencies,
-    watchChaptersForMangaProvider,
-    ...?watchChaptersForMangaProvider.allTransitiveDependencies
-  };
+        watchMangaByIdProvider,
+        ...?watchMangaByIdProvider.allTransitiveDependencies,
+        scopedMangaDatasourceProvider,
+        ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+        isMangaFavoriteProvider,
+        ...?isMangaFavoriteProvider.allTransitiveDependencies,
+        downloadQueueControllerProvider,
+        ...?downloadQueueControllerProvider.allTransitiveDependencies,
+        watchChaptersForMangaProvider,
+        ...?watchChaptersForMangaProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -242,21 +223,20 @@ class DetailsControllerFamily extends Family<DetailsState> {
 class DetailsControllerProvider
     extends AutoDisposeNotifierProviderImpl<DetailsController, DetailsState> {
   /// See also [DetailsController].
-  DetailsControllerProvider(
-    int mangaId,
-  ) : this._internal(
-          () => DetailsController()..mangaId = mangaId,
-          from: detailsControllerProvider,
-          name: r'detailsControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$detailsControllerHash,
-          dependencies: DetailsControllerFamily._dependencies,
-          allTransitiveDependencies:
-              DetailsControllerFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  DetailsControllerProvider(int mangaId)
+    : this._internal(
+        () => DetailsController()..mangaId = mangaId,
+        from: detailsControllerProvider,
+        name: r'detailsControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$detailsControllerHash,
+        dependencies: DetailsControllerFamily._dependencies,
+        allTransitiveDependencies:
+            DetailsControllerFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   DetailsControllerProvider._internal(
     super._createNotifier, {
@@ -271,12 +251,8 @@ class DetailsControllerProvider
   final int mangaId;
 
   @override
-  DetailsState runNotifierBuild(
-    covariant DetailsController notifier,
-  ) {
-    return notifier.build(
-      mangaId,
-    );
+  DetailsState runNotifierBuild(covariant DetailsController notifier) {
+    return notifier.build(mangaId);
   }
 
   @override
@@ -297,7 +273,7 @@ class DetailsControllerProvider
 
   @override
   AutoDisposeNotifierProviderElement<DetailsController, DetailsState>
-      createElement() {
+  createElement() {
     return _DetailsControllerProviderElement(this);
   }
 
@@ -330,5 +306,6 @@ class _DetailsControllerProviderElement
   @override
   int get mangaId => (origin as DetailsControllerProvider).mangaId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

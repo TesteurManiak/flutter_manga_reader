@@ -8,7 +8,7 @@ part 'source_chapter.g.dart';
 ///
 /// It doesn't have an id because it's not stored in the database.
 @Freezed(toJson: false)
-class SourceChapter with _$SourceChapter {
+abstract class SourceChapter with _$SourceChapter {
   const factory SourceChapter({
     required String url,
     required String name,

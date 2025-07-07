@@ -6,12 +6,12 @@ import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/download_icon.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/details/controllers/download_queue_controller.dart';
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
 import 'package:flutter_manga_reader/features/details/use_cases/is_chapter_selected.dart';
 import 'package:flutter_manga_reader/features/history/providers/incognito_mode_controller.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
@@ -79,7 +79,9 @@ class ChapterTile extends ConsumerWidget {
         final incognitoModeEnabled = ref.read(incognitoModeControllerProvider);
         if (!incognitoModeEnabled) {
           final clock = ref.read(appClockProvider);
-          ref.read(localDatasourceProvider).saveChapterHistory(
+          ref
+              .read(localDatasourceProvider)
+              .saveChapterHistory(
                 ChapterHistory(
                   manga: manga,
                   chapter: chapter,
@@ -88,7 +90,7 @@ class ChapterTile extends ConsumerWidget {
               );
         }
 
-        ChapterViewerRoute.go(
+        ChapterViewerRoute.goTo(
           context,
           mangaId: manga.id,
           chapterId: chapter.id,
@@ -121,7 +123,8 @@ class _DownloadButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final task = ref.watch(chapterDownloadTaskProvider(chapterId));
     final status = task?.status;
-    final canDownload = !initiallyDownloaded &&
+    final canDownload =
+        !initiallyDownloaded &&
         (status == null || status == DownloadTaskStatus.failed);
 
     return IconButton(

@@ -4,7 +4,7 @@ import 'package:manga_reader_core/src/models/image_extensions.dart';
 part 'chapter_page.freezed.dart';
 
 @freezed
-class ChapterPage with _$ChapterPage {
+abstract class ChapterPage with _$ChapterPage {
   const factory ChapterPage({
     required int index,
     @Default('') String url,

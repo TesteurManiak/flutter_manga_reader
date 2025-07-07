@@ -13,9 +13,10 @@ String _$filePickerServiceHash() => r'661dcef0dfe988f58af906c0a8c49ce8ce061d98';
 final filePickerServiceProvider = Provider<FilePickerService>.internal(
   filePickerService,
   name: r'filePickerServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$filePickerServiceHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$filePickerServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

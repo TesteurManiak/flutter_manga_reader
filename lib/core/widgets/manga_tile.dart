@@ -4,7 +4,7 @@ import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasou
 import 'package:flutter_manga_reader/core/use_cases/get_unread_chapters.dart';
 import 'package:flutter_manga_reader/core/use_cases/is_manga_in_library.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
-import 'package:flutter_manga_reader/features/details/navigation/route.dart';
+import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -35,39 +35,39 @@ class MangaTile extends ConsumerWidget {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         child: GridTile(
-          header: alreadyInLibrary || showRemainingChapters
-              ? _Header(alreadyInLibrary: alreadyInLibrary, sourceManga: manga)
-              : null,
+          header:
+              alreadyInLibrary || showRemainingChapters
+                  ? _Header(
+                    alreadyInLibrary: alreadyInLibrary,
+                    sourceManga: manga,
+                  )
+                  : null,
           footer: _Footer(manga.title),
           child: switch (manga.thumbnailUrl) {
             final url? => Container(
-                foregroundDecoration: BoxDecoration(
-                  boxShadow: switch (alreadyInLibrary) {
-                    true => [
-                        BoxShadow(
-                          color: canvasColor.withValues(alpha: .2),
-                        ),
-                      ],
-                    false => null,
-                  },
-                  gradient: LinearGradient(
-                    begin: Alignment.center,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      canvasColor.withValues(alpha: 0),
-                      canvasColor.withValues(alpha: .4),
-                      canvasColor.withValues(alpha: .9),
-                    ],
-                  ),
-                ),
-                child: AppNetworkImage(
-                  url: url,
-                  fit: BoxFit.cover,
-                  height: double.infinity,
-                  width: double.infinity,
-                  decodeWidth: decodeWidth,
+              foregroundDecoration: BoxDecoration(
+                boxShadow: switch (alreadyInLibrary) {
+                  true => [BoxShadow(color: canvasColor.withValues(alpha: .2))],
+                  false => null,
+                },
+                gradient: LinearGradient(
+                  begin: Alignment.center,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    canvasColor.withValues(alpha: 0),
+                    canvasColor.withValues(alpha: .4),
+                    canvasColor.withValues(alpha: .9),
+                  ],
                 ),
               ),
+              child: AppNetworkImage(
+                url: url,
+                fit: BoxFit.cover,
+                height: double.infinity,
+                width: double.infinity,
+                decodeWidth: decodeWidth,
+              ),
+            ),
             null => const SizedBox.shrink(),
           },
         ),
@@ -88,20 +88,13 @@ class MangaTile extends ConsumerWidget {
     };
 
     if (context.mounted) {
-      DetailsRoute.go(
-        context,
-        sourceId: manga.sourceId,
-        mangaId: mangaId,
-      );
+      DetailsRoute.goTo(context, sourceId: manga.sourceId, mangaId: mangaId);
     }
   }
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    required this.alreadyInLibrary,
-    required this.sourceManga,
-  });
+  const _Header({required this.alreadyInLibrary, required this.sourceManga});
 
   final bool alreadyInLibrary;
   final SourceManga sourceManga;
@@ -130,8 +123,9 @@ class _ChaptersLeftToRead extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final unreadChaptersCount =
-        ref.watch(getUnreadChaptersProvider(sourceManga));
+    final unreadChaptersCount = ref.watch(
+      getUnreadChaptersProvider(sourceManga),
+    );
 
     if (unreadChaptersCount == null) return const SizedBox.shrink();
 
@@ -157,10 +151,7 @@ class _MangaBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          fontSize: 12,
-          color: colorScheme.onPrimary,
-        ),
+        style: TextStyle(fontSize: 12, color: colorScheme.onPrimary),
       ),
     );
   }

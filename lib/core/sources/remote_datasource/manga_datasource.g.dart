@@ -13,14 +13,15 @@ String _$scopedMangaDatasourceHash() =>
 @ProviderFor(scopedMangaDatasource)
 final scopedMangaDatasourceProvider =
     AutoDisposeProvider<MangaDatasource>.internal(
-  scopedMangaDatasource,
-  name: r'scopedMangaDatasourceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$scopedMangaDatasourceHash,
-  dependencies: const <ProviderOrFamily>[],
-  allTransitiveDependencies: const <ProviderOrFamily>{},
-);
+      scopedMangaDatasource,
+      name: r'scopedMangaDatasourceProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$scopedMangaDatasourceHash,
+      dependencies: const <ProviderOrFamily>[],
+      allTransitiveDependencies: const <ProviderOrFamily>{},
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -59,25 +60,19 @@ class FetchChapterPagesFamily
   const FetchChapterPagesFamily();
 
   /// See also [fetchChapterPages].
-  FetchChapterPagesProvider call(
-    SourceChapter sourceChapter,
-  ) {
-    return FetchChapterPagesProvider(
-      sourceChapter,
-    );
+  FetchChapterPagesProvider call(SourceChapter sourceChapter) {
+    return FetchChapterPagesProvider(sourceChapter);
   }
 
   @override
   FetchChapterPagesProvider getProviderOverride(
     covariant FetchChapterPagesProvider provider,
   ) {
-    return call(
-      provider.sourceChapter,
-    );
+    return call(provider.sourceChapter);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    scopedMangaDatasourceProvider
+    scopedMangaDatasourceProvider,
   ];
 
   @override
@@ -85,9 +80,9 @@ class FetchChapterPagesFamily
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    scopedMangaDatasourceProvider,
-    ...?scopedMangaDatasourceProvider.allTransitiveDependencies
-  };
+        scopedMangaDatasourceProvider,
+        ...?scopedMangaDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -101,24 +96,20 @@ class FetchChapterPagesFamily
 class FetchChapterPagesProvider
     extends AutoDisposeFutureProvider<Result<List<ChapterPage>, HttpError>> {
   /// See also [fetchChapterPages].
-  FetchChapterPagesProvider(
-    SourceChapter sourceChapter,
-  ) : this._internal(
-          (ref) => fetchChapterPages(
-            ref as FetchChapterPagesRef,
-            sourceChapter,
-          ),
-          from: fetchChapterPagesProvider,
-          name: r'fetchChapterPagesProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$fetchChapterPagesHash,
-          dependencies: FetchChapterPagesFamily._dependencies,
-          allTransitiveDependencies:
-              FetchChapterPagesFamily._allTransitiveDependencies,
-          sourceChapter: sourceChapter,
-        );
+  FetchChapterPagesProvider(SourceChapter sourceChapter)
+    : this._internal(
+        (ref) => fetchChapterPages(ref as FetchChapterPagesRef, sourceChapter),
+        from: fetchChapterPagesProvider,
+        name: r'fetchChapterPagesProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$fetchChapterPagesHash,
+        dependencies: FetchChapterPagesFamily._dependencies,
+        allTransitiveDependencies:
+            FetchChapterPagesFamily._allTransitiveDependencies,
+        sourceChapter: sourceChapter,
+      );
 
   FetchChapterPagesProvider._internal(
     super._createNotifier, {
@@ -135,8 +126,9 @@ class FetchChapterPagesProvider
   @override
   Override overrideWith(
     FutureOr<Result<List<ChapterPage>, HttpError>> Function(
-            FetchChapterPagesRef provider)
-        create,
+      FetchChapterPagesRef provider,
+    )
+    create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -154,7 +146,7 @@ class FetchChapterPagesProvider
 
   @override
   AutoDisposeFutureProviderElement<Result<List<ChapterPage>, HttpError>>
-      createElement() {
+  createElement() {
     return _FetchChapterPagesProviderElement(this);
   }
 
@@ -182,8 +174,9 @@ mixin FetchChapterPagesRef
 }
 
 class _FetchChapterPagesProviderElement
-    extends AutoDisposeFutureProviderElement<
-        Result<List<ChapterPage>, HttpError>> with FetchChapterPagesRef {
+    extends
+        AutoDisposeFutureProviderElement<Result<List<ChapterPage>, HttpError>>
+    with FetchChapterPagesRef {
   _FetchChapterPagesProviderElement(super.provider);
 
   @override
@@ -197,19 +190,20 @@ String _$mangaDatasourcesHash() => r'1d91e24d4ecaa88ec3542d512033cb4d8ae3259b';
 @ProviderFor(mangaDatasources)
 final mangaDatasourcesProvider =
     AutoDisposeProvider<Map<String, MangaDatasource>>.internal(
-  mangaDatasources,
-  name: r'mangaDatasourcesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$mangaDatasourcesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      mangaDatasources,
+      name: r'mangaDatasourcesProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$mangaDatasourcesHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef MangaDatasourcesRef
-    = AutoDisposeProviderRef<Map<String, MangaDatasource>>;
+typedef MangaDatasourcesRef =
+    AutoDisposeProviderRef<Map<String, MangaDatasource>>;
 String _$findSourceFromIdHash() => r'b28730c5f5798059ae284a3bab819d202b96316e';
 
 /// See also [findSourceFromId].
@@ -222,21 +216,15 @@ class FindSourceFromIdFamily extends Family<MangaDatasource?> {
   const FindSourceFromIdFamily();
 
   /// See also [findSourceFromId].
-  FindSourceFromIdProvider call(
-    String sourceId,
-  ) {
-    return FindSourceFromIdProvider(
-      sourceId,
-    );
+  FindSourceFromIdProvider call(String sourceId) {
+    return FindSourceFromIdProvider(sourceId);
   }
 
   @override
   FindSourceFromIdProvider getProviderOverride(
     covariant FindSourceFromIdProvider provider,
   ) {
-    return call(
-      provider.sourceId,
-    );
+    return call(provider.sourceId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -257,24 +245,20 @@ class FindSourceFromIdFamily extends Family<MangaDatasource?> {
 /// See also [findSourceFromId].
 class FindSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource?> {
   /// See also [findSourceFromId].
-  FindSourceFromIdProvider(
-    String sourceId,
-  ) : this._internal(
-          (ref) => findSourceFromId(
-            ref as FindSourceFromIdRef,
-            sourceId,
-          ),
-          from: findSourceFromIdProvider,
-          name: r'findSourceFromIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$findSourceFromIdHash,
-          dependencies: FindSourceFromIdFamily._dependencies,
-          allTransitiveDependencies:
-              FindSourceFromIdFamily._allTransitiveDependencies,
-          sourceId: sourceId,
-        );
+  FindSourceFromIdProvider(String sourceId)
+    : this._internal(
+        (ref) => findSourceFromId(ref as FindSourceFromIdRef, sourceId),
+        from: findSourceFromIdProvider,
+        name: r'findSourceFromIdProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$findSourceFromIdHash,
+        dependencies: FindSourceFromIdFamily._dependencies,
+        allTransitiveDependencies:
+            FindSourceFromIdFamily._allTransitiveDependencies,
+        sourceId: sourceId,
+      );
 
   FindSourceFromIdProvider._internal(
     super._createNotifier, {
@@ -353,21 +337,15 @@ class GetSourceFromIdFamily extends Family<MangaDatasource> {
   const GetSourceFromIdFamily();
 
   /// See also [getSourceFromId].
-  GetSourceFromIdProvider call(
-    String sourceId,
-  ) {
-    return GetSourceFromIdProvider(
-      sourceId,
-    );
+  GetSourceFromIdProvider call(String sourceId) {
+    return GetSourceFromIdProvider(sourceId);
   }
 
   @override
   GetSourceFromIdProvider getProviderOverride(
     covariant GetSourceFromIdProvider provider,
   ) {
-    return call(
-      provider.sourceId,
-    );
+    return call(provider.sourceId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -388,24 +366,20 @@ class GetSourceFromIdFamily extends Family<MangaDatasource> {
 /// See also [getSourceFromId].
 class GetSourceFromIdProvider extends AutoDisposeProvider<MangaDatasource> {
   /// See also [getSourceFromId].
-  GetSourceFromIdProvider(
-    String sourceId,
-  ) : this._internal(
-          (ref) => getSourceFromId(
-            ref as GetSourceFromIdRef,
-            sourceId,
-          ),
-          from: getSourceFromIdProvider,
-          name: r'getSourceFromIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getSourceFromIdHash,
-          dependencies: GetSourceFromIdFamily._dependencies,
-          allTransitiveDependencies:
-              GetSourceFromIdFamily._allTransitiveDependencies,
-          sourceId: sourceId,
-        );
+  GetSourceFromIdProvider(String sourceId)
+    : this._internal(
+        (ref) => getSourceFromId(ref as GetSourceFromIdRef, sourceId),
+        from: getSourceFromIdProvider,
+        name: r'getSourceFromIdProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$getSourceFromIdHash,
+        dependencies: GetSourceFromIdFamily._dependencies,
+        allTransitiveDependencies:
+            GetSourceFromIdFamily._allTransitiveDependencies,
+        sourceId: sourceId,
+      );
 
   GetSourceFromIdProvider._internal(
     super._createNotifier, {
@@ -471,5 +445,6 @@ class _GetSourceFromIdProviderElement
   @override
   String get sourceId => (origin as GetSourceFromIdProvider).sourceId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

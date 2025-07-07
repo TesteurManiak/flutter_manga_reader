@@ -28,12 +28,15 @@ String _$updateProgressControllerHash() =>
 /// See also [UpdateProgressController].
 @ProviderFor(UpdateProgressController)
 final updateProgressControllerProvider = AutoDisposeNotifierProvider<
-    UpdateProgressController, UpdateProgressState>.internal(
+  UpdateProgressController,
+  UpdateProgressState
+>.internal(
   UpdateProgressController.new,
   name: r'updateProgressControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$updateProgressControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$updateProgressControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

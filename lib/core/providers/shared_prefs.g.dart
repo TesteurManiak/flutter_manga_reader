@@ -13,9 +13,10 @@ String _$sharedPreferencesHash() => r'ad13470fe866595ad0f58a3e26f11048d94ef22e';
 final sharedPreferencesProvider = FutureProvider<SharedPreferences>.internal(
   sharedPreferences,
   name: r'sharedPreferencesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$sharedPreferencesHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sharedPreferencesHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

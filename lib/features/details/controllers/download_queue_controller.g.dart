@@ -40,25 +40,19 @@ class ChapterDownloadTaskFamily extends Family<ChapterDownloadTask?> {
   const ChapterDownloadTaskFamily();
 
   /// See also [chapterDownloadTask].
-  ChapterDownloadTaskProvider call(
-    int chapterId,
-  ) {
-    return ChapterDownloadTaskProvider(
-      chapterId,
-    );
+  ChapterDownloadTaskProvider call(int chapterId) {
+    return ChapterDownloadTaskProvider(chapterId);
   }
 
   @override
   ChapterDownloadTaskProvider getProviderOverride(
     covariant ChapterDownloadTaskProvider provider,
   ) {
-    return call(
-      provider.chapterId,
-    );
+    return call(provider.chapterId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    downloadQueueControllerProvider
+    downloadQueueControllerProvider,
   ];
 
   @override
@@ -66,9 +60,9 @@ class ChapterDownloadTaskFamily extends Family<ChapterDownloadTask?> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    downloadQueueControllerProvider,
-    ...?downloadQueueControllerProvider.allTransitiveDependencies
-  };
+        downloadQueueControllerProvider,
+        ...?downloadQueueControllerProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -82,24 +76,20 @@ class ChapterDownloadTaskFamily extends Family<ChapterDownloadTask?> {
 class ChapterDownloadTaskProvider
     extends AutoDisposeProvider<ChapterDownloadTask?> {
   /// See also [chapterDownloadTask].
-  ChapterDownloadTaskProvider(
-    int chapterId,
-  ) : this._internal(
-          (ref) => chapterDownloadTask(
-            ref as ChapterDownloadTaskRef,
-            chapterId,
-          ),
-          from: chapterDownloadTaskProvider,
-          name: r'chapterDownloadTaskProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$chapterDownloadTaskHash,
-          dependencies: ChapterDownloadTaskFamily._dependencies,
-          allTransitiveDependencies:
-              ChapterDownloadTaskFamily._allTransitiveDependencies,
-          chapterId: chapterId,
-        );
+  ChapterDownloadTaskProvider(int chapterId)
+    : this._internal(
+        (ref) => chapterDownloadTask(ref as ChapterDownloadTaskRef, chapterId),
+        from: chapterDownloadTaskProvider,
+        name: r'chapterDownloadTaskProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$chapterDownloadTaskHash,
+        dependencies: ChapterDownloadTaskFamily._dependencies,
+        allTransitiveDependencies:
+            ChapterDownloadTaskFamily._allTransitiveDependencies,
+        chapterId: chapterId,
+      );
 
   ChapterDownloadTaskProvider._internal(
     super._createNotifier, {
@@ -172,21 +162,24 @@ String _$downloadQueueControllerHash() =>
 /// See also [DownloadQueueController].
 @ProviderFor(DownloadQueueController)
 final downloadQueueControllerProvider = NotifierProvider<
-    DownloadQueueController, Map<int, ChapterDownloadTask>>.internal(
+  DownloadQueueController,
+  Map<int, ChapterDownloadTask>
+>.internal(
   DownloadQueueController.new,
   name: r'downloadQueueControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$downloadQueueControllerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$downloadQueueControllerHash,
   dependencies: <ProviderOrFamily>[
     localDatasourceProvider,
-    fetchChapterPagesProvider
+    fetchChapterPagesProvider,
   ],
   allTransitiveDependencies: <ProviderOrFamily>{
     localDatasourceProvider,
     ...?localDatasourceProvider.allTransitiveDependencies,
     fetchChapterPagesProvider,
-    ...?fetchChapterPagesProvider.allTransitiveDependencies
+    ...?fetchChapterPagesProvider.allTransitiveDependencies,
   },
 );
 

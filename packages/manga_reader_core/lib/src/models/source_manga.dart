@@ -10,7 +10,7 @@ part 'source_manga.g.dart';
 ///
 /// It doesn't have an id because it's not stored in the database.
 @Freezed(toJson: false)
-class SourceManga with _$SourceManga {
+abstract class SourceManga with _$SourceManga {
   const factory SourceManga({
     required String url,
     required String title,

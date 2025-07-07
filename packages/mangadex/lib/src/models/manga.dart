@@ -5,7 +5,7 @@ part 'manga.freezed.dart';
 part 'manga.g.dart';
 
 @freezed
-class MangaListResponse with _$MangaListResponse {
+abstract class MangaListResponse with _$MangaListResponse {
   const factory MangaListResponse({
     @Default(<MangaData>[]) List<MangaData> data,
     @Default(0) int limit,
@@ -22,7 +22,7 @@ class MangaListResponse with _$MangaListResponse {
 }
 
 @freezed
-class MangaResponse with _$MangaResponse {
+abstract class MangaResponse with _$MangaResponse {
   const factory MangaResponse({
     required MangaData data,
   }) = _MangaResponse;
@@ -32,7 +32,7 @@ class MangaResponse with _$MangaResponse {
 }
 
 @freezed
-class MangaData with _$MangaData {
+abstract class MangaData with _$MangaData {
   const factory MangaData({
     required String id,
     required MangaAttributes attributes,
@@ -44,7 +44,7 @@ class MangaData with _$MangaData {
 }
 
 @freezed
-class MangaAttributes with _$MangaAttributes {
+abstract class MangaAttributes with _$MangaAttributes {
   const factory MangaAttributes({
     required LocalizedString title,
     required List<LocalizedString> altTitles,
@@ -100,7 +100,7 @@ enum Status {
 }
 
 @freezed
-class Tag with _$Tag {
+abstract class Tag with _$Tag {
   const factory Tag({
     @Default('') String id,
     required TagAttributes attributes,
@@ -110,7 +110,7 @@ class Tag with _$Tag {
 }
 
 @freezed
-class TagAttributes with _$TagAttributes {
+abstract class TagAttributes with _$TagAttributes {
   const factory TagAttributes({
     required LocalizedString name,
     required String group,

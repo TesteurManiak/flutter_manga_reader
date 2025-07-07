@@ -34,9 +34,7 @@ abstract class _$FilteredMangaController
     extends BuildlessAutoDisposeNotifier<PaginatedMangaState> {
   late final MangaDatasource datasource;
 
-  PaginatedMangaState build(
-    MangaDatasource datasource,
-  );
+  PaginatedMangaState build(MangaDatasource datasource);
 }
 
 /// See also [FilteredMangaController].
@@ -49,21 +47,15 @@ class FilteredMangaControllerFamily extends Family<PaginatedMangaState> {
   const FilteredMangaControllerFamily();
 
   /// See also [FilteredMangaController].
-  FilteredMangaControllerProvider call(
-    MangaDatasource datasource,
-  ) {
-    return FilteredMangaControllerProvider(
-      datasource,
-    );
+  FilteredMangaControllerProvider call(MangaDatasource datasource) {
+    return FilteredMangaControllerProvider(datasource);
   }
 
   @override
   FilteredMangaControllerProvider getProviderOverride(
     covariant FilteredMangaControllerProvider provider,
   ) {
-    return call(
-      provider.datasource,
-    );
+    return call(provider.datasource);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -82,24 +74,27 @@ class FilteredMangaControllerFamily extends Family<PaginatedMangaState> {
 }
 
 /// See also [FilteredMangaController].
-class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
-    FilteredMangaController, PaginatedMangaState> {
+class FilteredMangaControllerProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          FilteredMangaController,
+          PaginatedMangaState
+        > {
   /// See also [FilteredMangaController].
-  FilteredMangaControllerProvider(
-    MangaDatasource datasource,
-  ) : this._internal(
-          () => FilteredMangaController()..datasource = datasource,
-          from: filteredMangaControllerProvider,
-          name: r'filteredMangaControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$filteredMangaControllerHash,
-          dependencies: FilteredMangaControllerFamily._dependencies,
-          allTransitiveDependencies:
-              FilteredMangaControllerFamily._allTransitiveDependencies,
-          datasource: datasource,
-        );
+  FilteredMangaControllerProvider(MangaDatasource datasource)
+    : this._internal(
+        () => FilteredMangaController()..datasource = datasource,
+        from: filteredMangaControllerProvider,
+        name: r'filteredMangaControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$filteredMangaControllerHash,
+        dependencies: FilteredMangaControllerFamily._dependencies,
+        allTransitiveDependencies:
+            FilteredMangaControllerFamily._allTransitiveDependencies,
+        datasource: datasource,
+      );
 
   FilteredMangaControllerProvider._internal(
     super._createNotifier, {
@@ -117,9 +112,7 @@ class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
   PaginatedMangaState runNotifierBuild(
     covariant FilteredMangaController notifier,
   ) {
-    return notifier.build(
-      datasource,
-    );
+    return notifier.build(datasource);
   }
 
   @override
@@ -139,8 +132,11 @@ class FilteredMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeNotifierProviderElement<FilteredMangaController,
-      PaginatedMangaState> createElement() {
+  AutoDisposeNotifierProviderElement<
+    FilteredMangaController,
+    PaginatedMangaState
+  >
+  createElement() {
     return _FilteredMangaControllerProviderElement(this);
   }
 
@@ -168,13 +164,18 @@ mixin FilteredMangaControllerRef
 }
 
 class _FilteredMangaControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<FilteredMangaController,
-        PaginatedMangaState> with FilteredMangaControllerRef {
+    extends
+        AutoDisposeNotifierProviderElement<
+          FilteredMangaController,
+          PaginatedMangaState
+        >
+    with FilteredMangaControllerRef {
   _FilteredMangaControllerProviderElement(super.provider);
 
   @override
   MangaDatasource get datasource =>
       (origin as FilteredMangaControllerProvider).datasource;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

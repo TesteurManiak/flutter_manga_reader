@@ -56,7 +56,7 @@
         "prefix": "goRouteData",
         "description": "Create a GoRouteData",
         "body": [
-            "class $1Route extends GoRouteData {",
+            "class $1Route extends GoRouteData with _$$1Route {",
             "\tconst $1Route();",
             "",
             "\tstatic const path = '/$1';\n",

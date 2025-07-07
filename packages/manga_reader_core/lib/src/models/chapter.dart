@@ -5,7 +5,7 @@ part 'chapter.freezed.dart';
 part 'chapter.g.dart';
 
 @freezed
-class Chapter with _$Chapter {
+abstract class Chapter with _$Chapter {
   const factory Chapter({
     required int id,
     required int mangaId,

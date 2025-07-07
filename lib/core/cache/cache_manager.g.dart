@@ -14,9 +14,10 @@ String _$networkCacheServiceHash() =>
 final networkCacheServiceProvider = Provider<NetworkQueryCacheService>.internal(
   networkCacheService,
   name: r'networkCacheServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$networkCacheServiceHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$networkCacheServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -47,9 +48,10 @@ String _$appCacheManagerHash() => r'c451126f7f6ddc8636654dd2c4fe35596717afd0';
 final appCacheManagerProvider = Provider<AppCacheManager>.internal(
   appCacheManager,
   name: r'appCacheManagerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$appCacheManagerHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$appCacheManagerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

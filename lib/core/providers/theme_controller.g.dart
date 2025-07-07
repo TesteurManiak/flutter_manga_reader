@@ -13,9 +13,10 @@ String _$defaultThemeModeHash() => r'1daddb75d74d61c6b93940947b810ecd285357c9';
 final defaultThemeModeProvider = AutoDisposeProvider<ThemeMode>.internal(
   defaultThemeMode,
   name: r'defaultThemeModeProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$defaultThemeModeHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$defaultThemeModeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -63,9 +64,10 @@ String _$platformBrightnessHash() =>
 final platformBrightnessProvider = AutoDisposeProvider<Brightness>.internal(
   platformBrightness,
   name: r'platformBrightnessProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$platformBrightnessHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$platformBrightnessHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -96,9 +98,10 @@ String _$pureDarkModeStateHash() => r'9d4dbeb45d9a29e30f68ec5b6339a769bf65047a';
 final pureDarkModeStateProvider = AutoDisposeProvider<bool>.internal(
   pureDarkModeState,
   name: r'pureDarkModeStateProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$pureDarkModeStateHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$pureDarkModeStateHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -128,14 +131,15 @@ String _$themeControllerHash() => r'5b18abece4d0ab9c88ed802576571347ad883f6c';
 @ProviderFor(ThemeController)
 final themeControllerProvider =
     NotifierProvider<ThemeController, ThemeState>.internal(
-  ThemeController.new,
-  name: r'themeControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$themeControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      ThemeController.new,
+      name: r'themeControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$themeControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$ThemeController = Notifier<ThemeState>;
 // ignore_for_file: type=lint

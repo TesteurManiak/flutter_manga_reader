@@ -40,25 +40,19 @@ class WatchReadingDirectionFamily extends Family<AsyncValue<ReadingDirection>> {
   const WatchReadingDirectionFamily();
 
   /// See also [watchReadingDirection].
-  WatchReadingDirectionProvider call(
-    int mangaId,
-  ) {
-    return WatchReadingDirectionProvider(
-      mangaId,
-    );
+  WatchReadingDirectionProvider call(int mangaId) {
+    return WatchReadingDirectionProvider(mangaId);
   }
 
   @override
   WatchReadingDirectionProvider getProviderOverride(
     covariant WatchReadingDirectionProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -66,9 +60,9 @@ class WatchReadingDirectionFamily extends Family<AsyncValue<ReadingDirection>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -82,24 +76,21 @@ class WatchReadingDirectionFamily extends Family<AsyncValue<ReadingDirection>> {
 class WatchReadingDirectionProvider
     extends AutoDisposeStreamProvider<ReadingDirection> {
   /// See also [watchReadingDirection].
-  WatchReadingDirectionProvider(
-    int mangaId,
-  ) : this._internal(
-          (ref) => watchReadingDirection(
-            ref as WatchReadingDirectionRef,
-            mangaId,
-          ),
-          from: watchReadingDirectionProvider,
-          name: r'watchReadingDirectionProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchReadingDirectionHash,
-          dependencies: WatchReadingDirectionFamily._dependencies,
-          allTransitiveDependencies:
-              WatchReadingDirectionFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  WatchReadingDirectionProvider(int mangaId)
+    : this._internal(
+        (ref) =>
+            watchReadingDirection(ref as WatchReadingDirectionRef, mangaId),
+        from: watchReadingDirectionProvider,
+        name: r'watchReadingDirectionProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchReadingDirectionHash,
+        dependencies: WatchReadingDirectionFamily._dependencies,
+        allTransitiveDependencies:
+            WatchReadingDirectionFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   WatchReadingDirectionProvider._internal(
     super._createNotifier, {
@@ -174,9 +165,7 @@ abstract class _$ReadingDirectionController
     extends BuildlessAutoDisposeNotifier<AsyncValue<ReadingDirection>> {
   late final int mangaId;
 
-  AsyncValue<ReadingDirection> build(
-    int mangaId,
-  );
+  AsyncValue<ReadingDirection> build(int mangaId);
 }
 
 /// See also [ReadingDirectionController].
@@ -190,26 +179,20 @@ class ReadingDirectionControllerFamily
   const ReadingDirectionControllerFamily();
 
   /// See also [ReadingDirectionController].
-  ReadingDirectionControllerProvider call(
-    int mangaId,
-  ) {
-    return ReadingDirectionControllerProvider(
-      mangaId,
-    );
+  ReadingDirectionControllerProvider call(int mangaId) {
+    return ReadingDirectionControllerProvider(mangaId);
   }
 
   @override
   ReadingDirectionControllerProvider getProviderOverride(
     covariant ReadingDirectionControllerProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
     watchReadingDirectionProvider,
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -217,11 +200,11 @@ class ReadingDirectionControllerFamily
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    watchReadingDirectionProvider,
-    ...?watchReadingDirectionProvider.allTransitiveDependencies,
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        watchReadingDirectionProvider,
+        ...?watchReadingDirectionProvider.allTransitiveDependencies,
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -233,24 +216,26 @@ class ReadingDirectionControllerFamily
 
 /// See also [ReadingDirectionController].
 class ReadingDirectionControllerProvider
-    extends AutoDisposeNotifierProviderImpl<ReadingDirectionController,
-        AsyncValue<ReadingDirection>> {
+    extends
+        AutoDisposeNotifierProviderImpl<
+          ReadingDirectionController,
+          AsyncValue<ReadingDirection>
+        > {
   /// See also [ReadingDirectionController].
-  ReadingDirectionControllerProvider(
-    int mangaId,
-  ) : this._internal(
-          () => ReadingDirectionController()..mangaId = mangaId,
-          from: readingDirectionControllerProvider,
-          name: r'readingDirectionControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$readingDirectionControllerHash,
-          dependencies: ReadingDirectionControllerFamily._dependencies,
-          allTransitiveDependencies:
-              ReadingDirectionControllerFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  ReadingDirectionControllerProvider(int mangaId)
+    : this._internal(
+        () => ReadingDirectionController()..mangaId = mangaId,
+        from: readingDirectionControllerProvider,
+        name: r'readingDirectionControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$readingDirectionControllerHash,
+        dependencies: ReadingDirectionControllerFamily._dependencies,
+        allTransitiveDependencies:
+            ReadingDirectionControllerFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   ReadingDirectionControllerProvider._internal(
     super._createNotifier, {
@@ -268,9 +253,7 @@ class ReadingDirectionControllerProvider
   AsyncValue<ReadingDirection> runNotifierBuild(
     covariant ReadingDirectionController notifier,
   ) {
-    return notifier.build(
-      mangaId,
-    );
+    return notifier.build(mangaId);
   }
 
   @override
@@ -290,8 +273,11 @@ class ReadingDirectionControllerProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ReadingDirectionController,
-      AsyncValue<ReadingDirection>> createElement() {
+  AutoDisposeNotifierProviderElement<
+    ReadingDirectionController,
+    AsyncValue<ReadingDirection>
+  >
+  createElement() {
     return _ReadingDirectionControllerProviderElement(this);
   }
 
@@ -319,12 +305,17 @@ mixin ReadingDirectionControllerRef
 }
 
 class _ReadingDirectionControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<ReadingDirectionController,
-        AsyncValue<ReadingDirection>> with ReadingDirectionControllerRef {
+    extends
+        AutoDisposeNotifierProviderElement<
+          ReadingDirectionController,
+          AsyncValue<ReadingDirection>
+        >
+    with ReadingDirectionControllerRef {
   _ReadingDirectionControllerProviderElement(super.provider);
 
   @override
   int get mangaId => (origin as ReadingDirectionControllerProvider).mangaId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

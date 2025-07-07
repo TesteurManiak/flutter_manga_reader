@@ -13,14 +13,15 @@ String _$applicationDocumentsDirectoryHash() =>
 @ProviderFor(applicationDocumentsDirectory)
 final applicationDocumentsDirectoryProvider =
     FutureProvider<Directory>.internal(
-  applicationDocumentsDirectory,
-  name: r'applicationDocumentsDirectoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$applicationDocumentsDirectoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      applicationDocumentsDirectory,
+      name: r'applicationDocumentsDirectoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$applicationDocumentsDirectoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

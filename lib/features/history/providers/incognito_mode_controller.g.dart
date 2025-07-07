@@ -13,14 +13,15 @@ String _$incognitoModeControllerHash() =>
 @ProviderFor(IncognitoModeController)
 final incognitoModeControllerProvider =
     NotifierProvider<IncognitoModeController, bool>.internal(
-  IncognitoModeController.new,
-  name: r'incognitoModeControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$incognitoModeControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      IncognitoModeController.new,
+      name: r'incognitoModeControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$incognitoModeControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$IncognitoModeController = Notifier<bool>;
 // ignore_for_file: type=lint

@@ -11,213 +11,310 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _sourceIdMeta =
-      const VerificationMeta('sourceId');
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _sourceIdMeta = const VerificationMeta(
+    'sourceId',
+  );
   @override
   late final GeneratedColumn<String> sourceId = GeneratedColumn<String>(
-      'source_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _favoriteMeta =
-      const VerificationMeta('favorite');
+    'source_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _favoriteMeta = const VerificationMeta(
+    'favorite',
+  );
   @override
   late final GeneratedColumn<bool> favorite = GeneratedColumn<bool>(
-      'favorite', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("favorite" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _fetchIntervalMeta =
-      const VerificationMeta('fetchInterval');
+    'favorite',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("favorite" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _fetchIntervalMeta = const VerificationMeta(
+    'fetchInterval',
+  );
   @override
   late final GeneratedColumn<int> fetchInterval = GeneratedColumn<int>(
-      'fetch_interval', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
-  static const VerificationMeta _dateAddedMeta =
-      const VerificationMeta('dateAdded');
+    'fetch_interval',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _dateAddedMeta = const VerificationMeta(
+    'dateAdded',
+  );
   @override
   late final GeneratedColumn<DateTime> dateAdded = GeneratedColumn<DateTime>(
-      'date_added', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+    'date_added',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
   @override
   late final GeneratedColumn<String> url = GeneratedColumn<String>(
-      'url', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'url',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'title',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _artistMeta = const VerificationMeta('artist');
   @override
   late final GeneratedColumn<String> artist = GeneratedColumn<String>(
-      'artist', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'artist',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _authorMeta = const VerificationMeta('author');
   @override
   late final GeneratedColumn<String> author = GeneratedColumn<String>(
-      'author', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _descriptionMeta =
-      const VerificationMeta('description');
+    'author',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
   @override
   late final GeneratedColumn<String> description = GeneratedColumn<String>(
-      'description', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'description',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _genreMeta = const VerificationMeta('genre');
   @override
   late final GeneratedColumn<String> genre = GeneratedColumn<String>(
-      'genre', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+    'genre',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   late final GeneratedColumnWithTypeConverter<MangaStatus, int> status =
-      GeneratedColumn<int>('status', aliasedName, false,
-              type: DriftSqlType.int,
-              requiredDuringInsert: false,
-              defaultValue: const Constant(0))
-          .withConverter<MangaStatus>($DbMangasTable.$converterstatus);
-  static const VerificationMeta _thumbnailUrlMeta =
-      const VerificationMeta('thumbnailUrl');
+      GeneratedColumn<int>(
+        'status',
+        aliasedName,
+        false,
+        type: DriftSqlType.int,
+        requiredDuringInsert: false,
+        defaultValue: const Constant(0),
+      ).withConverter<MangaStatus>($DbMangasTable.$converterstatus);
+  static const VerificationMeta _thumbnailUrlMeta = const VerificationMeta(
+    'thumbnailUrl',
+  );
   @override
   late final GeneratedColumn<String> thumbnailUrl = GeneratedColumn<String>(
-      'thumbnail_url', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _updateStrategyMeta =
-      const VerificationMeta('updateStrategy');
+    'thumbnail_url',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   late final GeneratedColumnWithTypeConverter<UpdateStrategy, int>
-      updateStrategy = GeneratedColumn<int>(
-              'update_strategy', aliasedName, false,
-              type: DriftSqlType.int, requiredDuringInsert: true)
-          .withConverter<UpdateStrategy>(
-              $DbMangasTable.$converterupdateStrategy);
-  static const VerificationMeta _initializedMeta =
-      const VerificationMeta('initialized');
+  updateStrategy = GeneratedColumn<int>(
+    'update_strategy',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  ).withConverter<UpdateStrategy>($DbMangasTable.$converterupdateStrategy);
+  static const VerificationMeta _initializedMeta = const VerificationMeta(
+    'initialized',
+  );
   @override
   late final GeneratedColumn<bool> initialized = GeneratedColumn<bool>(
-      'initialized', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("initialized" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _lastModifiedAtMeta =
-      const VerificationMeta('lastModifiedAt');
+    'initialized',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("initialized" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _lastModifiedAtMeta = const VerificationMeta(
+    'lastModifiedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> lastModifiedAt =
-      GeneratedColumn<DateTime>('last_modified_at', aliasedName, true,
-          type: DriftSqlType.dateTime, requiredDuringInsert: false);
+      GeneratedColumn<DateTime>(
+        'last_modified_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        sourceId,
-        favorite,
-        fetchInterval,
-        dateAdded,
-        url,
-        title,
-        artist,
-        author,
-        description,
-        genre,
-        status,
-        thumbnailUrl,
-        updateStrategy,
-        initialized,
-        lastModifiedAt
-      ];
+    id,
+    sourceId,
+    favorite,
+    fetchInterval,
+    dateAdded,
+    url,
+    title,
+    artist,
+    author,
+    description,
+    genre,
+    status,
+    thumbnailUrl,
+    updateStrategy,
+    initialized,
+    lastModifiedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'db_mangas';
   @override
-  VerificationContext validateIntegrity(Insertable<DbManga> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<DbManga> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('source_id')) {
-      context.handle(_sourceIdMeta,
-          sourceId.isAcceptableOrUnknown(data['source_id']!, _sourceIdMeta));
+      context.handle(
+        _sourceIdMeta,
+        sourceId.isAcceptableOrUnknown(data['source_id']!, _sourceIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_sourceIdMeta);
     }
     if (data.containsKey('favorite')) {
-      context.handle(_favoriteMeta,
-          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+      context.handle(
+        _favoriteMeta,
+        favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta),
+      );
     }
     if (data.containsKey('fetch_interval')) {
       context.handle(
+        _fetchIntervalMeta,
+        fetchInterval.isAcceptableOrUnknown(
+          data['fetch_interval']!,
           _fetchIntervalMeta,
-          fetchInterval.isAcceptableOrUnknown(
-              data['fetch_interval']!, _fetchIntervalMeta));
+        ),
+      );
     }
     if (data.containsKey('date_added')) {
-      context.handle(_dateAddedMeta,
-          dateAdded.isAcceptableOrUnknown(data['date_added']!, _dateAddedMeta));
+      context.handle(
+        _dateAddedMeta,
+        dateAdded.isAcceptableOrUnknown(data['date_added']!, _dateAddedMeta),
+      );
     }
     if (data.containsKey('url')) {
       context.handle(
-          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+        _urlMeta,
+        url.isAcceptableOrUnknown(data['url']!, _urlMeta),
+      );
     } else if (isInserting) {
       context.missing(_urlMeta);
     }
     if (data.containsKey('title')) {
       context.handle(
-          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
+        _titleMeta,
+        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
+      );
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
     if (data.containsKey('artist')) {
-      context.handle(_artistMeta,
-          artist.isAcceptableOrUnknown(data['artist']!, _artistMeta));
+      context.handle(
+        _artistMeta,
+        artist.isAcceptableOrUnknown(data['artist']!, _artistMeta),
+      );
     }
     if (data.containsKey('author')) {
-      context.handle(_authorMeta,
-          author.isAcceptableOrUnknown(data['author']!, _authorMeta));
+      context.handle(
+        _authorMeta,
+        author.isAcceptableOrUnknown(data['author']!, _authorMeta),
+      );
     }
     if (data.containsKey('description')) {
       context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
           _descriptionMeta,
-          description.isAcceptableOrUnknown(
-              data['description']!, _descriptionMeta));
+        ),
+      );
     }
     if (data.containsKey('genre')) {
       context.handle(
-          _genreMeta, genre.isAcceptableOrUnknown(data['genre']!, _genreMeta));
+        _genreMeta,
+        genre.isAcceptableOrUnknown(data['genre']!, _genreMeta),
+      );
     }
-    context.handle(_statusMeta, const VerificationResult.success());
     if (data.containsKey('thumbnail_url')) {
       context.handle(
+        _thumbnailUrlMeta,
+        thumbnailUrl.isAcceptableOrUnknown(
+          data['thumbnail_url']!,
           _thumbnailUrlMeta,
-          thumbnailUrl.isAcceptableOrUnknown(
-              data['thumbnail_url']!, _thumbnailUrlMeta));
+        ),
+      );
     }
-    context.handle(_updateStrategyMeta, const VerificationResult.success());
     if (data.containsKey('initialized')) {
       context.handle(
+        _initializedMeta,
+        initialized.isAcceptableOrUnknown(
+          data['initialized']!,
           _initializedMeta,
-          initialized.isAcceptableOrUnknown(
-              data['initialized']!, _initializedMeta));
+        ),
+      );
     }
     if (data.containsKey('last_modified_at')) {
       context.handle(
+        _lastModifiedAtMeta,
+        lastModifiedAt.isAcceptableOrUnknown(
+          data['last_modified_at']!,
           _lastModifiedAtMeta,
-          lastModifiedAt.isAcceptableOrUnknown(
-              data['last_modified_at']!, _lastModifiedAtMeta));
+        ),
+      );
     }
     return context;
   }
@@ -226,46 +323,87 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {sourceId, url},
-      ];
+    {sourceId, url},
+  ];
   @override
   DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbManga(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      sourceId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_id'])!,
-      favorite: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}favorite'])!,
-      fetchInterval: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}fetch_interval'])!,
-      dateAdded: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_added']),
-      url: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
-      title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
-      artist: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}artist']),
-      author: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}author']),
-      description: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}description']),
-      genre: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}genre']),
-      status: $DbMangasTable.$converterstatus.fromSql(attachedDatabase
-          .typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}status'])!),
-      thumbnailUrl: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}thumbnail_url']),
-      updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
+      id:
           attachedDatabase.typeMapping.read(
-              DriftSqlType.int, data['${effectivePrefix}update_strategy'])!),
-      initialized: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}initialized'])!,
+            DriftSqlType.int,
+            data['${effectivePrefix}id'],
+          )!,
+      sourceId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}source_id'],
+          )!,
+      favorite:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}favorite'],
+          )!,
+      fetchInterval:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}fetch_interval'],
+          )!,
+      dateAdded: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date_added'],
+      ),
+      url:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}url'],
+          )!,
+      title:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}title'],
+          )!,
+      artist: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}artist'],
+      ),
+      author: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author'],
+      ),
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
+      genre: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}genre'],
+      ),
+      status: $DbMangasTable.$converterstatus.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.int,
+          data['${effectivePrefix}status'],
+        )!,
+      ),
+      thumbnailUrl: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}thumbnail_url'],
+      ),
+      updateStrategy: $DbMangasTable.$converterupdateStrategy.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.int,
+          data['${effectivePrefix}update_strategy'],
+        )!,
+      ),
+      initialized:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}initialized'],
+          )!,
       lastModifiedAt: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}last_modified_at']),
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_modified_at'],
+      ),
     );
   }
 
@@ -297,23 +435,24 @@ class DbManga extends DataClass implements Insertable<DbManga> {
   final UpdateStrategy updateStrategy;
   final bool initialized;
   final DateTime? lastModifiedAt;
-  const DbManga(
-      {required this.id,
-      required this.sourceId,
-      required this.favorite,
-      required this.fetchInterval,
-      this.dateAdded,
-      required this.url,
-      required this.title,
-      this.artist,
-      this.author,
-      this.description,
-      this.genre,
-      required this.status,
-      this.thumbnailUrl,
-      required this.updateStrategy,
-      required this.initialized,
-      this.lastModifiedAt});
+  const DbManga({
+    required this.id,
+    required this.sourceId,
+    required this.favorite,
+    required this.fetchInterval,
+    this.dateAdded,
+    required this.url,
+    required this.title,
+    this.artist,
+    this.author,
+    this.description,
+    this.genre,
+    required this.status,
+    this.thumbnailUrl,
+    required this.updateStrategy,
+    required this.initialized,
+    this.lastModifiedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -339,15 +478,17 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       map['genre'] = Variable<String>(genre);
     }
     {
-      map['status'] =
-          Variable<int>($DbMangasTable.$converterstatus.toSql(status));
+      map['status'] = Variable<int>(
+        $DbMangasTable.$converterstatus.toSql(status),
+      );
     }
     if (!nullToAbsent || thumbnailUrl != null) {
       map['thumbnail_url'] = Variable<String>(thumbnailUrl);
     }
     {
       map['update_strategy'] = Variable<int>(
-          $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy));
+        $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy),
+      );
     }
     map['initialized'] = Variable<bool>(initialized);
     if (!nullToAbsent || lastModifiedAt != null) {
@@ -362,34 +503,40 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       sourceId: Value(sourceId),
       favorite: Value(favorite),
       fetchInterval: Value(fetchInterval),
-      dateAdded: dateAdded == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateAdded),
+      dateAdded:
+          dateAdded == null && nullToAbsent
+              ? const Value.absent()
+              : Value(dateAdded),
       url: Value(url),
       title: Value(title),
       artist:
           artist == null && nullToAbsent ? const Value.absent() : Value(artist),
       author:
           author == null && nullToAbsent ? const Value.absent() : Value(author),
-      description: description == null && nullToAbsent
-          ? const Value.absent()
-          : Value(description),
+      description:
+          description == null && nullToAbsent
+              ? const Value.absent()
+              : Value(description),
       genre:
           genre == null && nullToAbsent ? const Value.absent() : Value(genre),
       status: Value(status),
-      thumbnailUrl: thumbnailUrl == null && nullToAbsent
-          ? const Value.absent()
-          : Value(thumbnailUrl),
+      thumbnailUrl:
+          thumbnailUrl == null && nullToAbsent
+              ? const Value.absent()
+              : Value(thumbnailUrl),
       updateStrategy: Value(updateStrategy),
       initialized: Value(initialized),
-      lastModifiedAt: lastModifiedAt == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastModifiedAt),
+      lastModifiedAt:
+          lastModifiedAt == null && nullToAbsent
+              ? const Value.absent()
+              : Value(lastModifiedAt),
     );
   }
 
-  factory DbManga.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DbManga.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbManga(
       id: serializer.fromJson<int>(json['id']),
@@ -403,11 +550,13 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       author: serializer.fromJson<String?>(json['author']),
       description: serializer.fromJson<String?>(json['description']),
       genre: serializer.fromJson<String?>(json['genre']),
-      status: $DbMangasTable.$converterstatus
-          .fromJson(serializer.fromJson<int>(json['status'])),
+      status: $DbMangasTable.$converterstatus.fromJson(
+        serializer.fromJson<int>(json['status']),
+      ),
       thumbnailUrl: serializer.fromJson<String?>(json['thumbnailUrl']),
-      updateStrategy: $DbMangasTable.$converterupdateStrategy
-          .fromJson(serializer.fromJson<int>(json['updateStrategy'])),
+      updateStrategy: $DbMangasTable.$converterupdateStrategy.fromJson(
+        serializer.fromJson<int>(json['updateStrategy']),
+      ),
       initialized: serializer.fromJson<bool>(json['initialized']),
       lastModifiedAt: serializer.fromJson<DateTime?>(json['lastModifiedAt']),
     );
@@ -427,61 +576,63 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       'author': serializer.toJson<String?>(author),
       'description': serializer.toJson<String?>(description),
       'genre': serializer.toJson<String?>(genre),
-      'status': serializer
-          .toJson<int>($DbMangasTable.$converterstatus.toJson(status)),
+      'status': serializer.toJson<int>(
+        $DbMangasTable.$converterstatus.toJson(status),
+      ),
       'thumbnailUrl': serializer.toJson<String?>(thumbnailUrl),
       'updateStrategy': serializer.toJson<int>(
-          $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy)),
+        $DbMangasTable.$converterupdateStrategy.toJson(updateStrategy),
+      ),
       'initialized': serializer.toJson<bool>(initialized),
       'lastModifiedAt': serializer.toJson<DateTime?>(lastModifiedAt),
     };
   }
 
-  DbManga copyWith(
-          {int? id,
-          String? sourceId,
-          bool? favorite,
-          int? fetchInterval,
-          Value<DateTime?> dateAdded = const Value.absent(),
-          String? url,
-          String? title,
-          Value<String?> artist = const Value.absent(),
-          Value<String?> author = const Value.absent(),
-          Value<String?> description = const Value.absent(),
-          Value<String?> genre = const Value.absent(),
-          MangaStatus? status,
-          Value<String?> thumbnailUrl = const Value.absent(),
-          UpdateStrategy? updateStrategy,
-          bool? initialized,
-          Value<DateTime?> lastModifiedAt = const Value.absent()}) =>
-      DbManga(
-        id: id ?? this.id,
-        sourceId: sourceId ?? this.sourceId,
-        favorite: favorite ?? this.favorite,
-        fetchInterval: fetchInterval ?? this.fetchInterval,
-        dateAdded: dateAdded.present ? dateAdded.value : this.dateAdded,
-        url: url ?? this.url,
-        title: title ?? this.title,
-        artist: artist.present ? artist.value : this.artist,
-        author: author.present ? author.value : this.author,
-        description: description.present ? description.value : this.description,
-        genre: genre.present ? genre.value : this.genre,
-        status: status ?? this.status,
-        thumbnailUrl:
-            thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
-        updateStrategy: updateStrategy ?? this.updateStrategy,
-        initialized: initialized ?? this.initialized,
-        lastModifiedAt:
-            lastModifiedAt.present ? lastModifiedAt.value : this.lastModifiedAt,
-      );
+  DbManga copyWith({
+    int? id,
+    String? sourceId,
+    bool? favorite,
+    int? fetchInterval,
+    Value<DateTime?> dateAdded = const Value.absent(),
+    String? url,
+    String? title,
+    Value<String?> artist = const Value.absent(),
+    Value<String?> author = const Value.absent(),
+    Value<String?> description = const Value.absent(),
+    Value<String?> genre = const Value.absent(),
+    MangaStatus? status,
+    Value<String?> thumbnailUrl = const Value.absent(),
+    UpdateStrategy? updateStrategy,
+    bool? initialized,
+    Value<DateTime?> lastModifiedAt = const Value.absent(),
+  }) => DbManga(
+    id: id ?? this.id,
+    sourceId: sourceId ?? this.sourceId,
+    favorite: favorite ?? this.favorite,
+    fetchInterval: fetchInterval ?? this.fetchInterval,
+    dateAdded: dateAdded.present ? dateAdded.value : this.dateAdded,
+    url: url ?? this.url,
+    title: title ?? this.title,
+    artist: artist.present ? artist.value : this.artist,
+    author: author.present ? author.value : this.author,
+    description: description.present ? description.value : this.description,
+    genre: genre.present ? genre.value : this.genre,
+    status: status ?? this.status,
+    thumbnailUrl: thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
+    updateStrategy: updateStrategy ?? this.updateStrategy,
+    initialized: initialized ?? this.initialized,
+    lastModifiedAt:
+        lastModifiedAt.present ? lastModifiedAt.value : this.lastModifiedAt,
+  );
   DbManga copyWithCompanion(DbMangasCompanion data) {
     return DbManga(
       id: data.id.present ? data.id.value : this.id,
       sourceId: data.sourceId.present ? data.sourceId.value : this.sourceId,
       favorite: data.favorite.present ? data.favorite.value : this.favorite,
-      fetchInterval: data.fetchInterval.present
-          ? data.fetchInterval.value
-          : this.fetchInterval,
+      fetchInterval:
+          data.fetchInterval.present
+              ? data.fetchInterval.value
+              : this.fetchInterval,
       dateAdded: data.dateAdded.present ? data.dateAdded.value : this.dateAdded,
       url: data.url.present ? data.url.value : this.url,
       title: data.title.present ? data.title.value : this.title,
@@ -491,17 +642,20 @@ class DbManga extends DataClass implements Insertable<DbManga> {
           data.description.present ? data.description.value : this.description,
       genre: data.genre.present ? data.genre.value : this.genre,
       status: data.status.present ? data.status.value : this.status,
-      thumbnailUrl: data.thumbnailUrl.present
-          ? data.thumbnailUrl.value
-          : this.thumbnailUrl,
-      updateStrategy: data.updateStrategy.present
-          ? data.updateStrategy.value
-          : this.updateStrategy,
+      thumbnailUrl:
+          data.thumbnailUrl.present
+              ? data.thumbnailUrl.value
+              : this.thumbnailUrl,
+      updateStrategy:
+          data.updateStrategy.present
+              ? data.updateStrategy.value
+              : this.updateStrategy,
       initialized:
           data.initialized.present ? data.initialized.value : this.initialized,
-      lastModifiedAt: data.lastModifiedAt.present
-          ? data.lastModifiedAt.value
-          : this.lastModifiedAt,
+      lastModifiedAt:
+          data.lastModifiedAt.present
+              ? data.lastModifiedAt.value
+              : this.lastModifiedAt,
     );
   }
 
@@ -530,22 +684,23 @@ class DbManga extends DataClass implements Insertable<DbManga> {
 
   @override
   int get hashCode => Object.hash(
-      id,
-      sourceId,
-      favorite,
-      fetchInterval,
-      dateAdded,
-      url,
-      title,
-      artist,
-      author,
-      description,
-      genre,
-      status,
-      thumbnailUrl,
-      updateStrategy,
-      initialized,
-      lastModifiedAt);
+    id,
+    sourceId,
+    favorite,
+    fetchInterval,
+    dateAdded,
+    url,
+    title,
+    artist,
+    author,
+    description,
+    genre,
+    status,
+    thumbnailUrl,
+    updateStrategy,
+    initialized,
+    lastModifiedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -620,10 +775,10 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     required UpdateStrategy updateStrategy,
     this.initialized = const Value.absent(),
     this.lastModifiedAt = const Value.absent(),
-  })  : sourceId = Value(sourceId),
-        url = Value(url),
-        title = Value(title),
-        updateStrategy = Value(updateStrategy);
+  }) : sourceId = Value(sourceId),
+       url = Value(url),
+       title = Value(title),
+       updateStrategy = Value(updateStrategy);
   static Insertable<DbManga> custom({
     Expression<int>? id,
     Expression<String>? sourceId,
@@ -662,23 +817,24 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
     });
   }
 
-  DbMangasCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? sourceId,
-      Value<bool>? favorite,
-      Value<int>? fetchInterval,
-      Value<DateTime?>? dateAdded,
-      Value<String>? url,
-      Value<String>? title,
-      Value<String?>? artist,
-      Value<String?>? author,
-      Value<String?>? description,
-      Value<String?>? genre,
-      Value<MangaStatus>? status,
-      Value<String?>? thumbnailUrl,
-      Value<UpdateStrategy>? updateStrategy,
-      Value<bool>? initialized,
-      Value<DateTime?>? lastModifiedAt}) {
+  DbMangasCompanion copyWith({
+    Value<int>? id,
+    Value<String>? sourceId,
+    Value<bool>? favorite,
+    Value<int>? fetchInterval,
+    Value<DateTime?>? dateAdded,
+    Value<String>? url,
+    Value<String>? title,
+    Value<String?>? artist,
+    Value<String?>? author,
+    Value<String?>? description,
+    Value<String?>? genre,
+    Value<MangaStatus>? status,
+    Value<String?>? thumbnailUrl,
+    Value<UpdateStrategy>? updateStrategy,
+    Value<bool>? initialized,
+    Value<DateTime?>? lastModifiedAt,
+  }) {
     return DbMangasCompanion(
       id: id ?? this.id,
       sourceId: sourceId ?? this.sourceId,
@@ -736,15 +892,17 @@ class DbMangasCompanion extends UpdateCompanion<DbManga> {
       map['genre'] = Variable<String>(genre.value);
     }
     if (status.present) {
-      map['status'] =
-          Variable<int>($DbMangasTable.$converterstatus.toSql(status.value));
+      map['status'] = Variable<int>(
+        $DbMangasTable.$converterstatus.toSql(status.value),
+      );
     }
     if (thumbnailUrl.present) {
       map['thumbnail_url'] = Variable<String>(thumbnailUrl.value);
     }
     if (updateStrategy.present) {
       map['update_strategy'] = Variable<int>(
-          $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy.value));
+        $DbMangasTable.$converterupdateStrategy.toSql(updateStrategy.value),
+      );
     }
     if (initialized.present) {
       map['initialized'] = Variable<bool>(initialized.value);
@@ -788,192 +946,276 @@ class $DbChaptersTable extends DbChapters
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-      'id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _mangaIdMeta =
-      const VerificationMeta('mangaId');
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _mangaIdMeta = const VerificationMeta(
+    'mangaId',
+  );
   @override
   late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
-      'manga_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES db_mangas (id) ON DELETE CASCADE'));
+    'manga_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES db_mangas (id) ON DELETE CASCADE',
+    ),
+  );
   static const VerificationMeta _urlMeta = const VerificationMeta('url');
   @override
   late final GeneratedColumn<String> url = GeneratedColumn<String>(
-      'url', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'url',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _dateUploadMeta =
-      const VerificationMeta('dateUpload');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dateUploadMeta = const VerificationMeta(
+    'dateUpload',
+  );
   @override
   late final GeneratedColumn<DateTime> dateUpload = GeneratedColumn<DateTime>(
-      'date_upload', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _chapterNumberMeta =
-      const VerificationMeta('chapterNumber');
+    'date_upload',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _chapterNumberMeta = const VerificationMeta(
+    'chapterNumber',
+  );
   @override
   late final GeneratedColumn<double> chapterNumber = GeneratedColumn<double>(
-      'chapter_number', aliasedName, false,
-      type: DriftSqlType.double,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(-1));
-  static const VerificationMeta _scanlatorMeta =
-      const VerificationMeta('scanlator');
+    'chapter_number',
+    aliasedName,
+    false,
+    type: DriftSqlType.double,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(-1),
+  );
+  static const VerificationMeta _scanlatorMeta = const VerificationMeta(
+    'scanlator',
+  );
   @override
   late final GeneratedColumn<String> scanlator = GeneratedColumn<String>(
-      'scanlator', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'scanlator',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _readMeta = const VerificationMeta('read');
   @override
   late final GeneratedColumn<bool> read = GeneratedColumn<bool>(
-      'read', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("read" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _downloadedMeta =
-      const VerificationMeta('downloaded');
+    'read',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("read" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _downloadedMeta = const VerificationMeta(
+    'downloaded',
+  );
   @override
   late final GeneratedColumn<bool> downloaded = GeneratedColumn<bool>(
-      'downloaded', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("downloaded" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _bookmarkMeta =
-      const VerificationMeta('bookmark');
+    'downloaded',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("downloaded" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _bookmarkMeta = const VerificationMeta(
+    'bookmark',
+  );
   @override
   late final GeneratedColumn<bool> bookmark = GeneratedColumn<bool>(
-      'bookmark', aliasedName, false,
-      type: DriftSqlType.bool,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("bookmark" IN (0, 1))'),
-      defaultValue: const Constant(false));
-  static const VerificationMeta _lastPageReadMeta =
-      const VerificationMeta('lastPageRead');
+    'bookmark',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("bookmark" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _lastPageReadMeta = const VerificationMeta(
+    'lastPageRead',
+  );
   @override
   late final GeneratedColumn<int> lastPageRead = GeneratedColumn<int>(
-      'last_page_read', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultValue: const Constant(0));
-  static const VerificationMeta _dateFetchMeta =
-      const VerificationMeta('dateFetch');
+    'last_page_read',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  static const VerificationMeta _dateFetchMeta = const VerificationMeta(
+    'dateFetch',
+  );
   @override
   late final GeneratedColumn<DateTime> dateFetch = GeneratedColumn<DateTime>(
-      'date_fetch', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
-  static const VerificationMeta _lastModifiedMeta =
-      const VerificationMeta('lastModified');
+    'date_fetch',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastModifiedMeta = const VerificationMeta(
+    'lastModified',
+  );
   @override
   late final GeneratedColumn<DateTime> lastModified = GeneratedColumn<DateTime>(
-      'last_modified', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+    'last_modified',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        mangaId,
-        url,
-        name,
-        dateUpload,
-        chapterNumber,
-        scanlator,
-        read,
-        downloaded,
-        bookmark,
-        lastPageRead,
-        dateFetch,
-        lastModified
-      ];
+    id,
+    mangaId,
+    url,
+    name,
+    dateUpload,
+    chapterNumber,
+    scanlator,
+    read,
+    downloaded,
+    bookmark,
+    lastPageRead,
+    dateFetch,
+    lastModified,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'db_chapters';
   @override
-  VerificationContext validateIntegrity(Insertable<DbChapter> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<DbChapter> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('manga_id')) {
-      context.handle(_mangaIdMeta,
-          mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+      context.handle(
+        _mangaIdMeta,
+        mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_mangaIdMeta);
     }
     if (data.containsKey('url')) {
       context.handle(
-          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+        _urlMeta,
+        url.isAcceptableOrUnknown(data['url']!, _urlMeta),
+      );
     } else if (isInserting) {
       context.missing(_urlMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('date_upload')) {
       context.handle(
-          _dateUploadMeta,
-          dateUpload.isAcceptableOrUnknown(
-              data['date_upload']!, _dateUploadMeta));
+        _dateUploadMeta,
+        dateUpload.isAcceptableOrUnknown(data['date_upload']!, _dateUploadMeta),
+      );
     }
     if (data.containsKey('chapter_number')) {
       context.handle(
+        _chapterNumberMeta,
+        chapterNumber.isAcceptableOrUnknown(
+          data['chapter_number']!,
           _chapterNumberMeta,
-          chapterNumber.isAcceptableOrUnknown(
-              data['chapter_number']!, _chapterNumberMeta));
+        ),
+      );
     }
     if (data.containsKey('scanlator')) {
-      context.handle(_scanlatorMeta,
-          scanlator.isAcceptableOrUnknown(data['scanlator']!, _scanlatorMeta));
+      context.handle(
+        _scanlatorMeta,
+        scanlator.isAcceptableOrUnknown(data['scanlator']!, _scanlatorMeta),
+      );
     }
     if (data.containsKey('read')) {
       context.handle(
-          _readMeta, read.isAcceptableOrUnknown(data['read']!, _readMeta));
+        _readMeta,
+        read.isAcceptableOrUnknown(data['read']!, _readMeta),
+      );
     }
     if (data.containsKey('downloaded')) {
       context.handle(
-          _downloadedMeta,
-          downloaded.isAcceptableOrUnknown(
-              data['downloaded']!, _downloadedMeta));
+        _downloadedMeta,
+        downloaded.isAcceptableOrUnknown(data['downloaded']!, _downloadedMeta),
+      );
     }
     if (data.containsKey('bookmark')) {
-      context.handle(_bookmarkMeta,
-          bookmark.isAcceptableOrUnknown(data['bookmark']!, _bookmarkMeta));
+      context.handle(
+        _bookmarkMeta,
+        bookmark.isAcceptableOrUnknown(data['bookmark']!, _bookmarkMeta),
+      );
     }
     if (data.containsKey('last_page_read')) {
       context.handle(
+        _lastPageReadMeta,
+        lastPageRead.isAcceptableOrUnknown(
+          data['last_page_read']!,
           _lastPageReadMeta,
-          lastPageRead.isAcceptableOrUnknown(
-              data['last_page_read']!, _lastPageReadMeta));
+        ),
+      );
     }
     if (data.containsKey('date_fetch')) {
-      context.handle(_dateFetchMeta,
-          dateFetch.isAcceptableOrUnknown(data['date_fetch']!, _dateFetchMeta));
+      context.handle(
+        _dateFetchMeta,
+        dateFetch.isAcceptableOrUnknown(data['date_fetch']!, _dateFetchMeta),
+      );
     }
     if (data.containsKey('last_modified')) {
       context.handle(
+        _lastModifiedMeta,
+        lastModified.isAcceptableOrUnknown(
+          data['last_modified']!,
           _lastModifiedMeta,
-          lastModified.isAcceptableOrUnknown(
-              data['last_modified']!, _lastModifiedMeta));
+        ),
+      );
     }
     return context;
   }
@@ -982,38 +1224,73 @@ class $DbChaptersTable extends DbChapters
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
   List<Set<GeneratedColumn>> get uniqueKeys => [
-        {mangaId, url},
-      ];
+    {mangaId, url},
+  ];
   @override
   DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbChapter(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      mangaId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
-      url: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      dateUpload: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_upload']),
-      chapterNumber: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}chapter_number'])!,
-      scanlator: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}scanlator']),
-      read: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}read'])!,
-      downloaded: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}downloaded'])!,
-      bookmark: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}bookmark'])!,
-      lastPageRead: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}last_page_read'])!,
-      dateFetch: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}date_fetch']),
-      lastModified: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}last_modified']),
+      id:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}id'],
+          )!,
+      mangaId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}manga_id'],
+          )!,
+      url:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}url'],
+          )!,
+      name:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}name'],
+          )!,
+      dateUpload: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date_upload'],
+      ),
+      chapterNumber:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.double,
+            data['${effectivePrefix}chapter_number'],
+          )!,
+      scanlator: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}scanlator'],
+      ),
+      read:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}read'],
+          )!,
+      downloaded:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}downloaded'],
+          )!,
+      bookmark:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}bookmark'],
+          )!,
+      lastPageRead:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}last_page_read'],
+          )!,
+      dateFetch: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}date_fetch'],
+      ),
+      lastModified: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_modified'],
+      ),
     );
   }
 
@@ -1037,20 +1314,21 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
   final int lastPageRead;
   final DateTime? dateFetch;
   final DateTime? lastModified;
-  const DbChapter(
-      {required this.id,
-      required this.mangaId,
-      required this.url,
-      required this.name,
-      this.dateUpload,
-      required this.chapterNumber,
-      this.scanlator,
-      required this.read,
-      required this.downloaded,
-      required this.bookmark,
-      required this.lastPageRead,
-      this.dateFetch,
-      this.lastModified});
+  const DbChapter({
+    required this.id,
+    required this.mangaId,
+    required this.url,
+    required this.name,
+    this.dateUpload,
+    required this.chapterNumber,
+    this.scanlator,
+    required this.read,
+    required this.downloaded,
+    required this.bookmark,
+    required this.lastPageRead,
+    this.dateFetch,
+    this.lastModified,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1084,28 +1362,34 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
-      dateUpload: dateUpload == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateUpload),
+      dateUpload:
+          dateUpload == null && nullToAbsent
+              ? const Value.absent()
+              : Value(dateUpload),
       chapterNumber: Value(chapterNumber),
-      scanlator: scanlator == null && nullToAbsent
-          ? const Value.absent()
-          : Value(scanlator),
+      scanlator:
+          scanlator == null && nullToAbsent
+              ? const Value.absent()
+              : Value(scanlator),
       read: Value(read),
       downloaded: Value(downloaded),
       bookmark: Value(bookmark),
       lastPageRead: Value(lastPageRead),
-      dateFetch: dateFetch == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dateFetch),
-      lastModified: lastModified == null && nullToAbsent
-          ? const Value.absent()
-          : Value(lastModified),
+      dateFetch:
+          dateFetch == null && nullToAbsent
+              ? const Value.absent()
+              : Value(dateFetch),
+      lastModified:
+          lastModified == null && nullToAbsent
+              ? const Value.absent()
+              : Value(lastModified),
     );
   }
 
-  factory DbChapter.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DbChapter.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbChapter(
       id: serializer.fromJson<int>(json['id']),
@@ -1143,36 +1427,35 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
     };
   }
 
-  DbChapter copyWith(
-          {int? id,
-          int? mangaId,
-          String? url,
-          String? name,
-          Value<DateTime?> dateUpload = const Value.absent(),
-          double? chapterNumber,
-          Value<String?> scanlator = const Value.absent(),
-          bool? read,
-          bool? downloaded,
-          bool? bookmark,
-          int? lastPageRead,
-          Value<DateTime?> dateFetch = const Value.absent(),
-          Value<DateTime?> lastModified = const Value.absent()}) =>
-      DbChapter(
-        id: id ?? this.id,
-        mangaId: mangaId ?? this.mangaId,
-        url: url ?? this.url,
-        name: name ?? this.name,
-        dateUpload: dateUpload.present ? dateUpload.value : this.dateUpload,
-        chapterNumber: chapterNumber ?? this.chapterNumber,
-        scanlator: scanlator.present ? scanlator.value : this.scanlator,
-        read: read ?? this.read,
-        downloaded: downloaded ?? this.downloaded,
-        bookmark: bookmark ?? this.bookmark,
-        lastPageRead: lastPageRead ?? this.lastPageRead,
-        dateFetch: dateFetch.present ? dateFetch.value : this.dateFetch,
-        lastModified:
-            lastModified.present ? lastModified.value : this.lastModified,
-      );
+  DbChapter copyWith({
+    int? id,
+    int? mangaId,
+    String? url,
+    String? name,
+    Value<DateTime?> dateUpload = const Value.absent(),
+    double? chapterNumber,
+    Value<String?> scanlator = const Value.absent(),
+    bool? read,
+    bool? downloaded,
+    bool? bookmark,
+    int? lastPageRead,
+    Value<DateTime?> dateFetch = const Value.absent(),
+    Value<DateTime?> lastModified = const Value.absent(),
+  }) => DbChapter(
+    id: id ?? this.id,
+    mangaId: mangaId ?? this.mangaId,
+    url: url ?? this.url,
+    name: name ?? this.name,
+    dateUpload: dateUpload.present ? dateUpload.value : this.dateUpload,
+    chapterNumber: chapterNumber ?? this.chapterNumber,
+    scanlator: scanlator.present ? scanlator.value : this.scanlator,
+    read: read ?? this.read,
+    downloaded: downloaded ?? this.downloaded,
+    bookmark: bookmark ?? this.bookmark,
+    lastPageRead: lastPageRead ?? this.lastPageRead,
+    dateFetch: dateFetch.present ? dateFetch.value : this.dateFetch,
+    lastModified: lastModified.present ? lastModified.value : this.lastModified,
+  );
   DbChapter copyWithCompanion(DbChaptersCompanion data) {
     return DbChapter(
       id: data.id.present ? data.id.value : this.id,
@@ -1181,21 +1464,24 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       name: data.name.present ? data.name.value : this.name,
       dateUpload:
           data.dateUpload.present ? data.dateUpload.value : this.dateUpload,
-      chapterNumber: data.chapterNumber.present
-          ? data.chapterNumber.value
-          : this.chapterNumber,
+      chapterNumber:
+          data.chapterNumber.present
+              ? data.chapterNumber.value
+              : this.chapterNumber,
       scanlator: data.scanlator.present ? data.scanlator.value : this.scanlator,
       read: data.read.present ? data.read.value : this.read,
       downloaded:
           data.downloaded.present ? data.downloaded.value : this.downloaded,
       bookmark: data.bookmark.present ? data.bookmark.value : this.bookmark,
-      lastPageRead: data.lastPageRead.present
-          ? data.lastPageRead.value
-          : this.lastPageRead,
+      lastPageRead:
+          data.lastPageRead.present
+              ? data.lastPageRead.value
+              : this.lastPageRead,
       dateFetch: data.dateFetch.present ? data.dateFetch.value : this.dateFetch,
-      lastModified: data.lastModified.present
-          ? data.lastModified.value
-          : this.lastModified,
+      lastModified:
+          data.lastModified.present
+              ? data.lastModified.value
+              : this.lastModified,
     );
   }
 
@@ -1221,19 +1507,20 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
 
   @override
   int get hashCode => Object.hash(
-      id,
-      mangaId,
-      url,
-      name,
-      dateUpload,
-      chapterNumber,
-      scanlator,
-      read,
-      downloaded,
-      bookmark,
-      lastPageRead,
-      dateFetch,
-      lastModified);
+    id,
+    mangaId,
+    url,
+    name,
+    dateUpload,
+    chapterNumber,
+    scanlator,
+    read,
+    downloaded,
+    bookmark,
+    lastPageRead,
+    dateFetch,
+    lastModified,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1296,9 +1583,9 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     this.lastPageRead = const Value.absent(),
     this.dateFetch = const Value.absent(),
     this.lastModified = const Value.absent(),
-  })  : mangaId = Value(mangaId),
-        url = Value(url),
-        name = Value(name);
+  }) : mangaId = Value(mangaId),
+       url = Value(url),
+       name = Value(name);
   static Insertable<DbChapter> custom({
     Expression<int>? id,
     Expression<int>? mangaId,
@@ -1331,20 +1618,21 @@ class DbChaptersCompanion extends UpdateCompanion<DbChapter> {
     });
   }
 
-  DbChaptersCompanion copyWith(
-      {Value<int>? id,
-      Value<int>? mangaId,
-      Value<String>? url,
-      Value<String>? name,
-      Value<DateTime?>? dateUpload,
-      Value<double>? chapterNumber,
-      Value<String?>? scanlator,
-      Value<bool>? read,
-      Value<bool>? downloaded,
-      Value<bool>? bookmark,
-      Value<int>? lastPageRead,
-      Value<DateTime?>? dateFetch,
-      Value<DateTime?>? lastModified}) {
+  DbChaptersCompanion copyWith({
+    Value<int>? id,
+    Value<int>? mangaId,
+    Value<String>? url,
+    Value<String>? name,
+    Value<DateTime?>? dateUpload,
+    Value<double>? chapterNumber,
+    Value<String?>? scanlator,
+    Value<bool>? read,
+    Value<bool>? downloaded,
+    Value<bool>? bookmark,
+    Value<int>? lastPageRead,
+    Value<DateTime?>? dateFetch,
+    Value<DateTime?>? lastModified,
+  }) {
     return DbChaptersCompanion(
       id: id ?? this.id,
       mangaId: mangaId ?? this.mangaId,
@@ -1434,23 +1722,31 @@ class $DbReadingDirectionTable extends DbReadingDirection
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $DbReadingDirectionTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _mangaIdMeta =
-      const VerificationMeta('mangaId');
+  static const VerificationMeta _mangaIdMeta = const VerificationMeta(
+    'mangaId',
+  );
   @override
   late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
-      'manga_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES db_mangas (id) ON DELETE CASCADE'));
-  static const VerificationMeta _directionMeta =
-      const VerificationMeta('direction');
+    'manga_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES db_mangas (id) ON DELETE CASCADE',
+    ),
+  );
   @override
   late final GeneratedColumnWithTypeConverter<ReadingDirection, int> direction =
-      GeneratedColumn<int>('direction', aliasedName, false,
-              type: DriftSqlType.int, requiredDuringInsert: true)
-          .withConverter<ReadingDirection>(
-              $DbReadingDirectionTable.$converterdirection);
+      GeneratedColumn<int>(
+        'direction',
+        aliasedName,
+        false,
+        type: DriftSqlType.int,
+        requiredDuringInsert: true,
+      ).withConverter<ReadingDirection>(
+        $DbReadingDirectionTable.$converterdirection,
+      );
   @override
   List<GeneratedColumn> get $columns => [mangaId, direction];
   @override
@@ -1460,15 +1756,17 @@ class $DbReadingDirectionTable extends DbReadingDirection
   static const String $name = 'db_reading_direction';
   @override
   VerificationContext validateIntegrity(
-      Insertable<DbReadingDirectionData> instance,
-      {bool isInserting = false}) {
+    Insertable<DbReadingDirectionData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('manga_id')) {
-      context.handle(_mangaIdMeta,
-          mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+      context.handle(
+        _mangaIdMeta,
+        mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta),
+      );
     }
-    context.handle(_directionMeta, const VerificationResult.success());
     return context;
   }
 
@@ -1478,11 +1776,17 @@ class $DbReadingDirectionTable extends DbReadingDirection
   DbReadingDirectionData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbReadingDirectionData(
-      mangaId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
+      mangaId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}manga_id'],
+          )!,
       direction: $DbReadingDirectionTable.$converterdirection.fromSql(
-          attachedDatabase.typeMapping
-              .read(DriftSqlType.int, data['${effectivePrefix}direction'])!),
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.int,
+          data['${effectivePrefix}direction'],
+        )!,
+      ),
     );
   }
 
@@ -1499,15 +1803,18 @@ class DbReadingDirectionData extends DataClass
     implements Insertable<DbReadingDirectionData> {
   final int mangaId;
   final ReadingDirection direction;
-  const DbReadingDirectionData(
-      {required this.mangaId, required this.direction});
+  const DbReadingDirectionData({
+    required this.mangaId,
+    required this.direction,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['manga_id'] = Variable<int>(mangaId);
     {
       map['direction'] = Variable<int>(
-          $DbReadingDirectionTable.$converterdirection.toSql(direction));
+        $DbReadingDirectionTable.$converterdirection.toSql(direction),
+      );
     }
     return map;
   }
@@ -1519,13 +1826,16 @@ class DbReadingDirectionData extends DataClass
     );
   }
 
-  factory DbReadingDirectionData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DbReadingDirectionData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbReadingDirectionData(
       mangaId: serializer.fromJson<int>(json['mangaId']),
-      direction: $DbReadingDirectionTable.$converterdirection
-          .fromJson(serializer.fromJson<int>(json['direction'])),
+      direction: $DbReadingDirectionTable.$converterdirection.fromJson(
+        serializer.fromJson<int>(json['direction']),
+      ),
     );
   }
   @override
@@ -1534,16 +1844,18 @@ class DbReadingDirectionData extends DataClass
     return <String, dynamic>{
       'mangaId': serializer.toJson<int>(mangaId),
       'direction': serializer.toJson<int>(
-          $DbReadingDirectionTable.$converterdirection.toJson(direction)),
+        $DbReadingDirectionTable.$converterdirection.toJson(direction),
+      ),
     };
   }
 
-  DbReadingDirectionData copyWith(
-          {int? mangaId, ReadingDirection? direction}) =>
-      DbReadingDirectionData(
-        mangaId: mangaId ?? this.mangaId,
-        direction: direction ?? this.direction,
-      );
+  DbReadingDirectionData copyWith({
+    int? mangaId,
+    ReadingDirection? direction,
+  }) => DbReadingDirectionData(
+    mangaId: mangaId ?? this.mangaId,
+    direction: direction ?? this.direction,
+  );
   DbReadingDirectionData copyWithCompanion(DbReadingDirectionCompanion data) {
     return DbReadingDirectionData(
       mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
@@ -1592,8 +1904,10 @@ class DbReadingDirectionCompanion
     });
   }
 
-  DbReadingDirectionCompanion copyWith(
-      {Value<int>? mangaId, Value<ReadingDirection>? direction}) {
+  DbReadingDirectionCompanion copyWith({
+    Value<int>? mangaId,
+    Value<ReadingDirection>? direction,
+  }) {
     return DbReadingDirectionCompanion(
       mangaId: mangaId ?? this.mangaId,
       direction: direction ?? this.direction,
@@ -1608,7 +1922,8 @@ class DbReadingDirectionCompanion
     }
     if (direction.present) {
       map['direction'] = Variable<int>(
-          $DbReadingDirectionTable.$converterdirection.toSql(direction.value));
+        $DbReadingDirectionTable.$converterdirection.toSql(direction.value),
+      );
     }
     return map;
   }
@@ -1632,19 +1947,32 @@ class $DbCacheEntriesTable extends DbCacheEntries
   static const VerificationMeta _keyMeta = const VerificationMeta('key');
   @override
   late final GeneratedColumn<String> key = GeneratedColumn<String>(
-      'key', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _responseMeta =
-      const VerificationMeta('response');
+    'key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _responseMeta = const VerificationMeta(
+    'response',
+  );
   @override
   late final GeneratedColumn<String> response = GeneratedColumn<String>(
-      'response', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'response',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _expiryMeta = const VerificationMeta('expiry');
   @override
   late final GeneratedColumn<DateTime> expiry = GeneratedColumn<DateTime>(
-      'expiry', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'expiry',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [key, response, expiry];
   @override
@@ -1653,25 +1981,33 @@ class $DbCacheEntriesTable extends DbCacheEntries
   String get actualTableName => $name;
   static const String $name = 'db_cache_entries';
   @override
-  VerificationContext validateIntegrity(Insertable<DbCacheEntry> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<DbCacheEntry> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('key')) {
       context.handle(
-          _keyMeta, key.isAcceptableOrUnknown(data['key']!, _keyMeta));
+        _keyMeta,
+        key.isAcceptableOrUnknown(data['key']!, _keyMeta),
+      );
     } else if (isInserting) {
       context.missing(_keyMeta);
     }
     if (data.containsKey('response')) {
-      context.handle(_responseMeta,
-          response.isAcceptableOrUnknown(data['response']!, _responseMeta));
+      context.handle(
+        _responseMeta,
+        response.isAcceptableOrUnknown(data['response']!, _responseMeta),
+      );
     } else if (isInserting) {
       context.missing(_responseMeta);
     }
     if (data.containsKey('expiry')) {
-      context.handle(_expiryMeta,
-          expiry.isAcceptableOrUnknown(data['expiry']!, _expiryMeta));
+      context.handle(
+        _expiryMeta,
+        expiry.isAcceptableOrUnknown(data['expiry']!, _expiryMeta),
+      );
     } else if (isInserting) {
       context.missing(_expiryMeta);
     }
@@ -1684,12 +2020,21 @@ class $DbCacheEntriesTable extends DbCacheEntries
   DbCacheEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbCacheEntry(
-      key: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}key'])!,
-      response: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}response'])!,
-      expiry: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}expiry'])!,
+      key:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}key'],
+          )!,
+      response:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}response'],
+          )!,
+      expiry:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.dateTime,
+            data['${effectivePrefix}expiry'],
+          )!,
     );
   }
 
@@ -1703,8 +2048,11 @@ class DbCacheEntry extends DataClass implements Insertable<DbCacheEntry> {
   final String key;
   final String response;
   final DateTime expiry;
-  const DbCacheEntry(
-      {required this.key, required this.response, required this.expiry});
+  const DbCacheEntry({
+    required this.key,
+    required this.response,
+    required this.expiry,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1722,8 +2070,10 @@ class DbCacheEntry extends DataClass implements Insertable<DbCacheEntry> {
     );
   }
 
-  factory DbCacheEntry.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DbCacheEntry.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbCacheEntry(
       key: serializer.fromJson<String>(json['key']),
@@ -1792,9 +2142,9 @@ class DbCacheEntriesCompanion extends UpdateCompanion<DbCacheEntry> {
     required String response,
     required DateTime expiry,
     this.rowid = const Value.absent(),
-  })  : key = Value(key),
-        response = Value(response),
-        expiry = Value(expiry);
+  }) : key = Value(key),
+       response = Value(response),
+       expiry = Value(expiry);
   static Insertable<DbCacheEntry> custom({
     Expression<String>? key,
     Expression<String>? response,
@@ -1809,11 +2159,12 @@ class DbCacheEntriesCompanion extends UpdateCompanion<DbCacheEntry> {
     });
   }
 
-  DbCacheEntriesCompanion copyWith(
-      {Value<String>? key,
-      Value<String>? response,
-      Value<DateTime>? expiry,
-      Value<int>? rowid}) {
+  DbCacheEntriesCompanion copyWith({
+    Value<String>? key,
+    Value<String>? response,
+    Value<DateTime>? expiry,
+    Value<int>? rowid,
+  }) {
     return DbCacheEntriesCompanion(
       key: key ?? this.key,
       response: response ?? this.response,
@@ -1858,29 +2209,43 @@ class $DbChapterHistoryTable extends DbChapterHistory
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $DbChapterHistoryTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _mangaIdMeta =
-      const VerificationMeta('mangaId');
+  static const VerificationMeta _mangaIdMeta = const VerificationMeta(
+    'mangaId',
+  );
   @override
   late final GeneratedColumn<int> mangaId = GeneratedColumn<int>(
-      'manga_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES db_mangas (id) ON DELETE CASCADE'));
-  static const VerificationMeta _chapterIdMeta =
-      const VerificationMeta('chapterId');
+    'manga_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES db_mangas (id) ON DELETE CASCADE',
+    ),
+  );
+  static const VerificationMeta _chapterIdMeta = const VerificationMeta(
+    'chapterId',
+  );
   @override
   late final GeneratedColumn<int> chapterId = GeneratedColumn<int>(
-      'chapter_id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES db_chapters (id) ON DELETE CASCADE'));
+    'chapter_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES db_chapters (id) ON DELETE CASCADE',
+    ),
+  );
   static const VerificationMeta _readAtMeta = const VerificationMeta('readAt');
   @override
   late final GeneratedColumn<DateTime> readAt = GeneratedColumn<DateTime>(
-      'read_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'read_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [mangaId, chapterId, readAt];
   @override
@@ -1890,23 +2255,30 @@ class $DbChapterHistoryTable extends DbChapterHistory
   static const String $name = 'db_chapter_history';
   @override
   VerificationContext validateIntegrity(
-      Insertable<DbChapterHistoryData> instance,
-      {bool isInserting = false}) {
+    Insertable<DbChapterHistoryData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('manga_id')) {
-      context.handle(_mangaIdMeta,
-          mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta));
+      context.handle(
+        _mangaIdMeta,
+        mangaId.isAcceptableOrUnknown(data['manga_id']!, _mangaIdMeta),
+      );
     }
     if (data.containsKey('chapter_id')) {
-      context.handle(_chapterIdMeta,
-          chapterId.isAcceptableOrUnknown(data['chapter_id']!, _chapterIdMeta));
+      context.handle(
+        _chapterIdMeta,
+        chapterId.isAcceptableOrUnknown(data['chapter_id']!, _chapterIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_chapterIdMeta);
     }
     if (data.containsKey('read_at')) {
-      context.handle(_readAtMeta,
-          readAt.isAcceptableOrUnknown(data['read_at']!, _readAtMeta));
+      context.handle(
+        _readAtMeta,
+        readAt.isAcceptableOrUnknown(data['read_at']!, _readAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_readAtMeta);
     }
@@ -1919,12 +2291,21 @@ class $DbChapterHistoryTable extends DbChapterHistory
   DbChapterHistoryData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbChapterHistoryData(
-      mangaId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}manga_id'])!,
-      chapterId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}chapter_id'])!,
-      readAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}read_at'])!,
+      mangaId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}manga_id'],
+          )!,
+      chapterId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.int,
+            data['${effectivePrefix}chapter_id'],
+          )!,
+      readAt:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.dateTime,
+            data['${effectivePrefix}read_at'],
+          )!,
     );
   }
 
@@ -1939,8 +2320,11 @@ class DbChapterHistoryData extends DataClass
   final int mangaId;
   final int chapterId;
   final DateTime readAt;
-  const DbChapterHistoryData(
-      {required this.mangaId, required this.chapterId, required this.readAt});
+  const DbChapterHistoryData({
+    required this.mangaId,
+    required this.chapterId,
+    required this.readAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1958,8 +2342,10 @@ class DbChapterHistoryData extends DataClass
     );
   }
 
-  factory DbChapterHistoryData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory DbChapterHistoryData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return DbChapterHistoryData(
       mangaId: serializer.fromJson<int>(json['mangaId']),
@@ -1977,13 +2363,15 @@ class DbChapterHistoryData extends DataClass
     };
   }
 
-  DbChapterHistoryData copyWith(
-          {int? mangaId, int? chapterId, DateTime? readAt}) =>
-      DbChapterHistoryData(
-        mangaId: mangaId ?? this.mangaId,
-        chapterId: chapterId ?? this.chapterId,
-        readAt: readAt ?? this.readAt,
-      );
+  DbChapterHistoryData copyWith({
+    int? mangaId,
+    int? chapterId,
+    DateTime? readAt,
+  }) => DbChapterHistoryData(
+    mangaId: mangaId ?? this.mangaId,
+    chapterId: chapterId ?? this.chapterId,
+    readAt: readAt ?? this.readAt,
+  );
   DbChapterHistoryData copyWithCompanion(DbChapterHistoryCompanion data) {
     return DbChapterHistoryData(
       mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
@@ -2026,8 +2414,8 @@ class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
     this.mangaId = const Value.absent(),
     required int chapterId,
     required DateTime readAt,
-  })  : chapterId = Value(chapterId),
-        readAt = Value(readAt);
+  }) : chapterId = Value(chapterId),
+       readAt = Value(readAt);
   static Insertable<DbChapterHistoryData> custom({
     Expression<int>? mangaId,
     Expression<int>? chapterId,
@@ -2040,8 +2428,11 @@ class DbChapterHistoryCompanion extends UpdateCompanion<DbChapterHistoryData> {
     });
   }
 
-  DbChapterHistoryCompanion copyWith(
-      {Value<int>? mangaId, Value<int>? chapterId, Value<DateTime>? readAt}) {
+  DbChapterHistoryCompanion copyWith({
+    Value<int>? mangaId,
+    Value<int>? chapterId,
+    Value<DateTime>? readAt,
+  }) {
     return DbChapterHistoryCompanion(
       mangaId: mangaId ?? this.mangaId,
       chapterId: chapterId ?? this.chapterId,
@@ -2083,170 +2474,207 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $DbReadingDirectionTable dbReadingDirection =
       $DbReadingDirectionTable(this);
   late final $DbCacheEntriesTable dbCacheEntries = $DbCacheEntriesTable(this);
-  late final $DbChapterHistoryTable dbChapterHistory =
-      $DbChapterHistoryTable(this);
-  late final Index mangaSourceId = Index('manga_source_id',
-      'CREATE INDEX manga_source_id ON db_mangas (source_id)');
+  late final $DbChapterHistoryTable dbChapterHistory = $DbChapterHistoryTable(
+    this,
+  );
+  late final Index mangaSourceId = Index(
+    'manga_source_id',
+    'CREATE INDEX manga_source_id ON db_mangas (source_id)',
+  );
   late final Index mangaFavorite = Index(
-      'manga_favorite', 'CREATE INDEX manga_favorite ON db_mangas (favorite)');
-  late final Index mangaUrl =
-      Index('manga_url', 'CREATE INDEX manga_url ON db_mangas (url)');
-  late final Index mangaTitle =
-      Index('manga_title', 'CREATE INDEX manga_title ON db_mangas (title)');
-  late final Index chapterMangaId = Index('chapter_manga_id',
-      'CREATE INDEX chapter_manga_id ON db_chapters (manga_id)');
-  late final Index chapterDateUpload = Index('chapter_date_upload',
-      'CREATE INDEX chapter_date_upload ON db_chapters (date_upload)');
-  late final Index chapterNumber = Index('chapter_number',
-      'CREATE INDEX chapter_number ON db_chapters (chapter_number)');
-  late final Index chapterRead =
-      Index('chapter_read', 'CREATE INDEX chapter_read ON db_chapters (read)');
-  late final Index chapterHistoryReadAt = Index('chapter_history_read_at',
-      'CREATE INDEX chapter_history_read_at ON db_chapter_history (read_at)');
+    'manga_favorite',
+    'CREATE INDEX manga_favorite ON db_mangas (favorite)',
+  );
+  late final Index mangaUrl = Index(
+    'manga_url',
+    'CREATE INDEX manga_url ON db_mangas (url)',
+  );
+  late final Index mangaTitle = Index(
+    'manga_title',
+    'CREATE INDEX manga_title ON db_mangas (title)',
+  );
+  late final Index chapterMangaId = Index(
+    'chapter_manga_id',
+    'CREATE INDEX chapter_manga_id ON db_chapters (manga_id)',
+  );
+  late final Index chapterDateUpload = Index(
+    'chapter_date_upload',
+    'CREATE INDEX chapter_date_upload ON db_chapters (date_upload)',
+  );
+  late final Index chapterNumber = Index(
+    'chapter_number',
+    'CREATE INDEX chapter_number ON db_chapters (chapter_number)',
+  );
+  late final Index chapterRead = Index(
+    'chapter_read',
+    'CREATE INDEX chapter_read ON db_chapters (read)',
+  );
+  late final Index chapterHistoryReadAt = Index(
+    'chapter_history_read_at',
+    'CREATE INDEX chapter_history_read_at ON db_chapter_history (read_at)',
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-        dbMangas,
-        dbChapters,
-        dbReadingDirection,
-        dbCacheEntries,
-        dbChapterHistory,
-        mangaSourceId,
-        mangaFavorite,
-        mangaUrl,
-        mangaTitle,
-        chapterMangaId,
-        chapterDateUpload,
-        chapterNumber,
-        chapterRead,
-        chapterHistoryReadAt
-      ];
+    dbMangas,
+    dbChapters,
+    dbReadingDirection,
+    dbCacheEntries,
+    dbChapterHistory,
+    mangaSourceId,
+    mangaFavorite,
+    mangaUrl,
+    mangaTitle,
+    chapterMangaId,
+    chapterDateUpload,
+    chapterNumber,
+    chapterRead,
+    chapterHistoryReadAt,
+  ];
   @override
-  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules(
-        [
-          WritePropagation(
-            on: TableUpdateQuery.onTableName('db_mangas',
-                limitUpdateKind: UpdateKind.delete),
-            result: [
-              TableUpdate('db_chapters', kind: UpdateKind.delete),
-            ],
-          ),
-          WritePropagation(
-            on: TableUpdateQuery.onTableName('db_mangas',
-                limitUpdateKind: UpdateKind.delete),
-            result: [
-              TableUpdate('db_reading_direction', kind: UpdateKind.delete),
-            ],
-          ),
-          WritePropagation(
-            on: TableUpdateQuery.onTableName('db_mangas',
-                limitUpdateKind: UpdateKind.delete),
-            result: [
-              TableUpdate('db_chapter_history', kind: UpdateKind.delete),
-            ],
-          ),
-          WritePropagation(
-            on: TableUpdateQuery.onTableName('db_chapters',
-                limitUpdateKind: UpdateKind.delete),
-            result: [
-              TableUpdate('db_chapter_history', kind: UpdateKind.delete),
-            ],
-          ),
-        ],
-      );
+  StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'db_mangas',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('db_chapters', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'db_mangas',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('db_reading_direction', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'db_mangas',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('db_chapter_history', kind: UpdateKind.delete)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'db_chapters',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('db_chapter_history', kind: UpdateKind.delete)],
+    ),
+  ]);
 }
 
-typedef $$DbMangasTableCreateCompanionBuilder = DbMangasCompanion Function({
-  Value<int> id,
-  required String sourceId,
-  Value<bool> favorite,
-  Value<int> fetchInterval,
-  Value<DateTime?> dateAdded,
-  required String url,
-  required String title,
-  Value<String?> artist,
-  Value<String?> author,
-  Value<String?> description,
-  Value<String?> genre,
-  Value<MangaStatus> status,
-  Value<String?> thumbnailUrl,
-  required UpdateStrategy updateStrategy,
-  Value<bool> initialized,
-  Value<DateTime?> lastModifiedAt,
-});
-typedef $$DbMangasTableUpdateCompanionBuilder = DbMangasCompanion Function({
-  Value<int> id,
-  Value<String> sourceId,
-  Value<bool> favorite,
-  Value<int> fetchInterval,
-  Value<DateTime?> dateAdded,
-  Value<String> url,
-  Value<String> title,
-  Value<String?> artist,
-  Value<String?> author,
-  Value<String?> description,
-  Value<String?> genre,
-  Value<MangaStatus> status,
-  Value<String?> thumbnailUrl,
-  Value<UpdateStrategy> updateStrategy,
-  Value<bool> initialized,
-  Value<DateTime?> lastModifiedAt,
-});
+typedef $$DbMangasTableCreateCompanionBuilder =
+    DbMangasCompanion Function({
+      Value<int> id,
+      required String sourceId,
+      Value<bool> favorite,
+      Value<int> fetchInterval,
+      Value<DateTime?> dateAdded,
+      required String url,
+      required String title,
+      Value<String?> artist,
+      Value<String?> author,
+      Value<String?> description,
+      Value<String?> genre,
+      Value<MangaStatus> status,
+      Value<String?> thumbnailUrl,
+      required UpdateStrategy updateStrategy,
+      Value<bool> initialized,
+      Value<DateTime?> lastModifiedAt,
+    });
+typedef $$DbMangasTableUpdateCompanionBuilder =
+    DbMangasCompanion Function({
+      Value<int> id,
+      Value<String> sourceId,
+      Value<bool> favorite,
+      Value<int> fetchInterval,
+      Value<DateTime?> dateAdded,
+      Value<String> url,
+      Value<String> title,
+      Value<String?> artist,
+      Value<String?> author,
+      Value<String?> description,
+      Value<String?> genre,
+      Value<MangaStatus> status,
+      Value<String?> thumbnailUrl,
+      Value<UpdateStrategy> updateStrategy,
+      Value<bool> initialized,
+      Value<DateTime?> lastModifiedAt,
+    });
 
 final class $$DbMangasTableReferences
     extends BaseReferences<_$AppDatabase, $DbMangasTable, DbManga> {
   $$DbMangasTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$DbChaptersTable, List<DbChapter>>
-      _dbChaptersRefsTable(_$AppDatabase db) =>
-          MultiTypedResultKey.fromTable(db.dbChapters,
-              aliasName:
-                  $_aliasNameGenerator(db.dbMangas.id, db.dbChapters.mangaId));
+  _dbChaptersRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.dbChapters,
+    aliasName: $_aliasNameGenerator(db.dbMangas.id, db.dbChapters.mangaId),
+  );
 
   $$DbChaptersTableProcessedTableManager get dbChaptersRefs {
-    final manager = $$DbChaptersTableTableManager($_db, $_db.dbChapters)
-        .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$DbChaptersTableTableManager(
+      $_db,
+      $_db.dbChapters,
+    ).filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
     final cache = $_typedResult.readTableOrNull(_dbChaptersRefsTable($_db));
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 
-  static MultiTypedResultKey<$DbReadingDirectionTable,
-      List<DbReadingDirectionData>> _dbReadingDirectionRefsTable(
-          _$AppDatabase db) =>
-      MultiTypedResultKey.fromTable(db.dbReadingDirection,
-          aliasName: $_aliasNameGenerator(
-              db.dbMangas.id, db.dbReadingDirection.mangaId));
+  static MultiTypedResultKey<
+    $DbReadingDirectionTable,
+    List<DbReadingDirectionData>
+  >
+  _dbReadingDirectionRefsTable(_$AppDatabase db) =>
+      MultiTypedResultKey.fromTable(
+        db.dbReadingDirection,
+        aliasName: $_aliasNameGenerator(
+          db.dbMangas.id,
+          db.dbReadingDirection.mangaId,
+        ),
+      );
 
   $$DbReadingDirectionTableProcessedTableManager get dbReadingDirectionRefs {
-    final manager =
-        $$DbReadingDirectionTableTableManager($_db, $_db.dbReadingDirection)
-            .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$DbReadingDirectionTableTableManager(
+      $_db,
+      $_db.dbReadingDirection,
+    ).filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_dbReadingDirectionRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _dbReadingDirectionRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 
   static MultiTypedResultKey<$DbChapterHistoryTable, List<DbChapterHistoryData>>
-      _dbChapterHistoryRefsTable(_$AppDatabase db) =>
-          MultiTypedResultKey.fromTable(db.dbChapterHistory,
-              aliasName: $_aliasNameGenerator(
-                  db.dbMangas.id, db.dbChapterHistory.mangaId));
+  _dbChapterHistoryRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.dbChapterHistory,
+    aliasName: $_aliasNameGenerator(
+      db.dbMangas.id,
+      db.dbChapterHistory.mangaId,
+    ),
+  );
 
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
-    final manager =
-        $$DbChapterHistoryTableTableManager($_db, $_db.dbChapterHistory)
-            .filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$DbChapterHistoryTableTableManager(
+      $_db,
+      $_db.dbChapterHistory,
+    ).filter((f) => f.mangaId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_dbChapterHistoryRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _dbChapterHistoryRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -2260,118 +2688,159 @@ class $$DbMangasTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get sourceId => $composableBuilder(
-      column: $table.sourceId, builder: (column) => ColumnFilters(column));
+    column: $table.sourceId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get favorite => $composableBuilder(
-      column: $table.favorite, builder: (column) => ColumnFilters(column));
+    column: $table.favorite,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get fetchInterval => $composableBuilder(
-      column: $table.fetchInterval, builder: (column) => ColumnFilters(column));
+    column: $table.fetchInterval,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get dateAdded => $composableBuilder(
-      column: $table.dateAdded, builder: (column) => ColumnFilters(column));
+    column: $table.dateAdded,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnFilters(column));
+    column: $table.url,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => ColumnFilters(column));
+    column: $table.title,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get artist => $composableBuilder(
-      column: $table.artist, builder: (column) => ColumnFilters(column));
+    column: $table.artist,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get author => $composableBuilder(
-      column: $table.author, builder: (column) => ColumnFilters(column));
+    column: $table.author,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnFilters(column));
+    column: $table.description,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get genre => $composableBuilder(
-      column: $table.genre, builder: (column) => ColumnFilters(column));
+    column: $table.genre,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnWithTypeConverterFilters<MangaStatus, MangaStatus, int> get status =>
       $composableBuilder(
-          column: $table.status,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+        column: $table.status,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
 
   ColumnFilters<String> get thumbnailUrl => $composableBuilder(
-      column: $table.thumbnailUrl, builder: (column) => ColumnFilters(column));
+    column: $table.thumbnailUrl,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnWithTypeConverterFilters<UpdateStrategy, UpdateStrategy, int>
-      get updateStrategy => $composableBuilder(
-          column: $table.updateStrategy,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+  get updateStrategy => $composableBuilder(
+    column: $table.updateStrategy,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
 
   ColumnFilters<bool> get initialized => $composableBuilder(
-      column: $table.initialized, builder: (column) => ColumnFilters(column));
+    column: $table.initialized,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get lastModifiedAt => $composableBuilder(
-      column: $table.lastModifiedAt,
-      builder: (column) => ColumnFilters(column));
+    column: $table.lastModifiedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   Expression<bool> dbChaptersRefs(
-      Expression<bool> Function($$DbChaptersTableFilterComposer f) f) {
+    Expression<bool> Function($$DbChaptersTableFilterComposer f) f,
+  ) {
     final $$DbChaptersTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapters,
-        getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChaptersTableFilterComposer(
-              $db: $db,
-              $table: $db.dbChapters,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapters,
+      getReferencedColumn: (t) => t.mangaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChaptersTableFilterComposer(
+            $db: $db,
+            $table: $db.dbChapters,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<bool> dbReadingDirectionRefs(
-      Expression<bool> Function($$DbReadingDirectionTableFilterComposer f) f) {
+    Expression<bool> Function($$DbReadingDirectionTableFilterComposer f) f,
+  ) {
     final $$DbReadingDirectionTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbReadingDirection,
-        getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbReadingDirectionTableFilterComposer(
-              $db: $db,
-              $table: $db.dbReadingDirection,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbReadingDirection,
+      getReferencedColumn: (t) => t.mangaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbReadingDirectionTableFilterComposer(
+            $db: $db,
+            $table: $db.dbReadingDirection,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<bool> dbChapterHistoryRefs(
-      Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f) {
+    Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f,
+  ) {
     final $$DbChapterHistoryTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapterHistory,
-        getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChapterHistoryTableFilterComposer(
-              $db: $db,
-              $table: $db.dbChapterHistory,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapterHistory,
+      getReferencedColumn: (t) => t.mangaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChapterHistoryTableFilterComposer(
+            $db: $db,
+            $table: $db.dbChapterHistory,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -2386,56 +2855,84 @@ class $$DbMangasTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get sourceId => $composableBuilder(
-      column: $table.sourceId, builder: (column) => ColumnOrderings(column));
+    column: $table.sourceId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get favorite => $composableBuilder(
-      column: $table.favorite, builder: (column) => ColumnOrderings(column));
+    column: $table.favorite,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get fetchInterval => $composableBuilder(
-      column: $table.fetchInterval,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.fetchInterval,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get dateAdded => $composableBuilder(
-      column: $table.dateAdded, builder: (column) => ColumnOrderings(column));
+    column: $table.dateAdded,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnOrderings(column));
+    column: $table.url,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get title => $composableBuilder(
-      column: $table.title, builder: (column) => ColumnOrderings(column));
+    column: $table.title,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get artist => $composableBuilder(
-      column: $table.artist, builder: (column) => ColumnOrderings(column));
+    column: $table.artist,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get author => $composableBuilder(
-      column: $table.author, builder: (column) => ColumnOrderings(column));
+    column: $table.author,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnOrderings(column));
+    column: $table.description,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get genre => $composableBuilder(
-      column: $table.genre, builder: (column) => ColumnOrderings(column));
+    column: $table.genre,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get status => $composableBuilder(
-      column: $table.status, builder: (column) => ColumnOrderings(column));
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get thumbnailUrl => $composableBuilder(
-      column: $table.thumbnailUrl,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.thumbnailUrl,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get updateStrategy => $composableBuilder(
-      column: $table.updateStrategy,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.updateStrategy,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get initialized => $composableBuilder(
-      column: $table.initialized, builder: (column) => ColumnOrderings(column));
+    column: $table.initialized,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get lastModifiedAt => $composableBuilder(
-      column: $table.lastModifiedAt,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.lastModifiedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$DbMangasTableAnnotationComposer
@@ -2457,7 +2954,9 @@ class $$DbMangasTableAnnotationComposer
       $composableBuilder(column: $table.favorite, builder: (column) => column);
 
   GeneratedColumn<int> get fetchInterval => $composableBuilder(
-      column: $table.fetchInterval, builder: (column) => column);
+    column: $table.fetchInterval,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get dateAdded =>
       $composableBuilder(column: $table.dateAdded, builder: (column) => column);
@@ -2475,7 +2974,9 @@ class $$DbMangasTableAnnotationComposer
       $composableBuilder(column: $table.author, builder: (column) => column);
 
   GeneratedColumn<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => column);
+    column: $table.description,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get genre =>
       $composableBuilder(column: $table.genre, builder: (column) => column);
@@ -2484,289 +2985,354 @@ class $$DbMangasTableAnnotationComposer
       $composableBuilder(column: $table.status, builder: (column) => column);
 
   GeneratedColumn<String> get thumbnailUrl => $composableBuilder(
-      column: $table.thumbnailUrl, builder: (column) => column);
+    column: $table.thumbnailUrl,
+    builder: (column) => column,
+  );
 
   GeneratedColumnWithTypeConverter<UpdateStrategy, int> get updateStrategy =>
       $composableBuilder(
-          column: $table.updateStrategy, builder: (column) => column);
+        column: $table.updateStrategy,
+        builder: (column) => column,
+      );
 
   GeneratedColumn<bool> get initialized => $composableBuilder(
-      column: $table.initialized, builder: (column) => column);
+    column: $table.initialized,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get lastModifiedAt => $composableBuilder(
-      column: $table.lastModifiedAt, builder: (column) => column);
+    column: $table.lastModifiedAt,
+    builder: (column) => column,
+  );
 
   Expression<T> dbChaptersRefs<T extends Object>(
-      Expression<T> Function($$DbChaptersTableAnnotationComposer a) f) {
+    Expression<T> Function($$DbChaptersTableAnnotationComposer a) f,
+  ) {
     final $$DbChaptersTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapters,
-        getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChaptersTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbChapters,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapters,
+      getReferencedColumn: (t) => t.mangaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChaptersTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbChapters,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 
   Expression<T> dbReadingDirectionRefs<T extends Object>(
-      Expression<T> Function($$DbReadingDirectionTableAnnotationComposer a) f) {
+    Expression<T> Function($$DbReadingDirectionTableAnnotationComposer a) f,
+  ) {
     final $$DbReadingDirectionTableAnnotationComposer composer =
         $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.id,
-            referencedTable: $db.dbReadingDirection,
-            getReferencedColumn: (t) => t.mangaId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$DbReadingDirectionTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.dbReadingDirection,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+          composer: this,
+          getCurrentColumn: (t) => t.id,
+          referencedTable: $db.dbReadingDirection,
+          getReferencedColumn: (t) => t.mangaId,
+          builder:
+              (
+                joinBuilder, {
+                $addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer,
+              }) => $$DbReadingDirectionTableAnnotationComposer(
+                $db: $db,
+                $table: $db.dbReadingDirection,
+                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                joinBuilder: joinBuilder,
+                $removeJoinBuilderFromRootComposer:
+                    $removeJoinBuilderFromRootComposer,
+              ),
+        );
     return f(composer);
   }
 
   Expression<T> dbChapterHistoryRefs<T extends Object>(
-      Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f) {
+    Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f,
+  ) {
     final $$DbChapterHistoryTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapterHistory,
-        getReferencedColumn: (t) => t.mangaId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChapterHistoryTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbChapterHistory,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapterHistory,
+      getReferencedColumn: (t) => t.mangaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChapterHistoryTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbChapterHistory,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
-class $$DbMangasTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbMangasTable,
-    DbManga,
-    $$DbMangasTableFilterComposer,
-    $$DbMangasTableOrderingComposer,
-    $$DbMangasTableAnnotationComposer,
-    $$DbMangasTableCreateCompanionBuilder,
-    $$DbMangasTableUpdateCompanionBuilder,
-    (DbManga, $$DbMangasTableReferences),
-    DbManga,
-    PrefetchHooks Function(
-        {bool dbChaptersRefs,
-        bool dbReadingDirectionRefs,
-        bool dbChapterHistoryRefs})> {
+class $$DbMangasTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DbMangasTable,
+          DbManga,
+          $$DbMangasTableFilterComposer,
+          $$DbMangasTableOrderingComposer,
+          $$DbMangasTableAnnotationComposer,
+          $$DbMangasTableCreateCompanionBuilder,
+          $$DbMangasTableUpdateCompanionBuilder,
+          (DbManga, $$DbMangasTableReferences),
+          DbManga,
+          PrefetchHooks Function({
+            bool dbChaptersRefs,
+            bool dbReadingDirectionRefs,
+            bool dbChapterHistoryRefs,
+          })
+        > {
   $$DbMangasTableTableManager(_$AppDatabase db, $DbMangasTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$DbMangasTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$DbMangasTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$DbMangasTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<String> sourceId = const Value.absent(),
-            Value<bool> favorite = const Value.absent(),
-            Value<int> fetchInterval = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String> title = const Value.absent(),
-            Value<String?> artist = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> genre = const Value.absent(),
-            Value<MangaStatus> status = const Value.absent(),
-            Value<String?> thumbnailUrl = const Value.absent(),
-            Value<UpdateStrategy> updateStrategy = const Value.absent(),
-            Value<bool> initialized = const Value.absent(),
-            Value<DateTime?> lastModifiedAt = const Value.absent(),
-          }) =>
-              DbMangasCompanion(
-            id: id,
-            sourceId: sourceId,
-            favorite: favorite,
-            fetchInterval: fetchInterval,
-            dateAdded: dateAdded,
-            url: url,
-            title: title,
-            artist: artist,
-            author: author,
-            description: description,
-            genre: genre,
-            status: status,
-            thumbnailUrl: thumbnailUrl,
-            updateStrategy: updateStrategy,
-            initialized: initialized,
-            lastModifiedAt: lastModifiedAt,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required String sourceId,
-            Value<bool> favorite = const Value.absent(),
-            Value<int> fetchInterval = const Value.absent(),
-            Value<DateTime?> dateAdded = const Value.absent(),
-            required String url,
-            required String title,
-            Value<String?> artist = const Value.absent(),
-            Value<String?> author = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> genre = const Value.absent(),
-            Value<MangaStatus> status = const Value.absent(),
-            Value<String?> thumbnailUrl = const Value.absent(),
-            required UpdateStrategy updateStrategy,
-            Value<bool> initialized = const Value.absent(),
-            Value<DateTime?> lastModifiedAt = const Value.absent(),
-          }) =>
-              DbMangasCompanion.insert(
-            id: id,
-            sourceId: sourceId,
-            favorite: favorite,
-            fetchInterval: fetchInterval,
-            dateAdded: dateAdded,
-            url: url,
-            title: title,
-            artist: artist,
-            author: author,
-            description: description,
-            genre: genre,
-            status: status,
-            thumbnailUrl: thumbnailUrl,
-            updateStrategy: updateStrategy,
-            initialized: initialized,
-            lastModifiedAt: lastModifiedAt,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) =>
-                  (e.readTable(table), $$DbMangasTableReferences(db, table, e)))
-              .toList(),
-          prefetchHooksCallback: (
-              {dbChaptersRefs = false,
-              dbReadingDirectionRefs = false,
-              dbChapterHistoryRefs = false}) {
+          createFilteringComposer:
+              () => $$DbMangasTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => $$DbMangasTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer:
+              () => $$DbMangasTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> sourceId = const Value.absent(),
+                Value<bool> favorite = const Value.absent(),
+                Value<int> fetchInterval = const Value.absent(),
+                Value<DateTime?> dateAdded = const Value.absent(),
+                Value<String> url = const Value.absent(),
+                Value<String> title = const Value.absent(),
+                Value<String?> artist = const Value.absent(),
+                Value<String?> author = const Value.absent(),
+                Value<String?> description = const Value.absent(),
+                Value<String?> genre = const Value.absent(),
+                Value<MangaStatus> status = const Value.absent(),
+                Value<String?> thumbnailUrl = const Value.absent(),
+                Value<UpdateStrategy> updateStrategy = const Value.absent(),
+                Value<bool> initialized = const Value.absent(),
+                Value<DateTime?> lastModifiedAt = const Value.absent(),
+              }) => DbMangasCompanion(
+                id: id,
+                sourceId: sourceId,
+                favorite: favorite,
+                fetchInterval: fetchInterval,
+                dateAdded: dateAdded,
+                url: url,
+                title: title,
+                artist: artist,
+                author: author,
+                description: description,
+                genre: genre,
+                status: status,
+                thumbnailUrl: thumbnailUrl,
+                updateStrategy: updateStrategy,
+                initialized: initialized,
+                lastModifiedAt: lastModifiedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String sourceId,
+                Value<bool> favorite = const Value.absent(),
+                Value<int> fetchInterval = const Value.absent(),
+                Value<DateTime?> dateAdded = const Value.absent(),
+                required String url,
+                required String title,
+                Value<String?> artist = const Value.absent(),
+                Value<String?> author = const Value.absent(),
+                Value<String?> description = const Value.absent(),
+                Value<String?> genre = const Value.absent(),
+                Value<MangaStatus> status = const Value.absent(),
+                Value<String?> thumbnailUrl = const Value.absent(),
+                required UpdateStrategy updateStrategy,
+                Value<bool> initialized = const Value.absent(),
+                Value<DateTime?> lastModifiedAt = const Value.absent(),
+              }) => DbMangasCompanion.insert(
+                id: id,
+                sourceId: sourceId,
+                favorite: favorite,
+                fetchInterval: fetchInterval,
+                dateAdded: dateAdded,
+                url: url,
+                title: title,
+                artist: artist,
+                author: author,
+                description: description,
+                genre: genre,
+                status: status,
+                thumbnailUrl: thumbnailUrl,
+                updateStrategy: updateStrategy,
+                initialized: initialized,
+                lastModifiedAt: lastModifiedAt,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          $$DbMangasTableReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
+          prefetchHooksCallback: ({
+            dbChaptersRefs = false,
+            dbReadingDirectionRefs = false,
+            dbChapterHistoryRefs = false,
+          }) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
                 if (dbChaptersRefs) db.dbChapters,
                 if (dbReadingDirectionRefs) db.dbReadingDirection,
-                if (dbChapterHistoryRefs) db.dbChapterHistory
+                if (dbChapterHistoryRefs) db.dbChapterHistory,
               ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dbChaptersRefs)
-                    await $_getPrefetchedData<DbManga, $DbMangasTable,
-                            DbChapter>(
-                        currentTable: table,
-                        referencedTable:
-                            $$DbMangasTableReferences._dbChaptersRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DbMangasTableReferences(db, table, p0)
-                                .dbChaptersRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.mangaId == item.id),
-                        typedResults: items),
+                    await $_getPrefetchedData<
+                      DbManga,
+                      $DbMangasTable,
+                      DbChapter
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DbMangasTableReferences
+                          ._dbChaptersRefsTable(db),
+                      managerFromTypedResult:
+                          (p0) =>
+                              $$DbMangasTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).dbChaptersRefs,
+                      referencedItemsForCurrentItem:
+                          (item, referencedItems) => referencedItems.where(
+                            (e) => e.mangaId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
                   if (dbReadingDirectionRefs)
-                    await $_getPrefetchedData<DbManga, $DbMangasTable,
-                            DbReadingDirectionData>(
-                        currentTable: table,
-                        referencedTable: $$DbMangasTableReferences
-                            ._dbReadingDirectionRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DbMangasTableReferences(db, table, p0)
-                                .dbReadingDirectionRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.mangaId == item.id),
-                        typedResults: items),
+                    await $_getPrefetchedData<
+                      DbManga,
+                      $DbMangasTable,
+                      DbReadingDirectionData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DbMangasTableReferences
+                          ._dbReadingDirectionRefsTable(db),
+                      managerFromTypedResult:
+                          (p0) =>
+                              $$DbMangasTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).dbReadingDirectionRefs,
+                      referencedItemsForCurrentItem:
+                          (item, referencedItems) => referencedItems.where(
+                            (e) => e.mangaId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
                   if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData<DbManga, $DbMangasTable,
-                            DbChapterHistoryData>(
-                        currentTable: table,
-                        referencedTable: $$DbMangasTableReferences
-                            ._dbChapterHistoryRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DbMangasTableReferences(db, table, p0)
-                                .dbChapterHistoryRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) => e.mangaId == item.id),
-                        typedResults: items)
+                    await $_getPrefetchedData<
+                      DbManga,
+                      $DbMangasTable,
+                      DbChapterHistoryData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DbMangasTableReferences
+                          ._dbChapterHistoryRefsTable(db),
+                      managerFromTypedResult:
+                          (p0) =>
+                              $$DbMangasTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).dbChapterHistoryRefs,
+                      referencedItemsForCurrentItem:
+                          (item, referencedItems) => referencedItems.where(
+                            (e) => e.mangaId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
                 ];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$DbMangasTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $DbMangasTable,
-    DbManga,
-    $$DbMangasTableFilterComposer,
-    $$DbMangasTableOrderingComposer,
-    $$DbMangasTableAnnotationComposer,
-    $$DbMangasTableCreateCompanionBuilder,
-    $$DbMangasTableUpdateCompanionBuilder,
-    (DbManga, $$DbMangasTableReferences),
-    DbManga,
-    PrefetchHooks Function(
-        {bool dbChaptersRefs,
+typedef $$DbMangasTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DbMangasTable,
+      DbManga,
+      $$DbMangasTableFilterComposer,
+      $$DbMangasTableOrderingComposer,
+      $$DbMangasTableAnnotationComposer,
+      $$DbMangasTableCreateCompanionBuilder,
+      $$DbMangasTableUpdateCompanionBuilder,
+      (DbManga, $$DbMangasTableReferences),
+      DbManga,
+      PrefetchHooks Function({
+        bool dbChaptersRefs,
         bool dbReadingDirectionRefs,
-        bool dbChapterHistoryRefs})>;
-typedef $$DbChaptersTableCreateCompanionBuilder = DbChaptersCompanion Function({
-  Value<int> id,
-  required int mangaId,
-  required String url,
-  required String name,
-  Value<DateTime?> dateUpload,
-  Value<double> chapterNumber,
-  Value<String?> scanlator,
-  Value<bool> read,
-  Value<bool> downloaded,
-  Value<bool> bookmark,
-  Value<int> lastPageRead,
-  Value<DateTime?> dateFetch,
-  Value<DateTime?> lastModified,
-});
-typedef $$DbChaptersTableUpdateCompanionBuilder = DbChaptersCompanion Function({
-  Value<int> id,
-  Value<int> mangaId,
-  Value<String> url,
-  Value<String> name,
-  Value<DateTime?> dateUpload,
-  Value<double> chapterNumber,
-  Value<String?> scanlator,
-  Value<bool> read,
-  Value<bool> downloaded,
-  Value<bool> bookmark,
-  Value<int> lastPageRead,
-  Value<DateTime?> dateFetch,
-  Value<DateTime?> lastModified,
-});
+        bool dbChapterHistoryRefs,
+      })
+    >;
+typedef $$DbChaptersTableCreateCompanionBuilder =
+    DbChaptersCompanion Function({
+      Value<int> id,
+      required int mangaId,
+      required String url,
+      required String name,
+      Value<DateTime?> dateUpload,
+      Value<double> chapterNumber,
+      Value<String?> scanlator,
+      Value<bool> read,
+      Value<bool> downloaded,
+      Value<bool> bookmark,
+      Value<int> lastPageRead,
+      Value<DateTime?> dateFetch,
+      Value<DateTime?> lastModified,
+    });
+typedef $$DbChaptersTableUpdateCompanionBuilder =
+    DbChaptersCompanion Function({
+      Value<int> id,
+      Value<int> mangaId,
+      Value<String> url,
+      Value<String> name,
+      Value<DateTime?> dateUpload,
+      Value<double> chapterNumber,
+      Value<String?> scanlator,
+      Value<bool> read,
+      Value<bool> downloaded,
+      Value<bool> bookmark,
+      Value<int> lastPageRead,
+      Value<DateTime?> dateFetch,
+      Value<DateTime?> lastModified,
+    });
 
 final class $$DbChaptersTableReferences
     extends BaseReferences<_$AppDatabase, $DbChaptersTable, DbChapter> {
@@ -2778,29 +3344,38 @@ final class $$DbChaptersTableReferences
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
 
-    final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DbMangasTableTableManager(
+      $_db,
+      $_db.dbMangas,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 
   static MultiTypedResultKey<$DbChapterHistoryTable, List<DbChapterHistoryData>>
-      _dbChapterHistoryRefsTable(_$AppDatabase db) =>
-          MultiTypedResultKey.fromTable(db.dbChapterHistory,
-              aliasName: $_aliasNameGenerator(
-                  db.dbChapters.id, db.dbChapterHistory.chapterId));
+  _dbChapterHistoryRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.dbChapterHistory,
+    aliasName: $_aliasNameGenerator(
+      db.dbChapters.id,
+      db.dbChapterHistory.chapterId,
+    ),
+  );
 
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
-    final manager =
-        $$DbChapterHistoryTableTableManager($_db, $_db.dbChapterHistory)
-            .filter((f) => f.chapterId.id.sqlEquals($_itemColumn<int>('id')!));
+    final manager = $$DbChapterHistoryTableTableManager(
+      $_db,
+      $_db.dbChapterHistory,
+    ).filter((f) => f.chapterId.id.sqlEquals($_itemColumn<int>('id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_dbChapterHistoryRefsTable($_db));
+    final cache = $_typedResult.readTableOrNull(
+      _dbChapterHistoryRefsTable($_db),
+    );
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+      manager.$state.copyWith(prefetchedData: cache),
+    );
   }
 }
 
@@ -2814,79 +3389,110 @@ class $$DbChaptersTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnFilters(column));
+    column: $table.url,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get dateUpload => $composableBuilder(
-      column: $table.dateUpload, builder: (column) => ColumnFilters(column));
+    column: $table.dateUpload,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<double> get chapterNumber => $composableBuilder(
-      column: $table.chapterNumber, builder: (column) => ColumnFilters(column));
+    column: $table.chapterNumber,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get scanlator => $composableBuilder(
-      column: $table.scanlator, builder: (column) => ColumnFilters(column));
+    column: $table.scanlator,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get read => $composableBuilder(
-      column: $table.read, builder: (column) => ColumnFilters(column));
+    column: $table.read,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get downloaded => $composableBuilder(
-      column: $table.downloaded, builder: (column) => ColumnFilters(column));
+    column: $table.downloaded,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<bool> get bookmark => $composableBuilder(
-      column: $table.bookmark, builder: (column) => ColumnFilters(column));
+    column: $table.bookmark,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get lastPageRead => $composableBuilder(
-      column: $table.lastPageRead, builder: (column) => ColumnFilters(column));
+    column: $table.lastPageRead,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get dateFetch => $composableBuilder(
-      column: $table.dateFetch, builder: (column) => ColumnFilters(column));
+    column: $table.dateFetch,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get lastModified => $composableBuilder(
-      column: $table.lastModified, builder: (column) => ColumnFilters(column));
+    column: $table.lastModified,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$DbMangasTableFilterComposer get mangaId {
     final $$DbMangasTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableFilterComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableFilterComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   Expression<bool> dbChapterHistoryRefs(
-      Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f) {
+    Expression<bool> Function($$DbChapterHistoryTableFilterComposer f) f,
+  ) {
     final $$DbChapterHistoryTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapterHistory,
-        getReferencedColumn: (t) => t.chapterId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChapterHistoryTableFilterComposer(
-              $db: $db,
-              $table: $db.dbChapterHistory,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapterHistory,
+      getReferencedColumn: (t) => t.chapterId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChapterHistoryTableFilterComposer(
+            $db: $db,
+            $table: $db.dbChapterHistory,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
@@ -2901,61 +3507,85 @@ class $$DbChaptersTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnOrderings(column));
+    column: $table.url,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get dateUpload => $composableBuilder(
-      column: $table.dateUpload, builder: (column) => ColumnOrderings(column));
+    column: $table.dateUpload,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<double> get chapterNumber => $composableBuilder(
-      column: $table.chapterNumber,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.chapterNumber,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get scanlator => $composableBuilder(
-      column: $table.scanlator, builder: (column) => ColumnOrderings(column));
+    column: $table.scanlator,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get read => $composableBuilder(
-      column: $table.read, builder: (column) => ColumnOrderings(column));
+    column: $table.read,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get downloaded => $composableBuilder(
-      column: $table.downloaded, builder: (column) => ColumnOrderings(column));
+    column: $table.downloaded,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<bool> get bookmark => $composableBuilder(
-      column: $table.bookmark, builder: (column) => ColumnOrderings(column));
+    column: $table.bookmark,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get lastPageRead => $composableBuilder(
-      column: $table.lastPageRead,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.lastPageRead,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get dateFetch => $composableBuilder(
-      column: $table.dateFetch, builder: (column) => ColumnOrderings(column));
+    column: $table.dateFetch,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get lastModified => $composableBuilder(
-      column: $table.lastModified,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.lastModified,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$DbMangasTableOrderingComposer get mangaId {
     final $$DbMangasTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableOrderingComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableOrderingComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -2979,10 +3609,14 @@ class $$DbChaptersTableAnnotationComposer
       $composableBuilder(column: $table.name, builder: (column) => column);
 
   GeneratedColumn<DateTime> get dateUpload => $composableBuilder(
-      column: $table.dateUpload, builder: (column) => column);
+    column: $table.dateUpload,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<double> get chapterNumber => $composableBuilder(
-      column: $table.chapterNumber, builder: (column) => column);
+    column: $table.chapterNumber,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get scanlator =>
       $composableBuilder(column: $table.scanlator, builder: (column) => column);
@@ -2991,179 +3625,208 @@ class $$DbChaptersTableAnnotationComposer
       $composableBuilder(column: $table.read, builder: (column) => column);
 
   GeneratedColumn<bool> get downloaded => $composableBuilder(
-      column: $table.downloaded, builder: (column) => column);
+    column: $table.downloaded,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<bool> get bookmark =>
       $composableBuilder(column: $table.bookmark, builder: (column) => column);
 
   GeneratedColumn<int> get lastPageRead => $composableBuilder(
-      column: $table.lastPageRead, builder: (column) => column);
+    column: $table.lastPageRead,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get dateFetch =>
       $composableBuilder(column: $table.dateFetch, builder: (column) => column);
 
   GeneratedColumn<DateTime> get lastModified => $composableBuilder(
-      column: $table.lastModified, builder: (column) => column);
+    column: $table.lastModified,
+    builder: (column) => column,
+  );
 
   $$DbMangasTableAnnotationComposer get mangaId {
     final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   Expression<T> dbChapterHistoryRefs<T extends Object>(
-      Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f) {
+    Expression<T> Function($$DbChapterHistoryTableAnnotationComposer a) f,
+  ) {
     final $$DbChapterHistoryTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.id,
-        referencedTable: $db.dbChapterHistory,
-        getReferencedColumn: (t) => t.chapterId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChapterHistoryTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbChapterHistory,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.dbChapterHistory,
+      getReferencedColumn: (t) => t.chapterId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChapterHistoryTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbChapterHistory,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return f(composer);
   }
 }
 
-class $$DbChaptersTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbChaptersTable,
-    DbChapter,
-    $$DbChaptersTableFilterComposer,
-    $$DbChaptersTableOrderingComposer,
-    $$DbChaptersTableAnnotationComposer,
-    $$DbChaptersTableCreateCompanionBuilder,
-    $$DbChaptersTableUpdateCompanionBuilder,
-    (DbChapter, $$DbChaptersTableReferences),
-    DbChapter,
-    PrefetchHooks Function({bool mangaId, bool dbChapterHistoryRefs})> {
+class $$DbChaptersTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DbChaptersTable,
+          DbChapter,
+          $$DbChaptersTableFilterComposer,
+          $$DbChaptersTableOrderingComposer,
+          $$DbChaptersTableAnnotationComposer,
+          $$DbChaptersTableCreateCompanionBuilder,
+          $$DbChaptersTableUpdateCompanionBuilder,
+          (DbChapter, $$DbChaptersTableReferences),
+          DbChapter,
+          PrefetchHooks Function({bool mangaId, bool dbChapterHistoryRefs})
+        > {
   $$DbChaptersTableTableManager(_$AppDatabase db, $DbChaptersTable table)
-      : super(TableManagerState(
+    : super(
+        TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$DbChaptersTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$DbChaptersTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$DbChaptersTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            Value<int> mangaId = const Value.absent(),
-            Value<String> url = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<DateTime?> dateUpload = const Value.absent(),
-            Value<double> chapterNumber = const Value.absent(),
-            Value<String?> scanlator = const Value.absent(),
-            Value<bool> read = const Value.absent(),
-            Value<bool> downloaded = const Value.absent(),
-            Value<bool> bookmark = const Value.absent(),
-            Value<int> lastPageRead = const Value.absent(),
-            Value<DateTime?> dateFetch = const Value.absent(),
-            Value<DateTime?> lastModified = const Value.absent(),
-          }) =>
-              DbChaptersCompanion(
-            id: id,
-            mangaId: mangaId,
-            url: url,
-            name: name,
-            dateUpload: dateUpload,
-            chapterNumber: chapterNumber,
-            scanlator: scanlator,
-            read: read,
-            downloaded: downloaded,
-            bookmark: bookmark,
-            lastPageRead: lastPageRead,
-            dateFetch: dateFetch,
-            lastModified: lastModified,
-          ),
-          createCompanionCallback: ({
-            Value<int> id = const Value.absent(),
-            required int mangaId,
-            required String url,
-            required String name,
-            Value<DateTime?> dateUpload = const Value.absent(),
-            Value<double> chapterNumber = const Value.absent(),
-            Value<String?> scanlator = const Value.absent(),
-            Value<bool> read = const Value.absent(),
-            Value<bool> downloaded = const Value.absent(),
-            Value<bool> bookmark = const Value.absent(),
-            Value<int> lastPageRead = const Value.absent(),
-            Value<DateTime?> dateFetch = const Value.absent(),
-            Value<DateTime?> lastModified = const Value.absent(),
-          }) =>
-              DbChaptersCompanion.insert(
-            id: id,
-            mangaId: mangaId,
-            url: url,
-            name: name,
-            dateUpload: dateUpload,
-            chapterNumber: chapterNumber,
-            scanlator: scanlator,
-            read: read,
-            downloaded: downloaded,
-            bookmark: bookmark,
-            lastPageRead: lastPageRead,
-            dateFetch: dateFetch,
-            lastModified: lastModified,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$DbChaptersTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: (
-              {mangaId = false, dbChapterHistoryRefs = false}) {
+          createFilteringComposer:
+              () => $$DbChaptersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => $$DbChaptersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer:
+              () => $$DbChaptersTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> mangaId = const Value.absent(),
+                Value<String> url = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<DateTime?> dateUpload = const Value.absent(),
+                Value<double> chapterNumber = const Value.absent(),
+                Value<String?> scanlator = const Value.absent(),
+                Value<bool> read = const Value.absent(),
+                Value<bool> downloaded = const Value.absent(),
+                Value<bool> bookmark = const Value.absent(),
+                Value<int> lastPageRead = const Value.absent(),
+                Value<DateTime?> dateFetch = const Value.absent(),
+                Value<DateTime?> lastModified = const Value.absent(),
+              }) => DbChaptersCompanion(
+                id: id,
+                mangaId: mangaId,
+                url: url,
+                name: name,
+                dateUpload: dateUpload,
+                chapterNumber: chapterNumber,
+                scanlator: scanlator,
+                read: read,
+                downloaded: downloaded,
+                bookmark: bookmark,
+                lastPageRead: lastPageRead,
+                dateFetch: dateFetch,
+                lastModified: lastModified,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int mangaId,
+                required String url,
+                required String name,
+                Value<DateTime?> dateUpload = const Value.absent(),
+                Value<double> chapterNumber = const Value.absent(),
+                Value<String?> scanlator = const Value.absent(),
+                Value<bool> read = const Value.absent(),
+                Value<bool> downloaded = const Value.absent(),
+                Value<bool> bookmark = const Value.absent(),
+                Value<int> lastPageRead = const Value.absent(),
+                Value<DateTime?> dateFetch = const Value.absent(),
+                Value<DateTime?> lastModified = const Value.absent(),
+              }) => DbChaptersCompanion.insert(
+                id: id,
+                mangaId: mangaId,
+                url: url,
+                name: name,
+                dateUpload: dateUpload,
+                chapterNumber: chapterNumber,
+                scanlator: scanlator,
+                read: read,
+                downloaded: downloaded,
+                bookmark: bookmark,
+                lastPageRead: lastPageRead,
+                dateFetch: dateFetch,
+                lastModified: lastModified,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          $$DbChaptersTableReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
+          prefetchHooksCallback: ({
+            mangaId = false,
+            dbChapterHistoryRefs = false,
+          }) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (dbChapterHistoryRefs) db.dbChapterHistory
+                if (dbChapterHistoryRefs) db.dbChapterHistory,
               ],
               addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
+                T extends TableManagerState<
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic
+                >
+              >(state) {
                 if (mangaId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.mangaId,
-                    referencedTable:
-                        $$DbChaptersTableReferences._mangaIdTable(db),
-                    referencedColumn:
-                        $$DbChaptersTableReferences._mangaIdTable(db).id,
-                  ) as T;
+                  state =
+                      state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.mangaId,
+                            referencedTable: $$DbChaptersTableReferences
+                                ._mangaIdTable(db),
+                            referencedColumn:
+                                $$DbChaptersTableReferences
+                                    ._mangaIdTable(db)
+                                    .id,
+                          )
+                          as T;
                 }
 
                 return state;
@@ -3171,65 +3834,90 @@ class $$DbChaptersTableTableManager extends RootTableManager<
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData<DbChapter, $DbChaptersTable, DbChapterHistoryData>(
-                        currentTable: table,
-                        referencedTable: $$DbChaptersTableReferences
-                            ._dbChapterHistoryRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$DbChaptersTableReferences(db, table, p0)
-                                .dbChapterHistoryRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.chapterId == item.id),
-                        typedResults: items)
+                    await $_getPrefetchedData<
+                      DbChapter,
+                      $DbChaptersTable,
+                      DbChapterHistoryData
+                    >(
+                      currentTable: table,
+                      referencedTable: $$DbChaptersTableReferences
+                          ._dbChapterHistoryRefsTable(db),
+                      managerFromTypedResult:
+                          (p0) =>
+                              $$DbChaptersTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).dbChapterHistoryRefs,
+                      referencedItemsForCurrentItem:
+                          (item, referencedItems) => referencedItems.where(
+                            (e) => e.chapterId == item.id,
+                          ),
+                      typedResults: items,
+                    ),
                 ];
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$DbChaptersTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $DbChaptersTable,
-    DbChapter,
-    $$DbChaptersTableFilterComposer,
-    $$DbChaptersTableOrderingComposer,
-    $$DbChaptersTableAnnotationComposer,
-    $$DbChaptersTableCreateCompanionBuilder,
-    $$DbChaptersTableUpdateCompanionBuilder,
-    (DbChapter, $$DbChaptersTableReferences),
-    DbChapter,
-    PrefetchHooks Function({bool mangaId, bool dbChapterHistoryRefs})>;
-typedef $$DbReadingDirectionTableCreateCompanionBuilder
-    = DbReadingDirectionCompanion Function({
-  Value<int> mangaId,
-  required ReadingDirection direction,
-});
-typedef $$DbReadingDirectionTableUpdateCompanionBuilder
-    = DbReadingDirectionCompanion Function({
-  Value<int> mangaId,
-  Value<ReadingDirection> direction,
-});
+typedef $$DbChaptersTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DbChaptersTable,
+      DbChapter,
+      $$DbChaptersTableFilterComposer,
+      $$DbChaptersTableOrderingComposer,
+      $$DbChaptersTableAnnotationComposer,
+      $$DbChaptersTableCreateCompanionBuilder,
+      $$DbChaptersTableUpdateCompanionBuilder,
+      (DbChapter, $$DbChaptersTableReferences),
+      DbChapter,
+      PrefetchHooks Function({bool mangaId, bool dbChapterHistoryRefs})
+    >;
+typedef $$DbReadingDirectionTableCreateCompanionBuilder =
+    DbReadingDirectionCompanion Function({
+      Value<int> mangaId,
+      required ReadingDirection direction,
+    });
+typedef $$DbReadingDirectionTableUpdateCompanionBuilder =
+    DbReadingDirectionCompanion Function({
+      Value<int> mangaId,
+      Value<ReadingDirection> direction,
+    });
 
-final class $$DbReadingDirectionTableReferences extends BaseReferences<
-    _$AppDatabase, $DbReadingDirectionTable, DbReadingDirectionData> {
+final class $$DbReadingDirectionTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $DbReadingDirectionTable,
+          DbReadingDirectionData
+        > {
   $$DbReadingDirectionTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
 
   static $DbMangasTable _mangaIdTable(_$AppDatabase db) =>
       db.dbMangas.createAlias(
-          $_aliasNameGenerator(db.dbReadingDirection.mangaId, db.dbMangas.id));
+        $_aliasNameGenerator(db.dbReadingDirection.mangaId, db.dbMangas.id),
+      );
 
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
 
-    final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DbMangasTableTableManager(
+      $_db,
+      $_db.dbMangas,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 }
 
@@ -3243,27 +3931,31 @@ class $$DbReadingDirectionTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnWithTypeConverterFilters<ReadingDirection, ReadingDirection, int>
-      get direction => $composableBuilder(
-          column: $table.direction,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+  get direction => $composableBuilder(
+    column: $table.direction,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
 
   $$DbMangasTableFilterComposer get mangaId {
     final $$DbMangasTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableFilterComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableFilterComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -3278,25 +3970,30 @@ class $$DbReadingDirectionTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get direction => $composableBuilder(
-      column: $table.direction, builder: (column) => ColumnOrderings(column));
+    column: $table.direction,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$DbMangasTableOrderingComposer get mangaId {
     final $$DbMangasTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableOrderingComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableOrderingComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -3315,98 +4012,123 @@ class $$DbReadingDirectionTableAnnotationComposer
 
   $$DbMangasTableAnnotationComposer get mangaId {
     final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-class $$DbReadingDirectionTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbReadingDirectionTable,
-    DbReadingDirectionData,
-    $$DbReadingDirectionTableFilterComposer,
-    $$DbReadingDirectionTableOrderingComposer,
-    $$DbReadingDirectionTableAnnotationComposer,
-    $$DbReadingDirectionTableCreateCompanionBuilder,
-    $$DbReadingDirectionTableUpdateCompanionBuilder,
-    (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
-    DbReadingDirectionData,
-    PrefetchHooks Function({bool mangaId})> {
+class $$DbReadingDirectionTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DbReadingDirectionTable,
+          DbReadingDirectionData,
+          $$DbReadingDirectionTableFilterComposer,
+          $$DbReadingDirectionTableOrderingComposer,
+          $$DbReadingDirectionTableAnnotationComposer,
+          $$DbReadingDirectionTableCreateCompanionBuilder,
+          $$DbReadingDirectionTableUpdateCompanionBuilder,
+          (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
+          DbReadingDirectionData,
+          PrefetchHooks Function({bool mangaId})
+        > {
   $$DbReadingDirectionTableTableManager(
-      _$AppDatabase db, $DbReadingDirectionTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $DbReadingDirectionTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$DbReadingDirectionTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$DbReadingDirectionTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$DbReadingDirectionTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> mangaId = const Value.absent(),
-            Value<ReadingDirection> direction = const Value.absent(),
-          }) =>
-              DbReadingDirectionCompanion(
-            mangaId: mangaId,
-            direction: direction,
-          ),
-          createCompanionCallback: ({
-            Value<int> mangaId = const Value.absent(),
-            required ReadingDirection direction,
-          }) =>
-              DbReadingDirectionCompanion.insert(
-            mangaId: mangaId,
-            direction: direction,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$DbReadingDirectionTableReferences(db, table, e)
-                  ))
-              .toList(),
+          createFilteringComposer:
+              () => $$DbReadingDirectionTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer:
+              () => $$DbReadingDirectionTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer:
+              () => $$DbReadingDirectionTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> mangaId = const Value.absent(),
+                Value<ReadingDirection> direction = const Value.absent(),
+              }) => DbReadingDirectionCompanion(
+                mangaId: mangaId,
+                direction: direction,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> mangaId = const Value.absent(),
+                required ReadingDirection direction,
+              }) => DbReadingDirectionCompanion.insert(
+                mangaId: mangaId,
+                direction: direction,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          $$DbReadingDirectionTableReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
           prefetchHooksCallback: ({mangaId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
               addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
+                T extends TableManagerState<
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic
+                >
+              >(state) {
                 if (mangaId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.mangaId,
-                    referencedTable:
-                        $$DbReadingDirectionTableReferences._mangaIdTable(db),
-                    referencedColumn: $$DbReadingDirectionTableReferences
-                        ._mangaIdTable(db)
-                        .id,
-                  ) as T;
+                  state =
+                      state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.mangaId,
+                            referencedTable: $$DbReadingDirectionTableReferences
+                                ._mangaIdTable(db),
+                            referencedColumn:
+                                $$DbReadingDirectionTableReferences
+                                    ._mangaIdTable(db)
+                                    .id,
+                          )
+                          as T;
                 }
 
                 return state;
@@ -3416,35 +4138,38 @@ class $$DbReadingDirectionTableTableManager extends RootTableManager<
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$DbReadingDirectionTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $DbReadingDirectionTable,
-    DbReadingDirectionData,
-    $$DbReadingDirectionTableFilterComposer,
-    $$DbReadingDirectionTableOrderingComposer,
-    $$DbReadingDirectionTableAnnotationComposer,
-    $$DbReadingDirectionTableCreateCompanionBuilder,
-    $$DbReadingDirectionTableUpdateCompanionBuilder,
-    (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
-    DbReadingDirectionData,
-    PrefetchHooks Function({bool mangaId})>;
-typedef $$DbCacheEntriesTableCreateCompanionBuilder = DbCacheEntriesCompanion
-    Function({
-  required String key,
-  required String response,
-  required DateTime expiry,
-  Value<int> rowid,
-});
-typedef $$DbCacheEntriesTableUpdateCompanionBuilder = DbCacheEntriesCompanion
-    Function({
-  Value<String> key,
-  Value<String> response,
-  Value<DateTime> expiry,
-  Value<int> rowid,
-});
+typedef $$DbReadingDirectionTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DbReadingDirectionTable,
+      DbReadingDirectionData,
+      $$DbReadingDirectionTableFilterComposer,
+      $$DbReadingDirectionTableOrderingComposer,
+      $$DbReadingDirectionTableAnnotationComposer,
+      $$DbReadingDirectionTableCreateCompanionBuilder,
+      $$DbReadingDirectionTableUpdateCompanionBuilder,
+      (DbReadingDirectionData, $$DbReadingDirectionTableReferences),
+      DbReadingDirectionData,
+      PrefetchHooks Function({bool mangaId})
+    >;
+typedef $$DbCacheEntriesTableCreateCompanionBuilder =
+    DbCacheEntriesCompanion Function({
+      required String key,
+      required String response,
+      required DateTime expiry,
+      Value<int> rowid,
+    });
+typedef $$DbCacheEntriesTableUpdateCompanionBuilder =
+    DbCacheEntriesCompanion Function({
+      Value<String> key,
+      Value<String> response,
+      Value<DateTime> expiry,
+      Value<int> rowid,
+    });
 
 class $$DbCacheEntriesTableFilterComposer
     extends Composer<_$AppDatabase, $DbCacheEntriesTable> {
@@ -3456,13 +4181,19 @@ class $$DbCacheEntriesTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get key => $composableBuilder(
-      column: $table.key, builder: (column) => ColumnFilters(column));
+    column: $table.key,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get response => $composableBuilder(
-      column: $table.response, builder: (column) => ColumnFilters(column));
+    column: $table.response,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get expiry => $composableBuilder(
-      column: $table.expiry, builder: (column) => ColumnFilters(column));
+    column: $table.expiry,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$DbCacheEntriesTableOrderingComposer
@@ -3475,13 +4206,19 @@ class $$DbCacheEntriesTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get key => $composableBuilder(
-      column: $table.key, builder: (column) => ColumnOrderings(column));
+    column: $table.key,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get response => $composableBuilder(
-      column: $table.response, builder: (column) => ColumnOrderings(column));
+    column: $table.response,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get expiry => $composableBuilder(
-      column: $table.expiry, builder: (column) => ColumnOrderings(column));
+    column: $table.expiry,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$DbCacheEntriesTableAnnotationComposer
@@ -3503,124 +4240,159 @@ class $$DbCacheEntriesTableAnnotationComposer
       $composableBuilder(column: $table.expiry, builder: (column) => column);
 }
 
-class $$DbCacheEntriesTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbCacheEntriesTable,
-    DbCacheEntry,
-    $$DbCacheEntriesTableFilterComposer,
-    $$DbCacheEntriesTableOrderingComposer,
-    $$DbCacheEntriesTableAnnotationComposer,
-    $$DbCacheEntriesTableCreateCompanionBuilder,
-    $$DbCacheEntriesTableUpdateCompanionBuilder,
-    (
-      DbCacheEntry,
-      BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>
-    ),
-    DbCacheEntry,
-    PrefetchHooks Function()> {
+class $$DbCacheEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DbCacheEntriesTable,
+          DbCacheEntry,
+          $$DbCacheEntriesTableFilterComposer,
+          $$DbCacheEntriesTableOrderingComposer,
+          $$DbCacheEntriesTableAnnotationComposer,
+          $$DbCacheEntriesTableCreateCompanionBuilder,
+          $$DbCacheEntriesTableUpdateCompanionBuilder,
+          (
+            DbCacheEntry,
+            BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>,
+          ),
+          DbCacheEntry,
+          PrefetchHooks Function()
+        > {
   $$DbCacheEntriesTableTableManager(
-      _$AppDatabase db, $DbCacheEntriesTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $DbCacheEntriesTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$DbCacheEntriesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$DbCacheEntriesTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$DbCacheEntriesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> key = const Value.absent(),
-            Value<String> response = const Value.absent(),
-            Value<DateTime> expiry = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DbCacheEntriesCompanion(
-            key: key,
-            response: response,
-            expiry: expiry,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String key,
-            required String response,
-            required DateTime expiry,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              DbCacheEntriesCompanion.insert(
-            key: key,
-            response: response,
-            expiry: expiry,
-            rowid: rowid,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
-              .toList(),
+          createFilteringComposer:
+              () => $$DbCacheEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () =>
+                  $$DbCacheEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer:
+              () => $$DbCacheEntriesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> key = const Value.absent(),
+                Value<String> response = const Value.absent(),
+                Value<DateTime> expiry = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DbCacheEntriesCompanion(
+                key: key,
+                response: response,
+                expiry: expiry,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String key,
+                required String response,
+                required DateTime expiry,
+                Value<int> rowid = const Value.absent(),
+              }) => DbCacheEntriesCompanion.insert(
+                key: key,
+                response: response,
+                expiry: expiry,
+                rowid: rowid,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          BaseReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$DbCacheEntriesTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $DbCacheEntriesTable,
-    DbCacheEntry,
-    $$DbCacheEntriesTableFilterComposer,
-    $$DbCacheEntriesTableOrderingComposer,
-    $$DbCacheEntriesTableAnnotationComposer,
-    $$DbCacheEntriesTableCreateCompanionBuilder,
-    $$DbCacheEntriesTableUpdateCompanionBuilder,
-    (
+typedef $$DbCacheEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DbCacheEntriesTable,
       DbCacheEntry,
-      BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>
-    ),
-    DbCacheEntry,
-    PrefetchHooks Function()>;
-typedef $$DbChapterHistoryTableCreateCompanionBuilder
-    = DbChapterHistoryCompanion Function({
-  Value<int> mangaId,
-  required int chapterId,
-  required DateTime readAt,
-});
-typedef $$DbChapterHistoryTableUpdateCompanionBuilder
-    = DbChapterHistoryCompanion Function({
-  Value<int> mangaId,
-  Value<int> chapterId,
-  Value<DateTime> readAt,
-});
+      $$DbCacheEntriesTableFilterComposer,
+      $$DbCacheEntriesTableOrderingComposer,
+      $$DbCacheEntriesTableAnnotationComposer,
+      $$DbCacheEntriesTableCreateCompanionBuilder,
+      $$DbCacheEntriesTableUpdateCompanionBuilder,
+      (
+        DbCacheEntry,
+        BaseReferences<_$AppDatabase, $DbCacheEntriesTable, DbCacheEntry>,
+      ),
+      DbCacheEntry,
+      PrefetchHooks Function()
+    >;
+typedef $$DbChapterHistoryTableCreateCompanionBuilder =
+    DbChapterHistoryCompanion Function({
+      Value<int> mangaId,
+      required int chapterId,
+      required DateTime readAt,
+    });
+typedef $$DbChapterHistoryTableUpdateCompanionBuilder =
+    DbChapterHistoryCompanion Function({
+      Value<int> mangaId,
+      Value<int> chapterId,
+      Value<DateTime> readAt,
+    });
 
-final class $$DbChapterHistoryTableReferences extends BaseReferences<
-    _$AppDatabase, $DbChapterHistoryTable, DbChapterHistoryData> {
+final class $$DbChapterHistoryTableReferences
+    extends
+        BaseReferences<
+          _$AppDatabase,
+          $DbChapterHistoryTable,
+          DbChapterHistoryData
+        > {
   $$DbChapterHistoryTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
 
   static $DbMangasTable _mangaIdTable(_$AppDatabase db) =>
       db.dbMangas.createAlias(
-          $_aliasNameGenerator(db.dbChapterHistory.mangaId, db.dbMangas.id));
+        $_aliasNameGenerator(db.dbChapterHistory.mangaId, db.dbMangas.id),
+      );
 
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
 
-    final manager = $$DbMangasTableTableManager($_db, $_db.dbMangas)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DbMangasTableTableManager(
+      $_db,
+      $_db.dbMangas,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_mangaIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 
   static $DbChaptersTable _chapterIdTable(_$AppDatabase db) =>
-      db.dbChapters.createAlias($_aliasNameGenerator(
-          db.dbChapterHistory.chapterId, db.dbChapters.id));
+      db.dbChapters.createAlias(
+        $_aliasNameGenerator(db.dbChapterHistory.chapterId, db.dbChapters.id),
+      );
 
   $$DbChaptersTableProcessedTableManager get chapterId {
     final $_column = $_itemColumn<int>('chapter_id')!;
 
-    final manager = $$DbChaptersTableTableManager($_db, $_db.dbChapters)
-        .filter((f) => f.id.sqlEquals($_column));
+    final manager = $$DbChaptersTableTableManager(
+      $_db,
+      $_db.dbChapters,
+    ).filter((f) => f.id.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_chapterIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
   }
 }
 
@@ -3634,45 +4406,53 @@ class $$DbChapterHistoryTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<DateTime> get readAt => $composableBuilder(
-      column: $table.readAt, builder: (column) => ColumnFilters(column));
+    column: $table.readAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   $$DbMangasTableFilterComposer get mangaId {
     final $$DbMangasTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableFilterComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableFilterComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DbChaptersTableFilterComposer get chapterId {
     final $$DbChaptersTableFilterComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.chapterId,
-        referencedTable: $db.dbChapters,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChaptersTableFilterComposer(
-              $db: $db,
-              $table: $db.dbChapters,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.chapterId,
+      referencedTable: $db.dbChapters,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChaptersTableFilterComposer(
+            $db: $db,
+            $table: $db.dbChapters,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -3687,45 +4467,53 @@ class $$DbChapterHistoryTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<DateTime> get readAt => $composableBuilder(
-      column: $table.readAt, builder: (column) => ColumnOrderings(column));
+    column: $table.readAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   $$DbMangasTableOrderingComposer get mangaId {
     final $$DbMangasTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableOrderingComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableOrderingComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DbChaptersTableOrderingComposer get chapterId {
     final $$DbChaptersTableOrderingComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.chapterId,
-        referencedTable: $db.dbChapters,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChaptersTableOrderingComposer(
-              $db: $db,
-              $table: $db.dbChapters,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.chapterId,
+      referencedTable: $db.dbChapters,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChaptersTableOrderingComposer(
+            $db: $db,
+            $table: $db.dbChapters,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
@@ -3744,131 +4532,162 @@ class $$DbChapterHistoryTableAnnotationComposer
 
   $$DbMangasTableAnnotationComposer get mangaId {
     final $$DbMangasTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.mangaId,
-        referencedTable: $db.dbMangas,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbMangasTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbMangas,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.mangaId,
+      referencedTable: $db.dbMangas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbMangasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbMangas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 
   $$DbChaptersTableAnnotationComposer get chapterId {
     final $$DbChaptersTableAnnotationComposer composer = $composerBuilder(
-        composer: this,
-        getCurrentColumn: (t) => t.chapterId,
-        referencedTable: $db.dbChapters,
-        getReferencedColumn: (t) => t.id,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$DbChaptersTableAnnotationComposer(
-              $db: $db,
-              $table: $db.dbChapters,
-              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-              joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
-            ));
+      composer: this,
+      getCurrentColumn: (t) => t.chapterId,
+      referencedTable: $db.dbChapters,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$DbChaptersTableAnnotationComposer(
+            $db: $db,
+            $table: $db.dbChapters,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
     return composer;
   }
 }
 
-class $$DbChapterHistoryTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $DbChapterHistoryTable,
-    DbChapterHistoryData,
-    $$DbChapterHistoryTableFilterComposer,
-    $$DbChapterHistoryTableOrderingComposer,
-    $$DbChapterHistoryTableAnnotationComposer,
-    $$DbChapterHistoryTableCreateCompanionBuilder,
-    $$DbChapterHistoryTableUpdateCompanionBuilder,
-    (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
-    DbChapterHistoryData,
-    PrefetchHooks Function({bool mangaId, bool chapterId})> {
+class $$DbChapterHistoryTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DbChapterHistoryTable,
+          DbChapterHistoryData,
+          $$DbChapterHistoryTableFilterComposer,
+          $$DbChapterHistoryTableOrderingComposer,
+          $$DbChapterHistoryTableAnnotationComposer,
+          $$DbChapterHistoryTableCreateCompanionBuilder,
+          $$DbChapterHistoryTableUpdateCompanionBuilder,
+          (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
+          DbChapterHistoryData,
+          PrefetchHooks Function({bool mangaId, bool chapterId})
+        > {
   $$DbChapterHistoryTableTableManager(
-      _$AppDatabase db, $DbChapterHistoryTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $DbChapterHistoryTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$DbChapterHistoryTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$DbChapterHistoryTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$DbChapterHistoryTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<int> mangaId = const Value.absent(),
-            Value<int> chapterId = const Value.absent(),
-            Value<DateTime> readAt = const Value.absent(),
-          }) =>
-              DbChapterHistoryCompanion(
-            mangaId: mangaId,
-            chapterId: chapterId,
-            readAt: readAt,
-          ),
-          createCompanionCallback: ({
-            Value<int> mangaId = const Value.absent(),
-            required int chapterId,
-            required DateTime readAt,
-          }) =>
-              DbChapterHistoryCompanion.insert(
-            mangaId: mangaId,
-            chapterId: chapterId,
-            readAt: readAt,
-          ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$DbChapterHistoryTableReferences(db, table, e)
-                  ))
-              .toList(),
+          createFilteringComposer:
+              () =>
+                  $$DbChapterHistoryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => $$DbChapterHistoryTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer:
+              () => $$DbChapterHistoryTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<int> mangaId = const Value.absent(),
+                Value<int> chapterId = const Value.absent(),
+                Value<DateTime> readAt = const Value.absent(),
+              }) => DbChapterHistoryCompanion(
+                mangaId: mangaId,
+                chapterId: chapterId,
+                readAt: readAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> mangaId = const Value.absent(),
+                required int chapterId,
+                required DateTime readAt,
+              }) => DbChapterHistoryCompanion.insert(
+                mangaId: mangaId,
+                chapterId: chapterId,
+                readAt: readAt,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          $$DbChapterHistoryTableReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
           prefetchHooksCallback: ({mangaId = false, chapterId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
               addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
+                T extends TableManagerState<
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic,
+                  dynamic
+                >
+              >(state) {
                 if (mangaId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.mangaId,
-                    referencedTable:
-                        $$DbChapterHistoryTableReferences._mangaIdTable(db),
-                    referencedColumn:
-                        $$DbChapterHistoryTableReferences._mangaIdTable(db).id,
-                  ) as T;
+                  state =
+                      state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.mangaId,
+                            referencedTable: $$DbChapterHistoryTableReferences
+                                ._mangaIdTable(db),
+                            referencedColumn:
+                                $$DbChapterHistoryTableReferences
+                                    ._mangaIdTable(db)
+                                    .id,
+                          )
+                          as T;
                 }
                 if (chapterId) {
-                  state = state.withJoin(
-                    currentTable: table,
-                    currentColumn: table.chapterId,
-                    referencedTable:
-                        $$DbChapterHistoryTableReferences._chapterIdTable(db),
-                    referencedColumn: $$DbChapterHistoryTableReferences
-                        ._chapterIdTable(db)
-                        .id,
-                  ) as T;
+                  state =
+                      state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.chapterId,
+                            referencedTable: $$DbChapterHistoryTableReferences
+                                ._chapterIdTable(db),
+                            referencedColumn:
+                                $$DbChapterHistoryTableReferences
+                                    ._chapterIdTable(db)
+                                    .id,
+                          )
+                          as T;
                 }
 
                 return state;
@@ -3878,21 +4697,24 @@ class $$DbChapterHistoryTableTableManager extends RootTableManager<
               },
             );
           },
-        ));
+        ),
+      );
 }
 
-typedef $$DbChapterHistoryTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $DbChapterHistoryTable,
-    DbChapterHistoryData,
-    $$DbChapterHistoryTableFilterComposer,
-    $$DbChapterHistoryTableOrderingComposer,
-    $$DbChapterHistoryTableAnnotationComposer,
-    $$DbChapterHistoryTableCreateCompanionBuilder,
-    $$DbChapterHistoryTableUpdateCompanionBuilder,
-    (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
-    DbChapterHistoryData,
-    PrefetchHooks Function({bool mangaId, bool chapterId})>;
+typedef $$DbChapterHistoryTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DbChapterHistoryTable,
+      DbChapterHistoryData,
+      $$DbChapterHistoryTableFilterComposer,
+      $$DbChapterHistoryTableOrderingComposer,
+      $$DbChapterHistoryTableAnnotationComposer,
+      $$DbChapterHistoryTableCreateCompanionBuilder,
+      $$DbChapterHistoryTableUpdateCompanionBuilder,
+      (DbChapterHistoryData, $$DbChapterHistoryTableReferences),
+      DbChapterHistoryData,
+      PrefetchHooks Function({bool mangaId, bool chapterId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;

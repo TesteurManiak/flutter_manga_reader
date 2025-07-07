@@ -4,7 +4,7 @@ part 'generic_attributes.freezed.dart';
 part 'generic_attributes.g.dart';
 
 @Freezed(copyWith: false)
-class GenericAttributes with _$GenericAttributes {
+abstract class GenericAttributes with _$GenericAttributes {
   const factory GenericAttributes({
     required String name,
   }) = _GenericAttributes;

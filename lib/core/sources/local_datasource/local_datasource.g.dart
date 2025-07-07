@@ -13,9 +13,10 @@ String _$localDatasourceHash() => r'9c102b9d533f58de48515a9de4de698c843b2bb0';
 final localDatasourceProvider = Provider<LocalDatasource>.internal(
   localDatasource,
   name: r'localDatasourceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$localDatasourceHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$localDatasourceHash,
   dependencies: const <ProviderOrFamily>[],
   allTransitiveDependencies: const <ProviderOrFamily>{},
 );
@@ -31,13 +32,14 @@ String _$watchMangasInLibraryHash() =>
 final watchMangasInLibraryProvider = StreamProvider<List<Manga>>.internal(
   watchMangasInLibrary,
   name: r'watchMangasInLibraryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$watchMangasInLibraryHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$watchMangasInLibraryHash,
   dependencies: <ProviderOrFamily>[localDatasourceProvider],
   allTransitiveDependencies: <ProviderOrFamily>{
     localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
+    ...?localDatasourceProvider.allTransitiveDependencies,
   },
 );
 
@@ -77,25 +79,19 @@ class WatchMangaByIdFamily extends Family<AsyncValue<Manga>> {
   const WatchMangaByIdFamily();
 
   /// See also [watchMangaById].
-  WatchMangaByIdProvider call(
-    int id,
-  ) {
-    return WatchMangaByIdProvider(
-      id,
-    );
+  WatchMangaByIdProvider call(int id) {
+    return WatchMangaByIdProvider(id);
   }
 
   @override
   WatchMangaByIdProvider getProviderOverride(
     covariant WatchMangaByIdProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -103,9 +99,9 @@ class WatchMangaByIdFamily extends Family<AsyncValue<Manga>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -118,24 +114,20 @@ class WatchMangaByIdFamily extends Family<AsyncValue<Manga>> {
 /// See also [watchMangaById].
 class WatchMangaByIdProvider extends AutoDisposeStreamProvider<Manga> {
   /// See also [watchMangaById].
-  WatchMangaByIdProvider(
-    int id,
-  ) : this._internal(
-          (ref) => watchMangaById(
-            ref as WatchMangaByIdRef,
-            id,
-          ),
-          from: watchMangaByIdProvider,
-          name: r'watchMangaByIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchMangaByIdHash,
-          dependencies: WatchMangaByIdFamily._dependencies,
-          allTransitiveDependencies:
-              WatchMangaByIdFamily._allTransitiveDependencies,
-          id: id,
-        );
+  WatchMangaByIdProvider(int id)
+    : this._internal(
+        (ref) => watchMangaById(ref as WatchMangaByIdRef, id),
+        from: watchMangaByIdProvider,
+        name: r'watchMangaByIdProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchMangaByIdHash,
+        dependencies: WatchMangaByIdFamily._dependencies,
+        allTransitiveDependencies:
+            WatchMangaByIdFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   WatchMangaByIdProvider._internal(
     super._createNotifier, {
@@ -194,7 +186,8 @@ mixin WatchMangaByIdRef on AutoDisposeStreamProviderRef<Manga> {
 }
 
 class _WatchMangaByIdProviderElement
-    extends AutoDisposeStreamProviderElement<Manga> with WatchMangaByIdRef {
+    extends AutoDisposeStreamProviderElement<Manga>
+    with WatchMangaByIdRef {
   _WatchMangaByIdProviderElement(super.provider);
 
   @override
@@ -218,24 +211,18 @@ class GetMangaByUrlAndSourceIdFamily extends Family<AsyncValue<Manga?>> {
     required String url,
     required String sourceId,
   }) {
-    return GetMangaByUrlAndSourceIdProvider(
-      url: url,
-      sourceId: sourceId,
-    );
+    return GetMangaByUrlAndSourceIdProvider(url: url, sourceId: sourceId);
   }
 
   @override
   GetMangaByUrlAndSourceIdProvider getProviderOverride(
     covariant GetMangaByUrlAndSourceIdProvider provider,
   ) {
-    return call(
-      url: provider.url,
-      sourceId: provider.sourceId,
-    );
+    return call(url: provider.url, sourceId: provider.sourceId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -243,9 +230,9 @@ class GetMangaByUrlAndSourceIdFamily extends Family<AsyncValue<Manga?>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -263,23 +250,23 @@ class GetMangaByUrlAndSourceIdProvider
     required String url,
     required String sourceId,
   }) : this._internal(
-          (ref) => getMangaByUrlAndSourceId(
-            ref as GetMangaByUrlAndSourceIdRef,
-            url: url,
-            sourceId: sourceId,
-          ),
-          from: getMangaByUrlAndSourceIdProvider,
-          name: r'getMangaByUrlAndSourceIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getMangaByUrlAndSourceIdHash,
-          dependencies: GetMangaByUrlAndSourceIdFamily._dependencies,
-          allTransitiveDependencies:
-              GetMangaByUrlAndSourceIdFamily._allTransitiveDependencies,
-          url: url,
-          sourceId: sourceId,
-        );
+         (ref) => getMangaByUrlAndSourceId(
+           ref as GetMangaByUrlAndSourceIdRef,
+           url: url,
+           sourceId: sourceId,
+         ),
+         from: getMangaByUrlAndSourceIdProvider,
+         name: r'getMangaByUrlAndSourceIdProvider',
+         debugGetCreateSourceHash:
+             const bool.fromEnvironment('dart.vm.product')
+                 ? null
+                 : _$getMangaByUrlAndSourceIdHash,
+         dependencies: GetMangaByUrlAndSourceIdFamily._dependencies,
+         allTransitiveDependencies:
+             GetMangaByUrlAndSourceIdFamily._allTransitiveDependencies,
+         url: url,
+         sourceId: sourceId,
+       );
 
   GetMangaByUrlAndSourceIdProvider._internal(
     super._createNotifier, {
@@ -369,25 +356,19 @@ class GetChapterFamily extends Family<AsyncValue<Chapter?>> {
   const GetChapterFamily();
 
   /// See also [getChapter].
-  GetChapterProvider call(
-    int chapterId,
-  ) {
-    return GetChapterProvider(
-      chapterId,
-    );
+  GetChapterProvider call(int chapterId) {
+    return GetChapterProvider(chapterId);
   }
 
   @override
   GetChapterProvider getProviderOverride(
     covariant GetChapterProvider provider,
   ) {
-    return call(
-      provider.chapterId,
-    );
+    return call(provider.chapterId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -395,9 +376,9 @@ class GetChapterFamily extends Family<AsyncValue<Chapter?>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -410,24 +391,19 @@ class GetChapterFamily extends Family<AsyncValue<Chapter?>> {
 /// See also [getChapter].
 class GetChapterProvider extends AutoDisposeFutureProvider<Chapter?> {
   /// See also [getChapter].
-  GetChapterProvider(
-    int chapterId,
-  ) : this._internal(
-          (ref) => getChapter(
-            ref as GetChapterRef,
-            chapterId,
-          ),
-          from: getChapterProvider,
-          name: r'getChapterProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getChapterHash,
-          dependencies: GetChapterFamily._dependencies,
-          allTransitiveDependencies:
-              GetChapterFamily._allTransitiveDependencies,
-          chapterId: chapterId,
-        );
+  GetChapterProvider(int chapterId)
+    : this._internal(
+        (ref) => getChapter(ref as GetChapterRef, chapterId),
+        from: getChapterProvider,
+        name: r'getChapterProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$getChapterHash,
+        dependencies: GetChapterFamily._dependencies,
+        allTransitiveDependencies: GetChapterFamily._allTransitiveDependencies,
+        chapterId: chapterId,
+      );
 
   GetChapterProvider._internal(
     super._createNotifier, {
@@ -486,7 +462,8 @@ mixin GetChapterRef on AutoDisposeFutureProviderRef<Chapter?> {
 }
 
 class _GetChapterProviderElement
-    extends AutoDisposeFutureProviderElement<Chapter?> with GetChapterRef {
+    extends AutoDisposeFutureProviderElement<Chapter?>
+    with GetChapterRef {
   _GetChapterProviderElement(super.provider);
 
   @override
@@ -506,25 +483,19 @@ class WatchChaptersForMangaFamily extends Family<AsyncValue<List<Chapter>>> {
   const WatchChaptersForMangaFamily();
 
   /// See also [watchChaptersForManga].
-  WatchChaptersForMangaProvider call(
-    int mangaId,
-  ) {
-    return WatchChaptersForMangaProvider(
-      mangaId,
-    );
+  WatchChaptersForMangaProvider call(int mangaId) {
+    return WatchChaptersForMangaProvider(mangaId);
   }
 
   @override
   WatchChaptersForMangaProvider getProviderOverride(
     covariant WatchChaptersForMangaProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -532,9 +503,9 @@ class WatchChaptersForMangaFamily extends Family<AsyncValue<List<Chapter>>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -547,24 +518,21 @@ class WatchChaptersForMangaFamily extends Family<AsyncValue<List<Chapter>>> {
 /// See also [watchChaptersForManga].
 class WatchChaptersForMangaProvider extends StreamProvider<List<Chapter>> {
   /// See also [watchChaptersForManga].
-  WatchChaptersForMangaProvider(
-    int mangaId,
-  ) : this._internal(
-          (ref) => watchChaptersForManga(
-            ref as WatchChaptersForMangaRef,
-            mangaId,
-          ),
-          from: watchChaptersForMangaProvider,
-          name: r'watchChaptersForMangaProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchChaptersForMangaHash,
-          dependencies: WatchChaptersForMangaFamily._dependencies,
-          allTransitiveDependencies:
-              WatchChaptersForMangaFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  WatchChaptersForMangaProvider(int mangaId)
+    : this._internal(
+        (ref) =>
+            watchChaptersForManga(ref as WatchChaptersForMangaRef, mangaId),
+        from: watchChaptersForMangaProvider,
+        name: r'watchChaptersForMangaProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchChaptersForMangaHash,
+        dependencies: WatchChaptersForMangaFamily._dependencies,
+        allTransitiveDependencies:
+            WatchChaptersForMangaFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   WatchChaptersForMangaProvider._internal(
     super._createNotifier, {
@@ -623,7 +591,8 @@ mixin WatchChaptersForMangaRef on StreamProviderRef<List<Chapter>> {
 }
 
 class _WatchChaptersForMangaProviderElement
-    extends StreamProviderElement<List<Chapter>> with WatchChaptersForMangaRef {
+    extends StreamProviderElement<List<Chapter>>
+    with WatchChaptersForMangaRef {
   _WatchChaptersForMangaProviderElement(super.provider);
 
   @override
@@ -644,25 +613,19 @@ class WatchUnreadChaptersCountForMangaFamily extends Family<AsyncValue<int>> {
   const WatchUnreadChaptersCountForMangaFamily();
 
   /// See also [watchUnreadChaptersCountForManga].
-  WatchUnreadChaptersCountForMangaProvider call(
-    int mangaId,
-  ) {
-    return WatchUnreadChaptersCountForMangaProvider(
-      mangaId,
-    );
+  WatchUnreadChaptersCountForMangaProvider call(int mangaId) {
+    return WatchUnreadChaptersCountForMangaProvider(mangaId);
   }
 
   @override
   WatchUnreadChaptersCountForMangaProvider getProviderOverride(
     covariant WatchUnreadChaptersCountForMangaProvider provider,
   ) {
-    return call(
-      provider.mangaId,
-    );
+    return call(provider.mangaId);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -670,9 +633,9 @@ class WatchUnreadChaptersCountForMangaFamily extends Family<AsyncValue<int>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -686,24 +649,23 @@ class WatchUnreadChaptersCountForMangaFamily extends Family<AsyncValue<int>> {
 class WatchUnreadChaptersCountForMangaProvider
     extends AutoDisposeStreamProvider<int> {
   /// See also [watchUnreadChaptersCountForManga].
-  WatchUnreadChaptersCountForMangaProvider(
-    int mangaId,
-  ) : this._internal(
-          (ref) => watchUnreadChaptersCountForManga(
-            ref as WatchUnreadChaptersCountForMangaRef,
-            mangaId,
-          ),
-          from: watchUnreadChaptersCountForMangaProvider,
-          name: r'watchUnreadChaptersCountForMangaProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$watchUnreadChaptersCountForMangaHash,
-          dependencies: WatchUnreadChaptersCountForMangaFamily._dependencies,
-          allTransitiveDependencies:
-              WatchUnreadChaptersCountForMangaFamily._allTransitiveDependencies,
-          mangaId: mangaId,
-        );
+  WatchUnreadChaptersCountForMangaProvider(int mangaId)
+    : this._internal(
+        (ref) => watchUnreadChaptersCountForManga(
+          ref as WatchUnreadChaptersCountForMangaRef,
+          mangaId,
+        ),
+        from: watchUnreadChaptersCountForMangaProvider,
+        name: r'watchUnreadChaptersCountForMangaProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$watchUnreadChaptersCountForMangaHash,
+        dependencies: WatchUnreadChaptersCountForMangaFamily._dependencies,
+        allTransitiveDependencies:
+            WatchUnreadChaptersCountForMangaFamily._allTransitiveDependencies,
+        mangaId: mangaId,
+      );
 
   WatchUnreadChaptersCountForMangaProvider._internal(
     super._createNotifier, {
@@ -771,5 +733,6 @@ class _WatchUnreadChaptersCountForMangaProviderElement
   int get mangaId =>
       (origin as WatchUnreadChaptersCountForMangaProvider).mangaId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

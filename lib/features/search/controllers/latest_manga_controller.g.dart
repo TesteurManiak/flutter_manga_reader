@@ -34,9 +34,7 @@ abstract class _$LatestMangaController
     extends BuildlessAutoDisposeNotifier<PaginatedMangaState> {
   late final MangaDatasource datasource;
 
-  PaginatedMangaState build(
-    MangaDatasource datasource,
-  );
+  PaginatedMangaState build(MangaDatasource datasource);
 }
 
 /// See also [LatestMangaController].
@@ -49,21 +47,15 @@ class LatestMangaControllerFamily extends Family<PaginatedMangaState> {
   const LatestMangaControllerFamily();
 
   /// See also [LatestMangaController].
-  LatestMangaControllerProvider call(
-    MangaDatasource datasource,
-  ) {
-    return LatestMangaControllerProvider(
-      datasource,
-    );
+  LatestMangaControllerProvider call(MangaDatasource datasource) {
+    return LatestMangaControllerProvider(datasource);
   }
 
   @override
   LatestMangaControllerProvider getProviderOverride(
     covariant LatestMangaControllerProvider provider,
   ) {
-    return call(
-      provider.datasource,
-    );
+    return call(provider.datasource);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -82,24 +74,27 @@ class LatestMangaControllerFamily extends Family<PaginatedMangaState> {
 }
 
 /// See also [LatestMangaController].
-class LatestMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
-    LatestMangaController, PaginatedMangaState> {
+class LatestMangaControllerProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          LatestMangaController,
+          PaginatedMangaState
+        > {
   /// See also [LatestMangaController].
-  LatestMangaControllerProvider(
-    MangaDatasource datasource,
-  ) : this._internal(
-          () => LatestMangaController()..datasource = datasource,
-          from: latestMangaControllerProvider,
-          name: r'latestMangaControllerProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$latestMangaControllerHash,
-          dependencies: LatestMangaControllerFamily._dependencies,
-          allTransitiveDependencies:
-              LatestMangaControllerFamily._allTransitiveDependencies,
-          datasource: datasource,
-        );
+  LatestMangaControllerProvider(MangaDatasource datasource)
+    : this._internal(
+        () => LatestMangaController()..datasource = datasource,
+        from: latestMangaControllerProvider,
+        name: r'latestMangaControllerProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$latestMangaControllerHash,
+        dependencies: LatestMangaControllerFamily._dependencies,
+        allTransitiveDependencies:
+            LatestMangaControllerFamily._allTransitiveDependencies,
+        datasource: datasource,
+      );
 
   LatestMangaControllerProvider._internal(
     super._createNotifier, {
@@ -117,9 +112,7 @@ class LatestMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
   PaginatedMangaState runNotifierBuild(
     covariant LatestMangaController notifier,
   ) {
-    return notifier.build(
-      datasource,
-    );
+    return notifier.build(datasource);
   }
 
   @override
@@ -140,7 +133,7 @@ class LatestMangaControllerProvider extends AutoDisposeNotifierProviderImpl<
 
   @override
   AutoDisposeNotifierProviderElement<LatestMangaController, PaginatedMangaState>
-      createElement() {
+  createElement() {
     return _LatestMangaControllerProviderElement(this);
   }
 
@@ -168,13 +161,18 @@ mixin LatestMangaControllerRef
 }
 
 class _LatestMangaControllerProviderElement
-    extends AutoDisposeNotifierProviderElement<LatestMangaController,
-        PaginatedMangaState> with LatestMangaControllerRef {
+    extends
+        AutoDisposeNotifierProviderElement<
+          LatestMangaController,
+          PaginatedMangaState
+        >
+    with LatestMangaControllerRef {
   _LatestMangaControllerProviderElement(super.provider);
 
   @override
   MangaDatasource get datasource =>
       (origin as LatestMangaControllerProvider).datasource;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

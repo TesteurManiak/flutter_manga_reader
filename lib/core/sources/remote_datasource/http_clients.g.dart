@@ -55,21 +55,15 @@ class SourceClientFamily extends Family<RestClient> {
   const SourceClientFamily();
 
   /// See also [sourceClient].
-  SourceClientProvider call(
-    String baseUrl,
-  ) {
-    return SourceClientProvider(
-      baseUrl,
-    );
+  SourceClientProvider call(String baseUrl) {
+    return SourceClientProvider(baseUrl);
   }
 
   @override
   SourceClientProvider getProviderOverride(
     covariant SourceClientProvider provider,
   ) {
-    return call(
-      provider.baseUrl,
-    );
+    return call(provider.baseUrl);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -90,24 +84,20 @@ class SourceClientFamily extends Family<RestClient> {
 /// See also [sourceClient].
 class SourceClientProvider extends Provider<RestClient> {
   /// See also [sourceClient].
-  SourceClientProvider(
-    String baseUrl,
-  ) : this._internal(
-          (ref) => sourceClient(
-            ref as SourceClientRef,
-            baseUrl,
-          ),
-          from: sourceClientProvider,
-          name: r'sourceClientProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$sourceClientHash,
-          dependencies: SourceClientFamily._dependencies,
-          allTransitiveDependencies:
-              SourceClientFamily._allTransitiveDependencies,
-          baseUrl: baseUrl,
-        );
+  SourceClientProvider(String baseUrl)
+    : this._internal(
+        (ref) => sourceClient(ref as SourceClientRef, baseUrl),
+        from: sourceClientProvider,
+        name: r'sourceClientProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$sourceClientHash,
+        dependencies: SourceClientFamily._dependencies,
+        allTransitiveDependencies:
+            SourceClientFamily._allTransitiveDependencies,
+        baseUrl: baseUrl,
+      );
 
   SourceClientProvider._internal(
     super._createNotifier, {
@@ -122,9 +112,7 @@ class SourceClientProvider extends Provider<RestClient> {
   final String baseUrl;
 
   @override
-  Override overrideWith(
-    RestClient Function(SourceClientRef provider) create,
-  ) {
+  Override overrideWith(RestClient Function(SourceClientRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: SourceClientProvider._internal(
@@ -172,5 +160,6 @@ class _SourceClientProviderElement extends ProviderElement<RestClient>
   @override
   String get baseUrl => (origin as SourceClientProvider).baseUrl;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

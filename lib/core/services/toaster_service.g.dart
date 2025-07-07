@@ -13,9 +13,10 @@ String _$toasterServiceHash() => r'0d7e555e414aee0629a2f0ef5c5d30f4ee4c7b52';
 final toasterServiceProvider = Provider<ToasterService>.internal(
   toasterService,
   name: r'toasterServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$toasterServiceHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$toasterServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

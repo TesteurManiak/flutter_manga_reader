@@ -39,25 +39,19 @@ class GetMangaFromIdFamily extends Family<AsyncValue<Manga?>> {
   const GetMangaFromIdFamily();
 
   /// See also [getMangaFromId].
-  GetMangaFromIdProvider call(
-    int id,
-  ) {
-    return GetMangaFromIdProvider(
-      id,
-    );
+  GetMangaFromIdProvider call(int id) {
+    return GetMangaFromIdProvider(id);
   }
 
   @override
   GetMangaFromIdProvider getProviderOverride(
     covariant GetMangaFromIdProvider provider,
   ) {
-    return call(
-      provider.id,
-    );
+    return call(provider.id);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    localDatasourceProvider
+    localDatasourceProvider,
   ];
 
   @override
@@ -65,9 +59,9 @@ class GetMangaFromIdFamily extends Family<AsyncValue<Manga?>> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  };
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -80,24 +74,20 @@ class GetMangaFromIdFamily extends Family<AsyncValue<Manga?>> {
 /// See also [getMangaFromId].
 class GetMangaFromIdProvider extends AutoDisposeFutureProvider<Manga?> {
   /// See also [getMangaFromId].
-  GetMangaFromIdProvider(
-    int id,
-  ) : this._internal(
-          (ref) => getMangaFromId(
-            ref as GetMangaFromIdRef,
-            id,
-          ),
-          from: getMangaFromIdProvider,
-          name: r'getMangaFromIdProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getMangaFromIdHash,
-          dependencies: GetMangaFromIdFamily._dependencies,
-          allTransitiveDependencies:
-              GetMangaFromIdFamily._allTransitiveDependencies,
-          id: id,
-        );
+  GetMangaFromIdProvider(int id)
+    : this._internal(
+        (ref) => getMangaFromId(ref as GetMangaFromIdRef, id),
+        from: getMangaFromIdProvider,
+        name: r'getMangaFromIdProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$getMangaFromIdHash,
+        dependencies: GetMangaFromIdFamily._dependencies,
+        allTransitiveDependencies:
+            GetMangaFromIdFamily._allTransitiveDependencies,
+        id: id,
+      );
 
   GetMangaFromIdProvider._internal(
     super._createNotifier, {
@@ -156,11 +146,13 @@ mixin GetMangaFromIdRef on AutoDisposeFutureProviderRef<Manga?> {
 }
 
 class _GetMangaFromIdProviderElement
-    extends AutoDisposeFutureProviderElement<Manga?> with GetMangaFromIdRef {
+    extends AutoDisposeFutureProviderElement<Manga?>
+    with GetMangaFromIdRef {
   _GetMangaFromIdProviderElement(super.provider);
 
   @override
   int get id => (origin as GetMangaFromIdProvider).id;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

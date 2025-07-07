@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,228 +10,199 @@ part of 'update_progress_controller.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$UpdateProgressState {
-  int? get progress => throw _privateConstructorUsedError;
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $UpdateProgressStateCopyWith<UpdateProgressState> get copyWith =>
-      throw _privateConstructorUsedError;
+ int? get progress;
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateProgressStateCopyWith<UpdateProgressState> get copyWith => _$UpdateProgressStateCopyWithImpl<UpdateProgressState>(this as UpdateProgressState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProgressState&&(identical(other.progress, progress) || other.progress == progress));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,progress);
+
+@override
+String toString() {
+  return 'UpdateProgressState(progress: $progress)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $UpdateProgressStateCopyWith<$Res> {
-  factory $UpdateProgressStateCopyWith(
-          UpdateProgressState value, $Res Function(UpdateProgressState) then) =
-      _$UpdateProgressStateCopyWithImpl<$Res, UpdateProgressState>;
-  @useResult
-  $Res call({int progress});
-}
+abstract mixin class $UpdateProgressStateCopyWith<$Res>  {
+  factory $UpdateProgressStateCopyWith(UpdateProgressState value, $Res Function(UpdateProgressState) _then) = _$UpdateProgressStateCopyWithImpl;
+@useResult
+$Res call({
+ int progress
+});
 
+
+
+
+}
 /// @nodoc
-class _$UpdateProgressStateCopyWithImpl<$Res, $Val extends UpdateProgressState>
+class _$UpdateProgressStateCopyWithImpl<$Res>
     implements $UpdateProgressStateCopyWith<$Res> {
-  _$UpdateProgressStateCopyWithImpl(this._value, this._then);
+  _$UpdateProgressStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final UpdateProgressState _self;
+  final $Res Function(UpdateProgressState) _then;
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? progress = null,
-  }) {
-    return _then(_value.copyWith(
-      progress: null == progress
-          ? _value.progress!
-          : progress // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? progress = null,}) {
+  return _then(_self.copyWith(
+progress: null == progress ? _self.progress! : progress // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-abstract class _$$UpdateProgressLoadingImplCopyWith<$Res>
-    implements $UpdateProgressStateCopyWith<$Res> {
-  factory _$$UpdateProgressLoadingImplCopyWith(
-          _$UpdateProgressLoadingImpl value,
-          $Res Function(_$UpdateProgressLoadingImpl) then) =
-      __$$UpdateProgressLoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int progress});
 }
 
-/// @nodoc
-class __$$UpdateProgressLoadingImplCopyWithImpl<$Res>
-    extends _$UpdateProgressStateCopyWithImpl<$Res, _$UpdateProgressLoadingImpl>
-    implements _$$UpdateProgressLoadingImplCopyWith<$Res> {
-  __$$UpdateProgressLoadingImplCopyWithImpl(_$UpdateProgressLoadingImpl _value,
-      $Res Function(_$UpdateProgressLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? progress = null,
-  }) {
-    return _then(_$UpdateProgressLoadingImpl(
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$UpdateProgressLoadingImpl extends UpdateProgressLoading {
-  const _$UpdateProgressLoadingImpl({this.progress = 0}) : super._();
 
-  @override
-  @JsonKey()
-  final int progress;
+class UpdateProgressLoading extends UpdateProgressState {
+  const UpdateProgressLoading({this.progress = 0}): super._();
+  
 
-  @override
-  String toString() {
-    return 'UpdateProgressState.loading(progress: $progress)';
-  }
+@override@JsonKey() final  int progress;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateProgressLoadingImpl &&
-            (identical(other.progress, progress) ||
-                other.progress == progress));
-  }
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateProgressLoadingCopyWith<UpdateProgressLoading> get copyWith => _$UpdateProgressLoadingCopyWithImpl<UpdateProgressLoading>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, progress);
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateProgressLoadingImplCopyWith<_$UpdateProgressLoadingImpl>
-      get copyWith => __$$UpdateProgressLoadingImplCopyWithImpl<
-          _$UpdateProgressLoadingImpl>(this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProgressLoading&&(identical(other.progress, progress) || other.progress == progress));
 }
 
-abstract class UpdateProgressLoading extends UpdateProgressState {
-  const factory UpdateProgressLoading({final int progress}) =
-      _$UpdateProgressLoadingImpl;
-  const UpdateProgressLoading._() : super._();
 
-  @override
-  int get progress;
+@override
+int get hashCode => Object.hash(runtimeType,progress);
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateProgressLoadingImplCopyWith<_$UpdateProgressLoadingImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'UpdateProgressState.loading(progress: $progress)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$UpdateProgressLoadedImplCopyWith<$Res>
-    implements $UpdateProgressStateCopyWith<$Res> {
-  factory _$$UpdateProgressLoadedImplCopyWith(_$UpdateProgressLoadedImpl value,
-          $Res Function(_$UpdateProgressLoadedImpl) then) =
-      __$$UpdateProgressLoadedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int? progress});
+abstract mixin class $UpdateProgressLoadingCopyWith<$Res> implements $UpdateProgressStateCopyWith<$Res> {
+  factory $UpdateProgressLoadingCopyWith(UpdateProgressLoading value, $Res Function(UpdateProgressLoading) _then) = _$UpdateProgressLoadingCopyWithImpl;
+@override @useResult
+$Res call({
+ int progress
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateProgressLoadingCopyWithImpl<$Res>
+    implements $UpdateProgressLoadingCopyWith<$Res> {
+  _$UpdateProgressLoadingCopyWithImpl(this._self, this._then);
+
+  final UpdateProgressLoading _self;
+  final $Res Function(UpdateProgressLoading) _then;
+
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? progress = null,}) {
+  return _then(UpdateProgressLoading(
+progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
 }
 
-/// @nodoc
-class __$$UpdateProgressLoadedImplCopyWithImpl<$Res>
-    extends _$UpdateProgressStateCopyWithImpl<$Res, _$UpdateProgressLoadedImpl>
-    implements _$$UpdateProgressLoadedImplCopyWith<$Res> {
-  __$$UpdateProgressLoadedImplCopyWithImpl(_$UpdateProgressLoadedImpl _value,
-      $Res Function(_$UpdateProgressLoadedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? progress = freezed,
-  }) {
-    return _then(_$UpdateProgressLoadedImpl(
-      progress: freezed == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$UpdateProgressLoadedImpl extends UpdateProgressLoaded {
-  const _$UpdateProgressLoadedImpl({this.progress}) : super._();
 
-  @override
-  final int? progress;
+class UpdateProgressLoaded extends UpdateProgressState {
+  const UpdateProgressLoaded({this.progress}): super._();
+  
 
-  @override
-  String toString() {
-    return 'UpdateProgressState.loaded(progress: $progress)';
-  }
+@override final  int? progress;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UpdateProgressLoadedImpl &&
-            (identical(other.progress, progress) ||
-                other.progress == progress));
-  }
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$UpdateProgressLoadedCopyWith<UpdateProgressLoaded> get copyWith => _$UpdateProgressLoadedCopyWithImpl<UpdateProgressLoaded>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, progress);
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UpdateProgressLoadedImplCopyWith<_$UpdateProgressLoadedImpl>
-      get copyWith =>
-          __$$UpdateProgressLoadedImplCopyWithImpl<_$UpdateProgressLoadedImpl>(
-              this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UpdateProgressLoaded&&(identical(other.progress, progress) || other.progress == progress));
 }
 
-abstract class UpdateProgressLoaded extends UpdateProgressState {
-  const factory UpdateProgressLoaded({final int? progress}) =
-      _$UpdateProgressLoadedImpl;
-  const UpdateProgressLoaded._() : super._();
 
-  @override
-  int? get progress;
+@override
+int get hashCode => Object.hash(runtimeType,progress);
 
-  /// Create a copy of UpdateProgressState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UpdateProgressLoadedImplCopyWith<_$UpdateProgressLoadedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'UpdateProgressState.loaded(progress: $progress)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class $UpdateProgressLoadedCopyWith<$Res> implements $UpdateProgressStateCopyWith<$Res> {
+  factory $UpdateProgressLoadedCopyWith(UpdateProgressLoaded value, $Res Function(UpdateProgressLoaded) _then) = _$UpdateProgressLoadedCopyWithImpl;
+@override @useResult
+$Res call({
+ int? progress
+});
+
+
+
+
+}
+/// @nodoc
+class _$UpdateProgressLoadedCopyWithImpl<$Res>
+    implements $UpdateProgressLoadedCopyWith<$Res> {
+  _$UpdateProgressLoadedCopyWithImpl(this._self, this._then);
+
+  final UpdateProgressLoaded _self;
+  final $Res Function(UpdateProgressLoaded) _then;
+
+/// Create a copy of UpdateProgressState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? progress = freezed,}) {
+  return _then(UpdateProgressLoaded(
+progress: freezed == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
+
+}
+
+// dart format on

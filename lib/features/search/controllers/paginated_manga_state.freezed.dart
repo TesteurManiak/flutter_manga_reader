@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,482 +10,350 @@ part of 'paginated_manga_state.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$PaginatedMangaState {
-  int get page => throw _privateConstructorUsedError;
-  bool get hasMore => throw _privateConstructorUsedError;
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PaginatedMangaStateCopyWith<PaginatedMangaState> get copyWith =>
-      throw _privateConstructorUsedError;
+ int get page; bool get hasMore;
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaginatedMangaStateCopyWith<PaginatedMangaState> get copyWith => _$PaginatedMangaStateCopyWithImpl<PaginatedMangaState>(this as PaginatedMangaState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedMangaState&&(identical(other.page, page) || other.page == page)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,page,hasMore);
+
+@override
+String toString() {
+  return 'PaginatedMangaState(page: $page, hasMore: $hasMore)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $PaginatedMangaStateCopyWith<$Res> {
-  factory $PaginatedMangaStateCopyWith(
-          PaginatedMangaState value, $Res Function(PaginatedMangaState) then) =
-      _$PaginatedMangaStateCopyWithImpl<$Res, PaginatedMangaState>;
-  @useResult
-  $Res call({int page, bool hasMore});
-}
+abstract mixin class $PaginatedMangaStateCopyWith<$Res>  {
+  factory $PaginatedMangaStateCopyWith(PaginatedMangaState value, $Res Function(PaginatedMangaState) _then) = _$PaginatedMangaStateCopyWithImpl;
+@useResult
+$Res call({
+ int page, bool hasMore
+});
 
+
+
+
+}
 /// @nodoc
-class _$PaginatedMangaStateCopyWithImpl<$Res, $Val extends PaginatedMangaState>
+class _$PaginatedMangaStateCopyWithImpl<$Res>
     implements $PaginatedMangaStateCopyWith<$Res> {
-  _$PaginatedMangaStateCopyWithImpl(this._value, this._then);
+  _$PaginatedMangaStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final PaginatedMangaState _self;
+  final $Res Function(PaginatedMangaState) _then;
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? hasMore = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? hasMore = null,}) {
+  return _then(_self.copyWith(
+page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$PaginatedMangaLoadingImplCopyWith<$Res>
-    implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$PaginatedMangaLoadingImplCopyWith(
-          _$PaginatedMangaLoadingImpl value,
-          $Res Function(_$PaginatedMangaLoadingImpl) then) =
-      __$$PaginatedMangaLoadingImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int page, bool hasMore});
 }
 
-/// @nodoc
-class __$$PaginatedMangaLoadingImplCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$PaginatedMangaLoadingImpl>
-    implements _$$PaginatedMangaLoadingImplCopyWith<$Res> {
-  __$$PaginatedMangaLoadingImplCopyWithImpl(_$PaginatedMangaLoadingImpl _value,
-      $Res Function(_$PaginatedMangaLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? hasMore = null,
-  }) {
-    return _then(_$PaginatedMangaLoadingImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$PaginatedMangaLoadingImpl extends PaginatedMangaLoading {
-  const _$PaginatedMangaLoadingImpl({required this.page, this.hasMore = true})
-      : super._();
 
-  @override
-  final int page;
-  @override
-  @JsonKey()
-  final bool hasMore;
+class PaginatedMangaLoading extends PaginatedMangaState {
+  const PaginatedMangaLoading({required this.page, this.hasMore = true}): super._();
+  
 
-  @override
-  String toString() {
-    return 'PaginatedMangaState.loading(page: $page, hasMore: $hasMore)';
-  }
+@override final  int page;
+@override@JsonKey() final  bool hasMore;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaginatedMangaLoadingImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
-  }
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaginatedMangaLoadingCopyWith<PaginatedMangaLoading> get copyWith => _$PaginatedMangaLoadingCopyWithImpl<PaginatedMangaLoading>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, page, hasMore);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaginatedMangaLoadingImplCopyWith<_$PaginatedMangaLoadingImpl>
-      get copyWith => __$$PaginatedMangaLoadingImplCopyWithImpl<
-          _$PaginatedMangaLoadingImpl>(this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedMangaLoading&&(identical(other.page, page) || other.page == page)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore));
 }
 
-abstract class PaginatedMangaLoading extends PaginatedMangaState {
-  const factory PaginatedMangaLoading(
-      {required final int page,
-      final bool hasMore}) = _$PaginatedMangaLoadingImpl;
-  const PaginatedMangaLoading._() : super._();
 
-  @override
-  int get page;
-  @override
-  bool get hasMore;
+@override
+int get hashCode => Object.hash(runtimeType,page,hasMore);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PaginatedMangaLoadingImplCopyWith<_$PaginatedMangaLoadingImpl>
-      get copyWith => throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'PaginatedMangaState.loading(page: $page, hasMore: $hasMore)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$PaginatedMangaLoadedImplCopyWith<$Res>
-    implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$PaginatedMangaLoadedImplCopyWith(_$PaginatedMangaLoadedImpl value,
-          $Res Function(_$PaginatedMangaLoadedImpl) then) =
-      __$$PaginatedMangaLoadedImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int page, bool hasMore, List<SourceManga> mangas});
+abstract mixin class $PaginatedMangaLoadingCopyWith<$Res> implements $PaginatedMangaStateCopyWith<$Res> {
+  factory $PaginatedMangaLoadingCopyWith(PaginatedMangaLoading value, $Res Function(PaginatedMangaLoading) _then) = _$PaginatedMangaLoadingCopyWithImpl;
+@override @useResult
+$Res call({
+ int page, bool hasMore
+});
+
+
+
+
+}
+/// @nodoc
+class _$PaginatedMangaLoadingCopyWithImpl<$Res>
+    implements $PaginatedMangaLoadingCopyWith<$Res> {
+  _$PaginatedMangaLoadingCopyWithImpl(this._self, this._then);
+
+  final PaginatedMangaLoading _self;
+  final $Res Function(PaginatedMangaLoading) _then;
+
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? hasMore = null,}) {
+  return _then(PaginatedMangaLoading(
+page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$PaginatedMangaLoadedImplCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$PaginatedMangaLoadedImpl>
-    implements _$$PaginatedMangaLoadedImplCopyWith<$Res> {
-  __$$PaginatedMangaLoadedImplCopyWithImpl(_$PaginatedMangaLoadedImpl _value,
-      $Res Function(_$PaginatedMangaLoadedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? hasMore = null,
-    Object? mangas = null,
-  }) {
-    return _then(_$PaginatedMangaLoadedImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      mangas: null == mangas
-          ? _value._mangas
-          : mangas // ignore: cast_nullable_to_non_nullable
-              as List<SourceManga>,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$PaginatedMangaLoadedImpl extends PaginatedMangaLoaded {
-  const _$PaginatedMangaLoadedImpl(
-      {required this.page,
-      required this.hasMore,
-      required final List<SourceManga> mangas})
-      : _mangas = mangas,
-        super._();
 
-  @override
-  final int page;
-  @override
-  final bool hasMore;
-  final List<SourceManga> _mangas;
-  @override
-  List<SourceManga> get mangas {
-    if (_mangas is EqualUnmodifiableListView) return _mangas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mangas);
-  }
+class PaginatedMangaLoaded extends PaginatedMangaState {
+  const PaginatedMangaLoaded({required this.page, required this.hasMore, required final  List<SourceManga> mangas}): _mangas = mangas,super._();
+  
 
-  @override
-  String toString() {
-    return 'PaginatedMangaState.loaded(page: $page, hasMore: $hasMore, mangas: $mangas)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaginatedMangaLoadedImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
-            const DeepCollectionEquality().equals(other._mangas, _mangas));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, page, hasMore, const DeepCollectionEquality().hash(_mangas));
-
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaginatedMangaLoadedImplCopyWith<_$PaginatedMangaLoadedImpl>
-      get copyWith =>
-          __$$PaginatedMangaLoadedImplCopyWithImpl<_$PaginatedMangaLoadedImpl>(
-              this, _$identity);
+@override final  int page;
+@override final  bool hasMore;
+ final  List<SourceManga> _mangas;
+ List<SourceManga> get mangas {
+  if (_mangas is EqualUnmodifiableListView) return _mangas;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_mangas);
 }
 
-abstract class PaginatedMangaLoaded extends PaginatedMangaState {
-  const factory PaginatedMangaLoaded(
-      {required final int page,
-      required final bool hasMore,
-      required final List<SourceManga> mangas}) = _$PaginatedMangaLoadedImpl;
-  const PaginatedMangaLoaded._() : super._();
 
-  @override
-  int get page;
-  @override
-  bool get hasMore;
-  List<SourceManga> get mangas;
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaginatedMangaLoadedCopyWith<PaginatedMangaLoaded> get copyWith => _$PaginatedMangaLoadedCopyWithImpl<PaginatedMangaLoaded>(this, _$identity);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PaginatedMangaLoadedImplCopyWith<_$PaginatedMangaLoadedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedMangaLoaded&&(identical(other.page, page) || other.page == page)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&const DeepCollectionEquality().equals(other._mangas, _mangas));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,page,hasMore,const DeepCollectionEquality().hash(_mangas));
+
+@override
+String toString() {
+  return 'PaginatedMangaState.loaded(page: $page, hasMore: $hasMore, mangas: $mangas)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$PaginatedMangaEmptyImplCopyWith<$Res>
-    implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$PaginatedMangaEmptyImplCopyWith(_$PaginatedMangaEmptyImpl value,
-          $Res Function(_$PaginatedMangaEmptyImpl) then) =
-      __$$PaginatedMangaEmptyImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int page, bool hasMore});
+abstract mixin class $PaginatedMangaLoadedCopyWith<$Res> implements $PaginatedMangaStateCopyWith<$Res> {
+  factory $PaginatedMangaLoadedCopyWith(PaginatedMangaLoaded value, $Res Function(PaginatedMangaLoaded) _then) = _$PaginatedMangaLoadedCopyWithImpl;
+@override @useResult
+$Res call({
+ int page, bool hasMore, List<SourceManga> mangas
+});
+
+
+
+
+}
+/// @nodoc
+class _$PaginatedMangaLoadedCopyWithImpl<$Res>
+    implements $PaginatedMangaLoadedCopyWith<$Res> {
+  _$PaginatedMangaLoadedCopyWithImpl(this._self, this._then);
+
+  final PaginatedMangaLoaded _self;
+  final $Res Function(PaginatedMangaLoaded) _then;
+
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? hasMore = null,Object? mangas = null,}) {
+  return _then(PaginatedMangaLoaded(
+page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,mangas: null == mangas ? _self._mangas : mangas // ignore: cast_nullable_to_non_nullable
+as List<SourceManga>,
+  ));
 }
 
-/// @nodoc
-class __$$PaginatedMangaEmptyImplCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$PaginatedMangaEmptyImpl>
-    implements _$$PaginatedMangaEmptyImplCopyWith<$Res> {
-  __$$PaginatedMangaEmptyImplCopyWithImpl(_$PaginatedMangaEmptyImpl _value,
-      $Res Function(_$PaginatedMangaEmptyImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? hasMore = null,
-  }) {
-    return _then(_$PaginatedMangaEmptyImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$PaginatedMangaEmptyImpl extends PaginatedMangaEmpty {
-  const _$PaginatedMangaEmptyImpl({required this.page, this.hasMore = false})
-      : super._();
 
-  @override
-  final int page;
-  @override
-  @JsonKey()
-  final bool hasMore;
+class PaginatedMangaEmpty extends PaginatedMangaState {
+  const PaginatedMangaEmpty({required this.page, this.hasMore = false}): super._();
+  
 
-  @override
-  String toString() {
-    return 'PaginatedMangaState.empty(page: $page, hasMore: $hasMore)';
-  }
+@override final  int page;
+@override@JsonKey() final  bool hasMore;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaginatedMangaEmptyImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.hasMore, hasMore) || other.hasMore == hasMore));
-  }
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaginatedMangaEmptyCopyWith<PaginatedMangaEmpty> get copyWith => _$PaginatedMangaEmptyCopyWithImpl<PaginatedMangaEmpty>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, page, hasMore);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaginatedMangaEmptyImplCopyWith<_$PaginatedMangaEmptyImpl> get copyWith =>
-      __$$PaginatedMangaEmptyImplCopyWithImpl<_$PaginatedMangaEmptyImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedMangaEmpty&&(identical(other.page, page) || other.page == page)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore));
 }
 
-abstract class PaginatedMangaEmpty extends PaginatedMangaState {
-  const factory PaginatedMangaEmpty(
-      {required final int page,
-      final bool hasMore}) = _$PaginatedMangaEmptyImpl;
-  const PaginatedMangaEmpty._() : super._();
 
-  @override
-  int get page;
-  @override
-  bool get hasMore;
+@override
+int get hashCode => Object.hash(runtimeType,page,hasMore);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PaginatedMangaEmptyImplCopyWith<_$PaginatedMangaEmptyImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'PaginatedMangaState.empty(page: $page, hasMore: $hasMore)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$PaginatedMangaErrorImplCopyWith<$Res>
-    implements $PaginatedMangaStateCopyWith<$Res> {
-  factory _$$PaginatedMangaErrorImplCopyWith(_$PaginatedMangaErrorImpl value,
-          $Res Function(_$PaginatedMangaErrorImpl) then) =
-      __$$PaginatedMangaErrorImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int page, bool hasMore, String? message});
+abstract mixin class $PaginatedMangaEmptyCopyWith<$Res> implements $PaginatedMangaStateCopyWith<$Res> {
+  factory $PaginatedMangaEmptyCopyWith(PaginatedMangaEmpty value, $Res Function(PaginatedMangaEmpty) _then) = _$PaginatedMangaEmptyCopyWithImpl;
+@override @useResult
+$Res call({
+ int page, bool hasMore
+});
+
+
+
+
+}
+/// @nodoc
+class _$PaginatedMangaEmptyCopyWithImpl<$Res>
+    implements $PaginatedMangaEmptyCopyWith<$Res> {
+  _$PaginatedMangaEmptyCopyWithImpl(this._self, this._then);
+
+  final PaginatedMangaEmpty _self;
+  final $Res Function(PaginatedMangaEmpty) _then;
+
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? hasMore = null,}) {
+  return _then(PaginatedMangaEmpty(
+page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-class __$$PaginatedMangaErrorImplCopyWithImpl<$Res>
-    extends _$PaginatedMangaStateCopyWithImpl<$Res, _$PaginatedMangaErrorImpl>
-    implements _$$PaginatedMangaErrorImplCopyWith<$Res> {
-  __$$PaginatedMangaErrorImplCopyWithImpl(_$PaginatedMangaErrorImpl _value,
-      $Res Function(_$PaginatedMangaErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? hasMore = null,
-    Object? message = freezed,
-  }) {
-    return _then(_$PaginatedMangaErrorImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      message: freezed == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$PaginatedMangaErrorImpl extends PaginatedMangaError {
-  const _$PaginatedMangaErrorImpl(
-      {required this.page, required this.hasMore, this.message})
-      : super._();
 
-  @override
-  final int page;
-  @override
-  final bool hasMore;
-  @override
-  final String? message;
+class PaginatedMangaError extends PaginatedMangaState {
+  const PaginatedMangaError({required this.page, required this.hasMore, this.message}): super._();
+  
 
-  @override
-  String toString() {
-    return 'PaginatedMangaState.error(page: $page, hasMore: $hasMore, message: $message)';
-  }
+@override final  int page;
+@override final  bool hasMore;
+ final  String? message;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PaginatedMangaErrorImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
-            (identical(other.message, message) || other.message == message));
-  }
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaginatedMangaErrorCopyWith<PaginatedMangaError> get copyWith => _$PaginatedMangaErrorCopyWithImpl<PaginatedMangaError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, page, hasMore, message);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PaginatedMangaErrorImplCopyWith<_$PaginatedMangaErrorImpl> get copyWith =>
-      __$$PaginatedMangaErrorImplCopyWithImpl<_$PaginatedMangaErrorImpl>(
-          this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaginatedMangaError&&(identical(other.page, page) || other.page == page)&&(identical(other.hasMore, hasMore) || other.hasMore == hasMore)&&(identical(other.message, message) || other.message == message));
 }
 
-abstract class PaginatedMangaError extends PaginatedMangaState {
-  const factory PaginatedMangaError(
-      {required final int page,
-      required final bool hasMore,
-      final String? message}) = _$PaginatedMangaErrorImpl;
-  const PaginatedMangaError._() : super._();
 
-  @override
-  int get page;
-  @override
-  bool get hasMore;
-  String? get message;
+@override
+int get hashCode => Object.hash(runtimeType,page,hasMore,message);
 
-  /// Create a copy of PaginatedMangaState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PaginatedMangaErrorImplCopyWith<_$PaginatedMangaErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'PaginatedMangaState.error(page: $page, hasMore: $hasMore, message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class $PaginatedMangaErrorCopyWith<$Res> implements $PaginatedMangaStateCopyWith<$Res> {
+  factory $PaginatedMangaErrorCopyWith(PaginatedMangaError value, $Res Function(PaginatedMangaError) _then) = _$PaginatedMangaErrorCopyWithImpl;
+@override @useResult
+$Res call({
+ int page, bool hasMore, String? message
+});
+
+
+
+
+}
+/// @nodoc
+class _$PaginatedMangaErrorCopyWithImpl<$Res>
+    implements $PaginatedMangaErrorCopyWith<$Res> {
+  _$PaginatedMangaErrorCopyWithImpl(this._self, this._then);
+
+  final PaginatedMangaError _self;
+  final $Res Function(PaginatedMangaError) _then;
+
+/// Create a copy of PaginatedMangaState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? page = null,Object? hasMore = null,Object? message = freezed,}) {
+  return _then(PaginatedMangaError(
+page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
+as int,hasMore: null == hasMore ? _self.hasMore : hasMore // ignore: cast_nullable_to_non_nullable
+as bool,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+// dart format on

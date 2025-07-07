@@ -12,22 +12,23 @@ String _$libraryControllerHash() => r'6293712efd558ef39429efacda858d402ed791c6';
 @ProviderFor(LibraryController)
 final libraryControllerProvider =
     AutoDisposeNotifierProvider<LibraryController, LibraryState>.internal(
-  LibraryController.new,
-  name: r'libraryControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$libraryControllerHash,
-  dependencies: <ProviderOrFamily>[
-    watchMangasInLibraryProvider,
-    localDatasourceProvider
-  ],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    watchMangasInLibraryProvider,
-    ...?watchMangasInLibraryProvider.allTransitiveDependencies,
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  },
-);
+      LibraryController.new,
+      name: r'libraryControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$libraryControllerHash,
+      dependencies: <ProviderOrFamily>[
+        watchMangasInLibraryProvider,
+        localDatasourceProvider,
+      ],
+      allTransitiveDependencies: <ProviderOrFamily>{
+        watchMangasInLibraryProvider,
+        ...?watchMangasInLibraryProvider.allTransitiveDependencies,
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      },
+    );
 
 typedef _$LibraryController = AutoDisposeNotifier<LibraryState>;
 // ignore_for_file: type=lint

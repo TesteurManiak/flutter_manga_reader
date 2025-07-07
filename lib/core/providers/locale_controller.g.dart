@@ -13,9 +13,10 @@ String _$fallbackLocaleHash() => r'12e24bb4410adeef193b21b0ff3448cd027c9dd6';
 final fallbackLocaleProvider = Provider<Locale>.internal(
   fallbackLocale,
   name: r'fallbackLocaleProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$fallbackLocaleHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$fallbackLocaleHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -45,14 +46,15 @@ String _$localeControllerHash() => r'f73adb84b8a4e763227e30b367a42fe0bfe2cfa2';
 @ProviderFor(LocaleController)
 final localeControllerProvider =
     NotifierProvider<LocaleController, Locale>.internal(
-  LocaleController.new,
-  name: r'localeControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$localeControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocaleController.new,
+      name: r'localeControllerProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$localeControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocaleController = Notifier<Locale>;
 // ignore_for_file: type=lint

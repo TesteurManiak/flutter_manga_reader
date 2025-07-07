@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,261 +10,177 @@ part of 'chapter_download_task.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$ChapterDownloadTask {
-  Chapter get chapter => throw _privateConstructorUsedError;
-  List<ChapterPage> get pages => throw _privateConstructorUsedError;
-  DownloadTaskStatus get status => throw _privateConstructorUsedError;
-  double get progress => throw _privateConstructorUsedError;
-  Map<String, String>? get headers => throw _privateConstructorUsedError;
 
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ChapterDownloadTaskCopyWith<ChapterDownloadTask> get copyWith =>
-      throw _privateConstructorUsedError;
+ Chapter get chapter; List<ChapterPage> get pages; DownloadTaskStatus get status; double get progress; Map<String, String>? get headers;
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ChapterDownloadTaskCopyWith<ChapterDownloadTask> get copyWith => _$ChapterDownloadTaskCopyWithImpl<ChapterDownloadTask>(this as ChapterDownloadTask, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChapterDownloadTask&&(identical(other.chapter, chapter) || other.chapter == chapter)&&const DeepCollectionEquality().equals(other.pages, pages)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&const DeepCollectionEquality().equals(other.headers, headers));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,chapter,const DeepCollectionEquality().hash(pages),status,progress,const DeepCollectionEquality().hash(headers));
+
+@override
+String toString() {
+  return 'ChapterDownloadTask(chapter: $chapter, pages: $pages, status: $status, progress: $progress, headers: $headers)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ChapterDownloadTaskCopyWith<$Res> {
-  factory $ChapterDownloadTaskCopyWith(
-          ChapterDownloadTask value, $Res Function(ChapterDownloadTask) then) =
-      _$ChapterDownloadTaskCopyWithImpl<$Res, ChapterDownloadTask>;
-  @useResult
-  $Res call(
-      {Chapter chapter,
-      List<ChapterPage> pages,
-      DownloadTaskStatus status,
-      double progress,
-      Map<String, String>? headers});
+abstract mixin class $ChapterDownloadTaskCopyWith<$Res>  {
+  factory $ChapterDownloadTaskCopyWith(ChapterDownloadTask value, $Res Function(ChapterDownloadTask) _then) = _$ChapterDownloadTaskCopyWithImpl;
+@useResult
+$Res call({
+ Chapter chapter, List<ChapterPage> pages, DownloadTaskStatus status, double progress, Map<String, String>? headers
+});
 
-  $ChapterCopyWith<$Res> get chapter;
+
+$ChapterCopyWith<$Res> get chapter;
+
 }
-
 /// @nodoc
-class _$ChapterDownloadTaskCopyWithImpl<$Res, $Val extends ChapterDownloadTask>
+class _$ChapterDownloadTaskCopyWithImpl<$Res>
     implements $ChapterDownloadTaskCopyWith<$Res> {
-  _$ChapterDownloadTaskCopyWithImpl(this._value, this._then);
+  _$ChapterDownloadTaskCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ChapterDownloadTask _self;
+  final $Res Function(ChapterDownloadTask) _then;
 
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? chapter = null,
-    Object? pages = null,
-    Object? status = null,
-    Object? progress = null,
-    Object? headers = freezed,
-  }) {
-    return _then(_value.copyWith(
-      chapter: null == chapter
-          ? _value.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
-              as Chapter,
-      pages: null == pages
-          ? _value.pages
-          : pages // ignore: cast_nullable_to_non_nullable
-              as List<ChapterPage>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DownloadTaskStatus,
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as double,
-      headers: freezed == headers
-          ? _value.headers
-          : headers // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
-    ) as $Val);
-  }
-
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChapterCopyWith<$Res> get chapter {
-    return $ChapterCopyWith<$Res>(_value.chapter, (value) {
-      return _then(_value.copyWith(chapter: value) as $Val);
-    });
-  }
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? chapter = null,Object? pages = null,Object? status = null,Object? progress = null,Object? headers = freezed,}) {
+  return _then(_self.copyWith(
+chapter: null == chapter ? _self.chapter : chapter // ignore: cast_nullable_to_non_nullable
+as Chapter,pages: null == pages ? _self.pages : pages // ignore: cast_nullable_to_non_nullable
+as List<ChapterPage>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DownloadTaskStatus,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,headers: freezed == headers ? _self.headers : headers // ignore: cast_nullable_to_non_nullable
+as Map<String, String>?,
+  ));
+}
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChapterCopyWith<$Res> get chapter {
+  
+  return $ChapterCopyWith<$Res>(_self.chapter, (value) {
+    return _then(_self.copyWith(chapter: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$ChapterDownloadTaskImplCopyWith<$Res>
-    implements $ChapterDownloadTaskCopyWith<$Res> {
-  factory _$$ChapterDownloadTaskImplCopyWith(_$ChapterDownloadTaskImpl value,
-          $Res Function(_$ChapterDownloadTaskImpl) then) =
-      __$$ChapterDownloadTaskImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Chapter chapter,
-      List<ChapterPage> pages,
-      DownloadTaskStatus status,
-      double progress,
-      Map<String, String>? headers});
-
-  @override
-  $ChapterCopyWith<$Res> get chapter;
-}
-
-/// @nodoc
-class __$$ChapterDownloadTaskImplCopyWithImpl<$Res>
-    extends _$ChapterDownloadTaskCopyWithImpl<$Res, _$ChapterDownloadTaskImpl>
-    implements _$$ChapterDownloadTaskImplCopyWith<$Res> {
-  __$$ChapterDownloadTaskImplCopyWithImpl(_$ChapterDownloadTaskImpl _value,
-      $Res Function(_$ChapterDownloadTaskImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? chapter = null,
-    Object? pages = null,
-    Object? status = null,
-    Object? progress = null,
-    Object? headers = freezed,
-  }) {
-    return _then(_$ChapterDownloadTaskImpl(
-      chapter: null == chapter
-          ? _value.chapter
-          : chapter // ignore: cast_nullable_to_non_nullable
-              as Chapter,
-      pages: null == pages
-          ? _value._pages
-          : pages // ignore: cast_nullable_to_non_nullable
-              as List<ChapterPage>,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as DownloadTaskStatus,
-      progress: null == progress
-          ? _value.progress
-          : progress // ignore: cast_nullable_to_non_nullable
-              as double,
-      headers: freezed == headers
-          ? _value._headers
-          : headers // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$ChapterDownloadTaskImpl extends _ChapterDownloadTask {
-  const _$ChapterDownloadTaskImpl(
-      {required this.chapter,
-      required final List<ChapterPage> pages,
-      this.status = DownloadTaskStatus.pending,
-      this.progress = 0,
-      final Map<String, String>? headers})
-      : _pages = pages,
-        _headers = headers,
-        super._();
 
-  @override
-  final Chapter chapter;
-  final List<ChapterPage> _pages;
-  @override
-  List<ChapterPage> get pages {
-    if (_pages is EqualUnmodifiableListView) return _pages;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_pages);
-  }
+class _ChapterDownloadTask extends ChapterDownloadTask {
+  const _ChapterDownloadTask({required this.chapter, required final  List<ChapterPage> pages, this.status = DownloadTaskStatus.pending, this.progress = 0, final  Map<String, String>? headers}): _pages = pages,_headers = headers,super._();
+  
 
-  @override
-  @JsonKey()
-  final DownloadTaskStatus status;
-  @override
-  @JsonKey()
-  final double progress;
-  final Map<String, String>? _headers;
-  @override
-  Map<String, String>? get headers {
-    final value = _headers;
-    if (value == null) return null;
-    if (_headers is EqualUnmodifiableMapView) return _headers;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  @override
-  String toString() {
-    return 'ChapterDownloadTask(chapter: $chapter, pages: $pages, status: $status, progress: $progress, headers: $headers)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChapterDownloadTaskImpl &&
-            (identical(other.chapter, chapter) || other.chapter == chapter) &&
-            const DeepCollectionEquality().equals(other._pages, _pages) &&
-            (identical(other.status, status) || other.status == status) &&
-            (identical(other.progress, progress) ||
-                other.progress == progress) &&
-            const DeepCollectionEquality().equals(other._headers, _headers));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      chapter,
-      const DeepCollectionEquality().hash(_pages),
-      status,
-      progress,
-      const DeepCollectionEquality().hash(_headers));
-
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChapterDownloadTaskImplCopyWith<_$ChapterDownloadTaskImpl> get copyWith =>
-      __$$ChapterDownloadTaskImplCopyWithImpl<_$ChapterDownloadTaskImpl>(
-          this, _$identity);
+@override final  Chapter chapter;
+ final  List<ChapterPage> _pages;
+@override List<ChapterPage> get pages {
+  if (_pages is EqualUnmodifiableListView) return _pages;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_pages);
 }
 
-abstract class _ChapterDownloadTask extends ChapterDownloadTask {
-  const factory _ChapterDownloadTask(
-      {required final Chapter chapter,
-      required final List<ChapterPage> pages,
-      final DownloadTaskStatus status,
-      final double progress,
-      final Map<String, String>? headers}) = _$ChapterDownloadTaskImpl;
-  const _ChapterDownloadTask._() : super._();
-
-  @override
-  Chapter get chapter;
-  @override
-  List<ChapterPage> get pages;
-  @override
-  DownloadTaskStatus get status;
-  @override
-  double get progress;
-  @override
-  Map<String, String>? get headers;
-
-  /// Create a copy of ChapterDownloadTask
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChapterDownloadTaskImplCopyWith<_$ChapterDownloadTaskImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override@JsonKey() final  DownloadTaskStatus status;
+@override@JsonKey() final  double progress;
+ final  Map<String, String>? _headers;
+@override Map<String, String>? get headers {
+  final value = _headers;
+  if (value == null) return null;
+  if (_headers is EqualUnmodifiableMapView) return _headers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
 }
+
+
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ChapterDownloadTaskCopyWith<_ChapterDownloadTask> get copyWith => __$ChapterDownloadTaskCopyWithImpl<_ChapterDownloadTask>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChapterDownloadTask&&(identical(other.chapter, chapter) || other.chapter == chapter)&&const DeepCollectionEquality().equals(other._pages, _pages)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress)&&const DeepCollectionEquality().equals(other._headers, _headers));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,chapter,const DeepCollectionEquality().hash(_pages),status,progress,const DeepCollectionEquality().hash(_headers));
+
+@override
+String toString() {
+  return 'ChapterDownloadTask(chapter: $chapter, pages: $pages, status: $status, progress: $progress, headers: $headers)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ChapterDownloadTaskCopyWith<$Res> implements $ChapterDownloadTaskCopyWith<$Res> {
+  factory _$ChapterDownloadTaskCopyWith(_ChapterDownloadTask value, $Res Function(_ChapterDownloadTask) _then) = __$ChapterDownloadTaskCopyWithImpl;
+@override @useResult
+$Res call({
+ Chapter chapter, List<ChapterPage> pages, DownloadTaskStatus status, double progress, Map<String, String>? headers
+});
+
+
+@override $ChapterCopyWith<$Res> get chapter;
+
+}
+/// @nodoc
+class __$ChapterDownloadTaskCopyWithImpl<$Res>
+    implements _$ChapterDownloadTaskCopyWith<$Res> {
+  __$ChapterDownloadTaskCopyWithImpl(this._self, this._then);
+
+  final _ChapterDownloadTask _self;
+  final $Res Function(_ChapterDownloadTask) _then;
+
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? chapter = null,Object? pages = null,Object? status = null,Object? progress = null,Object? headers = freezed,}) {
+  return _then(_ChapterDownloadTask(
+chapter: null == chapter ? _self.chapter : chapter // ignore: cast_nullable_to_non_nullable
+as Chapter,pages: null == pages ? _self._pages : pages // ignore: cast_nullable_to_non_nullable
+as List<ChapterPage>,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as DownloadTaskStatus,progress: null == progress ? _self.progress : progress // ignore: cast_nullable_to_non_nullable
+as double,headers: freezed == headers ? _self._headers : headers // ignore: cast_nullable_to_non_nullable
+as Map<String, String>?,
+  ));
+}
+
+/// Create a copy of ChapterDownloadTask
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ChapterCopyWith<$Res> get chapter {
+  
+  return $ChapterCopyWith<$Res>(_self.chapter, (value) {
+    return _then(_self.copyWith(chapter: value));
+  });
+}
+}
+
+// dart format on

@@ -6,7 +6,7 @@ part 'chapter.freezed.dart';
 part 'chapter.g.dart';
 
 @freezed
-class ChapterResponse with _$ChapterResponse {
+abstract class ChapterResponse with _$ChapterResponse {
   const factory ChapterResponse({
     @Default(<ChapterData>[]) List<ChapterData> data,
     @Default(0) int limit,
@@ -23,7 +23,7 @@ class ChapterResponse with _$ChapterResponse {
 }
 
 @freezed
-class ChapterData with _$ChapterData {
+abstract class ChapterData with _$ChapterData {
   const factory ChapterData({
     required String id,
     required ChapterAttributes attributes,
@@ -35,7 +35,7 @@ class ChapterData with _$ChapterData {
 }
 
 @freezed
-class ChapterAttributes with _$ChapterAttributes {
+abstract class ChapterAttributes with _$ChapterAttributes {
   const factory ChapterAttributes({
     String? title,
     String? volume,

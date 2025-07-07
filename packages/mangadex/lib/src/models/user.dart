@@ -4,7 +4,7 @@ part 'user.freezed.dart';
 part 'user.g.dart';
 
 @Freezed(copyWith: false)
-class UserAttributes with _$UserAttributes {
+abstract class UserAttributes with _$UserAttributes {
   const factory UserAttributes({
     required String username,
   }) = _UserAttributes;

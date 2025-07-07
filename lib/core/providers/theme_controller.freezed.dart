@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,164 +10,148 @@ part of 'theme_controller.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$ThemeState {
-  ThemeMode get mode => throw _privateConstructorUsedError;
-  bool get pureDarkMode => throw _privateConstructorUsedError;
+mixin _$ThemeState implements DiagnosticableTreeMixin {
 
-  /// Create a copy of ThemeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ThemeStateCopyWith<ThemeState> get copyWith =>
-      throw _privateConstructorUsedError;
+ ThemeMode get mode; bool get pureDarkMode;
+/// Create a copy of ThemeState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ThemeStateCopyWith<ThemeState> get copyWith => _$ThemeStateCopyWithImpl<ThemeState>(this as ThemeState, _$identity);
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ThemeState'))
+    ..add(DiagnosticsProperty('mode', mode))..add(DiagnosticsProperty('pureDarkMode', pureDarkMode));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ThemeState&&(identical(other.mode, mode) || other.mode == mode)&&(identical(other.pureDarkMode, pureDarkMode) || other.pureDarkMode == pureDarkMode));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,mode,pureDarkMode);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'ThemeState(mode: $mode, pureDarkMode: $pureDarkMode)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $ThemeStateCopyWith<$Res> {
-  factory $ThemeStateCopyWith(
-          ThemeState value, $Res Function(ThemeState) then) =
-      _$ThemeStateCopyWithImpl<$Res, ThemeState>;
-  @useResult
-  $Res call({ThemeMode mode, bool pureDarkMode});
-}
+abstract mixin class $ThemeStateCopyWith<$Res>  {
+  factory $ThemeStateCopyWith(ThemeState value, $Res Function(ThemeState) _then) = _$ThemeStateCopyWithImpl;
+@useResult
+$Res call({
+ ThemeMode mode, bool pureDarkMode
+});
 
+
+
+
+}
 /// @nodoc
-class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
+class _$ThemeStateCopyWithImpl<$Res>
     implements $ThemeStateCopyWith<$Res> {
-  _$ThemeStateCopyWithImpl(this._value, this._then);
+  _$ThemeStateCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final ThemeState _self;
+  final $Res Function(ThemeState) _then;
 
-  /// Create a copy of ThemeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? mode = null,
-    Object? pureDarkMode = null,
-  }) {
-    return _then(_value.copyWith(
-      mode: null == mode
-          ? _value.mode
-          : mode // ignore: cast_nullable_to_non_nullable
-              as ThemeMode,
-      pureDarkMode: null == pureDarkMode
-          ? _value.pureDarkMode
-          : pureDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
+/// Create a copy of ThemeState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? mode = null,Object? pureDarkMode = null,}) {
+  return _then(_self.copyWith(
+mode: null == mode ? _self.mode : mode // ignore: cast_nullable_to_non_nullable
+as ThemeMode,pureDarkMode: null == pureDarkMode ? _self.pureDarkMode : pureDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
 
-/// @nodoc
-abstract class _$$ThemeStateImplCopyWith<$Res>
-    implements $ThemeStateCopyWith<$Res> {
-  factory _$$ThemeStateImplCopyWith(
-          _$ThemeStateImpl value, $Res Function(_$ThemeStateImpl) then) =
-      __$$ThemeStateImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({ThemeMode mode, bool pureDarkMode});
 }
 
-/// @nodoc
-class __$$ThemeStateImplCopyWithImpl<$Res>
-    extends _$ThemeStateCopyWithImpl<$Res, _$ThemeStateImpl>
-    implements _$$ThemeStateImplCopyWith<$Res> {
-  __$$ThemeStateImplCopyWithImpl(
-      _$ThemeStateImpl _value, $Res Function(_$ThemeStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ThemeState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? mode = null,
-    Object? pureDarkMode = null,
-  }) {
-    return _then(_$ThemeStateImpl(
-      mode: null == mode
-          ? _value.mode
-          : mode // ignore: cast_nullable_to_non_nullable
-              as ThemeMode,
-      pureDarkMode: null == pureDarkMode
-          ? _value.pureDarkMode
-          : pureDarkMode // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
 
 /// @nodoc
 
-class _$ThemeStateImpl with DiagnosticableTreeMixin implements _ThemeState {
-  const _$ThemeStateImpl({required this.mode, this.pureDarkMode = false});
 
-  @override
-  final ThemeMode mode;
-  @override
-  @JsonKey()
-  final bool pureDarkMode;
+class _ThemeState with DiagnosticableTreeMixin implements ThemeState {
+  const _ThemeState({required this.mode, this.pureDarkMode = false});
+  
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ThemeState(mode: $mode, pureDarkMode: $pureDarkMode)';
-  }
+@override final  ThemeMode mode;
+@override@JsonKey() final  bool pureDarkMode;
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ThemeState'))
-      ..add(DiagnosticsProperty('mode', mode))
-      ..add(DiagnosticsProperty('pureDarkMode', pureDarkMode));
-  }
+/// Create a copy of ThemeState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ThemeStateCopyWith<_ThemeState> get copyWith => __$ThemeStateCopyWithImpl<_ThemeState>(this, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ThemeStateImpl &&
-            (identical(other.mode, mode) || other.mode == mode) &&
-            (identical(other.pureDarkMode, pureDarkMode) ||
-                other.pureDarkMode == pureDarkMode));
-  }
 
-  @override
-  int get hashCode => Object.hash(runtimeType, mode, pureDarkMode);
-
-  /// Create a copy of ThemeState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ThemeStateImplCopyWith<_$ThemeStateImpl> get copyWith =>
-      __$$ThemeStateImplCopyWithImpl<_$ThemeStateImpl>(this, _$identity);
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ThemeState'))
+    ..add(DiagnosticsProperty('mode', mode))..add(DiagnosticsProperty('pureDarkMode', pureDarkMode));
 }
 
-abstract class _ThemeState implements ThemeState {
-  const factory _ThemeState(
-      {required final ThemeMode mode,
-      final bool pureDarkMode}) = _$ThemeStateImpl;
-
-  @override
-  ThemeMode get mode;
-  @override
-  bool get pureDarkMode;
-
-  /// Create a copy of ThemeState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ThemeStateImplCopyWith<_$ThemeStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ThemeState&&(identical(other.mode, mode) || other.mode == mode)&&(identical(other.pureDarkMode, pureDarkMode) || other.pureDarkMode == pureDarkMode));
 }
+
+
+@override
+int get hashCode => Object.hash(runtimeType,mode,pureDarkMode);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'ThemeState(mode: $mode, pureDarkMode: $pureDarkMode)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
+  factory _$ThemeStateCopyWith(_ThemeState value, $Res Function(_ThemeState) _then) = __$ThemeStateCopyWithImpl;
+@override @useResult
+$Res call({
+ ThemeMode mode, bool pureDarkMode
+});
+
+
+
+
+}
+/// @nodoc
+class __$ThemeStateCopyWithImpl<$Res>
+    implements _$ThemeStateCopyWith<$Res> {
+  __$ThemeStateCopyWithImpl(this._self, this._then);
+
+  final _ThemeState _self;
+  final $Res Function(_ThemeState) _then;
+
+/// Create a copy of ThemeState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? mode = null,Object? pureDarkMode = null,}) {
+  return _then(_ThemeState(
+mode: null == mode ? _self.mode : mode // ignore: cast_nullable_to_non_nullable
+as ThemeMode,pureDarkMode: null == pureDarkMode ? _self.pureDarkMode : pureDarkMode // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

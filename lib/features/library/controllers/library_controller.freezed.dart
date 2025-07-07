@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,287 +10,238 @@ part of 'library_controller.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
-mixin _$LibraryState {}
+mixin _$LibraryState {
 
-/// @nodoc
-abstract class $LibraryStateCopyWith<$Res> {
-  factory $LibraryStateCopyWith(
-          LibraryState value, $Res Function(LibraryState) then) =
-      _$LibraryStateCopyWithImpl<$Res, LibraryState>;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryState);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LibraryState()';
+}
+
+
 }
 
 /// @nodoc
-class _$LibraryStateCopyWithImpl<$Res, $Val extends LibraryState>
-    implements $LibraryStateCopyWith<$Res> {
-  _$LibraryStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
+class $LibraryStateCopyWith<$Res>  {
+$LibraryStateCopyWith(LibraryState _, $Res Function(LibraryState) __);
 }
 
-/// @nodoc
-abstract class _$$LibraryLoadingImplCopyWith<$Res> {
-  factory _$$LibraryLoadingImplCopyWith(_$LibraryLoadingImpl value,
-          $Res Function(_$LibraryLoadingImpl) then) =
-      __$$LibraryLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LibraryLoadingImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryLoadingImpl>
-    implements _$$LibraryLoadingImplCopyWith<$Res> {
-  __$$LibraryLoadingImplCopyWithImpl(
-      _$LibraryLoadingImpl _value, $Res Function(_$LibraryLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-}
 
 /// @nodoc
 
-class _$LibraryLoadingImpl extends LibraryLoading {
-  const _$LibraryLoadingImpl() : super._();
 
-  @override
-  String toString() {
-    return 'LibraryState.loading()';
-  }
+class LibraryLoading extends LibraryState {
+  const LibraryLoading(): super._();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LibraryLoadingImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryLoading);
 }
 
-abstract class LibraryLoading extends LibraryState {
-  const factory LibraryLoading() = _$LibraryLoadingImpl;
-  const LibraryLoading._() : super._();
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LibraryState.loading()';
 }
 
-/// @nodoc
-abstract class _$$LibraryLoadedImplCopyWith<$Res> {
-  factory _$$LibraryLoadedImplCopyWith(
-          _$LibraryLoadedImpl value, $Res Function(_$LibraryLoadedImpl) then) =
-      __$$LibraryLoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<Manga> mangas});
+
 }
 
-/// @nodoc
-class __$$LibraryLoadedImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryLoadedImpl>
-    implements _$$LibraryLoadedImplCopyWith<$Res> {
-  __$$LibraryLoadedImplCopyWithImpl(
-      _$LibraryLoadedImpl _value, $Res Function(_$LibraryLoadedImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? mangas = null,
-  }) {
-    return _then(_$LibraryLoadedImpl(
-      mangas: null == mangas
-          ? _value._mangas
-          : mangas // ignore: cast_nullable_to_non_nullable
-              as List<Manga>,
-    ));
-  }
-}
+
 
 /// @nodoc
 
-class _$LibraryLoadedImpl extends LibraryLoaded {
-  const _$LibraryLoadedImpl({required final List<Manga> mangas})
-      : _mangas = mangas,
-        super._();
 
-  final List<Manga> _mangas;
-  @override
-  List<Manga> get mangas {
-    if (_mangas is EqualUnmodifiableListView) return _mangas;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mangas);
-  }
+class LibraryLoaded extends LibraryState {
+  const LibraryLoaded({required final  List<Manga> mangas}): _mangas = mangas,super._();
+  
 
-  @override
-  String toString() {
-    return 'LibraryState.loaded(mangas: $mangas)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LibraryLoadedImpl &&
-            const DeepCollectionEquality().equals(other._mangas, _mangas));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_mangas));
-
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LibraryLoadedImplCopyWith<_$LibraryLoadedImpl> get copyWith =>
-      __$$LibraryLoadedImplCopyWithImpl<_$LibraryLoadedImpl>(this, _$identity);
+ final  List<Manga> _mangas;
+ List<Manga> get mangas {
+  if (_mangas is EqualUnmodifiableListView) return _mangas;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_mangas);
 }
 
-abstract class LibraryLoaded extends LibraryState {
-  const factory LibraryLoaded({required final List<Manga> mangas}) =
-      _$LibraryLoadedImpl;
-  const LibraryLoaded._() : super._();
 
-  List<Manga> get mangas;
+/// Create a copy of LibraryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LibraryLoadedCopyWith<LibraryLoaded> get copyWith => _$LibraryLoadedCopyWithImpl<LibraryLoaded>(this, _$identity);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LibraryLoadedImplCopyWith<_$LibraryLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryLoaded&&const DeepCollectionEquality().equals(other._mangas, _mangas));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_mangas));
+
+@override
+String toString() {
+  return 'LibraryState.loaded(mangas: $mangas)';
+}
+
+
 }
 
 /// @nodoc
-abstract class _$$LibraryEmptyImplCopyWith<$Res> {
-  factory _$$LibraryEmptyImplCopyWith(
-          _$LibraryEmptyImpl value, $Res Function(_$LibraryEmptyImpl) then) =
-      __$$LibraryEmptyImplCopyWithImpl<$Res>;
+abstract mixin class $LibraryLoadedCopyWith<$Res> implements $LibraryStateCopyWith<$Res> {
+  factory $LibraryLoadedCopyWith(LibraryLoaded value, $Res Function(LibraryLoaded) _then) = _$LibraryLoadedCopyWithImpl;
+@useResult
+$Res call({
+ List<Manga> mangas
+});
+
+
+
+
+}
+/// @nodoc
+class _$LibraryLoadedCopyWithImpl<$Res>
+    implements $LibraryLoadedCopyWith<$Res> {
+  _$LibraryLoadedCopyWithImpl(this._self, this._then);
+
+  final LibraryLoaded _self;
+  final $Res Function(LibraryLoaded) _then;
+
+/// Create a copy of LibraryState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? mangas = null,}) {
+  return _then(LibraryLoaded(
+mangas: null == mangas ? _self._mangas : mangas // ignore: cast_nullable_to_non_nullable
+as List<Manga>,
+  ));
 }
 
-/// @nodoc
-class __$$LibraryEmptyImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryEmptyImpl>
-    implements _$$LibraryEmptyImplCopyWith<$Res> {
-  __$$LibraryEmptyImplCopyWithImpl(
-      _$LibraryEmptyImpl _value, $Res Function(_$LibraryEmptyImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$LibraryEmptyImpl extends LibraryEmpty {
-  const _$LibraryEmptyImpl() : super._();
 
-  @override
-  String toString() {
-    return 'LibraryState.empty()';
-  }
+class LibraryEmpty extends LibraryState {
+  const LibraryEmpty(): super._();
+  
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LibraryEmptyImpl);
-  }
 
-  @override
-  int get hashCode => runtimeType.hashCode;
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryEmpty);
 }
 
-abstract class LibraryEmpty extends LibraryState {
-  const factory LibraryEmpty() = _$LibraryEmptyImpl;
-  const LibraryEmpty._() : super._();
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'LibraryState.empty()';
 }
 
-/// @nodoc
-abstract class _$$LibraryErrorImplCopyWith<$Res> {
-  factory _$$LibraryErrorImplCopyWith(
-          _$LibraryErrorImpl value, $Res Function(_$LibraryErrorImpl) then) =
-      __$$LibraryErrorImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
+
 }
 
-/// @nodoc
-class __$$LibraryErrorImplCopyWithImpl<$Res>
-    extends _$LibraryStateCopyWithImpl<$Res, _$LibraryErrorImpl>
-    implements _$$LibraryErrorImplCopyWith<$Res> {
-  __$$LibraryErrorImplCopyWithImpl(
-      _$LibraryErrorImpl _value, $Res Function(_$LibraryErrorImpl) _then)
-      : super(_value, _then);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$LibraryErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
+
 
 /// @nodoc
 
-class _$LibraryErrorImpl extends LibraryError {
-  const _$LibraryErrorImpl({required this.message}) : super._();
 
-  @override
-  final String message;
+class LibraryError extends LibraryState {
+  const LibraryError({required this.message}): super._();
+  
 
-  @override
-  String toString() {
-    return 'LibraryState.error(message: $message)';
-  }
+ final  String message;
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LibraryErrorImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
+/// Create a copy of LibraryState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LibraryErrorCopyWith<LibraryError> get copyWith => _$LibraryErrorCopyWithImpl<LibraryError>(this, _$identity);
 
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LibraryErrorImplCopyWith<_$LibraryErrorImpl> get copyWith =>
-      __$$LibraryErrorImplCopyWithImpl<_$LibraryErrorImpl>(this, _$identity);
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LibraryError&&(identical(other.message, message) || other.message == message));
 }
 
-abstract class LibraryError extends LibraryState {
-  const factory LibraryError({required final String message}) =
-      _$LibraryErrorImpl;
-  const LibraryError._() : super._();
 
-  String get message;
+@override
+int get hashCode => Object.hash(runtimeType,message);
 
-  /// Create a copy of LibraryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$LibraryErrorImplCopyWith<_$LibraryErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+String toString() {
+  return 'LibraryState.error(message: $message)';
 }
+
+
+}
+
+/// @nodoc
+abstract mixin class $LibraryErrorCopyWith<$Res> implements $LibraryStateCopyWith<$Res> {
+  factory $LibraryErrorCopyWith(LibraryError value, $Res Function(LibraryError) _then) = _$LibraryErrorCopyWithImpl;
+@useResult
+$Res call({
+ String message
+});
+
+
+
+
+}
+/// @nodoc
+class _$LibraryErrorCopyWithImpl<$Res>
+    implements $LibraryErrorCopyWith<$Res> {
+  _$LibraryErrorCopyWithImpl(this._self, this._then);
+
+  final LibraryError _self;
+  final $Res Function(LibraryError) _then;
+
+/// Create a copy of LibraryState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
+  return _then(LibraryError(
+message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

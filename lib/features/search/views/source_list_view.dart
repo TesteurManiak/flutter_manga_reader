@@ -3,7 +3,6 @@ import 'package:flutter_manga_reader/core/extensions/build_context_extensions.da
 import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
-import 'package:flutter_manga_reader/features/search/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -16,9 +15,7 @@ class BrowseView extends ConsumerWidget {
     final strings = context.strings;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(strings.search_title),
-      ),
+      appBar: AppBar(title: Text(strings.search_title)),
       body: ListView.builder(
         itemCount: sources.length,
         itemBuilder: (context, index) {

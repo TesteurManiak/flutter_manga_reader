@@ -39,26 +39,20 @@ class GetUnreadChaptersFamily extends Family<int?> {
   const GetUnreadChaptersFamily();
 
   /// See also [getUnreadChapters].
-  GetUnreadChaptersProvider call(
-    SourceManga sourceManga,
-  ) {
-    return GetUnreadChaptersProvider(
-      sourceManga,
-    );
+  GetUnreadChaptersProvider call(SourceManga sourceManga) {
+    return GetUnreadChaptersProvider(sourceManga);
   }
 
   @override
   GetUnreadChaptersProvider getProviderOverride(
     covariant GetUnreadChaptersProvider provider,
   ) {
-    return call(
-      provider.sourceManga,
-    );
+    return call(provider.sourceManga);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
     getMangaByUrlAndSourceIdProvider,
-    watchUnreadChaptersCountForMangaProvider
+    watchUnreadChaptersCountForMangaProvider,
   ];
 
   @override
@@ -66,11 +60,11 @@ class GetUnreadChaptersFamily extends Family<int?> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    getMangaByUrlAndSourceIdProvider,
-    ...?getMangaByUrlAndSourceIdProvider.allTransitiveDependencies,
-    watchUnreadChaptersCountForMangaProvider,
-    ...?watchUnreadChaptersCountForMangaProvider.allTransitiveDependencies
-  };
+        getMangaByUrlAndSourceIdProvider,
+        ...?getMangaByUrlAndSourceIdProvider.allTransitiveDependencies,
+        watchUnreadChaptersCountForMangaProvider,
+        ...?watchUnreadChaptersCountForMangaProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -83,24 +77,20 @@ class GetUnreadChaptersFamily extends Family<int?> {
 /// See also [getUnreadChapters].
 class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
   /// See also [getUnreadChapters].
-  GetUnreadChaptersProvider(
-    SourceManga sourceManga,
-  ) : this._internal(
-          (ref) => getUnreadChapters(
-            ref as GetUnreadChaptersRef,
-            sourceManga,
-          ),
-          from: getUnreadChaptersProvider,
-          name: r'getUnreadChaptersProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$getUnreadChaptersHash,
-          dependencies: GetUnreadChaptersFamily._dependencies,
-          allTransitiveDependencies:
-              GetUnreadChaptersFamily._allTransitiveDependencies,
-          sourceManga: sourceManga,
-        );
+  GetUnreadChaptersProvider(SourceManga sourceManga)
+    : this._internal(
+        (ref) => getUnreadChapters(ref as GetUnreadChaptersRef, sourceManga),
+        from: getUnreadChaptersProvider,
+        name: r'getUnreadChaptersProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$getUnreadChaptersHash,
+        dependencies: GetUnreadChaptersFamily._dependencies,
+        allTransitiveDependencies:
+            GetUnreadChaptersFamily._allTransitiveDependencies,
+        sourceManga: sourceManga,
+      );
 
   GetUnreadChaptersProvider._internal(
     super._createNotifier, {
@@ -115,9 +105,7 @@ class GetUnreadChaptersProvider extends AutoDisposeProvider<int?> {
   final SourceManga sourceManga;
 
   @override
-  Override overrideWith(
-    int? Function(GetUnreadChaptersRef provider) create,
-  ) {
+  Override overrideWith(int? Function(GetUnreadChaptersRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: GetUnreadChaptersProvider._internal(
@@ -167,5 +155,6 @@ class _GetUnreadChaptersProviderElement extends AutoDisposeProviderElement<int?>
   SourceManga get sourceManga =>
       (origin as GetUnreadChaptersProvider).sourceManga;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

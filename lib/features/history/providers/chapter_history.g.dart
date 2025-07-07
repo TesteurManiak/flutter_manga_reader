@@ -13,17 +13,18 @@ String _$watchChapterHistoryHash() =>
 @ProviderFor(watchChapterHistory)
 final watchChapterHistoryProvider =
     StreamProvider<List<ChapterHistory>>.internal(
-  watchChapterHistory,
-  name: r'watchChapterHistoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$watchChapterHistoryHash,
-  dependencies: <ProviderOrFamily>[localDatasourceProvider],
-  allTransitiveDependencies: <ProviderOrFamily>{
-    localDatasourceProvider,
-    ...?localDatasourceProvider.allTransitiveDependencies
-  },
-);
+      watchChapterHistory,
+      name: r'watchChapterHistoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchChapterHistoryHash,
+      dependencies: <ProviderOrFamily>[localDatasourceProvider],
+      allTransitiveDependencies: <ProviderOrFamily>{
+        localDatasourceProvider,
+        ...?localDatasourceProvider.allTransitiveDependencies,
+      },
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

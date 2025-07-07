@@ -1,13 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
-import 'package:flutter_manga_reader/features/details/views/cover_viewer_view.dart';
-import 'package:flutter_manga_reader/features/details/views/details_view.dart';
-import 'package:flutter_manga_reader/features/details/views/manga_webview.dart';
-import 'package:flutter_manga_reader/features/home/navigation/route.dart';
-import 'package:flutter_manga_reader/features/search/navigation/route.dart';
-import 'package:go_router/go_router.dart';
-
-part 'route.g.dart';
+part of 'route.dart';
 
 abstract class DetailsRoute extends GoRouteData {
   const DetailsRoute();
@@ -17,7 +8,7 @@ abstract class DetailsRoute extends GoRouteData {
 
   bool get openedFromSource => false;
 
-  static void go(
+  static void goTo(
     BuildContext context, {
     required String sourceId,
     required int mangaId,
@@ -45,7 +36,7 @@ abstract class DetailsRoute extends GoRouteData {
   }
 }
 
-class LibraryDetailsRoute extends DetailsRoute {
+class LibraryDetailsRoute extends DetailsRoute with _$LibraryDetailsRoute {
   const LibraryDetailsRoute({required this.sourceId, required this.mangaId});
 
   static const path = 'details/:sourceId/:mangaId';
@@ -57,7 +48,7 @@ class LibraryDetailsRoute extends DetailsRoute {
   final int mangaId;
 }
 
-class SourceDetailsRoute extends DetailsRoute {
+class SourceDetailsRoute extends DetailsRoute with _$SourceDetailsRoute {
   const SourceDetailsRoute({required this.sourceId, required this.mangaId});
 
   static const path = 'source-details/:mangaId';
@@ -73,7 +64,7 @@ class SourceDetailsRoute extends DetailsRoute {
 }
 
 @TypedGoRoute<CoverViewerRoute>(path: CoverViewerRoute.path)
-class CoverViewerRoute extends GoRouteData {
+class CoverViewerRoute extends GoRouteData with _$CoverViewerRoute {
   const CoverViewerRoute({required this.sourceId, required this.coverUrl});
 
   final String sourceId;
@@ -96,7 +87,7 @@ class CoverViewerRoute extends GoRouteData {
 }
 
 @TypedGoRoute<MangaWebviewRoute>(path: MangaWebviewRoute.path)
-class MangaWebviewRoute extends GoRouteData {
+class MangaWebviewRoute extends GoRouteData with _$MangaWebviewRoute {
   const MangaWebviewRoute({required this.sourceId, required this.mangaId});
 
   final String sourceId;

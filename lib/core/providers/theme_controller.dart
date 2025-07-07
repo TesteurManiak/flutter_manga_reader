@@ -71,9 +71,10 @@ class ThemeController extends _$ThemeController {
   /// Used to toggle between light and dark theme modes.
   Future<void> toggle() {
     final platformBrightness = ref.read(platformBrightnessProvider);
-    final newMode = state.mode.isDark(platformBrightness)
-        ? ThemeMode.light
-        : ThemeMode.dark;
+    final newMode =
+        state.mode.isDark(platformBrightness)
+            ? ThemeMode.light
+            : ThemeMode.dark;
 
     return setThemeMode(newMode);
   }
@@ -110,7 +111,7 @@ class ThemeController extends _$ThemeController {
 }
 
 @freezed
-class ThemeState with _$ThemeState {
+abstract class ThemeState with _$ThemeState {
   const factory ThemeState({
     required ThemeMode mode,
     @Default(false) bool pureDarkMode,

@@ -4,7 +4,7 @@ part 'scanlation_group.freezed.dart';
 part 'scanlation_group.g.dart';
 
 @Freezed(copyWith: false)
-class ScanlationGroupAttributes with _$ScanlationGroupAttributes {
+abstract class ScanlationGroupAttributes with _$ScanlationGroupAttributes {
   const factory ScanlationGroupAttributes({
     required String name,
   }) = _ScanlationGroupAttributes;

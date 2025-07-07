@@ -5,7 +5,7 @@ part 'cover.freezed.dart';
 part 'cover.g.dart';
 
 @freezed
-class CoverListResponse with _$CoverListResponse {
+abstract class CoverListResponse with _$CoverListResponse {
   const factory CoverListResponse({
     @Default(<CoverArt>[]) List<CoverArt> data,
     @Default(0) int limit,
@@ -18,7 +18,7 @@ class CoverListResponse with _$CoverListResponse {
 }
 
 @freezed
-class CoverArt with _$CoverArt {
+abstract class CoverArt with _$CoverArt {
   const factory CoverArt({
     CoverArtAttributes? attributes,
     @Default(<Relationship>[]) List<Relationship> relationships,
@@ -29,7 +29,7 @@ class CoverArt with _$CoverArt {
 }
 
 @freezed
-class CoverArtAttributes with _$CoverArtAttributes {
+abstract class CoverArtAttributes with _$CoverArtAttributes {
   const factory CoverArtAttributes({
     String? fileName,
     String? locale,

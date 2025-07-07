@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/widgets/source_provider_scope.dart';
-import 'package:flutter_manga_reader/features/chapter_viewer/views/chapter_viewer_view.dart';
-import 'package:flutter_manga_reader/features/details/navigation/route.dart';
-import 'package:flutter_manga_reader/features/home/navigation/route.dart';
-import 'package:go_router/go_router.dart';
+part of 'route.dart';
 
 abstract class ChapterViewerRoute extends GoRouteData {
   const ChapterViewerRoute();
@@ -15,7 +10,7 @@ abstract class ChapterViewerRoute extends GoRouteData {
   int get chapterId;
   int? get initialPage;
 
-  static void go(
+  static void goTo(
     BuildContext context, {
     required String sourceId,
     required int mangaId,
@@ -57,7 +52,8 @@ abstract class ChapterViewerRoute extends GoRouteData {
   }
 }
 
-class LibraryChapterViewerRoute extends ChapterViewerRoute {
+class LibraryChapterViewerRoute extends ChapterViewerRoute
+    with _$LibraryChapterViewerRoute {
   const LibraryChapterViewerRoute({
     required this.sourceId,
     required this.mangaId,
@@ -78,7 +74,8 @@ class LibraryChapterViewerRoute extends ChapterViewerRoute {
   final int? initialPage;
 }
 
-class SourceChapterViewerRoute extends ChapterViewerRoute {
+class SourceChapterViewerRoute extends ChapterViewerRoute
+    with _$SourceChapterViewerRoute {
   const SourceChapterViewerRoute({
     required this.sourceId,
     required this.mangaId,

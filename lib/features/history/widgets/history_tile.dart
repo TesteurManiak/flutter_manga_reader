@@ -4,7 +4,6 @@ import 'package:flutter_manga_reader/core/models/chapter_history.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
-import 'package:flutter_manga_reader/features/details/navigation/route.dart';
 import 'package:flutter_manga_reader/features/details/widgets/status_label.dart';
 import 'package:flutter_manga_reader/features/home/navigation/route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

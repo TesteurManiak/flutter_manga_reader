@@ -4,7 +4,7 @@ part 'aggregate.freezed.dart';
 part 'aggregate.g.dart';
 
 @freezed
-class AggregateResponse with _$AggregateResponse {
+abstract class AggregateResponse with _$AggregateResponse {
   const factory AggregateResponse({
     required String result,
     Map<String, AggregateVolume>? volumes,
@@ -15,7 +15,7 @@ class AggregateResponse with _$AggregateResponse {
 }
 
 @freezed
-class AggregateVolume with _$AggregateVolume {
+abstract class AggregateVolume with _$AggregateVolume {
   const factory AggregateVolume({
     required String volume,
     required String count,
@@ -27,7 +27,7 @@ class AggregateVolume with _$AggregateVolume {
 }
 
 @freezed
-class AggregateChapter with _$AggregateChapter {
+abstract class AggregateChapter with _$AggregateChapter {
   const factory AggregateChapter({
     required String chapter,
     required String count,

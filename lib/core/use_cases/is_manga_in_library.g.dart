@@ -39,25 +39,19 @@ class IsMangaInLibraryFamily extends Family<bool> {
   const IsMangaInLibraryFamily();
 
   /// See also [isMangaInLibrary].
-  IsMangaInLibraryProvider call(
-    SourceManga sourceManga,
-  ) {
-    return IsMangaInLibraryProvider(
-      sourceManga,
-    );
+  IsMangaInLibraryProvider call(SourceManga sourceManga) {
+    return IsMangaInLibraryProvider(sourceManga);
   }
 
   @override
   IsMangaInLibraryProvider getProviderOverride(
     covariant IsMangaInLibraryProvider provider,
   ) {
-    return call(
-      provider.sourceManga,
-    );
+    return call(provider.sourceManga);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    watchMangasInLibraryProvider
+    watchMangasInLibraryProvider,
   ];
 
   @override
@@ -65,9 +59,9 @@ class IsMangaInLibraryFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    watchMangasInLibraryProvider,
-    ...?watchMangasInLibraryProvider.allTransitiveDependencies
-  };
+        watchMangasInLibraryProvider,
+        ...?watchMangasInLibraryProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -80,24 +74,20 @@ class IsMangaInLibraryFamily extends Family<bool> {
 /// See also [isMangaInLibrary].
 class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
   /// See also [isMangaInLibrary].
-  IsMangaInLibraryProvider(
-    SourceManga sourceManga,
-  ) : this._internal(
-          (ref) => isMangaInLibrary(
-            ref as IsMangaInLibraryRef,
-            sourceManga,
-          ),
-          from: isMangaInLibraryProvider,
-          name: r'isMangaInLibraryProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$isMangaInLibraryHash,
-          dependencies: IsMangaInLibraryFamily._dependencies,
-          allTransitiveDependencies:
-              IsMangaInLibraryFamily._allTransitiveDependencies,
-          sourceManga: sourceManga,
-        );
+  IsMangaInLibraryProvider(SourceManga sourceManga)
+    : this._internal(
+        (ref) => isMangaInLibrary(ref as IsMangaInLibraryRef, sourceManga),
+        from: isMangaInLibraryProvider,
+        name: r'isMangaInLibraryProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$isMangaInLibraryHash,
+        dependencies: IsMangaInLibraryFamily._dependencies,
+        allTransitiveDependencies:
+            IsMangaInLibraryFamily._allTransitiveDependencies,
+        sourceManga: sourceManga,
+      );
 
   IsMangaInLibraryProvider._internal(
     super._createNotifier, {
@@ -112,9 +102,7 @@ class IsMangaInLibraryProvider extends AutoDisposeProvider<bool> {
   final SourceManga sourceManga;
 
   @override
-  Override overrideWith(
-    bool Function(IsMangaInLibraryRef provider) create,
-  ) {
+  Override overrideWith(bool Function(IsMangaInLibraryRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: IsMangaInLibraryProvider._internal(
@@ -164,5 +152,6 @@ class _IsMangaInLibraryProviderElement extends AutoDisposeProviderElement<bool>
   SourceManga get sourceManga =>
       (origin as IsMangaInLibraryProvider).sourceManga;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

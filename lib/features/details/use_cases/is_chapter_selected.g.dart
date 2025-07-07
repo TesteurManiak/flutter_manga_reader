@@ -40,25 +40,19 @@ class ScopedChapterSelectedFamily extends Family<bool> {
   const ScopedChapterSelectedFamily();
 
   /// See also [scopedChapterSelected].
-  ScopedChapterSelectedProvider call(
-    Chapter chapter,
-  ) {
-    return ScopedChapterSelectedProvider(
-      chapter,
-    );
+  ScopedChapterSelectedProvider call(Chapter chapter) {
+    return ScopedChapterSelectedProvider(chapter);
   }
 
   @override
   ScopedChapterSelectedProvider getProviderOverride(
     covariant ScopedChapterSelectedProvider provider,
   ) {
-    return call(
-      provider.chapter,
-    );
+    return call(provider.chapter);
   }
 
   static final Iterable<ProviderOrFamily> _dependencies = <ProviderOrFamily>[
-    detailsControllerProvider
+    detailsControllerProvider,
   ];
 
   @override
@@ -66,9 +60,9 @@ class ScopedChapterSelectedFamily extends Family<bool> {
 
   static final Iterable<ProviderOrFamily> _allTransitiveDependencies =
       <ProviderOrFamily>{
-    detailsControllerProvider,
-    ...?detailsControllerProvider.allTransitiveDependencies
-  };
+        detailsControllerProvider,
+        ...?detailsControllerProvider.allTransitiveDependencies,
+      };
 
   @override
   Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
@@ -81,24 +75,21 @@ class ScopedChapterSelectedFamily extends Family<bool> {
 /// See also [scopedChapterSelected].
 class ScopedChapterSelectedProvider extends AutoDisposeProvider<bool> {
   /// See also [scopedChapterSelected].
-  ScopedChapterSelectedProvider(
-    Chapter chapter,
-  ) : this._internal(
-          (ref) => scopedChapterSelected(
-            ref as ScopedChapterSelectedRef,
-            chapter,
-          ),
-          from: scopedChapterSelectedProvider,
-          name: r'scopedChapterSelectedProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$scopedChapterSelectedHash,
-          dependencies: ScopedChapterSelectedFamily._dependencies,
-          allTransitiveDependencies:
-              ScopedChapterSelectedFamily._allTransitiveDependencies,
-          chapter: chapter,
-        );
+  ScopedChapterSelectedProvider(Chapter chapter)
+    : this._internal(
+        (ref) =>
+            scopedChapterSelected(ref as ScopedChapterSelectedRef, chapter),
+        from: scopedChapterSelectedProvider,
+        name: r'scopedChapterSelectedProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$scopedChapterSelectedHash,
+        dependencies: ScopedChapterSelectedFamily._dependencies,
+        allTransitiveDependencies:
+            ScopedChapterSelectedFamily._allTransitiveDependencies,
+        chapter: chapter,
+      );
 
   ScopedChapterSelectedProvider._internal(
     super._createNotifier, {
@@ -157,11 +148,13 @@ mixin ScopedChapterSelectedRef on AutoDisposeProviderRef<bool> {
 }
 
 class _ScopedChapterSelectedProviderElement
-    extends AutoDisposeProviderElement<bool> with ScopedChapterSelectedRef {
+    extends AutoDisposeProviderElement<bool>
+    with ScopedChapterSelectedRef {
   _ScopedChapterSelectedProviderElement(super.provider);
 
   @override
   Chapter get chapter => (origin as ScopedChapterSelectedProvider).chapter;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
