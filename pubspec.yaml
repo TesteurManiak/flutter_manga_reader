@@ -20,7 +20,7 @@ dependencies:
   cached_network_image: ^3.4.1
   clock: ^1.1.2
   collection: ^1.19.0
-  drift: ^2.27.0
+  drift: ^2.28.0
   file_picker: ^10.2.0
   flutter:
     sdk: flutter
