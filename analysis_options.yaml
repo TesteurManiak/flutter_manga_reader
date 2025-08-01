@@ -1,8 +1,6 @@
 include: package:fd_lints/flutter.yaml
 
 analyzer:
-  plugins:
-    - custom_lint
   exclude:
     - "**/*.tailor.dart"
     - lib/gen/**.dart

@@ -1,9 +1,0 @@
-global_options:
-  freezed:
-    runs_before:
-      - json_serializable
-
-    options:
-      # Disable both `map` and `when` as they are now obsolete thanks to Pattern Matching support with Dart 3
-      map: false
-      when: false
