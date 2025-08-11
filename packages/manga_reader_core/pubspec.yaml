@@ -14,7 +14,7 @@ dependencies:
   crypto: ^3.0.6
   freezed_annotation:
   html: ^0.15.6
-  http:
+  http: ^1.5.0
   json_annotation:
   xpath_selector_html_parser:
     path: ../xpath_selector_html_parser
