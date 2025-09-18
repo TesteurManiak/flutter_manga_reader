@@ -5,50 +5,48 @@ import 'package:flutter_manga_reader/core/providers/shared_prefs.dart';
 import 'package:flutter_manga_reader/design_system/theme_data/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'theme_controller.freezed.dart';
-part 'theme_controller.g.dart';
 
-@riverpod
-ThemeMode defaultThemeMode(Ref ref) => ThemeMode.system;
+final defaultThemeModeProvider = Provider.autoDispose(
+  (ref) => ThemeMode.system,
+);
 
-@riverpod
-ThemeData lightTheme(Ref ref) => AppTheme.light();
+final lightThemeProvider = Provider.autoDispose((ref) => AppTheme.light());
 
-@riverpod
-ThemeData darkTheme(Ref ref) =>
-    AppTheme.dark(pureDark: ref.watch(pureDarkModeStateProvider));
+final darkThemeProvider = Provider.autoDispose((ref) {
+  return AppTheme.dark(pureDark: ref.watch(pureDarkModeStateProvider));
+});
 
-@riverpod
-Brightness platformBrightness(Ref ref) =>
-    PlatformDispatcher.instance.platformBrightness;
+final platformBrightnessProvider = Provider.autoDispose(
+  (ref) => PlatformDispatcher.instance.platformBrightness,
+);
 
-@riverpod
-ThemeMode appThemeMode(Ref ref) =>
-    ref.watch(themeControllerProvider.select((s) => s.mode));
+final appThemeModeProvider = Provider.autoDispose(
+  (ref) => ref.watch(themeControllerProvider.select((s) => s.mode)),
+);
 
-@riverpod
-bool pureDarkModeState(Ref ref) =>
-    ref.watch(themeControllerProvider.select((s) => s.pureDarkMode));
+final pureDarkModeStateProvider = Provider.autoDispose(
+  (ref) => ref.watch(themeControllerProvider.select((s) => s.pureDarkMode)),
+);
 
-@riverpod
-bool isDark(Ref ref) {
+final isDarkProvider = Provider.autoDispose((ref) {
   final platformBrightness = ref.watch(platformBrightnessProvider);
   return ref.watch(
     appThemeModeProvider.select((mode) => mode.isDark(platformBrightness)),
   );
-}
+});
 
-@Riverpod(keepAlive: true)
-class ThemeController extends _$ThemeController {
+final themeControllerProvider = NotifierProvider<ThemeController, ThemeState>(
+  ThemeController.new,
+);
+
+class ThemeController extends Notifier<ThemeState> {
   static const themeKey = 'theme_mode';
   static const pureDarkModeKey = 'pure_dark_theme';
 
   @override
-  ThemeState build() {
-    return ThemeState(mode: ref.read(defaultThemeModeProvider));
-  }
+  ThemeState build() => ThemeState(mode: ref.read(defaultThemeModeProvider));
 
   /// Initialize the theme mode.
   ///

@@ -2,12 +2,10 @@ import 'dart:io' as io;
 
 import 'package:file_picker/file_picker.dart' as fp;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'file_picker_service.g.dart';
-
-@Riverpod(keepAlive: true)
-FilePickerService filePickerService(Ref ref) => FilePickerService();
+final filePickerServiceProvider = Provider<FilePickerService>(
+  (ref) => FilePickerService(),
+);
 
 class FilePickerService {
   Future<io.File?> pickFile() async {

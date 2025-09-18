@@ -5,15 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/widgets/toast.dart';
 import 'package:flutter_manga_reader/navigation/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'toaster_service.g.dart';
 
 const _kDefaultToastDuration = Duration(seconds: 5);
 const _kDefaultFadeInDuration = Duration(milliseconds: 350);
 
-@Riverpod(keepAlive: true)
-ToasterService toasterService(Ref ref) => ToasterService();
+final toasterServiceProvider = Provider<ToasterService>(
+  (ref) => ToasterService(),
+);
 
 class ToasterService {
   final _overlayQueue = ListQueue<ToastEntry>();

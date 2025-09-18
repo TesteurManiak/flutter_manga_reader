@@ -3,14 +3,17 @@ import 'dart:io' as io;
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'backup_controller.freezed.dart';
-part 'backup_controller.g.dart';
 
-@Riverpod(dependencies: [localDatasource])
-class BackupController extends _$BackupController {
+final backupControllerProvider =
+    NotifierProvider.autoDispose<BackupController, BackupState>(
+      BackupController.new,
+    );
+
+class BackupController extends Notifier<BackupState> {
   @override
   BackupState build() => const BackupStateInitial();
 
@@ -31,8 +34,9 @@ class BackupController extends _$BackupController {
       final mangaToSync = <pb.BackupManga>[];
 
       for (final manga in backup.backupManga) {
-        final source =
-            ref.read(findSourceFromIdProvider(manga.source.toString()));
+        final source = ref.read(
+          findSourceFromIdProvider(manga.source.toString()),
+        );
         if (source != null) mangaToSync.add(manga);
       }
 
@@ -60,7 +64,4 @@ sealed class BackupState with _$BackupState {
   const factory BackupState.error(BackupErrorType type) = BackupStateError;
 }
 
-enum BackupErrorType {
-  invalidBackup,
-  unknown,
-}
+enum BackupErrorType { invalidBackup, unknown }

@@ -1,21 +1,25 @@
 import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'reading_direction_controller.g.dart';
+final watchReadingDirectionProvider = StreamProvider.autoDispose
+    .family<ReadingDirection, int>((Ref ref, int mangaId) {
+      return ref.watch(localDatasourceProvider).watchReadingDirection(mangaId);
+    });
 
-@Riverpod(dependencies: [localDatasource])
-Stream<ReadingDirection> watchReadingDirection(Ref ref, int mangaId) {
-  return ref.watch(localDatasourceProvider).watchReadingDirection(mangaId);
-}
+final readingDirectionControllerProvider = AsyncNotifierProvider.autoDispose
+    .family<ReadingDirectionController, ReadingDirection, int>(
+      ReadingDirectionController.new,
+    );
 
-@Riverpod(dependencies: [watchReadingDirection, localDatasource])
-class ReadingDirectionController extends _$ReadingDirectionController {
+class ReadingDirectionController extends AsyncNotifier<ReadingDirection> {
+  ReadingDirectionController(this.mangaId);
+
+  final int mangaId;
+
   @override
-  AsyncValue<ReadingDirection> build(int mangaId) {
-    return ref.watch(watchReadingDirectionProvider(mangaId));
-  }
+  Future<ReadingDirection> build() =>
+      ref.watch(watchReadingDirectionProvider(mangaId).future);
 
   Future<void> setDirection(ReadingDirection? direction) async {
     if (direction != null) {

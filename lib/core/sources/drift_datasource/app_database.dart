@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_database.g.dart';
 part 'tables/cache_entries.dart';
@@ -60,5 +59,4 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration => DriftMigrationStrategy();
 }
 
-@Riverpod(keepAlive: true)
-AppDatabase appDatabase(Ref ref) => AppDatabase();
+final appDatabaseProvider = Provider<AppDatabase>((ref) => AppDatabase());

@@ -6,31 +6,21 @@ import 'package:flutter_manga_reader/features/details/use_cases/is_manga_favorit
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'details_controller.freezed.dart';
-part 'details_controller.g.dart';
 
 typedef MangaFetchRecord = ({Manga manga, List<SourceChapter> sourceChapters});
 
-@Riverpod(
-  dependencies: [
-    watchMangaById,
-    watchMangaById,
-    scopedMangaDatasource,
-    localDatasource,
-    isMangaFavorite,
-    localDatasource,
-    localDatasource,
-    localDatasource,
-    localDatasource,
-    DownloadQueueController,
-    watchChaptersForManga,
-  ],
-)
-class DetailsController extends _$DetailsController {
+final detailsControllerProvider = NotifierProvider.autoDispose
+    .family<DetailsController, DetailsState, int>(DetailsController.new);
+
+class DetailsController extends Notifier<DetailsState> {
+  DetailsController(this.mangaId);
+
+  final int mangaId;
+
   @override
-  DetailsState build(int mangaId) {
+  DetailsState build() {
     fetchDetails();
 
     ref.listen(watchMangaByIdProvider(mangaId), (_, next) {
@@ -61,15 +51,16 @@ class DetailsController extends _$DetailsController {
 
     state = switch (result) {
       Success(success: final record) => await () async {
-          final mangaToSave = currentManga
-              .copyFrom(record.manga.toSourceManga())
-              .copyWith(initialized: true);
-          await ref.read(localDatasourceProvider).saveMangaData(
-            (manga: mangaToSave, sourceChapters: record.sourceChapters),
-          );
+        final mangaToSave = currentManga
+            .copyFrom(record.manga.toSourceManga())
+            .copyWith(initialized: true);
+        await ref.read(localDatasourceProvider).saveMangaData((
+          manga: mangaToSave,
+          sourceChapters: record.sourceChapters,
+        ));
 
-          return const DetailsState.loaded();
-        }(),
+        return const DetailsState.loaded();
+      }(),
       Failure(failure: final e) => DetailsState.error(error: e),
     };
     _isFetching = false;
@@ -77,10 +68,9 @@ class DetailsController extends _$DetailsController {
 
   Future<void> toggleFavorite() {
     final currentFavoriteState = ref.read(isMangaFavoriteProvider(mangaId));
-    return ref.read(localDatasourceProvider).setMangaFavorite(
-          mangaId: mangaId,
-          favorite: !currentFavoriteState,
-        );
+    return ref
+        .read(localDatasourceProvider)
+        .setMangaFavorite(mangaId: mangaId, favorite: !currentFavoriteState);
   }
 
   Future<void> markSelectedChaptersAsRead() async {
@@ -158,10 +148,7 @@ class DetailsController extends _$DetailsController {
 
   void selectAllChapters() {
     ref.read(watchChaptersForMangaProvider(mangaId)).whenData((chapters) {
-      state = state.copyWith(
-        selectedChapters: chapters,
-        selectionMode: true,
-      );
+      state = state.copyWith(selectedChapters: chapters, selectionMode: true);
     });
   }
 
@@ -170,12 +157,14 @@ class DetailsController extends _$DetailsController {
   }
 }
 
-@Riverpod(dependencies: [DetailsController])
-bool scopedSelectionMode(Ref ref, int mangaId) {
+final scopedSelectionModeProvider = Provider.autoDispose.family<bool, int>((
+  ref,
+  mangaId,
+) {
   return ref.watch(
     detailsControllerProvider(mangaId).select((s) => s.selectionMode),
   );
-}
+});
 
 @freezed
 sealed class DetailsState with _$DetailsState {

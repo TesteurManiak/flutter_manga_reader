@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
-import 'package:flutter_manga_reader/features/home/navigation/route.dart';
+import 'package:flutter_manga_reader/features/home/navigation/search.route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
