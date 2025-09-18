@@ -1,17 +1,23 @@
 import 'package:flutter_manga_reader/features/search/controllers/paginated_manga_state.dart';
 import 'package:flutter_manga_reader/features/search/mixins/loadable_paginated_manga_mixin.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'filtered_manga_controller.g.dart';
+final filteredMangaControllerProvider = NotifierProvider.autoDispose
+    .family<FilteredMangaController, PaginatedMangaState, MangaDatasource>(
+      FilteredMangaController.new,
+    );
 
-@riverpod
-class FilteredMangaController extends _$FilteredMangaController
+class FilteredMangaController extends Notifier<PaginatedMangaState>
     with PaginatedMangaConverterMixin {
+  FilteredMangaController(this.datasource);
+
+  final MangaDatasource datasource;
+
   String _query = '';
 
   @override
-  PaginatedMangaState build(MangaDatasource datasource) {
+  PaginatedMangaState build() {
     // return const PaginatedMangaState.empty(page: 0, hasMore: true);
     return const PaginatedMangaState.loading(page: 0);
   }

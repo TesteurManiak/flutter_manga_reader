@@ -1,9 +1,11 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-part 'incognito_mode_controller.g.dart';
+final incognitoModeControllerProvider =
+    NotifierProvider<IncognitoModeController, bool>(
+      IncognitoModeController.new,
+    );
 
-@Riverpod(keepAlive: true)
-class IncognitoModeController extends _$IncognitoModeController {
+class IncognitoModeController extends Notifier<bool> {
   @override
   bool build() => false;
 

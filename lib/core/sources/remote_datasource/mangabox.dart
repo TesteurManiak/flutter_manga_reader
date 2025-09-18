@@ -2,12 +2,8 @@ import 'package:flutter_manga_reader/core/sources/remote_datasource/http_clients
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:mangabox/mangabox.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'mangabox.g.dart';
-
-@Riverpod(keepAlive: true)
-List<MangaDatasource> mangabox(Ref ref) {
+final mangaboxProvider = Provider<List<MangaDatasource>>((Ref ref) {
   return [
     MangabatDatasource(
       client: ref.watch(sourceClientProvider(MBConsts.mangabatBaseUrl)),
@@ -22,4 +18,4 @@ List<MangaDatasource> mangabox(Ref ref) {
       client: ref.watch(sourceClientProvider(MBConsts.manganatoBaseUrl)),
     ),
   ];
-}
+});

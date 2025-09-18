@@ -1,37 +1,44 @@
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'chapter_viewer_controller.freezed.dart';
-part 'chapter_viewer_controller.g.dart';
 
-@Riverpod(dependencies: [localDatasource, fetchChapterPages])
-class ChapterViewerController extends _$ChapterViewerController {
+final chapterViewerControllerProvider = NotifierProvider.autoDispose
+    .family<ChapterViewerController, ChapterViewerState, int>(
+      ChapterViewerController.new,
+    );
+
+class ChapterViewerController extends Notifier<ChapterViewerState> {
+  ChapterViewerController(this.chapterId);
+
+  final int chapterId;
+
   @override
-  ChapterViewerState build(int chapterId) {
-    return const ChapterViewerState.loading();
-  }
+  ChapterViewerState build() => const ChapterViewerState.loading();
 
   Future<void> fetchPages() async {
     state = const ChapterViewerState.loading();
 
-    final localChapter =
-        await ref.read(localDatasourceProvider).getChapter(chapterId);
+    final localChapter = await ref
+        .read(localDatasourceProvider)
+        .getChapter(chapterId);
     if (localChapter == null) {
       state = const ChapterViewerState.error(error: 'Chapter not found');
       return;
     }
 
-    final result = await ref
-        .read(fetchChapterPagesProvider(localChapter.toSourceModel()).future);
+    final result = await ref.read(
+      fetchChapterPagesProvider(localChapter.toSourceModel()).future,
+    );
 
     state = switch (result) {
       Success(success: final pages) => ChapterViewerState.loaded(
-          pages: pages,
-          chapter: localChapter,
-        ),
+        pages: pages,
+        chapter: localChapter,
+      ),
       Failure(failure: final e) => ChapterViewerState.error(error: e.message),
     };
   }

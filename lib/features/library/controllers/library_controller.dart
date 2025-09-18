@@ -3,15 +3,18 @@ import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasou
 import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
 import 'package:flutter_manga_reader/features/library/controllers/update_progress_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'library_controller.freezed.dart';
-part 'library_controller.g.dart';
 
-@Riverpod(dependencies: [watchMangasInLibrary, localDatasource])
-class LibraryController extends _$LibraryController {
+final libraryControllerProvider =
+    NotifierProvider.autoDispose<LibraryController, LibraryState>(
+      LibraryController.new,
+    );
+
+class LibraryController extends Notifier<LibraryState> {
   @override
   LibraryState build() {
     ref.listen(watchMangasInLibraryProvider, (_, next) {
@@ -57,9 +60,8 @@ class LibraryController extends _$LibraryController {
 @freezed
 sealed class LibraryState with _$LibraryState {
   const factory LibraryState.loading() = LibraryLoading;
-  const factory LibraryState.loaded({
-    required List<Manga> mangas,
-  }) = LibraryLoaded;
+  const factory LibraryState.loaded({required List<Manga> mangas}) =
+      LibraryLoaded;
   const factory LibraryState.empty() = LibraryEmpty;
   const factory LibraryState.error({required String message}) = LibraryError;
 

@@ -4,7 +4,7 @@ import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasou
 import 'package:flutter_manga_reader/core/use_cases/get_unread_chapters.dart';
 import 'package:flutter_manga_reader/core/use_cases/is_manga_in_library.dart';
 import 'package:flutter_manga_reader/core/widgets/app_network_image.dart';
-import 'package:flutter_manga_reader/features/home/navigation/route.dart';
+import 'package:flutter_manga_reader/features/home/navigation/details.route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -77,10 +77,10 @@ class MangaTile extends ConsumerWidget {
 
   Future<void> _handleOnTap(BuildContext context, WidgetRef ref) async {
     final localId = await ref.read(
-      getMangaByUrlAndSourceIdProvider(
+      getMangaByUrlAndSourceIdProvider((
         url: manga.url,
         sourceId: manga.sourceId,
-      ).selectAsync((manga) => manga?.id),
+      )).selectAsync((manga) => manga?.id),
     );
     final int mangaId = await switch (localId) {
       final localId? => localId,

@@ -9,12 +9,13 @@ import 'package:flutter_manga_reader/core/sources/remote_datasource/manga_dataso
 import 'package:flutter_manga_reader/features/details/models/chapter_download_task.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'download_queue_controller.g.dart';
+final downloadQueueControllerProvider =
+    NotifierProvider<DownloadQueueController, Map<int, ChapterDownloadTask>>(
+      DownloadQueueController.new,
+    );
 
-@Riverpod(keepAlive: true, dependencies: [localDatasource, fetchChapterPages])
-class DownloadQueueController extends _$DownloadQueueController {
+class DownloadQueueController extends Notifier<Map<int, ChapterDownloadTask>> {
   final _waiting = ListQueue<ChapterDownloadTask>();
   var _readyForEnqueue = Completer<void>();
 
@@ -35,8 +36,9 @@ class DownloadQueueController extends _$DownloadQueueController {
     Chapter chapter,
     Map<String, String>? headers,
   ) async {
-    final result = await ref
-        .read(fetchChapterPagesProvider(chapter.toSourceModel()).future);
+    final result = await ref.read(
+      fetchChapterPagesProvider(chapter.toSourceModel()).future,
+    );
     if (result case Success(success: final pages) when pages.isNotEmpty) {
       final task = ChapterDownloadTask(
         chapter: chapter,
@@ -91,10 +93,12 @@ class DownloadQueueController extends _$DownloadQueueController {
       final newTask = task.copyWith(progress: progress, status: newStatus);
 
       if (newStatus == DownloadTaskStatus.completed) {
-        await ref.read(localDatasourceProvider).setChaptersDownloaded(
-          chapterIds: [task.chapter.id],
-          downloaded: true,
-        );
+        await ref
+            .read(localDatasourceProvider)
+            .setChaptersDownloaded(
+              chapterIds: [task.chapter.id],
+              downloaded: true,
+            );
         final newMap = Map.of(state)..remove(chapterId);
         state = newMap;
         _readyForEnqueue.complete();
@@ -117,13 +121,13 @@ class DownloadQueueController extends _$DownloadQueueController {
   }
 }
 
-@Riverpod(dependencies: [DownloadQueueController])
-ChapterDownloadTask? chapterDownloadTask(Ref ref, int chapterId) {
-  final task = ref.watch(
-    downloadQueueControllerProvider.select((value) => value[chapterId]),
-  );
-  return task;
-}
+final chapterDownloadTaskProvider = Provider.autoDispose
+    .family<ChapterDownloadTask?, int>((ref, chapterId) {
+      final task = ref.watch(
+        downloadQueueControllerProvider.select((value) => value[chapterId]),
+      );
+      return task;
+    });
 
 extension on ChapterDownloadTask {
   List<DownloadTask> toDownloadTaskBatch() {
