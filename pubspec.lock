@@ -641,10 +641,10 @@ packages:
     dependency: "direct dev"
     description:
       name: go_router_builder
-      sha256: "43a109ccf4f804c486f7f7c0e2e11345142ecf456b4cc265f75b33c7e6fe4684"
+      sha256: e0646fb5586e04e1df92678f539059f38e4314848f06dd4f3cd87fed434e16b5
       url: "https://pub.dev"
     source: hosted
-    version: "4.1.0"
+    version: "4.1.1"
   graphs:
     dependency: transitive
     description:
