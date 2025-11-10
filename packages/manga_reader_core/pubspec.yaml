@@ -11,7 +11,7 @@ resolution: workspace
 
 dependencies:
   clock:
-  crypto: ^3.0.6
+  crypto: ^3.0.7
   freezed_annotation:
   html: ^0.15.6
   http: ^1.5.0
