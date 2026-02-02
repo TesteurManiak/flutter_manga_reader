@@ -13,4 +13,4 @@ dependencies:
   expressions: ^0.2.5+2
 
 dev_dependencies:
-  lints: ^6.0.0
+  lints: ^6.1.0
