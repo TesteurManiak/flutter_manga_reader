@@ -14,7 +14,7 @@ dependencies:
   collection:
   freezed_annotation:
   intl:
-  json_annotation:
+  json_annotation: ^4.11.0
   manga_reader_core:
     path: ../manga_reader_core
   path:
