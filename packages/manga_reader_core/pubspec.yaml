@@ -15,7 +15,7 @@ dependencies:
   freezed_annotation:
   html: ^0.15.6
   http: ^1.6.0
-  json_annotation:
+  json_annotation: ^4.11.0
   xpath_selector_html_parser:
     path: ../xpath_selector_html_parser
 
