@@ -25,7 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_cache_manager: ^3.4.1
-  flutter_gen: ^5.14.0
+  flutter_gen: ^5.14.1
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.3.1
