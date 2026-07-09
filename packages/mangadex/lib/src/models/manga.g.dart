@@ -56,10 +56,9 @@ Map<String, dynamic> _$MangaDataToJson(_MangaData instance) =>
 _MangaAttributes _$MangaAttributesFromJson(Map<String, dynamic> json) =>
     _MangaAttributes(
       title: Map<String, String>.from(json['title'] as Map),
-      altTitles:
-          (json['altTitles'] as List<dynamic>)
-              .map((e) => Map<String, String>.from(e as Map))
-              .toList(),
+      altTitles: (json['altTitles'] as List<dynamic>)
+          .map((e) => Map<String, String>.from(e as Map))
+          .toList(),
       description: Map<String, String>.from(json['description'] as Map),
       originalLanguage: json['originalLanguage'] as String?,
       lastVolume: json['lastVolume'] as String?,
@@ -73,10 +72,9 @@ _MangaAttributes _$MangaAttributesFromJson(Map<String, dynamic> json) =>
         json['publicationDemographic'],
       ),
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
-      tags:
-          (json['tags'] as List<dynamic>)
-              .map((e) => Tag.fromJson(e as Map<String, dynamic>))
-              .toList(),
+      tags: (json['tags'] as List<dynamic>)
+          .map((e) => Tag.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$MangaAttributesToJson(_MangaAttributes instance) =>

@@ -20,8 +20,9 @@ _AtHomeChapter _$AtHomeChapterFromJson(Map<String, dynamic> json) =>
     _AtHomeChapter(
       hash: json['hash'] as String,
       data: (json['data'] as List<dynamic>).map((e) => e as String).toList(),
-      dataSaver:
-          (json['dataSaver'] as List<dynamic>).map((e) => e as String).toList(),
+      dataSaver: (json['dataSaver'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$AtHomeChapterToJson(_AtHomeChapter instance) =>

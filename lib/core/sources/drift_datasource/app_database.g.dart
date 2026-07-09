@@ -329,40 +329,34 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
   DbManga map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbManga(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      sourceId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}source_id'],
-          )!,
-      favorite:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}favorite'],
-          )!,
-      fetchInterval:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}fetch_interval'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      sourceId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_id'],
+      )!,
+      favorite: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}favorite'],
+      )!,
+      fetchInterval: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}fetch_interval'],
+      )!,
       dateAdded: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}date_added'],
       ),
-      url:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}url'],
-          )!,
-      title:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}title'],
-          )!,
+      url: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}url'],
+      )!,
+      title: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}title'],
+      )!,
       artist: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}artist'],
@@ -395,11 +389,10 @@ class $DbMangasTable extends DbMangas with TableInfo<$DbMangasTable, DbManga> {
           data['${effectivePrefix}update_strategy'],
         )!,
       ),
-      initialized:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}initialized'],
-          )!,
+      initialized: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}initialized'],
+      )!,
       lastModifiedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}last_modified_at'],
@@ -503,33 +496,32 @@ class DbManga extends DataClass implements Insertable<DbManga> {
       sourceId: Value(sourceId),
       favorite: Value(favorite),
       fetchInterval: Value(fetchInterval),
-      dateAdded:
-          dateAdded == null && nullToAbsent
-              ? const Value.absent()
-              : Value(dateAdded),
+      dateAdded: dateAdded == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateAdded),
       url: Value(url),
       title: Value(title),
-      artist:
-          artist == null && nullToAbsent ? const Value.absent() : Value(artist),
-      author:
-          author == null && nullToAbsent ? const Value.absent() : Value(author),
-      description:
-          description == null && nullToAbsent
-              ? const Value.absent()
-              : Value(description),
-      genre:
-          genre == null && nullToAbsent ? const Value.absent() : Value(genre),
+      artist: artist == null && nullToAbsent
+          ? const Value.absent()
+          : Value(artist),
+      author: author == null && nullToAbsent
+          ? const Value.absent()
+          : Value(author),
+      description: description == null && nullToAbsent
+          ? const Value.absent()
+          : Value(description),
+      genre: genre == null && nullToAbsent
+          ? const Value.absent()
+          : Value(genre),
       status: Value(status),
-      thumbnailUrl:
-          thumbnailUrl == null && nullToAbsent
-              ? const Value.absent()
-              : Value(thumbnailUrl),
+      thumbnailUrl: thumbnailUrl == null && nullToAbsent
+          ? const Value.absent()
+          : Value(thumbnailUrl),
       updateStrategy: Value(updateStrategy),
       initialized: Value(initialized),
-      lastModifiedAt:
-          lastModifiedAt == null && nullToAbsent
-              ? const Value.absent()
-              : Value(lastModifiedAt),
+      lastModifiedAt: lastModifiedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastModifiedAt),
     );
   }
 
@@ -621,41 +613,40 @@ class DbManga extends DataClass implements Insertable<DbManga> {
     thumbnailUrl: thumbnailUrl.present ? thumbnailUrl.value : this.thumbnailUrl,
     updateStrategy: updateStrategy ?? this.updateStrategy,
     initialized: initialized ?? this.initialized,
-    lastModifiedAt:
-        lastModifiedAt.present ? lastModifiedAt.value : this.lastModifiedAt,
+    lastModifiedAt: lastModifiedAt.present
+        ? lastModifiedAt.value
+        : this.lastModifiedAt,
   );
   DbManga copyWithCompanion(DbMangasCompanion data) {
     return DbManga(
       id: data.id.present ? data.id.value : this.id,
       sourceId: data.sourceId.present ? data.sourceId.value : this.sourceId,
       favorite: data.favorite.present ? data.favorite.value : this.favorite,
-      fetchInterval:
-          data.fetchInterval.present
-              ? data.fetchInterval.value
-              : this.fetchInterval,
+      fetchInterval: data.fetchInterval.present
+          ? data.fetchInterval.value
+          : this.fetchInterval,
       dateAdded: data.dateAdded.present ? data.dateAdded.value : this.dateAdded,
       url: data.url.present ? data.url.value : this.url,
       title: data.title.present ? data.title.value : this.title,
       artist: data.artist.present ? data.artist.value : this.artist,
       author: data.author.present ? data.author.value : this.author,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       genre: data.genre.present ? data.genre.value : this.genre,
       status: data.status.present ? data.status.value : this.status,
-      thumbnailUrl:
-          data.thumbnailUrl.present
-              ? data.thumbnailUrl.value
-              : this.thumbnailUrl,
-      updateStrategy:
-          data.updateStrategy.present
-              ? data.updateStrategy.value
-              : this.updateStrategy,
-      initialized:
-          data.initialized.present ? data.initialized.value : this.initialized,
-      lastModifiedAt:
-          data.lastModifiedAt.present
-              ? data.lastModifiedAt.value
-              : this.lastModifiedAt,
+      thumbnailUrl: data.thumbnailUrl.present
+          ? data.thumbnailUrl.value
+          : this.thumbnailUrl,
+      updateStrategy: data.updateStrategy.present
+          ? data.updateStrategy.value
+          : this.updateStrategy,
+      initialized: data.initialized.present
+          ? data.initialized.value
+          : this.initialized,
+      lastModifiedAt: data.lastModifiedAt.present
+          ? data.lastModifiedAt.value
+          : this.lastModifiedAt,
     );
   }
 
@@ -1230,59 +1221,50 @@ class $DbChaptersTable extends DbChapters
   DbChapter map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbChapter(
-      id:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}id'],
-          )!,
-      mangaId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}manga_id'],
-          )!,
-      url:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}url'],
-          )!,
-      name:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}name'],
-          )!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      mangaId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}manga_id'],
+      )!,
+      url: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}url'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
       dateUpload: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}date_upload'],
       ),
-      chapterNumber:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.double,
-            data['${effectivePrefix}chapter_number'],
-          )!,
+      chapterNumber: attachedDatabase.typeMapping.read(
+        DriftSqlType.double,
+        data['${effectivePrefix}chapter_number'],
+      )!,
       scanlator: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}scanlator'],
       ),
-      read:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}read'],
-          )!,
-      downloaded:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}downloaded'],
-          )!,
-      bookmark:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.bool,
-            data['${effectivePrefix}bookmark'],
-          )!,
-      lastPageRead:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}last_page_read'],
-          )!,
+      read: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}read'],
+      )!,
+      downloaded: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}downloaded'],
+      )!,
+      bookmark: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}bookmark'],
+      )!,
+      lastPageRead: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}last_page_read'],
+      )!,
       dateFetch: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}date_fetch'],
@@ -1362,27 +1344,23 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: Value(mangaId),
       url: Value(url),
       name: Value(name),
-      dateUpload:
-          dateUpload == null && nullToAbsent
-              ? const Value.absent()
-              : Value(dateUpload),
+      dateUpload: dateUpload == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateUpload),
       chapterNumber: Value(chapterNumber),
-      scanlator:
-          scanlator == null && nullToAbsent
-              ? const Value.absent()
-              : Value(scanlator),
+      scanlator: scanlator == null && nullToAbsent
+          ? const Value.absent()
+          : Value(scanlator),
       read: Value(read),
       downloaded: Value(downloaded),
       bookmark: Value(bookmark),
       lastPageRead: Value(lastPageRead),
-      dateFetch:
-          dateFetch == null && nullToAbsent
-              ? const Value.absent()
-              : Value(dateFetch),
-      lastModified:
-          lastModified == null && nullToAbsent
-              ? const Value.absent()
-              : Value(lastModified),
+      dateFetch: dateFetch == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateFetch),
+      lastModified: lastModified == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastModified),
     );
   }
 
@@ -1462,26 +1440,25 @@ class DbChapter extends DataClass implements Insertable<DbChapter> {
       mangaId: data.mangaId.present ? data.mangaId.value : this.mangaId,
       url: data.url.present ? data.url.value : this.url,
       name: data.name.present ? data.name.value : this.name,
-      dateUpload:
-          data.dateUpload.present ? data.dateUpload.value : this.dateUpload,
-      chapterNumber:
-          data.chapterNumber.present
-              ? data.chapterNumber.value
-              : this.chapterNumber,
+      dateUpload: data.dateUpload.present
+          ? data.dateUpload.value
+          : this.dateUpload,
+      chapterNumber: data.chapterNumber.present
+          ? data.chapterNumber.value
+          : this.chapterNumber,
       scanlator: data.scanlator.present ? data.scanlator.value : this.scanlator,
       read: data.read.present ? data.read.value : this.read,
-      downloaded:
-          data.downloaded.present ? data.downloaded.value : this.downloaded,
+      downloaded: data.downloaded.present
+          ? data.downloaded.value
+          : this.downloaded,
       bookmark: data.bookmark.present ? data.bookmark.value : this.bookmark,
-      lastPageRead:
-          data.lastPageRead.present
-              ? data.lastPageRead.value
-              : this.lastPageRead,
+      lastPageRead: data.lastPageRead.present
+          ? data.lastPageRead.value
+          : this.lastPageRead,
       dateFetch: data.dateFetch.present ? data.dateFetch.value : this.dateFetch,
-      lastModified:
-          data.lastModified.present
-              ? data.lastModified.value
-              : this.lastModified,
+      lastModified: data.lastModified.present
+          ? data.lastModified.value
+          : this.lastModified,
     );
   }
 
@@ -1776,11 +1753,10 @@ class $DbReadingDirectionTable extends DbReadingDirection
   DbReadingDirectionData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbReadingDirectionData(
-      mangaId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}manga_id'],
-          )!,
+      mangaId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}manga_id'],
+      )!,
       direction: $DbReadingDirectionTable.$converterdirection.fromSql(
         attachedDatabase.typeMapping.read(
           DriftSqlType.int,
@@ -2020,21 +1996,18 @@ class $DbCacheEntriesTable extends DbCacheEntries
   DbCacheEntry map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbCacheEntry(
-      key:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}key'],
-          )!,
-      response:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.string,
-            data['${effectivePrefix}response'],
-          )!,
-      expiry:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}expiry'],
-          )!,
+      key: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}key'],
+      )!,
+      response: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}response'],
+      )!,
+      expiry: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}expiry'],
+      )!,
     );
   }
 
@@ -2291,21 +2264,18 @@ class $DbChapterHistoryTable extends DbChapterHistory
   DbChapterHistoryData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return DbChapterHistoryData(
-      mangaId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}manga_id'],
-          )!,
-      chapterId:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.int,
-            data['${effectivePrefix}chapter_id'],
-          )!,
-      readAt:
-          attachedDatabase.typeMapping.read(
-            DriftSqlType.dateTime,
-            data['${effectivePrefix}read_at'],
-          )!,
+      mangaId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}manga_id'],
+      )!,
+      chapterId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}chapter_id'],
+      )!,
+      readAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}read_at'],
+      )!,
     );
   }
 
@@ -2612,7 +2582,7 @@ final class $$DbMangasTableReferences
   static MultiTypedResultKey<$DbChaptersTable, List<DbChapter>>
   _dbChaptersRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
     db.dbChapters,
-    aliasName: $_aliasNameGenerator(db.dbMangas.id, db.dbChapters.mangaId),
+    aliasName: 'db_mangas__id__db_chapters__manga_id',
   );
 
   $$DbChaptersTableProcessedTableManager get dbChaptersRefs {
@@ -2634,10 +2604,7 @@ final class $$DbMangasTableReferences
   _dbReadingDirectionRefsTable(_$AppDatabase db) =>
       MultiTypedResultKey.fromTable(
         db.dbReadingDirection,
-        aliasName: $_aliasNameGenerator(
-          db.dbMangas.id,
-          db.dbReadingDirection.mangaId,
-        ),
+        aliasName: 'db_mangas__id__db_reading_direction__manga_id',
       );
 
   $$DbReadingDirectionTableProcessedTableManager get dbReadingDirectionRefs {
@@ -2657,10 +2624,7 @@ final class $$DbMangasTableReferences
   static MultiTypedResultKey<$DbChapterHistoryTable, List<DbChapterHistoryData>>
   _dbChapterHistoryRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
     db.dbChapterHistory,
-    aliasName: $_aliasNameGenerator(
-      db.dbMangas.id,
-      db.dbChapterHistory.mangaId,
-    ),
+    aliasName: 'db_mangas__id__db_chapter_history__manga_id',
   );
 
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
@@ -3106,12 +3070,12 @@ class $$DbMangasTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DbMangasTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$DbMangasTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $$DbMangasTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$DbMangasTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbMangasTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbMangasTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -3184,101 +3148,97 @@ class $$DbMangasTableTableManager
                 initialized: initialized,
                 lastModifiedAt: lastModifiedAt,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DbMangasTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
-          prefetchHooksCallback: ({
-            dbChaptersRefs = false,
-            dbReadingDirectionRefs = false,
-            dbChapterHistoryRefs = false,
-          }) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (dbChaptersRefs) db.dbChapters,
-                if (dbReadingDirectionRefs) db.dbReadingDirection,
-                if (dbChapterHistoryRefs) db.dbChapterHistory,
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (dbChaptersRefs)
-                    await $_getPrefetchedData<
-                      DbManga,
-                      $DbMangasTable,
-                      DbChapter
-                    >(
-                      currentTable: table,
-                      referencedTable: $$DbMangasTableReferences
-                          ._dbChaptersRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DbMangasTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({
+                dbChaptersRefs = false,
+                dbReadingDirectionRefs = false,
+                dbChapterHistoryRefs = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (dbChaptersRefs) db.dbChapters,
+                    if (dbReadingDirectionRefs) db.dbReadingDirection,
+                    if (dbChapterHistoryRefs) db.dbChapterHistory,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (dbChaptersRefs)
+                        await $_getPrefetchedData<
+                          DbManga,
+                          $DbMangasTable,
+                          DbChapter
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DbMangasTableReferences
+                              ._dbChaptersRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DbMangasTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).dbChaptersRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.mangaId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                  if (dbReadingDirectionRefs)
-                    await $_getPrefetchedData<
-                      DbManga,
-                      $DbMangasTable,
-                      DbReadingDirectionData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$DbMangasTableReferences
-                          ._dbReadingDirectionRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.mangaId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (dbReadingDirectionRefs)
+                        await $_getPrefetchedData<
+                          DbManga,
+                          $DbMangasTable,
+                          DbReadingDirectionData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DbMangasTableReferences
+                              ._dbReadingDirectionRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DbMangasTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).dbReadingDirectionRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.mangaId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                  if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData<
-                      DbManga,
-                      $DbMangasTable,
-                      DbChapterHistoryData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$DbMangasTableReferences
-                          ._dbChapterHistoryRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.mangaId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (dbChapterHistoryRefs)
+                        await $_getPrefetchedData<
+                          DbManga,
+                          $DbMangasTable,
+                          DbChapterHistoryData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DbMangasTableReferences
+                              ._dbChapterHistoryRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DbMangasTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).dbChapterHistoryRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.mangaId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                ];
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.mangaId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -3338,8 +3298,8 @@ final class $$DbChaptersTableReferences
     extends BaseReferences<_$AppDatabase, $DbChaptersTable, DbChapter> {
   $$DbChaptersTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $DbMangasTable _mangaIdTable(_$AppDatabase db) => db.dbMangas
-      .createAlias($_aliasNameGenerator(db.dbChapters.mangaId, db.dbMangas.id));
+  static $DbMangasTable _mangaIdTable(_$AppDatabase db) =>
+      db.dbMangas.createAlias('db_chapters__manga_id__db_mangas__id');
 
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
@@ -3358,10 +3318,7 @@ final class $$DbChaptersTableReferences
   static MultiTypedResultKey<$DbChapterHistoryTable, List<DbChapterHistoryData>>
   _dbChapterHistoryRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
     db.dbChapterHistory,
-    aliasName: $_aliasNameGenerator(
-      db.dbChapters.id,
-      db.dbChapterHistory.chapterId,
-    ),
+    aliasName: 'db_chapters__id__db_chapter_history__chapter_id',
   );
 
   $$DbChapterHistoryTableProcessedTableManager get dbChapterHistoryRefs {
@@ -3714,12 +3671,12 @@ class $$DbChaptersTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DbChaptersTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$DbChaptersTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $$DbChaptersTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () =>
+              $$DbChaptersTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbChaptersTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbChaptersTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
@@ -3780,85 +3737,81 @@ class $$DbChaptersTableTableManager
                 dateFetch: dateFetch,
                 lastModified: lastModified,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DbChaptersTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
-          prefetchHooksCallback: ({
-            mangaId = false,
-            dbChapterHistoryRefs = false,
-          }) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (dbChapterHistoryRefs) db.dbChapterHistory,
-              ],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (mangaId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.mangaId,
-                            referencedTable: $$DbChaptersTableReferences
-                                ._mangaIdTable(db),
-                            referencedColumn:
-                                $$DbChaptersTableReferences
-                                    ._mangaIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DbChaptersTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({mangaId = false, dbChapterHistoryRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (dbChapterHistoryRefs) db.dbChapterHistory,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (mangaId) {
+                          state =
+                              state.withJoin(
+                                    currentTable: table,
+                                    currentColumn: table.mangaId,
+                                    referencedTable: $$DbChaptersTableReferences
+                                        ._mangaIdTable(db),
+                                    referencedColumn:
+                                        $$DbChaptersTableReferences
+                                            ._mangaIdTable(db)
+                                            .id,
+                                  )
+                                  as T;
+                        }
 
-                return state;
-              },
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (dbChapterHistoryRefs)
-                    await $_getPrefetchedData<
-                      DbChapter,
-                      $DbChaptersTable,
-                      DbChapterHistoryData
-                    >(
-                      currentTable: table,
-                      referencedTable: $$DbChaptersTableReferences
-                          ._dbChapterHistoryRefsTable(db),
-                      managerFromTypedResult:
-                          (p0) =>
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (dbChapterHistoryRefs)
+                        await $_getPrefetchedData<
+                          DbChapter,
+                          $DbChaptersTable,
+                          DbChapterHistoryData
+                        >(
+                          currentTable: table,
+                          referencedTable: $$DbChaptersTableReferences
+                              ._dbChapterHistoryRefsTable(db),
+                          managerFromTypedResult: (p0) =>
                               $$DbChaptersTableReferences(
                                 db,
                                 table,
                                 p0,
                               ).dbChapterHistoryRefs,
-                      referencedItemsForCurrentItem:
-                          (item, referencedItems) => referencedItems.where(
-                            (e) => e.chapterId == item.id,
-                          ),
-                      typedResults: items,
-                    ),
-                ];
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.chapterId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -3902,9 +3855,7 @@ final class $$DbReadingDirectionTableReferences
   );
 
   static $DbMangasTable _mangaIdTable(_$AppDatabase db) =>
-      db.dbMangas.createAlias(
-        $_aliasNameGenerator(db.dbReadingDirection.mangaId, db.dbMangas.id),
-      );
+      db.dbMangas.createAlias('db_reading_direction__manga_id__db_mangas__id');
 
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
@@ -4056,18 +4007,12 @@ class $$DbReadingDirectionTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DbReadingDirectionTableFilterComposer(
-                $db: db,
-                $table: table,
-              ),
-          createOrderingComposer:
-              () => $$DbReadingDirectionTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$DbReadingDirectionTableAnnotationComposer(
+          createFilteringComposer: () =>
+              $$DbReadingDirectionTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbReadingDirectionTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbReadingDirectionTableAnnotationComposer(
                 $db: db,
                 $table: table,
               ),
@@ -4087,52 +4032,52 @@ class $$DbReadingDirectionTableTableManager
                 mangaId: mangaId,
                 direction: direction,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DbReadingDirectionTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DbReadingDirectionTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({mangaId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (mangaId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.mangaId,
-                            referencedTable: $$DbReadingDirectionTableReferences
-                                ._mangaIdTable(db),
-                            referencedColumn:
-                                $$DbReadingDirectionTableReferences
-                                    ._mangaIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (mangaId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.mangaId,
+                                referencedTable:
+                                    $$DbReadingDirectionTableReferences
+                                        ._mangaIdTable(db),
+                                referencedColumn:
+                                    $$DbReadingDirectionTableReferences
+                                        ._mangaIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
@@ -4265,16 +4210,12 @@ class $$DbCacheEntriesTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () => $$DbCacheEntriesTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () =>
-                  $$DbCacheEntriesTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer:
-              () => $$DbCacheEntriesTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
+          createFilteringComposer: () =>
+              $$DbCacheEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbCacheEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbCacheEntriesTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<String> key = const Value.absent(),
@@ -4299,16 +4240,9 @@ class $$DbCacheEntriesTableTableManager
                 expiry: expiry,
                 rowid: rowid,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          BaseReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
           prefetchHooksCallback: null,
         ),
       );
@@ -4358,9 +4292,7 @@ final class $$DbChapterHistoryTableReferences
   );
 
   static $DbMangasTable _mangaIdTable(_$AppDatabase db) =>
-      db.dbMangas.createAlias(
-        $_aliasNameGenerator(db.dbChapterHistory.mangaId, db.dbMangas.id),
-      );
+      db.dbMangas.createAlias('db_chapter_history__manga_id__db_mangas__id');
 
   $$DbMangasTableProcessedTableManager get mangaId {
     final $_column = $_itemColumn<int>('manga_id')!;
@@ -4376,10 +4308,8 @@ final class $$DbChapterHistoryTableReferences
     );
   }
 
-  static $DbChaptersTable _chapterIdTable(_$AppDatabase db) =>
-      db.dbChapters.createAlias(
-        $_aliasNameGenerator(db.dbChapterHistory.chapterId, db.dbChapters.id),
-      );
+  static $DbChaptersTable _chapterIdTable(_$AppDatabase db) => db.dbChapters
+      .createAlias('db_chapter_history__chapter_id__db_chapters__id');
 
   $$DbChaptersTableProcessedTableManager get chapterId {
     final $_column = $_itemColumn<int>('chapter_id')!;
@@ -4599,19 +4529,12 @@ class $$DbChapterHistoryTableTableManager
         TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer:
-              () =>
-                  $$DbChapterHistoryTableFilterComposer($db: db, $table: table),
-          createOrderingComposer:
-              () => $$DbChapterHistoryTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
-          createComputedFieldComposer:
-              () => $$DbChapterHistoryTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
+          createFilteringComposer: () =>
+              $$DbChapterHistoryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DbChapterHistoryTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DbChapterHistoryTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback:
               ({
                 Value<int> mangaId = const Value.absent(),
@@ -4632,66 +4555,67 @@ class $$DbChapterHistoryTableTableManager
                 chapterId: chapterId,
                 readAt: readAt,
               ),
-          withReferenceMapper:
-              (p0) =>
-                  p0
-                      .map(
-                        (e) => (
-                          e.readTable(table),
-                          $$DbChapterHistoryTableReferences(db, table, e),
-                        ),
-                      )
-                      .toList(),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$DbChapterHistoryTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
           prefetchHooksCallback: ({mangaId = false, chapterId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                T extends TableManagerState<
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic,
-                  dynamic
-                >
-              >(state) {
-                if (mangaId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.mangaId,
-                            referencedTable: $$DbChapterHistoryTableReferences
-                                ._mangaIdTable(db),
-                            referencedColumn:
-                                $$DbChapterHistoryTableReferences
-                                    ._mangaIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
-                if (chapterId) {
-                  state =
-                      state.withJoin(
-                            currentTable: table,
-                            currentColumn: table.chapterId,
-                            referencedTable: $$DbChapterHistoryTableReferences
-                                ._chapterIdTable(db),
-                            referencedColumn:
-                                $$DbChapterHistoryTableReferences
-                                    ._chapterIdTable(db)
-                                    .id,
-                          )
-                          as T;
-                }
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (mangaId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.mangaId,
+                                referencedTable:
+                                    $$DbChapterHistoryTableReferences
+                                        ._mangaIdTable(db),
+                                referencedColumn:
+                                    $$DbChapterHistoryTableReferences
+                                        ._mangaIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
+                    if (chapterId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.chapterId,
+                                referencedTable:
+                                    $$DbChapterHistoryTableReferences
+                                        ._chapterIdTable(db),
+                                referencedColumn:
+                                    $$DbChapterHistoryTableReferences
+                                        ._chapterIdTable(db)
+                                        .id,
+                              )
+                              as T;
+                    }
 
-                return state;
-              },
+                    return state;
+                  },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
