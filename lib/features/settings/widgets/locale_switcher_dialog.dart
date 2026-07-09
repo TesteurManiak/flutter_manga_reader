@@ -6,26 +6,28 @@ import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/gen/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LocaleSwitcherDialog extends StatelessWidget
+class LocaleSwitcherDialog extends ConsumerWidget
     with ShowableDialogMixin<Locale> {
   const LocaleSwitcherDialog({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final strings = context.strings;
     final size = MediaQuery.sizeOf(context);
     const locales = AppLocalizations.supportedLocales;
+    final currentLocale = ref.watch(localeControllerProvider);
 
     return AlertDialog(
       title: Text(strings.settings_general_language),
       content: SizedBox(
         width: size.width * 0.8,
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            const _DefaultTile(),
-            ...locales.map(_LocaleTile.new),
-          ],
+        child: RadioGroup<Locale>(
+          groupValue: currentLocale,
+          onChanged: (value) => Navigator.pop(context, value),
+          child: ListView(
+            shrinkWrap: true,
+            children: [const _DefaultTile(), ...locales.map(_LocaleTile.new)],
+          ),
         ),
       ),
       actions: [
@@ -44,30 +46,23 @@ class _DefaultTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final systemLocale = ref.watch(systemLocaleProvider);
-
     return RadioListTile<Locale>(
       title: Text(context.strings.settings_general_language_default),
       value: systemLocale,
-      groupValue: null,
-      onChanged: (_) => Navigator.pop(context, systemLocale),
     );
   }
 }
 
-class _LocaleTile extends ConsumerWidget {
+class _LocaleTile extends StatelessWidget {
   const _LocaleTile(this.locale);
 
   final Locale locale;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentLocale = ref.watch(localeControllerProvider);
-
+  Widget build(BuildContext context) {
     return RadioListTile<Locale>(
       title: Text(locale.translatedLocaleName),
       value: locale,
-      groupValue: currentLocale,
-      onChanged: (_) => Navigator.pop(context, locale),
     );
   }
 }

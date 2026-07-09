@@ -1,4 +1,4 @@
-library mangabox;
+library;
 
 export 'src/consts.dart';
 export 'src/mangabat/mangabat.dart';

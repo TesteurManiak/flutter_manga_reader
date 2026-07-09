@@ -1,4 +1,4 @@
-library manga_reader_core;
+library;
 
 export 'src/cache/cache_entry.dart';
 export 'src/cache/network_query_cache_service.dart';
