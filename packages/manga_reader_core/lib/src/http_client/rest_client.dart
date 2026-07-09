@@ -13,10 +13,8 @@ enum HttpMethod {
 }
 
 class RestClient {
-  RestClient({
-    required this.baseUri,
-    Client? httpClient,
-  }) : httpClient = httpClient ?? Client();
+  RestClient({required this.baseUri, Client? httpClient})
+    : httpClient = httpClient ?? Client();
 
   final Uri baseUri;
   final Client httpClient;
@@ -32,13 +30,10 @@ class RestClient {
   }) async {
     final baseUri = baseUrl != null ? Uri.parse(baseUrl) : this.baseUri;
     final uri = baseUri.replace(
-      pathSegments: [
-        ...baseUri.pathSegments,
-        ...pathSegments,
-      ],
+      pathSegments: [...baseUri.pathSegments, ...pathSegments],
       queryParameters: {
         ...baseUri.queryParameters,
-        if (queryParameters?.normalize() case final params?) ...params,
+        ...?queryParameters?.normalize(),
       },
     );
 
@@ -99,9 +94,7 @@ class RestClient {
     return request;
   }
 
-  Future<Result<Object, HttpError>> _sendRequest(
-    BaseRequest request,
-  ) async {
+  Future<Result<Object, HttpError>> _sendRequest(BaseRequest request) async {
     try {
       final response = await httpClient.send(request);
       if (!response.isSuccessful) {
@@ -117,9 +110,7 @@ class RestClient {
         if (mimeType == ContentType.json.mimeType) {
           final json = jsonDecode(body);
           if (json is! Object) {
-            return Result.failure(
-              HttpError(message: 'Invalid JSON: $json'),
-            );
+            return Result.failure(HttpError(message: 'Invalid JSON: $json'));
           }
 
           return Success(json);

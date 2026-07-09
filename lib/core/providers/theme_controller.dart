@@ -33,7 +33,7 @@ final pureDarkModeStateProvider = Provider.autoDispose(
 final isDarkProvider = Provider.autoDispose((ref) {
   final platformBrightness = ref.watch(platformBrightnessProvider);
   return ref.watch(
-    appThemeModeProvider.select((mode) => mode.isDark(platformBrightness)),
+    appThemeModeProvider.select((mode) => mode.isDarkMode(platformBrightness)),
   );
 });
 
@@ -58,8 +58,10 @@ class ThemeController extends Notifier<ThemeState> {
     final themeMode = ThemeMode.values[themeModeIndex];
     final pureDarkMode = prefs.getBool(pureDarkModeKey) ?? false;
 
-    final (hasSetTheme, hasSetPureDarkMode) =
-        await (_setThemeMode(themeMode), _setPureDarkMode(pureDarkMode)).wait;
+    final (hasSetTheme, hasSetPureDarkMode) = await (
+      _setThemeMode(themeMode),
+      _setPureDarkMode(pureDarkMode),
+    ).wait;
 
     if (hasSetTheme || hasSetPureDarkMode) {
       state = state.copyWith(mode: themeMode, pureDarkMode: pureDarkMode);
@@ -69,10 +71,9 @@ class ThemeController extends Notifier<ThemeState> {
   /// Used to toggle between light and dark theme modes.
   Future<void> toggle() {
     final platformBrightness = ref.read(platformBrightnessProvider);
-    final newMode =
-        state.mode.isDark(platformBrightness)
-            ? ThemeMode.light
-            : ThemeMode.dark;
+    final newMode = state.mode.isDarkMode(platformBrightness)
+        ? ThemeMode.light
+        : ThemeMode.dark;
 
     return setThemeMode(newMode);
   }

@@ -5,7 +5,7 @@ extension ThemeModeExtensions on ThemeMode {
   ///
   /// [platformBrightness] is required to determine whether [ThemeMode.system]
   /// is dark or light.
-  bool isDark(Brightness platformBrightness) {
+  bool isDarkMode(Brightness platformBrightness) {
     return switch (this) {
       ThemeMode.system => platformBrightness == Brightness.dark,
       ThemeMode.light => false,

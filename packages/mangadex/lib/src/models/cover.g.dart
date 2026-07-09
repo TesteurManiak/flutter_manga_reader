@@ -27,12 +27,9 @@ Map<String, dynamic> _$CoverListResponseToJson(_CoverListResponse instance) =>
     };
 
 _CoverArt _$CoverArtFromJson(Map<String, dynamic> json) => _CoverArt(
-  attributes:
-      json['attributes'] == null
-          ? null
-          : CoverArtAttributes.fromJson(
-            json['attributes'] as Map<String, dynamic>,
-          ),
+  attributes: json['attributes'] == null
+      ? null
+      : CoverArtAttributes.fromJson(json['attributes'] as Map<String, dynamic>),
   relationships:
       (json['relationships'] as List<dynamic>?)
           ?.map((e) => Relationship.fromJson(e as Map<String, dynamic>))

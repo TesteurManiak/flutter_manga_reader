@@ -1,0 +1,26 @@
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable
+
+targets:
+  $default:
+    builders:
+      drift_dev:
+        enabled: false
+      drift_dev:analyzer:
+        enabled: true
+        options: &options
+          data_class_to_companions: false
+          generate_manager: false
+      drift_dev:modular:
+        enabled: true
+        options: *options
+      freezed|freezed:
+        options:
+          format: false
+          map: false
+          when: false
+      json_serializable|json_serializable:
+        options:
+          explicit_to_json: true

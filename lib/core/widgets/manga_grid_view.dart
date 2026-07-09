@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_manga_reader/core/widgets/manga_tile.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
@@ -17,13 +18,9 @@ class MangaGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const maxCrossAxisExtent = 160.0;
-
-    final size = MediaQuery.sizeOf(context);
-    final screenHeight = size.height;
-
     return GridView.builder(
       controller: controller,
-      cacheExtent: screenHeight * 2,
+      scrollCacheExtent: ScrollCacheExtent.viewport(2),
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         childAspectRatio: 0.69,

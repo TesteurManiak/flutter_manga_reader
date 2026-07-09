@@ -1,4 +1,6 @@
-part of '../app_database.dart';
+import 'package:drift/drift.dart';
+
+import 'mangas.dart';
 
 @TableIndex(name: 'chapter_manga_id', columns: {#mangaId})
 @TableIndex(name: 'chapter_date_upload', columns: {#dateUpload})
@@ -22,6 +24,6 @@ class DbChapters extends Table {
 
   @override
   List<Set<Column<Object>>>? get uniqueKeys => [
-        {mangaId, url},
-      ];
+    {mangaId, url},
+  ];
 }

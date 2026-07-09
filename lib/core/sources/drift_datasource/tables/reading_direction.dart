@@ -1,4 +1,7 @@
-part of '../app_database.dart';
+import 'package:drift/drift.dart';
+
+import '../../../models/reading_direction.dart';
+import 'mangas.dart';
 
 class DbReadingDirection extends Table {
   IntColumn get mangaId =>

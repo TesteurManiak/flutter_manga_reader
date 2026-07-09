@@ -1,4 +1,7 @@
-part of '../app_database.dart';
+import 'package:drift/drift.dart';
+
+import 'chapters.dart';
+import 'mangas.dart';
 
 @TableIndex(name: 'chapter_history_read_at', columns: {#readAt})
 class DbChapterHistory extends Table {

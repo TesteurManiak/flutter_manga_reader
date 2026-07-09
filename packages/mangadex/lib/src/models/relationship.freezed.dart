@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -77,6 +76,166 @@ String toString() {
 
 
 
+
+/// Adds pattern-matching-related methods to [Relationship].
+extension RelationshipPatterns on Relationship {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MangaRelationship value)?  manga,TResult Function( AuthorRelationship value)?  author,TResult Function( ArtistRelationship value)?  artist,TResult Function( CoverArtRelationship value)?  coverArt,TResult Function( ScanlationGroupRelationship value)?  scanlationGroup,TResult Function( UserRelationship value)?  user,TResult Function( OtherRelationship value)?  other,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case MangaRelationship() when manga != null:
+return manga(_that);case AuthorRelationship() when author != null:
+return author(_that);case ArtistRelationship() when artist != null:
+return artist(_that);case CoverArtRelationship() when coverArt != null:
+return coverArt(_that);case ScanlationGroupRelationship() when scanlationGroup != null:
+return scanlationGroup(_that);case UserRelationship() when user != null:
+return user(_that);case OtherRelationship() when other != null:
+return other(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MangaRelationship value)  manga,required TResult Function( AuthorRelationship value)  author,required TResult Function( ArtistRelationship value)  artist,required TResult Function( CoverArtRelationship value)  coverArt,required TResult Function( ScanlationGroupRelationship value)  scanlationGroup,required TResult Function( UserRelationship value)  user,required TResult Function( OtherRelationship value)  other,}){
+final _that = this;
+switch (_that) {
+case MangaRelationship():
+return manga(_that);case AuthorRelationship():
+return author(_that);case ArtistRelationship():
+return artist(_that);case CoverArtRelationship():
+return coverArt(_that);case ScanlationGroupRelationship():
+return scanlationGroup(_that);case UserRelationship():
+return user(_that);case OtherRelationship():
+return other(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MangaRelationship value)?  manga,TResult? Function( AuthorRelationship value)?  author,TResult? Function( ArtistRelationship value)?  artist,TResult? Function( CoverArtRelationship value)?  coverArt,TResult? Function( ScanlationGroupRelationship value)?  scanlationGroup,TResult? Function( UserRelationship value)?  user,TResult? Function( OtherRelationship value)?  other,}){
+final _that = this;
+switch (_that) {
+case MangaRelationship() when manga != null:
+return manga(_that);case AuthorRelationship() when author != null:
+return author(_that);case ArtistRelationship() when artist != null:
+return artist(_that);case CoverArtRelationship() when coverArt != null:
+return coverArt(_that);case ScanlationGroupRelationship() when scanlationGroup != null:
+return scanlationGroup(_that);case UserRelationship() when user != null:
+return user(_that);case OtherRelationship() when other != null:
+return other(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String id,  MangaAttributes? attributes)?  manga,TResult Function( String id,  GenericAttributes? attributes)?  author,TResult Function( String id,  GenericAttributes? attributes)?  artist,TResult Function( String id,  CoverArtAttributes? attributes)?  coverArt,TResult Function( String id,  ScanlationGroupAttributes? attributes)?  scanlationGroup,TResult Function( String id,  UserAttributes? attributes)?  user,TResult Function( String id,  Map<String, dynamic>? attributes)?  other,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case MangaRelationship() when manga != null:
+return manga(_that.id,_that.attributes);case AuthorRelationship() when author != null:
+return author(_that.id,_that.attributes);case ArtistRelationship() when artist != null:
+return artist(_that.id,_that.attributes);case CoverArtRelationship() when coverArt != null:
+return coverArt(_that.id,_that.attributes);case ScanlationGroupRelationship() when scanlationGroup != null:
+return scanlationGroup(_that.id,_that.attributes);case UserRelationship() when user != null:
+return user(_that.id,_that.attributes);case OtherRelationship() when other != null:
+return other(_that.id,_that.attributes);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String id,  MangaAttributes? attributes)  manga,required TResult Function( String id,  GenericAttributes? attributes)  author,required TResult Function( String id,  GenericAttributes? attributes)  artist,required TResult Function( String id,  CoverArtAttributes? attributes)  coverArt,required TResult Function( String id,  ScanlationGroupAttributes? attributes)  scanlationGroup,required TResult Function( String id,  UserAttributes? attributes)  user,required TResult Function( String id,  Map<String, dynamic>? attributes)  other,}) {final _that = this;
+switch (_that) {
+case MangaRelationship():
+return manga(_that.id,_that.attributes);case AuthorRelationship():
+return author(_that.id,_that.attributes);case ArtistRelationship():
+return artist(_that.id,_that.attributes);case CoverArtRelationship():
+return coverArt(_that.id,_that.attributes);case ScanlationGroupRelationship():
+return scanlationGroup(_that.id,_that.attributes);case UserRelationship():
+return user(_that.id,_that.attributes);case OtherRelationship():
+return other(_that.id,_that.attributes);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String id,  MangaAttributes? attributes)?  manga,TResult? Function( String id,  GenericAttributes? attributes)?  author,TResult? Function( String id,  GenericAttributes? attributes)?  artist,TResult? Function( String id,  CoverArtAttributes? attributes)?  coverArt,TResult? Function( String id,  ScanlationGroupAttributes? attributes)?  scanlationGroup,TResult? Function( String id,  UserAttributes? attributes)?  user,TResult? Function( String id,  Map<String, dynamic>? attributes)?  other,}) {final _that = this;
+switch (_that) {
+case MangaRelationship() when manga != null:
+return manga(_that.id,_that.attributes);case AuthorRelationship() when author != null:
+return author(_that.id,_that.attributes);case ArtistRelationship() when artist != null:
+return artist(_that.id,_that.attributes);case CoverArtRelationship() when coverArt != null:
+return coverArt(_that.id,_that.attributes);case ScanlationGroupRelationship() when scanlationGroup != null:
+return scanlationGroup(_that.id,_that.attributes);case UserRelationship() when user != null:
+return user(_that.id,_that.attributes);case OtherRelationship() when other != null:
+return other(_that.id,_that.attributes);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 @JsonSerializable()

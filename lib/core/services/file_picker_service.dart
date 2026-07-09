@@ -9,7 +9,7 @@ final filePickerServiceProvider = Provider<FilePickerService>(
 
 class FilePickerService {
   Future<io.File?> pickFile() async {
-    final result = await fp.FilePicker.platform.pickFiles();
+    final result = await fp.FilePicker.pickFiles();
     if (result?.files.single.path case final path?) return io.File(path);
     return null;
   }

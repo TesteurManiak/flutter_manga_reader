@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path/path.dart' as p;
+
+import '../sources/drift_datasource/tables/chapters.drift.dart';
 
 extension ChapterExtensions on Chapter {
   String get localPath {

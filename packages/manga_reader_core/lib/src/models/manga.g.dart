@@ -11,10 +11,9 @@ _Manga _$MangaFromJson(Map<String, dynamic> json) => _Manga(
   sourceId: json['sourceId'] as String,
   favorite: json['favorite'] as bool? ?? false,
   fetchInterval: (json['fetchInterval'] as num?)?.toInt() ?? 0,
-  dateAdded:
-      json['dateAdded'] == null
-          ? null
-          : DateTime.parse(json['dateAdded'] as String),
+  dateAdded: json['dateAdded'] == null
+      ? null
+      : DateTime.parse(json['dateAdded'] as String),
   url: json['url'] as String? ?? '',
   title: json['title'] as String? ?? '',
   artist: json['artist'] as String?,
@@ -29,10 +28,9 @@ _Manga _$MangaFromJson(Map<String, dynamic> json) => _Manga(
       $enumDecodeNullable(_$UpdateStrategyEnumMap, json['updateStrategy']) ??
       UpdateStrategy.alwaysUpdate,
   initialized: json['initialized'] as bool? ?? false,
-  lastModifiedAt:
-      json['lastModifiedAt'] == null
-          ? null
-          : DateTime.parse(json['lastModifiedAt'] as String),
+  lastModifiedAt: json['lastModifiedAt'] == null
+      ? null
+      : DateTime.parse(json['lastModifiedAt'] as String),
 );
 
 Map<String, dynamic> _$MangaToJson(_Manga instance) => <String, dynamic>{
