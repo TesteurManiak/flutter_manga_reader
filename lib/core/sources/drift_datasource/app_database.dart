@@ -2,19 +2,17 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
-import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/migrations/migrations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-part 'app_database.g.dart';
-part 'tables/cache_entries.dart';
-part 'tables/chapter_history.dart';
-part 'tables/chapters.dart';
-part 'tables/mangas.dart';
-part 'tables/reading_direction.dart';
+import 'app_database.drift.dart';
+import 'tables/cache_entries.dart';
+import 'tables/chapter_history.dart';
+import 'tables/chapters.dart';
+import 'tables/mangas.dart';
+import 'tables/reading_direction.dart';
 
 // This annotation tells drift to prepare a database class that uses both of the table we defined above
 @DriftDatabase(
@@ -26,7 +24,7 @@ part 'tables/reading_direction.dart';
     DbChapterHistory,
   ],
 )
-class AppDatabase extends _$AppDatabase {
+class AppDatabase extends $AppDatabase {
   // We tell the database where to store the data with this constructor
   AppDatabase() : super(_openConnection());
 

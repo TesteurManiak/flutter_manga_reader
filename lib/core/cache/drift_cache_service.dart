@@ -3,12 +3,14 @@ import 'package:drift/drift.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
 
+import '../sources/drift_datasource/tables/cache_entries.drift.dart';
+
 class DriftNetworkQueryCacheService extends NetworkQueryCacheService {
   DriftNetworkQueryCacheService({
     required Clock clock,
     required AppDatabase database,
-  })  : _clock = clock,
-        _database = database;
+  }) : _clock = clock,
+       _database = database;
 
   final Clock _clock;
   final AppDatabase _database;
@@ -18,16 +20,16 @@ class DriftNetworkQueryCacheService extends NetworkQueryCacheService {
 
   @override
   Future<void> clearExpiredEntries() {
-    return (_database.delete(_database.dbCacheEntries)
-          ..where((t) => t.expiry.isSmallerThanValue(_clock.now())))
-        .go();
+    return (_database.delete(
+      _database.dbCacheEntries,
+    )..where((t) => t.expiry.isSmallerThanValue(_clock.now()))).go();
   }
 
   @override
   Future<void> delete(String key) {
-    return (_database.delete(_database.dbCacheEntries)
-          ..where((t) => t.key.equals(key)))
-        .go();
+    return (_database.delete(
+      _database.dbCacheEntries,
+    )..where((t) => t.key.equals(key))).go();
   }
 
   @override

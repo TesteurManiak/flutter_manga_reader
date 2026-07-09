@@ -1,4 +1,7 @@
-part of '../app_database.dart';
+import 'package:drift/drift.dart';
+import 'package:manga_reader_core/manga_reader_core.dart';
+
+import 'mangas.drift.dart';
 
 @TableIndex(name: 'manga_source_id', columns: {#sourceId})
 @TableIndex(name: 'manga_favorite', columns: {#favorite})
@@ -25,8 +28,8 @@ class DbMangas extends Table {
 
   @override
   List<Set<Column<Object>>>? get uniqueKeys => [
-        {sourceId, url},
-      ];
+    {sourceId, url},
+  ];
 }
 
 extension DbMangaExtensions on DbManga {

@@ -1,4 +1,4 @@
-part of '../app_database.dart';
+import 'package:drift/drift.dart';
 
 class DbCacheEntries extends Table {
   TextColumn get key => text()();
