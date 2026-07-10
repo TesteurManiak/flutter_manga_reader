@@ -27,7 +27,7 @@ dependencies:
     sdk: flutter
   flutter_cache_manager: ^3.4.1
   flutter_gen: ^5.14.1
-  flutter_inappwebview: ^6.1.5
+  flutter_inappwebview: ^6.2.0-beta.3
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.3.2
