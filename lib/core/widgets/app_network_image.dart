@@ -72,8 +72,7 @@ class _AppNetworkImageState extends ConsumerState<AppNetworkImage> {
 
     return Image(
       key: imageKey,
-      // TODO: Handle headers
-      image: CachedImageProvider(localUrl),
+      image: CachedImageProvider(localUrl, headers: widget.headers ?? const {}),
       height: widget.height,
       width: widget.width,
       fit: widget.fit,

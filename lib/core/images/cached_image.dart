@@ -12,9 +12,14 @@ import 'package:path_provider/path_provider.dart';
 /// Credits: Simon Lightfoot (slightfoot)
 /// https://gist.github.com/slightfoot/2bdf52a5ec0972344e2a18fa5c44e2cf
 class CachedImageProvider extends ImageProvider<String> {
-  const CachedImageProvider(this.url, {this.httpClient});
+  const CachedImageProvider(
+    this.url, {
+    this.headers = const {},
+    this.httpClient,
+  });
 
   final String url;
+  final Map<String, Object> headers;
   final HttpClient? httpClient;
 
   static final _sharedHttpClient = HttpClient()..autoUncompress = false;
@@ -78,6 +83,7 @@ class CachedImageProvider extends ImageProvider<String> {
 
     final resolved = Uri.base.resolve(url);
     final request = await (httpClient ?? _sharedHttpClient).getUrl(resolved);
+    if (headers.isNotEmpty) request.headers.addAll(headers);
     final response = await request.close();
     if (response.statusCode != HttpStatus.ok) {
       // Drain the response body to avoid leaks.
@@ -258,5 +264,13 @@ class DiskCache {
     _index.clear();
     _lru.clear();
     _currentSize = 0;
+  }
+}
+
+extension on HttpHeaders {
+  void addAll(Map<String, Object> values, {bool preserveHeaderCase = false}) {
+    for (final entry in values.entries) {
+      add(entry.key, entry.value, preserveHeaderCase: preserveHeaderCase);
+    }
   }
 }
