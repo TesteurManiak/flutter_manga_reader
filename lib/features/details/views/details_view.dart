@@ -1,6 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/iterable_extensions.dart';
 import 'package:flutter_manga_reader/core/services/toaster_service.dart';
@@ -26,6 +24,8 @@ import 'package:flutter_manga_reader/features/details/widgets/status_label.dart'
 import 'package:flutter_manga_reader/features/home/navigation/details.route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:manga_reader_core/manga_reader_core.dart';
+
+import '../../../core/images/cached_image.dart';
 
 class DetailsView extends ConsumerStatefulWidget {
   const DetailsView({
@@ -160,7 +160,7 @@ class _MangaContentState extends ConsumerState<_MangaContent> {
   }
 }
 
-class _BackgroundCover extends ConsumerWidget {
+class _BackgroundCover extends StatelessWidget {
   const _BackgroundCover({
     required this.thumbnailUrl,
     required this.scrollController,
@@ -170,24 +170,22 @@ class _BackgroundCover extends ConsumerWidget {
   final ScrollController scrollController;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return ListenableBuilder(
       listenable: scrollController,
       builder: (_, child) {
-        final offset =
-            scrollController.hasClients ? scrollController.offset : 0;
+        final offset = scrollController.hasClients
+            ? scrollController.offset
+            : 0;
         final opacity = 1 - (offset / 200).clamp(0, 1).toDouble();
 
         return Opacity(opacity: opacity, child: child);
       },
       child: GradientImage(
         height: 480,
-        image: CachedNetworkImageProvider(
-          thumbnailUrl,
-          cacheManager: ref.watch(cacheManagerProvider),
-        ),
+        image: CachedImageProvider(thumbnailUrl),
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -294,16 +292,15 @@ class _StatusAndSource extends ConsumerWidget {
     };
 
     return Row(
-      children:
-          [
-            if (status case final status?) StatusLabel(status),
-            if (source case final source?)
-              Text(
-                '${source.name} (${source.lang.toUpperCase()})',
-                maxLines: 1,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-          ].separatedWith(const Text(' • ')).toList(),
+      children: [
+        if (status case final status?) StatusLabel(status),
+        if (source case final source?)
+          Text(
+            '${source.name} (${source.lang.toUpperCase()})',
+            maxLines: 1,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+      ].separatedWith(const Text(' • ')).toList(),
     );
   }
 }

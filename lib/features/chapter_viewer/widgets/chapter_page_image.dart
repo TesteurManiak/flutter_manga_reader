@@ -34,7 +34,7 @@ class ChapterPageImage extends ConsumerWidget {
       fit: fit,
       headers: source.getHeaders(),
       progressIndicatorBuilder: (_, progress) => _LoadingPlaceholder(progress),
-      errorBuilder: (_, _, e, onRetry) => _Error(error: e, onRetry: onRetry),
+      errorBuilder: (_, e, onRetry) => _Error(error: e, onRetry: onRetry),
     );
   }
 }

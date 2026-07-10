@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_manga_reader/core/extensions/locale_extensions.dart';
 import 'package:flutter_manga_reader/core/providers/locale_controller.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/generic_settings_view.dart';
 import 'package:flutter_manga_reader/features/settings/widgets/locale_switcher_dialog.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../core/images/cached_image.dart';
 
 class GeneralSettingsView extends StatelessWidget {
   const GeneralSettingsView({super.key});
@@ -55,7 +56,9 @@ class _ClearCache extends ConsumerWidget {
       leading: const Icon(Icons.cleaning_services),
       title: Text(strings.settings_general_clear_cache),
       onTap: () async {
-        await ref.read(appCacheManagerProvider).clearCache();
+        LruCache.instance.clear();
+        DiskCache.instance.clear();
+
         if (context.mounted) {
           ScaffoldMessenger.maybeOf(context)?.showSnackBar(
             SnackBar(content: Text(strings.cache_cleared)),

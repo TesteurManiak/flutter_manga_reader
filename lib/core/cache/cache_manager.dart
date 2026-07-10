@@ -29,14 +29,3 @@ final networkCacheServiceProvider = Provider<NetworkQueryCacheService>((ref) {
     database: ref.watch(appDatabaseProvider),
   );
 });
-
-final cacheManagerProvider = Provider<CacheManager>(
-  (Ref ref) => DefaultCacheManager(),
-);
-
-final appCacheManagerProvider = Provider<AppCacheManager>((Ref ref) {
-  return AppCacheManager(
-    networkQueryCacheService: ref.watch(networkCacheServiceProvider),
-    cacheManager: ref.watch(cacheManagerProvider),
-  );
-});

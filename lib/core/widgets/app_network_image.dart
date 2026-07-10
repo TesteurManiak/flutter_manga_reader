@@ -1,20 +1,21 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_manga_reader/core/cache/cache_manager.dart';
 import 'package:flutter_manga_reader/core/extensions/build_context_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-typedef ImageProgressIndicatorBuilder = Widget Function(
-  BuildContext context,
-  double? progress,
-);
+import '../images/cached_image.dart';
 
-typedef ImageErrorBuilder = Widget Function(
-  BuildContext context,
-  String url,
-  Object error,
-  VoidCallback onRetry,
-);
+typedef ImageProgressIndicatorBuilder =
+    Widget Function(
+      BuildContext context,
+      double? progress,
+    );
+
+typedef ImageErrorBuilder =
+    Widget Function(
+      BuildContext context,
+      Object error,
+      VoidCallback onRetry,
+    );
 
 class AppNetworkImage extends ConsumerStatefulWidget {
   const AppNetworkImage({
@@ -69,39 +70,27 @@ class _AppNetworkImageState extends ConsumerState<AppNetworkImage> {
       );
     }
 
-    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
-
-    final memCacheWidth = switch (widget.decodeWidth) {
-      final decodeWidth? => (decodeWidth * devicePixelRatio).toInt(),
-      null => null,
-    };
-
-    final memCacheHeight = switch (widget.decodeHeight) {
-      final decodeHeight? => (decodeHeight * devicePixelRatio).toInt(),
-      null => null,
-    };
-
-    return CachedNetworkImage(
+    return Image(
       key: imageKey,
-      imageUrl: localUrl,
-      cacheManager: ref.watch(cacheManagerProvider),
-      httpHeaders: widget.headers,
+      // TODO: Handle headers
+      image: CachedImageProvider(localUrl),
       height: widget.height,
       width: widget.width,
       fit: widget.fit,
-      fadeInDuration: Duration.zero,
-      fadeOutDuration: Duration.zero,
-      placeholderFadeInDuration: Duration.zero,
-      errorWidget: errorBuilder,
-      progressIndicatorBuilder: progressIndicatorBuilder,
-      memCacheWidth: memCacheWidth,
-      memCacheHeight: memCacheHeight,
+      errorBuilder: errorBuilder,
+      loadingBuilder: progressBuilder,
     );
   }
 
-  Widget errorBuilder(BuildContext context, String url, Object error) {
+  Widget errorBuilder(
+    BuildContext context,
+    Object error,
+    StackTrace? stackTrace,
+  ) {
+    debugPrint('error: $error\n$stackTrace');
+
     if (widget.errorBuilder case final builder?) {
-      return builder(context, url, error, handleOnRetry);
+      return builder(context, error, handleOnRetry);
     }
     return _Error(
       error: error,
@@ -111,15 +100,21 @@ class _AppNetworkImageState extends ConsumerState<AppNetworkImage> {
     );
   }
 
-  Widget progressIndicatorBuilder(
+  Widget progressBuilder(
     BuildContext context,
-    String url,
-    DownloadProgress progress,
+    Widget child,
+    ImageChunkEvent? progress,
   ) {
+    if (progress == null) return child;
+
+    final progressValue =
+        progress.cumulativeBytesLoaded / progress.expectedTotalBytes!;
+    if (progressValue == 1.0) return child;
+
     if (widget.progressIndicatorBuilder case final builder?) {
-      return builder(context, progress.progress);
+      return builder(context, progressValue);
     }
-    return _Loading(progress.progress);
+    return _Loading(progressValue);
   }
 
   void handleOnRetry() => setState(() => imageKey = UniqueKey());
