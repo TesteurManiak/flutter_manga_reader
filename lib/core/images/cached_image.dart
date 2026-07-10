@@ -82,8 +82,8 @@ class CachedImageProvider extends ImageProvider<String> {
     debugPrint('Loading from network: $url');
 
     final resolved = Uri.base.resolve(url);
-    final request = await (httpClient ?? _sharedHttpClient).getUrl(resolved);
-    if (headers.isNotEmpty) request.headers.addAll(headers);
+    final request = await (httpClient ?? _sharedHttpClient).getUrl(resolved)
+      ..headers.addAll(headers);
     final response = await request.close();
     if (response.statusCode != HttpStatus.ok) {
       // Drain the response body to avoid leaks.
