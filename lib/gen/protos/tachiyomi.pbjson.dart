@@ -1,13 +1,15 @@
+// This is a generated file - do not edit.
 //
-//  Generated code. Do not modify.
-//  source: tachiyomi.proto
-//
-// @dart = 2.12
+// Generated from protos/tachiyomi.proto.
+
+// @dart = 3.3
 
 // ignore_for_file: annotate_overrides, camel_case_types, comment_references
-// ignore_for_file: constant_identifier_names, library_prefixes
-// ignore_for_file: non_constant_identifier_names, prefer_final_fields
-// ignore_for_file: unnecessary_import, unnecessary_this, unused_import
+// ignore_for_file: constant_identifier_names
+// ignore_for_file: curly_braces_in_flow_control_structures
+// ignore_for_file: deprecated_member_use_from_same_package, library_prefixes
+// ignore_for_file: non_constant_identifier_names, prefer_relative_imports
+// ignore_for_file: unused_import
 
 import 'dart:convert' as $convert;
 import 'dart:core' as $core;
@@ -31,12 +33,54 @@ final $typed_data.Uint8List updateStrategyDescriptor = $convert.base64Decode(
 const Backup$json = {
   '1': 'Backup',
   '2': [
-    {'1': 'backupManga', '3': 1, '4': 3, '5': 11, '6': '.BackupManga', '10': 'backupManga'},
-    {'1': 'backupCategories', '3': 2, '4': 3, '5': 11, '6': '.BackupCategory', '10': 'backupCategories'},
-    {'1': 'backupBrokenSources', '3': 100, '4': 3, '5': 11, '6': '.BrokenBackupSource', '10': 'backupBrokenSources'},
-    {'1': 'backupSources', '3': 101, '4': 3, '5': 11, '6': '.BackupSource', '10': 'backupSources'},
-    {'1': 'backupPreferences', '3': 104, '4': 3, '5': 11, '6': '.BackupPreference', '10': 'backupPreferences'},
-    {'1': 'backupSourcePreferences', '3': 105, '4': 3, '5': 11, '6': '.BackupSourcePreferences', '10': 'backupSourcePreferences'},
+    {
+      '1': 'backupManga',
+      '3': 1,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupManga',
+      '10': 'backupManga'
+    },
+    {
+      '1': 'backupCategories',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupCategory',
+      '10': 'backupCategories'
+    },
+    {
+      '1': 'backupBrokenSources',
+      '3': 100,
+      '4': 3,
+      '5': 11,
+      '6': '.BrokenBackupSource',
+      '10': 'backupBrokenSources'
+    },
+    {
+      '1': 'backupSources',
+      '3': 101,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupSource',
+      '10': 'backupSources'
+    },
+    {
+      '1': 'backupPreferences',
+      '3': 104,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupPreference',
+      '10': 'backupPreferences'
+    },
+    {
+      '1': 'backupSourcePreferences',
+      '3': 105,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupSourcePreferences',
+      '10': 'backupSourcePreferences'
+    },
   ],
 };
 
@@ -66,17 +110,58 @@ const BackupManga$json = {
     {'1': 'thumbnailUrl', '3': 9, '4': 1, '5': 9, '10': 'thumbnailUrl'},
     {'1': 'dateAdded', '3': 13, '4': 1, '5': 3, '10': 'dateAdded'},
     {'1': 'viewer', '3': 14, '4': 1, '5': 5, '10': 'viewer'},
-    {'1': 'chapters', '3': 16, '4': 3, '5': 11, '6': '.BackupChapter', '10': 'chapters'},
+    {
+      '1': 'chapters',
+      '3': 16,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupChapter',
+      '10': 'chapters'
+    },
     {'1': 'categories', '3': 17, '4': 3, '5': 3, '10': 'categories'},
-    {'1': 'tracking', '3': 18, '4': 3, '5': 11, '6': '.BackupTracking', '10': 'tracking'},
+    {
+      '1': 'tracking',
+      '3': 18,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupTracking',
+      '10': 'tracking'
+    },
     {'1': 'favorite', '3': 100, '4': 1, '5': 8, '10': 'favorite'},
     {'1': 'chapterFlags', '3': 101, '4': 1, '5': 5, '10': 'chapterFlags'},
-    {'1': 'brokenHistory', '3': 102, '4': 3, '5': 11, '6': '.BrokenBackupHistory', '10': 'brokenHistory'},
+    {
+      '1': 'brokenHistory',
+      '3': 102,
+      '4': 3,
+      '5': 11,
+      '6': '.BrokenBackupHistory',
+      '10': 'brokenHistory'
+    },
     {'1': 'viewer_flags', '3': 103, '4': 1, '5': 5, '10': 'viewerFlags'},
-    {'1': 'history', '3': 104, '4': 3, '5': 11, '6': '.BackupHistory', '10': 'history'},
-    {'1': 'updateStrategy', '3': 105, '4': 1, '5': 14, '6': '.UpdateStrategy', '10': 'updateStrategy'},
+    {
+      '1': 'history',
+      '3': 104,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupHistory',
+      '10': 'history'
+    },
+    {
+      '1': 'updateStrategy',
+      '3': 105,
+      '4': 1,
+      '5': 14,
+      '6': '.UpdateStrategy',
+      '10': 'updateStrategy'
+    },
     {'1': 'lastModifiedAt', '3': 106, '4': 1, '5': 3, '10': 'lastModifiedAt'},
-    {'1': 'favoriteModifiedAt', '3': 107, '4': 1, '5': 3, '10': 'favoriteModifiedAt'},
+    {
+      '1': 'favoriteModifiedAt',
+      '3': 107,
+      '4': 1,
+      '5': 3,
+      '10': 'favoriteModifiedAt'
+    },
   ],
 };
 
@@ -121,8 +206,9 @@ const BrokenBackupSource$json = {
 };
 
 /// Descriptor for `BrokenBackupSource`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List brokenBackupSourceDescriptor = $convert.base64Decode(
-    'ChJCcm9rZW5CYWNrdXBTb3VyY2USGgoIc291cmNlSWQYASACKANSCHNvdXJjZUlk');
+final $typed_data.Uint8List brokenBackupSourceDescriptor =
+    $convert.base64Decode(
+        'ChJCcm9rZW5CYWNrdXBTb3VyY2USGgoIc291cmNlSWQYASACKANSCHNvdXJjZUlk');
 
 @$core.Deprecated('Use backupSourceDescriptor instead')
 const BackupSource$json = {
@@ -143,7 +229,14 @@ const BackupPreference$json = {
   '1': 'BackupPreference',
   '2': [
     {'1': 'key', '3': 1, '4': 2, '5': 9, '10': 'key'},
-    {'1': 'value', '3': 2, '4': 2, '5': 11, '6': '.PreferenceValue', '10': 'value'},
+    {
+      '1': 'value',
+      '3': 2,
+      '4': 2,
+      '5': 11,
+      '6': '.PreferenceValue',
+      '10': 'value'
+    },
   ],
 };
 
@@ -157,14 +250,22 @@ const BackupSourcePreferences$json = {
   '1': 'BackupSourcePreferences',
   '2': [
     {'1': 'sourceKey', '3': 1, '4': 2, '5': 9, '10': 'sourceKey'},
-    {'1': 'prefs', '3': 2, '4': 3, '5': 11, '6': '.BackupPreference', '10': 'prefs'},
+    {
+      '1': 'prefs',
+      '3': 2,
+      '4': 3,
+      '5': 11,
+      '6': '.BackupPreference',
+      '10': 'prefs'
+    },
   ],
 };
 
 /// Descriptor for `BackupSourcePreferences`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List backupSourcePreferencesDescriptor = $convert.base64Decode(
-    'ChdCYWNrdXBTb3VyY2VQcmVmZXJlbmNlcxIcCglzb3VyY2VLZXkYASACKAlSCXNvdXJjZUtleR'
-    'InCgVwcmVmcxgCIAMoCzIRLkJhY2t1cFByZWZlcmVuY2VSBXByZWZz');
+final $typed_data.Uint8List backupSourcePreferencesDescriptor =
+    $convert.base64Decode(
+        'ChdCYWNrdXBTb3VyY2VQcmVmZXJlbmNlcxIcCglzb3VyY2VLZXkYASACKAlSCXNvdXJjZUtleR'
+        'InCgVwcmVmcxgCIAMoCzIRLkJhY2t1cFByZWZlcmVuY2VSBXByZWZz');
 
 @$core.Deprecated('Use backupChapterDescriptor instead')
 const BackupChapter$json = {
@@ -207,8 +308,20 @@ const BackupTracking$json = {
     {'1': 'totalChapters', '3': 7, '4': 1, '5': 5, '10': 'totalChapters'},
     {'1': 'score', '3': 8, '4': 1, '5': 2, '10': 'score'},
     {'1': 'status', '3': 9, '4': 1, '5': 5, '10': 'status'},
-    {'1': 'startedReadingDate', '3': 10, '4': 1, '5': 3, '10': 'startedReadingDate'},
-    {'1': 'finishedReadingDate', '3': 11, '4': 1, '5': 3, '10': 'finishedReadingDate'},
+    {
+      '1': 'startedReadingDate',
+      '3': 10,
+      '4': 1,
+      '5': 3,
+      '10': 'startedReadingDate'
+    },
+    {
+      '1': 'finishedReadingDate',
+      '3': 11,
+      '4': 1,
+      '5': 3,
+      '10': 'finishedReadingDate'
+    },
     {'1': 'mediaId', '3': 100, '4': 1, '5': 3, '10': 'mediaId'},
   ],
 };
@@ -276,8 +389,9 @@ const BooleanPreferenceValue$json = {
 };
 
 /// Descriptor for `BooleanPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List booleanPreferenceValueDescriptor = $convert.base64Decode(
-    'ChZCb29sZWFuUHJlZmVyZW5jZVZhbHVlEhQKBXZhbHVlGAEgAigIUgV2YWx1ZQ==');
+final $typed_data.Uint8List booleanPreferenceValueDescriptor =
+    $convert.base64Decode(
+        'ChZCb29sZWFuUHJlZmVyZW5jZVZhbHVlEhQKBXZhbHVlGAEgAigIUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use floatPreferenceValueDescriptor instead')
 const FloatPreferenceValue$json = {
@@ -288,8 +402,9 @@ const FloatPreferenceValue$json = {
 };
 
 /// Descriptor for `FloatPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List floatPreferenceValueDescriptor = $convert.base64Decode(
-    'ChRGbG9hdFByZWZlcmVuY2VWYWx1ZRIUCgV2YWx1ZRgBIAIoAlIFdmFsdWU=');
+final $typed_data.Uint8List floatPreferenceValueDescriptor =
+    $convert.base64Decode(
+        'ChRGbG9hdFByZWZlcmVuY2VWYWx1ZRIUCgV2YWx1ZRgBIAIoAlIFdmFsdWU=');
 
 @$core.Deprecated('Use intPreferenceValueDescriptor instead')
 const IntPreferenceValue$json = {
@@ -300,8 +415,8 @@ const IntPreferenceValue$json = {
 };
 
 /// Descriptor for `IntPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List intPreferenceValueDescriptor = $convert.base64Decode(
-    'ChJJbnRQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASACKAVSBXZhbHVl');
+final $typed_data.Uint8List intPreferenceValueDescriptor = $convert
+    .base64Decode('ChJJbnRQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASACKAVSBXZhbHVl');
 
 @$core.Deprecated('Use longPreferenceValueDescriptor instead')
 const LongPreferenceValue$json = {
@@ -312,8 +427,9 @@ const LongPreferenceValue$json = {
 };
 
 /// Descriptor for `LongPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List longPreferenceValueDescriptor = $convert.base64Decode(
-    'ChNMb25nUHJlZmVyZW5jZVZhbHVlEhQKBXZhbHVlGAEgAigDUgV2YWx1ZQ==');
+final $typed_data.Uint8List longPreferenceValueDescriptor =
+    $convert.base64Decode(
+        'ChNMb25nUHJlZmVyZW5jZVZhbHVlEhQKBXZhbHVlGAEgAigDUgV2YWx1ZQ==');
 
 @$core.Deprecated('Use stringPreferenceValueDescriptor instead')
 const StringPreferenceValue$json = {
@@ -324,8 +440,9 @@ const StringPreferenceValue$json = {
 };
 
 /// Descriptor for `StringPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stringPreferenceValueDescriptor = $convert.base64Decode(
-    'ChVTdHJpbmdQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASACKAlSBXZhbHVl');
+final $typed_data.Uint8List stringPreferenceValueDescriptor =
+    $convert.base64Decode(
+        'ChVTdHJpbmdQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASACKAlSBXZhbHVl');
 
 @$core.Deprecated('Use stringSetPreferenceValueDescriptor instead')
 const StringSetPreferenceValue$json = {
@@ -336,6 +453,6 @@ const StringSetPreferenceValue$json = {
 };
 
 /// Descriptor for `StringSetPreferenceValue`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List stringSetPreferenceValueDescriptor = $convert.base64Decode(
-    'ChhTdHJpbmdTZXRQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASADKAlSBXZhbHVl');
-
+final $typed_data.Uint8List stringSetPreferenceValueDescriptor =
+    $convert.base64Decode(
+        'ChhTdHJpbmdTZXRQcmVmZXJlbmNlVmFsdWUSFAoFdmFsdWUYASADKAlSBXZhbHVl');

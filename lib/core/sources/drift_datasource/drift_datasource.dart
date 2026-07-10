@@ -8,7 +8,7 @@ import 'package:flutter_manga_reader/core/models/reading_direction.dart';
 import 'package:flutter_manga_reader/core/sources/drift_datasource/app_database.dart';
 import 'package:flutter_manga_reader/core/sources/local_datasource/local_datasource.dart';
 import 'package:flutter_manga_reader/features/details/controllers/details_controller.dart';
-import 'package:flutter_manga_reader/gen/tachiyomi.pb.dart' as pb;
+import 'package:flutter_manga_reader/gen/protos/tachiyomi.pb.dart' as pb;
 import 'package:manga_reader_core/manga_reader_core.dart';
 import 'package:path_provider/path_provider.dart';
 

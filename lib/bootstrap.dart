@@ -8,6 +8,8 @@ import 'package:flutter_manga_reader/core/utils/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'core/images/cached_image.dart';
+
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -16,6 +18,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   // Add cross-flavor configuration here
   setupLogging();
+  await DiskCache.init();
   final container = ProviderContainer();
 
   await Future.wait<void>([

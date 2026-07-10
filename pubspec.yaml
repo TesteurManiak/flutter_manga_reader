@@ -17,9 +17,9 @@ workspace:
 
 dependencies:
   background_downloader: ^9.5.5
-  cached_network_image: ^3.4.1
   clock: ^1.1.2
   collection: ^1.19.0
+  crypto: ^3.0.7
   drift: ^2.34.1
   file_picker: ^11.0.2
   fixnum: ^1.1.1
@@ -27,7 +27,7 @@ dependencies:
     sdk: flutter
   flutter_cache_manager: ^3.4.1
   flutter_gen: ^5.14.1
-  flutter_inappwebview: ^6.1.5
+  flutter_inappwebview: ^6.2.0-beta.3
   flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^3.3.2
