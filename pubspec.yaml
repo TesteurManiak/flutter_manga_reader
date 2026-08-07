@@ -69,7 +69,7 @@ dev_dependencies:
     sdk: flutter
   freezed: ^3.2.5
   go_router_builder: ^4.3.1
-  json_serializable: ^6.13.0
+  json_serializable: ^6.14.1
   mocktail: ^1.0.5
   theme_tailor: ^3.1.3
 
