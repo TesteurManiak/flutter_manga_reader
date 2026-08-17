@@ -13,7 +13,7 @@ dependencies:
   clock:
   collection:
   freezed_annotation:
-  intl:
+  intl: ^0.20.3
   json_annotation:
   manga_reader_core:
     path: ../manga_reader_core
