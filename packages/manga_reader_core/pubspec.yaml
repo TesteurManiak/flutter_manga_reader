@@ -10,7 +10,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  clock:
+  clock: ^1.1.3
   crypto:
   freezed_annotation:
   html:
