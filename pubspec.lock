@@ -418,10 +418,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_cache_manager
-      sha256: "1de7849213b4c73c85aca7e0ac687a9a5d82ccdb594366b9dcc26cb6a2189cd2"
+      sha256: f94fc6f5480977e3eb7b622ed488f671ba96c971bd0e274e6bd0f0ba9b044816
       url: "https://pub.dev"
     source: hosted
-    version: "3.4.2"
+    version: "3.4.5"
   flutter_gen:
     dependency: "direct main"
     description:
