@@ -54,7 +54,7 @@ dependencies:
   shared_preferences: ^2.5.5
   sqlite3_flutter_libs: ^0.6.0+eol
   theme_tailor_annotation: ^4.0.0
-  url_launcher: ^6.3.2
+  url_launcher: ^6.3.3
 
 dev_dependencies:
   alchemist: ^0.14.0
