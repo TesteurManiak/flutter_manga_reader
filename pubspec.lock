@@ -85,10 +85,10 @@ packages:
     dependency: "direct main"
     description:
       name: background_downloader
-      sha256: "41173cfbb759c9c41b7ea98372f18e36bcb0add1a0754484e38f17c890cc9fc6"
+      sha256: "4df9b2a2d5b78b883ebd4b6338cbc1b541ea3482da24112339468a66a7492b43"
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.4"
+    version: "9.6.5"
   boolean_selector:
     dependency: transitive
     description:
