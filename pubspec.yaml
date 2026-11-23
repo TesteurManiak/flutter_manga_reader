@@ -58,7 +58,7 @@ dependencies:
 
 dev_dependencies:
   alchemist: ^0.14.1
-  build_runner: ^2.16.1
+  build_runner: ^2.16.2
   build_version: ^2.2.1
   drift_dev: ^2.35.3
   flutter_gen_runner: ^5.15.0
