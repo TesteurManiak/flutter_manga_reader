@@ -13,10 +13,10 @@ packages:
     dependency: "direct dev"
     description:
       name: alchemist
-      sha256: "6a43c6a973403abfc8f95f066e4c03f39db668c052dfcfc177a38bade7f6b68b"
+      sha256: a83a511d731671c7f50623ce0dc70b4d6d3588bd8375243fc7978546c1556776
       url: "https://pub.dev"
     source: hosted
-    version: "0.14.1"
+    version: "0.15.0"
   analyzer:
     dependency: transitive
     description:
